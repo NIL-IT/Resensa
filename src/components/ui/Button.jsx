@@ -11,7 +11,8 @@ export default function Button({
   return !icon ? (
     <button
       className={cn(
-        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase ",
+        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all",
+
         className
       )}
       onClick={onClick}

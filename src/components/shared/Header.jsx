@@ -34,7 +34,7 @@ const list = [
 export default function Header() {
   return (
     <header className=" container pt-[34px]">
-      <div className="flex justify-between border-b border-gray-400 ">
+      <div className="flex justify-between border-b border-gray-400 pb-[25px]">
         <Link to="/">
           <img src="/icon/logo.svg" alt="logo" />
         </Link>
@@ -49,17 +49,19 @@ export default function Header() {
           </div>
           <div>
             <div className="flex-center gap-[45px] mb-[15px]">
-              <div className="flex-center gap-[10px]">
+              <div className="flex-center gap-[10px] ">
                 <a href="#">
                   <img src="/icon/telegram.svg" alt="telegram" />
                 </a>
                 <a href="#">
                   <img src="/icon/wa.svg" alt="whatsapp" />
                 </a>
+                <a href="#">
+                  <img src="/icon/search_btn.svg" alt="search" />
+                </a>
               </div>
               <Button text={"заказать звонок"} />
             </div>
-            <Input />
           </div>
         </div>
       </div>

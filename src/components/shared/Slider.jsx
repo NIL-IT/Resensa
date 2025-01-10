@@ -38,7 +38,7 @@ export default function Slider() {
   };
 
   return (
-    <div className="w-full bg-gray-50">
+    <div className="w-full">
       {/* Slider container */}
       <div className="relative">
         {/* Slides */}

@@ -74,7 +74,7 @@ export default function News() {
           </div>
           <Button
             text={"смотреть все новости"}
-            className="w-full py-[26px] bg-white border border-gray-400 text-gray-400 text-base mt-1"
+            className="w-full py-[26px] bg-white border border-gray-400 text-gray-400 text-base mt-1 hover:bg-gray-50 hover:border-gray-300"
           />
         </div>
       </div>

@@ -7,6 +7,7 @@ export default {
     colors: {
       white: "#fff",
       gray: {
+        50: "#F5F5F5",
         100: "#E4E4E4",
         200: "#C8C9CD",
         300: "#7A7776",
