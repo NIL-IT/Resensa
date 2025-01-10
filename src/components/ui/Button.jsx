@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "../../lib/utils";
+import { Link } from "react-router-dom";
 
 export default function Button({
   text,
@@ -7,18 +8,20 @@ export default function Button({
   icon = false,
   onClick = null,
   white = false,
+  href,
 }) {
   return !icon ? (
-    <button
+    <Link
+      to={href}
       className={cn(
-        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all",
+        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",
 
         className
       )}
       onClick={onClick}
     >
       {text}
-    </button>
+    </Link>
   ) : (
     <button
       className={cn(

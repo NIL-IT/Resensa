@@ -29,7 +29,7 @@ const list = [
     path: CONTACT,
   },
 ];
-export default function Footer() {
+export default function Footer({ scrollTop = null }) {
   return (
     <footer className="container py-[85px] flex justify-between relative">
       <div>
@@ -42,7 +42,11 @@ export default function Footer() {
         <nav className="flex gap-[58px]">
           <ul className="flex flex-col gap-5 text-xl">
             {list.map(({ name, path }, i) => (
-              <li key={i} className="text-gray-400 hover:text-gray-300">
+              <li
+                onClick={scrollTop}
+                key={i}
+                className="text-gray-400 hover:text-gray-300"
+              >
                 <Link to={path}>{name}</Link>
               </li>
             ))}

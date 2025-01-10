@@ -42,7 +42,7 @@ export default function News() {
       />
       <div className="flex justify-center">
         <div className="w-[1160px]">
-          <div className="flex flex-wrap justify-between ">
+          <div className="flex flex-wrap justify-between mb-10 ">
             {news.map((item, i) => (
               <div
                 className="group flex flex-col justify-between w-[370px] h-[484px] gradient mb-[37px] px-[29px] py-[20px] cursor-pointer"
@@ -72,10 +72,12 @@ export default function News() {
               </div>
             ))}
           </div>
-          <Button
-            text={"смотреть все новости"}
-            className="w-full py-[26px] bg-white border border-gray-400 text-gray-400 text-base mt-1 hover:bg-gray-50 hover:border-gray-300"
-          />
+          <div className="flex justify-center ">
+            <Button
+              text={"смотреть все новости"}
+              className="w-full py-[26px] bg-white border border-gray-400 text-gray-400 text-base hover:bg-gray-50 hover:border-gray-200"
+            />
+          </div>
         </div>
       </div>
     </div>

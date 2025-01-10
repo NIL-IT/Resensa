@@ -123,7 +123,7 @@ export default function Calculator() {
                   text={"ОФОРМИТЬ ЗАКАЗ"}
                   onClick={handleCalculate}
                   icon={true}
-                  className="w-[257px] text-white py-[17px] text-sm pl-[33px]  "
+                  className="w-[257px] text-white py-[17px] text-sm pl-[33px]"
                 />
               </div>
             </div>

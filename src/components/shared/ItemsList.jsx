@@ -2,7 +2,7 @@ import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 
-export default function ItemsList({ limited = true, list }) {
+export default function ItemsList({ limited = true, list, href }) {
   let newData = list.items;
   if (limited) newData = newData.slice(0, 6);
   return (
@@ -28,8 +28,9 @@ export default function ItemsList({ limited = true, list }) {
       {limited && (
         <div className="flex justify-center ">
           <Button
+            href={href}
             text={"смотреть все"}
-            className="bg-white w-[1158px] py-[26px] text-gray-400 border border-gray-400 mt-[64px]"
+            className="bg-white w-[1158px] py-[26px] text-gray-400 border border-gray-400 mt-[64px] hover:bg-gray-50 hover:border-gray-200"
           />
         </div>
       )}

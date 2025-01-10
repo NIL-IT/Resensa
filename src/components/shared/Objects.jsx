@@ -24,11 +24,11 @@ const list = [
     id: 5,
   },
 ];
-export default function Objects() {
+export default function Objects({ className = null }) {
   const [index, setIndex] = React.useState(0);
   const handleChange = (value) => setIndex(value);
   return (
-    <div className="w-full bg-gray-400 pb-[101px] pt-[81px]">
+    <div className={`w-full bg-gray-400 pb-[101px] pt-[81px] ${className}`}>
       <div className="container flex-center gap-[80px] justify-between">
         <div className="w-[411px]">
           <Title
