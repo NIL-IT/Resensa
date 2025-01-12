@@ -33,9 +33,11 @@ export default function Footer({ scrollTop = null }) {
   return (
     <footer className="container py-[85px] flex justify-between relative">
       <div>
-        <div className="w-[249px] h-[42px] mb-5">
-          <img src="/icon/logo.svg" alt="logo" />
-        </div>
+        <Link onClick={scrollTop} to={"/"}>
+          <div className="max-w-[249px] max-h-[42px] mb-5">
+            <img src="/icon/logo.svg" alt="logo" />
+          </div>
+        </Link>
         <span className="text-gray-900 text-base">copyright</span>
       </div>
       <div>
@@ -88,7 +90,7 @@ export default function Footer({ scrollTop = null }) {
         </div>
         <Button
           text={"заказать звонок"}
-          className=" bg-white border border-gray-400 text-gray-400 text-xs font-normal py-3 px-[30px] flex justify-end"
+          className=" bg-white border border-gray-400 text-gray-400 text-xs font-normal py-3 px-[30px] flex justify-end hover:border-gray-200 hover:bg-gray-50"
         />
       </div>
       <div className="absolute bottom-5 right-0 w-[156px] h-[27px]">

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
+import { useDispatch } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
 
 export default function ItemsList({ limited = true, list, href }) {
+  const dispatch = useDispatch();
   let newData = list.items;
   if (limited) newData = newData.slice(0, 6);
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <div className="container py-20">
       <Title text={list.name} className="text-2xl font-normal mb-[50px]" />
@@ -18,8 +22,9 @@ export default function ItemsList({ limited = true, list, href }) {
             <div className="flex-center justify-between gap-2">
               <p className="w-[50%] text-[13px] text-gray-300">{description}</p>
               <Button
+                onClick={() => handleChangeShowPopup(true)}
                 text={"Оставить заявку"}
-                className="w-[50%] py-4 px-[12.5px]"
+                className="w-[50%] py-4 px-[12.5px] hover:bg-gray-450"
               />
             </div>
           </div>

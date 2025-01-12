@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "../../lib/utils";
 import { Link } from "react-router-dom";
+import Popup from "../shared/Popup";
 
 export default function Button({
   text,

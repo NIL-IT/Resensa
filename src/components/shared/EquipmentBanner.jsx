@@ -2,40 +2,52 @@ import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 
-export default function EquipmentBanner() {
+export default function EquipmentBanner({
+  bannerImg,
+  blurImg,
+  subtitle,
+  title,
+  text,
+  isButton = false,
+  padding = "",
+  textSize,
+}) {
   return (
     <div className="relative h-[900px] mb-[30px]">
       <img
         className="absolute top-[30px] left-0 w-[100wh] h-[900px]  z-[-2]"
-        src="/img/eq_banner.svg"
-        alt=""
+        src={bannerImg}
+        alt="banner"
       />
       <img
-        src="/img/blur.png"
+        src={blurImg}
         className="absolute top-[30px] left-[-50px] w-[1286px] h-[900px] z-[-1]"
         alt=""
       />
-      <div className="container pt-[337px]">
+      <div className={`container pt-[337px] ${padding}`}>
         <Title
-          text={"recensa"}
+          text={subtitle}
           className="font-normal text-[32px] text-white leading-[41px]"
         />
         <Title
-          text={"оборудование"}
+          text={title}
           className="font-normal text-[48px] text-white leading-[61px]"
         />
-        <p className="text-xl text-white mt-[65px] mb-[33px] w-[656px]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+        <p
+          className={` text-white mt-[65px] mb-[33px] w-[656px] ${
+            textSize ? textSize : "text-xl"
+          }`}
+        >
+          {text}
         </p>
-        <Button
-          icon={true}
-          white={true}
-          text={"Оформить заказ"}
-          className="py-[19px] pl-[19px] bg-white text-gray-400 text-base"
-        />
+        {isButton && (
+          <Button
+            icon={true}
+            white={true}
+            text={"Оформить заказ"}
+            className="py-[19px] pl-[19px] bg-white text-gray-400 text-base"
+          />
+        )}
       </div>
     </div>
   );

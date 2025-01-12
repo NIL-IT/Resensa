@@ -138,3 +138,6 @@ button::-moz-focus-inner {
   border-right: 15px solid transparent;
   border-bottom: 12px solid white;
 }
+.blur {
+  backdrop-filter: blur(10px);
+}

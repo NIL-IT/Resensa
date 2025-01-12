@@ -1,29 +1,22 @@
 import React from "react";
-import { cn } from "../../lib/utils";
 
-export default function Input({ className }) {
-  const [value, setValue] = React.useState("");
-  const handleChange = ({ target: { value } }) => {
-    setValue(value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+export default function Input({
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  className = null,
+}) {
   return (
-    <form
-      className={cn(
-        "w-full h-[35px] border border-gray-400 border-b-0 p-[9px] flex-center gap-2",
-        className
-      )}
-      onSubmit={handleSubmit}
-    >
-      <input
-        className="w-full"
-        type="text"
-        value={value}
-        onChange={handleChange}
-      />
-      <img src="/icon/search.svg" alt="search" />
-    </form>
+    <input
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className="w-full p-4 bg-gray-75 rounded focus:outline-none focus:ring-2 font-normal text-base text-gray-400 placeholder:text-gray-150"
+      required
+    />
   );
 }

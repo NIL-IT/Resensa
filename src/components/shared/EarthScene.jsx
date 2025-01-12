@@ -70,7 +70,7 @@ function Earth() {
   });
 
   return (
-    <group className="max-w-[400px] max-h-[400px]" scale={0.9}>
+    <group className="" scale={1.1}>
       {/* Ambient light for general illumination */}
       <ambientLight intensity={0.3} />
 

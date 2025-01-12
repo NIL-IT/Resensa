@@ -17,13 +17,13 @@ export default function Calculator() {
   };
 
   return (
-    <div className="container pt-[94px] h-[1220px]">
+    <div className="container pt-[94px] pb-[94px] h-[1320px]">
       <Title
         text={"калькулятор"}
         className="text-2xl border-b inline-block mb-10"
       />
       <div className="flex justify-center">
-        <div className="w-[1160px] h-[709px]">
+        <div className="w-[1160px] h-[709px] ">
           <div>
             <Title
               className="font-light text-gray-500"
@@ -123,16 +123,16 @@ export default function Calculator() {
                   text={"ОФОРМИТЬ ЗАКАЗ"}
                   onClick={handleCalculate}
                   icon={true}
-                  className="w-[257px] text-white py-[17px] text-sm pl-[33px]"
+                  className="w-[257px] text-white py-[17px] text-sm pl-[33px] "
                 />
               </div>
             </div>
 
-            <div className="w-[672px]">
+            <div className="w-[672px] ">
               <img
                 src="/img/calc.svg"
                 alt="Industrial HVAC Equipment"
-                className="w-full"
+                className="w-full "
               />
             </div>
           </div>

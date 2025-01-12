@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../ui/Button";
-import Input from "../ui/Input";
+import Input from "../ui/SearchInput";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT } = ROUTES;
@@ -60,7 +60,7 @@ export default function Header() {
                   <img src="/icon/search_btn.svg" alt="search" />
                 </a>
               </div>
-              <Button text={"заказать звонок"} />
+              <Button text={"заказать звонок"} className="hover:bg-gray-450" />
             </div>
           </div>
         </div>
