@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 import Input from "../ui/SearchInput";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
-const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT } = ROUTES;
+const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT, ADMIN } = ROUTES;
 const list = [
   {
     name: "Главная",
@@ -23,7 +23,7 @@ const list = [
   },
   {
     name: "Заказы",
-    path: ORDERS,
+    path: `/admin/1`,
   },
   {
     name: "Контакты",
