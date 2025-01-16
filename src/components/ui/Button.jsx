@@ -1,8 +1,6 @@
 import React from "react";
 import { cn } from "../../lib/utils";
 import { Link } from "react-router-dom";
-import Popup from "../shared/Popup";
-
 export default function Button({
   text,
   className = "",
@@ -10,6 +8,8 @@ export default function Button({
   onClick = null,
   white = false,
   href,
+  iconWidth,
+  type = "button",
 }) {
   return !icon ? (
     <Link
@@ -25,6 +25,7 @@ export default function Button({
     </Link>
   ) : (
     <button
+      type={type}
       className={cn(
         "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5",
         className
@@ -39,7 +40,9 @@ export default function Button({
         />
       ) : (
         <img
-          className="group-hover:translate-x-1 transition-all"
+          className={`group-hover:translate-x-1 transition-all ${
+            iconWidth ? iconWidth : ""
+          }`}
           src="/icon/arrow.svg"
           alt="arrow"
         />

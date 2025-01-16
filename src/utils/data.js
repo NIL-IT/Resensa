@@ -44,37 +44,37 @@ export const data = {
     name: "решения",
     items: [
       {
-        id: 1,
+        id: 7,
         name: "СЕРИЯ RPOOL",
         description: "Бассейновое от 1000 м3/ч до 32 000 м3/ч",
         img: "/img/equipment_1.svg",
       },
       {
-        id: 2,
+        id: 8,
         name: "СЕРИЯ RCDUCT",
         description: "Канальное от 100 м3/ч до 10 000 м3/ч",
         img: "/img/equipment_2.svg",
       },
       {
-        id: 3,
+        id: 9,
         name: "смесительные узлы",
         description: "Водяные узлы для систем вентиляции и кондиционирования",
         img: "/img/equipment_3.svg",
       },
       {
-        id: 4,
+        id: 10,
         name: "СЕРИЯ RCLEAN",
         description: "Медицинское Гигиеническое исполнение",
         img: "/img/equipment_4.svg",
       },
       {
-        id: 5,
+        id: 11,
         name: "СЕРИЯ RCROOF",
         description: "Крышное оборудование для больших помещений",
         img: "/img/equipment_5.svg",
       },
       {
-        id: 6,
+        id: 12,
         name: "СЕРИЯ RCN",
         description: "Общепромышленноеот 1000 м3/ч до 100 000 м3/ч",
         img: "/img/equipment_6.svg",
@@ -144,3 +144,8 @@ export const slidesSub = [
     image: "/img/subSlider_4.png",
   },
 ];
+export const textEquipment = `Lorem ipsum dolor sit amet, consectetur adipiscing 
+elit, sed do eiusmod tempor incididunt ut labore et 
+dolore magna aliqua. Ut enim ad minim veniam, quis 
+nostrud exercitation ullamco laboris nisi ut aliquip 
+ex ea commodo consequat.`;

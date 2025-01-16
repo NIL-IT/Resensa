@@ -79,7 +79,9 @@ export default function Admin() {
           </nav>
           <div className="pl-[38px] pt-12 w-full">
             {navList.map(({ title, id, component }, i) => (
-              <div>{pathname.split("/").at(-1) === id && component(title)}</div>
+              <div key={id}>
+                {pathname.split("/").at(-1) === id && component(title)}
+              </div>
             ))}
           </div>
         </section>

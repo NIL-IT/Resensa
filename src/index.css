@@ -106,7 +106,10 @@ button:focus,
 button:active {
   outline: none;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 button::-moz-focus-inner {
   padding: 0;
   border: 0;
@@ -140,4 +143,15 @@ button::-moz-focus-inner {
 }
 .blur {
   backdrop-filter: blur(10px);
+}
+@keyframes scrollAdvantages {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.scrollAdvantages {
+  animation: scrollAdvantages 20s linear infinite;
 }
