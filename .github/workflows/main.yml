@@ -29,7 +29,7 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           PAT: ${{ secrets.PAT }}
         run: |
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST 'bash -s' << 'EOF'
             # Create directory if it doesn't exist
             mkdir -p /var/www/resensa/frontend
 
@@ -63,4 +63,4 @@ jobs:
 
             # Cleanup old backup if everything is successful
             rm -rf /var/www/resensa/frontend/previous
-          "
+          EOF
