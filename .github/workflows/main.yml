@@ -29,27 +29,32 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           PAT: ${{ secrets.PAT }}
         run: |
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "
-            # Create directory if it doesn't exist
+          # Add server's host key to known_hosts to avoid prompts
+          mkdir -p ~/.ssh
+          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
+
+          # Deploy using single SSH connection
+          sshpass -p "$PASSWORD" ssh $USERNAME@$HOST '
+            # Create directory if it does not exist
             mkdir -p /var/www/resensa/frontend
 
             # If git repository exists, pull latest changes
             if [ -d /var/www/resensa/frontend/.git ]; then
-              cd /var/www/resensa/frontend && \
-              git fetch && \
+              cd /var/www/resensa/frontend
+              git fetch
               git reset --hard origin/main
             else
-              # Clone repository if it doesn't exist
-              rm -rf /var/www/resensa/frontend/* && \
-              git clone https://$PAT@github.com/NIL-IT/Resensa.git /var/www/resensa/frontend_temp && \
-              mv /var/www/resensa/frontend_temp/* /var/www/resensa/frontend/ && \
-              mv /var/www/resensa/frontend_temp/.* /var/www/resensa/frontend/ 2>/dev/null || true && \
+              # Clone repository if it does not exist
+              rm -rf /var/www/resensa/frontend/*
+              git clone https://'"$PAT"'@github.com/NIL-IT/Resensa.git /var/www/resensa/frontend_temp
+              mv /var/www/resensa/frontend_temp/* /var/www/resensa/frontend/
+              mv /var/www/resensa/frontend_temp/.* /var/www/resensa/frontend/ 2>/dev/null || true
               rm -rf /var/www/resensa/frontend_temp
             fi
 
             # Install dependencies and build
-            cd /var/www/resensa/frontend && \
-            npm install && \
+            cd /var/www/resensa/frontend
+            npm install
             npm run build
 
             # Backup current deployment if it exists
@@ -58,9 +63,9 @@ jobs:
             fi
 
             # Move built files to deployment directory
-            mkdir -p /var/www/resensa/frontend/current && \
+            mkdir -p /var/www/resensa/frontend/current
             cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
 
             # Cleanup old backup if everything is successful
             rm -rf /var/www/resensa/frontend/previous
-          "
+          '
