@@ -29,12 +29,8 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           PAT: ${{ secrets.PAT }}
         run: |
-          # Add server's host key to known_hosts to avoid prompts
-          mkdir -p ~/.ssh
-          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
-
-          # Deploy using single SSH connection
-          sshpass -p "$PASSWORD" ssh $USERNAME@$HOST '
+          # Deploy using single SSH connection with disabled host key checking
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST '
             # Create directory if it does not exist
             mkdir -p /var/www/resensa/frontend
 
