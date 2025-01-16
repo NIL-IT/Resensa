@@ -1,0 +1,65 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Create deploy script
+        run: |
+          cat > deploy.sh << 'SCRIPT'
+          #!/bin/bash
+          mkdir -p /var/www/resensa/frontend
+
+          if [ -d /var/www/resensa/frontend/.git ]; then
+            cd /var/www/resensa/frontend
+            git fetch
+            git reset --hard origin/main
+          else
+            rm -rf /var/www/resensa/frontend/*
+            git clone https://$1@github.com/NIL-IT/Resensa.git /var/www/resensa/frontend_temp
+            mv /var/www/resensa/frontend_temp/* /var/www/resensa/frontend/
+            mv /var/www/resensa/frontend_temp/.* /var/www/resensa/frontend/ 2>/dev/null || true
+            rm -rf /var/www/resensa/frontend_temp
+          fi
+
+          cd /var/www/resensa/frontend
+          npm install
+          npm run build
+
+          if [ -d /var/www/resensa/frontend/current ]; then
+            mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
+          fi
+
+          mkdir -p /var/www/resensa/frontend/current
+          cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
+          rm -rf /var/www/resensa/frontend/previous
+          SCRIPT
+          chmod +x deploy.sh
+
+      - name: Deploy and build project
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PAT: ${{ secrets.PAT }}
+        run: |
+          sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no deploy.sh $USERNAME@$HOST:/tmp/
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "bash /tmp/deploy.sh $PAT && rm /tmp/deploy.sh"
