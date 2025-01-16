@@ -1,0 +1,66 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Deploy and build project
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PAT: ${{ secrets.PAT }}
+        run: |
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "
+            # Create directory if it doesn't exist
+            mkdir -p /var/www/resensa/frontend
+
+            # If git repository exists, pull latest changes
+            if [ -d /var/www/resensa/frontend/.git ]; then
+              cd /var/www/resensa/frontend && \
+              git fetch && \
+              git reset --hard origin/main
+            else
+              # Clone repository if it doesn't exist
+              rm -rf /var/www/resensa/frontend/* && \
+              git clone https://$PAT@github.com/NIL-IT/Resensa.git /var/www/resensa/frontend_temp && \
+              mv /var/www/resensa/frontend_temp/* /var/www/resensa/frontend/ && \
+              mv /var/www/resensa/frontend_temp/.* /var/www/resensa/frontend/ 2>/dev/null || true && \
+              rm -rf /var/www/resensa/frontend_temp
+            fi
+
+            # Install dependencies and build
+            cd /var/www/resensa/frontend && \
+            npm install && \
+            npm run build
+
+            # Backup current deployment if it exists
+            if [ -d /var/www/resensa/frontend/current ]; then
+              mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
+            fi
+
+            # Move built files to deployment directory
+            mkdir -p /var/www/resensa/frontend/current && \
+            cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
+
+            # Cleanup old backup if everything is successful
+            rm -rf /var/www/resensa/frontend/previous
+          "
