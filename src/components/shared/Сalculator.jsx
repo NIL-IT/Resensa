@@ -2,22 +2,49 @@ import { useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import Select from "../ui/Select";
+import EquipmentType from "./popup/EquipmentType";
+const options = [
+  { label: "1.0", value: "1.0" },
+  { label: "2.0", value: "2.0" },
+  { label: "3.0", value: "3.0" },
+];
 
 export default function Calculator() {
-  const [calculationType, setCalculationType] = useState("byEquipment");
-  const [airExchange, setAirExchange] = useState("2.0");
-  const [area, setArea] = useState("");
-  const [height, setHeight] = useState("");
-  const [result, setResult] = useState("99");
-
-  const handleCalculate = () => {
-    // Placeholder calculation logic
-    // In a real application, you would implement the actual calculation here
-    setResult("99");
+  const [isCalculated, setIsCalculated] = useState(false);
+  const [formData, setFormData] = useState({
+    calculationType: "byEquipment",
+    multiplicity: "",
+    square: "",
+    count: "",
+  });
+  const handleSelectChange = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      multiplicity: value,
+    }));
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    setFormData({
+      calculationType: "byEquipment",
+      multiplicity: "",
+      square: "",
+      count: "",
+    });
+    setIsCalculated(true);
+  };
   return (
     <div className="container pt-[94px] pb-[94px] h-[1320px]">
+      {isCalculated && <EquipmentType />}
       <Title
         text={"калькулятор"}
         className="text-2xl border-b inline-block mb-10"
@@ -39,7 +66,7 @@ export default function Calculator() {
             </p>
           </div>
           <div className="flex justify-between gap-10 max-h-[709px]">
-            <div className="">
+            <form onSubmit={handleSubmit}>
               <div>
                 <h2 className="font-medium">РАСЧЕТ</h2>
                 <div className="mb-[52px] mt-[24px]">
@@ -48,9 +75,9 @@ export default function Calculator() {
                       type="radio"
                       id="byPeople"
                       name="calculationType"
-                      value="byPeople"
-                      checked={calculationType === "byPeople"}
-                      onChange={(e) => setCalculationType(e.target.value)}
+                      value={"byPeople"}
+                      checked={formData.calculationType === "byPeople"}
+                      onChange={handleInputChange}
                     />
                     <label htmlFor="byPeople">По количеству людей</label>
                   </div>
@@ -58,10 +85,10 @@ export default function Calculator() {
                     <input
                       type="radio"
                       id="byEquipment"
+                      value={"byEquipment"}
                       name="calculationType"
-                      value="byEquipment"
-                      checked={calculationType === "byEquipment"}
-                      onChange={(e) => setCalculationType(e.target.value)}
+                      checked={formData.calculationType === "byEquipment"}
+                      onChange={handleInputChange}
                     />
                     <label htmlFor="byEquipment">
                       По площади воздухообмена
@@ -76,7 +103,10 @@ export default function Calculator() {
                     <span className=" text-gray-600 font-normal text-xl uppercase ">
                       кратность воздухообмена
                     </span>
-                    <Select />
+                    <Select
+                      handleSelectChange={handleSelectChange}
+                      options={options}
+                    />
                   </div>
 
                   <div>
@@ -89,9 +119,11 @@ export default function Calculator() {
                     <input
                       type="number"
                       id="area"
-                      value={area}
-                      onChange={(e) => setArea(e.target.value)}
+                      name="square"
+                      value={formData.square}
+                      onChange={handleInputChange}
                       className="w-[115px] border border-gray-400 p-2 text-gray-700"
+                      required
                     />
                   </div>
 
@@ -105,9 +137,11 @@ export default function Calculator() {
                     <input
                       type="number"
                       id="height"
-                      value={height}
-                      onChange={(e) => setHeight(e.target.value)}
+                      name="count"
+                      value={formData.count}
+                      onChange={handleInputChange}
                       className="w-[115px] border border-gray-400  p-2 text-gray-700"
+                      required
                     />
                   </div>
                 </div>
@@ -116,17 +150,28 @@ export default function Calculator() {
                   <div className="font-medium mb-1 w-[60%]">
                     ПРОИЗВОДИТЕЛЬНОСТЬ ПО КРАТНОСТИ
                   </div>
-                  <div className="text-xl">{result} М³/Ч</div>
+                  <div className="text-xl">99 М³/Ч</div>
                 </div>
-
-                <Button
-                  text={"ОФОРМИТЬ ЗАКАЗ"}
-                  onClick={handleCalculate}
-                  icon={true}
+                {/* <button
                   className="w-[257px] text-white py-[17px] text-sm pl-[33px] "
-                />
+                  onSubmit={handleSubmit}
+                >
+                  оформить заказ
+                </button> */}
+                <button
+                  className="group bg-gray-400 text-white 
+                font-normal  px-[30px]  uppercase 
+                flex-center gap-5 w-[257px]  py-[17px] text-sm pl-[33px]"
+                >
+                  <img
+                    className="group-hover:translate-x-1 transition-all"
+                    src="/icon/arrow.svg"
+                    alt="arrow"
+                  />
+                  оформить заказ
+                </button>
               </div>
-            </div>
+            </form>
 
             <div className="w-[672px] ">
               <img

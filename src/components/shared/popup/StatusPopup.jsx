@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeShowStatus } from "../../utils/slice/userSlice";
-import { orders } from "./AdminOrders";
-import { div } from "three/tsl";
+import { changeShowStatus } from "../../../utils/slice/userSlice";
 
 export default function StatusPopup() {
   const dispatch = useDispatch();
+  const { ordersData } = useSelector(({ user }) => user);
   const { orderNum } = useSelector(({ user }) => user);
   const [isOpen, setIsOpen] = useState(true);
-  const findOrder = orders.find((order) => order.id === orderNum);
+  const findOrder = ordersData.find((order) => order.id === orderNum);
   useEffect(() => {
     dispatch(changeShowStatus(isOpen));
   }, [isOpen]);

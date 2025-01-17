@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Title from "../ui/Title";
 
-export default function Slider({ slides }) {
+export default function Slider({ slides, second }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const goToSlide = (index) => {
@@ -23,25 +23,42 @@ export default function Slider({ slides }) {
             >
               {slides.map(({ image, title = "", description = "" }, index) => (
                 <div key={index} className="w-full ">
-                  <div className="bg-gray-100 w-[816px] h-[558px] ">
-                    <div
-                      className={`h-[272px] w-full border-b  border-b-gray-400 mb-[30px]  ${
-                        index === 1
-                          ? "pt-[25px] pl-8"
-                          : index === 2 || index === 3
-                          ? "pt-7 pl-11"
-                          : ""
-                      }`}
-                    >
+                  {second ? (
+                    <div className="w-[816px] h-[558px]">
                       <img src={image} alt={title} className="object-cover " />
                     </div>
-                    <div className="px-[45px] pb-[52px]">
-                      <Title text={title} className="text-2xl leading-[56px]" />
-                      <p className="text-lg text-gray-400 leading-[23px]">
-                        {description}
-                      </p>
+                  ) : (
+                    <div
+                      className={` w-[816px] h-[558px] ${
+                        second ? "" : "bg-gray-100"
+                      }`}
+                    >
+                      <div
+                        className={`h-[272px] w-full  mb-[30px] border-b  border-b-gray-400 ${
+                          index === 1
+                            ? "pt-[25px] pl-8"
+                            : index === 2 || index === 3
+                            ? "pt-7 pl-11"
+                            : ""
+                        } `}
+                      >
+                        <img
+                          src={image}
+                          alt={title}
+                          className="object-cover "
+                        />
+                      </div>
+                      <div className="px-[45px] pb-[52px]">
+                        <Title
+                          text={title}
+                          className="text-2xl leading-[56px]"
+                        />
+                        <p className="text-lg text-gray-400 leading-[23px]">
+                          {description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>

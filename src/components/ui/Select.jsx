@@ -1,22 +1,30 @@
 import { ChevronDown } from "lucide-react";
-import React from "react";
-export default function Select() {
-  const options = [
-    { label: "1.0", value: "1.0" },
-    { label: "2.0", value: "2.0" },
-    { label: "3.0", value: "3.0" },
-  ];
-
+import React, { useEffect } from "react";
+export default function Select({
+  handleSelectChange,
+  options,
+  className,
+  border,
+  placeholder,
+}) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState("2.0");
-
+  const [selected, setSelected] = React.useState(placeholder);
+  useEffect(() => {
+    handleSelectChange(selected);
+  }, [selected]);
   return (
-    <div className="relative w-[115px] text-gray-400 mt-[13px]">
+    <div className={`relative w-[115px] text-gray-400 mt-[13px] ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-3 py-2 border border-gray-400"
+        className={`w-full flex items-center justify-between px-3 py-2 border border-gray-400 ${
+          border ? "border-none" : ""
+        }`}
       >
-        <span>{selected}</span>
+        <span
+          className={`${border ? "text-gray-400 font-normal text-base" : ""}`}
+        >
+          {selected}
+        </span>
         <ChevronDown
           className={`w-4 h-4 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -25,7 +33,9 @@ export default function Select() {
       </button>
 
       {isOpen && (
-        <div className="absolute w-full mt-1 border border-gray-200  bg-white shadow-lg">
+        <div
+          className={`absolute w-full mt-1 border border-gray-200  bg-white shadow-lg `}
+        >
           <ul className="py-1">
             {options.map((option) => (
               <li

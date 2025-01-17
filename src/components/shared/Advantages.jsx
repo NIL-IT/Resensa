@@ -1,13 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
 import Title from "../ui/Title";
 const list = [
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  {
+    title: "высокачественное оборудование",
+    text: "Производим, учитывая специфику эксплуатационных требований и климатических условий.",
+    img: "",
+  },
+  {
+    title: "комплексные решения",
+    text: "Предлагаем решения, повышающие эффективность проектирования, эксплуатации и модернизации объектов.",
+    img: "",
+  },
+  {
+    title: "инновации и технологии",
+    text: "Используя передовые технологии, разрабатываем оборудование, которое соответствует мировым стандартам энергоэффективности и надежности.",
+    img: "",
+  },
+  {
+    title: "широкий выбор комплектующих",
+    text: "Включая различные типы теплообменников, вентиляторов и фильтров, что позволяет создавать решения для любых условий.",
+    img: "",
+  },
+  {
+    title: "наши",
+    subtitle: "инженеры",
+    text: "Помогут вым подобрать идеальное решение, учитывая ваши задачи, требования и условия эксплуатации",
+    img: "",
+  },
+  {
+    title: "адаптация под ваши запросы",
+    text: "Оборудование может быть адаптировано под ваши запросы, включая окрасуц и конфигурацию.",
+    img: "",
+  },
 ];
 export default function Advantages() {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -94,26 +118,50 @@ export default function Advantages() {
           onTouchEnd={handleTouchEnd}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {list.map((text, i) => (
+          {list.map(({ title, text, subtitle, img }, i) => (
             <div
               key={`first-${i}`}
-              className="min-w-[411px] flex gap-5 select-none"
+              className="min-w-[500px] select-none space-y-4"
             >
-              <span className="text-gray-300 font-normal text-2xl">
-                (0{i + 1})
-              </span>
-              <p className="text-white text-xl leading-[25.5px]">{text}</p>
+              <img width={150} src="/icon/image.png" alt="" />
+              <div>
+                <Title
+                  className="text-2xl text-white max-w-[300px]"
+                  text={title}
+                />
+                {subtitle && (
+                  <Title
+                    className="text-2xl text-white max-w-[300px]"
+                    text={subtitle}
+                  />
+                )}
+              </div>
+              <p className="text-white text-xl leading-[25.5px] max-w-[370px]">
+                {text}
+              </p>
             </div>
           ))}
-          {list.map((text, i) => (
+          {list.map(({ title, text, subtitle, img }, i) => (
             <div
               key={`second-${i}`}
-              className="min-w-[411px] flex gap-5 select-none"
+              className="min-w-[500px] select-none  space-y-4"
             >
-              <span className="text-gray-300 font-normal text-2xl">
-                (0{i + 1})
-              </span>
-              <p className="text-white text-xl leading-[25.5px]">{text}</p>
+              <img width={150} src="/icon/image.png" alt="" />
+              <div>
+                <Title
+                  className="text-2xl text-white max-w-[300px]"
+                  text={title}
+                />
+                {subtitle && (
+                  <Title
+                    className="text-2xl text-white max-w-[300px]"
+                    text={subtitle}
+                  />
+                )}
+              </div>
+              <p className="text-white text-xl leading-[25.5px]  max-w-[370px]">
+                {text}
+              </p>
             </div>
           ))}
         </div>

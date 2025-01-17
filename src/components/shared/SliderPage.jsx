@@ -2,7 +2,13 @@ import React from "react";
 import Title from "../ui/Title";
 import Slider from "./Slider";
 
-export default function SliderPage({ title, subTitle, text, slides }) {
+export default function SliderPage({
+  title,
+  subTitle,
+  text,
+  slides,
+  second = false,
+}) {
   return (
     <div className="container pt-[124px]">
       <Title text={title} className="text-2xl border-b mb-10 inline-block" />
@@ -17,7 +23,7 @@ export default function SliderPage({ title, subTitle, text, slides }) {
           </div>
         </div>
       </div>
-      <Slider slides={slides} />
+      <Slider slides={slides} second={second} />
     </div>
   );
 }

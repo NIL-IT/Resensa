@@ -28,7 +28,7 @@ export default function Home() {
       <Banner />
       <Advantages />
       <ItemsList list={data.equipment} href={ROUTES.EQUIPMENT} />
-      <ItemsList list={data.solutions} />
+      <ItemsList list={data.solutions} href={ROUTES.SOLUTIONS} />
       <Calculator />
       <SliderPage
         title={"о компании"}

@@ -1,7 +1,11 @@
 import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
+import { useDispatch } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
 export default function Banner() {
+  const dispatch = useDispatch();
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <div className="container pt-[118px] pb-[102px]">
       <Title
@@ -26,6 +30,7 @@ export default function Banner() {
           </div>
         </div>
         <Button
+          onClick={() => handleChangeShowPopup(true)}
           className="py-[26px] pr-[26px] pl-6 w-[332px] h-[76px] text-base"
           icon={true}
           text={"Получить консультацию"}

@@ -7,7 +7,7 @@ export default function Button({
   icon = false,
   onClick = null,
   white = false,
-  href,
+  href = "",
   iconWidth,
   type = "button",
 }) {
@@ -24,31 +24,33 @@ export default function Button({
       {text}
     </Link>
   ) : (
-    <button
-      type={type}
-      className={cn(
-        "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5",
-        className
-      )}
-      onClick={onClick}
-    >
-      {white ? (
-        <img
-          className="group-hover:translate-x-1 transition-all"
-          src="/icon/arrow_right.svg"
-          alt="arrow"
-        />
-      ) : (
-        <img
-          className={`group-hover:translate-x-1 transition-all ${
-            iconWidth ? iconWidth : ""
-          }`}
-          src="/icon/arrow.svg"
-          alt="arrow"
-        />
-      )}
+    <Link to={href}>
+      <button
+        type={type}
+        className={cn(
+          "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5",
+          className
+        )}
+        onClick={onClick}
+      >
+        {white ? (
+          <img
+            className="group-hover:translate-x-1 transition-all"
+            src="/icon/arrow_right.svg"
+            alt="arrow"
+          />
+        ) : (
+          <img
+            className={`group-hover:translate-x-1 transition-all ${
+              iconWidth ? iconWidth : ""
+            }`}
+            src="/icon/arrow.svg"
+            alt="arrow"
+          />
+        )}
 
-      <p>{text}</p>
-    </button>
+        <p>{text}</p>
+      </button>
+    </Link>
   );
 }

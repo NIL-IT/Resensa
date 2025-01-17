@@ -38,6 +38,7 @@ export default function AboutCompany() {
         subTitle={"СОБСТВЕННОЕ ПРОИЗВОДСТВО"}
         text={sliderTextSub}
         slides={slidesSub}
+        second={true}
       />
       <Points />
       <ProductAdvantages />

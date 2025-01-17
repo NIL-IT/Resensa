@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Input from "../ui/Input";
+import Input from "../../ui/Input";
 import { useDispatch } from "react-redux";
-import { changeShowPopup, changeShowStatus } from "../../utils/slice/userSlice";
+import { changeShowPopup } from "../../../utils/slice/userSlice";
 
 const Popup = () => {
   const dispatch = useDispatch();

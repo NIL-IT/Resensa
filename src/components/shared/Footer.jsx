@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Button from "../ui/Button";
+import { useDispatch } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
 const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT } = ROUTES;
 const list = [
   {
@@ -30,6 +32,8 @@ const list = [
   },
 ];
 export default function Footer({ scrollTop = null }) {
+  const dispatch = useDispatch();
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <footer className="container py-[85px] flex justify-between relative">
       <div>
@@ -89,6 +93,7 @@ export default function Footer({ scrollTop = null }) {
           </a>
         </div>
         <Button
+          onClick={() => handleChangeShowPopup(true)}
           text={"заказать звонок"}
           className=" bg-white border border-gray-400 text-gray-400 text-xs font-normal py-3 px-[30px] flex justify-end hover:border-gray-200 hover:bg-gray-50"
         />

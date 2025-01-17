@@ -1,6 +1,8 @@
 import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
+import { changeShowPopup } from "../../utils/slice/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function EquipmentBanner({
   bannerImg,
@@ -13,6 +15,8 @@ export default function EquipmentBanner({
   textSize,
   width = "",
 }) {
+  const dispatch = useDispatch();
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <div className="relative h-[900px] mb-[30px]">
       <img
@@ -46,6 +50,7 @@ export default function EquipmentBanner({
         </p>
         {isButton && (
           <Button
+            onClick={() => handleChangeShowPopup(true)}
             icon={true}
             white={true}
             text={"Оформить заказ"}

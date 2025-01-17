@@ -3,6 +3,8 @@ import Button from "../ui/Button";
 import Input from "../ui/SearchInput";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
+import { useDispatch } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
 const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT, ADMIN } = ROUTES;
 const list = [
   {
@@ -32,6 +34,8 @@ const list = [
 ];
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <header className=" container pt-[34px]">
       <div className="flex justify-between border-b border-gray-400 pb-[25px]">
@@ -60,7 +64,11 @@ export default function Header() {
                   <img src="/icon/search_btn.svg" alt="search" />
                 </a>
               </div>
-              <Button text={"заказать звонок"} className="hover:bg-gray-450" />
+              <Button
+                onClick={() => handleChangeShowPopup(true)}
+                text={"заказать звонок"}
+                className="hover:bg-gray-450"
+              />
             </div>
           </div>
         </div>

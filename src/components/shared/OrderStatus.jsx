@@ -15,6 +15,7 @@ export default function OrderStatus() {
   };
   const handleClickStatus = (e) => {
     e.preventDefault();
+
     dispatch(changeShowStatus(true));
     dispatch(changeOrderNumber(value));
   };
@@ -37,13 +38,20 @@ export default function OrderStatus() {
           className="bg-white py-[18px] px-6 w-[370px] text-base font-normal"
           required
         />
-        <Button
+        <button
           type="submit"
-          icon={true}
-          text="проверить"
-          iconWidth={"w-[30px]"}
-          className="py-[15px] pl-5"
-        />
+          className={
+            "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5"
+          }
+        >
+          <img
+            className={`group-hover:translate-x-1 transition-all w-[30px]`}
+            src="/icon/arrow.svg"
+            alt="arrow"
+          />
+
+          <p>проверить</p>
+        </button>
       </form>
     </section>
   );
