@@ -6,7 +6,10 @@ import StatusPopup from "./components/shared/popup/StatusPopup";
 import AddOrderPopup from "./components/shared/popup/AddOrderPopup";
 
 function App() {
-  const { isPopup, status, addOrderPopup } = useSelector(({ user }) => user);
+  const { isPopup, status, addOrderPopup, isAuth } = useSelector(
+    ({ user }) => user
+  );
+
   return (
     <div className="relative">
       <div
@@ -14,7 +17,7 @@ function App() {
           (isPopup || status || addOrderPopup) && "blur-md bg-gray-200"
         }`}
       >
-        <Header />
+        {isAuth && <Header />}
         <AppRoutes />
       </div>
       {isPopup && <Popup />}

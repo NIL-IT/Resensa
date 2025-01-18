@@ -7,4 +7,5 @@ export const ROUTES = {
   CONTACT: "/contact",
   ADMIN: "/admin/:id",
   PRODUCT: "/product/:id",
+  AUTH: "/auth",
 };

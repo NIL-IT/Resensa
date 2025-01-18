@@ -74,6 +74,8 @@ const orders = [
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    isAdmin: true,
+    isAuth: false,
     isPopup: false,
     status: false,
     orderNum: null,
@@ -102,10 +104,14 @@ const userSlice = createSlice({
         state.ordersData.push(payload);
       }
     },
+    changeIsAuth: (state, { payload }) => {
+      state.isAuth = !state.isAuth;
+    },
   },
   extraReducers: (builder) => {},
 });
 export const {
+  changeIsAuth,
   addItemOrder,
   changeOrdersList,
   changeAddOrderPopup,
