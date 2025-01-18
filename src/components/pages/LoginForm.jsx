@@ -15,7 +15,7 @@ export default function LoginForm({ setAuth }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(changeIsAuth());
+    dispatch(changeIsAuth(true));
     setAuth(isAuth);
     console.log("Form submitted with:", form);
   };

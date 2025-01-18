@@ -105,7 +105,7 @@ const userSlice = createSlice({
       }
     },
     changeIsAuth: (state, { payload }) => {
-      state.isAuth = !state.isAuth;
+      state.isAuth = payload;
     },
   },
   extraReducers: (builder) => {},

@@ -29,36 +29,44 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      <Route path={ROUTES.AUTH} element={<LoginForm setAuth={setAuth} />} />
-      <Route path={ROUTES.HOME} element={<Home />} />
-      <Route
-        path={ROUTES.EQUIPMENT}
-        element={
-          <Equipment
-            data={data.equipment}
-            text={textEquipment}
-            bannerImg={"/img/eq_banner.svg"}
-            title={"оборудование"}
+      {auth ? (
+        <>
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route
+            path={ROUTES.EQUIPMENT}
+            element={
+              <Equipment
+                data={data.equipment}
+                text={textEquipment}
+                bannerImg={"/img/eq_banner.svg"}
+                title={"оборудование"}
+              />
+            }
           />
-        }
-      />
-      <Route
-        path={ROUTES.SOLUTIONS}
-        element={
-          <Equipment
-            data={data.solutions}
-            text={textEquipment}
-            bannerImg={"/img/solutions_banner.png"}
-            title={"решения"}
+          <Route
+            path={ROUTES.SOLUTIONS}
+            element={
+              <Equipment
+                data={data.solutions}
+                text={textEquipment}
+                bannerImg={"/img/solutions_banner.png"}
+                title={"решения"}
+              />
+            }
           />
-        }
-      />
-      <Route
-        path={ROUTES.PRODUCT}
-        element={<ProductItem list={combinedData.itemsList} />}
-      />
-      <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
-      <Route path={ROUTES.ADMIN} element={<Admin />} />
+          <Route
+            path={ROUTES.PRODUCT}
+            element={<ProductItem list={combinedData.itemsList} />}
+          />
+          <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
+          <Route path={ROUTES.ADMIN} element={<Admin />} />
+        </>
+      ) : (
+        <>
+          {" "}
+          <Route path={ROUTES.AUTH} element={<LoginForm setAuth={setAuth} />} />
+        </>
+      )}
     </Routes>
   );
 }
