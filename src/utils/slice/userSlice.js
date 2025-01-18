@@ -83,6 +83,8 @@ const userSlice = createSlice({
     orderNum: null,
     addOrderPopup: false,
     ordersData: orders,
+    equipmentPopup: false,
+    equipmentId: null,
   },
   reducers: {
     changeShowPopup: (state, { payload }) => {
@@ -100,6 +102,12 @@ const userSlice = createSlice({
     changeOrdersList: (state, { payload }) => {
       state.ordersData = payload;
     },
+    changeEquipmentPopup: (state, { payload }) => {
+      state.equipmentPopup = payload;
+    },
+    changeEquipmentId: (state, { payload }) => {
+      state.equipmentId = payload;
+    },
     addItemOrder: (state, { payload }) => {
       let isFind = state.ordersData.some(({ id }) => id === payload.id);
       if (!isFind && payload.id) {
@@ -114,7 +122,9 @@ const userSlice = createSlice({
   extraReducers: (builder) => {},
 });
 export const {
+  changeEquipmentId,
   changeIsAuth,
+  changeEquipmentPopup,
   addItemOrder,
   changeOrdersList,
   changeAddOrderPopup,

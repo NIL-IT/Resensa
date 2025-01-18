@@ -4,17 +4,17 @@ import Popup from "./components/shared/popup/Popup";
 import AppRoutes from "./routes/AppRoutes";
 import StatusPopup from "./components/shared/popup/StatusPopup";
 import AddOrderPopup from "./components/shared/popup/AddOrderPopup";
+import ChangeEquipmentPopup from "./components/shared/popup/ChangeEquipmentPopup";
 
 function App() {
-  const { isPopup, status, addOrderPopup, isAuth } = useSelector(
-    ({ user }) => user
-  );
-
+  const { isPopup, status, addOrderPopup, isAuth, equipmentPopup } =
+    useSelector(({ user }) => user);
   return (
     <div className="relative">
       <div
         className={`${
-          (isPopup || status || addOrderPopup) && "blur-md bg-gray-200"
+          (isPopup || status || addOrderPopup || equipmentPopup) &&
+          "blur-md bg-gray-200"
         }`}
       >
         {isAuth && <Header />}
@@ -23,6 +23,7 @@ function App() {
       {isPopup && <Popup />}
       {status && <StatusPopup />}
       {addOrderPopup && <AddOrderPopup />}
+      {equipmentPopup && <ChangeEquipmentPopup />}
     </div>
   );
 }

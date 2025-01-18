@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import Title from "../ui/Title";
-import AdminOrders from "../shared/AdminOrders";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
+import AdminOrders from "../shared/admin/AdminOrders";
+import AdminEquipment from "../shared/admin/AdminEquipment";
+import AdminSolutions from "../shared/admin/AdminSolutions";
+import AdminCalculator from "../shared/admin/AdminCalculator";
+import AdminNews from "../shared/admin/AdminNews";
+import AdminExit from "../shared/admin/AdminExit";
 const navList = [
   {
     id: "1",
@@ -19,31 +17,31 @@ const navList = [
   {
     id: "2",
     name: "оборудование",
-    component: AdminOrders,
+    component: (title) => <AdminEquipment title={title} />,
     title: "все оборудование",
   },
   {
     id: "3",
     name: "решения",
-    component: AdminOrders,
+    component: (title) => <AdminSolutions title={title} />,
     title: "все решения",
   },
   {
     id: "4",
     name: "калькулятор",
-    component: AdminOrders,
+    component: (title) => <AdminCalculator title={title} />,
     title: "калькулятор",
   },
   {
     id: "5",
     name: "новости",
-    component: AdminOrders,
+    component: (title) => <AdminNews title={title} />,
     title: "все новости",
   },
   {
     id: "6",
     name: "выйти",
-    component: AdminOrders,
+    component: (title) => <AdminExit title={title} />,
     title: "выйти",
   },
 ];

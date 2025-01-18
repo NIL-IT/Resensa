@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Title from "../ui/Title";
+import Title from "../../ui/Title";
 import { Plus, Trash2 } from "lucide-react";
-import VerticalDote from "../ui/VerticalDote";
+import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOrdersList } from "../../utils/slice/userSlice";
-import { useFormatDate } from "../../utils/hooks/formatDate";
+import { changeOrdersList } from "../../../utils/slice/userSlice";
+import { useFormatDate } from "../../../utils/hooks/formatDate";
 export const list = [
   { name: "Добавить новый заказ", icon: <Plus width={20} />, action: "add" },
   {

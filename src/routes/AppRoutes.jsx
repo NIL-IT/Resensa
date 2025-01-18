@@ -19,7 +19,7 @@ export default function AppRoutes() {
   const [auth, setAuth] = useState(
     authFormLocalStorage !== null ? authFormLocalStorage : isAuth
   );
-  console.log(authFormLocalStorage, "local", auth, "aвторизирован");
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -30,12 +30,12 @@ export default function AppRoutes() {
       navigate(ROUTES.AUTH);
     }
   }, [isAuth, auth, setAuth]);
-  useEffect(() => {
-    const isFind = Object.values(ROUTES).includes(pathname);
-    console.log(isFind);
-    console.log(auth, "Авторизован");
-    if (!isFind && isAuth) navigate(ROUTES.HOME);
-  }, [pathname]);
+  // useEffect(() => {
+  //   const isFind = Object.values(ROUTES).includes(pathname);
+  //   console.log(isFind);
+  //   if (!isFind && isAuth && pathname.match(/^\/admin\/[1-6]$/) === null)
+  //     navigate(ROUTES.HOME);
+  // }, [pathname]);
 
   return (
     <Routes>
