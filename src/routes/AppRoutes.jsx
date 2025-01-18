@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "../components/pages/Home";
 import Equipment from "../components/pages/Equipment";
 import { ROUTES } from "./routes";
@@ -15,17 +15,27 @@ export default function AppRoutes() {
     itemsList: [...data.equipment.items, ...data.solutions.items],
   };
   const { isAuth, isAdmin } = useSelector(({ user }) => user);
-  const [auth, setAuth] = useState(isAuth);
+  const authFormLocalStorage = localStorage.getItem(`auth`);
+  const [auth, setAuth] = useState(
+    authFormLocalStorage !== null ? authFormLocalStorage : isAuth
+  );
+  console.log(authFormLocalStorage, "local", auth, "aвторизирован");
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     setAuth(isAuth);
     if (auth) {
       navigate(ROUTES.HOME);
-      console.log("Home");
     } else {
       navigate(ROUTES.AUTH);
     }
   }, [isAuth, auth, setAuth]);
+  useEffect(() => {
+    const isFind = Object.values(ROUTES).includes(pathname);
+    console.log(isFind);
+    console.log(auth, "Авторизован");
+    if (!isFind && isAuth) navigate(ROUTES.HOME);
+  }, [pathname]);
 
   return (
     <Routes>

@@ -71,11 +71,13 @@ const orders = [
     amount: "200.00 ₽",
   },
 ];
+const authFormLocalStorage =
+  localStorage.getItem(`auth`) !== null ? localStorage.getItem(`auth`) : false;
 const userSlice = createSlice({
   name: "user",
   initialState: {
     isAdmin: true,
-    isAuth: false,
+    isAuth: authFormLocalStorage,
     isPopup: false,
     status: false,
     orderNum: null,
@@ -106,6 +108,7 @@ const userSlice = createSlice({
     },
     changeIsAuth: (state, { payload }) => {
       state.isAuth = payload;
+      localStorage.setItem(`auth`, payload);
     },
   },
   extraReducers: (builder) => {},
