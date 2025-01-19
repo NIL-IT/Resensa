@@ -89,6 +89,8 @@ const userSlice = createSlice({
     equipmentId: null,
     newsId: null,
     addNewItemPopup: false,
+    newsPopup: false,
+    searchPopup: false,
   },
   reducers: {
     changeShowAddNewItemPopup: (state, { payload }) => {
@@ -111,6 +113,12 @@ const userSlice = createSlice({
     },
     changeEquipmentPopup: (state, { payload }) => {
       state.equipmentPopup = payload;
+    },
+    changeShowNewsPopup: (state, { payload }) => {
+      state.newsPopup = payload;
+    },
+    changeShowSearchPopup: (state, { payload }) => {
+      state.searchPopup = payload;
     },
     changeEquipmentId: (state, { payload }) => {
       state.equipmentId = payload;
@@ -159,6 +167,8 @@ const userSlice = createSlice({
   extraReducers: (builder) => {},
 });
 export const {
+  changeShowSearchPopup,
+  changeShowNewsPopup,
   addNewItemToData,
   changeNewsId,
   changeData,

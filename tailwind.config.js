@@ -3,7 +3,26 @@ const plugin = require("tailwindcss/plugin");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    screens: {
+      xs: "375px",
+      sm: "420px",
+      md: "640px",
+      lg: "768px",
+      xl: "1024px",
+      "2xl": "1280px",
+      "3xl": "1536px",
+    },
+    extend: {
+      width: {
+        "container-xs": "355px",
+        "container-sm": "400px",
+        "container-md": "620px",
+        "container-lg": "748px",
+        "container-xl": "1004px",
+        "container-2xl": "1260px",
+        "container-3xl": "1311px",
+      },
+    },
     colors: {
       white: "#fff",
       green: "#00AB26",
@@ -39,8 +58,30 @@ export default {
           alignItems: "center",
         },
         ".container": {
-          width: "1311px",
+          width: "100%",
           margin: "0 auto",
+          maxWidth: "1311px",
+          "@screen xs": {
+            width: "355px",
+          },
+          "@screen sm": {
+            width: "420px",
+          },
+          "@screen md": {
+            width: "620px",
+          },
+          "@screen lg": {
+            width: "748px",
+          },
+          "@screen xl": {
+            width: "1004px",
+          },
+          "@screen 2xl": {
+            width: "1260px",
+          },
+          "@screen 3xl": {
+            width: "1311px",
+          },
         },
       });
     }),

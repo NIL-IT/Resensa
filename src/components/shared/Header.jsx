@@ -4,8 +4,11 @@ import Input from "../ui/SearchInput";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import { useDispatch } from "react-redux";
-import { changeShowPopup } from "../../utils/slice/userSlice";
-const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT, ADMIN } = ROUTES;
+import {
+  changeShowPopup,
+  changeShowSearchPopup,
+} from "../../utils/slice/userSlice";
+const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, CONTACT } = ROUTES;
 const list = [
   {
     name: "Главная",
@@ -60,7 +63,10 @@ export default function Header() {
                 <a href="#">
                   <img src="/icon/wa.svg" alt="whatsapp" />
                 </a>
-                <a href="#">
+                <a
+                  className="cursor-pointer"
+                  onClick={() => dispatch(changeShowSearchPopup(true))}
+                >
                   <img src="/icon/search_btn.svg" alt="search" />
                 </a>
               </div>

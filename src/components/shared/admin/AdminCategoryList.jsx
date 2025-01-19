@@ -63,7 +63,7 @@ export default function AdminCategoryList({ title, category }) {
   return (
     <div className="relative pb-5">
       <span className="w-[1px] h-[100%] absolute bg-gray-400 top-0 left-[-39px]" />
-      <div className="flex-center justify-between mb-6">
+      <div className="flex-center justify-between mb-9">
         <Title text={title} className="inline-block text-xl font-normal " />
         <button
           onClick={() => addNewItem()}
@@ -81,10 +81,10 @@ export default function AdminCategoryList({ title, category }) {
       </div>
       <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {data[category].items.map(
-          ({ id, name, description, img, text, date }) => (
+          ({ id, name, description, img, text, date, title }) => (
             <div
               key={id}
-              className=" flex flex-col justify-between w-[200px] h-[400px] border border-gray-100 p-4 mb-5"
+              className=" flex flex-col justify-between w-[200px] h-[360px] border border-gray-100 p-4 mb-5"
             >
               {category !== "news" ? (
                 <>
@@ -114,7 +114,7 @@ export default function AdminCategoryList({ title, category }) {
                   <div>
                     <img className="w-full h-[120px]" src={img} alt={name} />
                     <h2 className="text-gray-400  text-sm uppercase font-normal my-2 overflow-hidden">
-                      {text}
+                      {title}
                     </h2>
                     <p className=" text-[13px] text-gray-300">{date}</p>
                   </div>

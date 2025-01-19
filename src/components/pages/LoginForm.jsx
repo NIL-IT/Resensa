@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsAuth } from "../../utils/slice/userSlice";
 
-export default function LoginForm({ setAuth }) {
+export default function LoginForm() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(({ user }) => user);
   const [form, setForm] = React.useState({
@@ -16,8 +16,6 @@ export default function LoginForm({ setAuth }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(changeIsAuth(true));
-    setAuth(isAuth);
-    console.log("Form submitted with:", form);
   };
   return (
     <div className=" w-[100wh] h-[100vh] ">

@@ -5,6 +5,7 @@ import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
 import { changeOrdersList } from "../../../utils/slice/userSlice";
 import { useFormatDate } from "../../../utils/hooks/formatDate";
+import SearchInput from "../../ui/SearchInput";
 export const list = [
   { name: "Добавить новый заказ", icon: <Plus width={20} />, action: "add" },
   {
@@ -24,7 +25,7 @@ export default function AdminOrders({ title }) {
   const [ordersList, setOrdersList] = useState(ordersData);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const dispatch = useDispatch();
-  console.log(ordersList);
+
   useEffect(() => {
     setOrdersList(ordersData);
   }, [ordersData]);
@@ -59,18 +60,31 @@ export default function AdminOrders({ title }) {
     setSelectedOrders([]);
     dispatch(changeOrdersList(ordersList));
   };
-
+  const handleSearch = (value) => {
+    setOrdersList(
+      ordersData.filter((order) => order.id.toString().includes(value))
+    );
+  };
   return (
     <div className="w-full relative">
-      <div className="flex-center justify-between mb-6">
+      <span className="w-[1px] h-[100%] absolute bg-gray-400 top-0 left-[-39px]" />
+      <div className="flex-center justify-between mb-4">
         <Title className="text-xl font-normal text-gray-400" text={title} />
-        <VerticalDote
-          deleteAll={deleteAll}
-          deleteSelected={deleteSelected}
-          list={list}
-          selectedOrders={selectedOrders}
-          ordersList={ordersList}
-        />
+        <div className="flex-center gap-8">
+          <SearchInput
+            handleSearch={handleSearch}
+            type={"number"}
+            placeholder={"Введите номер заказа"}
+            className={"w-[300px]  border-0 border-b border-gray-250"}
+          />
+          <VerticalDote
+            deleteAll={deleteAll}
+            deleteSelected={deleteSelected}
+            list={list}
+            selectedOrders={selectedOrders}
+            ordersList={ordersList}
+          />
+        </div>
       </div>
       <div className="max-h-[480px] overflow-y-scroll">
         <table className="min-w-full relative">

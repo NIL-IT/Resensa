@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
 import AdminOrders from "../shared/admin/AdminOrders";
-import AdminCalculator from "../shared/admin/AdminCalculator";
 
 import AdminExit from "../shared/admin/AdminExit";
 import AdminCategoryList from "../shared/admin/AdminCategoryList";
+import FileUploader from "../ui/FileUploader";
+import { div } from "three/tsl";
 const navList = [
   {
     id: "1",
@@ -31,18 +32,12 @@ const navList = [
   },
   {
     id: "4",
-    name: "калькулятор",
-    component: (title) => <AdminCalculator title={title} />,
-    title: "калькулятор",
-  },
-  {
-    id: "5",
     name: "новости",
     component: (title) => <AdminCategoryList title={title} category={"news"} />,
     title: "все новости",
   },
   {
-    id: "6",
+    id: "5",
     name: "выйти",
     component: (title) => <AdminExit title={title} />,
     title: "выйти",
@@ -50,10 +45,15 @@ const navList = [
 ];
 export default function Admin() {
   const [activeLink, setActiveLink] = useState(null);
+  const [isActiveUploadFile, setActiveUploaderFile] = useState(false);
   const { pathname } = useLocation();
+  const changeShowUploadFile = () => {
+    setActiveUploaderFile(!isActiveUploadFile);
+  };
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
+    setActiveUploaderFile(false);
   }, [pathname]);
   return (
     <div>
@@ -78,15 +78,21 @@ export default function Admin() {
               ))}
             </ul>
           </nav>
-          <div className="pl-[38px] pt-12 w-full">
-            {navList.map(({ title, id, component }, i) => (
-              <div key={id}>
-                {pathname.split("/").at(-1) === id && component(title)}
-              </div>
-            ))}
-          </div>
+          {!isActiveUploadFile ? (
+            <div className="pl-[38px] pt-12 w-full">
+              {navList.map(({ title, id, component }, i) => (
+                <div key={id}>
+                  {pathname.split("/").at(-1) === id && component(title)}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="w-full h-[500px] flex-center flex-col justify-center">
+              <FileUploader />
+            </div>
+          )}
         </section>
-        <div className="flex justify-center w-full gap-4 mt-6">
+        <div className="flex justify-center w-full gap-4 mt-6 pl-44">
           <button className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5">
             <svg
               className="w-[30px] h-[30px] group-hover:translate-y-1 transition-all"
@@ -103,7 +109,10 @@ export default function Admin() {
             </svg>
             ВЫГРУЗИТЬ В EXCEL
           </button>
-          <button className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5">
+          <button
+            onClick={() => changeShowUploadFile()}
+            className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5"
+          >
             <svg
               className="w-[30px] h-[30px] group-hover:translate-y-1 transition-all"
               fill="none"

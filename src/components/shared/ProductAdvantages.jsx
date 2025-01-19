@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import Title from "../ui/Title";
-import { Tetrahedron } from "@react-three/drei";
 const list = [
   {
     title: "УДОБСТВО В ОБСЛУИВАНИИ",
@@ -85,7 +84,7 @@ export default function ProductAdvantages() {
                 </span>
                 <Title
                   text={title}
-                  className="text-2xl font-normal text-gray-600 w-[485px]"
+                  className="text-2xl font-normal text-gray-600 w-[485px] select-none"
                 />
                 <div>
                   <img

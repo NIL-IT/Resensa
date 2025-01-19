@@ -35,18 +35,20 @@ export default function Footer({ scrollTop = null }) {
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
-    <footer className="container py-[85px] flex justify-between relative">
+    <footer className="container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
       <div>
         <Link onClick={scrollTop} to={"/"}>
-          <div className="max-w-[249px] max-h-[42px] mb-5">
+          <div className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5">
             <img src="/icon/logo.svg" alt="logo" />
           </div>
         </Link>
-        <span className="text-gray-900 text-base">copyright</span>
+        <span className="text-gray-900 text-sm xs:text-sm sm:text-base">
+          copyright
+        </span>
       </div>
-      <div>
-        <nav className="flex gap-[58px]">
-          <ul className="flex flex-col gap-5 text-xl">
+      <div className="order-3 lg:order-2">
+        <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
+          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
             {list.map(({ name, path }, i) => (
               <li
                 onClick={scrollTop}
@@ -57,14 +59,14 @@ export default function Footer({ scrollTop = null }) {
               </li>
             ))}
           </ul>
-          <ul className="flex flex-col gap-5 text-xl">
+          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
             {list.map(({ name, path }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
                 <Link>Оборудование</Link>
               </li>
             ))}
           </ul>
-          <ul className="flex flex-col gap-5 text-xl">
+          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
             {list.map(({ name, path }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
                 <Link>Решения</Link>
@@ -74,8 +76,8 @@ export default function Footer({ scrollTop = null }) {
         </nav>
       </div>
 
-      <div className="flex flex-col gap-[26px]">
-        <div className="flex flex-col justify-end *:flex *:justify-end  text-gray-400 text-xl font-normal">
+      <div className="flex flex-col gap-[15px] xs:gap-[18px] sm:gap-[20px] md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3">
+        <div className="flex flex-col lg:justify-end *:flex *:lg:justify-end text-gray-400 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl font-normal">
           <p>Адрес</p>
           <a target="blank" href="mailto:office@recensa.ru">
             office@recensa.ru
@@ -84,7 +86,7 @@ export default function Footer({ scrollTop = null }) {
             +7 999 999 99 99
           </a>
         </div>
-        <div className="flex gap-[10px] justify-end">
+        <div className="flex gap-[10px] lg:justify-end">
           <a href="#">
             <img src="/icon/telegram.svg" alt="telegram" />
           </a>
@@ -95,10 +97,10 @@ export default function Footer({ scrollTop = null }) {
         <Button
           onClick={() => handleChangeShowPopup(true)}
           text={"заказать звонок"}
-          className=" bg-white border border-gray-400 text-gray-400 text-xs font-normal py-3 px-[30px] flex justify-end hover:border-gray-200 hover:bg-gray-50"
+          className="bg-white border border-gray-400 text-gray-400 text-xs font-normal py-2.5 xs:py-2.5 sm:py-3 px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[30px] flex lg:justify-end hover:border-gray-200 hover:bg-gray-50 w-fit lg:w-auto lg:ml-auto"
         />
       </div>
-      <div className="absolute bottom-5 right-0 w-[156px] h-[27px]">
+      <div className="absolute bottom-3 xs:bottom-3.5 sm:bottom-4 md:bottom-4.5 lg:bottom-5 right-0 w-[120px] xs:w-[130px] sm:w-[140px] md:w-[145px] lg:w-[150px] xl:w-[153px] 2xl:w-[154px] 3xl:w-[156px] h-[20px] xs:h-[22px] sm:h-[24px] md:h-[25px] lg:h-[26px] xl:h-[26px] 2xl:h-[26px] 3xl:h-[27px]">
         <img src="/img/nil.png" alt="" />
       </div>
     </footer>

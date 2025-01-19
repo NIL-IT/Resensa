@@ -152,6 +152,32 @@ button::-moz-focus-inner {
     transform: translateX(-100%);
   }
 }
+@keyframes animateWidget {
+  0% {
+    transform: rotate(0);
+  }
+  5% {
+    transform: rotate(65deg);
+  }
+  10% {
+    transform: rotate(-15deg);
+  }
+  15% {
+    transform: rotate(65deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  25% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.animateWidget {
+  animation: animateWidget 10s linear infinite;
+}
 .scrollAdvantages {
   animation: scrollAdvantages 20s linear infinite;
 }
