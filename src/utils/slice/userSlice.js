@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { data } from "../data";
 const orders = [
   {
     id: "25426",
@@ -76,6 +77,7 @@ const authFormLocalStorage =
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    data: data,
     isAdmin: true,
     isAuth: authFormLocalStorage,
     isPopup: false,
@@ -85,6 +87,7 @@ const userSlice = createSlice({
     ordersData: orders,
     equipmentPopup: false,
     equipmentId: null,
+    newsId: null,
   },
   reducers: {
     changeShowPopup: (state, { payload }) => {
@@ -108,6 +111,9 @@ const userSlice = createSlice({
     changeEquipmentId: (state, { payload }) => {
       state.equipmentId = payload;
     },
+    changeNewsId: (state, { payload }) => {
+      state.newsId = payload;
+    },
     addItemOrder: (state, { payload }) => {
       let isFind = state.ordersData.some(({ id }) => id === payload.id);
       if (!isFind && payload.id) {
@@ -118,10 +124,15 @@ const userSlice = createSlice({
       state.isAuth = payload;
       localStorage.setItem(`auth`, payload);
     },
+    changeData: (state, { payload }) => {
+      state.data = payload;
+    },
   },
   extraReducers: (builder) => {},
 });
 export const {
+  changeNewsId,
+  changeData,
   changeEquipmentId,
   changeIsAuth,
   changeEquipmentPopup,

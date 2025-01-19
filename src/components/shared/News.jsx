@@ -1,39 +1,10 @@
 import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-const news = [
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-  {
-    image: "/img/slider_1.png",
-    text: "Следует отметить, что курс социально-ориентирован",
-    date: "30.01.2023 ",
-  },
-];
+import { useSelector } from "react-redux";
+
 export default function News() {
+  const { data } = useSelector(({ user }) => user);
   return (
     <div className="container pt-[218px]">
       <Title
@@ -43,16 +14,12 @@ export default function News() {
       <div className="flex justify-center">
         <div className="w-[1160px]">
           <div className="flex flex-wrap justify-between mb-10 ">
-            {news.map((item, i) => (
+            {data.news.items.map((item, i) => (
               <div
                 className="group flex flex-col justify-between w-[370px] h-[484px] gradient mb-[37px] px-[29px] py-[20px] cursor-pointer"
                 key={i}
               >
-                <img
-                  className="h-[70%] object-contain"
-                  src={item.image}
-                  alt=""
-                />
+                <img className="h-[70%] object-contain" src={item.img} alt="" />
                 <div className="h-[30%]">
                   <p className="text-white text-xl leading-[25.5px] ">
                     {item.text}

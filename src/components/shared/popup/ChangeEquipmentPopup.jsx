@@ -1,25 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEquipmentPopup } from "../../../utils/slice/userSlice";
-import { data } from "../../../utils/data";
+import {
+  changeData,
+  changeEquipmentPopup,
+} from "../../../utils/slice/userSlice";
+
+import ImageUploader from "../../ui/ImageUploader";
+import { updateItemById } from "../../../utils/hooks/updateItemById";
+import { useLocation } from "react-router-dom";
 
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const pathnameId = pathname.split("/").at(-1);
+  const isNews = +pathnameId === +5;
+
+  const { equipmentId, newsId, data } = useSelector(({ user }) => user);
   const { itemsList } = {
-    itemsList: [...data.equipment.items, ...data.solutions.items],
+    itemsList: !isNews
+      ? [...data.equipment.items, ...data.solutions.items]
+      : [...data.news.items],
   };
 
-  const { equipmentId } = useSelector(({ user }) => user);
-  const findProduct = itemsList.find((item) => +item.id === +equipmentId);
+  const findProduct = itemsList.find((item) =>
+    !isNews ? +item.id === +equipmentId : +item.id === +newsId
+  );
 
-  const [isOpen, setIsOpen] = useState(true);
-  const [formData, setFormData] = useState({
-    id: findProduct.id,
-    name: findProduct.name,
-    description: findProduct.description,
-    img: findProduct.img,
-  });
+  const [formData, setFormData] = useState(
+    !isNews
+      ? {
+          id: findProduct.id,
+          name: findProduct.name,
+          description: findProduct.description,
+          img: findProduct.img,
+        }
+      : {
+          id: findProduct.id,
+          text: findProduct.text,
+          date: findProduct.date,
+          img: findProduct.img,
+        }
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,14 +53,40 @@ const ChangeEquipmentPopup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsOpen(false);
-    setFormData({
-      name: "",
-      description: "",
-      img: "",
-    });
+    if (!isNews) {
+      dispatch(changeData(updateItemById(formData.id, formData, data)));
+      setFormData({
+        id: findProduct.id,
+        name: findProduct.name,
+        description: findProduct.description,
+        img: findProduct.img,
+      });
+    } else {
+      const newData = { ...data };
+      const categoryData = newData.news;
+      const updatedItems = categoryData.items.map((item) => {
+        if (item.id === formData.id) {
+          return { ...item, ...formData };
+        }
+        return item;
+      });
+      if (JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)) {
+        newData.news = {
+          ...categoryData,
+          items: updatedItems,
+        };
+      }
+      dispatch(changeData(newData));
+      setFormData({
+        id: findProduct.id,
+        text: findProduct.text,
+        date: findProduct.date,
+        img: findProduct.img,
+      });
+    }
+
+    dispatch(changeEquipmentPopup(false));
   };
-  useEffect(() => {}, [isOpen]);
 
   return (
     <div className="fixed inset-0  flex items-center justify-center">
@@ -50,50 +98,46 @@ const ChangeEquipmentPopup = () => {
           ✕
         </button>
         <h2 className="text-center text-[32px] font-medium leading-[40.8px] text-gray-400 mb-6">
-          Изменить оборудование
+          {!isNews ? "Изменить оборудование" : "Изменить новость"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-[18px]">
-          <div className=" flex gap-2">
-            <img width={200} src={findProduct.img} alt="" />
-            <Input
-              type={"text"}
-              name="img"
-              placeholder="Наименование компании"
-              value={formData.img}
-              onChange={handleInputChange}
-            />
+          <div>
+            <ImageUploader />
           </div>
+
           <div className="space-y-2">
-            <span className="w-full text-sm text-gray-900 ">Название</span>
+            <span className="w-full text-sm text-gray-900 ">
+              {!isNews ? "Название" : "Дата "}
+            </span>
             <Input
-              type="text"
-              name="name"
-              className={
-                "border-gray-300 focus:gray-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-              }
-              value={formData.name}
+              type={!isNews ? "text" : "text"}
+              name={!isNews ? "name" : "date"}
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+              value={!isNews ? formData.name : formData.date}
               onChange={handleInputChange}
             />
           </div>
 
           <label
-            for="message"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="message"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Описание
+            {!isNews ? "Описание" : "Текст новости"}
           </label>
           <textarea
             id="message"
+            name={!isNews ? "description" : "text"}
             rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-            value={formData.description}
+            onChange={handleInputChange}
+            className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+            value={!isNews ? formData.description : formData.text}
           ></textarea>
 
           <button
             type="submit"
             className="w-full p-3 bg-gray-400 text-white rounded hover:bg-[#2F2F2F] transition-colors text-lg font-medium"
           >
-            ОТПРАВИТЬ
+            ИЗМЕНИТЬ
           </button>
         </form>
       </div>

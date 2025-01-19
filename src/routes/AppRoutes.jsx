@@ -25,7 +25,7 @@ export default function AppRoutes() {
   useEffect(() => {
     setAuth(isAuth);
     if (auth) {
-      navigate(ROUTES.HOME);
+      navigate(pathname);
     } else {
       navigate(ROUTES.AUTH);
     }

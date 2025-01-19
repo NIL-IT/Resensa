@@ -30,6 +30,7 @@ export default function ItemsList({ limited = true, list, href, title }) {
             <div className="flex-center justify-between gap-2">
               <p className="w-[50%] text-[13px] text-gray-300">{description}</p>
               <Button
+                noLink={true}
                 onClick={() => handleChangeShowPopup(true)}
                 text={"Оставить заявку"}
                 className="w-[50%] py-4 px-[12.5px] hover:bg-gray-450"

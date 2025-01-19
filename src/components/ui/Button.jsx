@@ -10,8 +10,21 @@ export default function Button({
   href = "",
   iconWidth,
   type = "button",
+  noLink = false,
 }) {
-  return !icon ? (
+  return noLink ? (
+    <button
+      to={href}
+      className={cn(
+        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",
+
+        className
+      )}
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  ) : !icon ? (
     <Link
       to={href}
       className={cn(

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
 import AdminOrders from "../shared/admin/AdminOrders";
-import AdminEquipment from "../shared/admin/AdminEquipment";
-import AdminSolutions from "../shared/admin/AdminSolutions";
 import AdminCalculator from "../shared/admin/AdminCalculator";
 import AdminNews from "../shared/admin/AdminNews";
 import AdminExit from "../shared/admin/AdminExit";
+import AdminCategoryList from "../shared/admin/AdminCategoryList";
 const navList = [
   {
     id: "1",
@@ -17,13 +16,17 @@ const navList = [
   {
     id: "2",
     name: "оборудование",
-    component: (title) => <AdminEquipment title={title} />,
+    component: (title) => (
+      <AdminCategoryList title={title} category={`equipment`} />
+    ),
     title: "все оборудование",
   },
   {
     id: "3",
     name: "решения",
-    component: (title) => <AdminSolutions title={title} />,
+    component: (title) => (
+      <AdminCategoryList title={title} category={"solutions"} />
+    ),
     title: "все решения",
   },
   {
@@ -35,7 +38,7 @@ const navList = [
   {
     id: "5",
     name: "новости",
-    component: (title) => <AdminNews title={title} />,
+    component: (title) => <AdminCategoryList title={title} category={"news"} />,
     title: "все новости",
   },
   {
