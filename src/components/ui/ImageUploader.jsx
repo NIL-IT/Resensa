@@ -9,7 +9,9 @@ const ImageUploader = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
-  const { equipmentId, newsId } = useSelector(({ user }) => user);
+  const { equipmentId, newsId, addNewItemPopup } = useSelector(
+    ({ user }) => user
+  );
   // проверка на новость
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
@@ -90,9 +92,10 @@ const ImageUploader = () => {
 
   return (
     <div className="w-full mx-auto ">
+      <span className="text-sm text-gray-300">Изображение</span>
       {!uploadedImage && (
         <div
-          className={`p-8 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors
+          className={`p-8 mt-2 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors
             ${
               dragActive
                 ? "border-blue-400 bg-blue-50"
@@ -145,7 +148,7 @@ const ImageUploader = () => {
             </button>
           </div>
         </div>
-      ) : (
+      ) : !addNewItemPopup ? (
         <div className="mt-4 w-full flex justify-between">
           <img
             src={findProduct.img}
@@ -161,6 +164,8 @@ const ImageUploader = () => {
             </button>
           </div>
         </div>
+      ) : (
+        <></>
       )}
 
       {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}

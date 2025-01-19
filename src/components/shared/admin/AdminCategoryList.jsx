@@ -3,11 +3,15 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeAddOrderPopup,
   changeData,
   changeEquipmentId,
   changeEquipmentPopup,
   changeNewsId,
+  changeShowAddNewItemPopup,
 } from "../../../utils/slice/userSlice";
+
+import { Plus } from "lucide-react";
 
 export default function AdminCategoryList({ title, category }) {
   const dispatch = useDispatch();
@@ -53,15 +57,28 @@ export default function AdminCategoryList({ title, category }) {
 
     dispatch(changeData(newData));
   };
-
+  const addNewItem = () => {
+    dispatch(changeShowAddNewItemPopup(true));
+  };
   return (
     <div className="relative pb-5">
       <span className="w-[1px] h-[100%] absolute bg-gray-400 top-0 left-[-39px]" />
-      <Title
-        text={title}
-        className="inline-block text-xl font-normal mb-[50px] "
-      />
-
+      <div className="flex-center justify-between mb-6">
+        <Title text={title} className="inline-block text-xl font-normal " />
+        <button
+          onClick={() => addNewItem()}
+          className=" p-2 flex-center gap-4 mr-12 rounded hover:bg-gray-50"
+        >
+          <span>{`Добавить ${
+            category === "equipment"
+              ? "оборудование"
+              : category !== "news"
+              ? "решение"
+              : "новость"
+          }`}</span>
+          <Plus className="w-6" />
+        </button>
+      </div>
       <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {data[category].items.map(
           ({ id, name, description, img, text, date }) => (

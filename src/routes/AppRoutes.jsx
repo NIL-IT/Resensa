@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import Home from "../components/pages/Home";
 import Equipment from "../components/pages/Equipment";
 import { ROUTES } from "./routes";
@@ -14,69 +20,67 @@ export default function AppRoutes() {
   const combinedData = {
     itemsList: [...data.equipment.items, ...data.solutions.items],
   };
-  const { isAuth, isAdmin } = useSelector(({ user }) => user);
-  const authFormLocalStorage = localStorage.getItem(`auth`);
-  const [auth, setAuth] = useState(
-    authFormLocalStorage !== null ? authFormLocalStorage : isAuth
-  );
-
-  const { pathname } = useLocation();
+  const { isAuth } = useSelector(({ user }) => user);
+  const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
-    setAuth(isAuth);
-    if (auth) {
-      navigate(pathname);
-    } else {
+    // Redirect to auth if not authenticated, unless already on auth page
+    if (!isAuth && location.pathname !== ROUTES.AUTH) {
       navigate(ROUTES.AUTH);
     }
-  }, [isAuth, auth, setAuth]);
-  // useEffect(() => {
-  //   const isFind = Object.values(ROUTES).includes(pathname);
-  //   console.log(isFind);
-  //   if (!isFind && isAuth && pathname.match(/^\/admin\/[1-6]$/) === null)
-  //     navigate(ROUTES.HOME);
-  // }, [pathname]);
+    // Redirect from auth page to home if already authenticated
+    if (isAuth && location.pathname === ROUTES.AUTH) {
+      navigate(ROUTES.HOME);
+    }
+  }, [isAuth, location.pathname, navigate]);
 
+  // Show only auth route when not authenticated
+  if (!isAuth) {
+    return (
+      <Routes>
+        <Route path={ROUTES.AUTH} element={<LoginForm />} />
+        <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
+      </Routes>
+    );
+  }
+
+  // Show all routes when authenticated
   return (
     <Routes>
-      {auth ? (
-        <>
-          <Route path={ROUTES.HOME} element={<Home />} />
-          <Route
-            path={ROUTES.EQUIPMENT}
-            element={
-              <Equipment
-                data={data.equipment}
-                text={textEquipment}
-                bannerImg={"/img/eq_banner.svg"}
-                title={"оборудование"}
-              />
-            }
+      <Route path={ROUTES.HOME} element={<Home />} />
+      <Route
+        path={ROUTES.EQUIPMENT}
+        element={
+          <Equipment
+            data={data.equipment}
+            text={textEquipment}
+            bannerImg={"/img/eq_banner.svg"}
+            title={"оборудование"}
           />
-          <Route
-            path={ROUTES.SOLUTIONS}
-            element={
-              <Equipment
-                data={data.solutions}
-                text={textEquipment}
-                bannerImg={"/img/solutions_banner.png"}
-                title={"решения"}
-              />
-            }
+        }
+      />
+      <Route
+        path={ROUTES.SOLUTIONS}
+        element={
+          <Equipment
+            data={data.solutions}
+            text={textEquipment}
+            bannerImg={"/img/solutions_banner.png"}
+            title={"решения"}
           />
-          <Route
-            path={ROUTES.PRODUCT}
-            element={<ProductItem list={combinedData.itemsList} />}
-          />
-          <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
-          <Route path={ROUTES.ADMIN} element={<Admin />} />
-        </>
-      ) : (
-        <>
-          {" "}
-          <Route path={ROUTES.AUTH} element={<LoginForm setAuth={setAuth} />} />
-        </>
-      )}
+        }
+      />
+      <Route
+        path={ROUTES.PRODUCT}
+        element={<ProductItem list={combinedData.itemsList} />}
+      />
+      <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
+      <Route path="/admin" element={<Navigate to="/admin/1" replace />} />
+      <Route path={ROUTES.ADMIN} element={<Admin />} />
+      <Route path={ROUTES.ORDERS} element={<Admin />} />
+      <Route path={ROUTES.CONTACT} element={<Admin />} />
+      <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
     </Routes>
   );
 }

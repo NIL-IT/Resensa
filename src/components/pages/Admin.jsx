@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
 import AdminOrders from "../shared/admin/AdminOrders";
 import AdminCalculator from "../shared/admin/AdminCalculator";
-import AdminNews from "../shared/admin/AdminNews";
+
 import AdminExit from "../shared/admin/AdminExit";
 import AdminCategoryList from "../shared/admin/AdminCategoryList";
 const navList = [

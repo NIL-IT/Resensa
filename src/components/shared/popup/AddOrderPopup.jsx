@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addItemOrder,
   changeAddOrderPopup,
@@ -7,7 +7,7 @@ import {
 
 import Select from "../../ui/Select";
 import Input from "../../ui/Input";
-import { useFormatDate } from "../../../utils/hooks/formatDate";
+
 const options = [
   { label: "Доставлен", value: "Доставлен" },
   { label: "Отменен", value: "Отменен" },
@@ -15,7 +15,7 @@ const options = [
 
 export default function AddOrderPopup() {
   const dispatch = useDispatch();
-  const { ordersData } = useSelector(({ user }) => user);
+
   const [isOpen, setIsOpen] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ export default function AddOrderPopup() {
     }));
   };
   const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
 
     setFormData((prevData) => ({
       ...prevData,

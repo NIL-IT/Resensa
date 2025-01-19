@@ -88,8 +88,12 @@ const userSlice = createSlice({
     equipmentPopup: false,
     equipmentId: null,
     newsId: null,
+    addNewItemPopup: false,
   },
   reducers: {
+    changeShowAddNewItemPopup: (state, { payload }) => {
+      state.addNewItemPopup = payload;
+    },
     changeShowPopup: (state, { payload }) => {
       state.isPopup = payload;
     },
@@ -120,6 +124,30 @@ const userSlice = createSlice({
         state.ordersData.push(payload);
       }
     },
+    addNewItemToData: (state, { payload }) => {
+      if (payload.category === "news") {
+        const isFind = state.data.news.items.some(
+          ({ id }) => id === payload.item.id
+        );
+        if (!isFind && payload.item.id) {
+          state.data.news.items.push(payload.item);
+        }
+      } else if (payload.category === "equipment") {
+        const isFind = state.data.equipment.items.some(
+          ({ id }) => id === payload.item.id
+        );
+        if (!isFind && payload.item.id) {
+          state.data.equipment.items.push(payload.item);
+        }
+      } else if (payload.category === "solutions") {
+        const isFind = state.data.solutions.items.some(
+          ({ id }) => id === payload.item.id
+        );
+        if (!isFind && payload.item.id) {
+          state.data.solutions.items.push(payload.item);
+        }
+      }
+    },
     changeIsAuth: (state, { payload }) => {
       state.isAuth = payload;
       localStorage.setItem(`auth`, payload);
@@ -131,6 +159,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {},
 });
 export const {
+  addNewItemToData,
   changeNewsId,
   changeData,
   changeEquipmentId,
@@ -142,5 +171,6 @@ export const {
   changeShowPopup,
   changeShowStatus,
   changeOrderNumber,
+  changeShowAddNewItemPopup,
 } = userSlice.actions;
 export default userSlice.reducer;
