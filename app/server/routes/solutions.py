@@ -5,9 +5,9 @@ from typing import Optional
 from fastapi import APIRouter, Depends, Form, UploadFile, File, HTTPException
 from starlette import status
 
-from app.server.repositories.solutions import SolutionsRepository, get_solutions_repository
-from app.server.database.models import Solutions
-from app.server.utils.save_image import save_upload_file, read_image
+from ..repositories.solutions import SolutionsRepository, get_solutions_repository
+from ..database.models import Solutions
+from ..utils.save_image import save_upload_file, read_image
 
 router = APIRouter()
 

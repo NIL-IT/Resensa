@@ -4,8 +4,8 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.server.database.database import get_db
-from app.server.database.models import News
+from ..database.database import get_db
+from ..database.models import News
 
 
 class NewsRepository:

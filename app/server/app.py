@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from app.server.database.database import init_db
+from .database.database import init_db
 
 from .routes.news import router as news_router
 from .routes.equipments import router as equipments_router

@@ -3,8 +3,8 @@ from sqlalchemy import select, update
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.server.database.database import get_db
-from app.server.database.models import Equipment
+from ..database.database import get_db
+from ..database.models import Equipment
 
 
 class EquipmentsRepository:

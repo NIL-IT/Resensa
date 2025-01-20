@@ -2,12 +2,13 @@ import os
 from io import BytesIO
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel
 from starlette.responses import FileResponse
 
-from app.server.database.models import Order, OrderState
-from app.server.repositories.orders import OrdersRepository, get_orders_repository
+from ..database.models import Order, OrderState
+from ..repositories.orders import OrdersRepository, get_orders_repository
+from ..utils.send_telegram import send_message_to_telegram
 
 router = APIRouter()
 
@@ -105,3 +106,14 @@ async def import_orders(file: UploadFile = File(...), orders_repo: OrdersReposit
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error importing orders: {e}")
+
+@router.post("/submit-order/")
+async def submit_order(company_name: str = Form(...), name: str = Form(...), phone: str = Form(...), email: str = Form(...)):
+    order_info = {
+        'company_name': company_name,
+        'name': name,
+        'phone': phone,
+        'email': email,
+    }
+    send_message_to_telegram(order_info)
+    return {"status": "success", "message": "Заказ отправлен"}

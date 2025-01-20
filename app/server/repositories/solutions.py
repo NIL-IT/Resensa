@@ -2,10 +2,9 @@ from fastapi import Depends, HTTPException
 from sqlalchemy import select, update
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
-from app.server.database.database import get_db
-from app.server.database.models import Solutions
+from ..database.database import get_db
+from ..database.models import Solutions
 
 
 class SolutionsRepository:

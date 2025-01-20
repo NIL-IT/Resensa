@@ -1,0 +1,37 @@
+  services:
+    postgres:
+      image: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_DB: resensa
+        POSTGRES_PASSWORD: 1423
+        POSTGRES_HOST: postgres
+      volumes:
+        - postgres_volume:/app/files
+      networks:
+        - default_network
+      healthcheck:
+        test: [ "CMD", "pg_isready", "-U", "postgres" ]
+        interval: 10s
+        timeout: 5s
+        retries: 10
+    app:
+      image: soramiyaz/fastapi-server:latest
+      networks:
+        - default_network
+      volumes:
+        - fastapi_server_volume:/app/files
+      ports:
+        - "8002:8002"
+      depends_on:
+        postgres:
+          condition: service_healthy
+
+
+  volumes:
+    postgres_volume:
+    fastapi_server_volume:
+
+  networks:
+    default_network:
+      driver: bridge

@@ -1,14 +1,12 @@
 import os
-from datetime import datetime
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Form, UploadFile, File, HTTPException
 from starlette import status
 
-from app.server.repositories.equipments import EquipmentsRepository, get_equipment_repository
-from app.server.repositories.news import NewsRepository, get_news_repository
-from app.server.database.models import Equipment
-from app.server.utils.save_image import save_upload_file, read_image
+from ..database.models import Equipment
+from ..repositories.equipments import EquipmentsRepository, get_equipment_repository
+from ..utils.save_image import save_upload_file, read_image
 
 router = APIRouter()
 
