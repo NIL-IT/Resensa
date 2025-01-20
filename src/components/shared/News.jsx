@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeNewsId, changeShowNewsPopup } from "../../utils/slice/userSlice";
 
 export default function News() {
-  const { data } = useSelector(({ user }) => user);
+  const { news } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const [isLimited, setLimited] = useState(true);
-  const [newsData, setNewsData] = useState(data.news.items);
+  const [newsData, setNewsData] = useState(news);
 
   useEffect(() => {
     if (!isLimited) {
@@ -41,7 +41,11 @@ export default function News() {
                 cursor-pointer"
                 key={item.id}
               >
-                <img className="h-[70%] object-contain" src={item.img} alt="" />
+                <img
+                  className="h-[70%] object-contain"
+                  src={item.image}
+                  alt=""
+                />
                 <div className="h-[30%]">
                   <p className="text-white text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]">
                     {item.title}

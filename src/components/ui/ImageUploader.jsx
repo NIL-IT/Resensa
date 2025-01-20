@@ -9,17 +9,17 @@ const ImageUploader = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
-  const { equipmentId, newsId, addNewItemPopup } = useSelector(
+  const { equipmentId, newsId, addNewItemPopup, news } = useSelector(
     ({ user }) => user
   );
   // проверка на новость
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
-  const isNews = +pathnameId === +5;
+  const isNews = +pathnameId === +4;
   const { itemsList } = {
     itemsList: !isNews
       ? [...data.equipment.items, ...data.solutions.items]
-      : [...data.news.items],
+      : [...news],
   };
   const findProduct = itemsList.find((item) =>
     !isNews ? +item.id === +equipmentId : +item.id === +newsId

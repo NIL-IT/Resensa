@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/shared/Header";
 import Popup from "./components/shared/popup/Popup";
 import AppRoutes from "./routes/AppRoutes";
@@ -9,6 +9,8 @@ import AddNewItem from "./components/shared/popup/AddNewItem";
 import NewsPopup from "./components/shared/popup/NewsPopup";
 import Widget from "./components/ui/Widget";
 import SearchPopup from "./components/shared/popup/SearchPopup";
+import { getAllNews } from "./utils/slice/userSlice";
+import { useEffect } from "react";
 
 function App() {
   const {
@@ -21,7 +23,7 @@ function App() {
     newsPopup,
     searchPopup,
   } = useSelector(({ user }) => user);
-
+  const dispatch = useDispatch();
   const isActivePopup =
     isPopup ||
     status ||
@@ -30,6 +32,10 @@ function App() {
     addNewItemPopup ||
     newsPopup ||
     searchPopup;
+  useEffect(() => {
+    dispatch(getAllNews());
+    console.log(getAllNews());
+  }, [dispatch]);
 
   return (
     <div className="relative">

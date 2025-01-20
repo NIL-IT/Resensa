@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeData,
   changeEquipmentPopup,
+  updateNews,
 } from "../../../utils/slice/userSlice";
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -14,19 +15,17 @@ const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
-  const isNews = +pathnameId === +5;
+  const isNews = +pathnameId === +4;
 
-  const { equipmentId, newsId, data } = useSelector(({ user }) => user);
+  const { equipmentId, newsId, data, news } = useSelector(({ user }) => user);
   const { itemsList } = {
     itemsList: !isNews
       ? [...data.equipment.items, ...data.solutions.items]
-      : [...data.news.items],
+      : [...news],
   };
-
   const findProduct = itemsList.find((item) =>
     !isNews ? +item.id === +equipmentId : +item.id === +newsId
   );
-
   const [formData, setFormData] = useState(
     !isNews
       ? {
@@ -36,10 +35,10 @@ const ChangeEquipmentPopup = () => {
           img: findProduct.img,
         }
       : {
-          id: findProduct.id,
-          text: findProduct.text,
+          title: findProduct.title,
           date: findProduct.date,
-          img: findProduct.img,
+          text: findProduct.text,
+          news_photo: findProduct.image,
         }
   );
 
@@ -62,29 +61,27 @@ const ChangeEquipmentPopup = () => {
         img: findProduct.img,
       });
     } else {
-      const newData = { ...data };
-      const categoryData = newData.news;
-      const updatedItems = categoryData.items.map((item) => {
-        if (item.id === formData.id) {
-          return { ...item, ...formData };
-        }
-        return item;
-      });
-      if (JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)) {
-        newData.news = {
-          ...categoryData,
-          items: updatedItems,
-        };
-      }
-      dispatch(changeData(newData));
-      setFormData({
-        id: findProduct.id,
-        text: findProduct.text,
-        date: findProduct.date,
-        img: findProduct.img,
-      });
+      dispatch(updateNews({ id: formData.id, body: formData }));
+      // const newData = { ...data };
+      // const categoryData = newData.news;
+      // const updatedItems = categoryData.items.map((item) => {
+      //   if (item.id === formData.id) {
+      //     return { ...item, ...formData };
+      //   }
+      //   return item;
+      // });
+      // if (JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)) {
+      //   newData.news = {
+      //     ...categoryData,
+      //     items: updatedItems,
+      //   };
     }
-
+    setFormData({
+      title: findProduct.title,
+      date: findProduct.date,
+      text: findProduct.text,
+      news_photo: findProduct.image,
+    });
     dispatch(changeEquipmentPopup(false));
   };
 
@@ -104,7 +101,18 @@ const ChangeEquipmentPopup = () => {
           <div>
             <ImageUploader />
           </div>
-
+          {isNews && (
+            <div className="space-y-2">
+              <span className="w-full text-sm text-gray-900 ">Название</span>
+              <Input
+                type={"text"}
+                name={"title"}
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </div>
+          )}
           <div className="space-y-2">
             <span className="w-full text-sm text-gray-900 ">
               {!isNews ? "Название" : "Дата "}

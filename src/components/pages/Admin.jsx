@@ -8,6 +8,7 @@ import AdminCategoryList from "../shared/admin/AdminCategoryList";
 import FileUploader from "../ui/FileUploader";
 import { div } from "three/tsl";
 import ChangeBanner from "../shared/admin/ChangeBanner";
+import AdminNews from "../shared/admin/AdminNews";
 const navList = [
   {
     id: "1",
@@ -34,7 +35,7 @@ const navList = [
   {
     id: "4",
     name: "новости",
-    component: (title) => <AdminCategoryList title={title} category={"news"} />,
+    component: (title) => <AdminNews />,
     title: "все новости",
   },
   {

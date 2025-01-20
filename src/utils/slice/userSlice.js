@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
+import axios from "axios";
 const orders = [
   {
     id: "25426",
@@ -74,9 +75,57 @@ const orders = [
 ];
 const authFormLocalStorage =
   localStorage.getItem(`auth`) !== null ? localStorage.getItem(`auth`) : false;
+const url = `http://89.23.116.157:8002`;
+export const getAllNews = createAsyncThunk("news/getNews", async (thunkApi) => {
+  try {
+    const res = await axios.get(`${url}/news/`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return thunkApi.rejectWithValue(err);
+  }
+});
+export const createNews = createAsyncThunk(
+  "news/createNews",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.post(`${url}/news/`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const updateNews = createAsyncThunk(
+  "news/updateNews",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.put(`${url}/news/${payload.id}`, payload.body);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const deleteNews = createAsyncThunk(
+  "news/deleteNews",
+  async (thunkApi, payload) => {
+    try {
+      console.log(payload);
+      const res = await axios.delete(`${url}/news/${payload}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    news: [],
     data: data,
     isAdmin: true,
     isAuth: authFormLocalStorage,
@@ -171,7 +220,20 @@ const userSlice = createSlice({
       state.data = payload;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(getAllNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(deleteNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(updateNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(createNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+  },
 });
 export const {
   changeNumberForMainBanner,

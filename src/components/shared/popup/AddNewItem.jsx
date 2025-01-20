@@ -5,6 +5,7 @@ import {
   addNewItemToData,
   changeData,
   changeShowAddNewItemPopup,
+  createNews,
 } from "../../../utils/slice/userSlice";
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -18,32 +19,30 @@ const ChangeEquipmentPopup = () => {
 
   const isNews = +pathnameId === +4;
 
-  const { data } = useSelector(({ user }) => user);
-  const getNewId = () => {
-    if (isNews) {
-      return data.news.items.length + 1;
-    } else if (+pathnameId === 2) {
-      // equipment
-      return data.equipment.items.length + 1;
-    } else if (+pathnameId === 3) {
-      // solutions
-      return data.solutions.items.length + 1;
-    }
-  };
+  const { data, news } = useSelector(({ user }) => user);
+  // const getNewId = () => {
+  //   if (isNews) {
+  //     return data.news.items.length + 1;
+  //   } else if (+pathnameId === 2) {
+  //     // equipment
+  //     return data.equipment.items.length + 1;
+  //   } else if (+pathnameId === 3) {
+  //     // solutions
+  //     return data.solutions.items.length + 1;
+  //   }
+  // };
 
   const [formData, setFormData] = useState(
     !isNews
       ? {
-          id: getNewId(),
           name: "",
           description: "",
           img: "",
         }
       : {
-          id: getNewId(),
+          title: "",
           text: "",
-          date: "",
-          img: "",
+          news_photo: "",
         }
   );
 
@@ -58,17 +57,11 @@ const ChangeEquipmentPopup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isNews) {
-      dispatch(
-        addNewItemToData({
-          category: "news",
-          item: formData,
-        })
-      );
+      dispatch(createNews(formData));
       setFormData({
-        id: getNewId(),
+        title: "",
         text: "",
-        date: "",
-        img: "",
+        news_photo: "",
       });
     } else if (+pathnameId === 2) {
       // equipment
@@ -128,14 +121,13 @@ const ChangeEquipmentPopup = () => {
 
           <div className="space-y-2">
             <span className="w-full text-xs xs:text-sm text-gray-900">
-              {!isNews ? "Название" : "Дата "}
+              Название
             </span>
             <Input
               type={"text"}
-              name={!isNews ? "name" : "date"}
+              name={"title"}
               className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-              value={!isNews ? formData.name : formData.date}
-              placeholder={!isNews ? "" : "дд.мм.гг"}
+              value={formData.title}
               onChange={handleInputChange}
             />
           </div>

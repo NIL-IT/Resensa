@@ -4,10 +4,8 @@ import { changeShowNewsPopup } from "../../../utils/slice/userSlice";
 
 export default function NewsPopup() {
   const dispatch = useDispatch();
-  const { newsId, data } = useSelector(({ user }) => user);
-  const { title, text, date, img } = data.news.items.find(
-    ({ id }) => id === newsId
-  );
+  const { newsId, news } = useSelector(({ user }) => user);
+  const { title, text, date, img } = news.find(({ id }) => id === newsId);
   document.body.style.overflow = "hidden";
   const handleClose = () => {
     dispatch(changeShowNewsPopup(false));
@@ -37,11 +35,7 @@ export default function NewsPopup() {
             {date}
           </span>
           <div className="space-y-4 xs:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 mt-4 xs:mt-5 sm:mt-6 md:mt-7 lg:mt-8">
-            {text.map((item, i) => (
-              <p key={i} className="text-gray-900 text-sm xs:text-base">
-                {item}
-              </p>
-            ))}
+            <p className="text-gray-900 text-sm xs:text-base">{text}</p>
           </div>
         </div>
       </div>
