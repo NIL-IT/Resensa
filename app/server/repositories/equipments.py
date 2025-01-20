@@ -63,5 +63,32 @@ class EquipmentsRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error deleting equipment")
 
+    async def get_required_equipment(self, param: int):
+        min_result = await self.db.execute(select(Equipment).order_by(Equipment.min_param))
+        global_min = min_result.scalars().first()
+
+        max_result = await self.db.execute(select(Equipment).order_by(Equipment.max_param.desc()))
+        global_max = max_result.scalars().first()
+
+        if global_min and param < global_min.min_param:
+            raise ValueError(f"Parameter is too low. Minimum allowed is {global_min.min_param}.")
+
+        if global_max and param > global_max.max_param:
+            raise ValueError(f"Parameter is too high. Maximum allowed is {global_max.max_param}.")
+
+        # Query for equipment matching the parameter
+        result = await self.db.execute(select(Equipment).filter(
+            Equipment.min_param <= param,
+            Equipment.max_param >= param
+        ))
+        equipment = result.scalar_one_or_none()
+
+        if not equipment:
+            raise NoResultFound(f"Equipment with such params {param} not found")
+
+        return equipment
+
+
+
 async def get_equipment_repository(db: AsyncSession = Depends(get_db)):
     return EquipmentsRepository(db)

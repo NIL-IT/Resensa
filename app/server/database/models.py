@@ -25,6 +25,8 @@ class Equipment(Base):
     name = Column(String, nullable=False)
     description = Column(String)
     equipment_image = Column(String)
+    min_param =Column(Integer)
+    max_param =Column(Integer)
 
 class Solutions(Base):
     __tablename__ = "solutions"

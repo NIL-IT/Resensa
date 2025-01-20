@@ -2,6 +2,7 @@ import os
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Form, UploadFile, File, HTTPException
+from fastapi.params import Query
 from starlette import status
 
 from ..database.models import Equipment
@@ -13,6 +14,8 @@ router = APIRouter()
 @router.post('/', status_code=status.HTTP_201_CREATED)
 async def create_equipments(name: str = Form(...),
     description: str = Form(...),
+    min_param: int = Form(...),
+    max_param: int = Form(...),
     equipment_photo: UploadFile = File(...),  equipment_repo: EquipmentsRepository = Depends(get_equipment_repository)):
 
     dirname = os.path.dirname(__file__)
@@ -22,6 +25,8 @@ async def create_equipments(name: str = Form(...),
     equipment_model = Equipment(
         equipment_image=absolute_path,
         name=name,
+        min_param=min_param,
+        max_param=max_param,
         description=description,
     )
     try:
@@ -30,7 +35,13 @@ async def create_equipments(name: str = Form(...),
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-
+@router.get('/requested-equipment')
+async def get_required_equipment(param: int = Query(..., description="Parameter to filter equipment"), equipment_repo: EquipmentsRepository = Depends(get_equipment_repository)):
+    try:
+        equipment = await equipment_repo.get_required_equipment(param)
+        return equipment
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 @router.get("/", status_code=status.HTTP_200_OK)
 async def get_all_equipments(equipment_repo: EquipmentsRepository = Depends(get_equipment_repository)):
     try:
@@ -41,6 +52,8 @@ async def get_all_equipments(equipment_repo: EquipmentsRepository = Depends(get_
             equipments_with_images.append({
                 "id": equipment.id,
                 "name": equipment.name,
+                "min_param": equipment.min_param,
+                "max_param": equipment.max_param,
                 "description": equipment.description,
                 "image": image_data if image_data else None
             })
@@ -58,6 +71,8 @@ async def get_equipment_by_id(equipment_id: int, equipment_repo: EquipmentsRepos
             "id": equipment.id,
             "name": equipment.name,
             "description": equipment.description,
+            "min_param": equipment.min_param,
+            "max_param": equipment.max_param,
             "image": (image_data if image_data else None)
         }
     except Exception as e:
@@ -66,6 +81,8 @@ async def get_equipment_by_id(equipment_id: int, equipment_repo: EquipmentsRepos
 @router.put("/{equipment_id}", status_code=status.HTTP_200_OK)
 async def update_equipment(equipment_id: int, name: Optional[str] = Form(None),
     description: Optional[str] = Form(None),
+    min_param: Optional[int] = Form(None),
+    max_param: Optional[int] = Form(None),
     equipment_photo: Optional[UploadFile] = File(None), equipment_repo: EquipmentsRepository = Depends(get_equipment_repository)):
     try:
         existing_equipment = await equipment_repo.get_equipment_by_id(equipment_id)
