@@ -109,10 +109,10 @@ function Earth() {
 
 export default function EarthScene() {
   return (
-    <div className="">
+    <div className=" *:overflow-auto xs:w-[350px] xs:h-[350px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[900px] 2xl:h-[700px]">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
-        style={{ background: "transparent", width: "760px", height: "700px" }}
+        style={{ background: "transparent", width: "100%", height: "100%" }}
       >
         <Earth />
         <OrbitControls

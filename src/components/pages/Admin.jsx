@@ -7,6 +7,7 @@ import AdminExit from "../shared/admin/AdminExit";
 import AdminCategoryList from "../shared/admin/AdminCategoryList";
 import FileUploader from "../ui/FileUploader";
 import { div } from "three/tsl";
+import ChangeBanner from "../shared/admin/ChangeBanner";
 const navList = [
   {
     id: "1",
@@ -38,6 +39,12 @@ const navList = [
   },
   {
     id: "5",
+    name: "Баннер",
+    component: (title) => <ChangeBanner title={title} />,
+    title: "Изменить баннер",
+  },
+  {
+    id: "6",
     name: "выйти",
     component: (title) => <AdminExit title={title} />,
     title: "выйти",

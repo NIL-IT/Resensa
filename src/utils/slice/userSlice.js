@@ -91,8 +91,15 @@ const userSlice = createSlice({
     addNewItemPopup: false,
     newsPopup: false,
     searchPopup: false,
+    experience: 22,
+    guarantee: 3,
   },
   reducers: {
+    changeNumberForMainBanner: (state, { payload }) => {
+      const { experience, guarantee } = payload;
+      state.experience = experience;
+      state.guarantee = guarantee;
+    },
     changeShowAddNewItemPopup: (state, { payload }) => {
       state.addNewItemPopup = payload;
     },
@@ -167,6 +174,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {},
 });
 export const {
+  changeNumberForMainBanner,
   changeShowSearchPopup,
   changeShowNewsPopup,
   addNewItemToData,

@@ -101,8 +101,8 @@ export default function Advantages() {
     };
   }, [autoScroll]);
   return (
-    <div className="w-full bg-gray-400 py-[40px] xs:py-[45px] sm:py-[50px] md:py-[75px] lg:py-[90px] xl:py-[95px] 2xl:py-[100px] 3xl:py-[104px]">
-      <div className="px-3 xs:px-3.5 sm:px-4 md:px-8 lg:ml-[15.8593%] xl:ml-[16%] 2xl:ml-[16.2%] 3xl:ml-[16.5%]">
+    <div className="overflow-x-hidden w-full bg-gray-400 py-[40px] xs:py-[45px] sm:py-[50px] md:py-[75px] lg:py-[90px] xl:py-[95px] 2xl:py-[100px] 3xl:py-[104px]">
+      <div className=" container ">
         <Title
           text={"наши преимущества"}
           className="text-white text-lg xs:text-lg sm:text-xl md:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[25px] xs:mb-[30px] sm:mb-[35px] md:mb-[50px] lg:mb-[55px] xl:mb-[60px] 2xl:mb-[62px] 3xl:mb-[65px]"

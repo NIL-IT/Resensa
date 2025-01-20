@@ -8,79 +8,73 @@ import {
   changeShowPopup,
   changeShowSearchPopup,
 } from "../../utils/slice/userSlice";
+
 const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, CONTACT } = ROUTES;
 const list = [
-  {
-    name: "Главная",
-    path: HOME,
-  },
-  {
-    name: "Оборудование",
-    path: EQUIPMENT,
-  },
-  {
-    name: "Решения",
-    path: SOLUTIONS,
-  },
-  {
-    name: "О компании",
-    path: ABOUT,
-  },
-  {
-    name: "Заказы",
-    path: `/admin/1`,
-  },
-  {
-    name: "Контакты",
-    path: CONTACT,
-  },
+  { name: "Главная", path: HOME },
+  { name: "Оборудование", path: EQUIPMENT },
+  { name: "Решения", path: SOLUTIONS },
+  { name: "О компании", path: ABOUT },
+  { name: "Заказы", path: `/admin/1` },
+  { name: "Контакты", path: CONTACT },
 ];
 
 export default function Header() {
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
+
   return (
-    <header className=" container pt-[34px]">
-      <div className="flex justify-between border-b border-gray-400 pb-[25px]">
-        <Link to="/">
-          <img src="/icon/logo.svg" alt="logo" />
+    <header className="container px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8">
+      <div className="flex flex-col lg:flex-row justify-between items-center border-b border-gray-400 pb-6">
+        <Link to="/" className="mb-4 lg:mb-0">
+          <img
+            className="w-[200px] sm:w-[250px] lg:w-[313px]"
+            src="/icon/logo.svg"
+            alt="logo"
+          />
         </Link>
-        <div className="flex gap-[71px]">
-          <div className="text-gray-400 flex gap-[27px] pt-[14px]">
-            <a target="blank" href="mailto:office@recensa.ru">
+        <div className="flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
+            <a
+              target="blank"
+              href="mailto:office@recensa.ru"
+              className="hover:text-gray-600 "
+            >
               office@recensa.ru
             </a>
-            <a target="blank" href="tel:89999999999">
+            <a
+              target="blank"
+              href="tel:89999999999"
+              className="hover:text-gray-600"
+            >
               +7 999 999 99 99
             </a>
           </div>
-          <div>
-            <div className="flex-center gap-[45px] mb-[15px]">
-              <div className="flex-center gap-[10px] ">
-                <a href="#">
-                  <img src="/icon/telegram.svg" alt="telegram" />
-                </a>
-                <a href="#">
-                  <img src="/icon/wa.svg" alt="whatsapp" />
-                </a>
-                <a
-                  className="cursor-pointer"
-                  onClick={() => dispatch(changeShowSearchPopup(true))}
-                >
-                  <img src="/icon/search_btn.svg" alt="search" />
-                </a>
-              </div>
-              <Button
-                onClick={() => handleChangeShowPopup(true)}
-                text={"заказать звонок"}
-                className="hover:bg-gray-450"
-              />
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex items-center gap-4">
+              <a href="#" className="hover:opacity-80">
+                <img src="/icon/telegram.svg" alt="telegram" className="w-8 " />
+              </a>
+              <a href="#" className="hover:opacity-80">
+                <img src="/icon/wa.svg" alt="whatsapp" className="w-8 " />
+              </a>
+              <button
+                onClick={() => dispatch(changeShowSearchPopup(true))}
+                className="hover:opacity-80"
+              >
+                <img src="/icon/search_btn.svg" alt="search" className="w-8 " />
+              </button>
             </div>
+            <Button
+              onClick={() => handleChangeShowPopup(true)}
+              text={"заказать звонок"}
+              className="w-full sm:w-auto hover:bg-gray-450 text-sm"
+            />
           </div>
         </div>
       </div>
-      <nav className="flex justify-center mt-[25px]">
-        <ul className="flex gap-[33px] text-base">
+      <nav className="mt-6">
+        <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm sm:text-base">
           {list.map(({ name, path }, i) => (
             <li key={i} className="text-gray-400 hover:text-gray-300">
               <Link to={path}>{name}</Link>

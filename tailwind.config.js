@@ -57,6 +57,34 @@ export default {
           flexDirection: "column",
           alignItems: "center",
         },
+        ".earth_container": {
+          width: "100%",
+          maxWidth: "1311px",
+          position: "relative",
+          left: "50%",
+          transform: "translateX(-50%)",
+          "@screen xs": {
+            width: "355px",
+          },
+          "@screen sm": {
+            width: "420px",
+          },
+          "@screen md": {
+            width: "620px",
+          },
+          "@screen lg": {
+            width: "748px",
+          },
+          "@screen xl": {
+            width: "1004px",
+          },
+          "@screen 2xl": {
+            width: "1260px",
+          },
+          "@screen 3xl": {
+            width: "1311px",
+          },
+        },
         ".container": {
           width: "100%",
           margin: "0 auto",
