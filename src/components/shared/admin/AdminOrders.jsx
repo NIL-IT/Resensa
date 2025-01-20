@@ -3,7 +3,7 @@ import Title from "../../ui/Title";
 import { Plus, Trash2 } from "lucide-react";
 import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOrdersList } from "../../../utils/slice/userSlice";
+import { getAllOrders, deleteOrders } from "../../../utils/slice/userSlice";
 import { useFormatDate } from "../../../utils/hooks/formatDate";
 import SearchInput from "../../ui/SearchInput";
 export const list = [
@@ -21,14 +21,18 @@ export const list = [
 ];
 
 export default function AdminOrders({ title }) {
-  const { ordersData } = useSelector(({ user }) => user);
-  const [ordersList, setOrdersList] = useState(ordersData);
+  const { orders } = useSelector(({ user }) => user);
+  const [ordersList, setOrdersList] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setOrdersList(ordersData);
-  }, [ordersData]);
+    dispatch(getAllOrders());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setOrdersList(orders);
+  }, [orders]);
   const handleCheckedAllOrders = () => {
     if (selectedOrders.length === ordersList.length) {
       setSelectedOrders([]);
@@ -47,22 +51,22 @@ export default function AdminOrders({ title }) {
     return selectedOrders.includes(orderId);
   };
 
-  const deleteSelected = () => {
-    setOrdersList((prev) =>
-      prev.filter((order) => !selectedOrders.includes(order.id))
-    );
-    dispatch(changeOrdersList(ordersList));
+  const deleteSelected = async () => {
+    for (const orderId of selectedOrders) {
+      await dispatch(deleteOrders(orderId));
+    }
     setSelectedOrders([]);
   };
 
-  const deleteAll = () => {
-    setOrdersList([]);
+  const deleteAll = async () => {
+    for (const order of ordersList) {
+      await dispatch(deleteOrders(order.id));
+    }
     setSelectedOrders([]);
-    dispatch(changeOrdersList(ordersList));
   };
   const handleSearch = (value) => {
     setOrdersList(
-      ordersData.filter((order) => order.id.toString().includes(value))
+      orders.filter((order) => order.id.toString().includes(value))
     );
   };
   return (
@@ -93,7 +97,7 @@ export default function AdminOrders({ title }) {
               <th className="w-[15px] py-3 px-0 mx-0">
                 <input
                   onChange={handleCheckedAllOrders}
-                  checked={selectedOrders.length === ordersData.length}
+                  checked={selectedOrders.length === orders.length}
                   type="checkbox"
                   className="rounded border-gray-300 cursor-pointer"
                 />

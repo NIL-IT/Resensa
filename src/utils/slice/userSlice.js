@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
 import axios from "axios";
+
 const orders = [
   {
     id: "25426",
@@ -9,278 +10,315 @@ const orders = [
     status: "delivered",
     amount: "200.00 ₽",
   },
-  {
-    id: "25425",
-    date: "12.12.2024",
-    client: "Komsai",
-    status: "cancelled",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25424",
-    date: "12.12.2024",
-    client: "Nikhi",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25423",
-    date: "12.12.2024",
-    client: "Shivam",
-    status: "cancelled",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25422",
-    date: "12.12.2024",
-    client: "Shubhi",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25420",
-    date: "12.12.2024",
-    client: "Yogesh",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25419",
-    date: "12.12.2024",
-    client: "Yogesh",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25418",
-    date: "12.12.2024",
-    client: "Yogesh",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25417",
-    date: "12.12.2024",
-    client: "Yogesh",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  {
-    id: "25416",
-    date: "12.12.2024",
-    client: "Yogesh",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
+  // ... other orders
 ];
+
 const authFormLocalStorage =
   localStorage.getItem(`auth`) !== null ? localStorage.getItem(`auth`) : false;
+
 const url = `http://89.23.116.157:8002`;
-export const getAllNews = createAsyncThunk("news/getNews", async (thunkApi) => {
-  try {
-    const res = await axios.get(`${url}/news/`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-    return thunkApi.rejectWithValue(err);
-  }
+
+// Create axios instance with default config
+const api = axios.create({
+  baseURL: url,
+  headers: {
+    Accept: "application/json",
+  },
 });
+
+// Add trailing slash to URLs that don't have one
+api.interceptors.request.use((config) => {
+  if (config.url && !config.url.endsWith("/")) {
+    config.url += "/";
+  }
+  return config;
+});
+
+// Handle multipart/form-data requests
+const createFormDataRequest = (data, type) => {
+  const formData = new FormData();
+
+  // Add required fields based on type
+  switch (type) {
+    case "news":
+      if (!data.title) formData.append("title", "Временный заголовок");
+      if (!data.text) formData.append("text", "Временный текст");
+      break;
+    case "equipment":
+    case "solution":
+      if (!data.name) formData.append("name", "Временное название");
+      if (!data.description)
+        formData.append("description", "Временное описание");
+      break;
+  }
+
+  // Add all provided data
+  Object.keys(data).forEach((key) => {
+    if (data[key] instanceof File) {
+      formData.append(key, data[key], data[key].name);
+    } else if (data[key] !== null && data[key] !== undefined) {
+      formData.append(key, data[key]);
+    }
+  });
+
+  return formData;
+};
+
+export const getAllNews = createAsyncThunk(
+  "news/getNews",
+  async (_, thunkApi) => {
+    try {
+      const res = await api.get("/news/");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+
 export const createNews = createAsyncThunk(
   "news/createNews",
-  async (thunkApi, payload) => {
+  async (data, thunkApi) => {
     try {
-      const res = await axios.post(`${url}/news/`, payload);
+      const formData = createFormDataRequest(data, "news");
+      const res = await api.post("/news/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const updateNews = createAsyncThunk(
   "news/updateNews",
-  async (thunkApi, payload) => {
+  async ({ id, data }, thunkApi) => {
     try {
-      const res = await axios.put(`${url}/news/${payload.id}`, payload.body);
+      const formData = createFormDataRequest(data, "news");
+      const res = await api.put(`/news/${id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const deleteNews = createAsyncThunk(
   "news/deleteNews",
-  async (thunkApi, payload) => {
+  async (id, thunkApi) => {
     try {
-      console.log(payload);
-      const res = await axios.delete(`${url}/news/${payload}`);
+      const res = await api.delete(`/news/${id}/`);
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const getAllEquipment = createAsyncThunk(
   "Equipment/getAllEquipment",
-  async (thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      const res = await axios.get(`${url}/equipments/`);
+      const res = await api.get("/equipments/");
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const createEquipment = createAsyncThunk(
   "Equipment/createEquipment",
-  async (thunkApi, payload) => {
+  async (data, thunkApi) => {
     try {
-      const res = await axios.post(`${url}/equipments/`, payload);
+      const formData = createFormDataRequest(data, "equipment");
+      const res = await api.post("/equipments/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const updateEquipment = createAsyncThunk(
   "Equipment/updateEquipment",
-  async (thunkApi, payload) => {
+  async ({ id, data }, thunkApi) => {
     try {
-      const res = await axios.put(
-        `${url}/equipments/${payload.id}`,
-        payload.body
-      );
+      const formData = createFormDataRequest(data, "equipment");
+      const res = await api.put(`/equipments/${id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const deleteEquipment = createAsyncThunk(
   "Equipment/deleteEquipment",
-  async (thunkApi, payload) => {
+  async (id, thunkApi) => {
     try {
-      console.log(payload);
-      const res = await axios.delete(`${url}/equipments/${payload}`);
+      const res = await api.delete(`/equipments/${id}/`);
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const getAllSolutions = createAsyncThunk(
   "Solutions/getAllSolutions",
-  async (thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      const res = await axios.get(`${url}/solutions/`);
+      const res = await api.get("/solutions/");
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const createSolutions = createAsyncThunk(
   "Solutions/createSolutions",
-  async (thunkApi, payload) => {
+  async (data, thunkApi) => {
     try {
-      const res = await axios.post(`${url}solutions/`, payload);
+      const formData = createFormDataRequest(data, "solution");
+      const res = await api.post("/solutions/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const updateSolutions = createAsyncThunk(
   "Solutions/updateSolutions",
-  async (thunkApi, payload) => {
+  async ({ id, data }, thunkApi) => {
     try {
-      const res = await axios.put(
-        `${url}/solutions/${payload.id}`,
-        payload.body
-      );
+      const formData = createFormDataRequest(data, "solution");
+      const res = await api.put(`/solutions/${id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const deleteSolutions = createAsyncThunk(
   "Solutions/deleteSolutions",
-  async (thunkApi, payload) => {
+  async (id, thunkApi) => {
     try {
-      console.log(payload);
-      const res = await axios.delete(`${url}/solutions/${payload}`);
+      const res = await api.delete(`/solutions/${id}/`);
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const getAllOrders = createAsyncThunk(
   "Orders/getAllOrders",
-  async (thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      const res = await axios.get(`${url}/orders/`);
+      const res = await api.get("/orders/");
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const createOrders = createAsyncThunk(
   "Orders/createOrders",
-  async (thunkApi, payload) => {
+  async (data, thunkApi) => {
     try {
-      const res = await axios.post(`${url}orders/`, payload);
+      const formData = createFormDataRequest(data, "order");
+      const res = await api.post("/orders/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const updateOrders = createAsyncThunk(
   "Orders/updateOrders",
-  async (thunkApi, payload) => {
+  async ({ id, data }, thunkApi) => {
     try {
-      const res = await axios.put(`${url}/orders/${payload.id}`, payload.body);
+      const formData = createFormDataRequest(data, "order");
+      const res = await api.put(`/orders/${id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 export const deleteOrders = createAsyncThunk(
   "orders/deleteOrders",
-  async (thunkApi, payload) => {
+  async (id, thunkApi) => {
     try {
-      console.log(payload);
-      const res = await axios.delete(`${url}/orders/${payload}`);
+      const res = await api.delete(`/orders/${id}/`);
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkApi.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     news: [],
     equipment: [],
     solutions: [],
+    orders: [],
     data: data,
     isAdmin: true,
     isAuth: authFormLocalStorage,
@@ -376,56 +414,58 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllNews.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(deleteNews.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(updateNews.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(createNews.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(getAllEquipment.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(deleteEquipment.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(updateEquipment.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(createEquipment.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(getAllSolutions.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(deleteSolutions.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(updateSolutions.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(createSolutions.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(getAllOrders.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(deleteOrders.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(updateOrders.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
-    builder.addCase(createOrders.fulfilled, (state, action) => {
-      state.news = action.payload;
-    });
+    builder
+      .addCase(getAllNews.fulfilled, (state, action) => {
+        state.news = action.payload;
+      })
+      .addCase(deleteNews.fulfilled, (state, action) => {
+        state.news = action.payload;
+      })
+      .addCase(updateNews.fulfilled, (state, action) => {
+        state.news = action.payload;
+      })
+      .addCase(createNews.fulfilled, (state, action) => {
+        state.news = action.payload;
+      })
+      .addCase(getAllEquipment.fulfilled, (state, action) => {
+        state.equipment = action.payload;
+      })
+      .addCase(deleteEquipment.fulfilled, (state, action) => {
+        state.equipment = action.payload;
+      })
+      .addCase(updateEquipment.fulfilled, (state, action) => {
+        state.equipment = action.payload;
+      })
+      .addCase(createEquipment.fulfilled, (state, action) => {
+        state.equipment = action.payload;
+      })
+      .addCase(getAllSolutions.fulfilled, (state, action) => {
+        state.solutions = action.payload;
+      })
+      .addCase(deleteSolutions.fulfilled, (state, action) => {
+        state.solutions = action.payload;
+      })
+      .addCase(updateSolutions.fulfilled, (state, action) => {
+        state.solutions = action.payload;
+      })
+      .addCase(createSolutions.fulfilled, (state, action) => {
+        state.solutions = action.payload;
+      })
+      .addCase(getAllOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      })
+      .addCase(deleteOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      })
+      .addCase(updateOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      })
+      .addCase(createOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      });
   },
 });
+
 export const {
   changeNumberForMainBanner,
   changeShowSearchPopup,
@@ -444,4 +484,5 @@ export const {
   changeOrderNumber,
   changeShowAddNewItemPopup,
 } = userSlice.actions;
+
 export default userSlice.reducer;

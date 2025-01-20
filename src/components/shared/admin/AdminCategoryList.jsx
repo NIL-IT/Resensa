@@ -3,12 +3,14 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeAddOrderPopup,
-  changeData,
   changeEquipmentId,
   changeEquipmentPopup,
   changeNewsId,
   changeShowAddNewItemPopup,
+  getAllEquipment,
+  getAllSolutions,
+  deleteEquipment,
+  deleteSolutions,
 } from "../../../utils/slice/userSlice";
 
 import { Plus } from "lucide-react";
@@ -16,10 +18,8 @@ import { Plus } from "lucide-react";
 export default function AdminCategoryList({ title, category }) {
   const dispatch = useDispatch();
   const [loading, isLoading] = useState(true);
-  const { data, news } = useSelector(({ user }) => user);
-  const [dataCategory, setDataCategory] = useState(
-    category === "news" ? news : data[category]
-  );
+  const { equipment, solutions } = useSelector(({ user }) => user);
+  const dataCategory = category === "equipment" ? equipment : solutions;
 
   const changeEquipment = (id) => {
     if (category !== "news") {
@@ -29,41 +29,22 @@ export default function AdminCategoryList({ title, category }) {
     dispatch(changeEquipmentPopup(true));
   };
   useEffect(() => {
-    if (news.length > 0) isLoading(false);
-  }, [news]);
-  console.log(news);
-  console.log(dataCategory);
-  const deleteEquipment = (id) => {
-    const newData = { ...data };
-    if (category !== "news") {
-      for (const category in newData) {
-        const categoryData = newData[category];
-
-        const updatedItems = categoryData.items.filter(
-          (item) => item.id !== id
-        );
-
-        if (
-          JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)
-        ) {
-          newData[category] = {
-            ...categoryData,
-            items: updatedItems,
-          };
-        }
+    const fetchData = async () => {
+      if (category === "equipment") {
+        await dispatch(getAllEquipment());
+      } else if (category === "solutions") {
+        await dispatch(getAllSolutions());
       }
-    } else {
-      const categoryData = newData["news"];
-      const updatedItems = categoryData.items.filter((item) => item.id !== id);
-      if (JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)) {
-        newData.news = {
-          ...categoryData,
-          items: updatedItems,
-        };
-      }
+      isLoading(false);
+    };
+    fetchData();
+  }, [dispatch, category]);
+  const handleDelete = (id) => {
+    if (category === "equipment") {
+      dispatch(deleteEquipment(id));
+    } else if (category === "solutions") {
+      dispatch(deleteSolutions(id));
     }
-
-    dispatch(changeData(newData));
   };
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
@@ -114,7 +95,7 @@ export default function AdminCategoryList({ title, category }) {
                         className="w-[100%] py-2 hover:bg-gray-450 text-center"
                       />
                       <Button
-                        onClick={() => deleteEquipment(id)}
+                        onClick={() => handleDelete(id)}
                         text={"Удалить"}
                         className="w-[100%] py-2 bg-gray-300 hover:bg-gray-500 text-center"
                       />

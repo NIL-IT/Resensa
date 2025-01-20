@@ -4,8 +4,9 @@ import EquipmentBanner from "../shared/EquipmentBanner";
 import Advantages from "../shared/Advantages";
 import { data } from "../../utils/data";
 import ItemsList from "../shared/ItemsList";
-import OrderStatus from "../shared/orderStatus";
 import Footer from "../shared/Footer";
+import OrderStatus from "../shared/OrderStatus";
+
 const text = `Оборудование серии RCN стандартного исполнения предназначено для 
 размещения и эксплуатации в помещениях различного 
 назначения как внутри зданий, так и на открытом 

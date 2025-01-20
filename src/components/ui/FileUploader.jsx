@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { ChevronDown, FileSpreadsheet } from "lucide-react";
+import axios from "axios";
 
 const FileUploader = () => {
   const [dragActive, setDragActive] = useState(false);
@@ -39,14 +40,44 @@ const FileUploader = () => {
     handleFiles(files);
   };
 
-  const handleFiles = (files) => {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleFiles = async (files) => {
     const validFiles = files.filter((file) => {
       const fileType = file.type || `.${file.name.split(".").pop()}`;
       return allowedTypes.includes(fileType.toLowerCase());
     });
 
     if (validFiles.length) {
-      setUploadedFiles((prev) => [...prev, ...validFiles]);
+      setUploading(true);
+      setError("");
+
+      for (const file of validFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+          await axios.post(
+            "http://89.23.116.157:8002/orders/import/excel",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          setUploadedFiles((prev) => [...prev, file]);
+        } catch (err) {
+          setError(
+            `Failed to upload ${file.name}: ${
+              err.response?.data?.message || err.message
+            }`
+          );
+        }
+      }
+
+      setUploading(false);
     }
   };
 
@@ -90,28 +121,36 @@ const FileUploader = () => {
         </div>
       </div>
 
-      {uploadedFiles.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-lg font-medium mb-2">Загруженные файлы:</h3>
-          <ul className="space-y-2">
-            {uploadedFiles.map((file, index) => (
-              <li
-                key={index}
-                className="flex items-center justify-between p-2 bg-gray-50 rounded"
-              >
-                <span className="text-sm text-gray-600">
-                  {file.name} ({(file.size / 1024).toFixed(1)} KB)
-                </span>
-                <button
-                  onClick={() => removeFile(index)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  ✕
-                </button>
-              </li>
-            ))}
-          </ul>
+      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
+
+      {uploading ? (
+        <div className="mt-4 text-center">
+          <p className="text-blue-500">Uploading files...</p>
         </div>
+      ) : (
+        uploadedFiles.length > 0 && (
+          <div className="mt-4">
+            <h3 className="text-lg font-medium mb-2">Загруженные файлы:</h3>
+            <ul className="space-y-2">
+              {uploadedFiles.map((file, index) => (
+                <li
+                  key={index}
+                  className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                >
+                  <span className="text-sm text-gray-600">
+                    {file.name} ({(file.size / 1024).toFixed(1)} KB)
+                  </span>
+                  <button
+                    onClick={() => removeFile(index)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    ✕
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
       )}
     </div>
   );

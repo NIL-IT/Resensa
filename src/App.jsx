@@ -9,7 +9,12 @@ import AddNewItem from "./components/shared/popup/AddNewItem";
 import NewsPopup from "./components/shared/popup/NewsPopup";
 import Widget from "./components/ui/Widget";
 import SearchPopup from "./components/shared/popup/SearchPopup";
-import { getAllNews } from "./utils/slice/userSlice";
+import {
+  getAllEquipment,
+  getAllNews,
+  getAllOrders,
+  getAllSolutions,
+} from "./utils/slice/userSlice";
 import { useEffect } from "react";
 
 function App() {
@@ -34,7 +39,9 @@ function App() {
     searchPopup;
   useEffect(() => {
     dispatch(getAllNews());
-    console.log(getAllNews());
+    dispatch(getAllEquipment());
+    dispatch(getAllSolutions());
+    dispatch(getAllOrders());
   }, [dispatch]);
 
   return (

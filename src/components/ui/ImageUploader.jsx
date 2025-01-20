@@ -3,16 +3,14 @@ import { data } from "../../utils/data";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-const ImageUploader = () => {
+const ImageUploader = ({ onFileSelect }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
   const { equipmentId, newsId, addNewItemPopup, news } = useSelector(
     ({ user }) => user
   );
-  // проверка на новость
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === +4;
@@ -53,31 +51,16 @@ const ImageUploader = () => {
 
   const handleFile = (file) => {
     if (["image/svg+xml", "image/png", "image/jpeg"].includes(file.type)) {
-      uploadImage(file);
-    } else {
-      setError("Invalid file type. Please upload SVG, PNG, or JPEG.");
-    }
-  };
+      // Create preview URL for display
+      const previewUrl = URL.createObjectURL(file);
+      setUploadedImage({ url: previewUrl });
 
-  const uploadImage = async (file) => {
-    setUploading(true);
-    setError("");
-    try {
-      // Simulating server upload
-      const result = await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            success: true,
-            url: URL.createObjectURL(file),
-            message: "Image uploaded successfully",
-          });
-        }, 1500);
-      });
-      setUploadedImage(result);
-    } catch (err) {
-      setError(err.message || "Failed to upload image");
-    } finally {
-      setUploading(false);
+      // Pass the file to parent component
+      if (onFileSelect) {
+        onFileSelect(file);
+      }
+    } else {
+      setError("Пожалуйста, загрузите SVG, PNG, или JPEG файл.");
     }
   };
 
@@ -88,10 +71,13 @@ const ImageUploader = () => {
   const removeImage = () => {
     setUploadedImage(null);
     setError("");
+    if (onFileSelect) {
+      onFileSelect(null);
+    }
   };
 
   return (
-    <div className="w-full mx-auto ">
+    <div className="w-full mx-auto">
       <span className="text-sm text-gray-300">Изображение</span>
       {!uploadedImage && (
         <div
@@ -100,8 +86,7 @@ const ImageUploader = () => {
               dragActive
                 ? "border-blue-400 bg-blue-50"
                 : "border-gray-300 hover:border-gray-400"
-            }
-            ${uploading ? "opacity-50 cursor-not-allowed" : ""}`}
+            }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
@@ -114,21 +99,14 @@ const ImageUploader = () => {
             accept=".svg,.png,.jpg,.jpeg"
             onChange={handleChange}
             className="hidden"
-            disabled={uploading}
           />
-          {uploading ? (
-            <p className="text-sm text-gray-500">Загрузка...</p>
-          ) : (
-            <>
-              <p className="mb-2 text-sm text-gray-500">
-                <span className="font-semibold">Нажмите, чтобы загрузить</span>{" "}
-                или перетащите.
-              </p>
-              <p className="text-xs text-gray-500">
-                SVG, PNG, JPG or JPEG (MAX. 800x400px)
-              </p>
-            </>
-          )}
+          <p className="mb-2 text-sm text-gray-500">
+            <span className="font-semibold">Нажмите, чтобы загрузить</span> или
+            перетащите.
+          </p>
+          <p className="text-xs text-gray-500">
+            SVG, PNG, JPG или JPEG (макс. 800x400px)
+          </p>
         </div>
       )}
 
@@ -136,7 +114,7 @@ const ImageUploader = () => {
         <div className="mt-4 w-full flex justify-between">
           <img
             src={uploadedImage.url || "/placeholder.svg"}
-            alt="Uploaded"
+            alt="Загруженное изображение"
             className="rounded-lg shadow-md max-w-[300px]"
           />
           <div className="flex flex-col justify-end">
@@ -148,11 +126,11 @@ const ImageUploader = () => {
             </button>
           </div>
         </div>
-      ) : !addNewItemPopup ? (
+      ) : !addNewItemPopup && findProduct ? (
         <div className="mt-4 w-full flex justify-between">
           <img
             src={findProduct.img}
-            alt="Uploaded"
+            alt="Текущее изображение"
             className="rounded-lg shadow-md max-w-[300px]"
           />
           <div className="flex flex-col justify-end">
@@ -164,9 +142,7 @@ const ImageUploader = () => {
             </button>
           </div>
         </div>
-      ) : (
-        <></>
-      )}
+      ) : null}
 
       {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
     </div>

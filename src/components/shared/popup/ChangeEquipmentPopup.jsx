@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeData,
   changeEquipmentPopup,
   updateNews,
+  updateEquipment,
+  updateSolutions,
 } from "../../../utils/slice/userSlice";
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -17,30 +18,28 @@ const ChangeEquipmentPopup = () => {
   const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === +4;
 
-  const { equipmentId, newsId, data, news } = useSelector(({ user }) => user);
-  const { itemsList } = {
-    itemsList: !isNews
-      ? [...data.equipment.items, ...data.solutions.items]
-      : [...news],
-  };
+  const { equipmentId, newsId, equipment, solutions, news } = useSelector(
+    ({ user }) => user
+  );
+  const itemsList = !isNews ? [...equipment, ...solutions] : news;
   const findProduct = itemsList.find((item) =>
     !isNews ? +item.id === +equipmentId : +item.id === +newsId
   );
+
   const [formData, setFormData] = useState(
     !isNews
       ? {
-          id: findProduct.id,
           name: findProduct.name,
           description: findProduct.description,
-          img: findProduct.img,
         }
       : {
           title: findProduct.title,
           date: findProduct.date,
           text: findProduct.text,
-          news_photo: findProduct.image,
         }
   );
+
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,39 +49,52 @@ const ChangeEquipmentPopup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isNews) {
-      dispatch(changeData(updateItemById(formData.id, formData, data)));
-      setFormData({
-        id: findProduct.id,
-        name: findProduct.name,
-        description: findProduct.description,
-        img: findProduct.img,
+
+    try {
+      const submitData = new FormData();
+
+      // Add text fields
+      Object.keys(formData).forEach((key) => {
+        submitData.append(key, formData[key]);
       });
-    } else {
-      dispatch(updateNews({ id: formData.id, body: formData }));
-      // const newData = { ...data };
-      // const categoryData = newData.news;
-      // const updatedItems = categoryData.items.map((item) => {
-      //   if (item.id === formData.id) {
-      //     return { ...item, ...formData };
-      //   }
-      //   return item;
-      // });
-      // if (JSON.stringify(updatedItems) !== JSON.stringify(categoryData.items)) {
-      //   newData.news = {
-      //     ...categoryData,
-      //     items: updatedItems,
-      //   };
+
+      // Add file if selected
+      if (selectedFile) {
+        if (isNews) {
+          submitData.append("news_photo", selectedFile);
+        } else if (equipment.some((item) => item.id === findProduct.id)) {
+          submitData.append("equipment_photo", selectedFile);
+        } else {
+          submitData.append("solution_photo", selectedFile);
+        }
+      }
+
+      if (!isNews) {
+        // Check if item is from equipment or solutions
+        const isEquipment = equipment.some(
+          (item) => item.id === findProduct.id
+        );
+        if (isEquipment) {
+          await dispatch(
+            updateEquipment({ id: findProduct.id, data: submitData })
+          ).unwrap();
+        } else {
+          await dispatch(
+            updateSolutions({ id: findProduct.id, data: submitData })
+          ).unwrap();
+        }
+      } else {
+        await dispatch(
+          updateNews({ id: findProduct.id, data: submitData })
+        ).unwrap();
+      }
+
+      dispatch(changeEquipmentPopup(false));
+    } catch (error) {
+      alert(error.message || "Не удалось сохранить изменения");
     }
-    setFormData({
-      title: findProduct.title,
-      date: findProduct.date,
-      text: findProduct.text,
-      news_photo: findProduct.image,
-    });
-    dispatch(changeEquipmentPopup(false));
   };
 
   return (
@@ -99,15 +111,15 @@ const ChangeEquipmentPopup = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-[18px]">
           <div>
-            <ImageUploader />
+            <ImageUploader onFileSelect={setSelectedFile} />
           </div>
           {isNews && (
             <div className="space-y-2">
               <span className="w-full text-sm text-gray-900 ">Название</span>
               <Input
-                type={"text"}
-                name={"title"}
-                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                type="text"
+                name="title"
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
                 value={formData.title}
                 onChange={handleInputChange}
               />
@@ -118,9 +130,9 @@ const ChangeEquipmentPopup = () => {
               {!isNews ? "Название" : "Дата "}
             </span>
             <Input
-              type={!isNews ? "text" : "text"}
+              type="text"
               name={!isNews ? "name" : "date"}
-              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
               value={!isNews ? formData.name : formData.date}
               onChange={handleInputChange}
             />
@@ -128,7 +140,7 @@ const ChangeEquipmentPopup = () => {
 
           <label
             htmlFor="message"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             {!isNews ? "Описание" : "Текст новости"}
           </label>
@@ -137,7 +149,7 @@ const ChangeEquipmentPopup = () => {
             name={!isNews ? "description" : "text"}
             rows="4"
             onChange={handleInputChange}
-            className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+            className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
             value={!isNews ? formData.description : formData.text}
           ></textarea>
 
