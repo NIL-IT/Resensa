@@ -24,15 +24,16 @@ export default function AdminOrders({ title }) {
   const { orders } = useSelector(({ user }) => user);
   const [ordersList, setOrdersList] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getAllOrders());
-  }, [dispatch]);
-
-  useEffect(() => {
-    setOrdersList(orders);
-  }, [orders]);
+    if (orders) {
+      setLoading(true);
+      setOrdersList(orders);
+    }
+  }, [orders, dispatch]);
+  console.log(loading);
+  console.log(ordersList);
   const handleCheckedAllOrders = () => {
     if (selectedOrders.length === ordersList.length) {
       setSelectedOrders([]);
@@ -53,20 +54,27 @@ export default function AdminOrders({ title }) {
 
   const deleteSelected = async () => {
     for (const orderId of selectedOrders) {
+      const filter = ordersList.filter(({ id }) => id !== orderId);
+      setOrdersList(filter);
+    }
+
+    for (const orderId of selectedOrders) {
       await dispatch(deleteOrders(orderId));
     }
     setSelectedOrders([]);
+    await dispatch(getAllOrders());
   };
 
   const deleteAll = async () => {
     for (const order of ordersList) {
       await dispatch(deleteOrders(order.id));
     }
+
     setSelectedOrders([]);
   };
   const handleSearch = (value) => {
     setOrdersList(
-      orders.filter((order) => order.id.toString().includes(value))
+      orders.filter((order) => order.number.toString().includes(value))
     );
   };
   return (
@@ -110,45 +118,59 @@ export default function AdminOrders({ title }) {
               <th className="text-left py-3 px-4 ">Сумма</th>
             </tr>
           </thead>
-          <tbody>
-            {ordersList.map((order) => (
-              <tr
-                key={order.id}
-                className="border-b *:text-sm *:font-normal *:text-gray-400"
-              >
-                <td className="py-3 w-[15px] ">
-                  <input
-                    checked={isChecked(order.id)}
-                    onChange={() => handleCheckedOrder(order.id)}
-                    type="checkbox"
-                    className="rounded border-gray-300 cursor-pointer"
-                  />
-                </td>
-                <td className="py-3 px-4 ">Lorem ipsum</td>
-                <td className="py-3 px-4 ">{order.id}</td>
-                <td className="py-3 px-4 ">{useFormatDate(order.date)}</td>
-                <td className="py-3 px-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
-                    <span className="text-sm">{order.client}</span>
-                  </div>
-                </td>
-                <td className="py-3 ">
-                  <span
-                    className={`inline-flex items-center gap-2 px-2 py-1 rounded-full text-gray-400`}
-                  >
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full ml-2 ${
-                        order.status === "delivered" ? "bg-green" : "bg-red"
-                      }`}
+          {loading && ordersList.length > 0 ? (
+            <tbody>
+              {ordersList.map((order) => (
+                <tr
+                  key={order.id}
+                  className="border-b *:text-sm *:font-normal *:text-gray-400"
+                >
+                  <td className="py-3 w-[15px] ">
+                    <input
+                      checked={isChecked(order.id)}
+                      onChange={() => handleCheckedOrder(order.id)}
+                      type="checkbox"
+                      className="rounded border-gray-300 cursor-pointer"
                     />
-                    {order.status === "delivered" ? "Доставлен" : "Отменен"}
-                  </span>
+                  </td>
+                  <td className="py-3 px-4 ">{order.name}</td>
+                  <td className="py-3 px-4 ">{order.number}</td>
+                  <td className="py-3 px-4 ">{useFormatDate(order.date)}</td>
+                  <td className="py-3 px-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+                      <span className="text-sm">{order.client_name}</span>
+                    </div>
+                  </td>
+                  <td className="py-3 ">
+                    <span
+                      className={`inline-flex items-center gap-2 px-2 py-1 rounded-full text-gray-400`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ml-2 ${
+                          order.state === "Доставлен"
+                            ? "bg-green"
+                            : order.state === "Отменен"
+                            ? "bg-red"
+                            : "bg-yellow"
+                        }`}
+                      />
+                      {order.state}
+                    </span>
+                  </td>
+                  <td className="py-3 px-4 text-sm">{order.order_amount} ₽</td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr className="border-b *:text-sm *:font-normal *:text-gray-400">
+                <td colSpan="7" className="py-3 px-4 text-center">
+                  Нет заказов
                 </td>
-                <td className="py-3 px-4 text-sm">{order.amount}</td>
               </tr>
-            ))}
-          </tbody>
+            </tbody>
+          )}
         </table>
       </div>
     </div>

@@ -74,7 +74,7 @@ export default function Header() {
         </div>
       </div>
       <nav className="mt-6">
-        <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm sm:text-base">
+        <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
           {list.map(({ name, path }, i) => (
             <li key={i} className="text-gray-400 hover:text-gray-300">
               <Link to={path}>{name}</Link>

@@ -17,11 +17,22 @@ export default function Objects({ className = null }) {
 
   return (
     <div
-      className={`w-full bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${className}`}
+      className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${className}`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex-center flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
-          <div className="w-full lg:w-1/2 xl:w-5/12">
+      <div className="earth_container px-4 sm:px-6 lg:px-8 relative">
+        <div
+          className="flex-center flex-col 
+        lg:flex-row lg:items-center lg:justify-between g
+        ap-20 lg:gap-12"
+        >
+          <div
+            className=" w-full lg:w-1/2 xl:w-5/12 
+          md:h-[1000px] lg:h-[1200px] xl:h-[auto]
+            
+          sm:h-[1000px] 
+            xs:h-[900px] 
+         h-[900px]"
+          >
             <Title
               text={"наши объекты"}
               className="inline-block text-white text-xl sm:text-2xl lg:text-3xl border-b border-b-white mb-6"
@@ -42,11 +53,23 @@ export default function Objects({ className = null }) {
             <Button
               icon={true}
               text={"построить маршрут до офиса"}
-              className="bg-white text-gray-400 w-full mt-6 sm:mt-8 text-sm sm:text-base font-normal py-3 sm:py-4 px-4 sm:px-6"
+              className="bg-white gap-2 text-gray-400 w-full mt-6 sm:mt-8 text-sm sm:text-base font-normal py-3 sm:py-4 px-4 sm:px-3
+            
+              xs:gap-2 sm:gap-2 md:gap-[100px] lg:gap-5  xl:text-center 3xl:text-center"
               white={true}
             />
           </div>
-          <div className="w-full flex-center justify-center">
+          <div
+            className="absolute  3xl:top-[-60px] 3xl:right-[-250px]
+            2xl:top-[-60px] 2xl:right-[-200px]
+            xl:top-[0px] xl:right-[-50px]
+            lg:top-[580px] lg:right-[-140px]
+            md:top-[520px] md:right-[-140px]
+            sm:top-[500px] sm:right-[-110px]
+            xs:top-[460px] xs:right-[0]
+            top-[460px] right-[0]
+       "
+          >
             <EarthScene />
           </div>
         </div>

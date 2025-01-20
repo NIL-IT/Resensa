@@ -2,17 +2,23 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { changeNewsId, changeShowNewsPopup } from "../../utils/slice/userSlice";
+import {
+  changeNewsId,
+  changeShowNewsPopup,
+  getAllNews,
+} from "../../utils/slice/userSlice";
 
 export default function News() {
   const { news } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const [isLimited, setLimited] = useState(true);
   const [newsData, setNewsData] = useState(news);
-
+  useEffect(() => {
+    setNewsData(news);
+  }, [news]);
   useEffect(() => {
     if (!isLimited) {
-      setNewsData(data.news.items);
+      setNewsData(news);
     } else {
       setNewsData(newsData.slice(0, 6));
     }
@@ -21,16 +27,20 @@ export default function News() {
     dispatch(changeShowNewsPopup(true));
     dispatch(changeNewsId(id));
   };
-  console.log(newsData);
-  return (
-    <div className="container pt-[140px] xs:pt-[160px] sm:pt-[180px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px]">
+  console.log(news);
+  return newsData.length ? (
+    <div
+      className={`container pt-[140px] xs:pt-[160px] sm:pt-[180px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
+        newsData.length > 6 ? "" : "pb-16"
+      }`}
+    >
       <Title
         text={"новости"}
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center">
         <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px]">
-          <div className="flex flex-wrap justify-center xs:justify-center sm:justify-between    mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10">
+          <div className="flex flex-wrap gap-[33px]   mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10">
             {newsData.map((item) => (
               <div
                 onClick={() => showNewsPopup(item.id)}
@@ -46,14 +56,16 @@ export default function News() {
                   src={item.image}
                   alt=""
                 />
-                <div className="h-[30%]">
-                  <p className="text-white text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]">
-                    {item.title}
-                  </p>
-                  <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
-                    <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
-                      {item.date}
-                    </span>
+                <div className="h-[30%] flex flex-col justify-between ">
+                  <div>
+                    <p className="text-white text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]">
+                      {item.title}
+                    </p>
+                    <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
+                      <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
+                        {item.date}
+                      </span>
+                    </div>
                   </div>
                   <button className="flex-center gap-3 group-hover:gap-4 transition-all">
                     <span className="text-white text-base xs:text-base sm:text-lg font-normal">
@@ -65,7 +77,7 @@ export default function News() {
               </div>
             ))}
           </div>
-          {isLimited && (
+          {isLimited && newsData.length > 6 && (
             <div className="flex justify-center ">
               <Button
                 onClick={() => setLimited(false)}
@@ -77,5 +89,7 @@ export default function News() {
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 }

@@ -53,7 +53,7 @@ const ImageUploader = ({ onFileSelect }) => {
     if (["image/svg+xml", "image/png", "image/jpeg"].includes(file.type)) {
       // Create preview URL for display
       const previewUrl = URL.createObjectURL(file);
-      setUploadedImage({ url: previewUrl });
+      setUploadedImage({ url: previewUrl, file: file });
 
       // Pass the file to parent component
       if (onFileSelect) {
@@ -115,7 +115,7 @@ const ImageUploader = ({ onFileSelect }) => {
           <img
             src={uploadedImage.url || "/placeholder.svg"}
             alt="Загруженное изображение"
-            className="rounded-lg shadow-md max-w-[300px]"
+            className="rounded-lg shadow-md max-w-[200px]"
           />
           <div className="flex flex-col justify-end">
             <button
@@ -129,9 +129,9 @@ const ImageUploader = ({ onFileSelect }) => {
       ) : !addNewItemPopup && findProduct ? (
         <div className="mt-4 w-full flex justify-between">
           <img
-            src={findProduct.img}
+            src={findProduct.img || "/placeholder.svg"}
             alt="Текущее изображение"
-            className="rounded-lg shadow-md max-w-[300px]"
+            className="rounded-lg shadow-md max-w-[200px]"
           />
           <div className="flex flex-col justify-end">
             <button

@@ -15,10 +15,8 @@ const AddNewItem = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
-
   const isNews = +pathnameId === +4;
-
-  const { news } = useSelector(({ user }) => user);
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState(
     !isNews
@@ -33,7 +31,7 @@ const AddNewItem = () => {
   );
 
   const [selectedFile, setSelectedFile] = useState(null);
-
+  console.log(selectedFile);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -44,47 +42,45 @@ const AddNewItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!selectedFile) {
-      alert("Пожалуйста, загрузите изображение");
+    setError("");
+    if (!formData.title || !formData.text || !selectedFile) {
+      setError(
+        "Пожалуйста, заполните все обязательные поля и загрузите изображение"
+      );
       return;
     }
 
     try {
       const submitData = new FormData();
+      submitData.append("title", formData.title);
+      submitData.append("text", formData.text);
+      submitData.append("news_photo", selectedFile);
 
-      // Add text fields
-      Object.keys(formData).forEach((key) => {
-        submitData.append(key, formData[key]);
-      });
+      // Dispatch the action
+      await dispatch(createNews(submitData)).unwrap();
 
-      // Add file with the correct field name based on context
+      // Reset form on success
+      setFormData({ title: "", text: "" });
+      setSelectedFile(null);
       if (isNews) {
+        // Create FormData object
+        const submitData = new FormData();
+        submitData.append("title", formData.title);
+        submitData.append("text", formData.text);
         submitData.append("news_photo", selectedFile);
-      } else if (+pathnameId === 2) {
-        submitData.append("equipment_photo", selectedFile);
-      } else if (+pathnameId === 3) {
-        submitData.append("solution_photo", selectedFile);
-      }
 
-      // Dispatch the appropriate action
-      if (isNews) {
+        // Dispatch the action
         await dispatch(createNews(submitData)).unwrap();
-        setFormData({
-          title: "",
-          text: "",
-        });
-      } else if (+pathnameId === 2) {
-        await dispatch(createEquipment(submitData)).unwrap();
-        setFormData({
-          name: "",
-          description: "",
-        });
+
+        // Reset form on success
+        setFormData({ title: "", text: "" });
+        setSelectedFile(null);
       } else if (+pathnameId === 3) {
         await dispatch(createSolutions(submitData)).unwrap();
         setFormData({
           name: "",
           description: "",
+          solution_photo: "",
         });
       }
 
@@ -148,6 +144,42 @@ const AddNewItem = () => {
             className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
             value={!isNews ? formData.description : formData.text}
           ></textarea>
+          {+pathnameId === 2 && (
+            <div className="flex w-full justify-between gap-4 pb-5">
+              <div className="w-[48%]">
+                <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+                  От
+                </span>
+                <Input
+                  required={false}
+                  type={"number"}
+                  name="min_param"
+                  value={formData.min_param}
+                  onChange={handleInputChange}
+                  className=" block p-2 xs:p-2.5 w-[300px]
+                  text-sm xs:text-base text-gray-400 
+                  font-normal bg-gray-50 rounded-lg 
+                  border 
+                  border-gray-300"
+                />
+              </div>
+              <div className="w-[48%]">
+                <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+                  До
+                </span>
+                <Input
+                  type="number"
+                  name="max_param"
+                  value={formData.max_param}
+                  className="block p-2 xs:p-2.5 w-full] 
+                  text-sm xs:text-base text-gray-400 
+                  font-normal bg-gray-50 rounded-lg border
+                   border-gray-300"
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          )}
 
           <button
             type="submit"

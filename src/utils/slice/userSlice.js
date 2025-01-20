@@ -77,20 +77,51 @@ export const getAllNews = createAsyncThunk(
   }
 );
 
+// export const createNews = createAsyncThunk(
+//   "news/createNews",
+//   async (payload, thunkApi) => {
+//     try {
+//       console.log(payload);
+//       const res = await axios.post("/news/", payload);
+//       return res.data;
+//     } catch (err) {
+//       console.log(err);
+//       return thunkApi.rejectWithValue(err.response?.data || err.message);
+//     }
+//   }
+// );
+axios.defaults.baseURL = "http://89.23.116.157:8002";
 export const createNews = createAsyncThunk(
   "news/createNews",
-  async (data, thunkApi) => {
+  async (payload, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "news");
-      const res = await api.post("/news/", formData, {
+      // Validate required fields
+      if (
+        !payload.get("title") ||
+        !payload.get("text") ||
+        !payload.get("news_photo")
+      ) {
+        throw new Error(
+          "Отсутствуют обязательные поля: заголовок, текст и изображение"
+        );
+      }
+
+      const res = await axios.post("/news/", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+
       return res.data;
     } catch (err) {
-      console.log(err);
-      return thunkApi.rejectWithValue(err.response?.data || err.message);
+      console.error("Upload error:", err);
+      return thunkApi.rejectWithValue({
+        message:
+          err.response?.data?.message ||
+          err.message ||
+          "Ошибка при создании новости",
+        status: err.response?.status,
+      });
     }
   }
 );
@@ -267,12 +298,8 @@ export const createOrders = createAsyncThunk(
   "Orders/createOrders",
   async (data, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "order");
-      const res = await api.post("/orders/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      console.log(data);
+      const res = await api.post("/orders/", data);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -424,9 +451,7 @@ const userSlice = createSlice({
       .addCase(updateNews.fulfilled, (state, action) => {
         state.news = action.payload;
       })
-      .addCase(createNews.fulfilled, (state, action) => {
-        state.news = action.payload;
-      })
+
       .addCase(getAllEquipment.fulfilled, (state, action) => {
         state.equipment = action.payload;
       })
@@ -436,9 +461,7 @@ const userSlice = createSlice({
       .addCase(updateEquipment.fulfilled, (state, action) => {
         state.equipment = action.payload;
       })
-      .addCase(createEquipment.fulfilled, (state, action) => {
-        state.equipment = action.payload;
-      })
+
       .addCase(getAllSolutions.fulfilled, (state, action) => {
         state.solutions = action.payload;
       })
@@ -448,9 +471,7 @@ const userSlice = createSlice({
       .addCase(updateSolutions.fulfilled, (state, action) => {
         state.solutions = action.payload;
       })
-      .addCase(createSolutions.fulfilled, (state, action) => {
-        state.solutions = action.payload;
-      })
+
       .addCase(getAllOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
       })
@@ -458,9 +479,6 @@ const userSlice = createSlice({
         state.orders = action.payload;
       })
       .addCase(updateOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
-      })
-      .addCase(createOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
       });
   },

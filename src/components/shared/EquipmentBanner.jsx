@@ -3,6 +3,7 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import { useDispatch } from "react-redux";
+import { div } from "three/tsl";
 
 export default function EquipmentBanner({
   bannerImg,
@@ -18,21 +19,26 @@ export default function EquipmentBanner({
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
-    <div className="relative h-[900px] mb-[30px]">
+    <div
+      className=" relative 3xl:pb-[280px] mb-[30px] 
+     "
+    >
       <img
-        className="absolute top-[30px] left-0 w-[100wh] h-[900px]  z-[-2]"
+        className="absolute top-[30px] left-0  h-full z-[-2] 
+        xs:min-w-[100wh]"
         src={bannerImg}
         alt="banner"
       />
       {blurImg && (
         <img
           src={blurImg}
-          className="absolute top-[30px] left-[-50px] w-[1286px] h-[900px] z-[-1]"
+          className="absolute  top-[30px] left-0 
+         xs:min-w-[100wh] h-full z-[-1]"
           alt=""
         />
       )}
 
-      <div className={`container pt-[337px] ${padding}`}>
+      <div className={`container 2xl:pt-[200px] 3xl:pt-[337px]  ${padding}`}>
         <Title
           text={subtitle}
           className="font-normal text-[32px] text-white leading-[41px]"

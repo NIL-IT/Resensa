@@ -18,12 +18,10 @@ export default function Slider({ slides, second }) {
   };
 
   return (
-    <div className="w-full ">
-      {/* Slider container */}
+    <div className="max-w-[100wh]   earth_container  ">
       <div className="relative">
-        {/* Slides */}
         <div className="flex justify-center">
-          <div className="w-full">
+          <div className="w-full ">
             <div
               className=" sm:w-full flex gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[40px] lg:gap-[50px] 
               xl:gap-[55px] 2xl:gap-[60px] 3xl:gap-[64px] 
@@ -35,15 +33,15 @@ export default function Slider({ slides, second }) {
                   key={index}
                   className="w-full min-w-[100%] xs:min-w-[100%] 
                    3xl:min-w-[auto]  
-                   2xl:h-auto  xs:w-full  lg:w-full "
+                   2xl:h-auto  xs:w-full  lg:w-full  "
                 >
                   {second ? (
-                    <div className="md:w-[350px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px] 3xl:w-[546px] ">
+                    <div className=" md:w-[350px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px] 3xl:w-[546px] ">
                       <img src={image} alt={title} className="object-cover " />
                     </div>
                   ) : (
                     <div
-                      className={`w-full xs:w-full sm:w-full 
+                      className={` w-full xs:w-full sm:w-full 
                         md:w-[600px] lg:w-[650px] xl:w-[700px] 
                         2xl:w-[750px] 3xl:w-[816px] h-[560px] 
                         xs:h-[600px] sm:h-[620px] 

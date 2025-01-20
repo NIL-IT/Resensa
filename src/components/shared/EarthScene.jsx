@@ -70,7 +70,7 @@ function Earth() {
   });
 
   return (
-    <group className="" scale={1.1}>
+    <group className="" scale={0.9}>
       {/* Ambient light for general illumination */}
       <ambientLight intensity={0.3} />
 
@@ -109,7 +109,14 @@ function Earth() {
 
 export default function EarthScene() {
   return (
-    <div className=" *:overflow-auto xs:w-[350px] xs:h-[350px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[900px] 2xl:h-[700px]">
+    <div
+      className=" *:overflow-auto xs:w-[350px] xs:h-[450px] 
+    sm:w-[600px] sm:h-[500px] 
+    md:w-[800px] md:h-[500px] 
+    lg:w-[1000px] lg:h-[600px] 
+    xl:w-[500px] xl:h-[500px] 
+    2xl:w-[1000px] 2xl:h-[660px]"
+    >
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         style={{ background: "transparent", width: "100%", height: "100%" }}

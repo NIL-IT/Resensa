@@ -12,6 +12,8 @@ import FileUploader from "../../ui/FileUploader";
 const options = [
   { label: "Доставлен", value: "Доставлен" },
   { label: "Отменен", value: "Отменен" },
+  { label: "Оплачен", value: "Оплачен" },
+  { label: "В пути", value: "В пути" },
 ];
 
 export default function AddOrderPopup() {
@@ -20,18 +22,18 @@ export default function AddOrderPopup() {
   const [isOpen, setIsOpen] = useState(true);
 
   const [formData, setFormData] = useState({
-    nameOrder: "",
-    id: "",
+    name: "",
+    number: "",
     date: "",
-    client: "",
-    status: "",
-    amount: "",
+    client_name: "",
+    state: "",
+    order_amount: "",
   });
 
   const handleSelectChange = (value) => {
     setFormData((prevData) => ({
       ...prevData,
-      status: value === "Доставлен" ? "delivered" : "cancelled",
+      state: value,
     }));
   };
   const handleInputChange = (e) => {
@@ -39,7 +41,8 @@ export default function AddOrderPopup() {
 
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]:
+        name === "number" || name === "order_amount" ? Number(value) : value,
     }));
   };
 
@@ -48,12 +51,12 @@ export default function AddOrderPopup() {
     await dispatch(createOrders(formData));
     setIsOpen(false);
     setFormData({
-      nameOrder: "",
-      id: "",
+      name: "",
+      number: "",
       date: "",
-      client: "",
-      status: "",
-      amount: "",
+      client_name: "",
+      state: "",
+      order_amount: "",
     });
 
     dispatch(changeAddOrderPopup(false));
@@ -64,7 +67,12 @@ export default function AddOrderPopup() {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8">
-      <div className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[663px] relative overflow-y-auto">
+      <div
+        className="h-[90%] bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] 
+      xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] 
+      md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] l
+      g:max-w-[500px] xl:max-w-[663px] relative overflow-y-auto"
+      >
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700"
@@ -94,14 +102,14 @@ export default function AddOrderPopup() {
         >
           <Input
             type="text"
-            name="nameOrder"
+            name="name"
             placeholder="Наименование заказа"
-            value={formData.nameOrder}
+            value={formData.name}
             onChange={handleInputChange}
           />
           <Input
             type={"number"}
-            name="id"
+            name="number"
             placeholder="Номер заказа"
             value={formData.id}
             onChange={handleInputChange}
@@ -114,7 +122,7 @@ export default function AddOrderPopup() {
           />
           <Input
             type="text"
-            name="client"
+            name="client_name"
             placeholder="Данные клиента"
             value={formData.client}
             onChange={handleInputChange}
@@ -130,9 +138,9 @@ export default function AddOrderPopup() {
           />
           <Input
             type="text"
-            name="amount"
+            name="order_amount"
             placeholder="Сумма заказа"
-            value={formData.amount}
+            value={formData.order_amount}
             onChange={handleInputChange}
           />
           <button
