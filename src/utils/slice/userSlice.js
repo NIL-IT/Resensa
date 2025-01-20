@@ -122,10 +122,165 @@ export const deleteNews = createAsyncThunk(
     }
   }
 );
+export const getAllEquipment = createAsyncThunk(
+  "Equipment/getAllEquipment",
+  async (thunkApi) => {
+    try {
+      const res = await axios.get(`${url}/equipments/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const createEquipment = createAsyncThunk(
+  "Equipment/createEquipment",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.post(`${url}/equipments/`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const updateEquipment = createAsyncThunk(
+  "Equipment/updateEquipment",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.put(
+        `${url}/equipments/${payload.id}`,
+        payload.body
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const deleteEquipment = createAsyncThunk(
+  "Equipment/deleteEquipment",
+  async (thunkApi, payload) => {
+    try {
+      console.log(payload);
+      const res = await axios.delete(`${url}/equipments/${payload}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const getAllSolutions = createAsyncThunk(
+  "Solutions/getAllSolutions",
+  async (thunkApi) => {
+    try {
+      const res = await axios.get(`${url}/solutions/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const createSolutions = createAsyncThunk(
+  "Solutions/createSolutions",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.post(`${url}solutions/`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const updateSolutions = createAsyncThunk(
+  "Solutions/updateSolutions",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.put(
+        `${url}/solutions/${payload.id}`,
+        payload.body
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const deleteSolutions = createAsyncThunk(
+  "Solutions/deleteSolutions",
+  async (thunkApi, payload) => {
+    try {
+      console.log(payload);
+      const res = await axios.delete(`${url}/solutions/${payload}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const getAllOrders = createAsyncThunk(
+  "Orders/getAllOrders",
+  async (thunkApi) => {
+    try {
+      const res = await axios.get(`${url}/orders/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const createOrders = createAsyncThunk(
+  "Orders/createOrders",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.post(`${url}orders/`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const updateOrders = createAsyncThunk(
+  "Orders/updateOrders",
+  async (thunkApi, payload) => {
+    try {
+      const res = await axios.put(`${url}/orders/${payload.id}`, payload.body);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const deleteOrders = createAsyncThunk(
+  "orders/deleteOrders",
+  async (thunkApi, payload) => {
+    try {
+      console.log(payload);
+      const res = await axios.delete(`${url}/orders/${payload}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
     news: [],
+    equipment: [],
+    solutions: [],
     data: data,
     isAdmin: true,
     isAuth: authFormLocalStorage,
@@ -231,6 +386,42 @@ const userSlice = createSlice({
       state.news = action.payload;
     });
     builder.addCase(createNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(getAllEquipment.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(deleteEquipment.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(updateEquipment.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(createEquipment.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(getAllSolutions.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(deleteSolutions.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(updateSolutions.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(createSolutions.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(getAllOrders.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(deleteOrders.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(updateOrders.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+    builder.addCase(createOrders.fulfilled, (state, action) => {
       state.news = action.payload;
     });
   },
