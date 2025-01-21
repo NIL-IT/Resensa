@@ -28,6 +28,7 @@ export default function ProductItem({ list }) {
         window.scrollTo({
           top: 2650,
           left: 0,
+          behavior: "smooth",
         });
       }, 20);
     }

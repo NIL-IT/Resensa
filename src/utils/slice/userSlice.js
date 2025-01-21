@@ -25,7 +25,7 @@ import { fromHalfFloat } from "three/src/extras/DataUtils.js";
 // };
 
 // Create axios instance with default config
-const url = `https://89.23.116.157:8002`;
+const url = `https://nilit1.ru/api`;
 const api = axios.create({
   baseURL: url,
   headers: {
@@ -131,7 +131,7 @@ export const createNews = createAsyncThunk(
         news_photo: formData.get("news_photo"),
       });
 
-      const res = await api.post("/news/", {
+      const res = await api.post("/news", {
         title: formData.get("title"),
         text: formData.get("text"),
         news_photo: formData.get("news_photo"),
