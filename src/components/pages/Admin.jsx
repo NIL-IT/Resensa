@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
 import AdminOrders from "../shared/admin/AdminOrders";
-
 import AdminExit from "../shared/admin/AdminExit";
 import AdminCategoryList from "../shared/admin/AdminCategoryList";
 import FileUploader from "../ui/FileUploader";
-import { div } from "three/tsl";
 import ChangeBanner from "../shared/admin/ChangeBanner";
 import AdminNews from "../shared/admin/AdminNews";
+import { useSelector } from "react-redux";
 const navList = [
   {
     id: "1",
@@ -60,9 +59,14 @@ export default function Admin() {
   };
   const getDirectoryName = (pathname) => {
     const dirs = pathname.split("/");
-    console.log(dirs[1]);
+    if (+dirs[2] === 1) return "Заказы";
+    if (+dirs[2] === 2) return "Оборудование";
+    if (+dirs[2] === 3) return "Решения";
+    if (+dirs[2] === 4) return "Новости";
+    if (+dirs[2] === 5) return "Баннер";
+    if (+dirs[2] === 6) return "Выйти";
   };
-  getDirectoryName(pathname);
+
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
@@ -71,7 +75,9 @@ export default function Admin() {
   return (
     <div>
       <div className="container pt-[30px]">
-        <span className="text-gray-900 text-sm">Личный кабинет - Заказы</span>
+        <span className="text-gray-900 text-sm">
+          Личный кабинет - {getDirectoryName(pathname)}
+        </span>
         <section className="mt-6 border-y border-y-gray-400 flex">
           <nav>
             <ul className="space-y-6 py-[105px] pb-[200px] pr-[81px] border-r border-r-gray-400 w-[220px]">
@@ -105,6 +111,7 @@ export default function Admin() {
             </div>
           )}
         </section>
+
         <div className="flex justify-center w-full gap-4 mt-6 pl-44">
           <button className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5">
             <svg

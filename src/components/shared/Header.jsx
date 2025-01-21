@@ -1,35 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../ui/Button";
-import Input from "../ui/SearchInput";
+
 import { Link, useNavigate } from "react-router-dom";
 import BurgerButton from "../ui/BurgerButton";
-import { ROUTES } from "../../routes/routes";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeIsAdmin,
+  changeRoutingToOrders,
   changeShowPopup,
   changeShowSearchPopup,
 } from "../../utils/slice/userSlice";
 
-const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, CONTACT } = ROUTES;
-const list = [
-  { name: "Главная", path: HOME },
-  { name: "Оборудование", path: EQUIPMENT },
-  { name: "Решения", path: SOLUTIONS },
-  { name: "О компании", path: ABOUT },
-  { name: "Заказы", path: `/admin/1` },
-  { name: "Контакты", path: CONTACT },
-];
-
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAdmin } = useSelector(({ user }) => user);
+  const navList = [
+    { name: "Главная", path: "/" },
+    { name: "Оборудование", path: "/equipment" },
+    { name: "Решения", path: "/solutions" },
+    { name: "О компании", path: "/about" },
+    { name: "Заказы", path: `/admin/1` },
+    { name: "Контакты", path: "/contact" },
+  ];
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const resetAuthIfAdmin = async () => {
-    if (!isAdmin) return;
-    console.log("что то происходит");
-    await dispatch(changeIsAdmin(false));
+  const handleClickLink = (i) => {
+    if (isAdmin) dispatch(changeIsAdmin(false));
+    if (+i === 4) {
+      dispatch(changeRoutingToOrders(true));
+    }
+    if (+i !== 4) dispatch(changeRoutingToOrders(false));
   };
+
   return (
     <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
@@ -40,7 +43,7 @@ export default function Header() {
             alt="logo"
           />
         </Link>
-        <BurgerButton list={list} />
+        <BurgerButton list={navList} />
         <div className="hidden md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
             <a
@@ -83,11 +86,11 @@ export default function Header() {
       </div>
       <nav className="mt-6 hidden md:block">
         <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
-          {list.map(({ name, path }, i) => (
+          {navList.map(({ name, path }, i) => (
             <li key={i} className="text-gray-400 hover:text-gray-300">
               <Link
-                onClick={() => resetAuthIfAdmin()}
-                to={isAdmin ? "/auth" : path}
+                onClick={() => handleClickLink(i)}
+                to={isAdmin ? "/auth" : +i === 4 ? "/product/1" : path}
               >
                 {name}
               </Link>

@@ -1,35 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../routes/routes";
+
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
 import { changeShowPopup } from "../../utils/slice/userSlice";
-const { HOME, EQUIPMENT, SOLUTIONS, ABOUT, ORDERS, CONTACT } = ROUTES;
-const list = [
-  {
-    name: "Главная",
-    path: HOME,
-  },
-  {
-    name: "Оборудование",
-    path: EQUIPMENT,
-  },
-  {
-    name: "Решения",
-    path: SOLUTIONS,
-  },
-  {
-    name: "О компании",
-    path: ABOUT,
-  },
-  {
-    name: "Заказы",
-    path: ORDERS,
-  },
-  {
-    name: "Контакты",
-    path: CONTACT,
-  },
+
+const navList = [
+  { name: "Главная", path: "/" },
+  { name: "Оборудование", path: "/equipment" },
+  { name: "Решения", path: "/solutions" },
+  { name: "О компании", path: "/about" },
+  { name: "Заказы", path: `/admin/1` },
+  { name: "Контакты", path: "/contact" },
 ];
 export default function Footer({ scrollTop = null }) {
   const dispatch = useDispatch();
@@ -49,7 +31,7 @@ export default function Footer({ scrollTop = null }) {
       <div className="order-3 lg:order-2">
         <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
           <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {list.map(({ name, path }, i) => (
+            {navList.map(({ name, path }, i) => (
               <li
                 onClick={scrollTop}
                 key={i}
@@ -60,14 +42,14 @@ export default function Footer({ scrollTop = null }) {
             ))}
           </ul>
           <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {list.map(({ name, path }, i) => (
+            {navList.map(({ name, path }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
                 <Link>Оборудование</Link>
               </li>
             ))}
           </ul>
           <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {list.map(({ name, path }, i) => (
+            {navList.map(({ name, path }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
                 <Link>Решения</Link>
               </li>

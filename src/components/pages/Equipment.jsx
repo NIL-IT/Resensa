@@ -7,9 +7,12 @@ import Objects from "../shared/Objects";
 import Footer from "../shared/Footer";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeRoutingToOrders } from "../../utils/slice/userSlice";
 
 export default function Equipment({ data, bannerImg, title, text }) {
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo({
       top: 0,

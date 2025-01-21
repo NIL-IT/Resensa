@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EquipmentBanner from "../shared/EquipmentBanner";
 import Objects from "../shared/Objects";
 import Advantages from "../shared/Advantages";
@@ -13,6 +13,8 @@ import {
 } from "../../utils/data";
 
 import Points from "../shared/Points";
+import { useDispatch } from "react-redux";
+import { changeRoutingToOrders } from "../../utils/slice/userSlice";
 const text = `Мы — профессиональная команда специалистов в области вентиляции и кондиционирования воздуха с многолетним опытом работы. Бренд RECENSA ориентирован на создание новой производственной базы, а также на поставку вентиляционного оборудования под собственной торговой маркой.`;
 export default function AboutCompany() {
   return (

@@ -21,7 +21,7 @@ export default function AppRoutes() {
   const combinedData = {
     itemsList: [...data.equipment.items, ...data.solutions.items],
   };
-  const { isAuth } = useSelector(({ user }) => user);
+  const { isAdmin } = useSelector(({ user }) => user);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -79,8 +79,7 @@ export default function AppRoutes() {
       />
       <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
       <Route path="/admin" element={<Navigate to="/admin/1" replace />} />
-      <Route path={ROUTES.ADMIN} element={<Admin />} />
-      <Route path={ROUTES.ORDERS} element={<Admin />} />
+      {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
       <Route path={ROUTES.CONTACT} element={<Contacts />} />
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
     </Routes>

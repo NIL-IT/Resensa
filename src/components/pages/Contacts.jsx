@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import {
+  changeRoutingToOrders,
+  changeShowPopup,
+} from "../../utils/slice/userSlice";
 import { div } from "three/tsl";
 import Footer from "../shared/Footer";
 
 const Contacts = () => {
-  const dispatch = useDispatch();
-
   return (
     <div>
       <div className="container px-4 sm:px-6 lg:px-8 py-6 border-b border-b-gray-400">

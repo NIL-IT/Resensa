@@ -11,15 +11,19 @@ import Footer from "../shared/Footer";
 import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
+import { useDispatch } from "react-redux";
+import { changeRoutingToOrders } from "../../utils/slice/userSlice";
 
 export default function Home() {
   const { pathname } = useLocation();
+
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
     });
   };
+
   useEffect(() => {
     scrollTop();
   }, [pathname]);

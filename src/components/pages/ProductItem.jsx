@@ -6,6 +6,8 @@ import { data } from "../../utils/data";
 import ItemsList from "../shared/ItemsList";
 import Footer from "../shared/Footer";
 import OrderStatus from "../shared/OrderStatus";
+import { useDispatch, useSelector } from "react-redux";
+import { changeRoutingToOrders } from "../../utils/slice/userSlice";
 
 const text = `Оборудование серии RCN стандартного исполнения предназначено для 
 размещения и эксплуатации в помещениях различного 
@@ -14,9 +16,23 @@ const text = `Оборудование серии RCN стандартного �
 export default function ProductItem({ list }) {
   const { id } = useParams();
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const { routingToOrders } = useSelector(({ user }) => user);
   const findProduct = (idProduct) =>
     list.find((item) => +item.id === +idProduct);
   const [currentProduct, setCurrentProduct] = useState(findProduct(id));
+  useEffect(() => {
+    if (routingToOrders) {
+      setTimeout(() => {
+        console.log("routing");
+        window.scrollTo({
+          top: 2650,
+          left: 0,
+        });
+      }, 20);
+    }
+  });
+
   useEffect(() => {
     if (!id) return;
     setCurrentProduct(findProduct(id));
@@ -28,6 +44,7 @@ export default function ProductItem({ list }) {
       left: 0,
     });
   }, [pathname]);
+
   function findCategory(id) {
     for (const category of ["equipment", "solutions"]) {
       const item = data[category].items.find((item) => item.id === +id);

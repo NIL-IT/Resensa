@@ -403,6 +403,7 @@ const userSlice = createSlice({
     news: [],
     equipment: [],
     solutions: [],
+    routingToOrders: false,
     orders: [],
     data: data,
     isAdmin: false,
@@ -421,6 +422,9 @@ const userSlice = createSlice({
     guarantee: 3,
   },
   reducers: {
+    changeRoutingToOrders: (state, { payload }) => {
+      state.routingToOrders = payload;
+    },
     changeNumberForMainBanner: (state, { payload }) => {
       const { experience, guarantee } = payload;
       state.experience = experience;
@@ -541,6 +545,7 @@ const userSlice = createSlice({
 });
 
 export const {
+  changeRoutingToOrders,
   changeIsAdmin,
   changeNumberForMainBanner,
   changeShowSearchPopup,
