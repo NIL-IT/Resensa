@@ -25,7 +25,7 @@ export default function Header() {
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
 
   return (
-    <header className="container px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8">
+    <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
         <Link to="/" className="mb-0">
           <img

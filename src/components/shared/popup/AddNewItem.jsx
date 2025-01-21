@@ -48,7 +48,6 @@ const AddNewItem = () => {
 
     try {
       if (isNews) {
-        // Validate news fields
         if (!formData.title || !formData.text || !selectedFile) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -58,14 +57,13 @@ const AddNewItem = () => {
         const newsData = {
           title: formData.title,
           text: formData.text,
-          news_photo: selectedFile, // selectedFile is now base64 string
+          news_photo: selectedFile,
         };
         console.log(newsData);
 
         await dispatch(createNews(newsData));
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {
-        // Validate equipment fields
         if (
           !formData.name ||
           !formData.description ||
@@ -93,7 +91,6 @@ const AddNewItem = () => {
           max_param: "",
         });
       } else if (+pathnameId === 3) {
-        // Validate solution fields
         if (!formData.name || !formData.description || !selectedFile) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -103,7 +100,7 @@ const AddNewItem = () => {
         const solutionData = {
           name: formData.name,
           description: formData.description,
-          solution_photo: selectedFile, // selectedFile is now base64 string
+          solution_photo: selectedFile,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         setFormData({

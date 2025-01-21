@@ -38,12 +38,14 @@ const ImageUploader = ({ onFileSelect }) => {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      console.log(e.dataTransfer.files[0], "drop");
       handleFile(e.dataTransfer.files[0]);
     }
   };
 
   const handleChange = (e) => {
     e.preventDefault();
+    console.log("загрузили файл:", e.target.files[0]);
     if (e.target.files && e.target.files[0]) {
       handleFile(e.target.files[0]);
     }
@@ -63,10 +65,11 @@ const ImageUploader = ({ onFileSelect }) => {
       try {
         const base64String = await convertToBase64(file);
         setUploadedImage({ url: base64String, file: file });
-
+        console.log("file----", file);
+        console.log("formating to base64", base64String);
         // Pass the base64 string to parent component
         if (onFileSelect) {
-          onFileSelect(base64String);
+          onFileSelect(file);
         }
       } catch (err) {
         setError("Ошибка при обработке изображения.");

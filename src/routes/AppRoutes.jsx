@@ -16,6 +16,7 @@ import { textEquipment } from "../utils/data";
 import ProductItem from "../components/pages/ProductItem";
 import LoginForm from "../components/pages/LoginForm";
 import { useSelector } from "react-redux";
+import Contacts from "../components/pages/Contacts";
 export default function AppRoutes() {
   const combinedData = {
     itemsList: [...data.equipment.items, ...data.solutions.items],
@@ -79,7 +80,7 @@ export default function AppRoutes() {
       <Route path="/admin" element={<Navigate to="/admin/1" replace />} />
       <Route path={ROUTES.ADMIN} element={<Admin />} />
       <Route path={ROUTES.ORDERS} element={<Admin />} />
-      <Route path={ROUTES.CONTACT} element={<Admin />} />
+      <Route path={ROUTES.CONTACT} element={<Contacts />} />
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
     </Routes>
   );
