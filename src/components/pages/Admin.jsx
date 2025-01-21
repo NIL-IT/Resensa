@@ -88,7 +88,7 @@ export default function Admin() {
           </nav>
           {!isActiveUploadFile ? (
             <div className="pl-[38px] pt-12 w-full">
-              {navList.map(({ title, id, component }, i) => (
+              {navList.map(({ title, id, component }) => (
                 <div key={id}>
                   {pathname.split("/").at(-1) === id && component(title)}
                 </div>

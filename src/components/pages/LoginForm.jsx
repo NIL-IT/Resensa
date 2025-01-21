@@ -12,16 +12,14 @@ export default function LoginForm() {
     password: "",
   });
   useEffect(() => {
-    console.log("login");
-    dispatch(changeIsAdmin());
-    console.log(isAdmin);
+    dispatch(changeIsAdmin(false));
   }, []);
-  console.log(isAdmin);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(changeIsAdmin(true));
     navigate("/admin/1");
   };
   return (

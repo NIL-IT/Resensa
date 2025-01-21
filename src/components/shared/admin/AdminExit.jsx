@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../../ui/Title";
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
@@ -8,13 +8,10 @@ import { changeIsAdmin } from "../../../utils/slice/userSlice";
 export default function AdminExit({ title }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleExit = () => {
-    dispatch(changeIsAdmin());
-    navigate("/auth");
-  };
-  const returnAdmin = () => {
-    navigate("/admin/1");
-  };
+
+  useEffect(() => {
+    dispatch(changeIsAdmin(true));
+  }, []);
   return (
     <div className="relative pb-5">
       <span className="w-[1px] h-[100%] absolute bg-gray-400 top-0 left-[-39px]" />
@@ -23,12 +20,12 @@ export default function AdminExit({ title }) {
         <span className="text-gray-400">Вы уверены что хотите выйти ? </span>
         <div className="flex gap-4">
           <Button
-            onClick={() => handleExit()}
+            href={"/auth"}
             text={"Да"}
             className="w-[100px] hover:bg-gray-300"
           />
           <Button
-            onClick={() => returnAdmin()}
+            href={"/admin/1"}
             text={"Нет"}
             className="w-[100px] hover:bg-gray-300"
           />

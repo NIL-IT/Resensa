@@ -1,11 +1,12 @@
 import React from "react";
 import Button from "../ui/Button";
 import Input from "../ui/SearchInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BurgerButton from "../ui/BurgerButton";
 import { ROUTES } from "../../routes/routes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  changeIsAdmin,
   changeShowPopup,
   changeShowSearchPopup,
 } from "../../utils/slice/userSlice";
@@ -22,8 +23,13 @@ const list = [
 
 export default function Header() {
   const dispatch = useDispatch();
+  const { isAdmin } = useSelector(({ user }) => user);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-
+  const resetAuthIfAdmin = async () => {
+    if (!isAdmin) return;
+    console.log("что то происходит");
+    await dispatch(changeIsAdmin(false));
+  };
   return (
     <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
@@ -79,7 +85,12 @@ export default function Header() {
         <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
           {list.map(({ name, path }, i) => (
             <li key={i} className="text-gray-400 hover:text-gray-300">
-              <Link to={path}>{name}</Link>
+              <Link
+                onClick={() => resetAuthIfAdmin()}
+                to={isAdmin ? "/auth" : path}
+              >
+                {name}
+              </Link>
             </li>
           ))}
         </ul>

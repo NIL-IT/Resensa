@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
 import axios from "axios";
+import { fromHalfFloat } from "three/src/extras/DataUtils.js";
 
 const url = `https://89.23.116.157:8002`;
 
@@ -119,16 +120,14 @@ export const createNews = createAsyncThunk(
         );
       }
 
-      // const formData = new FormData();
-      // formData.append("title", payload.title);
-      // formData.append("text", payload.text);
-
-      // // Convert base64 to blob using utility function
+      const formData = new FormData();
+      formData.append("title", payload.title);
+      formData.append("text", payload.text);
+      formData.append("news_photo", payload.news_photo);
       // const blob = base64ToBlob(payload.news_photo);
       // formData.append("news_photo", blob, "image.jpg");
-      // console.log(formData);
-      console.log("отправляемая дата:", payload);
-      const res = await api.post("/news/", payload);
+      console.log("отправляемая дата:", formData);
+      const res = await api.post("/news/", formData);
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);
