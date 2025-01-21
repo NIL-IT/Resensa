@@ -48,7 +48,9 @@ export default function Button({
       >
         {white ? (
           <img
-            className="group-hover:translate-x-1 transition-all"
+            className={`group-hover:translate-x-1 transition-all ${
+              iconWidth ? iconWidth : ""
+            }`}
             src="/icon/arrow_right.svg"
             alt="arrow"
           />

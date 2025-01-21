@@ -174,16 +174,66 @@ export const createEquipment = createAsyncThunk(
   "Equipment/createEquipment",
   async (data, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "equipment");
-      const res = await api.post("/equipments/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Validate required fields
+      const name = data.get("name");
+      const description = data.get("description");
+      const equipment_photo = data.get("equipment_photo");
+      const min_param = data.get("min_param");
+      const max_param = data.get("max_param");
+
+      if (
+        !name ||
+        !description ||
+        !equipment_photo ||
+        !min_param ||
+        !max_param
+      ) {
+        throw new Error(
+          "Отсутствуют обязательные поля: название, описание, фото, минимальный и максимальный параметры"
+        );
+      }
+
+      // Ensure min_param and max_param are valid integers
+      // Convert to numbers and validate
+      const minParamNum = Number(min_param);
+      const maxParamNum = Number(max_param);
+
+      if (isNaN(minParamNum) || isNaN(maxParamNum)) {
+        throw new Error("Параметры должны быть числами");
+      }
+
+      // Create FormData with all fields
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("equipment_photo", equipment_photo);
+      formData.append("min_param", minParamNum);
+      formData.append("max_param", maxParamNum);
+      console.log(formData);
+      // Log the final data being sent
+      console.log("Sending equipment data:");
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+
+      const res = await axios.post(`${url}/equipments/`, formData);
       return res.data;
     } catch (err) {
-      console.log(err);
-      return thunkApi.rejectWithValue(err.response?.data || err.message);
+      console.error("Equipment creation error:", {
+        error: err,
+        response: err.response?.data,
+        status: err.response?.status,
+        statusText: err.response?.statusText,
+        headers: err.response?.headers,
+      });
+      return thunkApi.rejectWithValue({
+        message:
+          err.response?.data?.message ||
+          err.message ||
+          "Ошибка при создании оборудования",
+        status: err.response?.status,
+        details: err.response?.data,
+      });
     }
   }
 );

@@ -19,38 +19,29 @@ export default function EquipmentBanner({
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
-    <div
-      className=" relative 3xl:pb-[280px] mb-[30px] 
-     "
-    >
+    <div className=" relative pb-[40px] xs:pb-[60px] sm:pb-[80px]  md:pb-[100px] lg:pb-[120px]  xl:pb-[140px] 2xl:pb-[160px] 3xl:pb-[180px]">
       <img
-        className="absolute top-[30px] left-0  h-full z-[-2] 
-        xs:min-w-[100wh]"
+        className="absolute object-contain top-[30px] left-0 min-w-[800px]   md:w-full z-[-2]"
         src={bannerImg}
         alt="banner"
       />
-      {blurImg && (
-        <img
-          src={blurImg}
-          className="absolute  top-[30px] left-0 
-         xs:min-w-[100wh] h-full z-[-1]"
-          alt=""
-        />
-      )}
-
-      <div className={`container 2xl:pt-[200px] 3xl:pt-[337px]  ${padding}`}>
+      <div
+        className={`container pt-[100px] pl-[20px] xs:pl-[0]  
+          md:pt-[60px] lg:pt-[70px] xl:pt-[120px] 2xl:pt-[180px] 3xl:pt-[250px]  ${padding}`}
+      >
         <Title
           text={subtitle}
-          className="font-normal text-[32px] text-white leading-[41px]"
+          className="font-norma text-2xl sm:text-[22px] leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
         <Title
           text={title}
-          className="font-normal text-[48px] text-white leading-[61px]"
+          className="font-normal text-2xl md:text-[38px] sm:leading-[28px]  
+          xl:text-[38px] 2xl:text-[48px] lg:leading-[61px] text-white leading-[24px]"
         />
         <p
-          className={` text-white mt-[65px] mb-[33px] ${
-            width ? width : "w-[656px]"
-          }  ${textSize ? textSize : "text-xl"}`}
+          className={` text-white mt-[10px] mb-4 md:mb-[20px] lg:mb-[33px] lg:mt-[20px]  xl:mt-[30px] 2xl:mt-[65px]  ${
+            width ? width : "w-[320px] xs:w-[360px] sm:w-[400px] lg:w-[656px]"
+          }  ${textSize ? textSize : " text-sm lg:text-lg xl:text-xl"}`}
         >
           {text}
         </p>
@@ -60,7 +51,7 @@ export default function EquipmentBanner({
             icon={true}
             white={true}
             text={"Оформить заказ"}
-            className="py-[19px] pl-[19px] bg-white text-gray-400 text-base"
+            className="py-[10px]  lg:py-[14px] xl:py-[19px] xs:pl-[19px] bg-white text-gray-400 text-base"
           />
         )}
       </div>

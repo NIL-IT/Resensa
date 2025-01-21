@@ -129,7 +129,7 @@ export default function AdminCategoryList({ title, category }) {
           )}
         </div>
       ) : (
-        <div>dsada</div>
+        <div>Товаров нет</div>
       )}
     </div>
   );

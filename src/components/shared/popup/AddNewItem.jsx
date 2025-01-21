@@ -23,6 +23,8 @@ const AddNewItem = () => {
       ? {
           name: "",
           description: "",
+          min_param: "",
+          max_param: "",
         }
       : {
           title: "",
@@ -43,44 +45,64 @@ const AddNewItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!formData.title || !formData.text || !selectedFile) {
-      setError(
-        "Пожалуйста, заполните все обязательные поля и загрузите изображение"
-      );
-      return;
-    }
 
     try {
       const submitData = new FormData();
-      submitData.append("title", formData.title);
-      submitData.append("text", formData.text);
-      submitData.append("news_photo", selectedFile);
 
-      // Dispatch the action
-      await dispatch(createNews(submitData)).unwrap();
-
-      // Reset form on success
-      setFormData({ title: "", text: "" });
-      setSelectedFile(null);
       if (isNews) {
-        // Create FormData object
-        const submitData = new FormData();
+        // Validate news fields
+        if (!formData.title || !formData.text || !selectedFile) {
+          setError(
+            "Пожалуйста, заполните все обязательные поля и загрузите изображение"
+          );
+          return;
+        }
         submitData.append("title", formData.title);
         submitData.append("text", formData.text);
         submitData.append("news_photo", selectedFile);
-
-        // Dispatch the action
         await dispatch(createNews(submitData)).unwrap();
-
-        // Reset form on success
         setFormData({ title: "", text: "" });
-        setSelectedFile(null);
+      } else if (+pathnameId === 2) {
+        // Validate equipment fields
+        if (
+          !formData.name ||
+          !formData.description ||
+          !selectedFile ||
+          !formData.min_param ||
+          !formData.max_param
+        ) {
+          setError(
+            "Пожалуйста, заполните все обязательные поля и загрузите изображение"
+          );
+          return;
+        }
+        submitData.append("name", formData.name);
+        submitData.append("description", formData.description);
+        submitData.append("equipment_photo", selectedFile);
+        submitData.append("min_param", parseInt(formData.min_param));
+        submitData.append("max_param", parseInt(formData.max_param));
+        await dispatch(createEquipment(submitData)).unwrap();
+        setFormData({
+          name: "",
+          description: "",
+          min_param: "",
+          max_param: "",
+        });
       } else if (+pathnameId === 3) {
+        // Validate solution fields
+        if (!formData.name || !formData.description || !selectedFile) {
+          setError(
+            "Пожалуйста, заполните все обязательные поля и загрузите изображение"
+          );
+          return;
+        }
+        submitData.append("name", formData.name);
+        submitData.append("description", formData.description);
+        submitData.append("solution_photo", selectedFile);
         await dispatch(createSolutions(submitData)).unwrap();
         setFormData({
           name: "",
           description: "",
-          solution_photo: "",
         });
       }
 
@@ -151,8 +173,8 @@ const AddNewItem = () => {
                   От
                 </span>
                 <Input
-                  required={false}
-                  type={"number"}
+                  required={true}
+                  type="number"
                   name="min_param"
                   value={formData.min_param}
                   onChange={handleInputChange}
@@ -168,6 +190,7 @@ const AddNewItem = () => {
                   До
                 </span>
                 <Input
+                  required={true}
                   type="number"
                   name="max_param"
                   value={formData.max_param}

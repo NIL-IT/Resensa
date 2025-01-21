@@ -55,7 +55,7 @@ export default function AppRoutes() {
           <Equipment
             data={data.equipment}
             text={textEquipment}
-            bannerImg={"/img/eq_banner.svg"}
+            bannerImg={"/img/newbanner.png"}
             title={"оборудование"}
           />
         }
