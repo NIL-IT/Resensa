@@ -49,15 +49,27 @@ const ImageUploader = ({ onFileSelect }) => {
     }
   };
 
-  const handleFile = (file) => {
-    if (["image/svg+xml", "image/png", "image/jpeg"].includes(file.type)) {
-      // Create preview URL for display
-      const previewUrl = URL.createObjectURL(file);
-      setUploadedImage({ url: previewUrl, file: file });
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
-      // Pass the file to parent component
-      if (onFileSelect) {
-        onFileSelect(file);
+  const handleFile = async (file) => {
+    if (["image/svg+xml", "image/png", "image/jpeg"].includes(file.type)) {
+      try {
+        const base64String = await convertToBase64(file);
+        setUploadedImage({ url: base64String, file: file });
+
+        // Pass the base64 string to parent component
+        if (onFileSelect) {
+          onFileSelect(base64String);
+        }
+      } catch (err) {
+        setError("Ошибка при обработке изображения.");
       }
     } else {
       setError("Пожалуйста, загрузите SVG, PNG, или JPEG файл.");

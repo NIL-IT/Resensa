@@ -18,21 +18,66 @@ const authFormLocalStorage =
 
 const url = `https://89.23.116.157:8002`;
 
+// Utility function to convert base64 to blob
+// const base64ToBlob = (base64String) => {
+//   try {
+//     // Extract MIME type and base64 data
+//     const [header, base64Data] = base64String.split(",");
+//     const mimeType = header.match(/data:(.*?);/)?.[1] || "image/jpeg";
+
+//     const byteCharacters = atob(base64Data);
+//     const byteArrays = [];
+
+//     for (let i = 0; i < byteCharacters.length; i++) {
+//       byteArrays.push(byteCharacters.charCodeAt(i));
+//     }
+
+//     return new Blob([new Uint8Array(byteArrays)], { type: mimeType });
+//   } catch (error) {
+//     console.error("Error converting base64 to blob:", error);
+//     throw new Error("Ошибка при обработке изображения");
+//   }
+// };
+
 // Create axios instance with default config
 const api = axios.create({
   baseURL: url,
-  headers: {
-    Accept: "application/json",
-  },
+  // headers: {
+  //   Accept: "application/json",
+  // },
 });
 
+// Add response interceptor to handle errors
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     console.error("API Error:", {
+//       status: error.response?.status,
+//       data: error.response?.data,
+//       config: error.config,
+//     });
+//     return Promise.reject(error);
+//   }
+// );
+
+// Add request interceptor to handle Content-Type
+// api.interceptors.request.use((config) => {
+//   // Don't set Content-Type for FormData, let the browser set it automatically with the boundary
+//   if (config.data instanceof FormData) {
+//     delete config.headers["Content-Type"];
+//   } else {
+//     config.headers["Content-Type"] = "application/json";
+//   }
+//   return config;
+// });
+
 // Add trailing slash to URLs that don't have one
-api.interceptors.request.use((config) => {
-  if (config.url && !config.url.endsWith("/")) {
-    config.url += "/";
-  }
-  return config;
-});
+// api.interceptors.request.use((config) => {
+//   if (config.url && !config.url.endsWith("/")) {
+//     config.url += "/";
+//   }
+//   return config;
+// });
 
 // Handle multipart/form-data requests
 const createFormDataRequest = (data, type) => {
@@ -68,7 +113,7 @@ export const getAllNews = createAsyncThunk(
   "news/getNews",
   async (_, thunkApi) => {
     try {
-      const res = await axios.get(`${url}/news/`);
+      const res = await api.get("/news/");
       return res.data;
     } catch (err) {
       console.log(err);
@@ -77,41 +122,27 @@ export const getAllNews = createAsyncThunk(
   }
 );
 
-// export const createNews = createAsyncThunk(
-//   "news/createNews",
-//   async (payload, thunkApi) => {
-//     try {
-//       console.log(payload);
-//       const res = await axios.post("/news/", payload);
-//       return res.data;
-//     } catch (err) {
-//       console.log(err);
-//       return thunkApi.rejectWithValue(err.response?.data || err.message);
-//     }
-//   }
-// );
-axios.defaults.baseURL = "http://89.23.116.157:8002";
 export const createNews = createAsyncThunk(
   "news/createNews",
   async (payload, thunkApi) => {
     try {
       // Validate required fields
-      if (
-        !payload.get("title") ||
-        !payload.get("text") ||
-        !payload.get("news_photo")
-      ) {
+      if (!payload.title || !payload.text || !payload.news_photo) {
         throw new Error(
           "Отсутствуют обязательные поля: заголовок, текст и изображение"
         );
       }
 
-      const res = await axios.post("/news/", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // const formData = new FormData();
+      // formData.append("title", payload.title);
+      // formData.append("text", payload.text);
 
+      // // Convert base64 to blob using utility function
+      // const blob = base64ToBlob(payload.news_photo);
+      // formData.append("news_photo", blob, "image.jpg");
+      // console.log(formData);
+
+      const res = await api.post("/news/", payload);
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);
@@ -131,11 +162,7 @@ export const updateNews = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "news");
-      const res = await api.put(`/news/${id}/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await api.put(`/news/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -175,18 +202,12 @@ export const createEquipment = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       // Validate required fields
-      const name = data.get("name");
-      const description = data.get("description");
-      const equipment_photo = data.get("equipment_photo");
-      const min_param = data.get("min_param");
-      const max_param = data.get("max_param");
-
       if (
-        !name ||
-        !description ||
-        !equipment_photo ||
-        !min_param ||
-        !max_param
+        !data.name ||
+        !data.description ||
+        !data.equipment_photo ||
+        !data.min_param ||
+        !data.max_param
       ) {
         throw new Error(
           "Отсутствуют обязательные поля: название, описание, фото, минимальный и максимальный параметры"
@@ -194,29 +215,25 @@ export const createEquipment = createAsyncThunk(
       }
 
       // Ensure min_param and max_param are valid integers
-      // Convert to numbers and validate
-      const minParamNum = Number(min_param);
-      const maxParamNum = Number(max_param);
+      const minParamNum = Number(data.min_param);
+      const maxParamNum = Number(data.max_param);
 
       if (isNaN(minParamNum) || isNaN(maxParamNum)) {
         throw new Error("Параметры должны быть числами");
       }
 
-      // Create FormData with all fields
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("equipment_photo", equipment_photo);
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+
+      // Convert base64 to blob using utility function
+      const blob = base64ToBlob(data.equipment_photo);
+      formData.append("equipment_photo", blob, "image.jpg");
+
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
-      console.log(formData);
-      // Log the final data being sent
-      console.log("Sending equipment data:");
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
 
-      const res = await axios.post(`${url}/equipments/`, formData);
+      const res = await api.post("/equipments/", formData);
       return res.data;
     } catch (err) {
       console.error("Equipment creation error:", {
@@ -243,11 +260,7 @@ export const updateEquipment = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "equipment");
-      const res = await api.put(`/equipments/${id}/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await api.put(`/equipments/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -286,16 +299,32 @@ export const createSolutions = createAsyncThunk(
   "Solutions/createSolutions",
   async (data, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "solution");
-      const res = await api.post("/solutions/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Validate required fields
+      if (!data.name || !data.description || !data.solution_photo) {
+        throw new Error(
+          "Отсутствуют обязательные поля: название, описание и изображение"
+        );
+      }
+
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+
+      // Convert base64 to blob using utility function
+      const blob = base64ToBlob(data.solution_photo);
+      formData.append("solution_photo", blob, "image.jpg");
+
+      const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
-      console.log(err);
-      return thunkApi.rejectWithValue(err.response?.data || err.message);
+      console.error("Solution creation error:", err);
+      return thunkApi.rejectWithValue({
+        message:
+          err.response?.data?.message ||
+          err.message ||
+          "Ошибка при создании решения",
+        status: err.response?.status,
+      });
     }
   }
 );
@@ -305,11 +334,7 @@ export const updateSolutions = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "solution");
-      const res = await api.put(`/solutions/${id}/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await api.put(`/solutions/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -363,11 +388,7 @@ export const updateOrders = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/orders/${id}/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await api.put(`/orders/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);

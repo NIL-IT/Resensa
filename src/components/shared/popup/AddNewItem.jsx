@@ -33,7 +33,7 @@ const AddNewItem = () => {
   );
 
   const [selectedFile, setSelectedFile] = useState(null);
-  console.log(selectedFile);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -47,8 +47,6 @@ const AddNewItem = () => {
     setError("");
 
     try {
-      const submitData = new FormData();
-
       if (isNews) {
         // Validate news fields
         if (!formData.title || !formData.text || !selectedFile) {
@@ -57,10 +55,14 @@ const AddNewItem = () => {
           );
           return;
         }
-        submitData.append("title", formData.title);
-        submitData.append("text", formData.text);
-        submitData.append("news_photo", selectedFile);
-        await dispatch(createNews(submitData)).unwrap();
+        const newsData = {
+          title: formData.title,
+          text: formData.text,
+          news_photo: selectedFile, // selectedFile is now base64 string
+        };
+        console.log(newsData);
+
+        await dispatch(createNews(newsData));
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {
         // Validate equipment fields
@@ -76,12 +78,14 @@ const AddNewItem = () => {
           );
           return;
         }
-        submitData.append("name", formData.name);
-        submitData.append("description", formData.description);
-        submitData.append("equipment_photo", selectedFile);
-        submitData.append("min_param", parseInt(formData.min_param));
-        submitData.append("max_param", parseInt(formData.max_param));
-        await dispatch(createEquipment(submitData)).unwrap();
+        const equipmentData = {
+          name: formData.name,
+          description: formData.description,
+          equipment_photo: selectedFile, // selectedFile is now base64 string
+          min_param: parseInt(formData.min_param),
+          max_param: parseInt(formData.max_param),
+        };
+        await dispatch(createEquipment(equipmentData)).unwrap();
         setFormData({
           name: "",
           description: "",
@@ -96,10 +100,12 @@ const AddNewItem = () => {
           );
           return;
         }
-        submitData.append("name", formData.name);
-        submitData.append("description", formData.description);
-        submitData.append("solution_photo", selectedFile);
-        await dispatch(createSolutions(submitData)).unwrap();
+        const solutionData = {
+          name: formData.name,
+          description: formData.description,
+          solution_photo: selectedFile, // selectedFile is now base64 string
+        };
+        await dispatch(createSolutions(solutionData)).unwrap();
         setFormData({
           name: "",
           description: "",
