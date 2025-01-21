@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../ui/Button";
 import Input from "../ui/SearchInput";
 import { Link } from "react-router-dom";
+import BurgerButton from "../ui/BurgerButton";
 import { ROUTES } from "../../routes/routes";
 import { useDispatch } from "react-redux";
 import {
@@ -25,15 +26,16 @@ export default function Header() {
 
   return (
     <header className="container px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8">
-      <div className="flex flex-col lg:flex-row justify-between items-center border-b border-gray-400 pb-6">
-        <Link to="/" className="mb-4 lg:mb-0">
+      <div className="flex justify-between items-center border-b border-gray-400 pb-6">
+        <Link to="/" className="mb-0">
           <img
             className="w-[200px] sm:w-[250px] lg:w-[313px]"
             src="/icon/logo.svg"
             alt="logo"
           />
         </Link>
-        <div className="flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
+        <BurgerButton list={list} />
+        <div className="hidden md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
             <a
               target="blank"
@@ -68,12 +70,12 @@ export default function Header() {
             <Button
               onClick={() => handleChangeShowPopup(true)}
               text={"заказать звонок"}
-              className="w-full sm:w-auto hover:bg-gray-450 text-sm"
+              className="w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm"
             />
           </div>
         </div>
       </div>
-      <nav className="mt-6">
+      <nav className="mt-6 hidden md:block">
         <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
           {list.map(({ name, path }, i) => (
             <li key={i} className="text-gray-400 hover:text-gray-300">

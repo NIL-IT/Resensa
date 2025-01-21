@@ -76,30 +76,6 @@ const navList = [
     capacity: "2000-40000 м³/ч",
     features: ["Осушение воздуха", "Защита от коррозии", "Рекуперация тепла"],
   },
-  {
-    title: "СИСТЕМЫ RCONTRO",
-    description: "Системы автоматизации и управления",
-    capacity: "Любая производительность",
-    features: ["Удаленное управление", "Интеграция с BMS", "Энергомониторинг"],
-  },
-  {
-    title: "ХОЛОД",
-    description: "Системы холодоснабжения",
-    capacity: "5-1000 кВт",
-    features: ["Чиллеры", "Фанкойлы", "Компрессорно-конденсаторные блоки"],
-  },
-  {
-    title: "ТЕПЛООБМЕННИКИ",
-    description: "Теплообменное оборудование",
-    capacity: "0.5-500 кВт",
-    features: ["Пластинчатые", "Кожухотрубные", "Рекуперативные"],
-  },
-  {
-    title: "СМЕСИТЕЛЬНЫЕ УЗЛЫ",
-    description: "Узлы обвязки теплообменников",
-    capacity: "0.5-250 кВт",
-    features: ["Насосные группы", "Регулирующая арматура", "Автоматика"],
-  },
 ];
 
 export default function EquipmentType() {
@@ -143,10 +119,11 @@ export default function EquipmentType() {
                       ref={ref}
                       onClick={() => handleClick(i)}
                       key={i}
-                      className="flex flex-col w-full xs:w-[300px] sm:w-[350px] md:w-[375px] lg:w-[400px] hover:bg-gray-50 cursor-pointer overflow-hidden"
+                      className="flex flex-col w-full xs:w-[300px] sm:w-[350px] md:w-[375px] lg:w-[400px]
+                       hover:bg-gray-50 cursor-pointer overflow-hidden"
                     >
                       <div
-                        className={`flex justify-between items-center px-1 py-1 ${
+                        className={`flex justify-between items-center px-1 py-2 ${
                           activeIndex === i ? "bg-gray-50" : ""
                         }`}
                       >

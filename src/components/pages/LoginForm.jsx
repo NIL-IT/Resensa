@@ -61,14 +61,6 @@ export default function LoginForm() {
                 >
                   Пароль
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Забыли пароль?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input

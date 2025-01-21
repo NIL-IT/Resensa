@@ -7,27 +7,41 @@ import { div } from "three/tsl";
 
 export default function EquipmentBanner({
   bannerImg,
-  blurImg,
   subtitle,
   title,
   text,
   isButton = false,
-  padding = "",
+
   textSize,
   width = "",
+  about = false,
 }) {
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
-    <div className=" relative pb-[40px] xs:pb-[60px] sm:pb-[80px]  md:pb-[100px] lg:pb-[120px]  xl:pb-[140px] 2xl:pb-[160px] 3xl:pb-[180px]">
+    <div
+      className={`relative  ${
+        !about
+          ? `pb-[50px] xs:pb-[40px] sm:pb-[30px] 
+           md:pb-[150px] lg:pb-[160px]  
+          xl:pb-[220px] 2xl:pb-[240px] 3xl:pb-[286px]`
+          : ""
+      }`}
+    >
       <img
-        className="absolute object-contain top-[30px] left-0 min-w-[800px]   md:w-full z-[-2]"
+        className="absolute object-contain top-[30px] left-0 min-w-[800px] max-w-[1920px] 
+         max-h-[400px] md:max-h-[500px] lg:max-h-[600px] xl:max-h-[700px] 2xl:max-h-[800px] 3xl:max-h-[900px]    
+        z-[-2]"
         src={bannerImg}
         alt="banner"
       />
       <div
-        className={`container pt-[100px] pl-[20px] xs:pl-[0]  
-          md:pt-[60px] lg:pt-[70px] xl:pt-[120px] 2xl:pt-[180px] 3xl:pt-[250px]  ${padding}`}
+        className={`container pl-[20px] xs:pl-[0] ${
+          about
+            ? `pt-[120px] xs:pt-[130px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[394px]`
+            : `pt-[120px] 
+          md:pt-[140px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
+        }`}
       >
         <Title
           text={subtitle}
@@ -39,8 +53,10 @@ export default function EquipmentBanner({
           xl:text-[38px] 2xl:text-[48px] lg:leading-[61px] text-white leading-[24px]"
         />
         <p
-          className={` text-white mt-[10px] mb-4 md:mb-[20px] lg:mb-[33px] lg:mt-[20px]  xl:mt-[30px] 2xl:mt-[65px]  ${
-            width ? width : "w-[320px] xs:w-[360px] sm:w-[400px] lg:w-[656px]"
+          className={` text-white mt-[16px] mb-4 xs:mb-[25px] xs:mt-[25px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
+            lg:mb-[33px] lg:mt-[20px] xl:mt-[30px] 2xl:mt-[65px] 
+            ${about ? "text-sm xl:text-lg" : ""} ${
+            width ? width : "w-[320px] xs:w-[360px] md:w-[500px] lg:w-[656px]"
           }  ${textSize ? textSize : " text-sm lg:text-lg xl:text-xl"}`}
         >
           {text}

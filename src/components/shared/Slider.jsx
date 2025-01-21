@@ -8,10 +8,13 @@ export default function Slider({ slides, second }) {
   const [width, setWidth] = useState(currentWidth);
   useEffect(() => {
     setWidth(currentWidth);
+    setCurrentSlide(0);
   }, [currentWidth]);
 
   const goToSlide = (index) => {
     if (index < 0) return;
+    if (second && width > 1536 && index > 1) return;
+    if (second && index > 4) return;
     if (index > 2 && width > 1536) return;
     if (index > 3) return;
     setCurrentSlide(index);
@@ -36,8 +39,12 @@ export default function Slider({ slides, second }) {
                    2xl:h-auto  xs:w-full  lg:w-full  "
                 >
                   {second ? (
-                    <div className=" md:w-[350px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px] 3xl:w-[546px] ">
-                      <img src={image} alt={title} className="object-cover " />
+                    <div className="w-[350px] h-[270px]  sm:w-[420px] sm:h-[324px] md:w-[631px] md:h-[487px] ">
+                      <img
+                        src={image}
+                        alt={title}
+                        className="object-cover w-full max-h-[100%]"
+                      />
                     </div>
                   ) : (
                     <div

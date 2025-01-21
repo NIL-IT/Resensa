@@ -66,7 +66,7 @@ export default function AppRoutes() {
           <Equipment
             data={data.solutions}
             text={textEquipment}
-            bannerImg={"/img/solutions_banner.png"}
+            bannerImg={"/img/newsol_banner.png"}
             title={"решения"}
           />
         }

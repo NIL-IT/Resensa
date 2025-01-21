@@ -26,26 +26,31 @@ const list = [
 ];
 export default function Points() {
   return (
-    <div className="container pb-[124px]">
-      <div className="flex justify-between">
+    <div className="container pb-12 md:pb-20 lg:pb-[124px] pt-0 mt-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-6 xl:gap-4">
         {list.map((item, i) => (
-          <div key={i} className="w-[345px]">
-            <span className="bg-gray-400 w-[15px] h-[15px] block"></span>
+          <div key={i} className="relative xl:w-[300px] 2xl:w-[380px]">
+            <span className="bg-gray-400 w-3 h-3 md:w-[15px] md:h-[15px] block"></span>
             <Title
               text={item.title}
-              className={`mt-[21px] font-normal text-2xl leading-[30.6px] ${
-                item.subTitle ? "mb-0 " : "mb-[30px] "
-              }`}
+              className={`mt-4 md:mt-[21px] font-normal text-xl 
+                md:text-2xl leading-[1.3] md:leading-[30.6px] ${
+                  item.subTitle ? "mb-0" : "mb-4 md:mb-[30px]"
+                }`}
             />
             {item.subTitle && (
               <Title
                 text={item.subTitle}
-                className="m mb-[30px] font-normal text-2xl leading-[30.6px]"
+                className="mb-4 md:mb-[30px] font-normal text-xl md:text-2xl leading-[1.3] md:leading-[30.6px]"
               />
             )}
-            <p className="text-lg text-gray-400">{item.text}</p>
+            <p className="text-base md:text-lg text-gray-400 whitespace-pre-line">
+              {item.text}
+            </p>
             {item.subtext && (
-              <p className="text-lg text-gray-400">{item.subtext}</p>
+              <p className="text-base md:text-lg text-gray-400 mt-2">
+                {item.subtext}
+              </p>
             )}
           </div>
         ))}

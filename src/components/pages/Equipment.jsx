@@ -20,7 +20,6 @@ export default function Equipment({ data, bannerImg, title, text }) {
     <div>
       <EquipmentBanner
         bannerImg={bannerImg}
-        blurImg={"/img/blur.png"}
         title={title}
         subtitle={"recensa"}
         text={text}

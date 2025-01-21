@@ -11,13 +11,17 @@ const list = [
   { name: "Муниципальные объекты", id: 5 },
 ];
 
-export default function Objects({ className = null }) {
+export default function Objects({ className = null, about = false }) {
   const [index, setIndex] = React.useState(0);
   const handleChange = (value) => setIndex(value);
 
   return (
     <div
-      className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${className}`}
+      className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${
+        about
+          ? "mt-[85px] xs:mt-[105px]  md:mt-[170px] lg:mt-[225px] xl:mt-[205px] 2xl:mt-[220px] 3xl:mt-[225px]"
+          : ""
+      } ${className}`}
     >
       <div className="earth_container px-4 sm:px-6 lg:px-8 relative">
         <div

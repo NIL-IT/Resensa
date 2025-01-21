@@ -68,7 +68,7 @@ export const getAllNews = createAsyncThunk(
   "news/getNews",
   async (_, thunkApi) => {
     try {
-      const res = await api.get("/news/");
+      const res = await axios.get(`${url}/news/`);
       return res.data;
     } catch (err) {
       console.log(err);

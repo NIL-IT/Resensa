@@ -31,19 +31,23 @@ export default function Banner() {
             </span>
             <p
               className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl
-             text-gray-300 xs:text-start xl:text-center"
+             text-gray-300 xs:text-start text-left"
             >
               года опыта на рынке
               <br /> вентиляционного оборудования
             </p>
           </div>
           <div className="xs:flex xs:gap-5 xl:block">
-            <span className="text-[28px] xs:text-[30px] sm:text-[32px] md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 3xl:text-[48px] text-gray-400">
+            <span
+              className="text-[28px] xs:text-[30px] sm:text-[32px] 
+            md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
+            3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto]"
+            >
               {guarantee}
             </span>
             <p
               className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl
-             xl:text-xl 2xl:text-xl 3xl:text-xl text-gray-300 xs:text-start xl:text-center"
+             xl:text-xl 2xl:text-xl 3xl:text-xl text-gray-300 xs:text-start text-left"
             >
               года гарантии
               <br /> на продукцию компании

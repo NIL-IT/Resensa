@@ -36,7 +36,13 @@ const list = [
 ];
 export default function Partners() {
   return (
-    <div className="w-full bg-gray-900 mt-[30px] xs:mt-[35px] sm:mt-[40px] md:mt-[42px] lg:mt-[43px] xl:mt-[44px] 2xl:mt-[44px] 3xl:mt-[45px] pb-[60px] xs:pb-[70px] sm:pb-[80px] md:pb-[85px] lg:pb-[90px] xl:pb-[95px] 2xl:pb-[98px] 3xl:pb-[101px] pt-[50px] xs:pt-[55px] sm:pt-[60px] md:pt-[65px] lg:pt-[70px] xl:pt-[75px] 2xl:pt-[78px] 3xl:pt-[81px]">
+    <div
+      className="w-full bg-gray-900  pb-[60px] 
+    xs:pb-[70px] sm:pb-[80px] md:pb-[85px] lg:pb-[90px] 
+    xl:pb-[95px] 2xl:pb-[98px] 3xl:pb-[101px] pt-[50px] 
+    xs:pt-[55px] sm:pt-[60px] md:pt-[65px] lg:pt-[70px] 
+    xl:pt-[75px] 2xl:pt-[78px] 3xl:pt-[81px]"
+    >
       <div className="container">
         <Title
           text={"партнеры"}

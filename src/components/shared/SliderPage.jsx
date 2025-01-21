@@ -1,8 +1,6 @@
 import React from "react";
 import Title from "../ui/Title";
 import Slider from "./Slider";
-import { div } from "three/tsl";
-
 export default function SliderPage({
   title,
   subTitle,
@@ -12,7 +10,14 @@ export default function SliderPage({
 }) {
   return (
     <div>
-      <div className="container overflow-x-hidden pt-[520px] xs:pt-[500px] sm:pt-[520px] md:pt-[550px] lg:pt-[115px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[124px]">
+      <div
+        className={`container overflow-x-hidden 
+         ${
+           second
+             ? "pt-[20px]"
+             : "pt-[40px] xs:pt-[60px] sm:pt-[80px] md:pt-[100px] lg:pt-[115px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[124px]"
+         }`}
+      >
         <Title
           text={title}
           className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10 inline-block"
