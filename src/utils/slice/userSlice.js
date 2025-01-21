@@ -16,7 +16,7 @@ const orders = [
 const authFormLocalStorage =
   localStorage.getItem(`auth`) !== null ? localStorage.getItem(`auth`) : false;
 
-const url = `http://89.23.116.157:8002`;
+const url = `https://89.23.116.157:8002`;
 
 // Create axios instance with default config
 const api = axios.create({
