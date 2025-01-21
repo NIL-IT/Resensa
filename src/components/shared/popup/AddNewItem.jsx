@@ -211,7 +211,7 @@ const AddNewItem = () => {
             type="submit"
             className="w-full p-2 xs:p-2.5 sm:p-2.5 md:p-3 bg-gray-400 text-white rounded hover:bg-[#2F2F2F] transition-colors text-base xs:text-base sm:text-lg font-medium"
           >
-            ИЗМЕНИТЬ
+            Добавить
           </button>
         </form>
       </div>

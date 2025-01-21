@@ -48,7 +48,7 @@ function App() {
     <div className="relative">
       <Widget />
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
-        {isAuth && <Header />}
+        {!isAuth && <Header />}
         <AppRoutes />
       </div>
       {isPopup && <Popup />}

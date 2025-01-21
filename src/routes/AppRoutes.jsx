@@ -25,30 +25,31 @@ export default function AppRoutes() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Redirect to auth if not authenticated, unless already on auth page
-    if (!isAuth && location.pathname !== ROUTES.AUTH) {
-      navigate(ROUTES.AUTH);
-    }
-    // Redirect from auth page to home if already authenticated
-    if (isAuth && location.pathname === ROUTES.AUTH) {
-      navigate(ROUTES.HOME);
-    }
-  }, [isAuth, location.pathname, navigate]);
+  // useEffect(() => {
+  //   // Redirect to auth if not authenticated, unless already on auth page
+  //   if (!isAuth && location.pathname !== ROUTES.AUTH) {
+  //     navigate(ROUTES.AUTH);
+  //   }
+  //   // Redirect from auth page to home if already authenticated
+  //   if (isAuth && location.pathname === ROUTES.AUTH) {
+  //     navigate(ROUTES.HOME);
+  //   }
+  // }, [isAuth, location.pathname, navigate]);
 
   // Show only auth route when not authenticated
-  if (!isAuth) {
-    return (
-      <Routes>
-        <Route path={ROUTES.AUTH} element={<LoginForm />} />
-        <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
-      </Routes>
-    );
-  }
+  // if (!isAuth) {
+  //   return (
+  //     <Routes>
+  //       <Route path={ROUTES.AUTH} element={<LoginForm />} />
+  //       <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
+  //     </Routes>
+  //   );
+  // }
 
   // Show all routes when authenticated
   return (
     <Routes>
+      <Route path={ROUTES.AUTH} element={<LoginForm />} />
       <Route path={ROUTES.HOME} element={<Home />} />
       <Route
         path={ROUTES.EQUIPMENT}

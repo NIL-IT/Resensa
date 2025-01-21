@@ -2,20 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
 import axios from "axios";
 
-const orders = [
-  {
-    id: "25426",
-    date: "12.12.2024",
-    client: "Kevin",
-    status: "delivered",
-    amount: "200.00 ₽",
-  },
-  // ... other orders
-];
-
-const authFormLocalStorage =
-  localStorage.getItem(`auth`) !== null ? localStorage.getItem(`auth`) : false;
-
 const url = `https://89.23.116.157:8002`;
 
 // Utility function to convert base64 to blob
@@ -418,13 +404,12 @@ const userSlice = createSlice({
     solutions: [],
     orders: [],
     data: data,
-    isAdmin: true,
-    isAuth: authFormLocalStorage,
+    isAuth: false,
     isPopup: false,
     status: false,
     orderNum: null,
     addOrderPopup: false,
-    ordersData: orders,
+    ordersData: [],
     equipmentPopup: false,
     equipmentId: null,
     newsId: null,
@@ -503,9 +488,8 @@ const userSlice = createSlice({
         }
       }
     },
-    changeIsAuth: (state, { payload }) => {
-      state.isAuth = payload;
-      localStorage.setItem(`auth`, payload);
+    changeIsAuth: (state) => {
+      state.isAuth = !state.isAuth;
     },
     changeData: (state, { payload }) => {
       state.data = payload;
