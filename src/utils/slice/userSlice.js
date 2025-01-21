@@ -3,8 +3,6 @@ import { data } from "../data";
 import axios from "axios";
 import { fromHalfFloat } from "three/src/extras/DataUtils.js";
 
-const url = `https://89.23.116.157:8002`;
-
 // Utility function to convert base64 to blob
 // const base64ToBlob = (base64String) => {
 //   try {
@@ -27,6 +25,7 @@ const url = `https://89.23.116.157:8002`;
 // };
 
 // Create axios instance with default config
+const url = `https://89.23.116.157:8002`;
 const api = axios.create({
   baseURL: url,
   headers: {
@@ -127,9 +126,17 @@ export const createNews = createAsyncThunk(
       formData.append("news_photo", payload.news_photo);
       // const blob = base64ToBlob(payload.news_photo);
       // formData.append("news_photo", blob, "image.jpg");
-      console.log("отправляемая дата:", formData);
+      console.log("отправляемая дата:", {
+        title: formData.get("title"),
+        text: formData.get("text"),
+        news_photo: formData.get("news_photo"),
+      });
 
-      const res = await api.post("/news/", formData);
+      const res = await api.post("/news/", {
+        title: formData.get("title"),
+        text: formData.get("text"),
+        news_photo: formData.get("news_photo"),
+      });
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);

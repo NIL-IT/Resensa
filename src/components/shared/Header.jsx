@@ -14,7 +14,6 @@ import {
 
 export default function Header() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { isAdmin } = useSelector(({ user }) => user);
   const navList = [
     { name: "Главная", path: "/" },
@@ -36,7 +35,7 @@ export default function Header() {
   return (
     <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
-        <Link to="/" className="mb-0">
+        <Link to={isAdmin ? "/auth" : ""} className="mb-0">
           <img
             className="w-[200px] sm:w-[250px] lg:w-[313px]"
             src="/icon/logo.svg"

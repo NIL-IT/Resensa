@@ -78,7 +78,6 @@ export default function AppRoutes() {
         element={<ProductItem list={combinedData.itemsList} />}
       />
       <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
-      <Route path="/admin" element={<Navigate to="/admin/1" replace />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
       <Route path={ROUTES.CONTACT} element={<Contacts />} />
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
