@@ -404,7 +404,7 @@ const userSlice = createSlice({
     solutions: [],
     orders: [],
     data: data,
-    isAuth: false,
+    isAdmin: false,
     isPopup: false,
     status: false,
     orderNum: null,
@@ -488,8 +488,8 @@ const userSlice = createSlice({
         }
       }
     },
-    changeIsAuth: (state) => {
-      state.isAuth = !state.isAuth;
+    changeIsAdmin: (state, { payload }) => {
+      state.isAdmin = payload;
     },
     changeData: (state, { payload }) => {
       state.data = payload;
@@ -540,6 +540,7 @@ const userSlice = createSlice({
 });
 
 export const {
+  changeIsAdmin,
   changeNumberForMainBanner,
   changeShowSearchPopup,
   changeShowNewsPopup,
@@ -547,7 +548,7 @@ export const {
   changeNewsId,
   changeData,
   changeEquipmentId,
-  changeIsAuth,
+
   changeEquipmentPopup,
   addItemOrder,
   changeOrdersList,

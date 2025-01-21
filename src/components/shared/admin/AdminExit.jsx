@@ -3,16 +3,17 @@ import Title from "../../ui/Title";
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeIsAuth } from "../../../utils/slice/userSlice";
+import { changeIsAdmin } from "../../../utils/slice/userSlice";
 
 export default function AdminExit({ title }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleExit = () => {
-    dispatch(changeIsAuth(false));
+    dispatch(changeIsAdmin());
+    navigate("/auth");
   };
-  const returnHome = () => {
-    navigate("/");
+  const returnAdmin = () => {
+    navigate("/admin/1");
   };
   return (
     <div className="relative pb-5">
@@ -27,7 +28,7 @@ export default function AdminExit({ title }) {
             className="w-[100px] hover:bg-gray-300"
           />
           <Button
-            onClick={() => returnHome()}
+            onClick={() => returnAdmin()}
             text={"Нет"}
             className="w-[100px] hover:bg-gray-300"
           />

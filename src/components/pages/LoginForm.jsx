@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeIsAuth } from "../../utils/slice/userSlice";
+import { changeIsAdmin } from "../../utils/slice/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector(({ user }) => user);
+  const { isAdmin } = useSelector(({ user }) => user);
+  const navigate = useNavigate();
   const [form, setForm] = React.useState({
     email: "",
     password: "",
   });
-
+  useEffect(() => {
+    console.log("login");
+    dispatch(changeIsAdmin());
+    console.log(isAdmin);
+  }, []);
+  console.log(isAdmin);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(changeIsAuth(true));
+    navigate("/admin/1");
   };
   return (
     <div className=" w-[100wh] h-[100vh] ">

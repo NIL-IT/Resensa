@@ -16,8 +16,11 @@ import {
   getAllSolutions,
 } from "./utils/slice/userSlice";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const { pathname } = useLocation();
+  const isLoginForm = pathname === "/auth";
   const {
     isPopup,
     status,
@@ -46,9 +49,9 @@ function App() {
 
   return (
     <div className="relative">
-      <Widget />
+      {!isLoginForm && <Widget />}
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
-        {!isAuth && <Header />}
+        {!isLoginForm && <Header />}
         <AppRoutes />
       </div>
       {isPopup && <Popup />}

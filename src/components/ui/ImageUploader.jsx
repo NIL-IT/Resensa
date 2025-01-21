@@ -69,7 +69,7 @@ const ImageUploader = ({ onFileSelect }) => {
         console.log("formating to base64", base64String);
         // Pass the base64 string to parent component
         if (onFileSelect) {
-          onFileSelect(file);
+          onFileSelect(base64String);
         }
       } catch (err) {
         setError("Ошибка при обработке изображения.");
