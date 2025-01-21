@@ -42,9 +42,9 @@ const url = `https://89.23.116.157:8002`;
 // Create axios instance with default config
 const api = axios.create({
   baseURL: url,
-  // headers: {
-  //   Accept: "application/json",
-  // },
+  headers: {
+    Accept: "application/json",
+  },
 });
 
 // Add response interceptor to handle errors
@@ -141,7 +141,7 @@ export const createNews = createAsyncThunk(
       // const blob = base64ToBlob(payload.news_photo);
       // formData.append("news_photo", blob, "image.jpg");
       // console.log(formData);
-
+      console.log("отправляемая дата:", payload);
       const res = await api.post("/news/", payload);
       return res.data;
     } catch (err) {
