@@ -28,6 +28,9 @@ import { fromHalfFloat } from "three/src/extras/DataUtils.js";
 const url = `https://89.23.116.157:8002`;
 const api = axios.create({
   baseURL: url,
+  headers: {
+    Accept: "application/json",
+  },
 });
 
 // Add response interceptor to handle errors

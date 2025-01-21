@@ -8,6 +8,8 @@ import FileUploader from "../ui/FileUploader";
 import ChangeBanner from "../shared/admin/ChangeBanner";
 import AdminNews from "../shared/admin/AdminNews";
 import { useSelector } from "react-redux";
+import { Menu, X } from "lucide-react";
+
 const navList = [
   {
     id: "1",
@@ -50,13 +52,17 @@ const navList = [
     title: "выйти",
   },
 ];
+
 export default function Admin() {
   const [activeLink, setActiveLink] = useState(null);
   const [isActiveUploadFile, setActiveUploaderFile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { pathname } = useLocation();
+
   const changeShowUploadFile = () => {
     setActiveUploaderFile(!isActiveUploadFile);
   };
+
   const getDirectoryName = (pathname) => {
     const dirs = pathname.split("/");
     if (+dirs[2] === 1) return "Заказы";
@@ -71,16 +77,32 @@ export default function Admin() {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
     setActiveUploaderFile(false);
+    setIsMobileMenuOpen(false);
   }, [pathname]);
+
   return (
-    <div>
-      <div className="container pt-[30px]">
+    <div className="min-h-screen flex flex-col">
+      <div className="container mx-auto px-4 pt-[30px] flex-grow">
         <span className="text-gray-900 text-sm">
           Личный кабинет - {getDirectoryName(pathname)}
         </span>
-        <section className="mt-6 border-y border-y-gray-400 flex">
-          <nav>
-            <ul className="space-y-6 py-[105px] pb-[200px] pr-[81px] border-r border-r-gray-400 w-[220px]">
+        <section className="mt-6 border-y border-y-gray-400 flex flex-col md:flex-row">
+          <nav className="md:w-[220px] border-b md:border-b-0 md:border-r border-gray-400">
+            <div className="md:hidden flex justify-between items-center py-4">
+              <span className="text-gray-400 text-lg uppercase">Меню</span>
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-400" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-400" />
+                )}
+              </button>
+            </div>
+            <ul
+              className={`${
+                isMobileMenuOpen ? "block" : "hidden"
+              } md:block space-y-6 py-[30px] md:py-[105px] md:pb-[200px] pr-[20px] md:pr-[81px]`}
+            >
               {navList.map(({ name, id }, i) => (
                 <li key={id}>
                   <Link
@@ -90,6 +112,7 @@ export default function Admin() {
                         ? "border-b border-b-gray-400 font-normal"
                         : ""
                     }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {name}
                   </Link>
@@ -98,7 +121,7 @@ export default function Admin() {
             </ul>
           </nav>
           {!isActiveUploadFile ? (
-            <div className="pl-[38px] pt-12 w-full">
+            <div className="pl-[20px] md:pl-[38px] pt-6 md:pt-12 w-full">
               {navList.map(({ title, id, component }) => (
                 <div key={id}>
                   {pathname.split("/").at(-1) === id && component(title)}
@@ -112,8 +135,8 @@ export default function Admin() {
           )}
         </section>
 
-        <div className="flex justify-center w-full gap-4 mt-6 pl-44">
-          <button className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5">
+        <div className="flex flex-col md:flex-row justify-center w-full gap-4 mt-6 md:pl-44">
+          <button className="group bg-gray-400 text-white py-[15px] px-[19px] text-base uppercase flex items-center justify-center gap-5">
             <svg
               className="w-[30px] h-[30px] group-hover:translate-y-1 transition-all"
               fill="none"
@@ -131,7 +154,7 @@ export default function Admin() {
           </button>
           <button
             onClick={() => changeShowUploadFile()}
-            className="group bg-gray-400 text-white py-[15px] pl-[19px] pr-[22px] text-base uppercase flex-center gap-5"
+            className="group bg-gray-400 text-white py-[15px] px-[19px] text-base uppercase flex items-center justify-center gap-5"
           >
             <svg
               className="w-[30px] h-[30px] group-hover:translate-y-1 transition-all"

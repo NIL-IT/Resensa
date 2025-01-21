@@ -43,14 +43,17 @@ export default function ChangeBanner({ title }) {
 
   return (
     <div className="w-full relative">
-      <span className="w-[1px] h-[100%] absolute bg-gray-400 top-0 left-[-39px]" />
-      <div className="flex-center justify-between mb-4">
+      <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
+      <div className="flex items-center justify-between mb-4">
         <Title className="text-xl font-normal text-gray-400" text={title} />
       </div>
-      <form onSubmit={handleSubmit} className="pt-10 w-[45%]">
-        <div className="flex gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="pt-6 sm:pt-10 w-full sm:w-[80%] md:w-[60%] lg:w-[45%]"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+            <span className="block mb-1 text-sm font-medium text-gray-900">
               Опыт на рынке
             </span>
             <Input
@@ -63,7 +66,7 @@ export default function ChangeBanner({ title }) {
             />
           </div>
           <div>
-            <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+            <span className="block mb-1 text-sm font-medium text-gray-900">
               Гарантия на продукцию
             </span>
             <Input
@@ -75,15 +78,15 @@ export default function ChangeBanner({ title }) {
             />
           </div>
         </div>
-        <div className="mt-5 flex items-center gap-4">
+        <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
           <button
             type="submit"
-            className="flex w-[120px] justify-center rounded-md bg-gray-400 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors"
+            className="flex w-full sm:w-[120px] justify-center rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors"
           >
             Сохранить
           </button>
           {showSuccess && (
-            <span className="text-green text-sm animate-fade-in">
+            <span className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
             </span>
           )}
