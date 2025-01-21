@@ -58,6 +58,11 @@ export default function Admin() {
   const changeShowUploadFile = () => {
     setActiveUploaderFile(!isActiveUploadFile);
   };
+  const getDirectoryName = (pathname) => {
+    const dirs = pathname.split("/");
+    console.log(dirs[1]);
+  };
+  getDirectoryName(pathname);
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);

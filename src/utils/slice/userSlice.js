@@ -31,6 +31,7 @@ const api = axios.create({
   baseURL: url,
   headers: {
     Accept: "application/json",
+    "Content-Type": "multipart/from-data",
   },
 });
 
@@ -127,6 +128,7 @@ export const createNews = createAsyncThunk(
       // const blob = base64ToBlob(payload.news_photo);
       // formData.append("news_photo", blob, "image.jpg");
       console.log("отправляемая дата:", formData);
+
       const res = await api.post("/news/", formData);
       return res.data;
     } catch (err) {
