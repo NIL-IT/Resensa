@@ -20,7 +20,7 @@ import { useLocation } from "react-router-dom";
 
 function App() {
   const { pathname } = useLocation();
-  const isLoginForm = pathname === "/auth";
+  const isLoginForm = pathname === "/auth" || pathname === "/auth/";
   const {
     isPopup,
     status,

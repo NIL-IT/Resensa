@@ -28,10 +28,6 @@ import { fromHalfFloat } from "three/src/extras/DataUtils.js";
 const url = `https://89.23.116.157:8002`;
 const api = axios.create({
   baseURL: url,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "multipart/from-data",
-  },
 });
 
 // Add response interceptor to handle errors
@@ -132,16 +128,16 @@ export const createNews = createAsyncThunk(
         news_photo: formData.get("news_photo"),
       });
 
-      // const res = await api.post("/news/", {
-      //   title: formData.get("title"),
-      //   text: formData.get("text"),
-      //   news_photo: formData.get("news_photo"),
-      // });
       const res = await api.post("/news/", {
-        title: payload.title,
-        text: payload.text,
-        news_photo: payload.news_photo,
+        title: formData.get("title"),
+        text: formData.get("text"),
+        news_photo: formData.get("news_photo"),
       });
+      // const res = await api.post("/news/", {
+      //   title: payload.title,
+      //   text: payload.text,
+      //   news_photo: payload.news_photo,
+      // });
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);
