@@ -48,23 +48,6 @@ export default function AdminCategoryList({ title, category }) {
     }
   };
 
-  function getImageSrc(base64) {
-  if (!base64) return "/placeholder.svg";
-
-  if (base64.startsWith("data:image/")) {
-    return base64; 
-  }
-
-  const signature = base64.substring(0, 5);
-  let mimeType = "image/*"; 
-
-  if (signature === "/9j/4") mimeType = "image/jpeg";
-  else if (signature === "iVBOR") mimeType = "image/png";
-  else if (signature === "PHN2Z") mimeType = "image/svg+xml";
-  else if (signature === "R0lGO") mimeType = "image/gif";
-
-  return `data:${mimeType};base64,${base64}`;
-}
 
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
@@ -105,7 +88,7 @@ export default function AdminCategoryList({ title, category }) {
                     <div>
                       <img
                         className="w-full h-[120px] object-cover"
-                        src={getImageSrc(image)}
+                        src={image}
                         alt={name}
                       />
                       <h2 className="text-gray-400 text-sm uppercase font-normal my-2">
