@@ -156,7 +156,7 @@ export const updateNews = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "news");
-      const res = await api.put(`/news/${id}/`, formData);
+      const res = await api.put(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -169,7 +169,7 @@ export const deleteNews = createAsyncThunk(
   "news/deleteNews",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/news/${id}/`);
+      const res = await api.delete(`/news/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
