@@ -220,9 +220,7 @@ export const createEquipment = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("description", data.description);
 
-      // Convert base64 to blob using utility function
-      const blob = base64ToBlob(data.equipment_photo);
-      formData.append("equipment_photo", blob, "image.jpg");
+      formData.append("equipment_photo", data.equipment_photo);
 
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
