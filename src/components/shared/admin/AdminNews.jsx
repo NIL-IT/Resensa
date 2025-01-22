@@ -26,26 +26,7 @@ export default function AdminNews() {
 
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
-  };
-
-function getImageSrc(base64) {
-  if (!base64) return "/placeholder.svg";
-
-  if (base64.startsWith("data:image/")) {
-    return base64; 
-  }
-
-  const signature = base64.substring(0, 5);
-  let mimeType = "image/*"; 
-
-  if (signature === "/9j/4") mimeType = "image/jpeg";
-  else if (signature === "iVBOR") mimeType = "image/png";
-  else if (signature === "PHN2Z") mimeType = "image/svg+xml";
-  else if (signature === "R0lGO") mimeType = "image/gif";
-
-  return `data:${mimeType};base64,${base64}`;
-}
-  
+  };  
   return (
     <div className="relative pb-5">
       <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
@@ -72,7 +53,7 @@ function getImageSrc(base64) {
               <div>
                 <img
                   className="w-full h-[120px] object-cover"
-                  src={getImageSrc(image)}
+                  src={image}
                   alt={name}
                 />
                 <h2 className="text-gray-400 text-sm uppercase font-normal my-2 overflow-hidden">
