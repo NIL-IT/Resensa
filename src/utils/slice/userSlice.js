@@ -131,11 +131,7 @@ export const createNews = createAsyncThunk(
         news_photo: formData.get("news_photo"),
       });
 
-      const res = await api.post("/news/", {
-        title: formData.get("title"),
-        text: formData.get("text"),
-        news_photo: formData.get("news_photo"),
-      });
+      const res = await api.post("/news/", formData);
       // const res = await api.post("/news/", {
       //   title: payload.title,
       //   text: payload.text,
