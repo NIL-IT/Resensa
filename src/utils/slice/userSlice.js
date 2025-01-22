@@ -252,7 +252,7 @@ export const updateEquipment = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "equipment");
-      const res = await api.put(`/equipments/${id}/`, formData);
+      const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -265,7 +265,7 @@ export const deleteEquipment = createAsyncThunk(
   "Equipment/deleteEquipment",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/equipments/${id}/`);
+      const res = await api.delete(`/equipments/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -323,7 +323,7 @@ export const updateSolutions = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "solution");
-      const res = await api.put(`/solutions/${id}/`, formData);
+      const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -336,7 +336,7 @@ export const deleteSolutions = createAsyncThunk(
   "Solutions/deleteSolutions",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/solutions/${id}/`);
+      const res = await api.delete(`/solutions/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -377,7 +377,7 @@ export const updateOrders = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/orders/${id}/`, formData);
+      const res = await api.put(`/orders/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -390,7 +390,7 @@ export const deleteOrders = createAsyncThunk(
   "orders/deleteOrders",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/orders/${id}/`);
+      const res = await api.delete(`/orders/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
