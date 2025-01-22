@@ -303,10 +303,7 @@ export const createSolutions = createAsyncThunk(
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
-
-      // Convert base64 to blob using utility function
-      const blob = base64ToBlob(data.solution_photo);
-      formData.append("solution_photo", blob, "image.jpg");
+      formData.append("solution_photo", data.solution_photo);
 
       const res = await api.post("/solutions/", formData);
       return res.data;
