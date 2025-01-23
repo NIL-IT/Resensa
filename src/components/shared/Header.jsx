@@ -24,17 +24,44 @@ export default function Header() {
     { name: "Контакты", path: "/contact" },
   ];
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const handleClickLink = (i) => {
-    if (+i === 4) {
-      dispatch(changeRoutingToOrders(true));
+  const handleClickImg = async () => {
+    if (isAdmin) {
+      Cookies.remove("access_token");
+      await dispatch(changeIsAdmin(false));
+      navigate("/auth");
+    } else {
+      navigate("/");
     }
-    if (+i !== 4) dispatch(changeRoutingToOrders(false));
+  };
+  const handleClickLink = async (i, path) => {
+    if (isAdmin) {
+      if (i === 4) {
+        // If admin clicks on "Заказы", navigate to admin panel
+        navigate("/admin/1");
+        dispatch(changeRoutingToOrders(true));
+      } else {
+        // For any other link click by admin, log them out
+        Cookies.remove("access_token");
+        await dispatch(changeIsAdmin(false));
+        navigate("/auth");
+      }
+    } else {
+      // Non-admin users just navigate normally
+      navigate(path);
+      if (i === 4) {
+        dispatch(changeRoutingToOrders(true));
+      } else {
+        dispatch(changeRoutingToOrders(false));
+      }
+    }
+
+    if (scrollTop) scrollTop();
   };
 
   return (
     <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
-        <Link to={isAdmin ? "/auth" : ""} className="mb-0">
+        <Link onClick={() => handleClickImg()} className="mb-0">
           <img
             className="w-[200px] sm:w-[250px] lg:w-[313px]"
             src="/icon/logo.svg"
@@ -85,13 +112,12 @@ export default function Header() {
       <nav className="mt-6 hidden md:block">
         <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
           {navList.map(({ name, path }, i) => (
-            <li key={i} className="text-gray-400 hover:text-gray-300">
-              <Link
-                onClick={() => handleClickLink(i)}
-                to={isAdmin ? "/auth" : +i === 4 ? "/product/orders" : path}
-              >
-                {name}
-              </Link>
+            <li
+              onClick={() => handleClickLink(i, path)}
+              key={i}
+              className="text-gray-400 hover:text-gray-300"
+            >
+              {name}
             </li>
           ))}
         </ul>

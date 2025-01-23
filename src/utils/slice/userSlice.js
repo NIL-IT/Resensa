@@ -391,7 +391,10 @@ export const authPost = createAsyncThunk(
   "user/authPost",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await apiLogin.post("/auth/token", credentials);
+      const formData = new FormData();
+      formData.append("username", credentials.username);
+      formData.append("password", credentials.password);
+      const response = await apiLogin.post("/auth/token", formData);
       return response.data;
     } catch (error) {
       if (error.response?.status === 422) {
@@ -405,6 +408,19 @@ export const authPost = createAsyncThunk(
     }
   }
 );
+export const importOrdersExcel = createAsyncThunk(
+  "importOrdersExcel/importOrdersExcel",
+  async (file, thunkApi) => {
+    try {
+      const res = await api.post("/orders/import/excel", file);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -432,6 +448,7 @@ const userSlice = createSlice({
     token: null,
     isAuthenticated: false,
     error: null,
+    excel: null,
   },
   reducers: {
     changeRoutingToOrders: (state, { payload }) => {
@@ -517,12 +534,6 @@ const userSlice = createSlice({
       .addCase(getAllNews.fulfilled, (state, action) => {
         state.news = action.payload;
       })
-      // .addCase(deleteNews.fulfilled, (state, action) => {
-      //   state.news = action.payload;
-      // })
-      // .addCase(updateNews.fulfilled, (state, action) => {
-      //   state.news = action.payload;
-      // })
 
       .addCase(getAllEquipment.fulfilled, (state, action) => {
         state.equipment = action.payload;
@@ -536,32 +547,15 @@ const userSlice = createSlice({
       .addCase(authPost.rejected, (state, action) => {
         state.error = action.payload?.message || "Ошибка авторизации";
       })
-      // .addCase(deleteEquipment.fulfilled, (state, action) => {
-      //   state.equipment = action.payload;
-      // })
-      // .addCase(updateEquipment.fulfilled, (state, action) => {
-      //   state.equipment = action.payload;
-      // })
-
+      .addCase(importOrdersExcel.fulfilled, (state, action) => {
+        state.excel = action.payload;
+      })
       .addCase(getAllSolutions.fulfilled, (state, action) => {
         state.solutions = action.payload;
       })
-      // .addCase(deleteSolutions.fulfilled, (state, action) => {
-      //   state.solutions = action.payload;
-      // })
-      // .addCase(updateSolutions.fulfilled, (state, action) => {
-      //   state.solutions = action.payload;
-      // })
-
       .addCase(getAllOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
       })
-      // .addCase(deleteOrders.fulfilled, (state, action) => {
-      //   state.orders = action.payload;
-      // })
-      // .addCase(updateOrders.fulfilled, (state, action) => {
-      //   state.orders = action.payload;
-      // })
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
       });

@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
 import { ChevronDown, FileSpreadsheet } from "lucide-react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { importOrdersExcel } from "../../utils/slice/userSlice";
 
 const FileUploader = () => {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const inputRef = useRef(null);
-
+  const dispatch = useDispatch();
   const allowedTypes = [
     "application/vnd.ms-excel",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -58,15 +60,7 @@ const FileUploader = () => {
         formData.append("file", file);
 
         try {
-          await axios.post(
-            "http://89.23.116.157:8002/orders/import/excel",
-            formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          );
+          await dispatch(importOrdersExcel(file));
           setUploadedFiles((prev) => [...prev, file]);
         } catch (err) {
           setError(

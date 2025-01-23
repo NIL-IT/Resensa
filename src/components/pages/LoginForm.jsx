@@ -33,7 +33,7 @@ export default function LoginForm() {
     try {
       const resultAction = await dispatch(authPost(form));
       console.log("resultAction", resultAction);
-      console.log(authPost.fulfilled, "authPost");
+      console.log(authPost.fulfilled.match(resultAction), "resultAction");
       if (authPost.fulfilled.match(resultAction)) {
         const token = resultAction.payload;
         console.log("Token", token);
