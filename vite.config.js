@@ -7,12 +7,11 @@ export default defineConfig({
   build: {
     // Оптимизация сборки
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
+    minify: 'esbuild',
+    minifyOptions: {
+      target: 'es2015',
+      treeShaking: true,
+      drop: ['console', 'debugger']
     },
     // Разделение кода
     rollupOptions: {
