@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 
 const ImageUploader = ({ onFileSelect, findProduct }) => {
   const [dragActive, setDragActive] = useState(false);
-
   const [error, setError] = useState("");
   const inputRef = useRef(null);
   const { itemId, addNewItemPopup, news, solutions, equipment } = useSelector(
@@ -18,9 +17,10 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
     const isNews = +pathnameId === 4;
     const isSolutions = +pathnameId === 3;
     const itemsList = isNews ? news : isSolutions ? solutions : equipment;
-    product = itemsList.find((item) => +item.id === +itemId);
+    product = itemsList?.find((item) => +item.id === +itemId);
   }
-  const [previewUrl, setPreviewUrl] = useState(product.image || null);
+  const [previewUrl, setPreviewUrl] = useState(product?.image || null);
+
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -77,7 +77,7 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
   return (
     <div className="w-full mx-auto">
       <span className="text-sm text-gray-300">Изображение</span>
-      {previewUrl != null && !addNewItemPopup && product ? (
+      {previewUrl && !addNewItemPopup && product ? (
         <div className="relative p-8 mt-2 border-2 border-dashed rounded-lg text-center">
           <img
             src={previewUrl}
@@ -86,7 +86,11 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
           />
           <button
             type="button"
-            onClick={() => removeImage()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              removeImage();
+            }}
             className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full hover:bg-gray-900"
           >
             ×
@@ -122,7 +126,9 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
                 className="max-h-[200px] mx-auto rounded-lg"
               />
               <button
+                type="button"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   removeImage();
                 }}

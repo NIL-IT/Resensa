@@ -23,33 +23,32 @@ const ChangeEquipmentPopup = () => {
   );
 
   const itemsList = isNews ? news : isSolutions ? solutions : equipment;
-  const findProduct = itemsList.find((item) => +item.id === +itemId);
+  const findProduct = itemId
+    ? itemsList?.find((item) => +item.id === +itemId)
+    : null;
 
   const [formData, setFormData] = useState(() => {
     const baseData = isNews
       ? {
-          title: findProduct.title,
-          date: findProduct.date,
-          text: findProduct.text,
-        }
-      : !isSolutions
-      ? {
-          name: findProduct.name,
-          description: findProduct.description,
-          min_param: findProduct.min_param || "",
-          max_param: findProduct.max_param || "",
+          title: findProduct?.title || "",
+          date: findProduct?.date || "",
+          text: findProduct?.text || "",
         }
       : {
-          name: findProduct.name,
-          description: findProduct.description,
+          name: findProduct?.name || "",
+          description: findProduct?.description || "",
+          min_param: findProduct?.min_param || "",
+          max_param: findProduct?.max_param || "",
         };
 
-    if (isNews) {
-      baseData.news_photo = findProduct.image;
-    } else if (isSolutions) {
-      baseData.solution_photo = findProduct.image;
-    } else {
-      baseData.equipment_photo = findProduct.image;
+    if (findProduct?.image) {
+      if (isNews) {
+        baseData.news_photo = findProduct.image;
+      } else if (isSolutions) {
+        baseData.solution_photo = findProduct.image;
+      } else {
+        baseData.equipment_photo = findProduct.image;
+      }
     }
 
     return baseData;
@@ -91,28 +90,26 @@ const ChangeEquipmentPopup = () => {
       if (selectedFile) {
         // If a new file was selected, use it
         submitData[imageFieldName] = selectedFile;
-      } else {
-        // If no new file was selected, convert the URL from server to a File
+      } else if (formData[imageFieldName]) {
+        // If no new file was selected but we have an existing image URL, convert it
         const imageFile = await urlToFile(formData[imageFieldName]);
         submitData[imageFieldName] = imageFile;
       }
 
       if (!isNews) {
-        const isEquipment = equipment.some(
-          (item) => item.id === findProduct.id
-        );
+        const isEquipment = !isSolutions;
         if (isEquipment) {
           await dispatch(
-            updateEquipment({ id: findProduct.id, data: submitData })
+            updateEquipment({ id: findProduct?.id, data: submitData })
           ).unwrap();
         } else {
           await dispatch(
-            updateSolutions({ id: findProduct.id, data: submitData })
+            updateSolutions({ id: findProduct?.id, data: submitData })
           ).unwrap();
         }
       } else {
         await dispatch(
-          updateNews({ id: findProduct.id, data: submitData })
+          updateNews({ id: findProduct?.id, data: submitData })
         ).unwrap();
       }
 
@@ -124,8 +121,8 @@ const ChangeEquipmentPopup = () => {
   };
 
   return (
-    <div className="fixed  inset-0 flex items-center justify-center">
-      <div className="bg-white py-[38px] max-h-[90%] overflow-y-scroll px-8 rounded-lg w-full max-w-[663px] relative">
+    <div className="fixed inset-0 flex items-center justify-center">
+      <div className="bg-white py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
         <button
           onClick={() => {
             dispatch(changeEquipmentPopup(false));
