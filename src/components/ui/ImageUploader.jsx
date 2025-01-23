@@ -5,10 +5,12 @@ import { useLocation } from "react-router-dom";
 
 const ImageUploader = ({ onFileSelect, findProduct }) => {
   const [dragActive, setDragActive] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState(null);
+
   const [error, setError] = useState("");
   const inputRef = useRef(null);
-  const { itemId, addNewItemPopup, news, solutions, equipment } = useSelector(({ user }) => user);
+  const { itemId, addNewItemPopup, news, solutions, equipment } = useSelector(
+    ({ user }) => user
+  );
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
   let product = findProduct;
@@ -18,6 +20,7 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
     const itemsList = isNews ? news : isSolutions ? solutions : equipment;
     product = itemsList.find((item) => +item.id === +itemId);
   }
+  const [previewUrl, setPreviewUrl] = useState(product.image || null);
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -72,67 +75,77 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
   };
 
   return (
-    <div className='w-full mx-auto'>
-      <span className='text-sm text-gray-300'>Изображение</span>
+    <div className="w-full mx-auto">
+      <span className="text-sm text-gray-300">Изображение</span>
       {previewUrl != null && !addNewItemPopup && product ? (
-        <div className='relative p-8 mt-2 border-2 border-dashed rounded-lg text-center'>
+        <div className="relative p-8 mt-2 border-2 border-dashed rounded-lg text-center">
           <img
             src={previewUrl}
-            alt='Текущее изображение'
-            className='max-h-[200px] mx-auto rounded-lg'
+            alt="Текущее изображение"
+            className="max-h-[200px] mx-auto rounded-lg"
           />
           <button
-            type='button'
+            type="button"
             onClick={() => removeImage()}
-            className='absolute top-2 right-2 w-6 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full hover:bg-gray-900'>
+            className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full hover:bg-gray-900"
+          >
             ×
           </button>
         </div>
       ) : (
         <div
           className={`relative p-8 mt-2 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors
-            ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300 hover:border-gray-400"}`}
+            ${
+              dragActive
+                ? "border-blue-400 bg-blue-50"
+                : "border-gray-300 hover:border-gray-400"
+            }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
-          onClick={onButtonClick}>
+          onClick={onButtonClick}
+        >
           <input
             ref={inputRef}
-            type='file'
-            accept='.svg,.png,.jpg,.jpeg'
+            type="file"
+            accept=".svg,.png,.jpg,.jpeg"
             onChange={handleChange}
-            className='hidden'
+            className="hidden"
           />
 
           {previewUrl ? (
             <>
               <img
                 src={previewUrl}
-                alt='Предпросмотр'
-                className='max-h-[200px] mx-auto rounded-lg'
+                alt="Предпросмотр"
+                className="max-h-[200px] mx-auto rounded-lg"
               />
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   removeImage();
                 }}
-                className='absolute top-2 right-2 w-6 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full hover:bg-gray-900'>
+                className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full hover:bg-gray-900"
+              >
                 ×
               </button>
             </>
           ) : (
             <>
-              <p className='mb-2 text-sm text-gray-500'>
-                <span className='font-semibold'>Нажмите, чтобы загрузить</span> или перетащите
+              <p className="mb-2 text-sm text-gray-500">
+                <span className="font-semibold">Нажмите, чтобы загрузить</span>{" "}
+                или перетащите
               </p>
-              <p className='text-xs text-gray-500'>SVG, PNG, JPG или JPEG (макс. 800x400px)</p>
+              <p className="text-xs text-gray-500">
+                SVG, PNG, JPG или JPEG (макс. 800x400px)
+              </p>
             </>
           )}
         </div>
       )}
 
-      {error && <p className='mt-2 text-red-500 text-sm'>{error}</p>}
+      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
     </div>
   );
 };

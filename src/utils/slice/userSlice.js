@@ -161,6 +161,7 @@ export const createEquipment = createAsyncThunk(
 export const updateEquipment = createAsyncThunk(
   "Equipment/updateEquipment",
   async ({ id, data }, thunkApi) => {
+    console.log("data", data, "id", id);
     try {
       const res = await api.put(`/equipments/${id}`, data);
       return res.data;

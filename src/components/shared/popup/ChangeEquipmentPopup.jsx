@@ -10,7 +10,6 @@ import {
 } from "../../../utils/slice/userSlice";
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
-import { string } from "three/tsl";
 
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
@@ -26,19 +25,28 @@ const ChangeEquipmentPopup = () => {
   const itemsList = isNews ? news : isSolutions ? solutions : equipment;
   const findProduct = itemsList.find((item) => +item.id === +itemId);
 
-  const [formData, setFormData] = useState(
-    !isNews
+  const [formData, setFormData] = useState(() => {
+    const baseData = isNews
       ? {
-          name: findProduct.name,
-          description: findProduct.description,
-        }
-      : {
           title: findProduct.title,
           date: findProduct.date,
           text: findProduct.text,
-          news_photo: findProduct.image,
         }
-  );
+      : {
+          name: findProduct.name,
+          description: findProduct.description,
+        };
+
+    if (isNews) {
+      baseData.news_photo = findProduct.image;
+    } else if (isSolutions) {
+      baseData.solution_photo = findProduct.image;
+    } else {
+      baseData.equipment_photo = findProduct.image;
+    }
+
+    return baseData;
+  });
 
   const [selectedFile, setSelectedFile] = useState();
 
@@ -50,65 +58,55 @@ const ChangeEquipmentPopup = () => {
     }));
   };
 
+  const urlToFile = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const fileName = url.split("/").pop() || "image.jpg";
+      return new File([blob], fileName, { type: blob.type });
+    } catch (error) {
+      console.error("Error converting URL to File:", error);
+      throw new Error("Failed to process image");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.news_photo);
-    if (typeof formData.news_photo == string) {
-      console.log("dsadasdas");
-      const response = await fetch(formData.news_photo);
-      if (!response.ok) {
-        throw new Error(`Ошибка при загрузке файла: ${response.statusText}`);
-      }
-      const blob = await response.blob();
-      const fileName = decodeURIComponent(formData.news_photo.split("/").pop()); // Извлечение имени файла из URL
-      file = new File([blob], fileName, { type: blob.type });
-    }
-    console.log("formData", formData);
+
     try {
-      let file;
+      const submitData = { ...formData };
+      const imageFieldName = isNews
+        ? "news_photo"
+        : isSolutions
+        ? "solution_photo"
+        : "equipment_photo";
 
-      // const submitData = new FormData();
-
-      // // Add text fields
-      // Object.keys(formData).forEach((key) => {
-      //   submitData.append(key, formData[key]);
-      // });
-      // console.log(submitData);
-
-      // Add file if selected
-      console.log(selectedFile);
       if (selectedFile) {
-        if (isNews) {
-          // submitData.append("news_photo", selectedFile);
-          setFormData((prevData) => ({
-            ...prevData,
-            news_photo: file,
-          }));
-          console.log(formData, "Отправили ");
-        } else if (equipment.some((item) => item.id === findProduct.id)) {
-          // submitData.append("equipment_photo", selectedFile);
-        } else {
-          // submitData.append("solution_photo", selectedFile);
-        }
+        // If a new file was selected, use it
+        submitData[imageFieldName] = selectedFile;
+      } else {
+        // If no new file was selected, convert the URL from server to a File
+        const imageFile = await urlToFile(formData[imageFieldName]);
+        submitData[imageFieldName] = imageFile;
       }
 
       if (!isNews) {
-        // Check if item is from equipment or solutions
         const isEquipment = equipment.some(
           (item) => item.id === findProduct.id
         );
         if (isEquipment) {
           await dispatch(
-            updateEquipment({ id: findProduct.id, data: formData })
+            updateEquipment({ id: findProduct.id, data: submitData })
           ).unwrap();
         } else {
           await dispatch(
-            updateSolutions({ id: findProduct.id, data: formData })
+            updateSolutions({ id: findProduct.id, data: submitData })
           ).unwrap();
+          console.log({ id: findProduct.id, data: submitData }, "урааааа");
         }
       } else {
         await dispatch(
-          updateNews({ id: findProduct.id, data: formData })
+          updateNews({ id: findProduct.id, data: submitData })
         ).unwrap();
       }
 
@@ -132,8 +130,13 @@ const ChangeEquipmentPopup = () => {
           ✕
         </button>
         <h2 className="text-center text-[32px] font-medium leading-[40.8px] text-gray-400 mb-6">
-          {!isNews ? "Изменить оборудование" : "Изменить новость"}
+          {isNews
+            ? "Изменить новость"
+            : isSolutions
+            ? "Изменить решение"
+            : "Изменить оборудование"}
         </h2>
+
         <form onSubmit={handleSubmit} className="space-y-[18px]">
           <div>
             <ImageUploader
