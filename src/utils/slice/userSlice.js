@@ -58,11 +58,12 @@ export const updateNews = createAsyncThunk(
   "news/updateNews",
   async ({ id, data }, thunkApi) => {
     try {
+      console.log("Отправляемые данные в запросе:", data, id);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("text", data.text);
       formData.append("news_photo", data.news_photo);
-      const res = await api.post(`/news/${id}/`, formData);
+      const res = await api.post(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -161,7 +162,7 @@ export const createEquipment = createAsyncThunk(
 export const updateEquipment = createAsyncThunk(
   "Equipment/updateEquipment",
   async ({ id, data }, thunkApi) => {
-    console.log("data", data, "id", id);
+    console.log("Отправляемые данные в запросе:", data, id);
     try {
       const res = await api.put(`/equipments/${id}`, data);
       return res.data;
@@ -234,6 +235,7 @@ export const createSolutions = createAsyncThunk(
 export const updateSolutions = createAsyncThunk(
   "Solutions/updateSolutions",
   async ({ id, data }, thunkApi) => {
+    console.log("Отправляемые данные в запросе:", data, id);
     try {
       const res = await api.put(`/solutions/${id}`, data);
       return res.data;
@@ -307,7 +309,7 @@ export const patchOrders = createAsyncThunk(
   "patchOrders/patchOrders",
   async ({ id, state }, thunkApi) => {
     try {
-      const res = await api.patch(`/orders/${id}/`, state);
+      const res = await api.patch(`/orders/${id}`, state);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -351,7 +353,7 @@ export const updateBanner = createAsyncThunk(
       // formData.append("state", data.state);
       // formData.append("order_amount", data.order_amount);
       // const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/banner/`, formData);
+      const res = await api.put(`/banner`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
