@@ -118,7 +118,7 @@ export default function AdminOrders({ title }) {
         </div>
       </div>
       <div className="max-h-[480px] overflow-x-auto overflow-y-scroll">
-        <table className="min-w-full relative">
+        <table id="tableId" className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
             <tr className="border-b font-normal text-sm lg:text-base text-gray-400">
               <th className="w-[15px] py-2 px-1 ">

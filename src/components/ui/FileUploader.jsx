@@ -34,11 +34,13 @@ const FileUploader = () => {
     setDragActive(false);
 
     const files = Array.from(e.dataTransfer.files);
+    console.log(files);
     handleFiles(files);
   };
 
   const handleChange = (e) => {
     const files = Array.from(e.target.files || []);
+    console.log(files);
     handleFiles(files);
   };
 
@@ -56,11 +58,7 @@ const FileUploader = () => {
       setError("");
 
       for (const file of validFiles) {
-        const formData = new FormData();
-        formData.append("file", file);
-
         try {
-          console.log(formData.get("file"));
           await dispatch(importOrdersExcel(file));
           setUploadedFiles((prev) => [...prev, file]);
         } catch (err) {

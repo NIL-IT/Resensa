@@ -72,7 +72,18 @@ export default function Admin() {
     if (+dirs[2] === 5) return "Баннер";
     if (+dirs[2] === 6) return "Выйти";
   };
-
+  //функция для экспорта из html в excel
+  function exportTableToExcel(tableId, filename = "the_data_you_needed.xls") {
+    let dataType = "application/vnd.ms-excel";
+    let tableSelect = document.getElementById(tableId);
+    let tableHTML = encodeURIComponent(
+      tableSelect.outerHTML.replace(/ or .*?>/g, ">")
+    );
+    let link = document.createElement("a");
+    link.href = `data:${dataType}, ${tableHTML}`;
+    link.download = filename;
+    link.click();
+  }
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
@@ -136,7 +147,10 @@ export default function Admin() {
         </section>
 
         <div className="flex flex-col md:flex-row justify-center w-full gap-4 mt-6 md:pl-44">
-          <button className="group bg-gray-400 text-white py-[15px] px-[19px] text-base uppercase flex items-center justify-center gap-5">
+          <button
+            onClick={() => exportTableToExcel("tableId")}
+            className="group bg-gray-400 text-white py-[15px] px-[19px] text-base uppercase flex items-center justify-center gap-5"
+          >
             <svg
               className="w-[30px] h-[30px] group-hover:translate-y-1 transition-all"
               fill="none"
