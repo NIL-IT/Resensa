@@ -32,6 +32,13 @@ const ChangeEquipmentPopup = () => {
           date: findProduct.date,
           text: findProduct.text,
         }
+      : !isSolutions
+      ? {
+          name: findProduct.name,
+          description: findProduct.description,
+          min_param: findProduct.min_param || "",
+          max_param: findProduct.max_param || "",
+        }
       : {
           name: findProduct.name,
           description: findProduct.description,
@@ -102,7 +109,6 @@ const ChangeEquipmentPopup = () => {
           await dispatch(
             updateSolutions({ id: findProduct.id, data: submitData })
           ).unwrap();
-          console.log({ id: findProduct.id, data: submitData }, "урааааа");
         }
       } else {
         await dispatch(
@@ -118,8 +124,8 @@ const ChangeEquipmentPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <div className="bg-white py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
+    <div className="fixed  inset-0 flex items-center justify-center">
+      <div className="bg-white py-[38px] max-h-[90%] overflow-y-scroll px-8 rounded-lg w-full max-w-[663px] relative">
         <button
           onClick={() => {
             dispatch(changeEquipmentPopup(false));
@@ -130,11 +136,7 @@ const ChangeEquipmentPopup = () => {
           ✕
         </button>
         <h2 className="text-center text-[32px] font-medium leading-[40.8px] text-gray-400 mb-6">
-          {isNews
-            ? "Изменить новость"
-            : isSolutions
-            ? "Изменить решение"
-            : "Изменить оборудование"}
+          {!isNews ? "Изменить оборудование" : "Изменить новость"}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-[18px]">
@@ -144,45 +146,103 @@ const ChangeEquipmentPopup = () => {
               onFileSelect={setSelectedFile}
             />
           </div>
-          {isNews && (
-            <div className="space-y-2">
-              <span className="w-full text-sm text-gray-900 ">Название</span>
-              <Input
-                type="text"
-                name="title"
-                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                value={formData.title}
-                onChange={handleInputChange}
-              />
-            </div>
+          {isNews ? (
+            <>
+              <div className="space-y-2">
+                <span className="w-full text-sm text-gray-900">Название</span>
+                <Input
+                  type="text"
+                  name="title"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="space-y-2">
+                <span className="w-full text-sm text-gray-900">Дата</span>
+                <Input
+                  type="text"
+                  name="date"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-900"
+                >
+                  Текст новости
+                </label>
+                <textarea
+                  id="message"
+                  name="text"
+                  rows="4"
+                  onChange={handleInputChange}
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.text}
+                ></textarea>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="space-y-2">
+                <span className="w-full text-sm text-gray-900">Название</span>
+                <Input
+                  type="text"
+                  name="name"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {!isSolutions && (
+                <>
+                  <div className="space-y-2">
+                    <span className="w-full text-sm text-gray-900">
+                      Минимальный параметр
+                    </span>
+                    <Input
+                      type="text"
+                      name="min_param"
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.min_param}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <span className="w-full text-sm text-gray-900">
+                      Максимальный параметр
+                    </span>
+                    <Input
+                      type="text"
+                      name="max_param"
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.max_param}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </>
+              )}
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-900"
+                >
+                  Описание
+                </label>
+                <textarea
+                  id="message"
+                  name="description"
+                  rows="4"
+                  onChange={handleInputChange}
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.description}
+                ></textarea>
+              </div>
+            </>
           )}
-          <div className="space-y-2">
-            <span className="w-full text-sm text-gray-900 ">
-              {!isNews ? "Название" : "Дата "}
-            </span>
-            <Input
-              type="text"
-              name={!isNews ? "name" : "date"}
-              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-              value={!isNews ? formData.name : formData.date}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <label
-            htmlFor="message"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            {!isNews ? "Описание" : "Текст новости"}
-          </label>
-          <textarea
-            id="message"
-            name={!isNews ? "description" : "text"}
-            rows="4"
-            onChange={handleInputChange}
-            className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-            value={!isNews ? formData.description : formData.text}
-          ></textarea>
 
           <button
             type="submit"
