@@ -162,8 +162,7 @@ export const updateEquipment = createAsyncThunk(
   "Equipment/updateEquipment",
   async ({ id, data }, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "equipment");
-      const res = await api.put(`/equipments/${id}`, formData);
+      const res = await api.put(`/equipments/${id}`, data);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -235,7 +234,7 @@ export const updateSolutions = createAsyncThunk(
   "Solutions/updateSolutions",
   async ({ id, data }, thunkApi) => {
     try {
-      const res = await api.put(`/solutions/${id}`, data);
+      const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
