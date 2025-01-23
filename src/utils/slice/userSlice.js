@@ -162,9 +162,19 @@ export const createEquipment = createAsyncThunk(
 export const updateEquipment = createAsyncThunk(
   "Equipment/updateEquipment",
   async ({ id, data }, thunkApi) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+
+    // // Convert base64 to blob using utility function
+    // const blob = base64ToBlob(data.equipment_photo);
+    // formData.append("equipment_photo", blob, "image.jpg");
+    formData.append("equipment_photo", data.equipment_photo);
+    formData.append("min_param", data.min_param);
+    formData.append("max_param", data.max_param);
     console.log("Отправляемые данные в запросе:", data, id);
     try {
-      const res = await api.put(`/equipments/${id}`, data);
+      const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -235,9 +245,13 @@ export const createSolutions = createAsyncThunk(
 export const updateSolutions = createAsyncThunk(
   "Solutions/updateSolutions",
   async ({ id, data }, thunkApi) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("solution_photo", data.solution_photo);
     console.log("Отправляемые данные в запросе:", data, id);
     try {
-      const res = await api.put(`/solutions/${id}`, data);
+      const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -290,14 +304,11 @@ export const updateOrders = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("number", data.number);
-      formData.append("date", data.date);
-      formData.append("client_name", data.client_name);
-      formData.append("state", data.state);
-      formData.append("order_amount", data.order_amount);
+      const params = new URLSearchParams();
+      params.append("param1", "value1");
+      console.log(data);
       // const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/orders/${id}`, formData);
+      const res = await api.patch(`/orders/${id}/?`, data);
       return res.data;
     } catch (err) {
       console.log(err);

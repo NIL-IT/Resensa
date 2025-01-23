@@ -34,6 +34,11 @@ const ChangeEquipmentPopup = () => {
           date: findProduct?.date || "",
           text: findProduct?.text || "",
         }
+      : isSolutions
+      ? {
+          name: findProduct?.name || "",
+          description: findProduct?.description || "",
+        }
       : {
           name: findProduct?.name || "",
           description: findProduct?.description || "",

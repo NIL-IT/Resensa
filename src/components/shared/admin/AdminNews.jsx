@@ -9,7 +9,6 @@ import {
   deleteNews,
 } from "../../../utils/slice/userSlice";
 import { Plus } from "lucide-react";
-import { div } from "three/tsl";
 
 export default function AdminNews() {
   const dispatch = useDispatch();
