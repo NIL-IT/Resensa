@@ -11,19 +11,18 @@ import Footer from "../shared/Footer";
 import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeRoutingToOrders } from "../../utils/slice/userSlice";
 
 export default function Home() {
   const { pathname } = useLocation();
-
+  const { equipment, solutions } = useSelector(({ user }) => user);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
     });
   };
-
   useEffect(() => {
     scrollTop();
   }, [pathname]);
@@ -31,8 +30,8 @@ export default function Home() {
     <main>
       <Banner />
       <Advantages />
-      <ItemsList list={data.equipment} href={ROUTES.EQUIPMENT} />
-      <ItemsList list={data.solutions} href={ROUTES.SOLUTIONS} />
+      <ItemsList list={equipment} href={ROUTES.EQUIPMENT} />
+      <ItemsList list={solutions} href={ROUTES.SOLUTIONS} />
       <Calculator />
       <SliderPage
         title={"о компании"}

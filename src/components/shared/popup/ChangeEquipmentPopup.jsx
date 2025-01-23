@@ -6,25 +6,23 @@ import {
   updateNews,
   updateEquipment,
   updateSolutions,
+  changeItemId,
 } from "../../../utils/slice/userSlice";
-
 import ImageUploader from "../../ui/ImageUploader";
-import { updateItemById } from "../../../utils/hooks/updateItemById";
 import { useLocation } from "react-router-dom";
 
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
-  const isNews = +pathnameId === +4;
+  const isNews = +pathnameId === 4;
+  const isSolutions = +pathnameId === 3;
 
-  const { equipmentId, newsId, equipment, solutions, news } = useSelector(
+  const { itemId, equipment, solutions, news } = useSelector(
     ({ user }) => user
   );
-  const itemsList = !isNews ? [...equipment, ...solutions] : news;
-  const findProduct = itemsList.find((item) =>
-    !isNews ? +item.id === +equipmentId : +item.id === +newsId
-  );
+  const itemsList = isNews ? news : isSolutions ? solutions : equipment;
+  const findProduct = itemsList.find((item) => +item.id === +itemId);
 
   const [formData, setFormData] = useState(
     !isNews
@@ -92,6 +90,7 @@ const ChangeEquipmentPopup = () => {
       }
 
       dispatch(changeEquipmentPopup(false));
+      dispatch(changeItemId(null));
     } catch (error) {
       alert(error.message || "Не удалось сохранить изменения");
     }
@@ -101,7 +100,10 @@ const ChangeEquipmentPopup = () => {
     <div className="fixed inset-0 flex items-center justify-center">
       <div className="bg-white py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
         <button
-          onClick={() => dispatch(changeEquipmentPopup(false))}
+          onClick={() => {
+            dispatch(changeEquipmentPopup(false));
+            dispatch(changeItemId(null));
+          }}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
         >
           ✕
@@ -111,7 +113,10 @@ const ChangeEquipmentPopup = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-[18px]">
           <div>
-            <ImageUploader onFileSelect={setSelectedFile} />
+            <ImageUploader
+              findProduct={findProduct}
+              onFileSelect={setSelectedFile}
+            />
           </div>
           {isNews && (
             <div className="space-y-2">

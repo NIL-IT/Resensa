@@ -43,7 +43,7 @@ export default function ChangeBanner({ title }) {
 
   return (
     <div className="w-full relative">
-      <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
+      <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
       <div className="flex items-center justify-between mb-4">
         <Title className="text-xl font-normal text-gray-400" text={title} />
       </div>

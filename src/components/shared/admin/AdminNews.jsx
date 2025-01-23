@@ -4,7 +4,7 @@ import Title from "../../ui/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeEquipmentPopup,
-  changeNewsId,
+  changeItemId,
   changeShowAddNewItemPopup,
   deleteNews,
 } from "../../../utils/slice/userSlice";
@@ -13,15 +13,15 @@ import { Plus } from "lucide-react";
 export default function AdminNews() {
   const dispatch = useDispatch();
   const { news } = useSelector(({ user }) => user);
-
+  console.log(news);
   const changeNews = (id) => {
-    dispatch(changeNewsId(id));
+    dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
   };
 
   const handlerDeleteNews = (id) => {
-    console.log(`deleting ${id.toString()}`);
     dispatch(deleteNews(id));
+    dispatch(changeItemId(null));
   };
 
   const addNewItem = () => {
@@ -30,7 +30,7 @@ export default function AdminNews() {
 
   return (
     <div className="relative pb-5">
-      <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
+      <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-9">
         <Title
           text={"Все новости"}

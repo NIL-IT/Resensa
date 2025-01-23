@@ -82,7 +82,7 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="container mx-auto px-4 pt-[30px] flex-grow">
+      <div className="w-full md:container mx-auto px-4 pt-[30px] flex-grow">
         <span className="text-gray-900 text-sm">
           Личный кабинет - {getDirectoryName(pathname)}
         </span>
@@ -101,13 +101,13 @@ export default function Admin() {
             <ul
               className={`${
                 isMobileMenuOpen ? "block" : "hidden"
-              } md:block space-y-6 py-[30px] md:py-[105px] md:pb-[200px] pr-[20px] md:pr-[81px]`}
+              } md:block space-y-6 py-[30px] md:py-[105px] md:pb-[200px] pr-[20px]  xl:pr-[81px] `}
             >
               {navList.map(({ name, id }, i) => (
                 <li key={id}>
                   <Link
                     to={`/admin/${id}`}
-                    className={`text-gray-400 text-lg uppercase ${
+                    className={`text-gray-400 text-sm lg:text-lg uppercase ${
                       i === activeLink
                         ? "border-b border-b-gray-400 font-normal"
                         : ""
@@ -121,7 +121,7 @@ export default function Admin() {
             </ul>
           </nav>
           {!isActiveUploadFile ? (
-            <div className="pl-[20px] md:pl-[38px] pt-6 md:pt-12 w-full">
+            <div className="pl-[0px] md:pl-[38px] pt-6 md:pt-12 w-full">
               {navList.map(({ title, id, component }) => (
                 <div key={id}>
                   {pathname.split("/").at(-1) === id && component(title)}

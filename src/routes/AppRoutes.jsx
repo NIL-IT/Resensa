@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Route,
   Routes,
@@ -18,13 +18,15 @@ import LoginForm from "../components/pages/LoginForm";
 import { useSelector } from "react-redux";
 import Contacts from "../components/pages/Contacts";
 export default function AppRoutes() {
-  const combinedData = {
-    itemsList: [...data.equipment.items, ...data.solutions.items],
-  };
-  const { isAdmin } = useSelector(({ user }) => user);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { isAdmin, equipment, solutions } = useSelector(({ user }) => user);
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const [loading, isLoading] = useState(true);
+  // console.log(equipment, "equipment");
+  // console.log(solutions, "solutions");
+  const combinedData = [...equipment, ...solutions];
 
+  // console.log(combinedData, "combinedData");
   // useEffect(() => {
   //   // Redirect to auth if not authenticated, unless already on auth page
   //   if (!isAuth && location.pathname !== ROUTES.AUTH) {
@@ -55,7 +57,7 @@ export default function AppRoutes() {
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
-            data={data.equipment}
+            data={equipment}
             text={textEquipment}
             bannerImg={"/img/newbanner.png"}
             title={"оборудование"}
@@ -66,7 +68,7 @@ export default function AppRoutes() {
         path={ROUTES.SOLUTIONS}
         element={
           <Equipment
-            data={data.solutions}
+            data={solutions}
             text={textEquipment}
             bannerImg={"/img/newsol_banner.png"}
             title={"решения"}
@@ -75,7 +77,7 @@ export default function AppRoutes() {
       />
       <Route
         path={ROUTES.PRODUCT}
-        element={<ProductItem list={combinedData.itemsList} />}
+        element={<ProductItem list={combinedData} />}
       />
       <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}

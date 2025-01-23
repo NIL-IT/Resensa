@@ -3,7 +3,7 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeNewsId,
+  changeItemId,
   changeShowNewsPopup,
   getAllNews,
 } from "../../utils/slice/userSlice";
@@ -24,13 +24,13 @@ export default function News() {
     }
   }, [isLimited]);
   const showNewsPopup = (id) => {
+    dispatch(changeItemId(id));
     dispatch(changeShowNewsPopup(true));
-    dispatch(changeNewsId(id));
   };
   console.log(news);
   return newsData.length ? (
     <div
-      className={`container pt-[140px] xs:pt-[160px] sm:pt-[180px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
+      className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
         newsData.length > 6 ? "" : "pb-16"
       }`}
     >
@@ -40,7 +40,7 @@ export default function News() {
       />
       <div className="flex justify-center">
         <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px]">
-          <div className="flex flex-wrap gap-[33px]   mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10">
+          <div className="flex flex-wrap justify-center xl:justify-normal   gap-[33px]   mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10">
             {newsData.map((item) => (
               <div
                 onClick={() => showNewsPopup(item.id)}
@@ -52,11 +52,11 @@ export default function News() {
                 key={item.id}
               >
                 <img
-                  className="h-[70%] object-contain"
+                  className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px] "
                   src={item.image}
                   alt=""
                 />
-                <div className="h-[30%] flex flex-col justify-between ">
+                <div className=" flex flex-col justify-between ">
                   <div>
                     <p className="text-white text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]">
                       {item.title}

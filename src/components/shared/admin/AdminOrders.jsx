@@ -29,11 +29,17 @@ export default function AdminOrders({ title }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (orders) {
+    const fetchOrders = async () => {
       setLoading(true);
-      setOrdersList(orders);
-    }
-  }, [orders, dispatch]);
+      await dispatch(getAllOrders());
+      setLoading(false);
+    };
+    fetchOrders();
+  }, [dispatch]);
+
+  useEffect(() => {
+    setOrdersList(orders);
+  }, [orders]);
 
   const handleCheckedAllOrders = () => {
     if (selectedOrders.length === ordersList.length) {
@@ -84,13 +90,13 @@ export default function AdminOrders({ title }) {
 
   return (
     <div className="w-full relative">
-      <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">
+      <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
+      <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-start lg:items-center justify-between mb-4">
         <Title
           className="text-xl font-normal text-gray-400 mb-2 md:mb-0"
           text={title}
         />
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 w-full md:w-auto">
+        <div className="flex  md:flex-row items-start md:items-center gap-4 md:gap-8 w-full md:w-auto">
           <SearchInput
             handleSearch={handleSearch}
             type={"number"}
@@ -109,8 +115,8 @@ export default function AdminOrders({ title }) {
       <div className="max-h-[480px] overflow-x-auto overflow-y-scroll">
         <table className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
-            <tr className="border-b font-normal text-base text-gray-400">
-              <th className="w-[15px] py-3 px-2">
+            <tr className="border-b font-normal text-sm lg:text-base text-gray-400">
+              <th className="w-[15px] py-2 px-1 ">
                 <input
                   onChange={handleCheckedAllOrders}
                   checked={selectedOrders.length === orders.length}
@@ -118,22 +124,30 @@ export default function AdminOrders({ title }) {
                   className="rounded border-gray-300 cursor-pointer"
                 />
               </th>
-              <th className="text-left py-3 px-2 md:px-4">Заказ</th>
-              <th className="text-left py-3 px-2 md:px-4">Номер</th>
-              <th className="text-left py-3 px-2 md:px-4">Дата</th>
-              <th className="text-left py-3 px-2 md:px-4">Данные клиента</th>
-              <th className="text-left py-3 px-2 md:px-4">Статус</th>
-              <th className="text-left py-3 px-2 md:px-4">Сумма</th>
+              <th className="text-left py-2 px-1  xl:px-4">Заказ</th>
+              <th className="text-left py-2 px-1  xl:px-4">Номер</th>
+              <th className="text-left py-2 px-1 xl:px-4">Дата</th>
+              <th className="text-left py-2 px-1  xl:px-4">Данные клиента</th>
+              <th className="text-left py-2 px-1  xl:px-4">Статус</th>
+              <th className="text-left py-2 px-1 xl:px-4">Сумма</th>
             </tr>
           </thead>
-          {loading && ordersList.length > 0 ? (
+          {loading ? (
+            <tbody>
+              <tr className="border-b *:text-sm *:font-normal *:text-gray-400">
+                <td colSpan="7" className="py-3 px-4 text-center">
+                  Загрузка...
+                </td>
+              </tr>
+            </tbody>
+          ) : ordersList.length > 0 ? (
             <tbody>
               {ordersList.map((order) => (
                 <tr
                   key={order.id}
-                  className="border-b *:text-xs md:*:text-sm *:font-normal *:text-gray-400"
+                  className="border-b *:text-[11px] lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
                 >
-                  <td className="py-3 w-[15px] px-2">
+                  <td className="py-2 xl:py-3 w-[15px] px-1 xl:px-2">
                     <input
                       checked={isChecked(order.id)}
                       onChange={() => handleCheckedOrder(order.id)}
@@ -141,22 +155,22 @@ export default function AdminOrders({ title }) {
                       className="rounded border-gray-300 cursor-pointer"
                     />
                   </td>
-                  <td className="py-3 px-2 md:px-4">{order.name}</td>
-                  <td className="py-3 px-2 md:px-4">{order.number}</td>
-                  <td className="py-3 px-2 md:px-4">
+                  <td className="py-2 xl:py-3 px-1 xl:px-4">{order.name}</td>
+                  <td className="py-2 xl:py-3 px-1 xl:px-4">{order.number}</td>
+                  <td className="py-2 xl:py-3 px-1 xl:pr-4">
                     {useFormatDate(order.date)}
                   </td>
-                  <td className="py-3 px-2 md:px-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-200 rounded-full"></div>
-                      <span className="text-xs md:text-sm">
+                  <td className="py-2 lg:py-3 px-1 lg:px-4">
+                    <div className="flex items-center gap-1 lg:gap-2">
+                      <div className="w-5 h-5 xl:w-8 xl:h-8 bg-gray-200 rounded-full"></div>
+                      <span className="text-[11px] xl:text-sm">
                         {order.client_name}
                       </span>
                     </div>
                   </td>
-                  <td className="py-3 px-2 md:px-4">
+                  <td className="py-2 lg:py-3 px-1 lg:pr-4">
                     <span
-                      className={`inline-flex items-center gap-1 md:gap-2 px-1 md:px-2 py-1 rounded-full text-gray-400 text-xs md:text-sm`}
+                      className={`inline-flex items-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${
@@ -170,7 +184,7 @@ export default function AdminOrders({ title }) {
                       {order.state}
                     </span>
                   </td>
-                  <td className="py-3 px-2 md:px-4 text-xs md:text-sm">
+                  <td className="py-2 lg:py-3 px-1 lg:px-4 text-[11px] lg:text-sm">
                     {order.order_amount} ₽
                   </td>
                 </tr>

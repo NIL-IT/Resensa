@@ -1,28 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
 import axios from "axios";
-import { fromHalfFloat } from "three/src/extras/DataUtils.js";
-
-// Utility function to convert base64 to blob
-// const base64ToBlob = (base64String) => {
-//   try {
-//     // Extract MIME type and base64 data
-//     const [header, base64Data] = base64String.split(",");
-//     const mimeType = header.match(/data:(.*?);/)?.[1] || "image/jpeg";
-
-//     const byteCharacters = atob(base64Data);
-//     const byteArrays = [];
-
-//     for (let i = 0; i < byteCharacters.length; i++) {
-//       byteArrays.push(byteCharacters.charCodeAt(i));
-//     }
-
-//     return new Blob([new Uint8Array(byteArrays)], { type: mimeType });
-//   } catch (error) {
-//     console.error("Error converting base64 to blob:", error);
-//     throw new Error("Ошибка при обработке изображения");
-//   }
-// };
 
 // Create axios instance with default config
 const url = `https://nilit1.ru/api`;
@@ -33,39 +11,6 @@ const api = axios.create({
   },
 });
 
-// Add response interceptor to handle errors
-// api.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     console.error("API Error:", {
-//       status: error.response?.status,
-//       data: error.response?.data,
-//       config: error.config,
-//     });
-//     return Promise.reject(error);
-//   }
-// );
-
-// Add request interceptor to handle Content-Type
-// api.interceptors.request.use((config) => {
-//   // Don't set Content-Type for FormData, let the browser set it automatically with the boundary
-//   if (config.data instanceof FormData) {
-//     delete config.headers["Content-Type"];
-//   } else {
-//     config.headers["Content-Type"] = "application/json";
-//   }
-//   return config;
-// });
-
-// Add trailing slash to URLs that don't have one
-// api.interceptors.request.use((config) => {
-//   if (config.url && !config.url.endsWith("/")) {
-//     config.url += "/";
-//   }
-//   return config;
-// });
-
-// Handle multipart/form-data requests
 const createFormDataRequest = (data, type) => {
   const formData = new FormData();
 
@@ -118,29 +63,11 @@ export const createNews = createAsyncThunk(
           "Отсутствуют обязательные поля: заголовок, текст и изображение"
         );
       }
-
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("text", payload.text);
       formData.append("news_photo", payload.news_photo);
-      // const blob = base64ToBlob(payload.news_photo);
-      // formData.append("news_photo", blob, "image.jpg");
-      console.log("отправляемая дата:", {
-        title: formData.get("title"),
-        text: formData.get("text"),
-        news_photo: formData.get("news_photo"),
-      });
-
-      const res = await api.post("/news", {
-        title: formData.get("title"),
-        text: formData.get("text"),
-        news_photo: formData.get("news_photo"),
-      });
-      // const res = await api.post("/news/", {
-      //   title: payload.title,
-      //   text: payload.text,
-      //   news_photo: payload.news_photo,
-      // });
+      const res = await api.post("/news/", formData);
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);
@@ -159,6 +86,7 @@ export const updateNews = createAsyncThunk(
   "news/updateNews",
   async ({ id, data }, thunkApi) => {
     try {
+      console.log(data);
       const formData = createFormDataRequest(data, "news");
       const res = await api.put(`/news/${id}/`, formData);
       return res.data;
@@ -224,10 +152,10 @@ export const createEquipment = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("description", data.description);
 
-      // Convert base64 to blob using utility function
-      const blob = base64ToBlob(data.equipment_photo);
-      formData.append("equipment_photo", blob, "image.jpg");
-
+      // // Convert base64 to blob using utility function
+      // const blob = base64ToBlob(data.equipment_photo);
+      // formData.append("equipment_photo", blob, "image.jpg");
+      formData.append("equipment_photo", data.equipment_photo);
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
 
@@ -309,9 +237,9 @@ export const createSolutions = createAsyncThunk(
       formData.append("description", data.description);
 
       // Convert base64 to blob using utility function
-      const blob = base64ToBlob(data.solution_photo);
-      formData.append("solution_photo", blob, "image.jpg");
-
+      // const blob = base64ToBlob(data.solution_photo);
+      // formData.append("solution_photo", blob, "image.jpg");
+      formData.append("solution_photo", data.solution_photo);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -371,7 +299,6 @@ export const createOrders = createAsyncThunk(
   "Orders/createOrders",
   async (data, thunkApi) => {
     try {
-      console.log(data);
       const res = await api.post("/orders/", data);
       return res.data;
     } catch (err) {
@@ -399,7 +326,7 @@ export const deleteOrders = createAsyncThunk(
   "orders/deleteOrders",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/orders/${id}/`);
+      const res = await api.delete(`/orders/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -424,8 +351,7 @@ const userSlice = createSlice({
     addOrderPopup: false,
     ordersData: [],
     equipmentPopup: false,
-    equipmentId: null,
-    newsId: null,
+    itemId: null,
     addNewItemPopup: false,
     newsPopup: false,
     searchPopup: false,
@@ -468,11 +394,8 @@ const userSlice = createSlice({
     changeShowSearchPopup: (state, { payload }) => {
       state.searchPopup = payload;
     },
-    changeEquipmentId: (state, { payload }) => {
-      state.equipmentId = payload;
-    },
-    changeNewsId: (state, { payload }) => {
-      state.newsId = payload;
+    changeItemId: (state, { payload }) => {
+      state.itemId = payload;
     },
     addItemOrder: (state, { payload }) => {
       let isFind = state.ordersData.some(({ id }) => id === payload.id);
@@ -562,9 +485,8 @@ export const {
   changeShowSearchPopup,
   changeShowNewsPopup,
   addNewItemToData,
-  changeNewsId,
   changeData,
-  changeEquipmentId,
+  changeItemId,
 
   changeEquipmentPopup,
   addItemOrder,

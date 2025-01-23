@@ -6,6 +6,9 @@ import {
   createNews,
   createEquipment,
   createSolutions,
+  getAllNews,
+  getAllEquipment,
+  getAllSolutions,
 } from "../../../utils/slice/userSlice";
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -59,9 +62,8 @@ const AddNewItem = () => {
           text: formData.text,
           news_photo: selectedFile,
         };
-        console.log(newsData);
-
-        await dispatch(createNews(newsData));
+        await dispatch(createNews(newsData)).unwrap();
+        await dispatch(getAllNews());
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {
         if (
@@ -79,11 +81,12 @@ const AddNewItem = () => {
         const equipmentData = {
           name: formData.name,
           description: formData.description,
-          equipment_photo: selectedFile, // selectedFile is now base64 string
+          equipment_photo: selectedFile,
           min_param: parseInt(formData.min_param),
           max_param: parseInt(formData.max_param),
         };
         await dispatch(createEquipment(equipmentData)).unwrap();
+        await dispatch(getAllEquipment());
         setFormData({
           name: "",
           description: "",
@@ -103,6 +106,7 @@ const AddNewItem = () => {
           solution_photo: selectedFile,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
+        await dispatch(getAllSolutions());
         setFormData({
           name: "",
           description: "",
@@ -112,7 +116,15 @@ const AddNewItem = () => {
       setSelectedFile(null);
       dispatch(changeShowAddNewItemPopup(false));
     } catch (error) {
-      alert(error.message || "Не удалось сохранить изменения");
+      console.error("Failed to create item:", error);
+      const type = isNews
+        ? "новость"
+        : +pathnameId === 2
+        ? "оборудование"
+        : "решение";
+      alert(
+        `Не удалось создать ${type}. Пожалуйста, проверьте введенные данные.`
+      );
     }
   };
 

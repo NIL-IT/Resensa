@@ -89,7 +89,7 @@ export default function Header() {
             <li key={i} className="text-gray-400 hover:text-gray-300">
               <Link
                 onClick={() => handleClickLink(i)}
-                to={isAdmin ? "/auth" : +i === 4 ? "/product/1" : path}
+                to={isAdmin ? "/auth" : +i === 4 ? "/product/orders" : path}
               >
                 {name}
               </Link>

@@ -15,7 +15,7 @@ export default function AdminExit({ title }) {
 
   return (
     <div className="relative pb-5">
-      <span className="w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
+      <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
       <Title text={title} className="inline-block text-xl font-normal mb-6" />
       <div className="w-full h-[450px] flex items-center justify-center flex-col gap-5">
         <span className="text-gray-400 text-center">

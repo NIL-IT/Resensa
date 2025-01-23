@@ -15,9 +15,8 @@ import {
   getAllOrders,
   getAllSolutions,
 } from "./utils/slice/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
 function App() {
   const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
@@ -25,7 +24,6 @@ function App() {
     isPopup,
     status,
     addOrderPopup,
-    isAuth,
     equipmentPopup,
     addNewItemPopup,
     newsPopup,
@@ -40,14 +38,27 @@ function App() {
     addNewItemPopup ||
     newsPopup ||
     searchPopup;
+
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    dispatch(getAllNews());
-    dispatch(getAllEquipment());
-    dispatch(getAllSolutions());
-    dispatch(getAllOrders());
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        dispatch(getAllNews());
+        dispatch(getAllEquipment());
+        dispatch(getAllSolutions());
+        dispatch(getAllOrders());
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
   }, [dispatch]);
 
-  return (
+  return !loading ? (
     <div className="relative">
       {!isLoginForm && <Widget />}
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
@@ -62,6 +73,8 @@ function App() {
       {newsPopup && <NewsPopup />}
       {searchPopup && <SearchPopup />}
     </div>
+  ) : (
+    <div>Загрузка...</div>
   );
 }
 

@@ -11,7 +11,7 @@ export default function EquipmentBanner({
   title,
   text,
   isButton = false,
-
+  currentProduct,
   textSize,
   width = "",
   about = false,
@@ -21,18 +21,31 @@ export default function EquipmentBanner({
   return (
     <div
       className={`relative  ${
-        !about
+        !about && !currentProduct
           ? `pb-[50px] xs:pb-[40px] sm:pb-[30px] 
            md:pb-[150px] lg:pb-[160px]  
           xl:pb-[220px] 2xl:pb-[240px] 3xl:pb-[286px]`
+          : currentProduct
+          ? `pb-[50px] xs:pb-[60px] sm:pb-[30px] 
+           md:pb-[120px] lg:pb-[136px]  
+          xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`
           : ""
       }`}
     >
       <img
-        className="absolute object-contain top-[30px] left-0 min-w-[800px] max-w-[1920px] 
-         max-h-[400px] md:max-h-[500px] lg:max-h-[600px] xl:max-h-[700px] 2xl:max-h-[800px] 3xl:max-h-[900px]    
-        z-[-2]"
-        src={bannerImg}
+        className={`absolute object-cover top-[30px] 
+          left-0 w-full    
+          z-[-2] ${
+            currentProduct
+              ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
+              xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
+              : `
+              min-w-[100%] max-w-[1920px] 
+              h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
+              xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
+              max-h-[900px]`
+          }`}
+        src={bannerImg || "/placeholder.svg"}
         alt="banner"
       />
       <div

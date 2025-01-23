@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeShowNewsPopup } from "../../../utils/slice/userSlice";
+import {
+  changeShowNewsPopup,
+  changeItemId,
+} from "../../../utils/slice/userSlice";
 
 export default function NewsPopup() {
   const dispatch = useDispatch();
-  const { newsId, news } = useSelector(({ user }) => user);
-  const { title, text, date, img } = news.find(({ id }) => id === newsId);
+  const { itemId, news } = useSelector(({ user }) => user);
+  const { title, text, date, img } = news.find(({ id }) => id === itemId);
   document.body.style.overflow = "hidden";
   const handleClose = () => {
     dispatch(changeShowNewsPopup(false));
+    dispatch(changeItemId(null));
     document.body.style.overflow = "auto";
   };
   return (

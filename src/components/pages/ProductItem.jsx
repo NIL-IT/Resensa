@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import EquipmentBanner from "../shared/EquipmentBanner";
 import Advantages from "../shared/Advantages";
-import { data } from "../../utils/data";
+
 import ItemsList from "../shared/ItemsList";
 import Footer from "../shared/Footer";
 import OrderStatus from "../shared/OrderStatus";
-import { useDispatch, useSelector } from "react-redux";
-import { changeRoutingToOrders } from "../../utils/slice/userSlice";
+import { useSelector } from "react-redux";
 
 const text = `Оборудование серии RCN стандартного исполнения предназначено для 
 размещения и эксплуатации в помещениях различного 
@@ -16,13 +15,19 @@ const text = `Оборудование серии RCN стандартного �
 export default function ProductItem({ list }) {
   const { id } = useParams();
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
+  const isOrders = pathname.split("/")[2] === "orders";
+  const navigate = useNavigate();
+  const [dataCategory, setDataCategory] = useState();
   const { routingToOrders } = useSelector(({ user }) => user);
-  const findProduct = (idProduct) =>
-    list.find((item) => +item.id === +idProduct);
-  const [currentProduct, setCurrentProduct] = useState(findProduct(id));
+  const [isLoading, setIsLoading] = useState(false);
+  const findProduct = !isOrders
+    ? list.find((item) => +item.id === +id)
+    : list[0];
+  const [currentProduct, setCurrentProduct] = useState(findProduct);
+
+  if (!currentProduct && !isOrders) navigate("/");
   useEffect(() => {
-    if (routingToOrders) {
+    if (routingToOrders && isOrders) {
       setTimeout(() => {
         console.log("routing");
         window.scrollTo({
@@ -35,31 +40,38 @@ export default function ProductItem({ list }) {
   });
 
   useEffect(() => {
-    if (!id) return;
-    setCurrentProduct(findProduct(id));
+    if (!id && isOrders) return;
+    setCurrentProduct(findProduct);
   }, [id]);
 
   useEffect(() => {
+    setCurrentProduct(!isOrders ? findProduct : list[0]);
     window.scrollTo({
       top: 0,
       left: 0,
     });
   }, [pathname]);
 
-  function findCategory(id) {
-    for (const category of ["equipment", "solutions"]) {
-      const item = data[category].items.find((item) => item.id === +id);
-      if (item) {
-        return data[category];
-      }
+  useEffect(() => {
+    if (!currentProduct) return;
+    if (currentProduct.hasOwnProperty("max_param")) {
+      const filterData = list.filter((item) => item.max_param);
+      setDataCategory(filterData);
+      setIsLoading(true);
+    } else {
+      const filterData = list.filter(
+        (item) => !item.hasOwnProperty("max_param")
+      );
+      setDataCategory(filterData);
+      setIsLoading(true);
     }
-    return null;
-  }
+  }, [id, list]);
 
-  return (
+  return isLoading ? (
     <>
       <EquipmentBanner
-        bannerImg={"/img/product_banner.png"}
+        currentProduct={true}
+        bannerImg={currentProduct.image}
         title={"ОБЩЕПРОМЫШЛЕННОЕ"}
         subtitle={currentProduct.name}
         text={text}
@@ -67,9 +79,11 @@ export default function ProductItem({ list }) {
         width={"w-[550px]"}
       />
       <Advantages />
-      <ItemsList title={"каталог"} list={findCategory(id)} limited={false} />
+      <ItemsList title={"каталог"} list={dataCategory} limited={false} />
       <OrderStatus />
       <Footer />
     </>
+  ) : (
+    <div>Загрузка...</div>
   );
 }
