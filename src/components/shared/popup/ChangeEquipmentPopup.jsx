@@ -69,17 +69,25 @@ const ChangeEquipmentPopup = () => {
     }));
   };
 
-  const urlToFile = async (url) => {
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const fileName = url.split("/").pop() || "image.jpg";
-      return new File([blob], fileName, { type: blob.type });
-    } catch (error) {
-      console.error("Error converting URL to File:", error);
-      throw new Error("Failed to process image");
-    }
-  };
+  // const urlToFile = async (url) => {
+  //   try {
+  //     // If the URL is from an external domain, skip the conversion
+  //     if (!url.startsWith(window.location.origin)) {
+  //       console.log("Skipping external image conversion:", url);
+  //       return null;
+  //     }
+
+  //     const response = await fetch(url, { mode: "cors" });
+  //     if (!response.ok) throw new Error("Failed to fetch image");
+
+  //     const blob = await response.blob();
+  //     const fileName = url.split("/").pop() || "image.jpg";
+  //     return new File([blob], fileName, { type: blob.type });
+  //   } catch (error) {
+  //     console.warn("Error converting URL to File:", error);
+  //     return null;
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,14 +100,14 @@ const ChangeEquipmentPopup = () => {
         ? "solution_photo"
         : "equipment_photo";
 
-      if (selectedFile) {
-        // If a new file was selected, use it
-        submitData[imageFieldName] = selectedFile;
-      } else if (formData[imageFieldName]) {
-        // If no new file was selected but we have an existing image URL, convert it
-        const imageFile = await urlToFile(formData[imageFieldName]);
-        submitData[imageFieldName] = imageFile;
-      }
+      // if (selectedFile) {
+      // If a new file was selected, use it
+      submitData[imageFieldName] = selectedFile;
+      // } else if (formData[imageFieldName]) {
+      //   // If no new file was selected but we have an existing image URL, convert it
+      //   const imageFile = await urlToFile(formData[imageFieldName]);
+      //   submitData[imageFieldName] = imageFile;
+      // }
 
       if (!isNews) {
         const isEquipment = !isSolutions;
@@ -107,7 +115,7 @@ const ChangeEquipmentPopup = () => {
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: submitData })
           ).unwrap();
-        } else {
+        } else if (isSolutions) {
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: submitData })
           ).unwrap();
@@ -127,7 +135,7 @@ const ChangeEquipmentPopup = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center">
-      <div className="bg-white py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
+      <div className="bg-white h-[90%] overflow-y-scroll py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
         <button
           onClick={() => {
             dispatch(changeEquipmentPopup(false));
@@ -138,7 +146,11 @@ const ChangeEquipmentPopup = () => {
           ✕
         </button>
         <h2 className="text-center text-[32px] font-medium leading-[40.8px] text-gray-400 mb-6">
-          {!isNews ? "Изменить оборудование" : "Изменить новость"}
+          {isNews
+            ? "Изменить новость"
+            : isSolutions
+            ? "Изменить решения"
+            : "Изменить оборудование"}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-[18px]">

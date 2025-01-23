@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,13 +7,28 @@ import {
   changeItemId,
   changeShowAddNewItemPopup,
   deleteNews,
+  getAllNews,
 } from "../../../utils/slice/userSlice";
 import { Plus } from "lucide-react";
 
 export default function AdminNews() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const { news } = useSelector(({ user }) => user);
-  console.log(news);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        await dispatch(getAllNews());
+      } catch (error) {
+        console.error(`Failed to fetch ${category}:`, error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch, news]);
+
   const changeNews = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
@@ -43,7 +58,9 @@ export default function AdminNews() {
           <Plus className="w-5 md:w-6" />
         </button>
       </div>
-      {news.length > 0 ? (
+      {loading ? (
+        <div>Загрузка...</div>
+      ) : (
         <div className="flex justify-center lg:justif">
           <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
             {news.map(({ id, name, image, date, title }) => (
@@ -78,8 +95,6 @@ export default function AdminNews() {
             ))}
           </div>
         </div>
-      ) : (
-        <div>Загрузка...</div>
       )}
     </div>
   );

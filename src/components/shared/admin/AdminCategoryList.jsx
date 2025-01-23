@@ -34,7 +34,7 @@ export default function AdminCategoryList({ title, category }) {
       setLoading(false);
     };
     fetchData();
-  }, [dispatch, category]);
+  }, [dispatch, category, category === "equipment" ? equipment : solutions]);
 
   const changeEquipment = (id) => {
     dispatch(changeItemId(id));

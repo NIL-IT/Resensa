@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { data } from "../data";
 import axios from "axios";
+import apiLogin from "../api";
 
 // Create axios instance with default config
 const url = `https://nilit1.ru/api`;
@@ -58,11 +59,15 @@ export const updateNews = createAsyncThunk(
   "news/updateNews",
   async ({ id, data }, thunkApi) => {
     try {
-      console.log("Отправляемые данные в запросе:", data, id);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("text", data.text);
-      formData.append("news_photo", data.news_photo);
+
+      if (data.news_photo !== undefined) {
+        console.log(data.news_photo, "фото");
+        formData.append("news_photo", data.news_photo);
+      }
+      console.log("Отправляемые данные в запросе:", data, id);
       const res = await api.post(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
@@ -165,11 +170,10 @@ export const updateEquipment = createAsyncThunk(
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
+    if (data.equipment_photo) {
+      formData.append("equipment_photo", data.equipment_photo);
+    }
 
-    // // Convert base64 to blob using utility function
-    // const blob = base64ToBlob(data.equipment_photo);
-    // formData.append("equipment_photo", blob, "image.jpg");
-    formData.append("equipment_photo", data.equipment_photo);
     formData.append("min_param", data.min_param);
     formData.append("max_param", data.max_param);
     console.log("Отправляемые данные в запросе:", data, id);
@@ -248,7 +252,10 @@ export const updateSolutions = createAsyncThunk(
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append("solution_photo", data.solution_photo);
+    if (data.solution_photo) {
+      formData.append("solution_photo", data.solution_photo);
+    }
+
     console.log("Отправляемые данные в запросе:", data, id);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
@@ -289,8 +296,16 @@ export const getAllOrders = createAsyncThunk(
 export const createOrders = createAsyncThunk(
   "Orders/createOrders",
   async (data, thunkApi) => {
+    const formData = new FormData();
+    console.log("прокидываемая дата", data);
+    formData.append("name", data.name);
+    formData.append("number", Number(data.number));
+    formData.append("date", data.date);
+    formData.append("client_name", data.client_name);
+    formData.append("state", data.state);
+    formData.append("order_amount", Number(data.order_amount));
     try {
-      const res = await api.post("/orders/", data);
+      const res = await api.post("/orders", formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -303,12 +318,9 @@ export const updateOrders = createAsyncThunk(
   "Orders/updateOrders",
   async ({ id, data }, thunkApi) => {
     try {
-      const formData = new FormData();
-      const params = new URLSearchParams();
-      params.append("param1", "value1");
       console.log(data);
       // const formData = createFormDataRequest(data, "order");
-      const res = await api.patch(`/orders/${id}/?`, data);
+      const res = await api.patch(`/orders/${id}/`, data);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -320,7 +332,10 @@ export const patchOrders = createAsyncThunk(
   "patchOrders/patchOrders",
   async ({ id, state }, thunkApi) => {
     try {
-      const res = await api.patch(`/orders/${id}`, state);
+      console.log(`/orders/${id}/state?new_state=${state.toString()}`, ":путь");
+      const res = await api.patch(
+        `/orders/${id}/state?new_state=${state.toString()}`
+      );
       return res.data;
     } catch (err) {
       console.log(err);
@@ -372,6 +387,24 @@ export const updateBanner = createAsyncThunk(
     }
   }
 );
+export const authPost = createAsyncThunk(
+  "user/authPost",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await apiLogin.post("/auth/token", credentials);
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 422) {
+        return rejectWithValue({
+          message: "Неверное имя пользователя или пароль",
+        });
+      }
+      return rejectWithValue({
+        message: "Ошибка сервера. Попробуйте позже.",
+      });
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -396,6 +429,9 @@ const userSlice = createSlice({
     statusOrderPopup: false,
     experience: 22,
     guarantee: 3,
+    token: null,
+    isAuthenticated: false,
+    error: null,
   },
   reducers: {
     changeRoutingToOrders: (state, { payload }) => {
@@ -490,6 +526,15 @@ const userSlice = createSlice({
 
       .addCase(getAllEquipment.fulfilled, (state, action) => {
         state.equipment = action.payload;
+      })
+      .addCase(authPost.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(authPost.fulfilled, (state) => {
+        state.error = null;
+      })
+      .addCase(authPost.rejected, (state, action) => {
+        state.error = action.payload?.message || "Ошибка авторизации";
       })
       // .addCase(deleteEquipment.fulfilled, (state, action) => {
       //   state.equipment = action.payload;

@@ -40,7 +40,7 @@ export default function AdminOrders({ title }) {
       setLoading(false);
     };
     fetchOrders();
-  }, [dispatch]);
+  }, [dispatch, orders]);
 
   useEffect(() => {
     setOrdersList(orders);
