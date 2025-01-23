@@ -15,75 +15,42 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Create deploy script
         run: |
           cat > deploy.sh << 'SCRIPT'
           #!/bin/bash
-          set -e  # Exit on any error
-          
-          echo "Starting deployment process..."
-          DEPLOY_PATH="/var/www/resensa/frontend"
-          
-          # Create deployment directory
-          echo "Creating deployment directory..."
-          mkdir -p $DEPLOY_PATH
-          
-          # Clone or update repository
-          if [ -d "$DEPLOY_PATH/.git" ]; then
-            echo "Updating existing repository..."
-            cd $DEPLOY_PATH
+          mkdir -p /var/www/resensa/frontend
+
+          if [ -d /var/www/resensa/frontend/.git ]; then
+            cd /var/www/resensa/frontend
             git fetch
             git reset --hard origin/main
           else
-            echo "Cloning fresh repository..."
-            rm -rf $DEPLOY_PATH/*
-            git clone https://$1@github.com/NIL-IT/Resensa.git ${DEPLOY_PATH}_temp
-            mv ${DEPLOY_PATH}_temp/* $DEPLOY_PATH/
-            mv ${DEPLOY_PATH}_temp/.* $DEPLOY_PATH/ 2>/dev/null || true
-            rm -rf ${DEPLOY_PATH}_temp
+            rm -rf /var/www/resensa/frontend/*
+            git clone https://$1@github.com/NIL-IT/Resensa.git /var/www/resensa/frontend_temp
+            mv /var/www/resensa/frontend_temp/* /var/www/resensa/frontend/
+            mv /var/www/resensa/frontend_temp/.* /var/www/resensa/frontend/ 2>/dev/null || true
+            rm -rf /var/www/resensa/frontend_temp
           fi
-          
-          # Build process
-          cd $DEPLOY_PATH
-          echo "Cleaning npm cache..."
-          npm cache clean --force
-          
-          echo "Installing dependencies..."
-          npm ci
-          
-          echo "Cleaning temporary files..."
-          rm -rf dist node_modules/.vite
 
-          echo "Building project with increased memory limit..."
-          export NODE_OPTIONS="--max-old-space-size=4096"
-          NODE_ENV=production npm run build
-          
-          # Deploy new version
-          echo "Deploying new version..."
-          if [ -d "$DEPLOY_PATH/current" ]; then
-            echo "Backing up current version..."
-            mv $DEPLOY_PATH/current $DEPLOY_PATH/previous
+          cd /var/www/resensa/frontend
+          npm install
+          npm run build
+
+          if [ -d /var/www/resensa/frontend/current ]; then
+            mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
           fi
-          
-          mkdir -p $DEPLOY_PATH/current
-          echo "Copying build files..."
-          cp -r $DEPLOY_PATH/dist/* $DEPLOY_PATH/current/
-          
-          echo "Cleaning up..."
-          rm -rf $DEPLOY_PATH/previous
-          
-          echo "Deployment completed successfully!"
+
+          mkdir -p /var/www/resensa/frontend/current
+          cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
+          rm -rf /var/www/resensa/frontend/previous
           SCRIPT
           chmod +x deploy.sh
 
