@@ -62,7 +62,7 @@ export const updateNews = createAsyncThunk(
       formData.append("title", data.title);
       formData.append("text", data.text);
       formData.append("news_photo", data.news_photo);
-      const res = await api.put(`/news/${id}/`, formData);
+      const res = await api.post(`/news/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
