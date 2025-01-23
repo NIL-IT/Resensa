@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Title from "../ui/Title";
-import Button from "../ui/Button";
-import Select from "../ui/Select";
+
 import EquipmentType from "./popup/EquipmentType";
+import { useDispatch } from "react-redux";
+import { changeResult } from "../../utils/slice/userSlice";
 
 export default function Calculator() {
+  const dispatch = useDispatch();
   const [isCalculated, setIsCalculated] = useState(false);
   const [formData, setFormData] = useState({
     square: "",
@@ -19,9 +21,10 @@ export default function Calculator() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    let isCalculated = formData.square * formData.count;
+    await dispatch(changeResult(isCalculated));
     setFormData({
       square: "",
       count: "",

@@ -2,7 +2,10 @@ import React, { useState, useRef } from "react";
 import { ChevronDown, FileSpreadsheet } from "lucide-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { importOrdersExcel } from "../../utils/slice/userSlice";
+import {
+  exportOrdersExcel,
+  importOrdersExcel,
+} from "../../utils/slice/userSlice";
 
 const FileUploader = () => {
   const [dragActive, setDragActive] = useState(false);

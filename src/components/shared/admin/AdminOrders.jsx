@@ -3,7 +3,11 @@ import Title from "../../ui/Title";
 import { PencilLine, Plus, Trash2 } from "lucide-react";
 import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrders, deleteOrders } from "../../../utils/slice/userSlice";
+import {
+  getAllOrders,
+  deleteOrders,
+  exportOrdersExcel,
+} from "../../../utils/slice/userSlice";
 import { useFormatDate } from "../../../utils/hooks/formatDate";
 import SearchInput from "../../ui/SearchInput";
 
@@ -27,16 +31,18 @@ export const list = [
 ];
 
 export default function AdminOrders({ title }) {
-  const { orders } = useSelector(({ user }) => user);
+  const { orders, exportExcel } = useSelector(({ user }) => user);
   const [ordersList, setOrdersList] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const [excel, setExcel] = useState(ordersList);
 
   useEffect(() => {
     const fetchOrders = async () => {
       setLoading(true);
       await dispatch(getAllOrders());
+
       setLoading(false);
     };
     fetchOrders();
@@ -53,7 +59,15 @@ export default function AdminOrders({ title }) {
       setSelectedOrders(ordersList.map((order) => order.id));
     }
   };
-
+  // export excel
+  useEffect(() => {
+    const fetchExcel = async () => {
+      const file = await dispatch(getAllOrders());
+      setExcel(file.payload);
+      console.log("file", file.payload);
+    };
+    fetchExcel();
+  }, [exportExcel, dispatch]);
   const handleCheckedOrder = (orderId) => {
     setSelectedOrders((prev) =>
       prev.includes(orderId)
@@ -147,7 +161,7 @@ export default function AdminOrders({ title }) {
             </tbody>
           ) : ordersList.length > 0 ? (
             <tbody>
-              {ordersList.map((order) => (
+              {excel.map((order) => (
                 <tr
                   key={order.id}
                   className="border-b *:text-[11px] lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"

@@ -422,7 +422,36 @@ export const importOrdersExcel = createAsyncThunk(
     }
   }
 );
+export const exportOrdersExcel = createAsyncThunk(
+  "exportOrdersExcel/exportOrdersExcel",
+  async (_, thunkApi) => {
+    try {
+      const res = await api.get("/orders/export/excel");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const submitOrder = createAsyncThunk(
+  "submitOrder/submitOrder",
+  async (data, thunkApi) => {
+    try {
+      const formData = new FormData();
+      formData.append("company_name", data.company_name);
+      formData.append("name", data.name);
+      formData.append("phone", data.phone);
+      formData.append("email", data.email);
 
+      const res = await api.post("/orders/submit-order/", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -451,8 +480,13 @@ const userSlice = createSlice({
     isAuthenticated: false,
     error: null,
     excel: null,
+    exportExcel: null,
+    result: null,
   },
   reducers: {
+    changeResult: (state, { payload }) => {
+      state.result = payload;
+    },
     changeRoutingToOrders: (state, { payload }) => {
       state.routingToOrders = payload;
     },
@@ -560,6 +594,9 @@ const userSlice = createSlice({
       })
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
+      })
+      .addCase(exportOrdersExcel.fulfilled, (state, action) => {
+        state.exportExcel = action.payload;
       });
   },
 });
@@ -574,7 +611,7 @@ export const {
   addNewItemToData,
   changeData,
   changeItemId,
-
+  changeResult,
   changeEquipmentPopup,
   addItemOrder,
   changeOrdersList,

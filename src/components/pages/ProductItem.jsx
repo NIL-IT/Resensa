@@ -24,7 +24,7 @@ export default function ProductItem({ list }) {
     ? list.find((item) => +item.id === +id)
     : list[0];
   const [currentProduct, setCurrentProduct] = useState(findProduct);
-
+  document.body.style.overflowY = "auto";
   if (!currentProduct && !isOrders) navigate("/");
   useEffect(() => {
     if (routingToOrders && !isAdmin) {

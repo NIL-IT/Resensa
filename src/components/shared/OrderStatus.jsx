@@ -27,7 +27,7 @@ export default function OrderStatus() {
 
       <form
         onSubmit={handleClickStatus}
-        className="w-[600px] flex-center justify-center gap-5"
+        className="w-[600px] flex flex-col items-center gap-5   md:flex-row md:flex-center md:justify-center "
       >
         <input
           placeholder="Номер заказа"
@@ -40,7 +40,7 @@ export default function OrderStatus() {
         <button
           type="submit"
           className={
-            "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5"
+            "group bg-gray-400 text-white font-normal py-[15px] px-[30px] text-xs uppercase flex-center gap-5"
           }
         >
           <img

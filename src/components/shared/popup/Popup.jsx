@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../ui/Input";
 import { useDispatch } from "react-redux";
-import { changeShowPopup } from "../../../utils/slice/userSlice";
+import { changeShowPopup, submitOrder } from "../../../utils/slice/userSlice";
 
 const Popup = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(true);
 
   const [formData, setFormData] = useState({
-    companyName: "",
+    company_name: "",
     name: "",
     phone: "",
     email: "",
@@ -23,17 +23,25 @@ const Popup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsOpen(false);
-    setFormData({
-      companyName: "",
-      name: "",
-      phone: "",
-      email: "",
-      privacy: false,
-    });
-    dispatch(changeShowPopup(false));
+    try {
+      const newData = formData;
+      delete newData.privacy;
+      console.log("отправляеммые данные:", newData);
+      await dispatch(submitOrder(newData));
+      setIsOpen(false);
+      setFormData({
+        company_name: "",
+        name: "",
+        phone: "",
+        email: "",
+        privacy: false,
+      });
+      dispatch(changeShowPopup(false));
+    } catch (err) {
+      alert("Error", err.message);
+    }
   };
   useEffect(() => {
     dispatch(changeShowPopup(isOpen));
@@ -57,7 +65,7 @@ const Popup = () => {
         >
           <Input
             type={"text"}
-            name="companyName"
+            name="company_name"
             placeholder="Наименование компании"
             value={formData.companyName}
             onChange={handleInputChange}

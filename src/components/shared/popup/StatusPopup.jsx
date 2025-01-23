@@ -5,46 +5,68 @@ import { changeShowStatus } from "../../../utils/slice/userSlice";
 export default function StatusPopup() {
   const dispatch = useDispatch();
   const { ordersData } = useSelector(({ user }) => user);
-  const { orderNum } = useSelector(({ user }) => user);
+  const { orderNum, orders } = useSelector(({ user }) => user);
   const [isOpen, setIsOpen] = useState(true);
-  const findOrder = ordersData.find((order) => order.id === orderNum);
+  const [findOrder, setFindOrder] = useState(null);
+  useEffect(() => {
+    if (orders.length > 0 && orderNum) {
+      setFindOrder(orders.find((order) => +order.number === +orderNum));
+    }
+  }, [orders, orderNum]);
+  document.body.style.overflowY = "hidden";
+  console.log(findOrder);
   useEffect(() => {
     dispatch(changeShowStatus(isOpen));
   }, [isOpen]);
   return (
     <div className="fixed inset-0  flex items-center justify-center">
-      <div className="bg-white py-[38px] px-8 rounded-lg w-full max-w-[800px] max-h-[553px] flex flex-col justify-center relative">
+      <div
+        className="bg-white py-[38px] px-8 rounded-lg xl:min-h-[200px] xl:h-[auto]  w-[80%] 
+       xl:w-full max-w-[800px] lg:max-h-[553px] flex flex-col justify-normal xl:justify-center relative"
+      >
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
         >
           ✕
         </button>
-        <h2 className="text-center text-xl font-medium leading-[40.8px] text-gray-400 mb-6 uppercase">
+        <h2 className="text-center text-lg lg:text-xl font-medium leading-8 lg:leading-[40.8px] text-gray-400 mb-6 uppercase">
           вы можете проверить статус своего заказа
         </h2>
         {findOrder ? (
           <div className="flex justify-center">
-            <table className="w-[80%]">
-              <thead className="border-b border-gray-400">
-                <tr className=" font-normal text-base text-gray-400 *:py-4  flex justify-between w-[600px] px-2">
-                  <th className="text-left  ">Номер</th>
-                  <th className="text-left  ">Дата</th>
-                  <th className="text-left ">Статус</th>
-                  <th className="text-left  mr-2">Сумма</th>
+            <table className=" xl:w-[80%] ">
+              <thead
+                className="border-0 xl:border-b border-gray-400 relative  
+              :max-w-[400px]"
+              >
+                <tr
+                  className="flex  flex-col font-normal text-base text-gray-400 *:py-4  xl:flex xl:flex-row justify-between 
+                 w-[280px] sm:w-[300px] md:w-[350px] xl:w-[600px] px-2"
+                >
+                  <th className="text-left  border-b xl:border-b-0 border-b-gray-400 ">
+                    Номер
+                  </th>
+                  <th className="text-left  xl:mr-10  border-b xl:border-b-0 border-b-gray-400">
+                    Дата
+                  </th>
+                  <th className="text-left   xl:mr-6  border-b xl:border-b-0 border-b-gray-400">
+                    Статус
+                  </th>
+                  <th className="text-left  xl:mr-2  border-b xl:border-b-0 border-b-gray-400">
+                    Сумма
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="*:py-4 flex justify-between w-[600px] px-2">
-                  <td className=" text-sm text-gray-400 pl-[5px]">
-                    {findOrder.id}
+                <tr className="*:py-4 flex flex-col left-[-2vw] top-[132px] sm:left-[5vw] sm:top-[132px] md:top-[105px] md:left-[22vw] text-right xl:text-left absolute xl:static  xl:flex-row justify-between w-[300px]  xl:w-[600px] px-2">
+                  <td className="  text-sm text-gray-400 pl-[5px]">
+                    {findOrder.number}
                   </td>
-                  <td className=" text-sm text-gray-400 pl-7">
-                    {findOrder.date}
-                  </td>
-                  <td className="pr-4">
+                  <td className=" text-sm text-gray-400 ">{findOrder.date}</td>
+                  <td className="xl:pr-4 mt-[4px] xl:mt-0">
                     <span
-                      className={`inline-flex items-center gap-2 px-2  rounded-full text-gray-400`}
+                      className={`inline-flex items-center gap-2 xl:px-2  rounded-full text-gray-400`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${
@@ -58,7 +80,9 @@ export default function StatusPopup() {
                         : "Отменен"}
                     </span>
                   </td>
-                  <td className=" text-sm text-gray-400">{findOrder.amount}</td>
+                  <td className=" text-sm text-gray-400 xl:mr-1 mt-[3px] xl:mt-0">
+                    {findOrder.order_amount} ₽
+                  </td>
                 </tr>
               </tbody>
             </table>

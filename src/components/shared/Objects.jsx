@@ -57,7 +57,7 @@ export default function Objects({ className = null, about = false }) {
             <Button
               icon={true}
               text={"построить маршрут до офиса"}
-              className="bg-white gap-2 text-gray-400 w-full mt-6 sm:mt-8 text-sm sm:text-base font-normal py-3 sm:py-4 px-4 sm:px-3
+              className="bg-white gap-10  text-gray-400 w-full justify-center mt-6 sm:mt-8 text-sm sm:text-base font-normal py-3 sm:py-4 px-4 sm:px-3
             
               xs:gap-2 sm:gap-2 md:gap-[100px] lg:gap-5  xl:text-center 3xl:text-center"
               white={true}

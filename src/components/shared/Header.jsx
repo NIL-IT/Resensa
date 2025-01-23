@@ -25,13 +25,11 @@ export default function Header() {
     { name: "Контакты", path: "/contact" },
   ];
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const handleClickImg = async () => {
+  const handleClickImg = async (path) => {
     if (isAdmin) {
       Cookies.remove("access_token");
       await dispatch(changeIsAdmin(false));
       navigate("/auth");
-    } else {
-      navigate("/");
     }
   };
   const handleClickLink = async (i, path) => {
@@ -63,7 +61,11 @@ export default function Header() {
   return (
     <header className="container  pt-6 lg:pt-8">
       <div className="flex justify-between items-center border-b border-gray-400 pb-6">
-        <Link onClick={() => handleClickImg()} className="mb-0">
+        <Link
+          to={!isAdmin && "/"}
+          onClick={() => handleClickImg("/")}
+          className="mb-0"
+        >
           <img
             className="w-[200px] sm:w-[250px] lg:w-[313px]"
             src="/icon/logo.svg"
