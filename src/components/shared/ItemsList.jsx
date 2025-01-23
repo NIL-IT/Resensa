@@ -21,7 +21,7 @@ export default function ItemsList({ limited = true, list, href, title }) {
   }, [list, limited]);
   console.log(list);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  console.log;
+
   return data.length > 0 ? (
     <div className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
       <Title

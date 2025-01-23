@@ -21,7 +21,7 @@ const navList = [
 export default function Footer({ scrollTop = null }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAdmin } = useSelector(({ user }) => user);
+  const { isAdmin, equipment } = useSelector(({ user }) => user);
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const handleClickImg = async () => {
@@ -34,11 +34,14 @@ export default function Footer({ scrollTop = null }) {
     }
   };
   const handleClickLink = async (i, path) => {
+    if (!isAdmin && +i == 4) {
+      await dispatch(changeRoutingToOrders(true));
+      return navigate(`/product/${equipment[0].id}`);
+    }
     if (isAdmin) {
       if (i === 4) {
         // If admin clicks on "Заказы", navigate to admin panel
         navigate("/admin/1");
-        dispatch(changeRoutingToOrders(true));
       } else {
         // For any other link click by admin, log them out
         Cookies.remove("access_token");

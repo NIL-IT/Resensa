@@ -60,6 +60,7 @@ const FileUploader = () => {
         formData.append("file", file);
 
         try {
+          console.log(formData.get("file"));
           await dispatch(importOrdersExcel(file));
           setUploadedFiles((prev) => [...prev, file]);
         } catch (err) {
@@ -119,7 +120,7 @@ const FileUploader = () => {
 
       {uploading ? (
         <div className="mt-4 text-center">
-          <p className="text-blue-500">Uploading files...</p>
+          <p className="text-blue-500">Загрузка...</p>
         </div>
       ) : (
         uploadedFiles.length > 0 && (

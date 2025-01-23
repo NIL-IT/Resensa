@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../ui/Button";
-
+import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import BurgerButton from "../ui/BurgerButton";
 
@@ -14,7 +14,8 @@ import {
 
 export default function Header() {
   const dispatch = useDispatch();
-  const { isAdmin } = useSelector(({ user }) => user);
+  const navigate = useNavigate();
+  const { isAdmin, equipment } = useSelector(({ user }) => user);
   const navList = [
     { name: "Главная", path: "/" },
     { name: "Оборудование", path: "/equipment" },
@@ -34,11 +35,14 @@ export default function Header() {
     }
   };
   const handleClickLink = async (i, path) => {
+    if (!isAdmin && +i == 4) {
+      await dispatch(changeRoutingToOrders(true));
+      return navigate(`/product/${equipment[0].id}`);
+    }
     if (isAdmin) {
       if (i === 4) {
         // If admin clicks on "Заказы", navigate to admin panel
         navigate("/admin/1");
-        dispatch(changeRoutingToOrders(true));
       } else {
         // For any other link click by admin, log them out
         Cookies.remove("access_token");
@@ -54,8 +58,6 @@ export default function Header() {
         dispatch(changeRoutingToOrders(false));
       }
     }
-
-    if (scrollTop) scrollTop();
   };
 
   return (
@@ -115,7 +117,7 @@ export default function Header() {
             <li
               onClick={() => handleClickLink(i, path)}
               key={i}
-              className="text-gray-400 hover:text-gray-300"
+              className="text-gray-400 hover:text-gray-300 cursor-pointer"
             >
               {name}
             </li>

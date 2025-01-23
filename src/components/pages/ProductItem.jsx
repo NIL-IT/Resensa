@@ -18,7 +18,7 @@ export default function ProductItem({ list }) {
   const isOrders = pathname.split("/")[2] === "orders";
   const navigate = useNavigate();
   const [dataCategory, setDataCategory] = useState();
-  const { routingToOrders } = useSelector(({ user }) => user);
+  const { routingToOrders, isAdmin } = useSelector(({ user }) => user);
   const [isLoading, setIsLoading] = useState(false);
   const findProduct = !isOrders
     ? list.find((item) => +item.id === +id)
@@ -27,7 +27,7 @@ export default function ProductItem({ list }) {
 
   if (!currentProduct && !isOrders) navigate("/");
   useEffect(() => {
-    if (routingToOrders && isOrders) {
+    if (routingToOrders && !isAdmin) {
       setTimeout(() => {
         console.log("routing");
         window.scrollTo({

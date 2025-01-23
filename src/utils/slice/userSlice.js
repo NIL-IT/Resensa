@@ -412,7 +412,9 @@ export const importOrdersExcel = createAsyncThunk(
   "importOrdersExcel/importOrdersExcel",
   async (file, thunkApi) => {
     try {
-      const res = await api.post("/orders/import/excel", file);
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await api.post("/orders/import/excel", formData);
       return res.data;
     } catch (err) {
       console.log(err);
