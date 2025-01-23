@@ -9,6 +9,7 @@ import {
   deleteNews,
 } from "../../../utils/slice/userSlice";
 import { Plus } from "lucide-react";
+import { div } from "three/tsl";
 
 export default function AdminNews() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function AdminNews() {
 
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
-  };  
+  };
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
@@ -44,37 +45,39 @@ export default function AdminNews() {
         </button>
       </div>
       {news.length > 0 ? (
-        <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-          {news.map(({ id, name, image, date, title }) => (
-            <div
-              key={id}
-              className="flex flex-col justify-between w-full sm:w-[200px] h-[360px] border border-gray-100 p-4 mb-5"
-            >
-              <div>
-                <img
-                  className="w-full h-[120px] object-cover"
-                  src={image}
-                  alt={name}
-                />
-                <h2 className="text-gray-400 text-sm uppercase font-normal my-2 overflow-hidden">
-                  {title}
-                </h2>
-                <p className="text-[13px] text-gray-300">{date}</p>
+        <div className="flex justify-center lg:justif">
+          <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+            {news.map(({ id, name, image, date, title }) => (
+              <div
+                key={id}
+                className="flex flex-col justify-between w-full sm:w-[200px] h-[360px] border border-gray-100 p-4 mb-5"
+              >
+                <div>
+                  <img
+                    className="w-full h-[120px] object-cover"
+                    src={image}
+                    alt={name}
+                  />
+                  <h2 className="text-gray-400 text-sm uppercase font-normal my-2 overflow-hidden">
+                    {title}
+                  </h2>
+                  <p className="text-[13px] text-gray-300">{date}</p>
+                </div>
+                <div className="flex flex-col justify-center gap-2">
+                  <Button
+                    onClick={() => changeNews(id)}
+                    text={"Изменить"}
+                    className="w-full py-2 hover:bg-gray-450 text-center"
+                  />
+                  <Button
+                    onClick={() => handlerDeleteNews(id)}
+                    text={"Удалить"}
+                    className="w-full py-2 bg-gray-300 hover:bg-gray-500 text-center"
+                  />
+                </div>
               </div>
-              <div className="flex flex-col justify-center gap-2">
-                <Button
-                  onClick={() => changeNews(id)}
-                  text={"Изменить"}
-                  className="w-full py-2 hover:bg-gray-450 text-center"
-                />
-                <Button
-                  onClick={() => handlerDeleteNews(id)}
-                  text={"Удалить"}
-                  className="w-full py-2 bg-gray-300 hover:bg-gray-500 text-center"
-                />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ) : (
         <div>Загрузка...</div>

@@ -52,8 +52,9 @@ const ChangeEquipmentPopup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData.news_photo);
     if (typeof formData.news_photo == string) {
-      console.log(typeof formData.news_photo);
+      console.log("dsadasdas");
       const response = await fetch(formData.news_photo);
       if (!response.ok) {
         throw new Error(`Ошибка при загрузке файла: ${response.statusText}`);
