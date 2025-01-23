@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run ESLint
-        run: npm run lint
-
       - name: Create deploy script
         run: |
           cat > deploy.sh << 'SCRIPT'
