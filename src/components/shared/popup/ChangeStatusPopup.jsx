@@ -20,10 +20,7 @@ export default function ChangeStatusPopup() {
   const [selectedOrder, setSelectedOrder] = useState(
     orders.filter((item) => item.id === itemId)
   );
-  // useEffect(() => {
-  //   if (!itemId && !orders) return;
-  //   setSelectedOrder(orders.filter((item) => item.id === itemId));
-  // }, [itemId, orders]);
+
   const [formData, setFormData] = useState({
     name: selectedOrder[0].name,
     number: selectedOrder[0].number,
@@ -33,13 +30,12 @@ export default function ChangeStatusPopup() {
     order_amount: selectedOrder[0].order_amount,
   });
   const handleSelectChange = (value) => {
-    console.log(value, "value");
     setFormData((prevData) => ({
       ...prevData,
       state: value,
     }));
   };
-  console.log(`prev data`, formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`Submit`, formData);
@@ -47,7 +43,7 @@ export default function ChangeStatusPopup() {
       if (selectedOrder) {
         await dispatch(
           updateOrders({
-            id: item.id,
+            id: itemId,
             data: formData,
           })
         );
@@ -99,6 +95,7 @@ export default function ChangeStatusPopup() {
             <Select
               handleSelectChange={handleSelectChange}
               options={options}
+              placeholder={"Выберите новый статус"}
               border={true}
               className={
                 "w-full p-2 bg-gray-75 rounded focus:outline-none focus:ring-2 font-normal text-base text-gray-400 placeholder:text-gray-150"

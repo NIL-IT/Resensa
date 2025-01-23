@@ -11,7 +11,7 @@ export default function SliderPage({
   return (
     <div>
       <div
-        className={`container overflow-x-hidden 
+        className={`earth_container  
          ${
            second
              ? "pt-[20px]"
@@ -36,9 +36,8 @@ export default function SliderPage({
             </div>
           </div>
         </div>
+        <Slider slides={slides} second={second} />
       </div>
-
-      <Slider slides={slides} second={second} />
     </div>
   );
 }

@@ -485,42 +485,42 @@ const userSlice = createSlice({
       .addCase(getAllNews.fulfilled, (state, action) => {
         state.news = action.payload;
       })
-      .addCase(deleteNews.fulfilled, (state, action) => {
-        state.news = action.payload;
-      })
-      .addCase(updateNews.fulfilled, (state, action) => {
-        state.news = action.payload;
-      })
+      // .addCase(deleteNews.fulfilled, (state, action) => {
+      //   state.news = action.payload;
+      // })
+      // .addCase(updateNews.fulfilled, (state, action) => {
+      //   state.news = action.payload;
+      // })
 
       .addCase(getAllEquipment.fulfilled, (state, action) => {
         state.equipment = action.payload;
       })
-      .addCase(deleteEquipment.fulfilled, (state, action) => {
-        state.equipment = action.payload;
-      })
-      .addCase(updateEquipment.fulfilled, (state, action) => {
-        state.equipment = action.payload;
-      })
+      // .addCase(deleteEquipment.fulfilled, (state, action) => {
+      //   state.equipment = action.payload;
+      // })
+      // .addCase(updateEquipment.fulfilled, (state, action) => {
+      //   state.equipment = action.payload;
+      // })
 
       .addCase(getAllSolutions.fulfilled, (state, action) => {
         state.solutions = action.payload;
       })
-      .addCase(deleteSolutions.fulfilled, (state, action) => {
-        state.solutions = action.payload;
-      })
-      .addCase(updateSolutions.fulfilled, (state, action) => {
-        state.solutions = action.payload;
-      })
+      // .addCase(deleteSolutions.fulfilled, (state, action) => {
+      //   state.solutions = action.payload;
+      // })
+      // .addCase(updateSolutions.fulfilled, (state, action) => {
+      //   state.solutions = action.payload;
+      // })
 
       .addCase(getAllOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
       })
-      .addCase(deleteOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
-      })
-      .addCase(updateOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
-      })
+      // .addCase(deleteOrders.fulfilled, (state, action) => {
+      //   state.orders = action.payload;
+      // })
+      // .addCase(updateOrders.fulfilled, (state, action) => {
+      //   state.orders = action.payload;
+      // })
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
       });

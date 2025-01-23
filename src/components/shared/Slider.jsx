@@ -21,12 +21,12 @@ export default function Slider({ slides, second }) {
   };
 
   return (
-    <div className="max-w-[100wh]   earth_container  ">
+    <div className="min-w-[100wh]">
       <div className="relative">
         <div className="flex justify-center">
-          <div className="w-full ">
+          <div className="min-w-[100wh] overflow-hidden ">
             <div
-              className=" sm:w-full flex gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[40px] lg:gap-[50px] 
+              className=" flex gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[40px] lg:gap-[50px] 
               xl:gap-[55px] 2xl:gap-[60px] 3xl:gap-[64px] 
               transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -39,7 +39,7 @@ export default function Slider({ slides, second }) {
                    2xl:h-auto  xs:w-full  lg:w-full  "
                 >
                   {second ? (
-                    <div className="w-[350px] h-[270px]  sm:w-[420px] sm:h-[324px] md:w-[631px] md:h-[487px] ">
+                    <div className=" h-[270px]  sm:w-[420px] sm:h-[324px] md:w-[631px] md:h-[487px]  ">
                       <img
                         src={image}
                         alt={title}
