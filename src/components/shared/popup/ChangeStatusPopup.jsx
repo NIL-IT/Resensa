@@ -4,6 +4,7 @@ import Select from "../../ui/Select";
 import {
   changeItemId,
   changeStatusOrderPopup,
+  patchOrders,
   updateOrders,
 } from "../../../utils/slice/userSlice";
 
@@ -21,19 +22,9 @@ export default function ChangeStatusPopup() {
     orders.filter((item) => item.id === itemId)
   );
 
-  const [formData, setFormData] = useState({
-    name: selectedOrder[0].name,
-    number: selectedOrder[0].number,
-    date: selectedOrder[0].date,
-    client_name: selectedOrder[0].client_name,
-    state: selectedOrder[0].state,
-    order_amount: selectedOrder[0].order_amount,
-  });
+  const [formData, setFormData] = useState(selectedOrder[0].state);
   const handleSelectChange = (value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      state: value,
-    }));
+    setFormData(value);
   };
 
   const handleSubmit = async (e) => {
@@ -41,20 +32,17 @@ export default function ChangeStatusPopup() {
     console.log(`Submit`, formData);
     try {
       if (selectedOrder) {
+        console.log("Прокидываемая дата ", {
+          id: itemId,
+          state: formData,
+        });
         await dispatch(
-          updateOrders({
+          patchOrders({
             id: itemId,
-            data: formData,
+            state: formData,
           })
         );
-        setFormData({
-          name: "",
-          number: "",
-          date: "",
-          client_name: "",
-          state: "",
-          order_amount: "",
-        });
+        setFormData("");
         dispatch(changeItemId(null));
         dispatch(changeStatusOrderPopup(false));
       } else {

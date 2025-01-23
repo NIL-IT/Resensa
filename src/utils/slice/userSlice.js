@@ -11,35 +11,6 @@ const api = axios.create({
   },
 });
 
-const createFormDataRequest = (data, type) => {
-  const formData = new FormData();
-
-  // Add required fields based on type
-  switch (type) {
-    case "news":
-      if (!data.title) formData.append("title", "Временный заголовок");
-      if (!data.text) formData.append("text", "Временный текст");
-      break;
-    case "equipment":
-    case "solution":
-      if (!data.name) formData.append("name", "Временное название");
-      if (!data.description)
-        formData.append("description", "Временное описание");
-      break;
-  }
-
-  // Add all provided data
-  Object.keys(data).forEach((key) => {
-    if (data[key] instanceof File) {
-      formData.append(key, data[key], data[key].name);
-    } else if (data[key] !== null && data[key] !== undefined) {
-      formData.append(key, data[key]);
-    }
-  });
-
-  return formData;
-};
-
 export const getAllNews = createAsyncThunk(
   "news/getNews",
   async (_, thunkApi) => {
@@ -87,9 +58,11 @@ export const updateNews = createAsyncThunk(
   "news/updateNews",
   async ({ id, data }, thunkApi) => {
     try {
-      console.log(data);
-      const formData = createFormDataRequest(data, "news");
-      const res = await api.put(`/news/${id}`, formData);
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("text", data.text);
+      formData.append("news_photo", data.news_photo);
+      const res = await api.put(`/news/${id}/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -331,7 +304,18 @@ export const updateOrders = createAsyncThunk(
     }
   }
 );
-
+export const patchOrders = createAsyncThunk(
+  "patchOrders/patchOrders",
+  async ({ id, state }, thunkApi) => {
+    try {
+      const res = await api.patch(`/orders/${id}/`, state);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 export const deleteOrders = createAsyncThunk(
   "orders/deleteOrders",
   async (id, thunkApi) => {

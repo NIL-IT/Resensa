@@ -10,6 +10,7 @@ import {
 } from "../../../utils/slice/userSlice";
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
+import { string } from "three/tsl";
 
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const ChangeEquipmentPopup = () => {
   const { itemId, equipment, solutions, news } = useSelector(
     ({ user }) => user
   );
+
   const itemsList = isNews ? news : isSolutions ? solutions : equipment;
   const findProduct = itemsList.find((item) => +item.id === +itemId);
 
@@ -34,10 +36,11 @@ const ChangeEquipmentPopup = () => {
           title: findProduct.title,
           date: findProduct.date,
           text: findProduct.text,
+          news_photo: findProduct.image,
         }
   );
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,23 +52,42 @@ const ChangeEquipmentPopup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (typeof formData.news_photo == string) {
+      console.log(typeof formData.news_photo);
+      const response = await fetch(formData.news_photo);
+      if (!response.ok) {
+        throw new Error(`Ошибка при загрузке файла: ${response.statusText}`);
+      }
+      const blob = await response.blob();
+      const fileName = decodeURIComponent(formData.news_photo.split("/").pop()); // Извлечение имени файла из URL
+      file = new File([blob], fileName, { type: blob.type });
+    }
+    console.log("formData", formData);
     try {
-      const submitData = new FormData();
+      let file;
 
-      // Add text fields
-      Object.keys(formData).forEach((key) => {
-        submitData.append(key, formData[key]);
-      });
+      // const submitData = new FormData();
+
+      // // Add text fields
+      // Object.keys(formData).forEach((key) => {
+      //   submitData.append(key, formData[key]);
+      // });
+      // console.log(submitData);
 
       // Add file if selected
+      console.log(selectedFile);
       if (selectedFile) {
         if (isNews) {
-          submitData.append("news_photo", selectedFile);
+          // submitData.append("news_photo", selectedFile);
+          setFormData((prevData) => ({
+            ...prevData,
+            news_photo: file,
+          }));
+          console.log(formData, "Отправили ");
         } else if (equipment.some((item) => item.id === findProduct.id)) {
-          submitData.append("equipment_photo", selectedFile);
+          // submitData.append("equipment_photo", selectedFile);
         } else {
-          submitData.append("solution_photo", selectedFile);
+          // submitData.append("solution_photo", selectedFile);
         }
       }
 
@@ -76,16 +98,16 @@ const ChangeEquipmentPopup = () => {
         );
         if (isEquipment) {
           await dispatch(
-            updateEquipment({ id: findProduct.id, data: submitData })
+            updateEquipment({ id: findProduct.id, data: formData })
           ).unwrap();
         } else {
           await dispatch(
-            updateSolutions({ id: findProduct.id, data: submitData })
+            updateSolutions({ id: findProduct.id, data: formData })
           ).unwrap();
         }
       } else {
         await dispatch(
-          updateNews({ id: findProduct.id, data: submitData })
+          updateNews({ id: findProduct.id, data: formData })
         ).unwrap();
       }
 
