@@ -26,8 +26,7 @@ export default function AdminNews() {
 
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
-  };
-
+  };  
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
@@ -54,7 +53,7 @@ export default function AdminNews() {
               <div>
                 <img
                   className="w-full h-[120px] object-cover"
-                  src={image || "/placeholder.svg"}
+                  src={image}
                   alt={name}
                 />
                 <h2 className="text-gray-400 text-sm uppercase font-normal my-2 overflow-hidden">

@@ -67,7 +67,9 @@ export const createNews = createAsyncThunk(
       formData.append("title", payload.title);
       formData.append("text", payload.text);
       formData.append("news_photo", payload.news_photo);
-      const res = await api.post("/news/", formData);
+    const res = await api.post("/news/", formData);
+
+
       return res.data;
     } catch (err) {
       console.error("Upload error:", err);
@@ -88,7 +90,7 @@ export const updateNews = createAsyncThunk(
     try {
       console.log(data);
       const formData = createFormDataRequest(data, "news");
-      const res = await api.put(`/news/${id}/`, formData);
+      const res = await api.put(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -101,7 +103,7 @@ export const deleteNews = createAsyncThunk(
   "news/deleteNews",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/news/${id}/`);
+      const res = await api.delete(`/news/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -152,10 +154,14 @@ export const createEquipment = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("description", data.description);
 
+
       // // Convert base64 to blob using utility function
       // const blob = base64ToBlob(data.equipment_photo);
       // formData.append("equipment_photo", blob, "image.jpg");
       formData.append("equipment_photo", data.equipment_photo);
+
+      formData.append("equipment_photo", data.equipment_photo);
+
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
 
@@ -186,7 +192,7 @@ export const updateEquipment = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "equipment");
-      const res = await api.put(`/equipments/${id}/`, formData);
+      const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -199,7 +205,7 @@ export const deleteEquipment = createAsyncThunk(
   "Equipment/deleteEquipment",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/equipments/${id}/`);
+      const res = await api.delete(`/equipments/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -235,11 +241,10 @@ export const createSolutions = createAsyncThunk(
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
-
-      // Convert base64 to blob using utility function
-      // const blob = base64ToBlob(data.solution_photo);
-      // formData.append("solution_photo", blob, "image.jpg");
       formData.append("solution_photo", data.solution_photo);
+
+      formData.append("solution_photo", data.solution_photo);
+
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -260,7 +265,7 @@ export const updateSolutions = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "solution");
-      const res = await api.put(`/solutions/${id}/`, formData);
+      const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -273,7 +278,7 @@ export const deleteSolutions = createAsyncThunk(
   "Solutions/deleteSolutions",
   async (id, thunkApi) => {
     try {
-      const res = await api.delete(`/solutions/${id}/`);
+      const res = await api.delete(`/solutions/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -313,7 +318,7 @@ export const updateOrders = createAsyncThunk(
   async ({ id, data }, thunkApi) => {
     try {
       const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/orders/${id}/`, formData);
+      const res = await api.put(`/orders/${id}`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
