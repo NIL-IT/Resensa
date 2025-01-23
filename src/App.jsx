@@ -14,9 +14,11 @@ import {
   getAllNews,
   getAllOrders,
   getAllSolutions,
+  getBanner,
 } from "./utils/slice/userSlice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
 function App() {
   const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
@@ -28,6 +30,7 @@ function App() {
     addNewItemPopup,
     newsPopup,
     searchPopup,
+    statusOrderPopup,
   } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const isActivePopup =
@@ -37,7 +40,8 @@ function App() {
     equipmentPopup ||
     addNewItemPopup ||
     newsPopup ||
-    searchPopup;
+    searchPopup ||
+    statusOrderPopup;
 
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +53,7 @@ function App() {
         dispatch(getAllEquipment());
         dispatch(getAllSolutions());
         dispatch(getAllOrders());
+        dispatch(getBanner());
       } catch (error) {
         console.error(error);
       }
@@ -72,6 +77,7 @@ function App() {
       {addNewItemPopup && <AddNewItem />}
       {newsPopup && <NewsPopup />}
       {searchPopup && <SearchPopup />}
+      {statusOrderPopup && <ChangeStatusPopup />}
     </div>
   ) : (
     <div>Загрузка...</div>

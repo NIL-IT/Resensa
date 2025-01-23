@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeItemId,
   changeShowNewsPopup,
-  getAllNews,
 } from "../../utils/slice/userSlice";
 
 export default function News() {
@@ -27,7 +26,6 @@ export default function News() {
     dispatch(changeItemId(id));
     dispatch(changeShowNewsPopup(true));
   };
-  console.log(news);
   return newsData.length ? (
     <div
       className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${

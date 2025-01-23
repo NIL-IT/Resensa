@@ -8,7 +8,7 @@ import {
 export default function NewsPopup() {
   const dispatch = useDispatch();
   const { itemId, news } = useSelector(({ user }) => user);
-  const { title, text, date, img } = news.find(({ id }) => id === itemId);
+  const { title, text, date, image } = news.find(({ id }) => id === itemId);
   document.body.style.overflow = "hidden";
   const handleClose = () => {
     dispatch(changeShowNewsPopup(false));
@@ -28,10 +28,10 @@ export default function NewsPopup() {
           <h2 className="text-lg xs:text-xl sm:text-2xl leading-[24px] xs:leading-[26px] sm:leading-[28px] md:leading-[30.6px] text-gray-400 mb-4 xs:mb-5 sm:mb-6 md:mb-7 lg:mb-8">
             {title}
           </h2>
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full">
             <img
-              className="w-full max-h-[150px] xs:max-h-[180px] sm:max-h-[200px] md:max-h-[250px] lg:max-h-[300px] object-contain"
-              src={img}
+              className="min-w-full max-h-[150px] xs:max-h-[180px] sm:max-h-[200px] md:max-h-[250px] lg:h-[300px] object-contain"
+              src={image}
               alt={title}
             />
           </div>

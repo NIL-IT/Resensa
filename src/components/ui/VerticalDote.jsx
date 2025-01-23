@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeAddOrderPopup } from "../../utils/slice/userSlice";
+import {
+  changeAddOrderPopup,
+  changeItemId,
+  changeStatusOrderPopup,
+} from "../../utils/slice/userSlice";
 
-export default function VerticalDote({ list, deleteSelected, deleteAll }) {
+export default function VerticalDote({
+  list,
+  deleteSelected,
+  deleteAll,
+  selectedOrders,
+}) {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   const handleAction = (action) => {
@@ -16,7 +25,15 @@ export default function VerticalDote({ list, deleteSelected, deleteAll }) {
       case "add":
         dispatch(changeAddOrderPopup(true));
         break;
-      // Add other cases as needed
+      case "change":
+        if (selectedOrders.length == 1) {
+          dispatch(changeStatusOrderPopup(true));
+          dispatch(changeItemId(selectedOrders[0]));
+        } else {
+          alert("Выберите один заказ для изменения статуса.");
+        }
+
+        break;
     }
     setActive(false);
   };

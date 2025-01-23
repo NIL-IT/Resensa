@@ -12,7 +12,6 @@ import {
   deleteSolutions,
 } from "../../../utils/slice/userSlice";
 import { Plus } from "lucide-react";
-import { div } from "three/tsl";
 
 export default function AdminCategoryList({ title, category }) {
   const dispatch = useDispatch();

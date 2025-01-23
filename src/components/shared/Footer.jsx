@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../ui/Button";
-import { useDispatch } from "react-redux";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeIsAdmin,
+  changeRoutingToOrders,
+  changeShowPopup,
+} from "../../utils/slice/userSlice";
 
 const navList = [
   { name: "Главная", path: "/" },
@@ -15,11 +19,19 @@ const navList = [
 ];
 export default function Footer({ scrollTop = null }) {
   const dispatch = useDispatch();
+  const { isAdmin } = useSelector(({ user }) => user);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
+
+  const handleClickLink = (i) => {
+    if (+i === 4) {
+      dispatch(changeRoutingToOrders(true));
+    }
+    if (+i !== 4) dispatch(changeRoutingToOrders(false));
+  };
   return (
     <footer className="container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
       <div>
-        <Link onClick={scrollTop} to={"/"}>
+        <Link onClick={scrollTop} to={isAdmin ? "/auth" : ""}>
           <div className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5">
             <img src="/icon/logo.svg" alt="logo" />
           </div>
@@ -37,7 +49,12 @@ export default function Footer({ scrollTop = null }) {
                 key={i}
                 className="text-gray-400 hover:text-gray-300"
               >
-                <Link to={path}>{name}</Link>
+                <Link
+                  onClick={() => handleClickLink(i)}
+                  to={isAdmin ? "/auth" : +i === 4 ? "/product/orders" : path}
+                >
+                  {name}
+                </Link>
               </li>
             ))}
           </ul>

@@ -67,8 +67,7 @@ export const createNews = createAsyncThunk(
       formData.append("title", payload.title);
       formData.append("text", payload.text);
       formData.append("news_photo", payload.news_photo);
-    const res = await api.post("/news/", formData);
-
+      const res = await api.post("/news/", formData);
 
       return res.data;
     } catch (err) {
@@ -153,7 +152,6 @@ export const createEquipment = createAsyncThunk(
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
-
 
       // // Convert base64 to blob using utility function
       // const blob = base64ToBlob(data.equipment_photo);
@@ -317,7 +315,14 @@ export const updateOrders = createAsyncThunk(
   "Orders/updateOrders",
   async ({ id, data }, thunkApi) => {
     try {
-      const formData = createFormDataRequest(data, "order");
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("number", data.number);
+      formData.append("date", data.date);
+      formData.append("client_name", data.client_name);
+      formData.append("state", data.state);
+      formData.append("order_amount", data.order_amount);
+      // const formData = createFormDataRequest(data, "order");
       const res = await api.put(`/orders/${id}`, formData);
       return res.data;
     } catch (err) {
@@ -339,11 +344,43 @@ export const deleteOrders = createAsyncThunk(
     }
   }
 );
-
+export const getBanner = createAsyncThunk(
+  "banner/getBanner",
+  async (_, thunkApi) => {
+    try {
+      const res = await api.get(`/banner/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const updateBanner = createAsyncThunk(
+  "banner/updateBanner",
+  async (payload, thunkApi) => {
+    try {
+      // const formData = new FormData();
+      // formData.append("name", data.name);
+      // formData.append("number", data.number);
+      // formData.append("date", data.date);
+      // formData.append("client_name", data.client_name);
+      // formData.append("state", data.state);
+      // formData.append("order_amount", data.order_amount);
+      // const formData = createFormDataRequest(data, "order");
+      const res = await api.put(`/banner/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
     news: [],
+    banner: null,
     equipment: [],
     solutions: [],
     routingToOrders: false,
@@ -360,6 +397,7 @@ const userSlice = createSlice({
     addNewItemPopup: false,
     newsPopup: false,
     searchPopup: false,
+    statusOrderPopup: false,
     experience: 22,
     guarantee: 3,
   },
@@ -377,6 +415,9 @@ const userSlice = createSlice({
     },
     changeShowPopup: (state, { payload }) => {
       state.isPopup = payload;
+    },
+    changeStatusOrderPopup: (state, { payload }) => {
+      state.statusOrderPopup = payload;
     },
     changeShowStatus: (state, { payload }) => {
       state.status = payload;
@@ -479,11 +520,15 @@ const userSlice = createSlice({
       })
       .addCase(updateOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
+      })
+      .addCase(getBanner.fulfilled, (state, action) => {
+        state.banner = action.payload;
       });
   },
 });
 
 export const {
+  changeStatusOrderPopup,
   changeRoutingToOrders,
   changeIsAdmin,
   changeNumberForMainBanner,

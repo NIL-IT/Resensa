@@ -25,7 +25,6 @@ export default function Header() {
   ];
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const handleClickLink = (i) => {
-    if (isAdmin) dispatch(changeIsAdmin(false));
     if (+i === 4) {
       dispatch(changeRoutingToOrders(true));
     }

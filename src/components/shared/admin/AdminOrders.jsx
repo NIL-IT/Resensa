@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Title from "../../ui/Title";
-import { Plus, Trash2 } from "lucide-react";
+import { PencilLine, Plus, Trash2 } from "lucide-react";
 import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders, deleteOrders } from "../../../utils/slice/userSlice";
@@ -9,6 +9,11 @@ import SearchInput from "../../ui/SearchInput";
 
 export const list = [
   { name: "Добавить новый заказ", icon: <Plus width={20} />, action: "add" },
+  {
+    name: "Изменить статус заказа",
+    icon: <PencilLine width={20} />,
+    action: "change",
+  },
   {
     name: "Удалить выбранное",
     icon: <Trash2 width={20} />,
