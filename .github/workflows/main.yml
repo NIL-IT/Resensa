@@ -62,8 +62,12 @@ jobs:
           echo "Installing dependencies..."
           npm ci
           
-          echo "Building project..."
-          npm run build
+          echo "Cleaning temporary files..."
+          rm -rf dist node_modules/.vite
+
+          echo "Building project with increased memory limit..."
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          NODE_ENV=production npm run build
           
           # Deploy new version
           echo "Deploying new version..."
