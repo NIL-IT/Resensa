@@ -6,9 +6,9 @@ import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 
 export default function SearchPopup() {
-  const { data } = useSelector(({ user }) => user);
+  const { equipment, solutions } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
-  const combinedData = [...data.equipment.items, ...data.solutions.items];
+  const combinedData = [...equipment, ...solutions];
   const [searchData, setSearchData] = useState(combinedData);
 
   const handleSearch = (value) => {
@@ -40,7 +40,7 @@ export default function SearchPopup() {
         <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-center">
           {searchData ? (
             <div className="overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5">
-              {searchData.map(({ img, name, description, id }) => (
+              {searchData.map(({ image, name, description, id }) => (
                 <Link
                   onClick={() => handleClose()}
                   to={`/product/${id}`}
@@ -50,7 +50,7 @@ export default function SearchPopup() {
                   <div>
                     <img
                       className="w-full h-[120px] xs:h-[130px] sm:h-[140px] md:h-[150px] lg:h-[160px] object-cover"
-                      src={img}
+                      src={image}
                       alt={name}
                     />
                     <h2 className="text-gray-400 text-xs xs:text-sm uppercase font-normal my-1 xs:my-1.5 sm:my-2">

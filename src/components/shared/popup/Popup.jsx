@@ -13,6 +13,7 @@ const Popup = () => {
   const { itemId, equipment, solutions } = useSelector(({ user }) => user);
   const combinedData = [...equipment, ...solutions];
   const findProduct = combinedData.find(({ id }) => id === itemId);
+  document.body.style.overflowY = "hidden";
   const [formData, setFormData] = useState({
     company_name: "",
     name: "",

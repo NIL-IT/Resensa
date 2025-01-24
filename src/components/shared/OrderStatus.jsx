@@ -19,7 +19,7 @@ export default function OrderStatus() {
     dispatch(changeOrderNumber(value));
   };
   return (
-    <section className="bg-gray-200 py-[69px] flex-center flex-col justify-center gap-10 mt-[35px]">
+    <section className="overflow-hidden bg-gray-200 py-[69px] flex-center flex-col justify-center gap-10 mt-[35px]">
       <Title
         text="вы можете проверить статус своего заказа"
         className="text-xl font-normal text-gray-400"

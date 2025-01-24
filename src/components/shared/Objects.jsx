@@ -23,7 +23,7 @@ export default function Objects({ className = null, about = false }) {
           : ""
       } ${className}`}
     >
-      <div className="earth_container px-4 sm:px-6 lg:px-8 relative">
+      <div className="earth_container px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div
           className="flex-center flex-col 
         lg:flex-row lg:items-center lg:justify-between g
@@ -71,7 +71,7 @@ export default function Objects({ className = null, about = false }) {
             md:top-[520px] md:right-[-140px]
             sm:top-[500px] sm:right-[-110px]
             xs:top-[460px] xs:right-[0]
-            top-[460px] right-[0]
+            top-[460px] right-[0] 
        "
           >
             <EarthScene />

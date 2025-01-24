@@ -26,6 +26,7 @@ export default function AboutCompany() {
   useEffect(() => {
     dispatch(changeItemId(null));
   }, [pathname]);
+  document.body.style.overflowY = "auto";
   return (
     <main>
       <EquipmentBanner

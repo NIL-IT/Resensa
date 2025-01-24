@@ -23,6 +23,7 @@ export default function Equipment({ data, bannerImg, title, text }) {
       left: 0,
     });
   }, [pathname]);
+  document.body.style.overflowY = "auto";
   return (
     <div>
       <EquipmentBanner

@@ -58,7 +58,7 @@ export default function Admin() {
   const [isActiveUploadFile, setActiveUploaderFile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { pathname } = useLocation();
-
+  document.body.style.overflowY = "auto";
   const changeShowUploadFile = () => {
     setActiveUploaderFile(!isActiveUploadFile);
   };

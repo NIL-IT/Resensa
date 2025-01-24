@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 const Contacts = () => {
   const dispatch = useDispatch();
-
+  document.body.style.overflowY = "auto";
   const { pathname } = useParams();
   useEffect(() => {
     dispatch(changeItemId(null));

@@ -31,6 +31,7 @@ export default function Home() {
     scrollTop();
     dispatch(changeItemId(null));
   }, [pathname]);
+  document.body.style.overflowY = "auto";
 
   return (
     <main>
