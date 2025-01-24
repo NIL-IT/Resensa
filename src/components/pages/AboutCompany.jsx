@@ -14,9 +14,18 @@ import {
 
 import Points from "../shared/Points";
 import { useDispatch } from "react-redux";
-import { changeRoutingToOrders } from "../../utils/slice/userSlice";
+import {
+  changeItemId,
+  changeRoutingToOrders,
+} from "../../utils/slice/userSlice";
+import { useParams } from "react-router-dom";
 const text = `Мы — профессиональная команда специалистов в области вентиляции и кондиционирования воздуха с многолетним опытом работы. Бренд RECENSA ориентирован на создание новой производственной базы, а также на поставку вентиляционного оборудования под собственной торговой маркой.`;
 export default function AboutCompany() {
+  const dispatch = useDispatch();
+  const { pathname } = useParams();
+  useEffect(() => {
+    dispatch(changeItemId(null));
+  }, [pathname]);
   return (
     <main>
       <EquipmentBanner

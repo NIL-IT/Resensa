@@ -1,13 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../ui/Button";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import Footer from "../shared/Footer";
 import { useDispatch } from "react-redux";
 
 const Contacts = () => {
   const dispatch = useDispatch();
 
+  const { pathname } = useParams();
+  useEffect(() => {
+    dispatch(changeItemId(null));
+  }, [pathname]);
   return (
     <div className="min-h-screen flex flex-col">
       <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">

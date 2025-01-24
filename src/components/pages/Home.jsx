@@ -12,10 +12,14 @@ import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
 import { useDispatch, useSelector } from "react-redux";
-import { changeRoutingToOrders } from "../../utils/slice/userSlice";
+import {
+  changeItemId,
+  changeRoutingToOrders,
+} from "../../utils/slice/userSlice";
 
 export default function Home() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const { equipment, solutions } = useSelector(({ user }) => user);
   const scrollTop = () => {
     window.scrollTo({
@@ -25,7 +29,9 @@ export default function Home() {
   };
   useEffect(() => {
     scrollTop();
+    dispatch(changeItemId(null));
   }, [pathname]);
+
   return (
     <main>
       <Banner />

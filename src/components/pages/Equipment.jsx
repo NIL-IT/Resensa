@@ -8,12 +8,16 @@ import Footer from "../shared/Footer";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeRoutingToOrders } from "../../utils/slice/userSlice";
+import {
+  changeItemId,
+  changeRoutingToOrders,
+} from "../../utils/slice/userSlice";
 
 export default function Equipment({ data, bannerImg, title, text }) {
   const { pathname } = useLocation();
-
+  const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(changeItemId(null));
     window.scrollTo({
       top: 0,
       left: 0,
