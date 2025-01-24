@@ -3,25 +3,28 @@ import Title from "../ui/Title";
 
 export default function Slider({ slides, second }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  let currentWidth = document.body.offsetWidth;
-  const [width, setWidth] = useState(currentWidth);
+  const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    setWidth(currentWidth);
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  useEffect(() => {
+    setWidth(window.innerWidth);
     setCurrentSlide(0);
-  }, [currentWidth]);
+  }, [window.innerWidth]);
 
   const goToSlide = (index) => {
     if (index < 0) return;
-    if (second && width > 1536 && index > 1) return;
+    if (second && width > 1536 && index > 3) return;
     if (second && index > 4) return;
-    if (index > 2 && width > 1536) return;
+    if (index > 3 && width > 1536) return;
     if (index > 3) return;
     setCurrentSlide(index);
   };
 
   return (
-    <div className="min-w-[100wh]">
+    <div className="min-w-[100wh] overflow-x-hidden">
       <div className="relative">
         <div className="flex justify-center">
           <div className="min-w-[100wh] overflow-hidden ">
@@ -29,13 +32,16 @@ export default function Slider({ slides, second }) {
               className=" flex gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[40px] lg:gap-[50px] 
               xl:gap-[55px] 2xl:gap-[60px] 3xl:gap-[64px] 
               transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              style={{
+                transform: `translateX(-${currentSlide * 100}%)`,
+                width: `${slides.length * 30}%`,
+              }}
             >
               {slides.map(({ image, title = "", description = "" }, index) => (
                 <div
                   key={index}
                   className="w-full min-w-[100%] xs:min-w-[100%] 
-                   3xl:min-w-[auto]  
+                   3xl:max-w-[800px]  
                    2xl:h-auto  xs:w-full  lg:w-full  "
                 >
                   {second ? (
@@ -51,8 +57,8 @@ export default function Slider({ slides, second }) {
                       className={` w-full xs:w-full sm:w-full 
                         md:w-[600px] lg:w-[650px] xl:w-[700px] 
                         2xl:w-[750px] 3xl:w-[816px] h-[560px] 
-                        xs:h-[600px] sm:h-[620px] 
-                        md:h-[520px] 
+                        xs:h-[580px] sm:h-[620px] 
+                        md:h-[560px] 
                         lg:h-[550px] xl:h-[590px] 2xl:h-[560px] 
                         3xl:h-[558px] ${second ? "" : "bg-gray-100"}`}
                     >
@@ -88,7 +94,7 @@ export default function Slider({ slides, second }) {
                           text={title}
                           className="text-lg xs:text-xl sm:text-2xl leading-[30px] xs:leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[56px]"
                         />
-                        <p className="xl:max-w-[90%] 2xl:max-w-[100%] text-base xs:text-base sm:text-lg text-gray-400 leading-[18px] xs:leading-[19px] sm:leading-[20px] md:leading-[21px] lg:leading-[22px] xl:leading-[23px]">
+                        <p className=" max-w-[80%] pt-2 lg:pt-3 md:max-w-[90%] 2xl:max-w-[100%] text-base xs:text-base sm:text-lg text-gray-400 leading-[18px] xs:leading-[19px] sm:leading-[20px] md:leading-[21px] lg:leading-[22px] xl:leading-[23px]">
                           {description}
                         </p>
                       </div>

@@ -32,12 +32,11 @@ export const list = [
 ];
 
 export default function AdminOrders({ title }) {
-  const { orders, exportExcel, itemId } = useSelector(({ user }) => user);
+  const { orders, itemId } = useSelector(({ user }) => user);
   const [ordersList, setOrdersList] = useState(orders);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const [excel, setExcel] = useState(ordersList);
 
   useEffect(() => {
     setLoading(true);
@@ -59,17 +58,6 @@ export default function AdminOrders({ title }) {
       setSelectedOrders(ordersList.map((order) => order.id));
     }
   };
-  // export excel
-  // useEffect(() => {
-  //   const fetchExcel = async () => {
-  //     const file = await exportOrdersExcel();
-  //     const data = await parseExcelToOrders(file);
-  //     console.log("parseData", data);
-  //     // setExcel(file.payload);
-  //     console.log("file", file.payload);
-  //   };
-  //   fetchExcel();
-  // }, [exportExcel, dispatch]);
   const handleCheckedOrder = (orderId) => {
     setSelectedOrders((prev) =>
       prev.includes(orderId)
@@ -109,9 +97,16 @@ export default function AdminOrders({ title }) {
     );
   };
   const changeOrders = (data) => {
+    console.log(data);
     setOrdersList(data);
   };
-
+  const getColor = (state) => {
+    const toLowerCase = state.toLowerCase();
+    if (toLowerCase == "отменен") return "bg-red";
+    if (toLowerCase == "доставлен") return "bg-green";
+    if (toLowerCase == "оплачен") return "bg-blue";
+    return "bg-gray-400";
+  };
   return (
     <div className="w-full relative">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
@@ -193,13 +188,9 @@ export default function AdminOrders({ title }) {
                       className={`inline-flex items-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
                     >
                       <span
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          order.state === "Доставлен"
-                            ? "bg-green"
-                            : order.state === "Отменен"
-                            ? "bg-red"
-                            : "bg-yellow"
-                        }`}
+                        className={`w-1.5 h-1.5 rounded-full ${getColor(
+                          order.state
+                        )}`}
                       />
                       {order.state}
                     </span>

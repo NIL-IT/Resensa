@@ -7,11 +7,15 @@ import {
   changeShowSearchPopup,
 } from "../../utils/slice/userSlice";
 
-const BurgerButton = ({ list }) => {
+const BurgerButton = ({ list, handleClickLink }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-
+  const handleClickLinkBurger = (i, path) => {
+    setIsOpen(false);
+    handleClickLink(i, path);
+    handleChangeShowPopup(false);
+  };
   return (
     <div className="md:hidden">
       <button
@@ -39,10 +43,12 @@ const BurgerButton = ({ list }) => {
             <nav className="mt-2">
               <ul className="flex flex-col gap-2 text-sm">
                 {list.map(({ name, path }, i) => (
-                  <li key={i} className="text-gray-400 hover:text-gray-300">
-                    <Link to={path} onClick={() => setIsOpen(false)}>
-                      {name}
-                    </Link>
+                  <li
+                    onClick={() => handleClickLinkBurger(i, path)}
+                    key={i}
+                    className="text-gray-400 hover:text-gray-300 cursor-pointer"
+                  >
+                    {name}
                   </li>
                 ))}
               </ul>

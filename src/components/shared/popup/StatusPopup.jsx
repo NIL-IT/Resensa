@@ -37,7 +37,6 @@ export default function StatusPopup() {
   const getColor = (state) => {
     const toLowerCase = state.toLowerCase();
     if (toLowerCase == "отменен") return "bg-red";
-    if (toLowerCase == "в пути") return "bg-yellow";
     if (toLowerCase == "доставлен") return "bg-green";
     if (toLowerCase == "оплачен") return "bg-blue";
     return "bg-gray-400";

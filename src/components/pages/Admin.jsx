@@ -8,7 +8,11 @@ import FileUploader from "../ui/FileUploader";
 import ChangeBanner from "../shared/admin/ChangeBanner";
 import AdminNews from "../shared/admin/AdminNews";
 import { Menu, X } from "lucide-react";
-import { exportOrdersExcel } from "../../utils/slice/userSlice";
+import {
+  exportOrdersExcel,
+  importOrdersExcel,
+} from "../../utils/slice/userSlice";
+import { useDispatch } from "react-redux";
 
 const navList = [
   {
@@ -57,6 +61,7 @@ export default function Admin() {
   const [activeLink, setActiveLink] = useState(null);
   const [isActiveUploadFile, setActiveUploaderFile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   document.body.style.overflowY = "auto";
   const changeShowUploadFile = () => {
@@ -72,18 +77,7 @@ export default function Admin() {
     if (+dirs[2] === 5) return "Баннер";
     if (+dirs[2] === 6) return "Выйти";
   };
-  //функция для экспорта из html в excel
-  // function exportTableToExcel(tableId, filename = "the_data_you_needed.xls") {
-  //   let dataType = "application/vnd.ms-excel";
-  //   let tableSelect = document.getElementById(tableId);
-  //   let tableHTML = encodeURIComponent(
-  //     tableSelect.outerHTML.replace(/ or .*?>/g, ">")
-  //   );
-  //   let link = document.createElement("a");
-  //   link.href = `data:${dataType}, ${tableHTML}`;
-  //   link.download = filename;
-  //   link.click();
-  // }
+
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
@@ -94,7 +88,17 @@ export default function Admin() {
     const exportFile = await exportOrdersExcel(true);
     console.log(exportFile);
   };
-  const importFileExcel = async (excel) => {};
+  // const importFileExcel = async (file) => {
+  //   try {
+  //     await dispatch(importOrdersExcel(file));
+  //     const exportFile = await exportOrdersExcel();
+  //     console.log(exportFile, "export");
+  //     const sampleData = Buffer.from(exportFile);
+  //     parseExcelToCSVArray(sampleData).then((data) => console.log(data));
+  //   } catch (e) {
+  //     console.error("Ошибка при импорте файла", e);
+  //   }
+  // };
   return (
     <div className="min-h-screen flex flex-col">
       <div className="w-full md:container mx-auto px-4 pt-[30px] flex-grow">
@@ -145,10 +149,7 @@ export default function Admin() {
             </div>
           ) : (
             <div className="w-full h-[500px] flex-center flex-col justify-center">
-              <FileUploader
-                importFileExcel={importFileExcel}
-                setActiveUploaderFile={setActiveUploaderFile}
-              />
+              <FileUploader setActiveUploaderFile={setActiveUploaderFile} />
             </div>
           )}
         </section>

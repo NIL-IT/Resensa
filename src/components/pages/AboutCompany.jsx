@@ -23,6 +23,13 @@ const text = `Мы — профессиональная команда спец�
 export default function AboutCompany() {
   const dispatch = useDispatch();
   const { pathname } = useParams();
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  };
+  scrollTop();
   useEffect(() => {
     dispatch(changeItemId(null));
   }, [pathname]);

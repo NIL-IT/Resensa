@@ -12,7 +12,6 @@ const options = [
   { label: "Доставлен", value: "Доставлен" },
   { label: "Отменен", value: "Отменен" },
   { label: "Оплачен", value: "Оплачен" },
-  { label: "В пути", value: "В пути" },
 ];
 
 export default function ChangeStatusPopup() {

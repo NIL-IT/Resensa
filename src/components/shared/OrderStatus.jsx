@@ -22,7 +22,7 @@ export default function OrderStatus() {
     <section className="overflow-hidden bg-gray-200 py-[69px] flex-center flex-col justify-center gap-10 mt-[35px]">
       <Title
         text="вы можете проверить статус своего заказа"
-        className="text-xl font-normal text-gray-400"
+        className="text-xl font-normal text-gray-400 ml-3 sm:ml-0"
       />
 
       <form
@@ -34,7 +34,7 @@ export default function OrderStatus() {
           onChange={handleChange}
           value={value}
           type="number"
-          className="bg-white py-[18px] px-6 w-[370px] text-base font-normal"
+          className="bg-white py-[18px] px-6 w-[300px] sm:w-[370px] text-base font-normal"
           required
         />
         <button

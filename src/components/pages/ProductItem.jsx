@@ -50,19 +50,30 @@ export default function ProductItem({ list }) {
     ? list.find((item) => +item.id === +id)
     : list[0];
   const [currentProduct, setCurrentProduct] = useState(findProduct);
-  console.log(currentProduct, "current product");
   document.body.style.overflowY = "auto";
   if (!currentProduct && !isOrders) navigate("/");
+  const routing = (top) => {
+    setTimeout(() => {
+      console.log("routing");
+      window.scrollTo({
+        top: top,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 20);
+  };
   useEffect(() => {
+    let widthPage = document.querySelector("body").offsetWidth;
     if (routingToOrders && !isAdmin) {
-      setTimeout(() => {
-        console.log("routing");
-        window.scrollTo({
-          top: 2650,
-          left: 0,
-          behavior: "smooth",
-        });
-      }, 20);
+      if (widthPage > 1600) routing(2650);
+
+      if (widthPage > 1200) routing(3000);
+
+      if (widthPage > 768) routing(3200);
+      if (widthPage > 640) routing(3150);
+      if (widthPage > 420) routing(3150);
+      if (widthPage > 375) routing(3000);
+      if (widthPage < 375) routing(2800);
     }
   });
   const changeRoutingToOrders = () => {
@@ -104,12 +115,11 @@ export default function ProductItem({ list }) {
     );
 
     if (item.length > 0) {
-      console.log(item, "title");
       return item[0].subtitle;
     }
     return "";
   };
-  console.log(subtitle(), "subtitle");
+
   return isLoading ? (
     <>
       <EquipmentBanner

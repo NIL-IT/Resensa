@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
@@ -8,6 +8,13 @@ import { useDispatch } from "react-redux";
 const Contacts = () => {
   const dispatch = useDispatch();
   document.body.style.overflowY = "auto";
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  };
+  scrollTop();
   const { pathname } = useParams();
   useEffect(() => {
     dispatch(changeItemId(null));

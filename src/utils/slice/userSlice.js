@@ -418,34 +418,22 @@ export const importOrdersExcel = createAsyncThunk(
     }
   }
 );
-// export const exportOrdersExcel = createAsyncThunk(
-//   "exportOrdersExcel/exportOrdersExcel",
-//   async (_, thunkApi) => {
-//     try {
-//       const res = await api.get("/orders/export/excel");
-//       const blob = res.blob();
-//       const url = window.URL.createObjectURL(blob);
-//       // const link = document.createElement("a");
-//       // link.href = url;
-//       // link.download = "example.xlsx";
-//       // link.click();
-//       // window.URL.revokeObjectURL(url);
-//       return url;
-//     } catch (err) {
-//       console.log(err);
-//       return thunkApi.rejectWithValue(err.response?.data || err.message);
-//     }
-//   }
-// );
+
 export const exportOrdersExcel = async (exportFile = false) => {
   fetch("https://nilit1.ru/api/orders/export/excel", {
     method: "GET",
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("Ошибка при получении файла");
+      if (exportFile) {
+        if (!response.ok) {
+          throw new Error("Ошибка при получении файла");
+        }
+        return response.blob();
+      } else {
+        const excelBuffer = response.arrayBuffer();
+        const data = parseExcelToCSVArray(Buffer.from(excelBuffer));
+        return data;
       }
-      return response.blob();
     })
 
     .then((blob) => {
@@ -625,9 +613,6 @@ const userSlice = createSlice({
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
       });
-    // .addCase(exportOrdersExcel.fulfilled, (state, action) => {
-    //   state.exportExcel = action.payload;
-    // });
   },
 });
 

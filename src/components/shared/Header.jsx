@@ -72,7 +72,7 @@ export default function Header() {
             alt="logo"
           />
         </Link>
-        <BurgerButton list={navList} />
+        <BurgerButton list={navList} handleClickLink={handleClickLink} />
         <div className="hidden md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
             <a

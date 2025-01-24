@@ -7,7 +7,7 @@ import {
   importOrdersExcel,
 } from "../../utils/slice/userSlice";
 
-const FileUploader = ({ setActiveUploaderFile, importFileExcel }) => {
+const FileUploader = ({ setActiveUploaderFile }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const inputRef = useRef(null);
@@ -62,11 +62,8 @@ const FileUploader = ({ setActiveUploaderFile, importFileExcel }) => {
       for (const file of validFiles) {
         try {
           await dispatch(importOrdersExcel(file));
-          const exportExcel = await dispatch(exportOrdersExcel());
 
-          console.log(exportExcel, "export ");
           setUploadedFiles((prev) => [...prev, file]);
-          setActiveUploaderFile(false);
         } catch (err) {
           setError(
             `Failed to upload ${file.name}: ${
@@ -76,6 +73,7 @@ const FileUploader = ({ setActiveUploaderFile, importFileExcel }) => {
         }
       }
 
+      setActiveUploaderFile(false);
       setUploading(false);
     }
   };
