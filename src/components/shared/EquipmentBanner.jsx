@@ -2,7 +2,7 @@ import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { div } from "three/tsl";
 
 export default function EquipmentBanner({
@@ -17,6 +17,13 @@ export default function EquipmentBanner({
   about = false,
 }) {
   const dispatch = useDispatch();
+  const { equipment, solutions, itemId } = useSelector(({ user }) => user);
+  const product = () => {
+    const combinedData = [...equipment, ...solutions];
+    const product = combinedData.find((item) => item.id === itemId);
+    return product;
+  };
+  console.log(product());
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   return (
     <div
@@ -57,11 +64,11 @@ export default function EquipmentBanner({
         }`}
       >
         <Title
-          text={subtitle}
+          text={subtitle || product().name}
           className="font-norma text-2xl sm:text-[22px] leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
         <Title
-          text={title}
+          text={title || product().name}
           className="font-normal text-2xl md:text-[38px] sm:leading-[28px]  
           xl:text-[38px] 2xl:text-[48px] lg:leading-[61px] text-white leading-[24px]"
         />
@@ -72,7 +79,7 @@ export default function EquipmentBanner({
             width ? width : "w-[320px] xs:w-[360px] md:w-[500px] lg:w-[656px]"
           }  ${textSize ? textSize : " text-sm lg:text-lg xl:text-xl"}`}
         >
-          {text}
+          {text || product().description}
         </p>
         {isButton && (
           <Button

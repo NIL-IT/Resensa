@@ -10,6 +10,7 @@ import {
 } from "../../../utils/slice/userSlice";
 import { useFormatDate } from "../../../utils/hooks/formatDate";
 import SearchInput from "../../ui/SearchInput";
+import { parseExcelToOrders } from "../../../utils/hooks/parseServerExcel";
 
 export const list = [
   { name: "Добавить новый заказ", icon: <Plus width={20} />, action: "add" },
@@ -32,21 +33,20 @@ export const list = [
 
 export default function AdminOrders({ title }) {
   const { orders, exportExcel } = useSelector(({ user }) => user);
-  const [ordersList, setOrdersList] = useState([]);
+  const [ordersList, setOrdersList] = useState(orders);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [excel, setExcel] = useState(ordersList);
 
   useEffect(() => {
+    setLoading(true);
     const fetchOrders = async () => {
-      setLoading(true);
       await dispatch(getAllOrders());
-
-      setLoading(false);
+      return setLoading(false);
     };
     fetchOrders();
-  }, [dispatch, orders]);
+  }, []);
 
   useEffect(() => {
     setOrdersList(orders);
@@ -60,14 +60,16 @@ export default function AdminOrders({ title }) {
     }
   };
   // export excel
-  useEffect(() => {
-    const fetchExcel = async () => {
-      const file = await dispatch(getAllOrders());
-      setExcel(file.payload);
-      console.log("file", file.payload);
-    };
-    fetchExcel();
-  }, [exportExcel, dispatch]);
+  // useEffect(() => {
+  //   const fetchExcel = async () => {
+  //     const file = await exportOrdersExcel();
+  //     const data = await parseExcelToOrders(file);
+  //     console.log("parseData", data);
+  //     // setExcel(file.payload);
+  //     console.log("file", file.payload);
+  //   };
+  //   fetchExcel();
+  // }, [exportExcel, dispatch]);
   const handleCheckedOrder = (orderId) => {
     setSelectedOrders((prev) =>
       prev.includes(orderId)
@@ -179,13 +181,8 @@ export default function AdminOrders({ title }) {
                   <td className="py-2 xl:py-3 px-1 xl:pr-4">
                     {useFormatDate(order.date)}
                   </td>
-                  <td className="py-2 lg:py-3 px-1 lg:px-4">
-                    <div className="flex items-center gap-1 lg:gap-2">
-                      <div className="w-5 h-5 xl:w-8 xl:h-8 bg-gray-200 rounded-full"></div>
-                      <span className="text-[11px] xl:text-sm">
-                        {order.client_name}
-                      </span>
-                    </div>
+                  <td className="py-2 lg:py-3 px-1 lg:px-4 text-center">
+                    {order.client_name}
                   </td>
                   <td className="py-2 lg:py-3 px-1 lg:pr-4">
                     <span

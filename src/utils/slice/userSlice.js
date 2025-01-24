@@ -422,18 +422,47 @@ export const importOrdersExcel = createAsyncThunk(
     }
   }
 );
-export const exportOrdersExcel = createAsyncThunk(
-  "exportOrdersExcel/exportOrdersExcel",
-  async (_, thunkApi) => {
-    try {
-      const res = await api.get("/orders/export/excel");
-      return res.data;
-    } catch (err) {
-      console.log(err);
-      return thunkApi.rejectWithValue(err.response?.data || err.message);
-    }
-  }
-);
+// export const exportOrdersExcel = createAsyncThunk(
+//   "exportOrdersExcel/exportOrdersExcel",
+//   async (_, thunkApi) => {
+//     try {
+//       const res = await api.get("/orders/export/excel");
+//       const blob = res.blob();
+//       const url = window.URL.createObjectURL(blob);
+//       // const link = document.createElement("a");
+//       // link.href = url;
+//       // link.download = "example.xlsx";
+//       // link.click();
+//       // window.URL.revokeObjectURL(url);
+//       return url;
+//     } catch (err) {
+//       console.log(err);
+//       return thunkApi.rejectWithValue(err.response?.data || err.message);
+//     }
+//   }
+// );
+export const exportOrdersExcel = async (exportFile = false) => {
+  fetch("https://nilit1.ru/api/orders/export/excel", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Ошибка при получении файла");
+      }
+      return response.blob();
+    })
+
+    .then((blob) => {
+      if (exportFile) {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "example.xlsx";
+        link.click();
+        window.URL.revokeObjectURL(url);
+      }
+    });
+};
 export const submitOrder = createAsyncThunk(
   "submitOrder/submitOrder",
   async (data, thunkApi) => {
@@ -443,6 +472,11 @@ export const submitOrder = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("phone", data.phone);
       formData.append("email", data.email);
+      if (data.product_name) {
+        formData.append("product_name", data.product_name);
+      } else {
+        formData.append("product_name", "");
+      }
 
       const res = await api.post("/orders/submit-order/", formData);
       return res.data;
@@ -594,10 +628,10 @@ const userSlice = createSlice({
       })
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
-      })
-      .addCase(exportOrdersExcel.fulfilled, (state, action) => {
-        state.exportExcel = action.payload;
       });
+    // .addCase(exportOrdersExcel.fulfilled, (state, action) => {
+    //   state.exportExcel = action.payload;
+    // });
   },
 });
 

@@ -6,7 +6,7 @@ import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
 import Footer from "../shared/Footer";
 import OrderStatus from "../shared/OrderStatus";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const text = `Оборудование серии RCN стандартного исполнения предназначено для 
 размещения и эксплуатации в помещениях различного 
@@ -14,6 +14,7 @@ const text = `Оборудование серии RCN стандартного �
 воздухе.`;
 export default function ProductItem({ list }) {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isOrders = pathname.split("/")[2] === "orders";
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function ProductItem({ list }) {
     ? list.find((item) => +item.id === +id)
     : list[0];
   const [currentProduct, setCurrentProduct] = useState(findProduct);
+  console.log(currentProduct, "current product");
   document.body.style.overflowY = "auto";
   if (!currentProduct && !isOrders) navigate("/");
   useEffect(() => {
@@ -38,7 +40,9 @@ export default function ProductItem({ list }) {
       }, 20);
     }
   });
-
+  const changeRoutingToOrders = () => {
+    dispatch(changeRoutingToOrders(false));
+  };
   useEffect(() => {
     if (!id && isOrders) return;
     setCurrentProduct(findProduct);
@@ -72,14 +76,19 @@ export default function ProductItem({ list }) {
       <EquipmentBanner
         currentProduct={true}
         bannerImg={currentProduct.image}
-        title={"ОБЩЕПРОМЫШЛЕННОЕ"}
+        title={currentProduct.name}
         subtitle={currentProduct.name}
-        text={text}
+        text={currentProduct.description}
         isButton={true}
         width={"w-[550px]"}
       />
       <Advantages />
-      <ItemsList title={"каталог"} list={dataCategory} limited={false} />
+      <ItemsList
+        changeRoutingToOrders={changeRoutingToOrders}
+        title={"каталог"}
+        list={dataCategory}
+        limited={false}
+      />
       <OrderStatus />
       <Footer />
     </>

@@ -57,10 +57,17 @@ export default function AppRoutes() {
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
+            title={"Оборудование"}
+            text={`Lorem ipsum dolor sit amet, 
+              consectetur adipiscing elit, sed do 
+              eiusmod tempor incididunt ut labore et 
+              dolore magna aliqua. Ut enim ad minim 
+              veniam, quis nostrud exercitation ullamco 
+              laboris nisi ut aliquip ex ea commodo consequat. 
+
+`}
             data={equipment}
-            text={textEquipment}
             bannerImg={"/img/newbanner.png"}
-            title={"оборудование"}
           />
         }
       />
@@ -68,10 +75,17 @@ export default function AppRoutes() {
         path={ROUTES.SOLUTIONS}
         element={
           <Equipment
+            title={"Решения"}
+            text={`Lorem ipsum dolor sit amet, 
+              consectetur adipiscing elit, sed do 
+              eiusmod tempor incididunt ut labore et 
+              dolore magna aliqua. Ut enim ad minim 
+              veniam, quis nostrud exercitation ullamco 
+              laboris nisi ut aliquip ex ea commodo consequat. 
+
+`}
             data={solutions}
-            text={textEquipment}
             bannerImg={"/img/newsol_banner.png"}
-            title={"решения"}
           />
         }
       />

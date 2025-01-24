@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../ui/Input";
-import { useDispatch } from "react-redux";
-import { changeShowPopup, submitOrder } from "../../../utils/slice/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeItemId,
+  changeShowPopup,
+  submitOrder,
+} from "../../../utils/slice/userSlice";
 
 const Popup = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(true);
-
+  const { itemId, equipment, solutions } = useSelector(({ user }) => user);
+  const combinedData = [...equipment, ...solutions];
+  const findProduct = combinedData.find(({ id }) => id === itemId);
   const [formData, setFormData] = useState({
     company_name: "",
     name: "",
@@ -17,6 +23,12 @@ const Popup = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (itemId) {
+      setFormData((prevData) => ({
+        ...prevData,
+        product_name: findProduct.name,
+      }));
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
@@ -25,6 +37,7 @@ const Popup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const newData = formData;
       delete newData.privacy;
@@ -39,6 +52,7 @@ const Popup = () => {
         privacy: false,
       });
       dispatch(changeShowPopup(false));
+      dispatch(changeItemId(null));
     } catch (err) {
       alert("Error", err.message);
     }

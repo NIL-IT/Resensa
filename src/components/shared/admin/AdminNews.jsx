@@ -16,19 +16,6 @@ export default function AdminNews() {
   const [loading, setLoading] = useState(true);
   const { news } = useSelector(({ user }) => user);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        await dispatch(getAllNews());
-      } catch (error) {
-        console.error(`Failed to fetch ${category}:`, error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [dispatch, news]);
-
   const changeNews = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
@@ -42,6 +29,17 @@ export default function AdminNews() {
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getAllNews());
+      } catch (error) {
+        console.error(`Failed to fetch ${category}:`, error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch, changeNews, addNewItem, handlerDeleteNews]);
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />

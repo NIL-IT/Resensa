@@ -7,8 +7,8 @@ import AdminCategoryList from "../shared/admin/AdminCategoryList";
 import FileUploader from "../ui/FileUploader";
 import ChangeBanner from "../shared/admin/ChangeBanner";
 import AdminNews from "../shared/admin/AdminNews";
-import { useSelector } from "react-redux";
 import { Menu, X } from "lucide-react";
+import { exportOrdersExcel } from "../../utils/slice/userSlice";
 
 const navList = [
   {
@@ -73,24 +73,27 @@ export default function Admin() {
     if (+dirs[2] === 6) return "Выйти";
   };
   //функция для экспорта из html в excel
-  function exportTableToExcel(tableId, filename = "the_data_you_needed.xls") {
-    let dataType = "application/vnd.ms-excel";
-    let tableSelect = document.getElementById(tableId);
-    let tableHTML = encodeURIComponent(
-      tableSelect.outerHTML.replace(/ or .*?>/g, ">")
-    );
-    let link = document.createElement("a");
-    link.href = `data:${dataType}, ${tableHTML}`;
-    link.download = filename;
-    link.click();
-  }
+  // function exportTableToExcel(tableId, filename = "the_data_you_needed.xls") {
+  //   let dataType = "application/vnd.ms-excel";
+  //   let tableSelect = document.getElementById(tableId);
+  //   let tableHTML = encodeURIComponent(
+  //     tableSelect.outerHTML.replace(/ or .*?>/g, ">")
+  //   );
+  //   let link = document.createElement("a");
+  //   link.href = `data:${dataType}, ${tableHTML}`;
+  //   link.download = filename;
+  //   link.click();
+  // }
   useEffect(() => {
     const getId = () => pathname.split("/").at(-1);
     setActiveLink(getId() - 1);
     setActiveUploaderFile(false);
     setIsMobileMenuOpen(false);
   }, [pathname]);
-
+  const exportFile = async () => {
+    const exportFile = await exportOrdersExcel(true);
+    console.log(exportFile);
+  };
   return (
     <div className="min-h-screen flex flex-col">
       <div className="w-full md:container mx-auto px-4 pt-[30px] flex-grow">
@@ -141,14 +144,14 @@ export default function Admin() {
             </div>
           ) : (
             <div className="w-full h-[500px] flex-center flex-col justify-center">
-              <FileUploader />
+              <FileUploader setActiveUploaderFile={setActiveUploaderFile} />
             </div>
           )}
         </section>
 
         <div className="flex flex-col md:flex-row justify-center w-full gap-4 mt-6 md:pl-44">
           <button
-            onClick={() => exportTableToExcel("tableId")}
+            onClick={() => exportFile()}
             className="group bg-gray-400 text-white py-[15px] px-[19px] text-base uppercase flex items-center justify-center gap-5"
           >
             <svg

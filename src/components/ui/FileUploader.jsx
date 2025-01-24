@@ -7,7 +7,7 @@ import {
   importOrdersExcel,
 } from "../../utils/slice/userSlice";
 
-const FileUploader = () => {
+const FileUploader = ({ setActiveUploaderFile }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const inputRef = useRef(null);
@@ -74,6 +74,7 @@ const FileUploader = () => {
       }
 
       setUploading(false);
+      setActiveUploaderFile(false);
     }
   };
 

@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import { Link, useLocation } from "react-router-dom";
 
-export default function ItemsList({ limited = true, list, href, title }) {
+export default function ItemsList({
+  limited = true,
+  list,
+  href,
+  title,
+  changeRoutingToOrders = null,
+}) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [data, setData] = useState(list);
@@ -20,7 +26,14 @@ export default function ItemsList({ limited = true, list, href, title }) {
     }
   }, [list, limited]);
   console.log(list);
-  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
+  const handleChangeShowPopup = (boolean, id) => {
+    dispatch(changeShowPopup(boolean));
+    dispatch(changeItemId(id));
+  };
+  // const handleClickLink = () => {
+  //   changeRoutingToOrders();
+  //   dispatch(changeItemId(id));
+  // };
 
   return data.length > 0 ? (
     <div className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
@@ -32,6 +45,7 @@ export default function ItemsList({ limited = true, list, href, title }) {
         {data.map(({ id, name, description, image }) => (
           <Link
             to={`/product/${id}`}
+            onClick={() => dispatch(changeItemId(id))}
             key={id}
             className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
           >
@@ -44,12 +58,12 @@ export default function ItemsList({ limited = true, list, href, title }) {
               {name}
             </h2>
             <div className="flex-center justify-between gap-2">
-              <p className="w-[50%] text-[11px] xs:text-[12px] sm:text-[13px] text-gray-300">
+              <p className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300">
                 {description}
               </p>
               <Button
                 noLink={true}
-                onClick={() => handleChangeShowPopup(true)}
+                onClick={() => handleChangeShowPopup(true, id)}
                 text={"Оставить заявку"}
                 className="w-[50%] py-[16px] px-[12px] hover:bg-gray-450"
               />

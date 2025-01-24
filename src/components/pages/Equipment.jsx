@@ -24,8 +24,8 @@ export default function Equipment({ data, bannerImg, title, text }) {
       <EquipmentBanner
         bannerImg={bannerImg}
         title={title}
-        subtitle={"recensa"}
         text={text}
+        subtitle={"recensa"}
         isButton={true}
       />
       <ItemsList list={data} limited={false} />

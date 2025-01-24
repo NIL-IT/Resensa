@@ -19,23 +19,6 @@ export default function AdminCategoryList({ title, category }) {
   const { equipment, solutions } = useSelector(({ user }) => user);
   const dataCategory = category === "equipment" ? equipment : solutions;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        if (category === "equipment") {
-          await dispatch(getAllEquipment());
-        } else if (category === "solutions") {
-          await dispatch(getAllSolutions());
-        }
-      } catch (error) {
-        console.error(`Failed to fetch ${category}:`, error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [dispatch, category, category === "equipment" ? equipment : solutions]);
-
   const changeEquipment = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
@@ -64,7 +47,16 @@ export default function AdminCategoryList({ title, category }) {
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
   };
+  const fetchData = async () => {
+    setLoading(true);
+    await dispatch(getAllEquipment());
+    await dispatch(getAllSolutions());
 
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchData();
+  }, [category]);
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
@@ -110,7 +102,7 @@ export default function AdminCategoryList({ title, category }) {
                         <h2 className="text-gray-400 text-sm uppercase font-normal my-2">
                           {name}
                         </h2>
-                        <p className="text-[13px] text-gray-300">
+                        <p className="text-[13px] max-h-[80px] overflow-hidden text-gray-300">
                           {description}
                         </p>
                       </div>
