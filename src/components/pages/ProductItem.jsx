@@ -7,7 +7,32 @@ import ItemsList from "../shared/ItemsList";
 import Footer from "../shared/Footer";
 import OrderStatus from "../shared/OrderStatus";
 import { useDispatch, useSelector } from "react-redux";
-
+const dataTitle = [
+  {
+    name: "СЕРИЯ RPOOL",
+    subtitle: "Бассейновое",
+  },
+  {
+    name: "СЕРИЯ RCDUCT",
+    subtitle: "Канальное",
+  },
+  {
+    name: "смесительные узлы",
+    subtitle: "Водяные узлы",
+  },
+  {
+    name: "СЕРИЯ RCLEAN",
+    subtitle: "Медицинское Гигиеническое исполнение",
+  },
+  {
+    name: "СЕРИЯ RCROOF",
+    subtitle: "Крышное оборудованиe для больших помещений",
+  },
+  {
+    name: "СЕРИЯ RCN",
+    subtitle: "Общепромышленное",
+  },
+];
 const text = `Оборудование серии RCN стандартного исполнения предназначено для 
 размещения и эксплуатации в помещениях различного 
 назначения как внутри зданий, так и на открытом 
@@ -70,13 +95,27 @@ export default function ProductItem({ list }) {
       setIsLoading(true);
     }
   }, [id, list]);
+  const subtitle = () => {
+    let item;
+    if (!currentProduct) return;
 
+    item = dataTitle.filter(
+      (item) => item.name.toLowerCase() === currentProduct.name.toLowerCase()
+    );
+
+    if (item.length > 0) {
+      console.log(item, "title");
+      return item[0].subtitle;
+    }
+    return "";
+  };
+  console.log(subtitle(), "subtitle");
   return isLoading ? (
     <>
       <EquipmentBanner
         currentProduct={true}
         bannerImg={currentProduct.image}
-        title={currentProduct.name}
+        title={subtitle() || currentProduct.name}
         subtitle={currentProduct.name}
         text={currentProduct.description}
         isButton={true}

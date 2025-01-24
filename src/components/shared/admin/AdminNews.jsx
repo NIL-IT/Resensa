@@ -14,32 +14,34 @@ import { Plus } from "lucide-react";
 export default function AdminNews() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const { news } = useSelector(({ user }) => user);
+  const { news, itemId } = useSelector(({ user }) => user);
 
   const changeNews = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
   };
 
-  const handlerDeleteNews = (id) => {
-    dispatch(deleteNews(id));
+  const handlerDeleteNews = async (id) => {
+    await dispatch(deleteNews(id));
     dispatch(changeItemId(null));
+    fetchData();
   };
 
   const addNewItem = () => {
     dispatch(changeShowAddNewItemPopup(true));
   };
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      await dispatch(getAllNews());
+    } catch (error) {
+      console.error(`Failed to fetch ${category}:`, error);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getAllNews());
-      } catch (error) {
-        console.error(`Failed to fetch ${category}:`, error);
-      }
-      setLoading(false);
-    };
     fetchData();
-  }, [dispatch, changeNews, addNewItem, handlerDeleteNews]);
+  }, [itemId]);
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />

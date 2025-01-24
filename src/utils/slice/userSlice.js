@@ -305,7 +305,7 @@ export const createOrders = createAsyncThunk(
     formData.append("state", data.state);
     formData.append("order_amount", Number(data.order_amount));
     try {
-      const res = await api.post("/orders", formData);
+      const res = await api.post("/orders/", formData);
       return res.data;
     } catch (err) {
       console.log(err);

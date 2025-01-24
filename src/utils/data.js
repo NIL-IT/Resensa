@@ -1,3 +1,4 @@
+const password = 1234554321;
 export const data = {
   equipment: {
     name: "oборудование",

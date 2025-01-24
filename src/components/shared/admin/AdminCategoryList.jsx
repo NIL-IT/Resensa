@@ -16,7 +16,7 @@ import { Plus } from "lucide-react";
 export default function AdminCategoryList({ title, category }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const { equipment, solutions } = useSelector(({ user }) => user);
+  const { equipment, solutions, itemId } = useSelector(({ user }) => user);
   const dataCategory = category === "equipment" ? equipment : solutions;
 
   const changeEquipment = (id) => {
@@ -56,7 +56,7 @@ export default function AdminCategoryList({ title, category }) {
   };
   useEffect(() => {
     fetchData();
-  }, [category]);
+  }, [category, itemId]);
   return (
     <div className="relative pb-5">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />

@@ -32,7 +32,7 @@ export const list = [
 ];
 
 export default function AdminOrders({ title }) {
-  const { orders, exportExcel } = useSelector(({ user }) => user);
+  const { orders, exportExcel, itemId } = useSelector(({ user }) => user);
   const [ordersList, setOrdersList] = useState(orders);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ export default function AdminOrders({ title }) {
       return setLoading(false);
     };
     fetchOrders();
-  }, []);
+  }, [dispatch, itemId]);
 
   useEffect(() => {
     setOrdersList(orders);
@@ -108,6 +108,9 @@ export default function AdminOrders({ title }) {
       orders.filter((order) => order.number.toString().includes(value))
     );
   };
+  const changeOrders = (data) => {
+    setOrdersList(data);
+  };
 
   return (
     <div className="w-full relative">
@@ -125,6 +128,7 @@ export default function AdminOrders({ title }) {
             className={"w-full md:w-[300px] border-0 border-b border-gray-250"}
           />
           <VerticalDote
+            changeOrders={changeOrders}
             deleteAll={deleteAll}
             deleteSelected={deleteSelected}
             list={list}
@@ -163,7 +167,7 @@ export default function AdminOrders({ title }) {
             </tbody>
           ) : ordersList.length > 0 ? (
             <tbody>
-              {excel.map((order) => (
+              {ordersList.map((order) => (
                 <tr
                   key={order.id}
                   className="border-b *:text-[11px] lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"

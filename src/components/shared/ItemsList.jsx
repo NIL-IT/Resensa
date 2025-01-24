@@ -25,7 +25,7 @@ export default function ItemsList({
       getTitle = list[0].hasOwnProperty("max_param");
     }
   }, [list, limited]);
-  console.log(list);
+
   const handleChangeShowPopup = (boolean, id) => {
     dispatch(changeShowPopup(boolean));
     dispatch(changeItemId(id));

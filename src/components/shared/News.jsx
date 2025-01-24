@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeItemId,
-  changeShowNewsPopup,
-} from "../../utils/slice/userSlice";
+import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
 
 export default function News() {
   const { news } = useSelector(({ user }) => user);
@@ -50,7 +47,7 @@ export default function News() {
                 key={item.id}
               >
                 <img
-                  className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px] "
+                  className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:min-h-[280px] xl:w-[315px] 2xl:min-h-[290px] 2xl:w-[318px] 3xl:min-h-[300px] 3xl:w-[320px] "
                   src={item.image}
                   alt=""
                 />

@@ -11,6 +11,7 @@ export default function VerticalDote({
   deleteSelected,
   deleteAll,
   selectedOrders,
+  changeOrders,
 }) {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
