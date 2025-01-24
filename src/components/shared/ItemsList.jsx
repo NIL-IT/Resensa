@@ -5,13 +5,7 @@ import { useDispatch } from "react-redux";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import { Link, useLocation } from "react-router-dom";
 
-export default function ItemsList({
-  limited = true,
-  list,
-  href,
-  title,
-  changeRoutingToOrders = null,
-}) {
+export default function ItemsList({ limited = true, list, href, title }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [data, setData] = useState(list);
@@ -30,10 +24,6 @@ export default function ItemsList({
     dispatch(changeShowPopup(boolean));
     dispatch(changeItemId(id));
   };
-  // const handleClickLink = () => {
-  //   changeRoutingToOrders();
-  //   dispatch(changeItemId(id));
-  // };
 
   return data.length > 0 ? (
     <div className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
@@ -42,7 +32,7 @@ export default function ItemsList({
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[30px] xs:mb-[35px] sm:mb-[40px] md:mb-[45px] lg:mb-[50px] xl:mb-[50px] 2xl:mb-[50px] 3xl:mb-[50px] border-b border-b-gray-400"
       />
       <div className="flex flex-wrap justify-center gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[35px] lg:gap-[40px] xl:gap-[45px] 2xl:gap-[48px] 3xl:gap-[51px]">
-        {data.map(({ id, name, description, image }) => (
+        {data.map(({ id, name, description, image_card }) => (
           <Link
             to={`/product/${id}`}
             onClick={() => dispatch(changeItemId(id))}
@@ -51,7 +41,7 @@ export default function ItemsList({
           >
             <img
               className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px]"
-              src={image}
+              src={image_card || "/img/placeholder.svg"}
               alt={name}
             />
             <h2 className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal my-1.5 xs:my-1.5 sm:my-2">

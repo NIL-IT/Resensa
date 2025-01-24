@@ -35,6 +35,7 @@ export const createNews = createAsyncThunk(
           "Отсутствуют обязательные поля: заголовок, текст и изображение"
         );
       }
+      console.log(payload);
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("text", payload.text);
@@ -107,37 +108,19 @@ export const createEquipment = createAsyncThunk(
   "Equipment/createEquipment",
   async (data, thunkApi) => {
     try {
-      // Validate required fields
-      if (
-        !data.name ||
-        !data.description ||
-        !data.equipment_photo ||
-        !data.min_param ||
-        !data.max_param
-      ) {
-        throw new Error(
-          "Отсутствуют обязательные поля: название, описание, фото, минимальный и максимальный параметры"
-        );
-      }
-
-      // Ensure min_param and max_param are valid integers
       const minParamNum = Number(data.min_param);
       const maxParamNum = Number(data.max_param);
 
       if (isNaN(minParamNum) || isNaN(maxParamNum)) {
         throw new Error("Параметры должны быть числами");
       }
-
+      console.log("DATA", data);
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
 
-      // // Convert base64 to blob using utility function
-      // const blob = base64ToBlob(data.equipment_photo);
-      // formData.append("equipment_photo", blob, "image.jpg");
-      formData.append("equipment_photo", data.equipment_photo);
-
-      formData.append("equipment_photo", data.equipment_photo);
+      formData.append("image_banner", data.image_banner);
+      formData.append("image_card", data.image_card);
 
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
@@ -170,8 +153,11 @@ export const updateEquipment = createAsyncThunk(
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    if (data.equipment_photo) {
-      formData.append("equipment_photo", data.equipment_photo);
+    if (data.image_banner) {
+      formData.append("image_banner", data.image_banner);
+    }
+    if (data.image_card) {
+      formData.append("image_card", data.image_card);
     }
 
     formData.append("min_param", data.min_param);
@@ -217,20 +203,11 @@ export const createSolutions = createAsyncThunk(
   "Solutions/createSolutions",
   async (data, thunkApi) => {
     try {
-      // Validate required fields
-      if (!data.name || !data.description || !data.solution_photo) {
-        throw new Error(
-          "Отсутствуют обязательные поля: название, описание и изображение"
-        );
-      }
-
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
-      formData.append("solution_photo", data.solution_photo);
-
-      formData.append("solution_photo", data.solution_photo);
-
+      formData.append("image_banner", data.image_banner);
+      formData.append("image_card", data.image_card);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -252,10 +229,12 @@ export const updateSolutions = createAsyncThunk(
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    if (data.solution_photo) {
-      formData.append("solution_photo", data.solution_photo);
+    if (data.image_banner) {
+      formData.append("image_banner", data.image_banner);
     }
-
+    if (data.image_card) {
+      formData.append("image_card", data.image_card);
+    }
     console.log("Отправляемые данные в запросе:", data, id);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
@@ -371,11 +350,12 @@ export const updateBanner = createAsyncThunk(
   "banner/updateBanner",
   async (payload, thunkApi) => {
     try {
-      console.log("Put banner", payload);
-      // const formData = new FormData();
-      // formData.append("experience_year", payload.experience_year);
-      // formData.append("guaranty_year", payload.guaranty_year);
-      const res = await api.put(`/banner/`, payload);
+      const formData = new FormData();
+      formData.append("first_value_string", payload.first_value_string);
+      formData.append("first_value", Number(payload.first_value));
+      formData.append("second_value_string", payload.second_value_string);
+      formData.append("second_value", Number(payload.second_value));
+      const res = await api.put(`/banner/`, formData);
       return res.data;
     } catch (err) {
       console.log(err);

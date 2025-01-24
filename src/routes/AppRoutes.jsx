@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-  Navigate,
-} from "react-router-dom";
+import React from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "../components/pages/Home";
 import Equipment from "../components/pages/Equipment";
 import { ROUTES } from "./routes";
 import AboutCompany from "../components/pages/AboutCompany";
 import Admin from "../components/pages/Admin";
-import { data } from "../utils/data";
-import { textEquipment } from "../utils/data";
 import ProductItem from "../components/pages/ProductItem";
 import LoginForm from "../components/pages/LoginForm";
 import { useSelector } from "react-redux";

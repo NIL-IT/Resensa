@@ -24,6 +24,7 @@ export default function Header() {
     { name: "Заказы", path: `/admin/1` },
     { name: "Контакты", path: "/contact" },
   ];
+
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const handleClickImg = async (path) => {
     if (isAdmin) {
@@ -32,10 +33,10 @@ export default function Header() {
       navigate("/auth");
     }
   };
-  const handleClickLink = async (i, path) => {
-    if (!isAdmin && +i == 4) {
-      await dispatch(changeRoutingToOrders(true));
-      navigate(`/product/${equipment[0].id}`);
+  const handleClickLink = (i, path) => {
+    if (!isAdmin && +i === 4) {
+      dispatch(changeRoutingToOrders(true));
+      return navigate(`/product/${equipment[0].id}`);
     }
     if (isAdmin) {
       if (i === 4) {
@@ -44,7 +45,7 @@ export default function Header() {
       } else {
         // For any other link click by admin, log them out
         Cookies.remove("access_token");
-        await dispatch(changeIsAdmin(false));
+        dispatch(changeIsAdmin(false));
         navigate("/auth");
       }
     } else {
@@ -90,7 +91,7 @@ export default function Header() {
               +7 999 999 99 99
             </a>
           </div>
-          <div className="flex justify-normal  md:justify-between lg:justify-normal w-full flex-col sm:flex-row items-center gap-4">
+          <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
             <div className="flex items-center gap-4">
               <a href="#" className="hover:opacity-80">
                 <img src="/icon/telegram.svg" alt="telegram" className="w-8 " />

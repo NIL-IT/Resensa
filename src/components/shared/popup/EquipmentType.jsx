@@ -1,89 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import Title from "../../ui/Title";
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
-const navList = [
-  {
-    title: "СЕРИЯ RCN",
-    description:
-      "Общепромышленные установки для вентиляции и кондиционирования",
-    capacity: "1000-100000 м³/ч",
-    features: [
-      "Высокая энергоэффективность",
-      "Компактные размеры",
-      "Низкий уровень шума",
-    ],
-  },
-  {
-    title: "СЕРИЯ RCNICE",
-    description: "Специализированные установки для чистых помещений",
-    capacity: "500-50000 м³/ч",
-    features: [
-      "Высокая степень фильтрации",
-      "Прецизионное управление",
-      "Антибактериальное покрытие",
-    ],
-  },
-  {
-    title: "СЕРИЯ RCLEAN",
-    description: "Установки для медицинских учреждений",
-    capacity: "800-80000 м³/ч",
-    features: [
-      "Медицинское исполнение",
-      "HEPA-фильтрация",
-      "Дезинфекция воздуха",
-    ],
-  },
-  {
-    title: "СЕРИЯ RCDUCT",
-    description: "Канальные установки обработки воздуха",
-    capacity: "500-25000 м³/ч",
-    features: [
-      "Компактный монтаж",
-      "Простое обслуживание",
-      "Гибкая конфигурация",
-    ],
-  },
-  {
-    title: "СЕРИЯ RCOMP",
-    description: "Компактные вентиляционные установки",
-    capacity: "300-15000 м³/ч",
-    features: [
-      "Минимальные размеры",
-      "Быстрый монтаж",
-      "Встроенная автоматика",
-    ],
-  },
-  {
-    title: "СЕРИЯ RECO",
-    description: "Энергоэффективные установки с рекуперацией",
-    capacity: "500-50000 м³/ч",
-    features: [
-      "Высокий КПД рекуперации",
-      "Экономия энергии",
-      "Всесезонная работа",
-    ],
-  },
-  {
-    title: "СЕРИЯ RCROOF",
-    description: "Крышные вентиляционные установки",
-    capacity: "1000-60000 м³/ч",
-    features: ["Наружное исполнение", "Встроенная защита", "Простой монтаж"],
-  },
-  {
-    title: "СЕРИЯ RPOOL",
-    description: "Установки для бассейнов и аквапарков",
-    capacity: "2000-40000 м³/ч",
-    features: ["Осушение воздуха", "Защита от коррозии", "Рекуперация тепла"],
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeItemId,
+  changeRoutingToOrders,
+} from "../../../utils/slice/userSlice";
 
 export default function EquipmentType() {
   const ref = useRef(null);
-  const { data } = useSelector(({ user }) => user);
-
   const { result, equipment } = useSelector(({ user }) => user);
-
+  const dispatch = useDispatch();
   function findItemWithLowestMinParam(array, targetNumber) {
     // Filter items where the number falls between min_param and max_param
     const filteredItems = array.filter(
@@ -118,7 +45,10 @@ export default function EquipmentType() {
     const img = equipment.find(({ id }) => id === activeIndex);
     return img ? img : null;
   };
-  console.log(findImage());
+  const handleClickButton = (id) => {
+    dispatch(changeRoutingToOrders(false));
+    dispatch(changeItemId(id));
+  };
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-scroll">
       <div className="flex-center justify-center w-full px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 mb-10 lg:mb-20">
@@ -190,11 +120,15 @@ export default function EquipmentType() {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <img
-                src={findImage().image || "/img/placeholder.svg"}
-                alt="оборудование"
-                className="w-full max-w-[300px] lg:max-w-[400px] xl:max-w-[500px] 2xl:max-w-[570px] h-auto"
-              />
+              <div className=" h-[300px] lg:h-[337px] flex-center justify-center ">
+                <img
+                  src={findImage().image_card || "/img/placeholder.svg"}
+                  alt="оборудование"
+                  className="w-full 
+                max-w-[300px] lg:max-w-[400px] xl:max-w-[500px] 
+                2xl:max-w-[570px] max-h-[337px] object-contain"
+                />
+              </div>
               <div
                 className="w-[742px] border-t border-gray-400 pt-2 xs:pt-3 
               sm:pt-4 mt-[30px] xs:mt-[40px] sm:mt-[50px] md:mt-[60px] lg:mt-[65px] 
@@ -216,6 +150,7 @@ export default function EquipmentType() {
                   </p>
                 </div>
                 <Button
+                  onClick={() => handleClickButton(findImage().id)}
                   icon={true}
                   href={`/product/${findImage().id}`}
                   text="подробнее"

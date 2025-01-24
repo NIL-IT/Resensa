@@ -56,7 +56,6 @@ function App() {
         dispatch(getAllSolutions());
         dispatch(getAllOrders());
         dispatch(getBanner());
-        dispatch(updateBanner({ experience_year: 22, guaranty_year: 3 }));
       } catch (error) {
         console.error(error);
       }
@@ -83,7 +82,9 @@ function App() {
       {statusOrderPopup && <ChangeStatusPopup />}
     </div>
   ) : (
-    <div>Загрузка...</div>
+    <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">
+      <div className="loader" />
+    </div>
   );
 }
 

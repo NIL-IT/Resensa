@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
@@ -15,12 +15,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeItemId,
   changeRoutingToOrders,
+  getAllEquipment,
+  getAllSolutions,
 } from "../../utils/slice/userSlice";
 
 export default function Home() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { equipment, solutions } = useSelector(({ user }) => user);
+  const [loading, isLoading] = useState(true);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -28,12 +31,29 @@ export default function Home() {
     });
   };
   useEffect(() => {
+    const fetchData = async () => {
+      isLoading(true);
+      try {
+        await dispatch(getAllEquipment());
+        await dispatch(getAllSolutions());
+      } catch (error) {
+        console.log(error);
+      }
+      isLoading(false);
+    };
+    fetchData();
+  }, [pathname]);
+  useEffect(() => {
     scrollTop();
     dispatch(changeItemId(null));
   }, [pathname]);
   document.body.style.overflowY = "auto";
 
-  return (
+  return loading ? (
+    <div className=" fixed top-0 left-0 bg-white w-full h-full flex-center justify-center mt-20 ">
+      <div className="loader" />
+    </div>
+  ) : (
     <main>
       <Banner />
       <Advantages />

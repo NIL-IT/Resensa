@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import { changeShowPopup, getBanner } from "../../utils/slice/userSlice";
+import { div } from "three/tsl";
 export default function Banner() {
   const dispatch = useDispatch();
-  const { experience, guarantee } = useSelector(({ user }) => user);
+  const { banner } = useSelector(({ user }) => user);
+  const [loading, isLoading] = useState(true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  return (
+
+  useEffect(() => {
+    const fetchData = async () => {
+      isLoading(true);
+      try {
+        await dispatch(getBanner());
+      } catch (error) {
+        console.log(error);
+      }
+      isLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  return loading ? (
+    <div className="fixed top-0 left-0 bg-white w-full h-full flex-center justify-center mt-20">
+      <div className="loader" />
+    </div>
+  ) : (
     <div
       className="container 
       pt-[40px] xs:pt-[45px] sm:pt-[50px] md:pt-[90px] lg:pt-[118px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[125px] 
@@ -22,35 +42,37 @@ export default function Banner() {
       />
       <div className="flex-center flex-col lg:flex-row justify-between mt-3 xs:mt-3.5 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 2xl:mt-4 3xl:mt-4 gap-6 xs:gap-7 sm:gap-8 lg:gap-4">
         <div className="flex-center flex-wrap gap-6 xs:gap-7 sm:gap-8 md:gap-[60px] lg:gap-[70px] xl:gap-[75px] 2xl:gap-[80px] 3xl:gap-[88px]">
-          <div className="xs:flex xs:gap-5 xl:block ">
+          <div className="xs:flex xs:gap-5 xl:block md:w-[290px] xl:w-[312px]">
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
             3xl:text-[48px] text-gray-400"
             >
-              {experience}
+              {banner.first_value || "22"}
             </span>
             <p
               className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl
-             text-gray-300 xs:text-start text-left"
+             text-gray-300 xs:text-start text-left "
             >
-              года опыта на рынке
-              <br /> вентиляционного оборудования
+              {banner.first_value_string ||
+                `года опыта на рынке
+вентиляционного оборудования`}
             </p>
           </div>
-          <div className="xs:flex xs:gap-5 xl:block">
+          <div className="xs:flex xs:gap-5 xl:block md:w-[280px] xl:w-[312px]">
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] 
             md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
             3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto]"
             >
-              {guarantee}
+              {banner.second_value ||
+                `года гарантии
+на продукцию компании.`}
             </span>
             <p
               className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl
              xl:text-xl 2xl:text-xl 3xl:text-xl text-gray-300 xs:text-start text-left"
             >
-              года гарантии
-              <br /> на продукцию компании
+              {banner.second_value_string || "3"}
             </p>
           </div>
         </div>

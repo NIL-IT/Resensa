@@ -17,7 +17,7 @@ const ChangeEquipmentPopup = () => {
   const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === 4;
   const isSolutions = +pathnameId === 3;
-
+  document.body.style.overflowY = "hidden";
   const { itemId, equipment, solutions, news } = useSelector(
     ({ user }) => user
   );
@@ -69,61 +69,43 @@ const ChangeEquipmentPopup = () => {
     }));
   };
 
-  // const urlToFile = async (url) => {
-  //   try {
-  //     // If the URL is from an external domain, skip the conversion
-  //     if (!url.startsWith(window.location.origin)) {
-  //       console.log("Skipping external image conversion:", url);
-  //       return null;
-  //     }
-
-  //     const response = await fetch(url, { mode: "cors" });
-  //     if (!response.ok) throw new Error("Failed to fetch image");
-
-  //     const blob = await response.blob();
-  //     const fileName = url.split("/").pop() || "image.jpg";
-  //     return new File([blob], fileName, { type: blob.type });
-  //   } catch (error) {
-  //     console.warn("Error converting URL to File:", error);
-  //     return null;
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const submitData = { ...formData };
-      const imageFieldName = isNews
-        ? "news_photo"
-        : isSolutions
-        ? "solution_photo"
-        : "equipment_photo";
-
-      // if (selectedFile) {
-      // If a new file was selected, use it
-      submitData[imageFieldName] = selectedFile;
-      submitData["banner_photo"] = selectedFileBanner;
-      // } else if (formData[imageFieldName]) {
-      //   // If no new file was selected but we have an existing image URL, convert it
-      //   const imageFile = await urlToFile(formData[imageFieldName]);
-      //   submitData[imageFieldName] = imageFile;
-      // }
-      console.log(submitData, "submitData");
       if (!isNews) {
         const isEquipment = !isSolutions;
         if (isEquipment) {
+          const equipmentData = {
+            name: formData.name,
+            description: formData.description,
+            image_card: selectedFile,
+            image_banner: selectedFileBanner,
+            min_param: parseInt(formData.min_param),
+            max_param: parseInt(formData.max_param),
+          };
           await dispatch(
-            updateEquipment({ id: findProduct?.id, data: submitData })
+            updateEquipment({ id: findProduct?.id, data: equipmentData })
           ).unwrap();
         } else if (isSolutions) {
+          const solutionData = {
+            name: formData.name,
+            description: formData.description,
+            image_card: selectedFile,
+            image_banner: selectedFileBanner,
+          };
           await dispatch(
-            updateSolutions({ id: findProduct?.id, data: submitData })
+            updateSolutions({ id: findProduct?.id, data: solutionData })
           ).unwrap();
         }
       } else {
+        const newsData = {
+          title: formData.title,
+          text: formData.text,
+          news_photo: selectedFile,
+        };
         await dispatch(
-          updateNews({ id: findProduct?.id, data: submitData })
+          updateNews({ id: findProduct?.id, data: newsData })
         ).unwrap();
       }
 
@@ -136,7 +118,10 @@ const ChangeEquipmentPopup = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center">
-      <div className="bg-white h-[90%] overflow-y-scroll py-[38px] px-8 rounded-lg w-full max-w-[663px] relative">
+      <div
+        className="bg-white  h-[80%] py-[38px] px-8 
+      rounded-lg w-full max-w-[663px]  overflow-scroll  relative"
+      >
         <button
           onClick={() => {
             dispatch(changeEquipmentPopup(false));
@@ -155,17 +140,20 @@ const ChangeEquipmentPopup = () => {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-[18px]">
-          <div>
-            <span className="w-full text-sm text-gray-900">
-              Изображение для баннера
-            </span>
-            <ImageUploader
-              banner={true}
-              newsBanner={isNews ? true : false}
-              findProduct={findProduct}
-              onFileSelect={setSelectedFileBanner}
-            />
-          </div>
+          {!isNews && (
+            <div>
+              <span className="w-full text-sm text-gray-900">
+                Изображение для баннера
+              </span>
+              <ImageUploader
+                banner={true}
+                newsBanner={isNews ? true : false}
+                findProduct={findProduct}
+                onFileSelect={setSelectedFileBanner}
+              />
+            </div>
+          )}
+
           <div>
             <span className="w-full text-sm text-gray-900">
               Изображение для карточки

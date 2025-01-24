@@ -110,7 +110,10 @@ export default function AdminOrders({ title }) {
   return (
     <div className="w-full relative">
       <span className="hidden md:block w-[1px] h-full absolute bg-gray-400 top-0 left-0 md:left-[-39px]" />
-      <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-start lg:items-center justify-between mb-4">
+      <div
+        className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-start 
+      lg:items-center justify-between mb-4"
+      >
         <Title
           className="text-xl font-normal text-gray-400 mb-2 md:mb-0"
           text={title}
@@ -132,7 +135,7 @@ export default function AdminOrders({ title }) {
           />
         </div>
       </div>
-      <div className="max-h-[480px] overflow-x-auto overflow-y-scroll">
+      <div className="min-h-[500px]  lg:min-h-[auto] max-h-[480px] overflow-x-auto overflow-y-scroll">
         <table id="tableId" className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
             <tr className="border-b font-normal text-sm lg:text-base text-gray-400">

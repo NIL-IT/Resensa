@@ -85,7 +85,7 @@ export default function AdminCategoryList({ title, category }) {
         <div className="flex justify-center w-full">
           <div className="max-h-[440px] overflow-y-scroll grid  grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {dataCategory.map(
-              ({ id, name, description, image, date, title }) => (
+              ({ id, name, description, image_card, date, title }) => (
                 <div
                   key={id}
                   className="flex flex-col  justify-between w-full sm:w-[200px] h-[360px] border border-gray-100 p-4 "
@@ -95,7 +95,7 @@ export default function AdminCategoryList({ title, category }) {
                       <div>
                         <img
                           className="w-full h-[120px] object-cover"
-                          src={image || "/img/placeholder.svg"}
+                          src={image_card || "/img/placeholder.svg"}
                           alt={name}
                         />
 

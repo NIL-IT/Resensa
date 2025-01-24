@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-import { changeShowPopup } from "../../utils/slice/userSlice";
+import {
+  changeShowPopup,
+  getAllEquipment,
+  getAllSolutions,
+} from "../../utils/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Banner from "./Banner";
 
 export default function EquipmentBanner({
-  bannerImg,
   subtitle,
   title,
   text,
+  bannerImg,
   isButton = false,
   currentProduct,
   textSize,
@@ -17,21 +22,41 @@ export default function EquipmentBanner({
 }) {
   const dispatch = useDispatch();
   const { equipment, solutions, itemId } = useSelector(({ user }) => user);
-  const product = () => {
-    const combinedData = [...equipment, ...solutions];
-    const product = combinedData.find((item) => item.id === itemId);
-    return product;
-  };
-  console.log(product());
+  const [loading, isLoading] = useState(true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  return (
+  const [product, setProduct] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      isLoading(true);
+      try {
+        await dispatch(getAllEquipment());
+        await dispatch(getAllSolutions());
+      } catch (error) {
+        console.log(error);
+      }
+      let combinedData = [...equipment, ...solutions];
+      let filterData = combinedData.find((item) => item.id === itemId);
+      setProduct(filterData);
+      isLoading(false);
+    };
+    fetchData();
+  }, [itemId]);
+  console.log(product);
+  return loading ? (
+    <div
+      className="  bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
+              xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px] flex-center justify-center mt-20"
+    >
+      <div className="loader" />
+    </div>
+  ) : (
     <div
       className={`relative  ${
-        !about && !currentProduct
+        !about && !product
           ? `pb-[50px] xs:pb-[40px] sm:pb-[30px] 
            md:pb-[150px] lg:pb-[160px]  
           xl:pb-[220px] 2xl:pb-[240px] 3xl:pb-[286px]`
-          : currentProduct
+          : product
           ? `pb-[50px] xs:pb-[60px] sm:pb-[30px] 
            md:pb-[120px] lg:pb-[136px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`
@@ -42,7 +67,7 @@ export default function EquipmentBanner({
         className={`absolute object-cover top-[30px] 
           left-0 w-full    
           z-[-2] ${
-            currentProduct
+            product
               ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
               : `
@@ -51,7 +76,9 @@ export default function EquipmentBanner({
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
           }`}
-        src={bannerImg || "/placeholder.svg"}
+        src={
+          bannerImg ? bannerImg : product?.image_banner || "/placeholder.svg"
+        }
         alt="banner"
       />
       <div

@@ -4,20 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "../../ui/Input";
 import {
   changeNumberForMainBanner,
+  getBanner,
   updateBanner,
 } from "../../../utils/slice/userSlice";
 
 export default function ChangeBanner({ title }) {
   const dispatch = useDispatch();
-  const { experience, guarantee } = useSelector(({ user }) => user);
+  const { experience, guarantee, banner } = useSelector(({ user }) => user);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [data, setData] = useState();
   const [formData, setFormData] = useState({
-    experience_year: null,
-    experience_text: null,
-    guaranty_year: null,
-    guaranty_text: null,
+    first_value: banner.first_value,
+    first_value_string: banner.first_value_string,
+    second_value: banner.second_value,
+    second_value_string: banner.second_value_string,
   });
-
+  useEffect(() => {
+    dispatch(getBanner());
+    setData({
+      first_value: banner.first_value,
+      first_value_string: banner.first_value_string,
+      second_value: banner.second_value,
+      second_value_string: banner.second_value_string,
+    });
+  }, [dispatch]);
   useEffect(() => {
     let timer;
     if (showSuccess) {
@@ -38,11 +48,12 @@ export default function ChangeBanner({ title }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     dispatch(updateBanner(formData));
     setFormData({
-      experience: "",
-      guarantee: "",
+      first_value: formData.first_value,
+      first_value_string: formData.first_value_string,
+      second_value: formData.second_value,
+      second_value_string: formData.second_value_string,
     });
     setShowSuccess(true);
   };
@@ -66,9 +77,9 @@ export default function ChangeBanner({ title }) {
               <Input
                 required={false}
                 type={"number"}
-                name="experience_year"
-                placeholder={"Введите цифру..."}
-                value={formData.experience_year}
+                name="first_value"
+                placeholder={formData.first_value || 0}
+                value={formData.first_value}
                 onChange={handleInputChange}
               />
             </div>
@@ -79,9 +90,9 @@ export default function ChangeBanner({ title }) {
               <Input
                 required={false}
                 type={"text"}
-                name="experience_text"
+                name="first_value_string"
                 placeholder={"Введите текст..."}
-                value={formData.experience_text}
+                value={formData.first_value_string}
                 onChange={handleInputChange}
               />
             </div>
@@ -94,9 +105,9 @@ export default function ChangeBanner({ title }) {
               <Input
                 required={false}
                 type={"number"}
-                name=" guaranty_year"
+                name="second_value"
                 placeholder={"Введите цифру..."}
-                value={formData.guaranty_year}
+                value={formData.second_value}
                 onChange={handleInputChange}
               />
             </div>
@@ -107,9 +118,9 @@ export default function ChangeBanner({ title }) {
               <Input
                 required={false}
                 type={"text"}
-                name="guaranty_text"
+                name="second_value_string"
                 placeholder={"Введите текст..."}
-                value={formData.guaranty_text}
+                value={formData.second_value_string}
                 onChange={handleInputChange}
               />
             </div>

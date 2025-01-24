@@ -3,7 +3,7 @@ import { data } from "../../utils/data";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-const ImageUploader = ({ onFileSelect, findProduct, banner, newsBanner }) => {
+const ImageUploader = ({ onFileSelect, findProduct, banner = false }) => {
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
@@ -13,13 +13,21 @@ const ImageUploader = ({ onFileSelect, findProduct, banner, newsBanner }) => {
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
   let product = findProduct;
+  let isNews = +pathnameId === 4;
+  let isSolutions = +pathnameId === 3;
+
   if (!findProduct) {
-    const isNews = +pathnameId === 4;
-    const isSolutions = +pathnameId === 3;
     const itemsList = isNews ? news : isSolutions ? solutions : equipment;
     product = itemsList?.find((item) => +item.id === +itemId);
   }
-  const [previewUrl, setPreviewUrl] = useState(product?.image || null);
+
+  const [previewUrl, setPreviewUrl] = useState(
+    isNews
+      ? product?.image
+      : banner
+      ? product?.image_banner
+      : product?.image_card || null
+  );
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -144,7 +152,7 @@ const ImageUploader = ({ onFileSelect, findProduct, banner, newsBanner }) => {
               </p>
               <p className="text-xs text-gray-500">
                 PNG, JPG{" "}
-                {newsBanner
+                {isNews
                   ? "(Рекомендуемое разрешение 847 x 300 px)"
                   : banner
                   ? "(Рекомендуемое разрешение 1920 x 900 px)"

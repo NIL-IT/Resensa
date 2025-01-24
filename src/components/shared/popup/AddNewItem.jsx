@@ -19,24 +19,30 @@ const AddNewItem = () => {
   const { pathname } = useLocation();
   const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === +4;
+  const isSolutions = +pathnameId === +3;
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState(
     !isNews
       ? {
+          title: "",
+          text: "",
+        }
+      : isSolutions
+      ? {
+          name: "",
+          description: "",
+        }
+      : {
           name: "",
           description: "",
           min_param: "",
           max_param: "",
         }
-      : {
-          title: "",
-          text: "",
-        }
   );
 
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [selectedFileBanner, setSelectedFileBanner] = useState(null);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -70,6 +76,7 @@ const AddNewItem = () => {
           !formData.name ||
           !formData.description ||
           !selectedFile ||
+          !selectedFileBanner ||
           !formData.min_param ||
           !formData.max_param
         ) {
@@ -81,7 +88,8 @@ const AddNewItem = () => {
         const equipmentData = {
           name: formData.name,
           description: formData.description,
-          equipment_photo: selectedFile,
+          image_card: selectedFile,
+          image_banner: selectedFileBanner,
           min_param: parseInt(formData.min_param),
           max_param: parseInt(formData.max_param),
         };
@@ -94,7 +102,12 @@ const AddNewItem = () => {
           max_param: "",
         });
       } else if (+pathnameId === 3) {
-        if (!formData.name || !formData.description || !selectedFile) {
+        if (
+          !formData.name ||
+          !formData.description ||
+          !selectedFile ||
+          !selectedFileBanner
+        ) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
           );
@@ -103,7 +116,8 @@ const AddNewItem = () => {
         const solutionData = {
           name: formData.name,
           description: formData.description,
-          solution_photo: selectedFile,
+          image_card: selectedFile,
+          image_banner: selectedFileBanner,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
@@ -135,8 +149,17 @@ const AddNewItem = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8">
-      <div className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[663px] relative">
+    <div
+      className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 
+    sm:px-6 md:px-7 lg:px-8"
+    >
+      <div
+        className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] 
+      lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 
+      rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full 
+      max-w-[300px] xs:max-w-[350px] sm:max-w-[450px] md:max-w-[550px] 
+      lg:max-w-[600px] xl:max-w-[663px] relative overflow-y-scroll max-h-[85%]"
+      >
         <button
           onClick={() => dispatch(changeShowAddNewItemPopup(false))}
           className="absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700"
@@ -151,9 +174,17 @@ const AddNewItem = () => {
           className="space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]"
         >
           <div>
+            <span className="w-full text-sm text-gray-900">
+              Изображение для баннера
+            </span>
+            <ImageUploader onFileSelect={setSelectedFileBanner} />
+          </div>
+          <div>
+            <span className="w-full text-sm text-gray-900">
+              Изображение для карточки
+            </span>
             <ImageUploader onFileSelect={setSelectedFile} />
           </div>
-
           <div className="space-y-2">
             <span className="w-full text-xs xs:text-sm text-gray-900">
               Название
