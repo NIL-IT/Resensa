@@ -296,16 +296,16 @@ export const getAllOrders = createAsyncThunk(
 export const createOrders = createAsyncThunk(
   "Orders/createOrders",
   async (data, thunkApi) => {
-    const formData = new FormData();
-    console.log("прокидываемая дата", data);
-    formData.append("name", data.name);
-    formData.append("number", Number(data.number));
-    formData.append("date", data.date);
-    formData.append("client_name", data.client_name);
-    formData.append("state", data.state);
-    formData.append("order_amount", Number(data.order_amount));
+    // const formData = new FormData();
+    // console.log("прокидываемая дата", data);
+    // formData.append("name", data.name);
+    // formData.append("number", Number(data.number));
+    // formData.append("date", data.date);
+    // formData.append("client_name", data.client_name);
+    // formData.append("state", data.state);
+    // formData.append("order_amount", Number(data.order_amount));
     try {
-      const res = await api.post("/orders/", formData);
+      const res = await api.post("/orders/", data);
       return res.data;
     } catch (err) {
       console.log(err);
