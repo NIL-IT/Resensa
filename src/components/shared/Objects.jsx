@@ -19,7 +19,7 @@ export default function Objects({ className = null, about = false }) {
     <div
       className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${
         about
-          ? "mt-[85px] xs:mt-[105px]  md:mt-[170px] lg:mt-[225px] xl:mt-[205px] 2xl:mt-[220px] 3xl:mt-[225px]"
+          ? "mt-[0px] xs:mt-[38px]  md:mt-[170px] lg:mt-[225px] xl:mt-[205px] 2xl:mt-[220px] 3xl:mt-[225px]"
           : ""
       } ${className}`}
     >

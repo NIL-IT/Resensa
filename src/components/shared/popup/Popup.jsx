@@ -64,7 +64,15 @@ const Popup = () => {
 
   return (
     <div className="fixed inset-0  flex items-center justify-center">
-      <div className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[563px] max-h-[400px] xs:max-h-[450px] sm:max-h-[480px] md:max-h-[500px] lg:max-h-[520px] xl:max-h-[553px] relative">
+      <div
+        className="bg-white py-[25px] xs:py-[28px] 
+      sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] 
+      px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg 
+      w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full 
+      max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] 
+      lg:max-w-[500px] xl:max-w-[563px] max-h-[500px]  
+      lg:max-h-[520px] xl:max-h-[553px] relative"
+      >
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700"
@@ -76,7 +84,8 @@ const Popup = () => {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]"
+          className="space-y-[12px] xs:space-y-[14px] 
+          sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]"
         >
           <Input
             type={"text"}

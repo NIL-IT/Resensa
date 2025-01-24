@@ -3,7 +3,6 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { div } from "three/tsl";
 
 export default function EquipmentBanner({
   bannerImg,
@@ -36,7 +35,7 @@ export default function EquipmentBanner({
           ? `pb-[50px] xs:pb-[60px] sm:pb-[30px] 
            md:pb-[120px] lg:pb-[136px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`
-          : ""
+          : ``
       }`}
     >
       <img
@@ -58,7 +57,7 @@ export default function EquipmentBanner({
       <div
         className={`container pl-[20px] xs:pl-[0] ${
           about
-            ? `pt-[120px] xs:pt-[130px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[394px]`
+            ? `pt-[80px] xs:pt-[100px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[394px]`
             : `pt-[120px] 
           md:pt-[140px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
         }`}

@@ -17,10 +17,10 @@ const BurgerButton = ({ list, handleClickLink }) => {
     handleChangeShowPopup(false);
   };
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+        className="flex absolute right-10 top-[-20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80]"
       >
         <span
           className={`block w-6 h-0.5 bg-gray-400 transform transition-transform ${
@@ -38,7 +38,7 @@ const BurgerButton = ({ list, handleClickLink }) => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-24 left-0 right-0 bg-white shadow-lg p-4 z-50">
+        <div className="pt-10 fixed top-0 left-0 w-[100vw] bg-white shadow-lg p-4 z-50">
           <div className="flex flex-col  gap-4">
             <nav className="mt-2">
               <ul className="flex flex-col gap-2 text-sm">
@@ -46,7 +46,7 @@ const BurgerButton = ({ list, handleClickLink }) => {
                   <li
                     onClick={() => handleClickLinkBurger(i, path)}
                     key={i}
-                    className="text-gray-400 hover:text-gray-300 cursor-pointer"
+                    className="text-gray-400 hover:text-gray-300 cursor-pointer text-lg"
                   >
                     {name}
                   </li>
