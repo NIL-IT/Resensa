@@ -15,10 +15,12 @@ import {
   getAllOrders,
   getAllSolutions,
   getBanner,
+  updateBanner,
 } from "./utils/slice/userSlice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
+import { update } from "three/examples/jsm/libs/tween.module.js";
 function App() {
   const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
@@ -54,6 +56,7 @@ function App() {
         dispatch(getAllSolutions());
         dispatch(getAllOrders());
         dispatch(getBanner());
+        dispatch(updateBanner({ experience_year: 22, guaranty_year: 3 }));
       } catch (error) {
         console.error(error);
       }

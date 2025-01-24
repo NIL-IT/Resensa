@@ -3,7 +3,7 @@ import { data } from "../../utils/data";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-const ImageUploader = ({ onFileSelect, findProduct }) => {
+const ImageUploader = ({ onFileSelect, findProduct, banner, newsBanner }) => {
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
@@ -76,7 +76,6 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
 
   return (
     <div className="w-full mx-auto">
-      <span className="text-sm text-gray-300">Изображение</span>
       {previewUrl && !addNewItemPopup && product ? (
         <div className="relative p-8 mt-2 border-2 border-dashed rounded-lg text-center">
           <img
@@ -144,7 +143,12 @@ const ImageUploader = ({ onFileSelect, findProduct }) => {
                 или перетащите
               </p>
               <p className="text-xs text-gray-500">
-                SVG, PNG, JPG или JPEG (макс. 800x400px)
+                PNG, JPG{" "}
+                {newsBanner
+                  ? "(Рекомендуемое разрешение 847 x 300 px)"
+                  : banner
+                  ? "(Рекомендуемое разрешение 1920 x 900 px)"
+                  : "(Рекомендуемое разрешение 320 x 320 px)"}
               </p>
             </>
           )}

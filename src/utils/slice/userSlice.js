@@ -371,15 +371,11 @@ export const updateBanner = createAsyncThunk(
   "banner/updateBanner",
   async (payload, thunkApi) => {
     try {
+      console.log("Put banner", payload);
       // const formData = new FormData();
-      // formData.append("name", data.name);
-      // formData.append("number", data.number);
-      // formData.append("date", data.date);
-      // formData.append("client_name", data.client_name);
-      // formData.append("state", data.state);
-      // formData.append("order_amount", data.order_amount);
-      // const formData = createFormDataRequest(data, "order");
-      const res = await api.put(`/banner`, formData);
+      // formData.append("experience_year", payload.experience_year);
+      // formData.append("guaranty_year", payload.guaranty_year);
+      const res = await api.put(`/banner/`, payload);
       return res.data;
     } catch (err) {
       console.log(err);

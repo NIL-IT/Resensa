@@ -94,6 +94,7 @@ export default function Admin() {
     const exportFile = await exportOrdersExcel(true);
     console.log(exportFile);
   };
+  const importFileExcel = async (excel) => {};
   return (
     <div className="min-h-screen flex flex-col">
       <div className="w-full md:container mx-auto px-4 pt-[30px] flex-grow">
@@ -144,7 +145,10 @@ export default function Admin() {
             </div>
           ) : (
             <div className="w-full h-[500px] flex-center flex-col justify-center">
-              <FileUploader setActiveUploaderFile={setActiveUploaderFile} />
+              <FileUploader
+                importFileExcel={importFileExcel}
+                setActiveUploaderFile={setActiveUploaderFile}
+              />
             </div>
           )}
         </section>

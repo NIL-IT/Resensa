@@ -60,7 +60,7 @@ const ChangeEquipmentPopup = () => {
   });
 
   const [selectedFile, setSelectedFile] = useState();
-
+  const [selectedFileBanner, setSelectedFileBanner] = useState();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -103,12 +103,13 @@ const ChangeEquipmentPopup = () => {
       // if (selectedFile) {
       // If a new file was selected, use it
       submitData[imageFieldName] = selectedFile;
+      submitData["banner_photo"] = selectedFileBanner;
       // } else if (formData[imageFieldName]) {
       //   // If no new file was selected but we have an existing image URL, convert it
       //   const imageFile = await urlToFile(formData[imageFieldName]);
       //   submitData[imageFieldName] = imageFile;
       // }
-
+      console.log(submitData, "submitData");
       if (!isNews) {
         const isEquipment = !isSolutions;
         if (isEquipment) {
@@ -155,6 +156,20 @@ const ChangeEquipmentPopup = () => {
 
         <form onSubmit={handleSubmit} className="space-y-[18px]">
           <div>
+            <span className="w-full text-sm text-gray-900">
+              Изображение для баннера
+            </span>
+            <ImageUploader
+              banner={true}
+              newsBanner={isNews ? true : false}
+              findProduct={findProduct}
+              onFileSelect={setSelectedFileBanner}
+            />
+          </div>
+          <div>
+            <span className="w-full text-sm text-gray-900">
+              Изображение для карточки
+            </span>
             <ImageUploader
               findProduct={findProduct}
               onFileSelect={setSelectedFile}
