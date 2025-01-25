@@ -38,12 +38,14 @@ const ChangeEquipmentPopup = () => {
       ? {
           name: findProduct?.name || "",
           description: findProduct?.description || "",
+          sub_header: findProduct?.sub_header || "",
         }
       : {
           name: findProduct?.name || "",
           description: findProduct?.description || "",
           min_param: findProduct?.min_param || "",
           max_param: findProduct?.max_param || "",
+          sub_header: findProduct?.sub_header || "",
         };
 
     if (findProduct?.image) {
@@ -83,6 +85,7 @@ const ChangeEquipmentPopup = () => {
             image_banner: selectedFileBanner,
             min_param: parseInt(formData.min_param),
             max_param: parseInt(formData.max_param),
+            sub_header: findProduct?.sub_header
           };
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: equipmentData })
@@ -93,6 +96,7 @@ const ChangeEquipmentPopup = () => {
             description: formData.description,
             image_card: selectedFile,
             image_banner: selectedFileBanner,
+            sub_header: findProduct?.sub_header
           };
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: solutionData })
@@ -237,6 +241,18 @@ const ChangeEquipmentPopup = () => {
                       name="max_param"
                       className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
                       value={formData.max_param}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <span className="w-full text-sm text-gray-900">
+                      Заголовок баннера 
+                    </span>
+                    <Input
+                      type="text"
+                      name="sub_header"
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.sub_header}
                       onChange={handleInputChange}
                     />
                   </div>

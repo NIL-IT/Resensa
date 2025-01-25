@@ -133,7 +133,7 @@ export default function AdminOrders({ title }) {
       <div className="min-h-[500px]  lg:min-h-[auto] max-h-[480px] overflow-x-auto overflow-y-scroll">
         <table id="tableId" className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
-            <tr className="border-b font-normal text-[10px] sm:text-sm lg:text-sm xl:text-base text-gray-400">
+            <tr className="border-b *:text-center font-normal text-[10px] sm:text-sm lg:text-sm xl:text-base text-gray-400">
               <th className="w-[15px] py-2 px-1 ">
                 <input
                   onChange={handleCheckedAllOrders}
@@ -142,16 +142,14 @@ export default function AdminOrders({ title }) {
                   className="rounded border-gray-300 cursor-pointer"
                 />
               </th>
-              <th className=" text-center px-1 py-1 sm:py-2  xl:px-4">Заказ</th>
-              <th className="text-center py-1 px-1 sm:py-2   xl:px-4">Номер</th>
-              <th className="text-center py-1 px-1  sm:py-2  xl:px-4">Дата</th>
-              <th className="text-center py-1 px-1 sm:py-2   xl:px-4">
-                Данные клиента
-              </th>
-              <th className=" text-center  xl:text-base py-1  px-1 sm:py-2   xl:px-4">
+              <th className="  px-1 py-1 sm:py-2  xl:px-4">Заказ</th>
+              <th className=" py-1 px-1 sm:py-2   xl:px-4">Номер</th>
+              <th className=" py-1 px-1  sm:py-2  xl:px-4">Дата</th>
+              <th className=" py-1 px-1 sm:py-2   xl:px-4">Данные клиента</th>
+              <th className="  xl:text-base py-1  px-1 sm:py-2   xl:px-4">
                 Статус
               </th>
-              <th className=" text-center px-1  sm:py-2  xl:px-4">Сумма</th>
+              <th className=" px-1  sm:py-2  xl:px-4">Сумма</th>
             </tr>
           </thead>
           {loading ? (
@@ -167,7 +165,7 @@ export default function AdminOrders({ title }) {
               {ordersList.map((order) => (
                 <tr
                   key={order.id}
-                  className="border-b *:text-[8px]  lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
+                  className="border-b *:text-center *:text-[8px]  lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
                 >
                   <td className="text-center py-2 xl:py-3 w-[15px] px-1 xl:px-2">
                     <input
@@ -177,21 +175,17 @@ export default function AdminOrders({ title }) {
                       className="rounded border-gray-300 cursor-pointer"
                     />
                   </td>
-                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
-                    {order.name}
-                  </td>
-                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
-                    {order.number}
-                  </td>
-                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
+                  <td className=" py-2 xl:py-3 px-1 xl:px-4">{order.name}</td>
+                  <td className=" py-2 xl:py-3 px-1 xl:px-4">{order.number}</td>
+                  <td className=" py-2 xl:py-3 px-1 xl:px-4">
                     {useFormatDate(order.date)}
                   </td>
-                  <td className="py-2 lg:py-3 px-1 lg:px-4 text-center">
+                  <td className="py-2 lg:py-3 px-1 lg:px-4 ">
                     {order.client_name}
                   </td>
-                  <td className="py-2 lg:py-3 px-1 lg:pr-4 text-center">
+                  <td className="py-2 lg:py-3 px-1 lg:pr-4 ">
                     <span
-                      className={`inline-flex items-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
+                      className={`inline-flex items-center text-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${getColor(
@@ -201,7 +195,7 @@ export default function AdminOrders({ title }) {
                       {order.state}
                     </span>
                   </td>
-                  <td className="text-center py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
+                  <td className=" py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
                     {order.order_amount} ₽
                   </td>
                 </tr>

@@ -93,7 +93,7 @@ export default function EquipmentBanner({
           className="font-norma text-2xl sm:text-[22px] leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
         <Title
-          text={title || product().name}
+          text={title || product().sub_header}
           className="font-normal text-2xl md:text-[38px] sm:leading-[28px]  
           xl:text-[38px] 2xl:text-[48px] lg:leading-[61px] text-white leading-[24px]"
         />

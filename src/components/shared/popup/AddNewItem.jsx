@@ -32,12 +32,14 @@ const AddNewItem = () => {
       ? {
           name: "",
           description: "",
+          sub_header: "",
         }
       : {
           name: "",
           description: "",
           min_param: "",
           max_param: "",
+          sub_header: "",
         }
   );
 
@@ -92,6 +94,7 @@ const AddNewItem = () => {
           image_banner: selectedFileBanner,
           min_param: parseInt(formData.min_param),
           max_param: parseInt(formData.max_param),
+          sub_header: formData.sub_header,
         };
         await dispatch(createEquipment(equipmentData)).unwrap();
         await dispatch(getAllEquipment());
@@ -100,6 +103,7 @@ const AddNewItem = () => {
           description: "",
           min_param: "",
           max_param: "",
+          sub_header: "",
         });
       } else if (+pathnameId === 3) {
         if (
@@ -118,12 +122,14 @@ const AddNewItem = () => {
           description: formData.description,
           image_card: selectedFile,
           image_banner: selectedFileBanner,
+          sub_header: formData.sub_header,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
         setFormData({
           name: "",
           description: "",
+          sub_header: "",
         });
       }
 
@@ -212,6 +218,22 @@ const AddNewItem = () => {
             className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
             value={!isNews ? formData.description : formData.text}
           ></textarea>
+          {!isNews && (
+            <>
+              <div className="space-y-2">
+                <span className="w-full text-xs xs:text-sm text-gray-900">
+                  Заголовок баннера
+                </span>
+                <Input
+                  type="text"
+                  name="sub_header"
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.sub_header}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </>
+          )}
           {+pathnameId === 2 && (
             <div className="flex w-full justify-between gap-4 pb-5">
               <div className="w-[48%]">
