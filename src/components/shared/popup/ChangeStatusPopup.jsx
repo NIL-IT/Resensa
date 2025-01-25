@@ -20,12 +20,12 @@ export default function ChangeStatusPopup() {
   const [selectedOrder, setSelectedOrder] = useState(
     orders.filter((item) => item.id === itemId)
   );
-
+  const numberOfOrders = selectedOrder[0].number;
   const [formData, setFormData] = useState(selectedOrder[0].state);
   const handleSelectChange = (value) => {
     setFormData(value);
   };
-
+  console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`Submit`, formData);
@@ -74,8 +74,8 @@ export default function ChangeStatusPopup() {
         >
           ✕
         </button>
-        <h2 className="text-center text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-[32px] font-medium leading-[30px] xs:leading-[32px] sm:leading-[35px] md:leading-[38px] lg:leading-[40.8px] text-gray-400 mb-4 xs:mb-4.5 sm:mb-5 md:mb-5.5 lg:mb-10">
-          Изменить статус заказа № {formData.number}
+        <h2 className="text-center text-base xs:text-base sm:text-2xl md:text-3xl lg:text-[32px] font-medium leading-[30px] xs:leading-[32px] sm:leading-[35px] md:leading-[38px] lg:leading-[40.8px] text-gray-400 mb-4 xs:mb-4.5 sm:mb-5 md:mb-5.5 lg:mb-10">
+          Изменить статус заказа № {numberOfOrders || "Номер не найден"}
         </h2>
         <div className="space-y-[12px] xs:space-y-[14px] sm:space-y-[20px] md:space-y-[24px] lg:space-y-[40px]">
           <div className="space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]">

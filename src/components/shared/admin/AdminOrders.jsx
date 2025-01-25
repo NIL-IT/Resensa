@@ -3,14 +3,9 @@ import Title from "../../ui/Title";
 import { PencilLine, Plus, Trash2 } from "lucide-react";
 import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllOrders,
-  deleteOrders,
-  exportOrdersExcel,
-} from "../../../utils/slice/userSlice";
+import { getAllOrders, deleteOrders } from "../../../utils/slice/userSlice";
 import { useFormatDate } from "../../../utils/hooks/formatDate";
 import SearchInput from "../../ui/SearchInput";
-import { parseExcelToOrders } from "../../../utils/hooks/parseServerExcel";
 
 export const list = [
   { name: "Добавить новый заказ", icon: <Plus width={20} />, action: "add" },
@@ -138,7 +133,7 @@ export default function AdminOrders({ title }) {
       <div className="min-h-[500px]  lg:min-h-[auto] max-h-[480px] overflow-x-auto overflow-y-scroll">
         <table id="tableId" className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
-            <tr className="border-b font-normal text-sm lg:text-base text-gray-400">
+            <tr className="border-b font-normal text-[10px] sm:text-sm lg:text-sm xl:text-base text-gray-400">
               <th className="w-[15px] py-2 px-1 ">
                 <input
                   onChange={handleCheckedAllOrders}
@@ -147,12 +142,16 @@ export default function AdminOrders({ title }) {
                   className="rounded border-gray-300 cursor-pointer"
                 />
               </th>
-              <th className="text-left py-2 px-1  xl:px-4">Заказ</th>
-              <th className="text-left py-2 px-1  xl:px-4">Номер</th>
-              <th className="text-left py-2 px-1 xl:px-4">Дата</th>
-              <th className="text-left py-2 px-1  xl:px-4">Данные клиента</th>
-              <th className="text-left py-2 px-1  xl:px-4">Статус</th>
-              <th className="text-left py-2 px-1 xl:px-4">Сумма</th>
+              <th className=" text-center px-1 py-1 sm:py-2  xl:px-4">Заказ</th>
+              <th className="text-center py-1 px-1 sm:py-2   xl:px-4">Номер</th>
+              <th className="text-center py-1 px-1  sm:py-2  xl:px-4">Дата</th>
+              <th className="text-center py-1 px-1 sm:py-2   xl:px-4">
+                Данные клиента
+              </th>
+              <th className=" text-center  xl:text-base py-1  px-1 sm:py-2   xl:px-4">
+                Статус
+              </th>
+              <th className=" text-center px-1  sm:py-2  xl:px-4">Сумма</th>
             </tr>
           </thead>
           {loading ? (
@@ -168,9 +167,9 @@ export default function AdminOrders({ title }) {
               {ordersList.map((order) => (
                 <tr
                   key={order.id}
-                  className="border-b *:text-[11px] lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
+                  className="border-b *:text-[8px]  lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
                 >
-                  <td className="py-2 xl:py-3 w-[15px] px-1 xl:px-2">
+                  <td className="text-center py-2 xl:py-3 w-[15px] px-1 xl:px-2">
                     <input
                       checked={isChecked(order.id)}
                       onChange={() => handleCheckedOrder(order.id)}
@@ -178,15 +177,19 @@ export default function AdminOrders({ title }) {
                       className="rounded border-gray-300 cursor-pointer"
                     />
                   </td>
-                  <td className="py-2 xl:py-3 px-1 xl:px-4">{order.name}</td>
-                  <td className="py-2 xl:py-3 px-1 xl:px-4">{order.number}</td>
-                  <td className="py-2 xl:py-3 px-1 xl:pr-4">
+                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
+                    {order.name}
+                  </td>
+                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
+                    {order.number}
+                  </td>
+                  <td className="text-center py-2 xl:py-3 px-1 xl:px-4">
                     {useFormatDate(order.date)}
                   </td>
                   <td className="py-2 lg:py-3 px-1 lg:px-4 text-center">
                     {order.client_name}
                   </td>
-                  <td className="py-2 lg:py-3 px-1 lg:pr-4">
+                  <td className="py-2 lg:py-3 px-1 lg:pr-4 text-center">
                     <span
                       className={`inline-flex items-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
                     >
@@ -198,7 +201,7 @@ export default function AdminOrders({ title }) {
                       {order.state}
                     </span>
                   </td>
-                  <td className="py-2 lg:py-3 px-1 lg:px-4 text-[11px] lg:text-sm">
+                  <td className="text-center py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
                     {order.order_amount} ₽
                   </td>
                 </tr>

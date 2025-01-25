@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   changeAddOrderPopup,
@@ -15,6 +15,7 @@ export default function VerticalDote({
 }) {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
+  const menuRef = useRef(null);
   const handleAction = (action) => {
     switch (action) {
       case "deleteSelected":
@@ -38,9 +39,21 @@ export default function VerticalDote({
     }
     setActive(false);
   };
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setActive(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <button className="p-2" onClick={() => setActive(!active)}>
         <svg
           className="w-6 h-6"

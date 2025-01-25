@@ -21,7 +21,9 @@ export default function Select({
         }`}
       >
         <span
-          className={`${border ? "text-gray-400 font-normal text-base" : ""}`}
+          className={`${
+            border ? "text-gray-400 font-normal text-sm md:text-base" : ""
+          }`}
         >
           {selected}
         </span>
