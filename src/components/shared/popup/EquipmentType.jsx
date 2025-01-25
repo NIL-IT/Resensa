@@ -51,7 +51,7 @@ export default function EquipmentType() {
   };
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-scroll">
-      <div className="flex-center justify-center w-full px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 mb-10 lg:mb-20">
+      <div className="mt-14 md:mt-0 flex-center justify-center w-full px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 mb-10 lg:mb-20">
         <div className="w-full max-w-[300px] xs:max-w-[400px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-w-[1300px] pt-10 xs:pt-12 sm:pt-14 md:pt-16 lg:pt-18 xl:pt-20">
           <Title
             text={"оборудование"}
@@ -66,7 +66,7 @@ export default function EquipmentType() {
             профессионалов обеспечивает широкому кругу (специалистов) участие в
             формировании поставленных обществом задач. Безусловно.
           </p>
-          <div className="flex flex-col items-center xl:items-start xl:flex-row xl:justify-between w-full gap-8 lg:gap-10">
+          <div className="flex flex-col  xl:items-start xl:flex-row xl:justify-between w-full gap-8 lg:gap-10">
             <div
               className={`overflow-hidden transition-all duration-500 relative`}
             >
@@ -155,7 +155,7 @@ export default function EquipmentType() {
                   href={`/product/${findImage().id}`}
                   text="подробнее"
                   iconWidth={"w-[20px] xs:w-[25px] sm:w-[30px]"}
-                  className="text-sm py-1 sm:py-2  lg:py-3 xl:py-4 lg:pr-6 lg:pl-4 xl:pr-8 xl:pl-5  xs:text-base"
+                  className="text-sm py-4   lg:pr-6 lg:pl-4 xl:pr-8 xl:pl-5  xs:text-base"
                 />
               </div>
             </div>

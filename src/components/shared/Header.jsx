@@ -60,7 +60,7 @@ export default function Header() {
   };
 
   return (
-    <header className="container sticky lg:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8">
+    <header className="container sticky md:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8">
       <div className="pl-8 sm:pl-10 md:pl-14 lg:pl-0 flex justify-between items-center border-b border-gray-400 pb-6">
         <Link
           to={!isAdmin && "/"}

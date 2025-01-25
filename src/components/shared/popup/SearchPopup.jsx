@@ -26,8 +26,13 @@ export default function SearchPopup() {
     document.body.style.overflow = "auto";
   };
   return (
-    <div className="min-h-[80vh] min-w-[48wh] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
-      <div className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-full relative min-w-full min-h-full pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10">
+    <div className="h-[80%] min-w-[80%]  fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
+      <div
+        className=" bg-white pt-2 xs:pt-3 
+      sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 
+      rounded-lg min-w-[100%] relative  min-h-full 
+      pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10"
+      >
         <div className="sticky z-50 flex-center top-0 left-0 bg-white h-[60px] xs:h-[65px] sm:h-[70px] md:h-[75px] lg:h-[80px]">
           <SearchInput
             handleSearch={handleSearch}
@@ -39,8 +44,8 @@ export default function SearchPopup() {
         </div>
         <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-center">
           {searchData ? (
-            <div className="overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5">
-              {searchData.map(({ image, name, description, id }) => (
+            <div className="overflow-y-scroll grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-5">
+              {searchData.map(({ image_card, name, description, id }) => (
                 <Link
                   onClick={() => handleClose()}
                   to={`/product/${id}`}
@@ -50,7 +55,7 @@ export default function SearchPopup() {
                   <div>
                     <img
                       className="w-full h-[120px] xs:h-[130px] sm:h-[140px] md:h-[150px] lg:h-[160px] object-cover"
-                      src={image}
+                      src={image_card}
                       alt={name}
                     />
                     <h2 className="text-gray-400 text-xs xs:text-sm uppercase font-normal my-1 xs:my-1.5 sm:my-2">
