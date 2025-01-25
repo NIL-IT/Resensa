@@ -33,9 +33,9 @@ export default function News() {
         text={"новости"}
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
-      <div className="flex justify-center">
-        <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px]">
-          <div className="flex flex-wrap justify-center xl:justify-normal   gap-[33px]   mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10">
+      <div className="flex justify-center  w-full">
+        <div className="w-full flex mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
+          <div className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
             {newsData.map((item) => (
               <div
                 onClick={() => showNewsPopup(item.id)}

@@ -49,6 +49,7 @@ export default function EquipmentType() {
     dispatch(changeRoutingToOrders(false));
     dispatch(changeItemId(id));
   };
+  console.log(equipment[0].id);
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-scroll">
       <div className="mt-14 md:mt-0 flex-center justify-center w-full px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 mb-10 lg:mb-20">
@@ -152,7 +153,11 @@ export default function EquipmentType() {
                 <Button
                   onClick={() => handleClickButton(findImage().id)}
                   icon={true}
-                  href={`/product/${findImage().id}`}
+                  href={
+                    findImage()
+                      ? `/product/${findImage().id}`
+                      : `/product/${equipment[0].id}`
+                  }
                   text="подробнее"
                   iconWidth={"w-[20px] xs:w-[25px] sm:w-[30px]"}
                   className="text-sm py-4   lg:pr-6 lg:pl-4 xl:pr-8 xl:pl-5  xs:text-base"

@@ -56,8 +56,9 @@ export default function ProductItem({ list }) {
   const [currentProduct, setCurrentProduct] = useState(findProduct);
 
   document.body.style.overflowY = "auto";
-
-  if (!currentProduct && !isOrders) navigate("/");
+  useEffect(() => {
+    if (!currentProduct && !isOrders) navigate("/");
+  }, [currentProduct, isOrders]);
 
   const scrollToOrders = () => {
     if (itemId) return;
@@ -66,9 +67,9 @@ export default function ProductItem({ list }) {
     if (widthPage > 1600) scrollPosition = 3650;
     else if (widthPage > 1200) scrollPosition = 3000;
     else if (widthPage > 768) scrollPosition = 3500;
-    else if (widthPage > 640) scrollPosition = 3500;
-    else if (widthPage > 420) scrollPosition = 3150;
-    else if (widthPage > 375) scrollPosition = 3000;
+    else if (widthPage > 640) scrollPosition = 2400;
+    else if (widthPage > 420) scrollPosition = 2200;
+    else if (widthPage > 375) scrollPosition = 2050;
     else scrollPosition = 2800;
 
     window.scrollTo({

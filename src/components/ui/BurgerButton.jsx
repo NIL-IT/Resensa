@@ -46,7 +46,7 @@ const BurgerButton = ({ list, handleClickLink }) => {
                   <li
                     onClick={() => handleClickLinkBurger(i, path)}
                     key={i}
-                    className="text-gray-400 hover:text-gray-300 cursor-pointer text-lg"
+                    className="text-gray-400 hover:text-gray-300 cursor-pointer text-xl"
                   >
                     {name}
                   </li>

@@ -41,7 +41,6 @@ export default function EquipmentBanner({
     };
     fetchData();
   }, [itemId]);
-  console.log(product);
   return loading ? (
     <div
       className="  bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
