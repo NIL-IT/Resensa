@@ -119,6 +119,7 @@ export const createEquipment = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("description", data.description);
       formData.append("sub_header", data.sub_header);
+      formData.append("header", data.header);
 
       formData.append("image_banner", data.image_banner);
       formData.append("image_card", data.image_card);
@@ -160,6 +161,7 @@ export const updateEquipment = createAsyncThunk(
     if (data.image_card) {
       formData.append("image_card", data.image_card);
     }
+    formData.append("header", data.header);
     formData.append("sub_header", data.sub_header);
     formData.append("min_param", data.min_param);
     formData.append("max_param", data.max_param);
@@ -210,6 +212,8 @@ export const createSolutions = createAsyncThunk(
       formData.append("image_banner", data.image_banner);
       formData.append("image_card", data.image_card);
       formData.append("sub_header", data.sub_header);
+      formData.append("header", data.header);
+      console.log("Отправляемые данные в запросе:", data);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -232,6 +236,7 @@ export const updateSolutions = createAsyncThunk(
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("sub_header", data.sub_header);
+    formData.append("header", data.header);
     if (data.image_banner) {
       formData.append("image_banner", data.image_banner);
     }

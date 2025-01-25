@@ -33,6 +33,7 @@ const AddNewItem = () => {
           name: "",
           description: "",
           sub_header: "",
+          header: "",
         }
       : {
           name: "",
@@ -40,6 +41,7 @@ const AddNewItem = () => {
           min_param: "",
           max_param: "",
           sub_header: "",
+          header: "",
         }
   );
 
@@ -80,7 +82,9 @@ const AddNewItem = () => {
           !selectedFile ||
           !selectedFileBanner ||
           !formData.min_param ||
-          !formData.max_param
+          !formData.max_param ||
+          !formData.header ||
+          !formData.sub_header
         ) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -95,6 +99,7 @@ const AddNewItem = () => {
           min_param: parseInt(formData.min_param),
           max_param: parseInt(formData.max_param),
           sub_header: formData.sub_header,
+          header: formData.header,
         };
         await dispatch(createEquipment(equipmentData)).unwrap();
         await dispatch(getAllEquipment());
@@ -104,13 +109,16 @@ const AddNewItem = () => {
           min_param: "",
           max_param: "",
           sub_header: "",
+          header: "",
         });
       } else if (+pathnameId === 3) {
         if (
           !formData.name ||
           !formData.description ||
           !selectedFile ||
-          !selectedFileBanner
+          !selectedFileBanner ||
+          !formData.header ||
+          !formData.sub_header
         ) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -123,6 +131,7 @@ const AddNewItem = () => {
           image_card: selectedFile,
           image_banner: selectedFileBanner,
           sub_header: formData.sub_header,
+          header: formData.header,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
@@ -130,6 +139,7 @@ const AddNewItem = () => {
           name: "",
           description: "",
           sub_header: "",
+          header: "",
         });
       }
 
@@ -206,7 +216,7 @@ const AddNewItem = () => {
 
           <label
             htmlFor="message"
-            className="block mb-1 xs:mb-2 text-xs xs:text-sm font-medium text-gray-900"
+            className="block w-full text-xs xs:text-sm text-gray-900"
           >
             {!isNews ? "Описание" : "Текст новости"}
           </label>
@@ -232,12 +242,26 @@ const AddNewItem = () => {
                   onChange={handleInputChange}
                 />
               </div>
+              <label
+                htmlFor="message"
+                className="block w-full text-xs xs:text-sm text-gray-900"
+              >
+                Текст баннера
+              </label>
+              <textarea
+                id="message"
+                name="header"
+                rows="4"
+                onChange={handleInputChange}
+                className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.header}
+              ></textarea>
             </>
           )}
           {+pathnameId === 2 && (
             <div className="flex w-full justify-between gap-4 pb-5">
-              <div className="w-[48%]">
-                <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+              <div className="w-[48%] space-y-2">
+                <span className="block w-full text-xs xs:text-sm text-gray-900">
                   От
                 </span>
                 <Input
@@ -253,8 +277,8 @@ const AddNewItem = () => {
                   border-gray-300"
                 />
               </div>
-              <div className="w-[48%]">
-                <span className="block mb-1 text-sm/6 font-medium text-gray-900">
+              <div className="w-[48%] space-y-2">
+                <span className="block w-full text-xs xs:text-sm text-gray-900">
                   До
                 </span>
                 <Input
