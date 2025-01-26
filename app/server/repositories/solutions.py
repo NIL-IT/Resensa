@@ -41,11 +41,11 @@ class SolutionsRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error fetching solutions by id")
 
-    async def update_solution(self, solution_id: int, name: str, description: str, solutions_image: str):
+    async def update_solution(self, solution_id: int, name: str, description: str, image_banner: str, image_card: str, sub_header: str, header: str):
         stmt = (
             update(Solutions)
             .where(Solutions.id == solution_id)
-            .values(name=name, description=description, solutions_image=solutions_image)
+            .values(name=name, description=description, image_banner=image_banner, image_card=image_card, sub_header=sub_header, header= header)
             .execution_options(synchronize_session="fetch")
         )
         result = await self.db.execute(stmt)

@@ -41,11 +41,11 @@ class EquipmentsRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error fetching equipments by id")
 
-    async def update_equipment(self, equipment_id: int, name: str, description: str, photo_filename: str):
+    async def update_equipment(self, equipment_id: int, name: str, description: str, min_param: int, max_param: int, image_banner: str, image_card: str, sub_header: str, header: str):
         stmt = (
             update(Equipment)
             .where(Equipment.id == equipment_id)
-            .values(name=name, description=description, equipment_image=photo_filename)
+            .values(name=name, description=description, min_param=min_param, max_param=max_param, image_banner= image_banner, image_card=image_card, sub_header=sub_header, header=header)
             .execution_options(synchronize_session="fetch")
         )
         result = await self.db.execute(stmt)
@@ -64,27 +64,38 @@ class EquipmentsRepository:
             raise HTTPException(status_code=500, detail="Error deleting equipment")
 
     async def get_required_equipment(self, param: int):
+        # Получаем минимальное и максимальное значения
         min_result = await self.db.execute(select(Equipment).order_by(Equipment.min_param))
         global_min = min_result.scalars().first()
 
         max_result = await self.db.execute(select(Equipment).order_by(Equipment.max_param.desc()))
         global_max = max_result.scalars().first()
 
+        # Если значение параметра меньше минимального, возвращаем товар с минимальным значением
         if global_min and param < global_min.min_param:
-            raise ValueError(f"Parameter is too low. Minimum allowed is {global_min.min_param}.")
+            result = await self.db.execute(select(Equipment).filter(Equipment.min_param == global_min.min_param))
+            equipment = result.scalars().first()  # Используем first(), чтобы избежать ошибки
+            if not equipment:
+                raise NoResultFound(f"Equipment with minimum parameter {global_min.min_param} not found.")
+            return equipment
 
+        # Если значение параметра больше максимального, возвращаем товар с максимальным значением
         if global_max and param > global_max.max_param:
-            raise ValueError(f"Parameter is too high. Maximum allowed is {global_max.max_param}.")
+            result = await self.db.execute(select(Equipment).filter(Equipment.max_param == global_max.max_param))
+            equipment = result.scalars().first()  # Используем first(), чтобы избежать ошибки
+            if not equipment:
+                raise NoResultFound(f"Equipment with maximum parameter {global_max.max_param} not found.")
+            return equipment
 
-        # Query for equipment matching the parameter
+        # Ищем товар в пределах диапазона (если параметр находится внутри диапазона)
         result = await self.db.execute(select(Equipment).filter(
             Equipment.min_param <= param,
             Equipment.max_param >= param
         ))
-        equipment = result.scalar_one_or_none()
+        equipment = result.scalars().first()
 
         if not equipment:
-            raise NoResultFound(f"Equipment with such params {param} not found")
+            raise NoResultFound(f"Equipment with parameter {param} not found")
 
         return equipment
 

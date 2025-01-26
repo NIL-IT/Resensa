@@ -24,17 +24,22 @@ class Equipment(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     description = Column(String)
-    equipment_image = Column(String)
+    image_banner = Column(String)
+    image_card = Column(String)
     min_param =Column(Integer)
     max_param =Column(Integer)
+    sub_header = Column(String)
+    header = Column(String)
 
 class Solutions(Base):
     __tablename__ = "solutions"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     description = Column(String)
-    solutions_image = Column(String)
-
+    image_banner = Column(String)
+    image_card = Column(String)
+    sub_header = Column(String)
+    header = Column(String)
 class Order(Base):
     __tablename__ = "orders"
     id = Column(Integer, primary_key=True, index=True)
@@ -44,3 +49,19 @@ class Order(Base):
     client_name = Column(String)
     state = Column(Enum(OrderState), default=OrderState.paid)
     order_amount = Column(Float, nullable=False)
+
+class Admin(Base):
+    __tablename__ = "admins"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    last_login = Column(String, nullable=False)
+
+class Banner(Base):
+    __tablename__ = "banner"
+    id = Column(Integer, primary_key=True, index=True)
+    first_value_string = Column(String, nullable=False)
+    first_value = Column(Integer, nullable=False)
+    second_value_string = Column(String, nullable=False)
+    second_value = Column(Integer, nullable=False)
+    sub_header = Column(String)

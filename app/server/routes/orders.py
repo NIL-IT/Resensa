@@ -108,10 +108,11 @@ async def import_orders(file: UploadFile = File(...), orders_repo: OrdersReposit
         raise HTTPException(status_code=500, detail=f"Error importing orders: {e}")
 
 @router.post("/submit-order/")
-async def submit_order(company_name: str = Form(...), name: str = Form(...), phone: str = Form(...), email: str = Form(...)):
+async def submit_order(company_name: str = Form(...), name: str = Form(...), product_name: str = Form(...), phone: str = Form(...), email: str = Form(...)):
     order_info = {
         'company_name': company_name,
         'name': name,
+        "product_name": product_name,
         'phone': phone,
         'email': email,
     }

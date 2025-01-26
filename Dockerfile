@@ -18,7 +18,8 @@ COPY --from=build /server /server
 
 COPY ./app /server/app
 
-CMD ["uvicorn", "app.server.app:server", "--host", "0.0.0.0", "--port", "8002"]
+
+CMD ["uvicorn", "app.server.app:server", "--host", "0.0.0.0", "--port", "8002", "--ssl-keyfile", "/etc/letsencrypt/live/nilit1.ru/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/nilit1.ru/fullchain.pem"]
 
 
 

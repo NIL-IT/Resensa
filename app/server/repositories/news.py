@@ -42,11 +42,11 @@ class NewsRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error fetching news by id")
 
-    async def update_news(self, news_id: int, title: str, text: str, news_photo: str):
+    async def update_news(self, news_id: int, title: str, text: str, image: str):
         stmt = (
             update(News)
             .where(News.id == news_id)
-            .values(title=title, text=text, news_photo=news_photo)
+            .values(title=title, text=text, news_photo=image)
             .execution_options(synchronize_session="fetch")
         )
         result = await self.db.execute(stmt)

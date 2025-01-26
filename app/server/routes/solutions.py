@@ -10,20 +10,34 @@ from ..database.models import Solutions
 from ..utils.save_image import save_upload_file, read_image
 
 router = APIRouter()
+BASE_URL = "https://nilit1.ru"  # Замените на ваш реальный адрес
+
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 async def create_solutions(name: str = Form(...),
     description: str = Form(...),
-    solution_photo: UploadFile = File(...),  solution_repo: SolutionsRepository = Depends(get_solutions_repository)):
+    image_banner: UploadFile = File(...), image_card: UploadFile = File(...), sub_header: str = File(...),  header: str = Form(...),  solution_repo: SolutionsRepository = Depends(get_solutions_repository)):
+    dirname = os.path.dirname(__file__)  # Текущая директория
+    save_dir = os.path.join(dirname, "../files")  # Папка `files` в проекте
+    os.makedirs(save_dir, exist_ok=True)  # Создать папку, если её нет
 
-    dirname = os.path.dirname(__file__)
-    directory = os.path.join(dirname, f"../../../files/{solution_photo.filename}")
-    absolute_path = os.path.abspath(directory)
-    await save_upload_file(solution_photo, absolute_path)
+    # Сохраняем файл
+    image_banner_path = os.path.join(save_dir, image_banner.filename)
+    image_banner_relative_path = f"files/{image_banner.filename}"
+    await save_upload_file(image_banner, image_banner_path)
+
+    image_card_path = os.path.join(save_dir, image_card.filename)
+    image_card_relative_path = f"files/{image_card.filename}"
+    await save_upload_file(image_card, image_card_path)
+
+
     solution_model = Solutions(
-        solutions_image=absolute_path,
+        image_banner=image_banner_relative_path,
+        image_card=image_card_relative_path,
         name=name,
         description=description,
+        sub_header=sub_header,
+        header=header
     )
     try:
         solution = await solution_repo.create_solution(solution_model)
@@ -38,12 +52,14 @@ async def get_all_solutions(solution_repo: SolutionsRepository = Depends(get_sol
         solutions = await solution_repo.get_all_solutions()
         solutions_with_images = []
         for solution in solutions:
-            image_data = read_image(solution.solutions_image)
             solutions_with_images.append({
                 "id": solution.id,
                 "name": solution.name,
                 "description": solution.description,
-                "image": image_data if image_data else None
+                "image_card": f"{BASE_URL}/{solution.image_card}",
+                "image_banner": f"{BASE_URL}/{solution.image_banner}",
+                "sub_header": solution.sub_header,
+                "header": solution.header
             })
 
         return solutions_with_images
@@ -54,12 +70,14 @@ async def get_all_solutions(solution_repo: SolutionsRepository = Depends(get_sol
 async def get_equipment_by_id(solution_id: int, solution_repo: SolutionsRepository = Depends(get_solutions_repository)):
     try:
         solution = await solution_repo.get_solution_by_id(solution_id)
-        image_data = read_image(solution.solutions_image)
         return {
             "id": solution.id,
             "name": solution.name,
             "description": solution.description,
-            "image": (image_data if image_data else None)
+            "image_card": f"{BASE_URL}/{solution.image_card}",
+            "image_banner": f"{BASE_URL}/{solution.image_banner}",
+            "sub_header": solution.sub_header,
+            "header": solution.header
         }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
@@ -67,7 +85,7 @@ async def get_equipment_by_id(solution_id: int, solution_repo: SolutionsReposito
 @router.put("/{solution_id}", status_code=status.HTTP_200_OK)
 async def update_solution(solution_id: int, name: Optional[str] = Form(None),
     description: Optional[str] = Form(None),
-    solution_photo: Optional[UploadFile] = File(None), solution_repo: SolutionsRepository = Depends(get_solutions_repository)):
+    image_banner: UploadFile = File(None),  image_card: UploadFile = File(None), sub_header: str = File(None), header: str = File(None), solution_repo: SolutionsRepository = Depends(get_solutions_repository)):
     try:
         existing_solution = await solution_repo.get_solution_by_id(solution_id)
         if not existing_solution:
@@ -75,17 +93,33 @@ async def update_solution(solution_id: int, name: Optional[str] = Form(None),
 
         updated_name = name if name else existing_solution.name
         updated_description = description if description else existing_solution.description
+        updated_image_banner = existing_solution.image_banner
+        updated_image_card = existing_solution.image_card
 
-        if solution_photo:
-            dirname = os.path.dirname(__file__)
-            directory = os.path.join(dirname, f"../../../files/{solution_photo.filename}")
-            updated_solution_photo = os.path.abspath(directory)
-            await save_upload_file(solution_photo, updated_solution_photo)
-        else:
-            updated_solution_photo = existing_solution.solutions_image
 
-        updated_solution = await solution_repo.update_solution(solution_id, updated_name, updated_description, updated_solution_photo)
-        return updated_solution
+        if image_banner or image_card:
+            dirname = os.path.dirname(__file__)  # Текущая директория
+            save_dir = os.path.join(dirname, "../files")  # Папка `files` в проекте
+            os.makedirs(save_dir, exist_ok=True)  # Создать папку, если её нет
+            if image_banner:
+                file_path = os.path.join(save_dir, image_banner.filename)
+                updated_image_banner = f"files/{image_banner.filename}"
+                await save_upload_file(image_banner, file_path)
+            if image_card:
+                file_path = os.path.join(save_dir, image_card.filename)
+                updated_image_card = f"files/{image_card.filename}"
+                await save_upload_file(image_card, file_path)
+
+        updated_solution = await solution_repo.update_solution(solution_id, updated_name, updated_description, updated_image_banner, updated_image_card, sub_header)
+        return {
+            "id": updated_solution.id,
+            "name": updated_solution.name,
+            "description": updated_solution.description,
+            "image_card": f"{BASE_URL}/{updated_solution.image_card}",
+            "image_banner": f"{BASE_URL}/{updated_solution.image_banner}",
+            "sub_header": updated_solution.sub_header,
+            "header": updated_solution.header
+        }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
