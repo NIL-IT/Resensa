@@ -102,6 +102,18 @@ export const getAllEquipment = createAsyncThunk(
     }
   }
 );
+export const getEquipmentById = createAsyncThunk(
+  "getEquipmentById/getEquipmentById",
+  async (id, thunkApi) => {
+    try {
+      const res = await api.get(`/equipments/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 
 export const createEquipment = createAsyncThunk(
   "Equipment/createEquipment",
@@ -200,7 +212,18 @@ export const getAllSolutions = createAsyncThunk(
     }
   }
 );
-
+export const getSolutionsById = createAsyncThunk(
+  "getSolutionsById/getSolutionsById",
+  async (id, thunkApi) => {
+    try {
+      const res = await api.get(`/solutions/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 export const createSolutions = createAsyncThunk(
   "Solutions/createSolutions",
   async (data, thunkApi) => {
@@ -464,6 +487,8 @@ const userSlice = createSlice({
     banner: null,
     equipment: [],
     solutions: [],
+    equipmentById: null,
+    solutionsById: null,
     routingToOrders: false,
     orders: [],
     data: data,
@@ -491,6 +516,12 @@ const userSlice = createSlice({
   reducers: {
     changeResult: (state, { payload }) => {
       state.result = payload;
+    },
+    changeEquipmentId: (state, { payload }) => {
+      state.equipmentById = payload;
+    },
+    changeSolutionsId: (state, { payload }) => {
+      state.solutionsById = payload;
     },
     changeRoutingToOrders: (state, { payload }) => {
       state.routingToOrders = payload;
@@ -599,11 +630,19 @@ const userSlice = createSlice({
       })
       .addCase(getBanner.fulfilled, (state, action) => {
         state.banner = action.payload;
+      })
+      .addCase(getEquipmentById.fulfilled, (state, action) => {
+        state.equipmentById = action.payload;
+      })
+      .addCase(getSolutionsById.fulfilled, (state, action) => {
+        state.solutionsById = action.payload;
       });
   },
 });
 
 export const {
+  changeEquipmentId,
+  changeSolutionsId,
   changeStatusOrderPopup,
   changeRoutingToOrders,
   changeIsAdmin,

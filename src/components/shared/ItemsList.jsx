@@ -2,10 +2,23 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
-import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
+import {
+  changeEquipmentId,
+  changeItemId,
+  changeShowPopup,
+  changeSolutionsId,
+  getEquipmentById,
+  getSolutionsById,
+} from "../../utils/slice/userSlice";
 import { Link, useLocation } from "react-router-dom";
 
-export default function ItemsList({ limited = true, list, href, title }) {
+export default function ItemsList({
+  limited = true,
+  list,
+  href,
+  title,
+  equipment,
+}) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [data, setData] = useState(list);
@@ -25,6 +38,16 @@ export default function ItemsList({ limited = true, list, href, title }) {
     dispatch(changeItemId(id));
   };
 
+  const handleClickItem = async (id) => {
+    if (equipment) {
+      await dispatch(getEquipmentById(id));
+      dispatch(changeSolutionsId(null));
+    } else {
+      await dispatch(getSolutionsById(id));
+      dispatch(changeEquipmentId(null));
+    }
+    dispatch(changeItemId(id));
+  };
   return data.length > 0 ? (
     <div className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
       <Title
@@ -35,7 +58,7 @@ export default function ItemsList({ limited = true, list, href, title }) {
         {data.map(({ id, name, description, image_card }) => (
           <Link
             to={`/product/${id}`}
-            onClick={() => dispatch(changeItemId(id))}
+            onClick={() => handleClickItem(id)}
             key={id}
             className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
           >

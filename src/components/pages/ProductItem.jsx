@@ -11,54 +11,29 @@ import {
   changeRoutingToOrders,
 } from "../../utils/slice/userSlice";
 
-const dataTitle = [
-  {
-    name: "СЕРИЯ RPOOL",
-    subtitle: "Бассейновое",
-  },
-  {
-    name: "СЕРИЯ RCDUCT",
-    subtitle: "Канальное",
-  },
-  {
-    name: "смесительные узлы",
-    subtitle: "Водяные узлы",
-  },
-  {
-    name: "СЕРИЯ RCLEAN",
-    subtitle: "Медицинское Гигиеническое исполнение",
-  },
-  {
-    name: "СЕРИЯ RCROOF",
-    subtitle: "Крышное оборудованиe для больших помещений",
-  },
-  {
-    name: "СЕРИЯ RCN",
-    subtitle: "Общепромышленное",
-  },
-];
-
 export default function ProductItem({ list }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const isOrders = pathname.split("/")[2] === "orders";
+  // const isOrders = pathname.split("/")[2] === "orders";
   const navigate = useNavigate();
   const [dataCategory, setDataCategory] = useState();
-  const { routingToOrders, isAdmin, itemId } = useSelector(({ user }) => user);
+  const { routingToOrders, isAdmin, itemId, equipmentById, solutionsById } =
+    useSelector(({ user }) => user);
   const [isLoading, setIsLoading] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const isEquipment = equipmentById !== null;
+  console.log(isEquipment);
 
-  const findProduct = !isOrders
-    ? list.find((item) => +item.id === +id)
-    : list[0];
-  const [currentProduct, setCurrentProduct] = useState(findProduct);
+  const [currentProduct, setCurrentProduct] = useState(
+    equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+  );
 
   document.body.style.overflowY = "auto";
   useEffect(() => {
-    if (!currentProduct && !isOrders) navigate("/");
-  }, [currentProduct, isOrders]);
+    if (!currentProduct) navigate("/");
+  }, [currentProduct]);
 
   const scrollToOrders = () => {
     if (itemId) return;
@@ -104,9 +79,11 @@ export default function ProductItem({ list }) {
 
   // Handle product changes
   useEffect(() => {
-    if (!id && isOrders) return;
-    setCurrentProduct(findProduct);
-  }, [id, findProduct]);
+    if (!id) return;
+    setCurrentProduct(
+      equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+    );
+  }, [id, equipmentById, solutionsById]);
 
   // Handle pathname changes and scroll behavior
   useEffect(() => {
@@ -130,7 +107,9 @@ export default function ProductItem({ list }) {
       });
       dispatch(changeRoutingToOrders(false));
     }
-    setCurrentProduct(!isOrders ? findProduct : list[0]);
+    setCurrentProduct(
+      equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+    );
     setPrevPathname(pathname);
   }, [pathname, itemId]);
 
@@ -150,29 +129,24 @@ export default function ProductItem({ list }) {
     setIsLoading(true);
   }, [id, list, currentProduct]);
 
-  const getSubtitle = () => {
-    if (!currentProduct) return "";
-
-    const item = dataTitle.find(
-      (item) => item.name.toLowerCase() === currentProduct.name.toLowerCase()
-    );
-
-    return item ? item.subtitle : "";
-  };
-
   return isLoading ? (
     <>
       <EquipmentBanner
         currentProduct={true}
         bannerImg={currentProduct.image_banner}
-        title={getSubtitle() || currentProduct.name}
+        title={currentProduct.sub_header}
         subtitle={currentProduct.name}
-        text={currentProduct.description}
+        text={currentProduct.header}
         isButton={true}
-        width={"w-[550px]"}
+        width={"w-[300px] xs:w-[360px] md:w-[500px] lg:w-[656px]"}
       />
       <Advantages />
-      <ItemsList title={"каталог"} list={dataCategory} limited={false} />
+      <ItemsList
+        equipment={isEquipment}
+        title={"каталог"}
+        list={dataCategory}
+        limited={false}
+      />
       <OrderStatus />
       <Footer />
     </>

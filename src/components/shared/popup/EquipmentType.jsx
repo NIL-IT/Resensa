@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeItemId,
   changeRoutingToOrders,
+  getEquipmentById,
 } from "../../../utils/slice/userSlice";
 
 export default function EquipmentType() {
@@ -45,8 +46,9 @@ export default function EquipmentType() {
     const img = equipment.find(({ id }) => id === activeIndex);
     return img ? img : null;
   };
-  const handleClickButton = (id) => {
+  const handleClickButton = async (id) => {
     dispatch(changeRoutingToOrders(false));
+    await dispatch(getEquipmentById(id));
     dispatch(changeItemId(id));
   };
   console.log(equipment[0].id);
