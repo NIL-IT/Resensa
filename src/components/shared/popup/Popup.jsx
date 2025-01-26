@@ -62,7 +62,7 @@ const Popup = () => {
   }, [isOpen]);
 
   return (
-    <div className="fixed inset-0  flex items-center justify-center">
+    <article className="fixed inset-0  flex items-center justify-center">
       <div
         className="bg-white py-[25px] xs:py-[28px] 
       sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] 
@@ -138,7 +138,7 @@ const Popup = () => {
           </button>
         </form>
       </div>
-    </div>
+    </article>
   );
 };
 

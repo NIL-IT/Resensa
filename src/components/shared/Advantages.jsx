@@ -101,7 +101,7 @@ export default function Advantages() {
     };
   }, [autoScroll]);
   return (
-    <div className="overflow-x-hidden w-full bg-gray-400 py-[40px] xs:py-[45px] sm:py-[50px] md:py-[75px] lg:py-[90px] xl:py-[95px] 2xl:py-[100px] 3xl:py-[104px]">
+    <section className="overflow-x-hidden w-full bg-gray-400 py-[40px] xs:py-[45px] sm:py-[50px] md:py-[75px] lg:py-[90px] xl:py-[95px] 2xl:py-[100px] 3xl:py-[104px]">
       <div className=" container ">
         <Title
           text={"наши преимущества"}
@@ -119,7 +119,7 @@ export default function Advantages() {
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {list.map(({ title, text, subtitle, img }, i) => (
-            <div
+            <article
               key={`first-${i}`}
               className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[450px] xl:min-w-[470px] 2xl:min-w-[485px] 3xl:min-w-[500px] select-none space-y-3 xs:space-y-3.5 sm:space-y-4"
             >
@@ -131,24 +131,22 @@ export default function Advantages() {
                 />
               </div>
               <div>
-                <Title
-                  className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]"
-                  text={title}
-                />
+                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                  {title}
+                </h2>
                 {subtitle && (
-                  <Title
-                    className="text-xl xs:text-xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]"
-                    text={subtitle}
-                  />
+                  <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                    {subtitle}
+                  </h2>
                 )}
               </div>
               <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-xl leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
                 {text}
               </p>
-            </div>
+            </article>
           ))}
           {list.map(({ title, text, subtitle, img }, i) => (
-            <div
+            <article
               key={`second-${i}`}
               className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[450px] xl:min-w-[470px] 2xl:min-w-[485px] 3xl:min-w-[500px] select-none space-y-3 xs:space-y-3.5 sm:space-y-4"
             >
@@ -160,24 +158,22 @@ export default function Advantages() {
                 />
               </div>
               <div>
-                <Title
-                  className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]"
-                  text={title}
-                />
+                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                  {title}
+                </h2>
                 {subtitle && (
-                  <Title
-                    className="text-xl xs:text-xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]"
-                    text={subtitle}
-                  />
+                  <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                    {subtitle}
+                  </h2>
                 )}
               </div>
               <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-xl leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
                 {text}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

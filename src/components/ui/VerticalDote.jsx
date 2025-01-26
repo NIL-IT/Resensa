@@ -11,7 +11,6 @@ export default function VerticalDote({
   deleteSelected,
   deleteAll,
   selectedOrders,
-  changeOrders,
 }) {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
@@ -53,7 +52,7 @@ export default function VerticalDote({
   }, []);
 
   return (
-    <div className="relative" ref={menuRef}>
+    <article className="relative" ref={menuRef}>
       <button className="p-2" onClick={() => setActive(!active)}>
         <svg
           className="w-6 h-6"
@@ -77,12 +76,12 @@ export default function VerticalDote({
               className="flex-center justify-between gap-4 hover:bg-gray-50 p-2 w-full transition-all rounded"
               onClick={() => handleAction(action)}
             >
-              <span>{name}</span>
+              <p>{name}</p>
               {icon}
             </button>
           ))}
         </div>
       )}
-    </div>
+    </article>
   );
 }

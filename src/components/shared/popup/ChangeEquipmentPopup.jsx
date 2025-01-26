@@ -133,7 +133,7 @@ const ChangeEquipmentPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <section className="fixed inset-0 flex items-center justify-center">
       <div
         className="bg-white  h-[80%] py-[38px] px-8 
       rounded-lg w-full max-w-[663px]  overflow-scroll  relative"
@@ -158,9 +158,9 @@ const ChangeEquipmentPopup = () => {
         <form onSubmit={handleSubmit} className="space-y-[18px]">
           {!isNews && (
             <div>
-              <span className="w-full text-sm text-gray-900">
+              <p className="w-full text-sm text-gray-900">
                 Изображение для баннера
-              </span>
+              </p>
               <ImageUploader
                 banner={true}
                 newsBanner={isNews ? true : false}
@@ -171,9 +171,9 @@ const ChangeEquipmentPopup = () => {
           )}
 
           <div>
-            <span className="w-full text-sm text-gray-900">
+            <p className="w-full text-sm text-gray-900">
               Изображение для карточки
-            </span>
+            </p>
             <ImageUploader
               findProduct={findProduct}
               onFileSelect={setSelectedFile}
@@ -182,7 +182,7 @@ const ChangeEquipmentPopup = () => {
           {isNews ? (
             <>
               <div className="space-y-2">
-                <span className="w-full text-sm text-gray-900">Название</span>
+                <p className="w-full text-sm text-gray-900">Название</p>
                 <Input
                   type="text"
                   name="title"
@@ -211,7 +211,7 @@ const ChangeEquipmentPopup = () => {
           ) : (
             <>
               <div className="space-y-2">
-                <span className="w-full text-sm text-gray-900">Название</span>
+                <p className="w-full text-sm text-gray-900">Название</p>
                 <Input
                   type="text"
                   name="name"
@@ -221,9 +221,9 @@ const ChangeEquipmentPopup = () => {
                 />
               </div>
               <div className="space-y-2">
-                <span className="w-full text-sm text-gray-900">
+                <p className="w-full text-sm text-gray-900">
                   Заголовок баннера
-                </span>
+                </p>
                 <Input
                   type="text"
                   name="sub_header"
@@ -251,9 +251,9 @@ const ChangeEquipmentPopup = () => {
               {!isSolutions && (
                 <>
                   <div className="space-y-2">
-                    <span className="w-full text-sm text-gray-900">
+                    <p className="w-full text-sm text-gray-900">
                       Минимальный параметр
-                    </span>
+                    </p>
                     <Input
                       type="text"
                       name="min_param"
@@ -263,9 +263,9 @@ const ChangeEquipmentPopup = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <span className="w-full text-sm text-gray-900">
+                    <p className="w-full text-sm text-gray-900">
                       Максимальный параметр
-                    </span>
+                    </p>
                     <Input
                       type="text"
                       name="max_param"
@@ -303,7 +303,7 @@ const ChangeEquipmentPopup = () => {
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

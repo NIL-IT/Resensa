@@ -43,9 +43,9 @@ export default function ProductItem({ list }) {
     else if (widthPage > 1200) scrollPosition = 3000;
     else if (widthPage > 768) scrollPosition = 3500;
     else if (widthPage > 640) scrollPosition = 2400;
-    else if (widthPage > 420) scrollPosition = 2200;
-    else if (widthPage > 375) scrollPosition = 2050;
-    else scrollPosition = 2800;
+    else if (widthPage > 420) scrollPosition = 3600;
+    else if (widthPage > 375) scrollPosition = 3350;
+    else scrollPosition = 3150;
 
     window.scrollTo({
       top: scrollPosition,
@@ -131,23 +131,25 @@ export default function ProductItem({ list }) {
 
   return isLoading ? (
     <>
-      <EquipmentBanner
-        currentProduct={true}
-        bannerImg={currentProduct.image_banner}
-        title={currentProduct.sub_header}
-        subtitle={currentProduct.name}
-        text={currentProduct.header}
-        isButton={true}
-        width={"w-[300px] xs:w-[360px] md:w-[500px] lg:w-[656px]"}
-      />
-      <Advantages />
-      <ItemsList
-        equipment={isEquipment}
-        title={"каталог"}
-        list={dataCategory}
-        limited={false}
-      />
-      <OrderStatus />
+      <main>
+        <EquipmentBanner
+          currentProduct={true}
+          bannerImg={currentProduct.image_banner}
+          title={currentProduct.sub_header}
+          subtitle={currentProduct.name}
+          text={currentProduct.header}
+          isButton={true}
+          width={"w-[300px] xs:w-[360px] md:w-[500px] lg:w-[656px]"}
+        />
+        <Advantages />
+        <ItemsList
+          equipment={isEquipment}
+          title={"каталог"}
+          list={dataCategory}
+          limited={false}
+        />
+        <OrderStatus />
+      </main>
       <Footer />
     </>
   ) : (

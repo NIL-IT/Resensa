@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
-import { data, sliderTextMain, slidesMain } from "../../utils/data";
+import { sliderTextMain, slidesMain } from "../../utils/data";
 import Calculator from "../shared/Сalculator";
 import News from "../shared/News";
 import Partners from "../shared/Partners";

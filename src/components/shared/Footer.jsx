@@ -84,9 +84,9 @@ export default function Footer({ scrollTop = null }) {
             <img src="/icon/logo.svg" alt="logo" />
           </div>
         </div>
-        <span className="text-gray-900 text-sm xs:text-sm sm:text-base">
+        <h5 className="text-gray-900 text-sm xs:text-sm sm:text-base">
           copyright
-        </span>
+        </h5>
       </div>
       <div className="order-3 lg:order-2">
         <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
@@ -104,27 +104,27 @@ export default function Footer({ scrollTop = null }) {
           <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
             {navList.map(({ name }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
-                <span className="cursor-pointer">Оборудование</span>
+                <a className="cursor-pointer">Оборудование</a>
               </li>
             ))}
           </ul>
           <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
             {navList.map(({ name }, i) => (
               <li key={i} className="text-gray-400 hover:text-gray-300">
-                <span className="cursor-pointer">Решения</span>
+                <a className="cursor-pointer">Решения</a>
               </li>
             ))}
           </ul>
         </nav>
       </div>
 
-      <div className="flex flex-col gap-[15px] xs:gap-[18px] sm:gap-[20px] md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3">
+      <article className="flex flex-col gap-[15px] xs:gap-[18px] sm:gap-[20px] md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3">
         <div className="flex flex-col lg:justify-end *:flex *:lg:justify-end text-gray-400 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl font-normal">
           <p>Адрес</p>
-          <a target="blank" href="mailto:office@recensa.ru">
+          <a target="_blank" href="mailto:office@recensa.ru">
             office@recensa.ru
           </a>
-          <a target="blank" href="tel:89999999999">
+          <a target="_blank" href="tel:89999999999">
             +7 999 999 99 99
           </a>
         </div>
@@ -141,7 +141,7 @@ export default function Footer({ scrollTop = null }) {
           text={"заказать звонок"}
           className="bg-white border border-gray-400 text-gray-400 text-xs font-normal py-2.5 xs:py-2.5 sm:py-3 px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[30px] flex lg:justify-end hover:border-gray-200 hover:bg-gray-50 w-fit lg:w-auto lg:ml-auto"
         />
-      </div>
+      </article>
       <div className="absolute bottom-3 xs:bottom-3.5 sm:bottom-4 md:bottom-4.5 lg:bottom-5 right-0 w-[120px] xs:w-[130px] sm:w-[140px] md:w-[145px] lg:w-[150px] xl:w-[153px] 2xl:w-[154px] 3xl:w-[156px] h-[20px] xs:h-[22px] sm:h-[24px] md:h-[25px] lg:h-[26px] xl:h-[26px] 2xl:h-[26px] 3xl:h-[27px]">
         <img src="/img/nil.png" alt="" />
       </div>

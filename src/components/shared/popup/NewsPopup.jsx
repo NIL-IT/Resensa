@@ -16,7 +16,7 @@ export default function NewsPopup() {
     document.body.style.overflow = "auto";
   };
   return (
-    <div className="w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[400px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[922px] min-h-[80vh] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
+    <section className="w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[400px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[922px] min-h-[80vh] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
       <div className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-full relative">
         <button
           onClick={() => handleClose()}
@@ -35,14 +35,14 @@ export default function NewsPopup() {
               alt={title}
             />
           </div>
-          <span className="text-gray-900 text-sm xs:text-base block mt-4">
+          <p className="text-gray-900 text-sm xs:text-base block mt-4">
             {date}
-          </span>
+          </p>
           <div className="space-y-4 xs:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 mt-4 xs:mt-5 sm:mt-6 md:mt-7 lg:mt-8">
             <p className="text-gray-900 text-sm xs:text-base">{text}</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

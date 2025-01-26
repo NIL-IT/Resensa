@@ -109,8 +109,8 @@ function Earth() {
 
 export default function EarthScene() {
   return (
-    <div
-      className=" *:overflow-auto xs:w-[350px] xs:h-[450px] 
+    <article
+      className=" *:overflow-hidden xs:w-[350px] xs:h-[450px] 
     sm:w-[600px] sm:h-[500px] 
     md:w-[800px] md:h-[500px] 
     lg:w-[1000px] lg:h-[600px] 
@@ -131,6 +131,6 @@ export default function EarthScene() {
           rotateSpeed={0.4}
         />
       </Canvas>
-    </div>
+    </article>
   );
 }

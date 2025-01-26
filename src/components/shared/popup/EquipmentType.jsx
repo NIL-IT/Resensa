@@ -53,7 +53,7 @@ export default function EquipmentType() {
   };
   console.log(equipment[0].id);
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-scroll">
+    <section className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-scroll">
       <div className="mt-14 md:mt-0 flex-center justify-center w-full px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 mb-10 lg:mb-20">
         <div className="w-full max-w-[300px] xs:max-w-[400px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-w-[1300px] pt-10 xs:pt-12 sm:pt-14 md:pt-16 lg:pt-18 xl:pt-20">
           <Title
@@ -175,6 +175,6 @@ export default function EquipmentType() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

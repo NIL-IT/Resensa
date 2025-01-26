@@ -11,36 +11,8 @@ import { useSelector } from "react-redux";
 import Contacts from "../components/pages/Contacts";
 export default function AppRoutes() {
   const { isAdmin, equipment, solutions } = useSelector(({ user }) => user);
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const [loading, isLoading] = useState(true);
-  // console.log(equipment, "equipment");
-  // console.log(solutions, "solutions");
   const combinedData = [...equipment, ...solutions];
 
-  // console.log(combinedData, "combinedData");
-  // useEffect(() => {
-  //   // Redirect to auth if not authenticated, unless already on auth page
-  //   if (!isAuth && location.pathname !== ROUTES.AUTH) {
-  //     navigate(ROUTES.AUTH);
-  //   }
-  //   // Redirect from auth page to home if already authenticated
-  //   if (isAuth && location.pathname === ROUTES.AUTH) {
-  //     navigate(ROUTES.HOME);
-  //   }
-  // }, [isAuth, location.pathname, navigate]);
-
-  // Show only auth route when not authenticated
-  // if (!isAuth) {
-  //   return (
-  //     <Routes>
-  //       <Route path={ROUTES.AUTH} element={<LoginForm />} />
-  //       <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
-  //     </Routes>
-  //   );
-  // }
-
-  // Show all routes when authenticated
   return (
     <Routes>
       <Route path={ROUTES.AUTH} element={<LoginForm />} />

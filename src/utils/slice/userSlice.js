@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { data } from "../data";
 import axios from "axios";
 import apiLogin from "../api";
 
@@ -487,7 +486,6 @@ const userSlice = createSlice({
     solutionsById: null,
     routingToOrders: false,
     orders: [],
-    data: data,
     isAdmin: false,
     isPopup: false,
     status: false,
@@ -500,8 +498,6 @@ const userSlice = createSlice({
     newsPopup: false,
     searchPopup: false,
     statusOrderPopup: false,
-    experience: 22,
-    guarantee: 3,
     token: null,
     isAuthenticated: false,
     error: null,
@@ -522,11 +518,7 @@ const userSlice = createSlice({
     changeRoutingToOrders: (state, { payload }) => {
       state.routingToOrders = payload;
     },
-    changeNumberForMainBanner: (state, { payload }) => {
-      const { experience, guarantee } = payload;
-      state.experience = experience;
-      state.guarantee = guarantee;
-    },
+
     changeShowAddNewItemPopup: (state, { payload }) => {
       state.addNewItemPopup = payload;
     },
@@ -566,35 +558,8 @@ const userSlice = createSlice({
         state.ordersData.push(payload);
       }
     },
-    addNewItemToData: (state, { payload }) => {
-      if (payload.category === "news") {
-        const isFind = state.data.news.items.some(
-          ({ id }) => id === payload.item.id
-        );
-        if (!isFind && payload.item.id) {
-          state.data.news.items.push(payload.item);
-        }
-      } else if (payload.category === "equipment") {
-        const isFind = state.data.equipment.items.some(
-          ({ id }) => id === payload.item.id
-        );
-        if (!isFind && payload.item.id) {
-          state.data.equipment.items.push(payload.item);
-        }
-      } else if (payload.category === "solutions") {
-        const isFind = state.data.solutions.items.some(
-          ({ id }) => id === payload.item.id
-        );
-        if (!isFind && payload.item.id) {
-          state.data.solutions.items.push(payload.item);
-        }
-      }
-    },
     changeIsAdmin: (state, { payload }) => {
       state.isAdmin = payload;
-    },
-    changeData: (state, { payload }) => {
-      state.data = payload;
     },
   },
   extraReducers: (builder) => {
@@ -645,8 +610,6 @@ export const {
   changeNumberForMainBanner,
   changeShowSearchPopup,
   changeShowNewsPopup,
-  addNewItemToData,
-  changeData,
   changeItemId,
   changeResult,
   changeEquipmentPopup,

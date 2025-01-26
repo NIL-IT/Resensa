@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { data } from "../../utils/data";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 

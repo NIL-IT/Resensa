@@ -61,7 +61,7 @@ export default function ChangeStatusPopup() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 bg-black bg-opacity-50">
+    <section className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 bg-black bg-opacity-50">
       <div
         className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] 
       xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] 
@@ -97,6 +97,6 @@ export default function ChangeStatusPopup() {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

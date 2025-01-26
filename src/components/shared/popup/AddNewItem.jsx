@@ -165,7 +165,7 @@ const AddNewItem = () => {
   };
 
   return (
-    <div
+    <section
       className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 
     sm:px-6 md:px-7 lg:px-8"
     >
@@ -191,9 +191,9 @@ const AddNewItem = () => {
         >
           {!isNews && (
             <div>
-              <span className="w-full text-sm text-gray-900">
+              <p className="w-full text-sm text-gray-900">
                 Изображение для баннера
-              </span>
+              </p>
               <ImageUploader
                 banner={true}
                 onFileSelect={setSelectedFileBanner}
@@ -201,15 +201,13 @@ const AddNewItem = () => {
             </div>
           )}
           <div>
-            <span className="w-full text-sm text-gray-900">
+            <p className="w-full text-sm text-gray-900">
               Изображение для карточки
-            </span>
+            </p>
             <ImageUploader onFileSelect={setSelectedFile} />
           </div>
           <div className="space-y-2">
-            <span className="w-full text-xs xs:text-sm text-gray-900">
-              Название
-            </span>
+            <p className="w-full text-xs xs:text-sm text-gray-900">Название</p>
             <Input
               type="text"
               name={!isNews ? "name" : "title"}
@@ -236,9 +234,9 @@ const AddNewItem = () => {
           {!isNews && (
             <>
               <div className="space-y-2">
-                <span className="w-full text-xs xs:text-sm text-gray-900">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
                   Заголовок баннера
-                </span>
+                </p>
                 <Input
                   type="text"
                   name="sub_header"
@@ -266,9 +264,9 @@ const AddNewItem = () => {
           {+pathnameId === 2 && (
             <div className="flex w-full justify-between gap-4 pb-5">
               <div className="w-[48%] space-y-2">
-                <span className="block w-full text-xs xs:text-sm text-gray-900">
+                <p className="block w-full text-xs xs:text-sm text-gray-900">
                   От
-                </span>
+                </p>
                 <Input
                   required={true}
                   type="number"
@@ -283,9 +281,9 @@ const AddNewItem = () => {
                 />
               </div>
               <div className="w-[48%] space-y-2">
-                <span className="block w-full text-xs xs:text-sm text-gray-900">
+                <p className="block w-full text-xs xs:text-sm text-gray-900">
                   До
-                </span>
+                </p>
                 <Input
                   required={true}
                   type="number"
@@ -309,7 +307,7 @@ const AddNewItem = () => {
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

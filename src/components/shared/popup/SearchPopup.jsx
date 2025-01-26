@@ -40,7 +40,7 @@ export default function SearchPopup() {
   };
 
   return (
-    <div className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
+    <section className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
       <div className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg min-w-[100%] relative min-h-full pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10">
         <div className="sticky z-50 flex-center top-0 left-0 bg-white h-[60px] xs:h-[65px] sm:h-[70px] md:h-[75px] lg:h-[80px]">
           <SearchInput
@@ -97,6 +97,6 @@ export default function SearchPopup() {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

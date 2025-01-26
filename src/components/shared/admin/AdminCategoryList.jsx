@@ -69,13 +69,13 @@ export default function AdminCategoryList({ title, category }) {
           onClick={() => addNewItem()}
           className="p-2 flex items-center gap-2 md:gap-4 rounded hover:bg-gray-50"
         >
-          <span>{`Добавить ${
+          <p>{`Добавить ${
             category === "equipment"
               ? "оборудование"
               : category !== "news"
               ? "решение"
               : "новость"
-          }`}</span>
+          }`}</p>
           <Plus className="w-5 md:w-6" />
         </button>
       </div>
@@ -86,7 +86,7 @@ export default function AdminCategoryList({ title, category }) {
           <div className="max-h-[440px] overflow-y-scroll grid  grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {dataCategory.map(
               ({ id, name, description, image_card, date, title }) => (
-                <div
+                <article
                   key={id}
                   className="flex flex-col  justify-between w-full sm:w-[200px] h-[360px] border border-gray-100 p-4 "
                 >
@@ -146,15 +146,15 @@ export default function AdminCategoryList({ title, category }) {
                       </div>
                     </>
                   )}
-                </div>
+                </article>
               )
             )}
           </div>
         </div>
       ) : (
-        <div className="text-center text-gray-400 py-4">
+        <p className="text-center text-gray-400 py-4">
           {category === "equipment" ? "Оборудования нет" : "Решений нет"}
-        </div>
+        </p>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import Slider from "./Slider";
 
 export default function About() {
   return (
-    <div className="container pt-[218px]">
+    <section className="container pt-[218px]">
       <Title
         text={"о компании"}
         className="text-2xl border-b mb-10 inline-block"
@@ -36,6 +36,6 @@ export default function About() {
         </div>
       </div>
       <Slider />
-    </div>
+    </section>
   );
 }

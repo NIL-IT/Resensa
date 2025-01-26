@@ -13,7 +13,6 @@ export default function EquipmentBanner({
   text,
   bannerImg,
   isButton = false,
-  currentProduct,
   textSize,
   width = "",
   about = false,
@@ -57,7 +56,6 @@ export default function EquipmentBanner({
     };
     fetchData();
   }, [itemId]);
-  console.log(product);
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -66,7 +64,7 @@ export default function EquipmentBanner({
       <div className="loader" />
     </div>
   ) : (
-    <div
+    <section
       className={`relative ${
         !about && !product
           ? `pb-[50px] xs:pb-[30px] sm:pb-[60px] 
@@ -112,13 +110,13 @@ export default function EquipmentBanner({
           text={subtitle || product().name}
           className="font-norma text-md sm:text-[22px] leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
-        <h1
+        <h2
           ref={h1Ref}
           className="font-normal  text-lg leading-[28px]  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
           xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white   uppercase"
         >
           {title || product().sub_header}
-        </h1>
+        </h2>
 
         <p
           className={` text-white mt-3 mb-3 xs:mb-[20px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
@@ -144,6 +142,6 @@ export default function EquipmentBanner({
           />
         )}
       </div>
-    </div>
+    </section>
   );
 }

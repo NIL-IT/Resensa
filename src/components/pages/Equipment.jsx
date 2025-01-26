@@ -25,18 +25,20 @@ export default function Equipment({ data, bannerImg, title, text }) {
   }, [pathname]);
   document.body.style.overflowY = "auto";
   return (
-    <div>
-      <EquipmentBanner
-        bannerImg={bannerImg}
-        title={title}
-        text={text}
-        subtitle={"recensa"}
-        isButton={true}
-      />
-      <ItemsList list={data} limited={false} />
-      <Calculator />
-      <Objects className={"mt-[20px]"} />
+    <>
+      <main>
+        <EquipmentBanner
+          bannerImg={bannerImg}
+          title={title}
+          text={text}
+          subtitle={"recensa"}
+          isButton={true}
+        />
+        <ItemsList list={data} limited={false} />
+        <Calculator />
+        <Objects className={"mt-[20px]"} />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

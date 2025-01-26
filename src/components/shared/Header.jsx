@@ -77,14 +77,14 @@ export default function Header() {
         <div className="hidden pr-10 lg:pr-0 md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
             <a
-              target="blank"
+              target="_blank"
               href="mailto:office@recensa.ru"
               className="hover:text-gray-600 "
             >
               office@recensa.ru
             </a>
             <a
-              target="blank"
+              target="_blank"
               href="tel:89999999999"
               className="hover:text-gray-600"
             >
@@ -93,10 +93,10 @@ export default function Header() {
           </div>
           <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
             <div className="flex items-center gap-4">
-              <a href="#" className="hover:opacity-80">
+              <a target="_blank" href="#" className="hover:opacity-80">
                 <img src="/icon/telegram.svg" alt="telegram" className="w-8 " />
               </a>
-              <a href="#" className="hover:opacity-80">
+              <a target="_blank" href="#" className="hover:opacity-80">
                 <img src="/icon/wa.svg" alt="whatsapp" className="w-8 " />
               </a>
               <button
@@ -114,19 +114,21 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <nav className="mt-6 hidden md:block">
-        <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
-          {navList.map(({ name, path }, i) => (
-            <li
-              onClick={() => handleClickLink(i, path)}
-              key={i}
-              className="text-gray-400 hover:text-gray-300 cursor-pointer"
-            >
-              {name}
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <aside>
+        <nav className="mt-6 hidden md:block">
+          <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
+            {navList.map(({ name, path }, i) => (
+              <li
+                onClick={() => handleClickLink(i, path)}
+                key={i}
+                className="text-gray-400 hover:text-gray-300 cursor-pointer"
+              >
+                {name}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
     </header>
   );
 }

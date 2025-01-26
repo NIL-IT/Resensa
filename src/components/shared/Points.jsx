@@ -26,10 +26,10 @@ const list = [
 ];
 export default function Points() {
   return (
-    <div className="container pb-12 md:pb-20 lg:pb-[124px] pt-0 mt-0">
+    <section className="container pb-12 md:pb-20 lg:pb-[124px] pt-0 mt-0">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-6 xl:gap-4">
         {list.map((item, i) => (
-          <div key={i} className="relative xl:w-[300px] 2xl:w-[380px]">
+          <article key={i} className="relative xl:w-[300px] 2xl:w-[380px]">
             <span className="bg-gray-400 w-3 h-3 md:w-[15px] md:h-[15px] block"></span>
             <Title
               text={item.title}
@@ -52,9 +52,9 @@ export default function Points() {
                 {item.subtext}
               </p>
             )}
-          </div>
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

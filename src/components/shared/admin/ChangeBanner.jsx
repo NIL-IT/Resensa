@@ -71,9 +71,9 @@ export default function ChangeBanner({ title }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-5 items-center">
             <div>
-              <span className="block mb-1 text-sm font-medium text-gray-900">
+              <p className="block mb-1 text-sm font-medium text-gray-900">
                 Цифра для первого значения
-              </span>
+              </p>
               <Input
                 required={false}
                 type={"number"}
@@ -84,9 +84,9 @@ export default function ChangeBanner({ title }) {
               />
             </div>
             <div>
-              <span className="block mb-1 text-sm font-medium text-gray-900">
+              <p className="block mb-1 text-sm font-medium text-gray-900">
                 Текст для первого значения
-              </span>
+              </p>
               <Input
                 required={false}
                 type={"text"}
@@ -99,9 +99,9 @@ export default function ChangeBanner({ title }) {
           </div>
           <div className="flex flex-col gap-5 items-center">
             <div>
-              <span className="block mb-1 text-sm font-medium text-gray-900">
+              <p className="block mb-1 text-sm font-medium text-gray-900">
                 Цифра для второго значения
-              </span>
+              </p>
               <Input
                 required={false}
                 type={"number"}
@@ -112,9 +112,9 @@ export default function ChangeBanner({ title }) {
               />
             </div>
             <div>
-              <span className="block mb-1 text-sm font-medium text-gray-900">
+              <p className="block mb-1 text-sm font-medium text-gray-900">
                 Текст для второго значения
-              </span>
+              </p>
               <Input
                 required={false}
                 type={"text"}
@@ -134,9 +134,9 @@ export default function ChangeBanner({ title }) {
             Сохранить
           </button>
           {showSuccess && (
-            <span className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
+            <p className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
-            </span>
+            </p>
           )}
         </div>
       </form>

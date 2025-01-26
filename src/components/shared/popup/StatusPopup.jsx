@@ -43,7 +43,7 @@ export default function StatusPopup() {
   };
 
   return (
-    <div className="max-w-[100vw] max-h-[100vh] fixed inset-0  z-50 flex items-center justify-center">
+    <section className="max-w-[100vw] max-h-[100vh] fixed inset-0  z-50 flex items-center justify-center">
       <div
         className="bg-white py-[38px] px-8 rounded-lg xl:min-h-[200px] xl:h-[auto]  
          w-[80%] xl:max-w-[800px] lg:max-h-[553px] flex flex-col justify-normal xl:justify-center relative"
@@ -109,10 +109,10 @@ export default function StatusPopup() {
           </div>
         ) : (
           <div className="text-center text-sm text-gray-400">
-            Заказ с номером {orderNum} не найден
+            <p>Заказ с номером {orderNum} не найден</p>
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

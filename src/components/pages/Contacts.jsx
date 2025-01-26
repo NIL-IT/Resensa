@@ -20,7 +20,7 @@ const Contacts = () => {
     dispatch(changeItemId(null));
   }, [pathname]);
   return (
-    <div className="min-h-screen flex flex-col">
+    <section className="min-h-screen flex flex-col">
       <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
         {/* Breadcrumb - responsive text size */}
         <div className="mb-4 xs:mb-5 sm:mb-6">
@@ -29,7 +29,7 @@ const Contacts = () => {
               Главная
             </Link>
             <span>{">"}</span>
-            <span>Контакты</span>
+            <p>Контакты</p>
           </div>
         </div>
 
@@ -47,12 +47,14 @@ const Contacts = () => {
             </h2>
             <div className="space-y-3 xs:space-y-4">
               <a
+                target="_blank"
                 href="mailto:office@recensa.ru"
                 className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
               >
                 office@recensa.ru
               </a>
               <a
+                target="_blank"
                 href="tel:+79999999999"
                 className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
               >
@@ -61,14 +63,22 @@ const Contacts = () => {
 
               {/* Social icons - responsive spacing */}
               <div className="flex gap-3 xs:gap-4 py-4 xs:py-5 sm:py-6">
-                <a href="#" className="hover:opacity-80 transition-opacity">
+                <a
+                  target="_blank"
+                  href="#"
+                  className="hover:opacity-80 transition-opacity"
+                >
                   <img
                     src="/icon/wa.svg"
                     alt="WhatsApp"
                     className="w-6 xs:w-7 sm:w-8"
                   />
                 </a>
-                <a href="#" className="hover:opacity-80 transition-opacity">
+                <a
+                  target="_blank"
+                  href="#"
+                  className="hover:opacity-80 transition-opacity"
+                >
                   <img
                     src="/icon/telegram.svg"
                     alt="Telegram"
@@ -113,7 +123,7 @@ const Contacts = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </section>
   );
 };
 

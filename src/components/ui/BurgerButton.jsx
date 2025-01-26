@@ -17,7 +17,7 @@ const BurgerButton = ({ list, handleClickLink }) => {
     handleChangeShowPopup(false);
   };
   return (
-    <div className="md:hidden relative">
+    <section className="md:hidden relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex absolute right-10 top-[-20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80]"
@@ -38,7 +38,7 @@ const BurgerButton = ({ list, handleClickLink }) => {
       </button>
 
       {isOpen && (
-        <div className="pt-10 fixed top-0 left-0 w-[100vw] bg-white shadow-lg p-4 z-50">
+        <aside className="pt-10 fixed top-0 left-0 w-[100vw] bg-white shadow-lg p-4 z-50">
           <div className="flex flex-col  gap-4">
             <nav className="mt-2">
               <ul className="flex flex-col gap-2 text-sm">
@@ -56,25 +56,30 @@ const BurgerButton = ({ list, handleClickLink }) => {
             <div className="flex flex-col gap-2 text-gray-400 text-sm">
               <div className="flex flex-col gap-2 text-gray-400 text-sm">
                 <a
+                  target="_blank"
                   href="mailto:office@recensa.ru"
                   className="hover:text-gray-600"
                 >
                   office@recensa.ru
                 </a>
-                <a href="tel:89999999999" className="hover:text-gray-600">
+                <a
+                  target="_blank"
+                  href="tel:89999999999"
+                  className="hover:text-gray-600"
+                >
                   +7 999 999 99 99
                 </a>
               </div>
 
               <div className="flex items-center gap-4 mt-3 mb-3">
-                <a href="#" className="hover:opacity-80">
+                <a target="_blank" href="#" className="hover:opacity-80">
                   <img
                     src="/icon/telegram.svg"
                     alt="telegram"
                     className="w-8"
                   />
                 </a>
-                <a href="#" className="hover:opacity-80">
+                <a target="_blank" href="#" className="hover:opacity-80">
                   <img src="/icon/wa.svg" alt="whatsapp" className="w-8" />
                 </a>
                 <button
@@ -96,9 +101,9 @@ const BurgerButton = ({ list, handleClickLink }) => {
               />
             </div>
           </div>
-        </div>
+        </aside>
       )}
-    </div>
+    </section>
   );
 };
 

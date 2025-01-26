@@ -28,7 +28,7 @@ export default function Banner() {
       <div className="loader" />
     </div>
   ) : (
-    <div
+    <section
       className="container 
       pt-[40px] xs:pt-[45px] sm:pt-[50px] md:pt-[90px] lg:pt-[118px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[125px] 
     pb-[35px] xs:pb-[40px] sm:pb-[45px] md:pb-[75px] lg:pb-[102px] xl:pb-[105px] 2xl:pb-[108px] 3xl:pb-[110px]
@@ -88,6 +88,6 @@ export default function Banner() {
         src="/img/banner.svg"
         alt=""
       />
-    </div>
+    </section>
   );
 }

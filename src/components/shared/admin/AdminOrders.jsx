@@ -184,7 +184,7 @@ export default function AdminOrders({ title }) {
                     {order.client_name}
                   </td>
                   <td className="py-2 lg:py-3 px-1 lg:pr-4 ">
-                    <span
+                    <p
                       className={`inline-flex items-center text-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
                     >
                       <span
@@ -193,7 +193,7 @@ export default function AdminOrders({ title }) {
                         )}`}
                       />
                       {order.state}
-                    </span>
+                    </p>
                   </td>
                   <td className=" py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
                     {order.order_amount} ₽

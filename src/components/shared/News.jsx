@@ -28,7 +28,7 @@ export default function News() {
     setNewsData(news);
   };
   return newsData.length ? (
-    <div
+    <section
       className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
         newsData.length > 6 ? "pb-16" : "pb-16"
       }`}
@@ -38,10 +38,10 @@ export default function News() {
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center  w-full">
-        <div className="w-full flex flex-col mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
+        <div className="w-full flex-center flex-col mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
           <div className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
             {newsData.map((item) => (
-              <div
+              <article
                 onClick={() => showNewsPopup(item.id)}
                 className="group flex flex-col justify-between w-[300px] xs:w-[320px] sm:w-[340px] md:w-[350px] lg:w-[360px] xl:w-[365px] 2xl:w-[368px] 3xl:w-[370px] h-[400px] xs:h-[420px] sm:h-[440px] md:h-[450px] lg:h-[465px] xl:h-[475px] 2xl:h-[480px] 3xl:h-[484px] gradient 
                 mb-[25px] xs:mb-[28px] sm:mb-[30px] md:mb-[32px] lg:mb-[34px] xl:mb-[35px] 2xl:mb-[36px] 3xl:mb-[37px] 
@@ -61,23 +61,23 @@ export default function News() {
                       {item.title}
                     </p>
                     <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
-                      <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
+                      <a className="text-gray-800 text-sm xs:text-sm sm:text-base">
                         {item.date}
-                      </span>
+                      </a>
                     </div>
                   </div>
                   <button className="flex-center gap-3 group-hover:gap-4 transition-all">
-                    <span className="text-white text-base xs:text-base sm:text-lg font-normal">
+                    <a className="text-white text-base xs:text-base sm:text-lg font-normal">
                       Читать
-                    </span>
+                    </a>
                     <img src="/icon/sm_arrow.svg" alt="arrow" />
                   </button>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
           {isLimited && news.length > 6 && (
-            <div className="flex justify-center ">
+            <div className="flex justify-center w-[300px] sm:w-[350px] lg:w-[756px] xl:w-[766px] 2xl:w-full">
               <Button
                 onClick={() => handleClick()}
                 text={"смотреть все новости"}
@@ -87,8 +87,8 @@ export default function News() {
           )}
         </div>
       </div>
-    </div>
+    </section>
   ) : (
-    <div></div>
+    <></>
   );
 }

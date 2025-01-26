@@ -5,7 +5,8 @@ import { changeShowPopup } from "../../utils/slice/userSlice";
 export default function Widget() {
   const dispatch = useDispatch();
   return (
-    <div
+    <button
+      type="button"
       onClick={() => dispatch(changeShowPopup(true))}
       className="fixed bottom-8 right-8 cursor-pointer z-50"
     >
@@ -14,6 +15,6 @@ export default function Widget() {
         src="/icon/widget.svg"
         alt="Позвони нам"
       />
-    </div>
+    </button>
   );
 }

@@ -20,13 +20,13 @@ export default function Select({
           border ? "border-none" : ""
         }`}
       >
-        <span
+        <p
           className={`${
             border ? "text-gray-400 font-normal text-sm md:text-base" : ""
           }`}
         >
           {selected}
-        </span>
+        </p>
         <ChevronDown
           className={`w-4 h-4 transition-transform ${
             isOpen ? "rotate-180" : ""

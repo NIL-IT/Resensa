@@ -49,12 +49,12 @@ export default function ItemsList({
     dispatch(changeItemId(id));
   };
   return data.length > 0 ? (
-    <div className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
+    <section className="container py-12 xs:py-14 sm:py-16 md:py-18 lg:py-20 xl:py-20 2xl:py-20 3xl:py-20">
       <Title
         text={title ? title : getTitle ? "Оборудование" : "решения"}
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[30px] xs:mb-[35px] sm:mb-[40px] md:mb-[45px] lg:mb-[50px] xl:mb-[50px] 2xl:mb-[50px] 3xl:mb-[50px] border-b border-b-gray-400"
       />
-      <div className="flex flex-wrap justify-center gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[35px] lg:gap-[40px] xl:gap-[45px] 2xl:gap-[48px] 3xl:gap-[51px]">
+      <article className="flex flex-wrap justify-center gap-[20px] xs:gap-[25px] sm:gap-[30px] md:gap-[35px] lg:gap-[40px] xl:gap-[45px] 2xl:gap-[48px] 3xl:gap-[51px]">
         {data.map(({ id, name, description, image_card }) => (
           <Link
             to={`/product/${id}`}
@@ -83,7 +83,7 @@ export default function ItemsList({
             </div>
           </Link>
         ))}
-      </div>
+      </article>
       {limited && (
         <div className="flex justify-center ">
           <Button
@@ -93,8 +93,8 @@ export default function ItemsList({
           />
         </div>
       )}
-    </div>
+    </section>
   ) : (
-    <div>Загрузка...</div>
+    <p>Загрузка...</p>
   );
 }

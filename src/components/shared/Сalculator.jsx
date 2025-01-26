@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Title from "../ui/Title";
-
 import EquipmentType from "./popup/EquipmentType";
 import { useDispatch } from "react-redux";
 import { changeResult } from "../../utils/slice/userSlice";
@@ -32,7 +31,7 @@ export default function Calculator() {
     setIsCalculated(true);
   };
   return (
-    <div
+    <section
       className="container 
     pt-[50px] xs:pt-[60px] sm:pt-[70px] md:pt-[80px] lg:pt-[85px] xl:pt-[90px] 2xl:pt-[92px]
      3xl:pt-[94px] 
@@ -49,12 +48,9 @@ export default function Calculator() {
       <div className="flex justify-center">
         <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px] min-h-[500px] xs:min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[675px] xl:min-h-[690px] 2xl:min-h-[700px] 3xl:min-h-[709px]">
           <div>
-            <Title
-              className="font-light text-gray-500 text-2xl xs:text-[30px] xs:leading-[40px] md:text-[48px] md:leading-[61px] "
-              text={
-                "РАССЧИТАЙТЕ ПРОИЗВОДИТЕЛЬНОСТЬ ОБОРУДОВАНИЯ САМОСТОЯТЕЛЬНО"
-              }
-            />
+            <h2 className="font-light text-gray-500 text-2xl xs:text-[30px] xs:leading-[40px] md:text-[48px] md:leading-[61px] ">
+              РАССЧИТАЙТЕ ПРОИЗВОДИТЕЛЬНОСТЬ ОБОРУДОВАНИЯ САМОСТОЯТЕЛЬНО
+            </h2>
 
             <p className="text-gray-300 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl w-full xs:w-full sm:w-full md:w-[500px] lg:w-[600px] xl:w-[650px] 2xl:w-[700px] 3xl:w-[735px] mt-[20px] xs:mt-[22px] sm:mt-[25px] md:mt-[27px] lg:mt-[28px] xl:mt-[29px] 2xl:mt-[29px] 3xl:mt-[30px] mb-10 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-18 xl:mb-19 2xl:mb-19 3xl:mb-20">
               Предварительные выводы неутешительны: сплоченность команды
@@ -68,9 +64,9 @@ export default function Calculator() {
               onSubmit={handleSubmit}
             >
               <div>
-                <h2 className="font-normal uppercase mb-10 text-gray-400">
+                <h3 className="font-normal text-xl uppercase mb-10 text-gray-400">
                   расчет по площади воздухообмена
-                </h2>
+                </h3>
 
                 <div>
                   <div className="flex flex-col gap-6">
@@ -112,10 +108,10 @@ export default function Calculator() {
                   </div>
                 </div>
                 <div className="flex border-t border-gray-400 justify-between mb-[25px] xs:mb-[30px] sm:mb-[35px] md:mb-[38px] lg:mb-[40px] xl:mb-[42px] 2xl:mb-[43px] 3xl:mb-[45px] mt-[30px] xs:mt-[35px] sm:mt-[40px] md:mt-[43px] lg:mt-[45px] xl:mt-[47px] 2xl:mt-[48px] 3xl:mt-[50px] pt-[20px] xs:pt-[22px] sm:pt-[24px] md:pt-[26px] lg:pt-[28px] xl:pt-[29px] 2xl:pt-[29px] 3xl:pt-[30px]">
-                  <div className="font-medium mb-1 w-[60%]">
+                  <h4 className="font-medium mb-1 w-[60%]">
                     ПРОИЗВОДИТЕЛЬНОСТЬ ПО КРАТНОСТИ
-                  </div>
-                  <div className="text-xl">99 М³/Ч</div>
+                  </h4>
+                  <p className="text-xl">99 М³/Ч</p>
                 </div>
               </div>
 
@@ -139,6 +135,6 @@ export default function Calculator() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

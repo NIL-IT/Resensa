@@ -28,7 +28,7 @@ export default function Slider({ slides, second }) {
     if (width < 420) return currentSlide * 105;
   };
   return (
-    <div className="min-w-[100wh]">
+    <article className="min-w-[100wh]">
       <div className="relative">
         <div className="flex justify-center">
           <div className="min-w-[100wh] overflow-hidden ">
@@ -94,10 +94,13 @@ export default function Slider({ slides, second }) {
                         />
                       </div>
                       <div className="px-[20px] xs:px-[25px] sm:px-[30px] md:px-[35px] lg:px-[40px] xl:px-[45px] pb-[30px] xs:pb-[35px] sm:pb-[40px] md:pb-[45px] lg:pb-[50px] xl:pb-[52px]">
-                        <Title
-                          text={title}
-                          className="text-lg xs:text-xl sm:text-2xl leading-[30px] xs:leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[56px]"
-                        />
+                        <h3
+                          className="text-gray-400 uppercase text-lg xs:text-xl sm:text-2xl leading-[30px] 
+                          xs:leading-[35px] sm:leading-[40px] md:leading-[45px] 
+                          lg:leading-[50px] xl:leading-[56px]"
+                        >
+                          {title}
+                        </h3>
                         <p className="xl:max-w-[90%] 2xl:max-w-[100%] text-base xs:text-base sm:text-lg text-gray-400 leading-[18px] xs:leading-[19px] sm:leading-[20px] md:leading-[21px] lg:leading-[22px] xl:leading-[23px]">
                           {description}
                         </p>
@@ -112,20 +115,20 @@ export default function Slider({ slides, second }) {
 
         {/* Navigation dots */}
         <div className="flex-center gap-[15px] xs:gap-[17px] sm:gap-[20px] md:gap-[22px] lg:gap-[25px] mt-[25px] xs:mt-[30px] sm:mt-[35px] md:mt-[38px] lg:mt-[40px] xl:mt-[43px] pb-4 mb-[60px] xs:mb-[70px] sm:mb-[80px] md:mb-[90px] lg:mb-[100px] xl:mb-20 border-b border-b-gray-400">
-          <div
+          <button
             onClick={() => goToSlide(currentSlide - 1)}
             className="cursor-pointer hover:translate-x-[-2px] transition-all"
           >
             <img src="/icon/arrow_left.svg" alt="" />
-          </div>
-          <div
+          </button>
+          <button
             onClick={() => goToSlide(currentSlide + 1)}
             className="cursor-pointer hover:translate-x-[2px] transition-all"
           >
             <img src="/icon/arrow_right.svg" alt="" />
-          </div>
+          </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
