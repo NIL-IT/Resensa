@@ -62,7 +62,7 @@ export default function Objects({ className = null, about = false }) {
                 className="bg-white text-gray-400 w-full  justify-center xl:justify-normal
               mt-6 sm:mt-8 text-sm lg:text-md xl:text-base 
                font-normal 
-              py-3  px-4 sm:px-3 xl:px-5
+              py-3 xl:py-5  px-4 sm:px-3 xl:px-5
  
                gap-5 xl:gap-10 xl:text-center 2xl:text-start"
                 white={true}
