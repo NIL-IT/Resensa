@@ -30,7 +30,7 @@ export default function News() {
   return newsData.length ? (
     <div
       className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
-        newsData.length > 6 ? "" : "pb-16"
+        newsData.length > 6 ? "pb-16" : "pb-16"
       }`}
     >
       <Title
