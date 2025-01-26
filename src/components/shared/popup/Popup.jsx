@@ -10,9 +10,11 @@ import {
 const Popup = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(true);
-  const { itemId, equipment, solutions } = useSelector(({ user }) => user);
-  const combinedData = [...equipment, ...solutions];
-  const findProduct = combinedData.find(({ id }) => id === itemId);
+  const { equipmentById, solutionsById } = useSelector(({ user }) => user);
+
+  let productName = equipmentById
+    ? equipmentById?.name
+    : solutionsById?.name || "Пользователь не указал наименование продукта";
   const [formData, setFormData] = useState({
     company_name: "",
     name: "",
@@ -26,15 +28,10 @@ const Popup = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (itemId) {
-      setFormData((prevData) => ({
-        ...prevData,
-        product_name: findProduct.name,
-      }));
-    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
+      product_name: productName,
     }));
   };
 

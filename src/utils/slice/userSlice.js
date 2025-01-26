@@ -466,11 +466,7 @@ export const submitOrder = createAsyncThunk(
       formData.append("name", data.name);
       formData.append("phone", data.phone);
       formData.append("email", data.email);
-      if (data.product_name) {
-        formData.append("product_name", data.product_name);
-      } else {
-        formData.append("product_name", "");
-      }
+      formData.append("product_name", data.product_name);
 
       const res = await api.post("/orders/submit-order/", formData);
       return res.data;
