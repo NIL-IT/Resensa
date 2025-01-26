@@ -38,7 +38,6 @@ export const createNews = createAsyncThunk(
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("text", payload.text);
-
       formData.append("news_photo", payload.news_photo);
 
       console.log(payload);
