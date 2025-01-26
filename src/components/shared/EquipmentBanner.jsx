@@ -139,7 +139,7 @@ export default function EquipmentBanner({
             white={true}
             text={"Оформить заказ"}
             className="py-[5px] px-[10px]  sm:py-[10px]  lg:py-[14px]
-             xl:py-[19px] xs:pl-[10px] bg-white
+              xs:pl-[10px] xl:py-[19px] md:px-6 bg-white
               text-gray-400 text-xs sm:text-base"
           />
         )}
