@@ -123,7 +123,11 @@ export default function EquipmentType() {
             <div className="flex flex-col items-center">
               <div className=" h-[300px] lg:h-[337px] flex-center justify-center ">
                 <img
-                  src={findImage().image_card || "/img/placeholder.svg"}
+                  src={
+                    findImage().image_card ||
+                    equipment[0].image_card ||
+                    "/img/placeholder.svg"
+                  }
                   alt="оборудование"
                   className="w-full 
                 max-w-[300px] lg:max-w-[400px] xl:max-w-[500px] 
@@ -138,16 +142,16 @@ export default function EquipmentType() {
               >
                 <div className="text-center lg:text-left">
                   <p className="text-base xs:text-lg sm:text-xl">
-                    {findImage().name}
+                    {findImage().name || equipment[0].name}
                   </p>
                   <p className="text-sm xs:text-base">общепромышленное</p>
                 </div>
                 <div className="text-center">
                   <p className="text-base xs:text-lg sm:text-xl">
-                    от {findImage().min_param} м3/ч
+                    от {findImage().min_param || equipment[0].min_param} м3/ч
                   </p>
                   <p className="text-sm xs:text-base">
-                    до {findImage().max_param} м3/ч
+                    до {findImage().max_param || equipment[0].max_param} м3/ч
                   </p>
                 </div>
                 <Button

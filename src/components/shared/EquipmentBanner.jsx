@@ -104,7 +104,7 @@ export default function EquipmentBanner({
             width ? width : "w-[320px] xs:w-[360px] md:w-[500px] lg:w-[656px]"
           }  ${textSize ? textSize : " text-sm lg:text-lg xl:text-xl"}`}
         >
-          {text || product().description}
+          {text || product().header}
         </p>
         {isButton && (
           <Button
