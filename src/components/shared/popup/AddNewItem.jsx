@@ -189,12 +189,17 @@ const AddNewItem = () => {
           onSubmit={handleSubmit}
           className="space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]"
         >
-          <div>
-            <span className="w-full text-sm text-gray-900">
-              Изображение для баннера
-            </span>
-            <ImageUploader banner={true} onFileSelect={setSelectedFileBanner} />
-          </div>
+          {!isNews && (
+            <div>
+              <span className="w-full text-sm text-gray-900">
+                Изображение для баннера
+              </span>
+              <ImageUploader
+                banner={true}
+                onFileSelect={setSelectedFileBanner}
+              />
+            </div>
+          )}
           <div>
             <span className="w-full text-sm text-gray-900">
               Изображение для карточки
