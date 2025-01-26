@@ -26,12 +26,11 @@ const ChangeEquipmentPopup = () => {
   const findProduct = itemId
     ? itemsList?.find((item) => +item.id === +itemId)
     : null;
-
+  console.log(findProduct);
   const [formData, setFormData] = useState(() => {
     const baseData = isNews
       ? {
           title: findProduct?.title || "",
-          date: findProduct?.date || "",
           text: findProduct?.text || "",
         }
       : isSolutions
@@ -62,7 +61,7 @@ const ChangeEquipmentPopup = () => {
 
     return baseData;
   });
-
+  console.log(formData);
   const [selectedFile, setSelectedFile] = useState();
   const [selectedFileBanner, setSelectedFileBanner] = useState();
   const handleInputChange = (e) => {
@@ -107,14 +106,23 @@ const ChangeEquipmentPopup = () => {
           ).unwrap();
         }
       } else {
-        const newsData = {
-          title: formData.title,
-          text: formData.text,
-          news_photo: selectedFile,
-        };
+        const newsData = selectedFile
+          ? {
+              title: formData.title,
+              text: formData.text,
+              news_photo: selectedFile,
+            }
+          : {
+              title: formData.title,
+              text: formData.text,
+            };
         await dispatch(
           updateNews({ id: findProduct?.id, data: newsData })
         ).unwrap();
+        setFormData({
+          title: findProduct?.title || "",
+          text: findProduct?.text || "",
+        });
       }
 
       dispatch(changeEquipmentPopup(false));
@@ -180,16 +188,6 @@ const ChangeEquipmentPopup = () => {
                   name="title"
                   className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
                   value={formData.title}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <span className="w-full text-sm text-gray-900">Дата</span>
-                <Input
-                  type="text"
-                  name="date"
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.date}
                   onChange={handleInputChange}
                 />
               </div>

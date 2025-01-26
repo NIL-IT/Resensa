@@ -35,11 +35,13 @@ export const createNews = createAsyncThunk(
           "Отсутствуют обязательные поля: заголовок, текст и изображение"
         );
       }
-      console.log(payload);
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("text", payload.text);
+
       formData.append("news_photo", payload.news_photo);
+
+      console.log(payload);
       const res = await api.post("/news/", formData);
 
       return res.data;
@@ -63,12 +65,10 @@ export const updateNews = createAsyncThunk(
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("text", data.text);
-
+      console.log("Отправляемые данные в запросе:", data, "ID:", id);
       if (data.news_photo !== undefined) {
-        console.log(data.news_photo, "фото");
         formData.append("news_photo", data.news_photo);
       }
-      console.log("Отправляемые данные в запросе:", data, id);
       const res = await api.post(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
