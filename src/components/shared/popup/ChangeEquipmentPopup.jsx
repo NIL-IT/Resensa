@@ -128,7 +128,10 @@ const ChangeEquipmentPopup = () => {
       dispatch(changeEquipmentPopup(false));
       dispatch(changeItemId(null));
     } catch (error) {
-      alert(error.message || "Не удалось сохранить изменения");
+      alert(
+        error.message ||
+          "Не удалось сохранить изменения. Возможно вы уже добавляли фотографию с таким названием, переименуйте и попробуйте снова."
+      );
     }
   };
 
