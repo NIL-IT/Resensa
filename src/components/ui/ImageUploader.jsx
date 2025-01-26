@@ -44,7 +44,7 @@ const ImageUploader = ({ onFileSelect, findProduct, banner = false }) => {
       }
       setError("");
     } else {
-      setError("Пожалуйста, загрузите SVG, PNG, или JPEG файл.");
+      setError("Пожалуйста, загрузите PNG, или JPEG файл.");
     }
   };
 

@@ -193,7 +193,7 @@ const AddNewItem = () => {
             <span className="w-full text-sm text-gray-900">
               Изображение для баннера
             </span>
-            <ImageUploader onFileSelect={setSelectedFileBanner} />
+            <ImageUploader banner={true} onFileSelect={setSelectedFileBanner} />
           </div>
           <div>
             <span className="w-full text-sm text-gray-900">
