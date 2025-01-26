@@ -146,7 +146,9 @@ export default function EquipmentType() {
                   <p className="text-base xs:text-lg sm:text-xl">
                     {findImage().name || equipment[0].name}
                   </p>
-                  <p className="text-sm xs:text-base">общепромышленное</p>
+                  <p className="text-sm xs:text-base">
+                    {findImage().sub_header || equipment[0].sub_header}
+                  </p>
                 </div>
                 <div className="text-center">
                   <p className="text-base xs:text-lg sm:text-xl">
