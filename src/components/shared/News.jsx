@@ -23,6 +23,10 @@ export default function News() {
     dispatch(changeItemId(id));
     dispatch(changeShowNewsPopup(true));
   };
+  const handleClick = () => {
+    setLimited(false);
+    setNewsData(news);
+  };
   return newsData.length ? (
     <div
       className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
@@ -34,7 +38,7 @@ export default function News() {
         className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center  w-full">
-        <div className="w-full flex mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
+        <div className="w-full flex flex-col mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
           <div className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
             {newsData.map((item) => (
               <div
@@ -72,10 +76,10 @@ export default function News() {
               </div>
             ))}
           </div>
-          {isLimited && newsData.length > 6 && (
+          {isLimited && news.length > 6 && (
             <div className="flex justify-center ">
               <Button
-                onClick={() => setLimited(false)}
+                onClick={() => handleClick()}
                 text={"смотреть все новости"}
                 className="w-full py-[18px] xs:py-[20px] sm:py-[22px] md:py-[24px] lg:py-[26px] bg-white border border-gray-400 text-gray-400 text-sm xs:text-sm sm:text-base hover:bg-gray-50 hover:border-gray-200"
               />
