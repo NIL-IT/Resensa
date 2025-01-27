@@ -105,7 +105,7 @@ export default function Advantages() {
       <div className=" container ">
         <Title
           text={"наши преимущества"}
-          className="text-white text-lg xs:text-lg sm:text-xl md:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[25px] xs:mb-[30px] sm:mb-[35px] md:mb-[50px] lg:mb-[55px] xl:mb-[60px] 2xl:mb-[62px] 3xl:mb-[65px]"
+          className="ml-5 xs:ml-0 text-white text-lg xs:text-lg sm:text-xl md:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[25px] xs:mb-[30px] sm:mb-[35px] md:mb-[50px] lg:mb-[55px] xl:mb-[60px] 2xl:mb-[62px] 3xl:mb-[65px]"
         />
         <div
           ref={sliderRef}

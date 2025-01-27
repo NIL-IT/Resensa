@@ -11,51 +11,28 @@ import Footer from "../shared/Footer";
 import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changeItemId,
-  changeRoutingToOrders,
-  getAllEquipment,
-  getAllSolutions,
-} from "../../utils/slice/userSlice";
+import { useDispatch } from "react-redux";
+import { changeItemId } from "../../utils/slice/userSlice";
 
-export default function Home() {
+export default function Home({ equipment, solutions, banner, news }) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const { equipment, solutions } = useSelector(({ user }) => user);
-  const [loading, isLoading] = useState(true);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
     });
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      isLoading(true);
-      try {
-        await dispatch(getAllEquipment());
-        await dispatch(getAllSolutions());
-      } catch (error) {
-        console.log(error);
-      }
-      isLoading(false);
-    };
-    fetchData();
-  }, [pathname]);
+
   useEffect(() => {
     scrollTop();
     dispatch(changeItemId(null));
   }, [pathname]);
   document.body.style.overflowY = "auto";
 
-  return loading ? (
-    <div className=" fixed top-0 left-0 bg-white w-full h-full flex-center justify-center mt-20 ">
-      <div className="loader" />
-    </div>
-  ) : (
+  return (
     <main>
-      <Banner />
+      <Banner banner={banner} />
       <Advantages />
       <ItemsList
         equipment={true}
@@ -71,7 +48,7 @@ export default function Home() {
         text={sliderTextMain}
         slides={slidesMain}
       />
-      <News />
+      <News news={news} />
       <Partners />
       <Objects />
       <Footer scrollTop={scrollTop} />

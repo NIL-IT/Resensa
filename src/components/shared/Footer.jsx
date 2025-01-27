@@ -36,7 +36,9 @@ export default function Footer({ scrollTop = null }) {
   const handleClickLink = async (i, path) => {
     if (!isAdmin && +i == 4) {
       await dispatch(changeRoutingToOrders(true));
-      return navigate(`/product/${equipment[0].id}`);
+      dispatch(changeEquipmentId(null));
+      dispatch(changeSolutionsId(null));
+      return navigate(`/equipment/${equipment[0].id}`);
     }
     if (isAdmin) {
       if (i === 4) {
@@ -62,46 +64,48 @@ export default function Footer({ scrollTop = null }) {
   };
 
   return (
-    <footer className="container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
-      <div>
-        <div
-          onClick={() => {
-            if (isAdmin) {
-              Cookies.remove("access_token");
-              dispatch(changeIsAdmin(false));
-              navigate("/auth");
-            } else {
-              if (scrollTop) scrollTop();
-              navigate("/");
-            }
-          }}
-          className="cursor-pointer"
-        >
+    <footer className="pl-5 xs:pl-0 container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
+      <div className="flex flex-col lg:flex-row gap-5 lg:gap-20">
+        <div>
           <div
-            onClick={() => handleClickImg()}
-            className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5"
+            onClick={() => {
+              if (isAdmin) {
+                Cookies.remove("access_token");
+                dispatch(changeIsAdmin(false));
+                navigate("/auth");
+              } else {
+                if (scrollTop) scrollTop();
+                navigate("/");
+              }
+            }}
+            className="cursor-pointer"
           >
-            <img src="/icon/logo.svg" alt="logo" />
+            <div
+              onClick={() => handleClickImg()}
+              className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5"
+            >
+              <img src="/icon/logo.svg" alt="logo" />
+            </div>
           </div>
+          <h5 className="text-gray-900 text-sm xs:text-sm sm:text-base">
+            copyright
+          </h5>
         </div>
-        <h5 className="text-gray-900 text-sm xs:text-sm sm:text-base">
-          copyright
-        </h5>
-      </div>
-      <div className="order-3 lg:order-2">
-        <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
-          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {navList.map(({ name, path }, i) => (
-              <li
-                key={i}
-                className="text-gray-400 hover:text-gray-300 cursor-pointer"
-                onClick={() => handleClickLink(i, path)}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="order-3 lg:order-2">
+          <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
+            <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
+              {navList.map(({ name, path }, i) => (
+                <li
+                  key={i}
+                  className="text-gray-400 hover:text-gray-300 cursor-pointer"
+                  onClick={() => handleClickLink(i, path)}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
 
       <article className="flex flex-col gap-[15px] xs:gap-[18px] sm:gap-[20px] md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3">
@@ -123,6 +127,7 @@ export default function Footer({ scrollTop = null }) {
           </a>
         </div>
         <Button
+          noLink={true}
           onClick={() => handleChangeShowPopup(true)}
           text={"заказать звонок"}
           className="bg-white border border-gray-400 text-gray-400 text-xs font-normal py-2.5 xs:py-2.5 sm:py-3 px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[30px] flex lg:justify-end hover:border-gray-200 hover:bg-gray-50 w-fit lg:w-auto lg:ml-auto"

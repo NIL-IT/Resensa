@@ -15,12 +15,12 @@ import {
   getAllOrders,
   getAllSolutions,
   getBanner,
-  updateBanner,
 } from "./utils/slice/userSlice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
-import { update } from "three/examples/jsm/libs/tween.module.js";
+import EquipmentType from "./components/shared/popup/EquipmentType";
+
 function App() {
   const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
@@ -33,6 +33,12 @@ function App() {
     newsPopup,
     searchPopup,
     statusOrderPopup,
+    equipment,
+    solutions,
+    banner,
+    news,
+    orders,
+    calcPopup,
   } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const isActivePopup =
@@ -43,7 +49,8 @@ function App() {
     addNewItemPopup ||
     newsPopup ||
     searchPopup ||
-    statusOrderPopup;
+    statusOrderPopup ||
+    calcPopup;
 
   const [loading, setLoading] = useState(true);
 
@@ -51,11 +58,11 @@ function App() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        dispatch(getAllNews());
-        dispatch(getAllEquipment());
-        dispatch(getAllSolutions());
-        dispatch(getAllOrders());
-        dispatch(getBanner());
+        await dispatch(getAllNews());
+        await dispatch(getAllEquipment());
+        await dispatch(getAllSolutions());
+        await dispatch(getAllOrders());
+        await dispatch(getBanner());
       } catch (error) {
         console.error(error);
       }
@@ -70,16 +77,23 @@ function App() {
       {!isLoginForm && <Widget />}
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
         {!isLoginForm && <Header />}
-        <AppRoutes />
+        <AppRoutes
+          equipment={equipment}
+          solutions={solutions}
+          banner={banner}
+          news={news}
+          orders={orders}
+        />
       </div>
       {isPopup && <Popup />}
-      {status && <StatusPopup />}
+      {status && <StatusPopup orders={orders} />}
       {addOrderPopup && <AddOrderPopup />}
       {equipmentPopup && <ChangeEquipmentPopup />}
       {addNewItemPopup && <AddNewItem />}
       {newsPopup && <NewsPopup />}
       {searchPopup && <SearchPopup />}
       {statusOrderPopup && <ChangeStatusPopup />}
+      {calcPopup && <EquipmentType />}
     </div>
   ) : (
     <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">

@@ -9,23 +9,21 @@ export default function SearchPopup() {
   const { equipment, solutions } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const [combinedData, setCombinedData] = useState([]);
-  const [searchData, setSearchData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
   useEffect(() => {
     setCombinedData([...equipment, ...solutions]);
   }, [equipment, solutions]);
 
+  const [searchData, setSearchData] = useState([...equipment, ...solutions]);
+
   const handleSearch = (value) => {
     setSearchValue(value);
-    if (value.trim() === "") {
-      setSearchData([]);
-    } else {
-      const filteredData = combinedData.filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setSearchData(filteredData);
-    }
+    const filteredData = combinedData.filter(
+      (item) =>
+        item.name.toLowerCase().includes(value.toLowerCase()) ||
+        item.description.toLowerCase().includes(value.toLowerCase())
+    );
+    setSearchData(filteredData);
   };
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function SearchPopup() {
   const handleClose = () => {
     dispatch(changeShowSearchPopup(false));
   };
-
+  console.log(searchData);
   return (
     <section className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
       <div className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg min-w-[100%] relative min-h-full pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10">
@@ -46,20 +44,21 @@ export default function SearchPopup() {
           <SearchInput
             handleSearch={handleSearch}
             handleClose={handleClose}
+            placeholder={"Введите запрос для поиска"}
             closeIcon={true}
             iconLeft={true}
             className={"border-0 border-b border-b-gray-200 gap-4"}
           />
         </div>
         <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-center">
-          {searchValue ? (
-            searchData.length > 0 ? (
-              <div className="overflow-y-scroll grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-5">
-                {searchData.map(({ image_card, name, description, id }) => (
+          {searchData.length > 0 ? (
+            <div className="overflow-y-scroll grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-5">
+              {searchData.map(
+                ({ image_card, name, description, id, max_param }, i) => (
                   <Link
                     onClick={() => handleClose()}
-                    to={`/product/${id}`}
-                    key={id}
+                    to={max_param ? `/equipment/${id}` : `/solutions/${id}`}
+                    key={i}
                     className="flex flex-col justify-between w-full xs:w-[180px] sm:w-[190px] md:w-[195px] lg:w-[200px] border border-gray-100 p-2 xs:p-3 sm:p-4"
                   >
                     <div>
@@ -81,18 +80,14 @@ export default function SearchPopup() {
                       className="w-full py-2 xs:py-3 sm:py-4 px-[8px] xs:px-[10px] sm:px-[8px] hover:bg-gray-450 mt-2 xs:mt-3 sm:mt-4 text-sm xs:text-xs"
                     />
                   </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="w-full h-[60vh] flex-center justify-center ">
-                <p className="text-gray-400">
-                  По вашему запросу ничего не найдено
-                </p>
-              </div>
-            )
+                )
+              )}
+            </div>
           ) : (
             <div className="w-full h-[60vh] flex-center justify-center ">
-              <p className="text-gray-400">Введите запрос для поиска</p>
+              <p className="text-gray-400">
+                По вашему запросу ничего не найдено
+              </p>
             </div>
           )}
         </div>

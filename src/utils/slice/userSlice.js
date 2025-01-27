@@ -504,8 +504,12 @@ const userSlice = createSlice({
     excel: null,
     exportExcel: null,
     result: null,
+    calcPopup: false,
   },
   reducers: {
+    changeCalcPopup: (state, { payload }) => {
+      state.calcPopup = payload;
+    },
     changeResult: (state, { payload }) => {
       state.result = payload;
     },
@@ -602,6 +606,7 @@ const userSlice = createSlice({
 });
 
 export const {
+  changeCalcPopup,
   changeEquipmentId,
   changeSolutionsId,
   changeStatusOrderPopup,

@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeShowStatus, getAllOrders } from "../../../utils/slice/userSlice";
+import { changeShowStatus } from "../../../utils/slice/userSlice";
 
-export default function StatusPopup() {
+export default function StatusPopup({ orders }) {
   const dispatch = useDispatch();
-  const { orderNum, orders } = useSelector(({ user }) => user);
+  const { orderNum } = useSelector(({ user }) => user);
   const [isOpen, setIsOpen] = useState(true);
   const [findOrder, setFindOrder] = useState(null);
-  const [updateOrder, setUpdateOrder] = useState();
-  const [loading, setLoading] = useState(true);
+  const [updateOrder, setUpdateOrder] = useState(orders);
 
   document.body.style.overflowY = "hidden";
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await dispatch(getAllOrders());
-        setUpdateOrder(data.payload);
-        setLoading(false);
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-    setLoading(true);
-  }, []);
   useEffect(() => {
     if (!updateOrder) return;
     if (updateOrder.length > 0 && orderNum) {
@@ -33,7 +20,6 @@ export default function StatusPopup() {
   useEffect(() => {
     dispatch(changeShowStatus(isOpen));
   }, [isOpen]);
-  console.log(findOrder);
   const getColor = (state) => {
     const toLowerCase = state.toLowerCase();
     if (toLowerCase == "отменен") return "bg-red";
@@ -65,42 +51,44 @@ export default function StatusPopup() {
               :max-w-[400px]"
               >
                 <tr
-                  className="flex  flex-col font-normal text-base text-gray-400 *:py-4  xl:flex xl:flex-row justify-between 
+                  className="flex xl:*:min-w-[113px]  flex-col font-normal text-base text-gray-400 *:py-4  xl:flex xl:flex-row justify-between 
                  w-[280px] sm:w-[300px] md:w-[350px] xl:w-[600px] px-2"
                 >
-                  <th className="text-left  border-b xl:border-b-0 border-b-gray-400 ">
+                  <th className="text-left xl:text-center  border-b xl:border-b-0 border-b-gray-400 ">
                     Номер
                   </th>
-                  <th className="text-left  xl:mr-10  border-b xl:border-b-0 border-b-gray-400">
+                  <th className="text-left xl:text-center     border-b xl:border-b-0 border-b-gray-400">
                     Дата
                   </th>
-                  <th className="text-left   xl:mr-6  border-b xl:border-b-0 border-b-gray-400">
+                  <th className="text-left xl:text-center       border-b xl:border-b-0 border-b-gray-400">
                     Статус
                   </th>
-                  <th className="text-left  xl:mr-2  border-b xl:border-b-0 border-b-gray-400">
+                  <th className="text-left xl:text-center     border-b xl:border-b-0 border-b-gray-400">
                     Сумма
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="*:py-4 flex flex-col left-[-2vw] top-[132px] sm:left-[5vw] sm:top-[132px] md:top-[105px] md:left-[22vw] text-right xl:text-left absolute xl:static  xl:flex-row justify-between w-[300px]  xl:w-[600px] px-2">
-                  <td className="  text-sm text-gray-400 pl-[5px]">
+                <tr className="*:py-4 xl:*:min-w-[113px]   flex flex-col left-[-2vw] top-[132px] sm:left-[5vw] sm:top-[132px] md:top-[105px] md:left-[22vw] text-right xl:text-left absolute xl:static  xl:flex-row justify-between w-[300px]  xl:w-[600px] px-2">
+                  <td className="xl:text-center  text-sm text-gray-400 pl-[5px]">
                     {findOrder.number}
                   </td>
-                  <td className=" text-sm text-gray-400 ">{findOrder.date}</td>
-                  <td className="xl:pr-4 mt-[4px] xl:mt-0">
-                    <span
-                      className={`inline-flex items-center gap-2 xl:px-2  rounded-full text-gray-400`}
+                  <td className="xl:text-center  text-sm text-gray-400 ">
+                    {findOrder.date}
+                  </td>
+                  <td className=" xl:text-center  mt-[4px] xl:mt-0  ">
+                    <p
+                      className={`  inline-flex items-center justify-center gap-2 xl:px-2  rounded-full text-gray-400`}
                     >
-                      <span
+                      <p
                         className={`w-1.5 h-1.5 rounded-full ${getColor(
                           findOrder.state
                         )}`}
                       />
                       {findOrder.state}
-                    </span>
+                    </p>
                   </td>
-                  <td className=" text-sm text-gray-400 xl:mr-1 mt-[3px] xl:mt-0">
+                  <td className="xl:text-center text-sm text-gray-400  mt-[3px] xl:mt-0">
                     {findOrder.order_amount} ₽
                   </td>
                 </tr>

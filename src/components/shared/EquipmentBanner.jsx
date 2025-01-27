@@ -1,12 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-import {
-  changeShowPopup,
-  getAllEquipment,
-  getAllSolutions,
-} from "../../utils/slice/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 export default function EquipmentBanner({
   subtitle,
   title,
@@ -16,15 +13,25 @@ export default function EquipmentBanner({
   textSize,
   width = "",
   about = false,
+  currentProduct,
+  list,
 }) {
   const dispatch = useDispatch();
-  const { equipment, solutions, itemId } = useSelector(({ user }) => user);
-  const [loading, isLoading] = useState(true);
+  const { id } = useParams();
+  const [loading, isLoading] = useState(!currentProduct ? false : true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const [product, setProduct] = useState();
   const [paddingClass, setPaddingClass] = useState("");
   const h1Ref = useRef(null);
+
+  useEffect(() => {
+    if (!list || !id) return;
+    const filterData = list.filter((item) => item.id === id);
+    setProduct(filterData);
+    isLoading(false);
+  }, [id]);
   let height;
+
   useLayoutEffect(() => {
     if (h1Ref.current) {
       height = h1Ref.current.offsetHeight;
@@ -40,22 +47,6 @@ export default function EquipmentBanner({
     }
   }, [product]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      isLoading(true);
-      try {
-        await dispatch(getAllEquipment());
-        await dispatch(getAllSolutions());
-      } catch (error) {
-        console.log(error);
-      }
-      let combinedData = [...equipment, ...solutions];
-      let filterData = combinedData.find((item) => item.id === itemId);
-      setProduct(filterData);
-      isLoading(false);
-    };
-    fetchData();
-  }, [itemId]);
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -76,7 +67,7 @@ export default function EquipmentBanner({
       }`}
     >
       <img
-        className={`absolute object-cover top-[30px] 
+        className={`absolute brightness-50 object-cover top-[30px] 
           left-0 w-full    
           z-[-2] ${
             product

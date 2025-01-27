@@ -1,0 +1,25 @@
+User-agent: Yandex
+Disallow: /admin
+Disallow: /auth
+Disallow: /equipment/*
+Disallow: /solutions/*
+Disallow: *?s=
+Disallow: *?p=
+
+User-agent: Googlebot
+Disallow: /admin
+Disallow: /auth
+Disallow: /equipment/*
+Disallow: /solutions/*
+Disallow: *?s=
+Disallow: *?p=
+
+User-agent: *
+Disallow: /admin
+Disallow: /auth
+Disallow: /equipment/*
+Disallow: /solutions/*
+Disallow: *?s=
+Disallow: *?p=
+
+Sitemap: https://resensa.ru/sitemap.xml

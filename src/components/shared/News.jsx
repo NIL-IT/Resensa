@@ -4,8 +4,7 @@ import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
 
-export default function News() {
-  const { news } = useSelector(({ user }) => user);
+export default function News({ news }) {
   const dispatch = useDispatch();
   const [isLimited, setLimited] = useState(true);
   const [newsData, setNewsData] = useState(news);
@@ -35,7 +34,7 @@ export default function News() {
     >
       <Title
         text={"новости"}
-        className="inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
+        className="ml-5  xs:ml-0 inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center  w-full">
         <div className="w-full flex-center flex-col mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">

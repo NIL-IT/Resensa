@@ -90,9 +90,10 @@ const Contacts = () => {
               {/* Call to action button - responsive width */}
               <div className="pt-2">
                 <Button
+                  noLink={true}
                   onClick={() => dispatch(changeShowPopup(true))}
                   text="Заказать звонок"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto  hover:bg-gray-450"
                 />
               </div>
             </div>

@@ -146,7 +146,7 @@ function Earth({ index }) {
   });
 
   return (
-    <group className="" scale={0.9}>
+    <group className="" scale={1}>
       {/* Ambient light for general illumination */}
       <ambientLight intensity={0.3} />
 

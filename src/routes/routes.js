@@ -3,9 +3,9 @@ export const ROUTES = {
   EQUIPMENT: "/equipment",
   SOLUTIONS: "/solutions",
   ABOUT: "/about",
-  ORDERS: "/orders",
   CONTACT: "/contact",
   ADMIN: "/admin/:id",
-  PRODUCT: "/product/:id",
+  EQUIPMENT_PRODUCT: "/equipment/:id",
+  SOLUTIONS_PRODUCT: "/solutions/:id",
   AUTH: "/auth",
 };

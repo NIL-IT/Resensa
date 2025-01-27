@@ -1,35 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { changeShowPopup, getBanner } from "../../utils/slice/userSlice";
-import { div } from "three/tsl";
-export default function Banner() {
+import { useDispatch } from "react-redux";
+import { changeShowPopup } from "../../utils/slice/userSlice";
+export default function Banner({ banner }) {
   const dispatch = useDispatch();
-  const { banner } = useSelector(({ user }) => user);
-  const [loading, isLoading] = useState(true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      isLoading(true);
-      try {
-        await dispatch(getBanner());
-      } catch (error) {
-        console.log(error);
-      }
-      isLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  return loading ? (
-    <div className="fixed top-0 left-0 bg-white w-full h-full flex-center justify-center mt-20">
-      <div className="loader" />
-    </div>
-  ) : (
+  return (
     <section
-      className="container 
+      className="pl-5 xs:pl-0 container 
       pt-[40px] xs:pt-[45px] sm:pt-[50px] md:pt-[90px] lg:pt-[118px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[125px] 
     pb-[35px] xs:pb-[40px] sm:pb-[45px] md:pb-[75px] lg:pb-[102px] xl:pb-[105px] 2xl:pb-[108px] 3xl:pb-[110px]
     "
@@ -64,30 +44,35 @@ export default function Banner() {
             md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
             3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto]"
             >
-              {banner.second_value ||
-                `года гарантии
-на продукцию компании.`}
+              {banner.second_value || `3`}
             </span>
             <p
               className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl
              xl:text-xl 2xl:text-xl 3xl:text-xl text-gray-300 xs:text-start text-left"
             >
-              {banner.second_value_string || "3"}
+              {banner.second_value_string ||
+                `года гарантии
+на продукцию компании.`}
             </p>
           </div>
         </div>
-        <Button
-          onClick={() => handleChangeShowPopup(true)}
-          className="py-[16px] xs:py-[17px] sm:py-[18px] md:py-[26px] lg:py-[26px] xl:py-[26px] 2xl:py-[26px] 3xl:py-[26px] px-4 xs:px-5 sm:px-6 md:pr-[26px] md:pl-6 w-full xs:w-full sm:w-full md:w-[332px] h-[56px] xs:h-[58px] sm:h-[60px] md:h-[76px] lg:h-[76px] xl:h-[76px] 2xl:h-[76px] 3xl:h-[76px] text-sm xs:text-sm sm:text-base"
-          icon={true}
-          text={"Получить консультацию"}
+        <div className="mr-5 xs:mr-0">
+          <Button
+            onClick={() => handleChangeShowPopup(true)}
+            className=" py-[16px] xs:py-[17px] sm:py-[18px] md:py-[26px] lg:py-[26px] xl:py-[26px] 2xl:py-[26px] 3xl:py-[26px] px-4 xs:px-5 sm:px-6 md:pr-[26px] md:pl-6 w-full xs:w-full sm:w-full md:w-[332px] h-[56px] xs:h-[58px] sm:h-[60px] md:h-[76px] lg:h-[76px] xl:h-[76px] 2xl:h-[76px] 3xl:h-[76px] text-sm xs:text-sm sm:text-base"
+            icon={true}
+            text={"Получить консультацию"}
+          />
+        </div>
+      </div>
+      <div className="mr-5 xs:mr-0">
+        <img
+          className=" w-full mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]"
+          src="/img/banner.svg"
+          alt="banner"
+          title="Banner"
         />
       </div>
-      <img
-        className="w-full mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]"
-        src="/img/banner.svg"
-        alt=""
-      />
     </section>
   );
 }

@@ -11,7 +11,7 @@ export default function SliderPage({
   return (
     <section>
       <div
-        className={`earth_container  
+        className={`earth_container pl-5 pr-5 xs:pl-0 xs:pr-0  
          ${
            second
              ? "pt-[20px]"

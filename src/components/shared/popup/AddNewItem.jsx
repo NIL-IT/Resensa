@@ -22,28 +22,30 @@ const AddNewItem = () => {
   const isSolutions = +pathnameId === +3;
   const [error, setError] = useState("");
 
-  const [formData, setFormData] = useState(
-    !isNews
-      ? {
-          title: "",
-          text: "",
-        }
-      : isSolutions
-      ? {
-          name: "",
-          description: "",
-          sub_header: "",
-          header: "",
-        }
-      : {
-          name: "",
-          description: "",
-          min_param: "",
-          max_param: "",
-          sub_header: "",
-          header: "",
-        }
-  );
+  const [formData, setFormData] = useState(() => {
+    if (isNews) {
+      return {
+        title: "",
+        text: "",
+      };
+    } else if (isSolutions) {
+      return {
+        name: "",
+        description: "",
+        sub_header: "",
+        header: "",
+      };
+    } else {
+      return {
+        name: "",
+        description: "",
+        min_param: "",
+        max_param: "",
+        sub_header: "",
+        header: "",
+      };
+    }
+  });
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileBanner, setSelectedFileBanner] = useState(null);

@@ -15,21 +15,18 @@ export default function ProductItem({ list }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  // const isOrders = pathname.split("/")[2] === "orders";
   const navigate = useNavigate();
-  const [dataCategory, setDataCategory] = useState();
   const { routingToOrders, isAdmin, itemId, equipmentById, solutionsById } =
     useSelector(({ user }) => user);
-  const [isLoading, setIsLoading] = useState(false);
+
   const [prevPathname, setPrevPathname] = useState(pathname);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const isEquipment = equipmentById !== null;
-  console.log(isEquipment);
+  const isEquipment =
+    !equipmentById && !solutionsById ? true : equipmentById ? true : false;
 
   const [currentProduct, setCurrentProduct] = useState(
     equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
   );
-
   document.body.style.overflowY = "auto";
   useEffect(() => {
     if (!currentProduct) navigate("/");
@@ -113,26 +110,11 @@ export default function ProductItem({ list }) {
     setPrevPathname(pathname);
   }, [pathname, itemId]);
 
-  // Handle category data
-  useEffect(() => {
-    if (!currentProduct) return;
-
-    if (currentProduct.hasOwnProperty("max_param")) {
-      const filterData = list.filter((item) => item.max_param);
-      setDataCategory(filterData);
-    } else {
-      const filterData = list.filter(
-        (item) => !item.hasOwnProperty("max_param")
-      );
-      setDataCategory(filterData);
-    }
-    setIsLoading(true);
-  }, [id, list, currentProduct]);
-
-  return isLoading ? (
+  return list.length > 0 ? (
     <>
       <main>
         <EquipmentBanner
+          list={list}
           currentProduct={true}
           bannerImg={currentProduct.image_banner}
           title={currentProduct.sub_header}
@@ -145,7 +127,7 @@ export default function ProductItem({ list }) {
         <ItemsList
           equipment={isEquipment}
           title={"каталог"}
-          list={dataCategory}
+          list={list}
           limited={false}
         />
         <OrderStatus />
@@ -153,6 +135,6 @@ export default function ProductItem({ list }) {
       <Footer />
     </>
   ) : (
-    <div>Загрузка...</div>
+    <></>
   );
 }

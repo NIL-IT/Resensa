@@ -37,7 +37,7 @@ const list = [
 export default function Partners() {
   return (
     <section
-      className="w-full bg-gray-900  pb-[60px] 
+      className="pl-5 pr-5 xs:pl-0 xs:pr-0 w-full bg-gray-900  pb-[60px] 
     xs:pb-[70px] sm:pb-[80px] md:pb-[85px] lg:pb-[90px] 
     xl:pb-[95px] 2xl:pb-[98px] 3xl:pb-[101px] pt-[50px] 
     xs:pt-[55px] sm:pt-[60px] md:pt-[65px] lg:pt-[70px] 

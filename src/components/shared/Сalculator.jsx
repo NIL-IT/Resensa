@@ -2,11 +2,11 @@ import { useState } from "react";
 import Title from "../ui/Title";
 import EquipmentType from "./popup/EquipmentType";
 import { useDispatch } from "react-redux";
-import { changeResult } from "../../utils/slice/userSlice";
+import { changeCalcPopup, changeResult } from "../../utils/slice/userSlice";
 
 export default function Calculator() {
   const dispatch = useDispatch();
-  const [isCalculated, setIsCalculated] = useState(false);
+
   const [formData, setFormData] = useState({
     square: "",
     count: "",
@@ -20,19 +20,20 @@ export default function Calculator() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     let isCalculated = formData.square * formData.count;
-    await dispatch(changeResult(isCalculated));
+    dispatch(changeResult(isCalculated));
+    dispatch(changeCalcPopup(true));
     setFormData({
       square: "",
       count: "",
     });
-    setIsCalculated(true);
   };
+
   return (
     <section
-      className="container 
+      className="pl-5 pr-5 xs:pl-0 xs:pr-0 container 
     pt-[50px] xs:pt-[60px] sm:pt-[70px] md:pt-[80px] lg:pt-[85px] xl:pt-[90px] 2xl:pt-[92px]
      3xl:pt-[94px] 
      pb-[50px] xs:pb-[60px] sm:pb-[70px] md:pb-[80px] lg:pb-[85px] xl:pb-[90px] 2xl:pb-[92px] 
@@ -40,24 +41,16 @@ export default function Calculator() {
      min-h-[1250px] xs:min-h-[1400px] sm:min-h-[1500px] md:min-h-[1660px] lg:min-h-[1200px] 
      xl:min-h-[1250px] 2xl:min-h-[1280px] 3xl:min-h-[1320px]"
     >
-      {isCalculated && <EquipmentType />}
       <Title
         text={"калькулятор"}
         className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b inline-block mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center">
         <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px] min-h-[500px] xs:min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[675px] xl:min-h-[690px] 2xl:min-h-[700px] 3xl:min-h-[709px]">
-          <div>
-            <h2 className="font-light text-gray-500 text-2xl xs:text-[30px] xs:leading-[40px] md:text-[48px] md:leading-[61px] ">
-              РАССЧИТАЙТЕ ПРОИЗВОДИТЕЛЬНОСТЬ ОБОРУДОВАНИЯ САМОСТОЯТЕЛЬНО
-            </h2>
+          <h2 className="mb-20 font-light text-gray-500 text-2xl xs:text-[30px] xs:leading-[40px] md:text-[48px] md:leading-[61px] ">
+            РАССЧИТАЙТЕ ПРОИЗВОДИТЕЛЬНОСТЬ ОБОРУДОВАНИЯ САМОСТОЯТЕЛЬНО
+          </h2>
 
-            <p className="text-gray-300 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl w-full xs:w-full sm:w-full md:w-[500px] lg:w-[600px] xl:w-[650px] 2xl:w-[700px] 3xl:w-[735px] mt-[20px] xs:mt-[22px] sm:mt-[25px] md:mt-[27px] lg:mt-[28px] xl:mt-[29px] 2xl:mt-[29px] 3xl:mt-[30px] mb-10 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-18 xl:mb-19 2xl:mb-19 3xl:mb-20">
-              Предварительные выводы неутешительны: сплоченность команды
-              профессионалов обеспечивает широкому кругу (специалистов) участие
-              в формировании поставленных обществом задач. Безусловно.
-            </p>
-          </div>
           <div className="flex flex-col lg:flex-row justify-between gap-5 xs:gap-6 sm:gap-7 md:gap-8 lg:gap-9 xl:gap-10 max-h-[500px] xs:max-h-[550px] sm:max-h-[600px] md:max-h-[650px] lg:max-h-[675px] xl:max-h-[690px] 2xl:max-h-[700px] 3xl:max-h-[709px]">
             <form
               className="2xl:h-[685px] 3xl:h-[709px] flex flex-col justify-between "
@@ -115,13 +108,25 @@ export default function Calculator() {
                 </div>
               </div>
 
-              <button className="group bg-gray-400 text-white font-normal px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[28px] xl:px-[29px] 2xl:px-[29px] 3xl:px-[30px] uppercase flex-center gap-3 xs:gap-4 sm:gap-5 w-[200px] xs:w-[215px] sm:w-[225px] md:w-[235px] lg:w-[245px] xl:w-[250px] 2xl:w-[253px] 3xl:w-[257px] py-[12px] xs:py-[13px] sm:py-[14px] md:py-[15px] lg:py-[16px] xl:py-[16px] 2xl:py-[16px] 3xl:py-[17px] text-xs xs:text-sm sm:text-sm pl-[25px] xs:pl-[27px] sm:pl-[29px] md:pl-[30px] lg:pl-[31px] xl:pl-[32px] 2xl:pl-[32px] 3xl:pl-[33px]">
+              <button
+                className="group  bg-gray-400 text-white 
+              font-normal px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px]
+               lg:px-[28px] xl:px-[29px] 2xl:px-[29px] 3xl:px-[30px] uppercase 
+               flex-center justify-center 
+               gap-3 xs:gap-4 sm:gap-5 xl:gap-10
+               w-[200px] xs:w-[215px] sm:w-[225px] md:w-[235px] lg:w-[245px]
+                xl:w-[250px] 2xl:w-[253px] 3xl:w-[257px] py-[12px] xs:py-[13px] 
+                sm:py-[14px] md:py-[15px] lg:py-[16px] xl:py-[16px] 2xl:py-[16px] 
+                3xl:py-[17px] text-xs xs:text-sm sm:text-sm pl-[25px] xs:pl-[27px] 
+                sm:pl-[29px] md:pl-[30px] lg:pl-[31px] xl:pl-[32px] 2xl:pl-[32px] 
+                3xl:pl-[33px]"
+              >
                 <img
                   className="group-hover:translate-x-1 transition-all"
                   src="/icon/arrow.svg"
                   alt="arrow"
                 />
-                оформить заказ
+                рассчитать
               </button>
             </form>
 

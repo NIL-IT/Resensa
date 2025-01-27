@@ -6,10 +6,12 @@ import BurgerButton from "../ui/BurgerButton";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeEquipmentId,
   changeIsAdmin,
   changeRoutingToOrders,
   changeShowPopup,
   changeShowSearchPopup,
+  changeSolutionsId,
 } from "../../utils/slice/userSlice";
 
 export default function Header() {
@@ -36,7 +38,9 @@ export default function Header() {
   const handleClickLink = (i, path) => {
     if (!isAdmin && +i === 4) {
       dispatch(changeRoutingToOrders(true));
-      return navigate(`/product/${equipment[0].id}`);
+      dispatch(changeEquipmentId(null));
+      dispatch(changeSolutionsId(null));
+      return navigate(`/equipment/${equipment[0].id}`);
     }
     if (isAdmin) {
       if (i === 4) {
@@ -110,6 +114,7 @@ export default function Header() {
               onClick={() => handleChangeShowPopup(true)}
               text={"заказать звонок"}
               className="w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm"
+              noLink={true}
             />
           </div>
         </div>
