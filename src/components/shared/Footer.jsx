@@ -101,20 +101,6 @@ export default function Footer({ scrollTop = null }) {
               </li>
             ))}
           </ul>
-          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {navList.map(({ name }, i) => (
-              <li key={i} className="text-gray-400 hover:text-gray-300">
-                <a className="cursor-pointer">Оборудование</a>
-              </li>
-            ))}
-          </ul>
-          <ul className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl">
-            {navList.map(({ name }, i) => (
-              <li key={i} className="text-gray-400 hover:text-gray-300">
-                <a className="cursor-pointer">Решения</a>
-              </li>
-            ))}
-          </ul>
         </nav>
       </div>
 

@@ -4,11 +4,11 @@ import Button from "../ui/Button";
 import EarthScene from "./EarthScene";
 
 const list = [
-  { name: "Медицина и фармацевтика", id: 1 },
-  { name: "Спортивные объекты", id: 2 },
-  { name: "Административные объекты", id: 3 },
-  { name: "Производства", id: 4 },
-  { name: "Муниципальные объекты", id: 5 },
+  { name: "Административные объекты", id: 1 },
+  { name: "Производства", id: 2 },
+  { name: "Медицина и фармацевтика", id: 3 },
+  // { name: "Спортивные объекты", id: 2 },
+  // { name: "Муниципальные объекты", id: 5 },
 ];
 
 export default function Objects({ className = null, about = false }) {
@@ -23,7 +23,7 @@ export default function Objects({ className = null, about = false }) {
           : ""
       } ${className}`}
     >
-      <div className="earth_container px-4 sm:px-6 lg:px-8 relative max-w-[full]">
+      <div className="earth_container px-4 sm:px-6 lg:px-8 relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
         <div
           className="flex-center flex-col 
         lg:flex-row lg:items-center lg:justify-between g
@@ -31,11 +31,11 @@ export default function Objects({ className = null, about = false }) {
         >
           <div
             className=" w-full  
-          md:h-[1000px] lg:h-[1200px] xl:h-[auto]
+          md:h-[800px] lg:h-[1000px] xl:h-[auto]
             
-          sm:h-[1000px] 
-            xs:h-[900px] 
-         h-[900px]"
+          sm:h-[850px] 
+            xs:h-[800px] 
+         h-[800px]"
           >
             <Title
               text={"наши объекты"}
@@ -70,17 +70,18 @@ export default function Objects({ className = null, about = false }) {
             </article>
           </div>
           <div
-            className="absolute    3xl:top-[-60px] 3xl:right-[-250px]
-            2xl:top-[-60px] 2xl:right-[-200px]
-            xl:top-[0px] xl:right-[-50px]
-            lg:top-[580px] lg:right-[-140px]
-            md:top-[520px] md:right-[-140px]
-            sm:top-[500px] sm:right-[-110px]
-            xs:top-[460px] xs:right-[0]
-            top-[460px] right-[0] 
+            className="absolute   
+            3xl:top-[40px] 3xl:right-[-250px]
+            2xl:top-[60px] 2xl:right-[-200px]
+            xl:top-[100px] xl:right-[-50px]
+            lg:top-[460px] lg:right-[-140px]
+            md:top-[360px] md:right-[-140px]
+            sm:top-[400px] sm:right-[-110px]
+            xs:top-[360px] xs:right-[0]
+            top-[360px] right-[0] 
        "
           >
-            <EarthScene />
+            <EarthScene index={index} />
           </div>
         </div>
       </div>
