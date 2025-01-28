@@ -137,27 +137,27 @@ export default function Header() {
       </div>
       <aside>
         <nav
-          itemscope
-          itemtype="http://schema.org/SiteNavigationElement"
+          itemScope
+          itemType="http://schema.org/SiteNavigationElement"
           className="mt-6 hidden md:block"
         >
           <menu
-            itemprop="about"
-            itemscope
-            itemtype="http://schema.org/ItemList"
+            itemProp="about"
+            itemScope
+            itemType="http://schema.org/ItemList"
             className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base"
           >
             {navList.map(({ name, path }, i) => (
               <li
-                itemprop="itemListElement"
-                itemscope=""
-                itemtype="http://schema.org/ItemList"
+                itemProp="itemListElement"
+                itemScope=""
+                itemType="http://schema.org/ItemList"
                 onClick={() => handleClickLink(i, path)}
                 key={i}
                 className="text-gray-400 hover:text-gray-300 cursor-pointer"
               >
-                <Link itemprop="url">{name}</Link>
-                <meta itemprop="name" content={name} />
+                <Link itemProp="url">{name}</Link>
+                <meta itemProp="name" content={name} />
               </li>
             ))}
           </menu>

@@ -65,9 +65,9 @@ export default function Footer({ scrollTop = null }) {
 
   return (
     <footer className="pl-5 xs:pl-0 container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
-      <span itemscope itemtype="r" className="hidden">
-        <meta itemprop="copyrightYear" content="2025" />
-        <meta itemprop="copyrightHolder" content="Recensa" />
+      <span itemScope itemType="r" className="hidden">
+        <meta itemProp="copyrightYear" content="2025" />
+        <meta itemProp="copyrightHolder" content="Recensa" />
       </span>
       <div className="flex flex-col lg:flex-row gap-5 lg:gap-20">
         <div>
@@ -102,8 +102,8 @@ export default function Footer({ scrollTop = null }) {
         <div className="order-3 lg:order-2">
           <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
             <menu
-              itemscope
-              itemtype="http://schema.org/SiteNavigationElement"
+              itemScope
+              itemType="http://schema.org/SiteNavigationElement"
               className="flex flex-col gap-3 xs:gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5 text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl"
             >
               {navList.map(({ name, path }, i) => (
@@ -112,7 +112,7 @@ export default function Footer({ scrollTop = null }) {
                   className="text-gray-400 hover:text-gray-300 cursor-pointer"
                   onClick={() => handleClickLink(i, path)}
                 >
-                  <Link itemprop="url">{name}</Link>
+                  <Link itemProp="url">{name}</Link>
                 </li>
               ))}
             </menu>

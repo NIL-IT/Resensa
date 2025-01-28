@@ -73,6 +73,7 @@ const locations = [
     },
   ],
 ];
+
 function LocationCard({ position, title, description }) {
   return (
     <mesh position={position}>
@@ -202,7 +203,7 @@ export default function EarthScene({ index }) {
         <OrbitControls
           enableZoom={false}
           enablePan={true}
-          enableRotate={true}
+          enableRotate={[1, 0, 1]}
           zoomSpeed={0.6}
           panSpeed={0.5}
           rotateSpeed={0.4}
