@@ -113,12 +113,12 @@ export default function EquipmentType() {
           <div
             className="w-full max-w-[300px] xs:max-w-[400px] 
         sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] 
-        xl:max-w-[1200px] 2xl:max-w-[1300px]  pt-10 xs:pt-12
-         sm:pt-14 md:pt-16 lg:pt-18 xl:pt-10 xl:pb-10"
+        xl:max-w-[1200px] 2xl:max-w-[1300px]  pt-0 
+         md:pt-16 lg:pt-18 xl:pt-10 xl:pb-10"
           >
             <Title
               text={"оборудование"}
-              className="pt-5 inline-block border-b border-gray-400 text-lg xs:text-xl sm:text-2xl font-normal"
+              className=" pt-0 xs:pt-5 inline-block border-b border-gray-400 text-lg xs:text-xl sm:text-2xl font-normal"
             />
             <Title
               text={"ВЫБЕРИТЕ ТИП ОБОРУДОВАНИЯ"}
@@ -151,7 +151,7 @@ export default function EquipmentType() {
                           }`}
                         >
                           <p
-                            className={`text-gray-900 text-base xs:text-lg sm:text-xl md:text-2xl uppercase`}
+                            className={`text-gray-900 text-base xs:text-lg sm:text-xl md:text-2xl xl:text-xl 2xl:text-2xl uppercase`}
                           >
                             {name}
                           </p>
@@ -185,7 +185,7 @@ export default function EquipmentType() {
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <div className=" h-[300px] lg:h-[337px] flex-center justify-center ">
+                <div className=" h-[300px] lg:h-[400px] flex-center justify-center ">
                   <img
                     src={
                       findImage().image_card ||
@@ -194,31 +194,35 @@ export default function EquipmentType() {
                     }
                     alt="оборудование"
                     className="w-full 
-                max-w-[300px] lg:max-w-[400px] xl:max-w-[500px] 
+                max-w-[300px] lg:max-w-[400px] xl:max-w-[550px] 
                 2xl:max-w-[570px] max-h-[337px] object-contain"
                   />
                 </div>
                 <div
                   className="w-[742px] border-t border-gray-400 pt-2 xs:pt-3 
-              sm:pt-4 mt-[30px] xs:mt-[40px] sm:mt-[50px] md:mt-[60px] lg:mt-[65px] 
-              flex-col lg:flex-row flex-center gap-4 lg:gap-0 lg:justify-between  
-              max-w-[400px] lg:max-w-[700px] xl:max-w-[550px] 2xl:max-w-[680px] 3xl:max-w-[742px] mb-10 xl:mb-0"
+              sm:pt-4 mt-[30px] xs:mt-[40px] sm:mt-[50px] md:mt-[60px] lg:mt-[25px] 
+              flex-col 2xl:flex-row  items-center 2xl:flex-center  xl:gap-4 gap-4  lg:justify-between  
+              max-w-[320px] sm:max-w-[350px] lg:max-w-[600px] xl:max-w-[530px] 2xl:max-w-[680px] 3xl:max-w-[742px] mb-10 xl:mb-0 "
                 >
-                  <div className="text-center lg:text-left">
-                    <p className="text-base xs:text-lg sm:text-xl uppercase">
-                      {findImage().name || equipment[0].name}
-                    </p>
-                    <p className="text-sm xs:text-base xl:max-w-[150px] 2xl:max-w-[200px] 3xl:max-w-auto">
-                      {findImage().sub_header || equipment[0].sub_header}
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-base xs:text-lg sm:text-xl">
-                      от {findImage().min_param || equipment[0].min_param} м3/ч
-                    </p>
-                    <p className="text-sm xs:text-base">
-                      до {findImage().max_param || equipment[0].max_param} м3/ч
-                    </p>
+                  <div className="flex flex-row xl:w-[100%]  2xl:w-[55%] justify-between mb-5 2xl:mb-0">
+                    <div className="text-center lg:text-left">
+                      <p className="text-left text-base xs:text-lg sm:text-xl uppercase">
+                        {findImage().name || equipment[0].name}
+                      </p>
+                      <p className="text-left text-sm xs:text-base xl:max-w-[400px] 2xl:max-w-[200px] 3xl:max-w-auto uppercase">
+                        {findImage().sub_header || equipment[0].sub_header}
+                      </p>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-base xs:text-lg sm:text-xl lg:text-base 2xl:text-xl">
+                        от {findImage().min_param || equipment[0].min_param}{" "}
+                        м3/ч
+                      </p>
+                      <p className="text-sm xs:text-base">
+                        до {findImage().max_param || equipment[0].max_param}{" "}
+                        м3/ч
+                      </p>
+                    </div>
                   </div>
 
                   <Button
