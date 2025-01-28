@@ -73,7 +73,7 @@ const locations = [
     },
   ],
 ];
-function LocationCard({ position, title, description, spherePosition }) {
+function LocationCard({ position, title, description }) {
   return (
     <mesh position={position}>
       {/* Dot marker */}
@@ -117,10 +117,6 @@ function LocationCard({ position, title, description, spherePosition }) {
           </div>
         </div>
       </Html>
-
-      {/* <line position={spherePosition}>
-        <sphereGeometry args={[0.02, 16, 16]} />
-      </line> */}
     </mesh>
   );
 }
@@ -147,7 +143,7 @@ function Earth({ index }) {
   });
 
   return (
-    <group className="" scale={1}>
+    <group className="" scale={1} rotation={[0.8, -2.6, 0]}>
       {/* Ambient light for general illumination */}
       <ambientLight intensity={0.3} />
 
@@ -171,6 +167,7 @@ function Earth({ index }) {
         <meshStandardMaterial
           map={earthTexture}
           metalness={0.1}
+          s
           roughness={0.7}
         />
         {/* Location markers with cards */}

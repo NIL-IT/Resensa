@@ -38,7 +38,8 @@ export default function Calculator() {
      3xl:pt-[94px] 
      pb-[50px] xs:pb-[60px] sm:pb-[70px] md:pb-[80px] lg:pb-[85px] xl:pb-[90px] 2xl:pb-[92px] 
      3xl:pb-[94px] h-[1150px]
-     min-h-[1250px] xs:min-h-[1400px] sm:min-h-[1500px] md:min-h-[1660px] lg:min-h-[1200px] 
+     min-h-[1250px] xs:min-h-[1400px] sm:min-h-[1500px] 
+     md:min-h-[1660px] lg:min-h-[1200px] 
      xl:min-h-[1250px] 2xl:min-h-[1280px] 3xl:min-h-[1320px]"
     >
       <Title
@@ -46,7 +47,7 @@ export default function Calculator() {
         className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b inline-block mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
       <div className="flex justify-center">
-        <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px] min-h-[500px] xs:min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[675px] xl:min-h-[690px] 2xl:min-h-[700px] 3xl:min-h-[709px]">
+        <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[720px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px] min-h-[500px] xs:min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[675px] xl:min-h-[690px] 2xl:min-h-[700px] 3xl:min-h-[709px]">
           <h2 className="mb-20 font-light text-gray-500 text-2xl xs:text-[30px] xs:leading-[40px] md:text-[48px] md:leading-[61px] ">
             РАССЧИТАЙТЕ ПРОИЗВОДИТЕЛЬНОСТЬ ОБОРУДОВАНИЯ САМОСТОЯТЕЛЬНО
           </h2>
