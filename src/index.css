@@ -238,3 +238,10 @@ button::-moz-focus-inner {
     transform: rotate(360deg);
   }
 }
+.loading {
+  backdrop-filter: blur(10px);
+}
+.loaded {
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s linear;
+}

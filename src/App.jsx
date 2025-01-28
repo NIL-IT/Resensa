@@ -98,13 +98,21 @@ function App() {
         {!isLoginForm && <Widget />}
         <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
           {!isLoginForm && <Header />}
-          <AppRoutes
-            equipment={equipment}
-            solutions={solutions}
-            banner={banner}
-            news={news}
-            orders={orders}
-          />
+          <Suspense
+            fallback={
+              <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">
+                <div className="loader" />
+              </div>
+            }
+          >
+            <AppRoutes
+              equipment={equipment}
+              solutions={solutions}
+              banner={banner}
+              news={news}
+              orders={orders}
+            />
+          </Suspense>
         </div>
         {isPopup && (
           <Suspense fallback={"...Загрузка"}>

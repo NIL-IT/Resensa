@@ -81,18 +81,18 @@ export default function EquipmentBanner({
       }`}
     >
       <img
-        className={`absolute brightness-50 object-cover top-[30px] 
+        className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
-          z-[-2] ${
-            product
-              ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
+          z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
+          product
+            ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
-              : `
+            : `
               min-w-[100%] max-w-[1920px] 
               h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
-          }`}
+        }`}
         src={imageSrc}
         alt="banner"
         title="Banner"
