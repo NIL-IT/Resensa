@@ -203,10 +203,12 @@ export default function EarthScene({ index }) {
         <OrbitControls
           enableZoom={false}
           enablePan={true}
-          enableRotate={[1, 0, 1]}
+          enableRotate={true}
           zoomSpeed={0.6}
           panSpeed={0.5}
           rotateSpeed={0.4}
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
     </article>

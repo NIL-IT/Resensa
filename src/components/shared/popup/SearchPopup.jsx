@@ -36,7 +36,7 @@ export default function SearchPopup() {
   const handleClose = () => {
     dispatch(changeShowSearchPopup(false));
   };
-  console.log(searchData);
+
   return (
     <section className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
       <div className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg min-w-[100%] relative min-h-full pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10">
@@ -71,6 +71,7 @@ export default function SearchPopup() {
                         className="w-full h-[120px] xs:h-[130px] sm:h-[140px] md:h-[150px] lg:h-[160px] object-cover"
                         src={image_card || "/placeholder.svg"}
                         alt={name}
+                        title={`Продукт ${name}`}
                       />
                       <h2 className="text-gray-400 text-xs xs:text-sm uppercase font-normal my-1 xs:my-1.5 sm:my-2">
                         {name}

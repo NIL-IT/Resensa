@@ -46,7 +46,7 @@ export default function Objects({ className = null, about = false }) {
                 {list.map(({ name, id }, i) => (
                   <button
                     type="button"
-                    className={`px-4 w-full text-left py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl cursor-pointer uppercase ${
+                    className={`select-none px-4 w-full text-left py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl cursor-pointer uppercase ${
                       i === index ? "text-gray-400 bg-white" : ""
                     }`}
                     key={id}
@@ -59,7 +59,7 @@ export default function Objects({ className = null, about = false }) {
               <Button
                 icon={true}
                 text={"построить маршрут до офиса"}
-                className="bg-white text-gray-400 w-full  justify-center xl:justify-normal
+                className="bg-white text-gray-400 w-full select-none  justify-center xl:justify-normal
               mt-6 sm:mt-8 text-sm lg:text-md xl:text-base 
                font-normal 
               py-3 xl:py-5  px-4 sm:px-3 xl:px-5

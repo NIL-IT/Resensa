@@ -134,24 +134,30 @@ button::-moz-focus-inner {
 #triangle {
   position: absolute;
   bottom: -11px;
-  left: 10px;
-  transform: rotate(180deg);
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
   width: 0;
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-bottom: 12px solid white;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 10;
 }
 #triangleTop {
   position: absolute;
   top: -12px;
-  right: 0px;
-  transform: rotate(0deg);
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-bottom: 12px solid white;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 10;
 }
 .blur {
   backdrop-filter: blur(10px);

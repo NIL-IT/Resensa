@@ -31,7 +31,7 @@ export default function SearchInput({
       )}
       onSubmit={handleSubmit}
     >
-      S{iconLeft && <img src="/icon/search.svg" alt="search" />}
+      {iconLeft && <img src="/icon/search.svg" alt="search" />}
       <meta itemProp="target" />
       <input
         itemProp="query-input"
