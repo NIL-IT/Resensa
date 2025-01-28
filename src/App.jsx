@@ -100,7 +100,7 @@ function App() {
           {!isLoginForm && <Header />}
           <Suspense
             fallback={
-              <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">
+              <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ">
                 <div className="loader" />
               </div>
             }
@@ -162,7 +162,7 @@ function App() {
       </div>
     </HelmetProvider>
   ) : (
-    <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">
+    <div className="fixed top-0left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center">
       <div className="loader" />
     </div>
   );
