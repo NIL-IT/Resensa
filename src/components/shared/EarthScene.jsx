@@ -102,7 +102,8 @@ function LocationCard({ position, title, description, spherePosition }) {
               <img
                 className="object-contain h-full"
                 src="/img/no_img.svg"
-                alt=""
+                alt="Объект"
+                title="Объект"
               />
             </div>
             <div className="py-1 px-1.5">

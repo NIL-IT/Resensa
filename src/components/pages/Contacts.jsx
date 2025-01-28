@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
@@ -21,6 +22,45 @@ const Contacts = () => {
   }, [pathname]);
   return (
     <section className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Контакты - Recensa</title>
+        <meta
+          name="description"
+          content="Контактная информация RECENSA. Адрес, телефон, email и реквизиты компании. Свяжитесь с нами для получения профессиональной консультации по вентиляционному оборудованию."
+        />
+      </Helmet>
+      <div
+        itemScope
+        itemType="http://schema.org/Organization"
+        className="hidden"
+      >
+        <meta itemProp="name" content="ООО РЕСЕНСА" />
+        <meta itemProp="telephone" content="+7 999 999 99 99" />
+        <meta itemProp="email" content="office@recensa.ru" />
+        <meta itemProp="address" content="г. Москва, ул. Примерная, д. 1" />
+        <meta itemProp="logo" content="/icon/logo.svg" />
+        <meta itemProp="image" content="/img/newbanner_about.png" />
+        <meta
+          itemProp="description"
+          content="Бренд RECENSA ориентирован на создание новой производственной базы, а также на поставку вентиляционного оборудования под собственной торговой маркой."
+        />
+        <meta
+          itemProp="legalName"
+          content="ООО РЕСЕНСА - производство и поставка вентиляционного оборудования"
+        />
+        <link itemProp="url" href="https://recensa.ru/contact" />
+        <meta itemProp="sameAs" content="#" />
+        <div
+          itemProp="aggregateRating"
+          itemScope
+          itemType="https://schema.org/AggregateRating"
+        >
+          <meta itemProp="worstRating" content="1" />
+          <meta itemProp="bestRating" content="5" />
+          <meta itemProp="ratingValue" content="5" />
+          <meta itemProp="ratingCount" content="1064" />
+        </div>
+      </div>
       <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
         {/* Breadcrumb - responsive text size */}
         <div className="mb-4 xs:mb-5 sm:mb-6">
@@ -71,6 +111,7 @@ const Contacts = () => {
                   <img
                     src="/icon/wa.svg"
                     alt="WhatsApp"
+                    title="WhatsApp"
                     className="w-6 xs:w-7 sm:w-8"
                   />
                 </a>
@@ -82,6 +123,7 @@ const Contacts = () => {
                   <img
                     src="/icon/telegram.svg"
                     alt="Telegram"
+                    title="Telegram"
                     className="w-6 xs:w-7 sm:w-8"
                   />
                 </a>

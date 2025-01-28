@@ -14,6 +14,7 @@ export default function Widget() {
         className="max-w-[50px] max-h-[50px] animateWidget"
         src="/icon/widget.svg"
         alt="Позвони нам"
+        title="Нажмите, чтобы заказать звонок"
       />
     </button>
   );

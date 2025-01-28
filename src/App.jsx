@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/shared/Header";
 import Popup from "./components/shared/popup/Popup";
 import AppRoutes from "./routes/AppRoutes";
@@ -73,28 +74,30 @@ function App() {
   }, [dispatch]);
 
   return !loading ? (
-    <div className="relative">
-      {!isLoginForm && <Widget />}
-      <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
-        {!isLoginForm && <Header />}
-        <AppRoutes
-          equipment={equipment}
-          solutions={solutions}
-          banner={banner}
-          news={news}
-          orders={orders}
-        />
+    <HelmetProvider>
+      <div className="relative">
+        {!isLoginForm && <Widget />}
+        <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
+          {!isLoginForm && <Header />}
+          <AppRoutes
+            equipment={equipment}
+            solutions={solutions}
+            banner={banner}
+            news={news}
+            orders={orders}
+          />
+        </div>
+        {isPopup && <Popup />}
+        {status && <StatusPopup orders={orders} />}
+        {addOrderPopup && <AddOrderPopup />}
+        {equipmentPopup && <ChangeEquipmentPopup />}
+        {addNewItemPopup && <AddNewItem />}
+        {newsPopup && <NewsPopup />}
+        {searchPopup && <SearchPopup />}
+        {statusOrderPopup && <ChangeStatusPopup />}
+        {calcPopup && <EquipmentType />}
       </div>
-      {isPopup && <Popup />}
-      {status && <StatusPopup orders={orders} />}
-      {addOrderPopup && <AddOrderPopup />}
-      {equipmentPopup && <ChangeEquipmentPopup />}
-      {addNewItemPopup && <AddNewItem />}
-      {newsPopup && <NewsPopup />}
-      {searchPopup && <SearchPopup />}
-      {statusOrderPopup && <ChangeStatusPopup />}
-      {calcPopup && <EquipmentType />}
-    </div>
+    </HelmetProvider>
   ) : (
     <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center mt-20">
       <div className="loader" />

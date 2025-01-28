@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
@@ -31,27 +32,36 @@ export default function Home({ equipment, solutions, banner, news }) {
   document.body.style.overflowY = "auto";
 
   return (
-    <main>
-      <Banner banner={banner} />
-      <Advantages />
-      <ItemsList
-        equipment={true}
-        title={"Оборудование"}
-        list={equipment}
-        href={ROUTES.EQUIPMENT}
-      />
-      <ItemsList equipment={false} list={solutions} href={ROUTES.SOLUTIONS} />
-      <Calculator />
-      <SliderPage
-        title={"о компании"}
-        subTitle={"ВИРТУОЗЫ ВЕНТИЛЯЦИИ"}
-        text={sliderTextMain}
-        slides={slidesMain}
-      />
-      <News news={news} />
-      <Partners />
-      <Objects />
+    <>
+      <Helmet>
+        <title>Recensa - Вентиляционное оборудование и решения</title>
+        <meta
+          name="description"
+          content="Бренд RECENSA - создание новой производственной базы и поставка вентиляционного оборудования. Профессиональные решения для вентиляции и кондиционирования."
+        />
+      </Helmet>
+      <main>
+        <Banner banner={banner} />
+        <Advantages />
+        <ItemsList
+          equipment={true}
+          title={"Оборудование"}
+          list={equipment}
+          href={ROUTES.EQUIPMENT}
+        />
+        <ItemsList equipment={false} list={solutions} href={ROUTES.SOLUTIONS} />
+        <Calculator />
+        <SliderPage
+          title={"о компании"}
+          subTitle={"ВИРТУОЗЫ ВЕНТИЛЯЦИИ"}
+          text={sliderTextMain}
+          slides={slidesMain}
+        />
+        <News news={news} />
+        <Partners />
+        <Objects />
+      </main>
       <Footer scrollTop={scrollTop} />
-    </main>
+    </>
   );
 }

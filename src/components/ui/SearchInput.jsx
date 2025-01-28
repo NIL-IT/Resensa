@@ -22,14 +22,19 @@ export default function SearchInput({
   };
   return (
     <form
+      itemprop="potentialAction"
+      itemscope
+      itemtype="https://schema.org/SearchAction"
       className={cn(
         "w-full h-[35px] border border-gray-400 border-b-0 p-[9px] flex-center gap-2",
         className
       )}
       onSubmit={handleSubmit}
     >
-      {iconLeft && <img src="/icon/search.svg" alt="search" />}
+      S{iconLeft && <img src="/icon/search.svg" alt="search" />}
+      <meta itemprop="target" />
       <input
+        itemprop="query-input"
         placeholder={placeholder}
         className="w-full placeholder:text-gray-150"
         type={type}

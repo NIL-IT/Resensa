@@ -52,7 +52,8 @@ export default function News({ news }) {
                 <img
                   className="object-cover min-h-[250px] w-[260px] xs:min-h-[265px] xs:w-[275px] sm:min-h-[260px] sm:w-[290px] md:min-h-[260px] md:w-[300px] lg:min-h-[270px] lg:w-[310px] xl:h-[280px] xl:w-[315px] 2xl:min-h-[290px] 2xl:w-[318px]  3xl:min-w-[320px] "
                   src={item.image}
-                  alt=""
+                  alt={item.title}
+                  title={item.title}
                 />
                 <div className=" flex flex-col justify-between h-full pt-2">
                   <div>
@@ -69,7 +70,11 @@ export default function News({ news }) {
                     <a className="text-white text-base xs:text-base sm:text-lg font-normal">
                       Читать
                     </a>
-                    <img src="/icon/sm_arrow.svg" alt="arrow" />
+                    <img
+                      src="/icon/sm_arrow.svg"
+                      alt="arrow"
+                      title="Нажмите чтобы посмотреть новость"
+                    />
                   </button>
                 </div>
               </article>

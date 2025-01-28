@@ -127,7 +127,8 @@ export default function Advantages() {
                 <img
                   className="w-[100px] xs:w-[110px] sm:w-[126px] h-[100px] xs:h-[110px] sm:h-[126px] md:w-[125px] lg:w-[135px] xl:w-[140px] 2xl:w-[145px] 3xl:w-[150px]"
                   src={img}
-                  alt=""
+                  alt={title}
+                  title={title}
                 />
               </div>
               <div>
@@ -154,7 +155,8 @@ export default function Advantages() {
                 <img
                   className="w-[100px] xs:w-[110px] sm:w-[126px] h-[100px] xs:h-[110px] sm:h-[126px] md:w-[125px] lg:w-[135px] xl:w-[140px] 2xl:w-[145px] 3xl:w-[150px]"
                   src={img}
-                  alt=""
+                  alt={title}
+                  title={title}
                 />
               </div>
               <div>

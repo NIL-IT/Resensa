@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import EquipmentBanner from "../shared/EquipmentBanner";
@@ -112,6 +113,13 @@ export default function ProductItem({ list }) {
 
   return list.length > 0 ? (
     <>
+      <Helmet>
+        <title>{`${currentProduct.name} - Recensa`}</title>
+        <meta
+          name="description"
+          content={`${currentProduct.name}. ${currentProduct.header}. Профессиональные решения для вентиляции от RECENSA.`}
+        />
+      </Helmet>
       <main>
         <EquipmentBanner
           list={list}

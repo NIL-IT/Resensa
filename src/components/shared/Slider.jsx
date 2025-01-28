@@ -53,6 +53,7 @@ export default function Slider({ slides, second }) {
                       <img
                         src={image}
                         alt={title}
+                        title={title}
                         className="object-cover w-full max-h-[100%]"
                       />
                     </div>
@@ -80,6 +81,7 @@ export default function Slider({ slides, second }) {
                         <img
                           src={image}
                           alt={title}
+                          title={title}
                           className={`object-cover w-full ${
                             index === 0
                               ? "  max-w-[300px] sm:max-w-[380px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[490px] 2xl:max-w-[546px]"
@@ -119,13 +121,21 @@ export default function Slider({ slides, second }) {
             onClick={() => goToSlide(currentSlide - 1)}
             className="cursor-pointer hover:translate-x-[-2px] transition-all"
           >
-            <img src="/icon/arrow_left.svg" alt="" />
+            <img
+              src="/icon/arrow_left.svg"
+              alt="Стрелка"
+              title="Нажмите чтобы перелистнуть назад"
+            />
           </button>
           <button
             onClick={() => goToSlide(currentSlide + 1)}
             className="cursor-pointer hover:translate-x-[2px] transition-all"
           >
-            <img src="/icon/arrow_right.svg" alt="" />
+            <img
+              src="/icon/arrow_right.svg"
+              alt="Стрелка"
+              title="Нажмите чтобы перелистнуть вперёд"
+            />
           </button>
         </div>
       </div>

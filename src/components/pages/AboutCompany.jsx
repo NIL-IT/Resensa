@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
 import Objects from "../shared/Objects";
 import Advantages from "../shared/Advantages";
@@ -33,6 +34,10 @@ export default function AboutCompany() {
   document.body.style.overflowY = "auto";
   return (
     <>
+      <Helmet>
+        <title>О компании - Recensa</title>
+        <meta name="description" content={text} />
+      </Helmet>
       <main>
         <EquipmentBanner
           bannerImg={"/img/newbanner_about.png"}

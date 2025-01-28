@@ -47,6 +47,7 @@ export default function OrderStatus() {
             className={`group-hover:translate-x-1 transition-all w-[30px]`}
             src="/icon/arrow.svg"
             alt="arrow"
+            title="Нажмите чтобы посмотреть статус заказа"
           />
 
           <p>проверить</p>

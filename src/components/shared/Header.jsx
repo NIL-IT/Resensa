@@ -75,6 +75,7 @@ export default function Header() {
             className="w-[200px] sm:w-[230px] lg:w-[313px]"
             src="/icon/logo.svg"
             alt="logo"
+            title="Перейти на главную страницу"
           />
         </Link>
         <BurgerButton list={navList} handleClickLink={handleClickLink} />
@@ -98,16 +99,31 @@ export default function Header() {
           <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
             <div className="flex items-center gap-4">
               <a target="_blank" href="#" className="hover:opacity-80">
-                <img src="/icon/telegram.svg" alt="telegram" className="w-8 " />
+                <img
+                  src="/icon/telegram.svg"
+                  alt="telegram"
+                  title="Телеграмм"
+                  className="w-8 "
+                />
               </a>
               <a target="_blank" href="#" className="hover:opacity-80">
-                <img src="/icon/wa.svg" alt="whatsapp" className="w-8 " />
+                <img
+                  src="/icon/wa.svg"
+                  alt="whatsapp"
+                  title="Ватсап"
+                  className="w-8 "
+                />
               </a>
               <button
                 onClick={() => dispatch(changeShowSearchPopup(true))}
                 className="hover:opacity-80"
               >
-                <img src="/icon/search_btn.svg" alt="search" className="w-8 " />
+                <img
+                  src="/icon/search_btn.svg"
+                  alt="search"
+                  title="Поиск"
+                  className="w-8 "
+                />
               </button>
             </div>
             <Button
@@ -120,18 +136,31 @@ export default function Header() {
         </div>
       </div>
       <aside>
-        <nav className="mt-6 hidden md:block">
-          <ul className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base">
+        <nav
+          itemscope
+          itemtype="http://schema.org/SiteNavigationElement"
+          className="mt-6 hidden md:block"
+        >
+          <menu
+            itemprop="about"
+            itemscope
+            itemtype="http://schema.org/ItemList"
+            className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base"
+          >
             {navList.map(({ name, path }, i) => (
               <li
+                itemprop="itemListElement"
+                itemscope=""
+                itemtype="http://schema.org/ItemList"
                 onClick={() => handleClickLink(i, path)}
                 key={i}
                 className="text-gray-400 hover:text-gray-300 cursor-pointer"
               >
-                {name}
+                <Link itemprop="url">{name}</Link>
+                <meta itemprop="name" content={name} />
               </li>
             ))}
-          </ul>
+          </menu>
         </nav>
       </aside>
     </header>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
 import ItemsList from "../shared/ItemsList";
 import Calculator from "../shared/Сalculator";
@@ -23,6 +24,15 @@ export default function Equipment({ data, bannerImg, title, text }) {
   const isEquipment = pathname.split("/")[1] === "equipment";
   return (
     <>
+      <Helmet>
+        <title>{`Recensa - ${title}`}</title>
+        <meta
+          name="description"
+          content={`${title} от RECENSA. ${
+            text.split(".")[0]
+          }. Профессиональные решения для вентиляции и кондиционирования.`}
+        />
+      </Helmet>
       <main>
         <EquipmentBanner
           c

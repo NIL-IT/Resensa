@@ -83,6 +83,7 @@ export default function EquipmentBanner({
           bannerImg ? bannerImg : product?.image_banner || "/placeholder.svg"
         }
         alt="banner"
+        title="Banner"
       />
       <div
         className={`container pl-[20px] xs:pl-[0] ${

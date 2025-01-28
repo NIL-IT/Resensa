@@ -55,7 +55,12 @@ export default function Partners() {
                 key={i}
                 className="w-[120px] xs:w-[60px] sm:w-[70px] md:w-[80px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
               >
-                <img src={item.img} alt={item.alt} className="w-full h-auto" />
+                <img
+                  src={item.img}
+                  alt={item.alt}
+                  title="Наш партнер"
+                  className="w-full h-auto"
+                />
               </article>
             ))}
           </div>
