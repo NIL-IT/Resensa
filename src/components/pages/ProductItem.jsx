@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import OrderStatus from "../shared/OrderStatus";
 import {
   changeIsAdmin,
   changeRoutingToOrders,
+  getAllOrders,
 } from "../../utils/slice/userSlice";
 
 export default function ProductItem({ list }) {
@@ -110,6 +111,13 @@ export default function ProductItem({ list }) {
     );
     setPrevPathname(pathname);
   }, [pathname, itemId]);
+
+  const dataFetchedRef = useRef(false);
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    dispatch(getAllOrders());
+  }, []);
 
   return list.length > 0 ? (
     <>

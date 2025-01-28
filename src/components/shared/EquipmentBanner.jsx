@@ -15,6 +15,7 @@ export default function EquipmentBanner({
   about = false,
   currentProduct,
   list,
+  placeholderSrc,
 }) {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function EquipmentBanner({
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const [product, setProduct] = useState();
   const [paddingClass, setPaddingClass] = useState("");
+
   const h1Ref = useRef(null);
 
   useEffect(() => {
@@ -46,6 +48,18 @@ export default function EquipmentBanner({
       }
     }
   }, [product]);
+  const [imageSrc, setImageSrc] = useState(
+    product ? product?.image_banner : placeholderSrc
+  );
+  console.log(imageSrc);
+  useEffect(() => {
+    if (product) return;
+    const img = new Image();
+    img.src = bannerImg;
+    img.onload = () => {
+      setImageSrc(bannerImg);
+    };
+  }, [bannerImg]);
 
   return loading && !height ? (
     <div
@@ -79,9 +93,7 @@ export default function EquipmentBanner({
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
           }`}
-        src={
-          bannerImg ? bannerImg : product?.image_banner || "/placeholder.svg"
-        }
+        src={imageSrc}
         alt="banner"
         title="Banner"
       />

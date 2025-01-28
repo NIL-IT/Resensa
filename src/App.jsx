@@ -1,26 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/shared/Header";
-import Popup from "./components/shared/popup/Popup";
 import AppRoutes from "./routes/AppRoutes";
-import StatusPopup from "./components/shared/popup/StatusPopup";
-import AddOrderPopup from "./components/shared/popup/AddOrderPopup";
-import ChangeEquipmentPopup from "./components/shared/popup/ChangeEquipmentPopup";
-import AddNewItem from "./components/shared/popup/AddNewItem";
-import NewsPopup from "./components/shared/popup/NewsPopup";
 import Widget from "./components/ui/Widget";
-import SearchPopup from "./components/shared/popup/SearchPopup";
+// import Popup from "./components/shared/popup/Popup";
+// import StatusPopup from "./components/shared/popup/StatusPopup";
+// import AddOrderPopup from "./components/shared/popup/AddOrderPopup";
+// import ChangeEquipmentPopup from "./components/shared/popup/ChangeEquipmentPopup";
+// import AddNewItem from "./components/shared/popup/AddNewItem";
+// import NewsPopup from "./components/shared/popup/NewsPopup";
+// import SearchPopup from "./components/shared/popup/SearchPopup";
+
 import {
   getAllEquipment,
   getAllNews,
-  getAllOrders,
   getAllSolutions,
   getBanner,
 } from "./utils/slice/userSlice";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
 import EquipmentType from "./components/shared/popup/EquipmentType";
+
+const Popup = lazy(() => import("./components/shared/popup/Popup"));
+
+const StatusPopup = lazy(() => import("./components/shared/popup/StatusPopup"));
+
+const AddOrderPopup = lazy(() =>
+  import("./components/shared/popup/AddOrderPopup")
+);
+
+const ChangeEquipmentPopup = lazy(() =>
+  import("./components/shared/popup/ChangeEquipmentPopup")
+);
+
+const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
+
+const NewsPopup = lazy(() => import("./components/shared/popup/NewsPopup"));
+
+const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
   const { pathname } = useLocation();
@@ -54,15 +72,16 @@ function App() {
     calcPopup;
 
   const [loading, setLoading] = useState(true);
-
+  const dataFetchedRef = useRef(false);
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     const fetchData = async () => {
       setLoading(true);
       try {
         await dispatch(getAllNews());
         await dispatch(getAllEquipment());
         await dispatch(getAllSolutions());
-        await dispatch(getAllOrders());
         await dispatch(getBanner());
       } catch (error) {
         console.error(error);
@@ -87,15 +106,51 @@ function App() {
             orders={orders}
           />
         </div>
-        {isPopup && <Popup />}
-        {status && <StatusPopup orders={orders} />}
-        {addOrderPopup && <AddOrderPopup />}
-        {equipmentPopup && <ChangeEquipmentPopup />}
-        {addNewItemPopup && <AddNewItem />}
-        {newsPopup && <NewsPopup />}
-        {searchPopup && <SearchPopup />}
-        {statusOrderPopup && <ChangeStatusPopup />}
-        {calcPopup && <EquipmentType />}
+        {isPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <Popup />
+          </Suspense>
+        )}
+        {status && (
+          <Suspense fallback={"...Загрузка"}>
+            <StatusPopup orders={orders} />
+          </Suspense>
+        )}
+        {addOrderPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <AddOrderPopup />
+          </Suspense>
+        )}
+        {equipmentPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <ChangeEquipmentPopup />
+          </Suspense>
+        )}
+        {addNewItemPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <AddNewItem />
+          </Suspense>
+        )}
+        {newsPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <NewsPopup />
+          </Suspense>
+        )}
+        {searchPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <SearchPopup />
+          </Suspense>
+        )}
+        {statusOrderPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <ChangeStatusPopup />
+          </Suspense>
+        )}
+        {calcPopup && (
+          <Suspense fallback={"...Загрузка"}>
+            <EquipmentType />
+          </Suspense>
+        )}
       </div>
     </HelmetProvider>
   ) : (

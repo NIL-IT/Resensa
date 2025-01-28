@@ -10,7 +10,13 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 
-export default function Equipment({ data, bannerImg, title, text }) {
+export default function Equipment({
+  data,
+  bannerImg,
+  title,
+  text,
+  placeholderSrc,
+}) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,12 +41,12 @@ export default function Equipment({ data, bannerImg, title, text }) {
       </Helmet>
       <main>
         <EquipmentBanner
-          c
           bannerImg={bannerImg}
           title={title}
           text={text}
           subtitle={"recensa"}
           isButton={true}
+          placeholderSrc={placeholderSrc}
         />
         <ItemsList equipment={isEquipment} list={data} limited={false} />
         <Calculator />

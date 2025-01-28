@@ -41,6 +41,7 @@ export default function AboutCompany() {
       <main>
         <EquipmentBanner
           bannerImg={"/img/newbanner_about.png"}
+          placeholderSrc={"/img/newbanner_about_compress.png"}
           title={"о компании"}
           subtitle={"recensa"}
           text={text}
