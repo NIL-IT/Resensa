@@ -26,7 +26,7 @@ const ChangeEquipmentPopup = () => {
   const findProduct = itemId
     ? itemsList?.find((item) => +item.id === +itemId)
     : null;
-  console.log(findProduct);
+
   const [formData, setFormData] = useState(() => {
     const baseData = isNews
       ? {
@@ -61,7 +61,7 @@ const ChangeEquipmentPopup = () => {
 
     return baseData;
   });
-  console.log(formData);
+
   const [selectedFile, setSelectedFile] = useState();
   const [selectedFileBanner, setSelectedFileBanner] = useState();
   const handleInputChange = (e) => {
@@ -86,8 +86,8 @@ const ChangeEquipmentPopup = () => {
             image_banner: selectedFileBanner,
             min_param: parseInt(formData.min_param),
             max_param: parseInt(formData.max_param),
-            sub_header: findProduct?.sub_header,
-            header: findProduct?.header,
+            sub_header: formData?.sub_header,
+            header: formData?.header,
           };
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: equipmentData })
@@ -98,8 +98,8 @@ const ChangeEquipmentPopup = () => {
             description: formData.description,
             image_card: selectedFile,
             image_banner: selectedFileBanner,
-            sub_header: findProduct?.sub_header,
-            header: findProduct?.header,
+            sub_header: formData?.sub_header,
+            header: formData?.header,
           };
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: solutionData })
@@ -120,8 +120,8 @@ const ChangeEquipmentPopup = () => {
           updateNews({ id: findProduct?.id, data: newsData })
         ).unwrap();
         setFormData({
-          title: findProduct?.title || "",
-          text: findProduct?.text || "",
+          title: formData?.title || "",
+          text: formData?.text || "",
         });
       }
 
@@ -229,9 +229,9 @@ const ChangeEquipmentPopup = () => {
                 </p>
                 <Input
                   type="text"
-                  name="sub_header"
+                  name="header"
                   className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.sub_header}
+                  value={formData.header}
                   onChange={handleInputChange}
                 />
               </div>
@@ -244,11 +244,11 @@ const ChangeEquipmentPopup = () => {
                 </label>
                 <textarea
                   id="message"
-                  name="header"
+                  name="sub_header"
                   rows="4"
                   onChange={handleInputChange}
                   className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.header}
+                  value={formData.sub_header}
                 ></textarea>
               </div>
               {!isSolutions && (
