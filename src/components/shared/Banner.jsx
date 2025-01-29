@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
 import { changeShowPopup } from "../../utils/slice/userSlice";
+import imgPlaceholder from "/img/banner_main_placeholder.png";
+import imgMain from "/img/banner_main.png";
 export default function Banner({ banner }) {
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-
+  const [imageSrc, setImageSrc] = useState(imgPlaceholder);
+  useEffect(() => {
+    const img = new Image();
+    img.src = imgMain;
+    img.onload = () => {
+      setImageSrc(imgMain);
+    };
+  }, []);
   return (
     <section
       className="pl-5 xs:pl-0 container 
@@ -67,8 +76,11 @@ export default function Banner({ banner }) {
       </div>
       <div className="mr-5 xs:mr-0">
         <img
-          className=" w-full mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]"
-          src="/img/banner.svg"
+          className={`${imageSrc === imgPlaceholder ? "loading" : "loaded"}
+          w-full mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
+          xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]
+          `}
+          src={imageSrc}
           alt="banner"
           title="Banner"
         />
