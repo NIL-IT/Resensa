@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import apiLogin from "../api";
-
+import Cookies from "js-cookie";
 // Create axios instance with default config
 const url = `https://nilit1.ru/api`;
 const api = axios.create({
@@ -476,6 +476,7 @@ export const submitOrder = createAsyncThunk(
     }
   }
 );
+const token = Cookies.get("access_token");
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -487,7 +488,7 @@ const userSlice = createSlice({
     solutionsById: null,
     routingToOrders: false,
     orders: [],
-    isAdmin: false,
+    isAdmin: token ? true : false,
     isPopup: false,
     status: false,
     orderNum: null,
