@@ -130,7 +130,7 @@ export default function AdminOrders({ title }) {
           />
         </div>
       </div>
-      <div className="min-h-[500px]  lg:min-h-[auto] max-h-[480px] overflow-x-auto overflow-y-scroll">
+      <div className="min-h-[500px]  lg:min-h-[auto] max-h-[480px] overflow-x-auto overflow-y-scroll  scrollbar-hide">
         <table id="tableId" className="min-w-full relative">
           <thead className="sticky top-0 left-0 bg-white z-20">
             <tr className="border-b *:text-center font-normal text-[10px] sm:text-sm lg:text-sm xl:text-base text-gray-400">

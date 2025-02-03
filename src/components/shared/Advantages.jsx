@@ -107,86 +107,86 @@ export default function Advantages() {
           text={"наши преимущества"}
           className="ml-5 xs:ml-0 text-white text-lg xs:text-lg sm:text-xl md:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-normal mb-[25px] xs:mb-[30px] sm:mb-[35px] md:mb-[40px] lg:mb-[40px] xl:mb-[40px] 2xl:mb-[45px] 3xl:mb-[50px]"
         />
-        <div
-          ref={sliderRef}
-          className="flex gap-[40px]  lg:gap-[45px] xl:gap-[50px] 2xl:gap-[53px] 3xl:gap-[57px] overflow-x-auto w-[200%] scrollbar-hide cursor-grab active:cursor-grabbing"
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {list.map(({ title, text, subtitle, img }, i) => (
-            <article
-              key={`first-${i}`}
-              className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[420px] xl:min-w-[430px]
+      </div>
+      <div
+        ref={sliderRef}
+        className="flex gap-[40px]  lg:gap-[45px] xl:gap-[50px] 2xl:gap-[53px] 3xl:gap-[57px] overflow-x-auto w-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {list.map(({ title, text, subtitle, img }, i) => (
+          <article
+            key={`first-${i}`}
+            className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[420px] xl:min-w-[430px]
                2xl:min-w-[445px] 3xl:min-w-[485px] select-none space-y-2 sm:space-y-3"
-            >
-              <div className="max-w-[130px] max-h-[130px]">
-                <img
-                  className="w-[60px]  h-[60px]
+          >
+            <div className="max-w-[130px] max-h-[130px]">
+              <img
+                className="w-[60px]  h-[60px]
                   xs:w-[60px] sm:w-[60px]  md:h-[60px]  md:w-[60px] 
                   lg:h-[70px] lg:w-[70px] xl:h-[80px] xl:w-[80px] 2xl:h-[90px] 2xl:w-[90px] 3xl:h-[100px] 3xl:w-[100px]"
-                  src={img}
-                  alt={title}
-                  title={title}
-                />
-              </div>
-              <div
-                className="min-h-[44px] sm:min-h-[48px] 
+                src={img}
+                alt={title}
+                title={title}
+              />
+            </div>
+            <div
+              className="min-h-[44px] sm:min-h-[48px] 
                md:min-h-[56px] max-w-[180px] md:max-w-[200px] lg:max-w-[220px]"
-              >
-                <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                  {title}
-                </h2>
-                {subtitle && (
-                  <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                    {subtitle}
-                  </h2>
-                )}
-              </div>
-              <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
-                {text}
-              </p>
-            </article>
-          ))}
-          {list.map(({ title, text, subtitle, img }, i) => (
-            <article
-              key={`second-${i}`}
-              className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[420px] xl:min-w-[430px]
-               2xl:min-w-[445px] 3xl:min-w-[485px] select-none space-y-2 sm:space-y-3"
             >
-              <div className="max-w-[130px] max-h-[130px]">
-                <img
-                  className="w-[60px]  h-[60px]
+              <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                {title}
+              </h2>
+              {subtitle && (
+                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                  {subtitle}
+                </h2>
+              )}
+            </div>
+            <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
+              {text}
+            </p>
+          </article>
+        ))}
+        {list.map(({ title, text, subtitle, img }, i) => (
+          <article
+            key={`second-${i}`}
+            className="min-w-[260px] xs:min-w-[270px] sm:min-w-[280px] md:min-w-[400px] lg:min-w-[420px] xl:min-w-[430px]
+               2xl:min-w-[445px] 3xl:min-w-[485px] select-none space-y-2 sm:space-y-3"
+          >
+            <div className="max-w-[130px] max-h-[130px]">
+              <img
+                className="w-[60px]  h-[60px]
                   xs:w-[60px] sm:w-[60px]  md:h-[60px]  md:w-[60px] 
                   lg:h-[70px] lg:w-[70px] xl:h-[80px] xl:w-[80px] 2xl:h-[90px] 2xl:w-[90px] 3xl:h-[100px] 3xl:w-[100px]"
-                  src={img}
-                  alt={title}
-                  title={title}
-                />
-              </div>
-              <div
-                className="min-h-[44px] sm:min-h-[48px] 
+                src={img}
+                alt={title}
+                title={title}
+              />
+            </div>
+            <div
+              className="min-h-[44px] sm:min-h-[48px] 
                md:min-h-[56px] max-w-[180px] md:max-w-[200px] lg:max-w-[220px]"
-              >
-                <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                  {title}
+            >
+              <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                {title}
+              </h2>
+              {subtitle && (
+                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                  {subtitle}
                 </h2>
-                {subtitle && (
-                  <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                    {subtitle}
-                  </h2>
-                )}
-              </div>
-              <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
-                {text}
-              </p>
-            </article>
-          ))}
-        </div>
+              )}
+            </div>
+            <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
+              {text}
+            </p>
+          </article>
+        ))}
       </div>
     </section>
   );

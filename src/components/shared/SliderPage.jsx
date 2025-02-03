@@ -38,8 +38,8 @@ export default function SliderPage({
             </div>
           </div>
         </div>
-        <Slider slides={slides} second={second} />
       </div>
+      <Slider slides={slides} second={second} />
     </section>
   );
 }

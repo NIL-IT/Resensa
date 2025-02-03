@@ -94,7 +94,7 @@ export default function EquipmentType() {
     dispatch(changeCalcPopup(false));
   };
   return (
-    <section className="min-h-[90%] min-w-[90%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll">
+    <section className="min-h-[90%] min-w-[90%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll scrollbar-hide">
       <div className=" bg-white pt-2 xs:pt-3 sm:pt-4  rounded-lg min-w-[100%] min-h-[90vh]  relative  ">
         <div className="sticky z-50 flex-center top-0 left-0 bg-white ">
           <div className="w-full  ">
@@ -107,7 +107,7 @@ export default function EquipmentType() {
           </div>
         </div>
         <div
-          className="overflow-y-scroll h-full mt-14 md:mt-0 flex-center justify-center w-full 
+          className=" h-full mt-14 md:mt-0 flex-center justify-center w-full 
    px-4 mb-10 lg:mb-20"
         >
           <div
@@ -130,9 +130,7 @@ export default function EquipmentType() {
               в формировании поставленных обществом задач. Безусловно.
             </p>
             <div className="flex flex-col  xl:items-start xl:flex-row xl:justify-between w-full gap-8 lg:gap-10">
-              <div
-                className={`overflow-scroll transition-all duration-500 relative`}
-              >
+              <div className={` transition-all duration-500 relative `}>
                 <div
                   className={`space-y-1 pb-10 xs:pb-12 sm:pb-14 md:pb-16 lg:pb-0 xl:pb-20 h-[500px]  xl:h-[600px]`}
                 >

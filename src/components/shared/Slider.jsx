@@ -12,28 +12,31 @@ export default function Slider({ slides, second }) {
 
   const goToSlide = (index) => {
     if (index < 0) return;
-    if (second && width > 1536 && index > 2) return;
-    if (second && index > 4) return;
-    if (index > 3 && width > 1536) return;
+    // if (second && width > 1024 && width < 1536 && index > 3) return;
+    if (second && width > 1669 && index > 1) return;
+    if (second && index > 2 && width > 1220) return;
+    if (second && index > 3) return;
+    if (index > 2 && width > 1536) return;
     if (index > 3) return;
     setCurrentSlide(index);
   };
   const setTranslate = () => {
+    if (width >= 1024 && second) return currentSlide * 60;
     if (width > 1280) return currentSlide * 60;
-    if (width > 1024) return currentSlide * 70;
+    if (width > 1024) return currentSlide * 60;
     if (width > 768) return currentSlide * 100;
     if (width > 768) return currentSlide * 100;
     if (width > 640) return currentSlide * 100;
-    if (width > 420) return currentSlide * 105;
-    if (width < 420) return currentSlide * 105;
+    if (width > 420) return currentSlide * 100;
+    if (width < 420) return currentSlide * 100;
   };
   return (
-    <article className="min-w-[100wh]">
+    <article className="min-w-[100wh] mb-10 xs:mb-0">
       <div className="relative">
         <div className="flex justify-center">
           <div className="min-w-[100wh] overflow-hidden ">
             <div
-              className=" flex gap-[20px] xs:gap-[20px] sm:gap-[20px] md:gap-[20px] lg:gap-[20px] 
+              className=" flex gap-0  
               xl:gap-[55px] 2xl:gap-[60px] 3xl:gap-[64px] 
               transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${setTranslate()}%)` }}
@@ -41,7 +44,7 @@ export default function Slider({ slides, second }) {
               {slides.map(({ image, title = "", description = "" }, index) => (
                 <div
                   key={index}
-                  className="w-full min-w-full xl:min-w-[auto]
+                  className="w-full min-w-full flex justify-center xl:block xl:min-w-[auto]
                    3xl:min-w-[auto]  
                    2xl:h-auto  xs:w-full    "
                 >
@@ -86,11 +89,11 @@ export default function Slider({ slides, second }) {
                             index === 0
                               ? "  max-w-[300px] sm:max-w-[380px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[490px] 2xl:max-w-[546px]"
                               : index === 1
-                              ? "max-w-[230px] sm:max-w-[260px] md:max-w-[280px] lg:max-w-[300px] xl:max-w-[300px] 2xl:max-w-[346px]"
+                              ? "max-w-[210px] sm:max-w-[260px] md:max-w-[280px] lg:max-w-[300px] xl:max-w-[300px] 2xl:max-w-[346px]"
                               : index === 2
-                              ? "max-w-[250px] sm:max-w-[290px] md:max-w-[320px] lg:max-w-[350px] xl:max-w-[380px] 2xl:max-w-[400px]"
+                              ? "max-w-[240px] sm:max-w-[290px] md:max-w-[320px] lg:max-w-[350px] xl:max-w-[380px] 2xl:max-w-[400px]"
                               : index === 3
-                              ? "max-w-[190px] sm:max-w-[210px] md:max-w-[230px] lg:max-w-[250px] xl:max-w-[280px] 2xl:max-w-[290px]"
+                              ? "max-w-[170px] sm:max-w-[210px] md:max-w-[230px] lg:max-w-[250px] xl:max-w-[280px] 2xl:max-w-[290px]"
                               : ""
                           }`}
                         />
@@ -116,7 +119,11 @@ export default function Slider({ slides, second }) {
         </div>
 
         {/* Navigation dots */}
-        <div className="flex-center gap-[15px] xs:gap-[17px] sm:gap-[20px] md:gap-[22px] lg:gap-[25px] mt-[25px] xs:mt-[30px] sm:mt-[35px] md:mt-[38px] lg:mt-[40px] xl:mt-[43px] pb-4 mb-[60px] xs:mb-[70px] sm:mb-[80px] md:mb-[90px] lg:mb-[100px] xl:mb-20 border-b border-b-gray-400">
+        <div
+          className="container pl-5 xs:pl-0 flex-center gap-[15px] xs:gap-[17px] sm:gap-[20px]
+         md:gap-[22px] lg:gap-[25px] mt-[25px] xs:mt-[30px] sm:mt-[35px] md:mt-[38px] lg:mt-[40px] xl:mt-[43px] pb-4 pt-5 xs:pt-0 mb-[60px]
+         xs:mb-[70px] sm:mb-[80px] md:mb-[90px] lg:mb-[100px] xl:mb-20 border-b border-b-gray-400"
+        >
           <button
             onClick={() => goToSlide(currentSlide - 1)}
             className="cursor-pointer hover:translate-x-[-2px] transition-all"
