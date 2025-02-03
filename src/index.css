@@ -116,58 +116,78 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-/* Webkit browsers (Chrome, Safari, newer Edge) */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+/* Скроллбар только для десктопа (экраны шире 768px) */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-}
-
-/* For dark mode */
-@media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
   }
 
+  /* Firefox */
   * {
+    scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  /* Для темной темы */
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+  }
+
+  /* Для светлой темы */
+  @media (prefers-color-scheme: light) {
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    }
   }
 }
 
-/* For light mode */
-@media (prefers-color-scheme: light) {
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+/* Стили для мобильных устройств (экраны уже 768px) */
+@media (max-width: 767px) {
+  /* Скрываем скроллбар в WebKit браузерах */
+  ::-webkit-scrollbar {
+    display: none;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
+  /* Скрываем скроллбар в Firefox */
   * {
-    scrollbar-color: #483f3a76 transparent;
+    scrollbar-width: none;
+  }
+
+  /* Общее свойство для скрытия скроллбара */
+  * {
+    -ms-overflow-style: none; /* для IE и Edge */
   }
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
