@@ -22,4 +22,4 @@ Disallow: /solutions/*
 Disallow: *?s=
 Disallow: *?p=
 
-Sitemap: https://new.recensa.ru/sitemap.xml
+Sitemap: https://new.recensa.ru/api/sitemap.xml

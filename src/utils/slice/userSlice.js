@@ -3,7 +3,7 @@ import axios from "axios";
 import apiLogin from "../api";
 import Cookies from "js-cookie";
 // Create axios instance with default config
-const url = `https://new.recensa.ru`;
+const url = `https://new.recensa.ru/api`;
 const api = axios.create({
   baseURL: url,
   headers: {
@@ -417,7 +417,7 @@ export const importOrdersExcel = createAsyncThunk(
 );
 
 export const exportOrdersExcel = async (exportFile = false) => {
-  fetch("https://new.recensa.ru/orders/export/excel", {
+  fetch("https://new.recensa.ru/api/orders/export/excel", {
     method: "GET",
   })
     .then((response) => {

@@ -48,7 +48,7 @@ const Contacts = () => {
           itemProp="legalName"
           content="ООО РЕСЕНСА - производство и поставка вентиляционного оборудования"
         />
-        <link itemProp="url" href="https://new.recensa.ru/contact" />
+        <link itemProp="url" href="https://new.recensa.ru/api/contact" />
         <meta itemProp="sameAs" content="#" />
         <div
           itemProp="aggregateRating"
