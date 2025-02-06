@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const apiLogin = axios.create({
-  baseURL: "http://new.recensa.ru", // Adjust this based on your API URL
+  baseURL: "https://new.recensa.ru", // Adjust this based on your API URL
 });
 
 // Add request interceptor to add token to protected requests
