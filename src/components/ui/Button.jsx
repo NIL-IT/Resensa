@@ -12,6 +12,7 @@ export default function Button({
   iconWidth,
   type = "button",
   noLink = false,
+  target = null,
 }) {
   return noLink ? (
     <button
@@ -38,7 +39,7 @@ export default function Button({
       {text}
     </Link>
   ) : (
-    <Link to={href}>
+    <Link to={href} target={target}>
       <button
         type={type}
         className={cn(

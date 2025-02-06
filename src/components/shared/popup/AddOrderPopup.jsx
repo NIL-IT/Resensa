@@ -52,7 +52,7 @@ export default function AddOrderPopup() {
         number: Number(formData.number),
         order_amount: Number(formData.order_amount),
       };
-      console.log(submitData);
+
       await dispatch(createOrders(submitData));
       await dispatch(getAllOrders());
       setFormData({

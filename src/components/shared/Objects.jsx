@@ -57,6 +57,8 @@ export default function Objects({ className = null, about = false }) {
                 ))}
               </div>
               <Button
+                target={"_blank"}
+                href="https://2gis.ru/novosibirsk/firm/70000001034795864?m=82.933752%2C55.014709%2F18"
                 icon={true}
                 text={"построить маршрут до офиса"}
                 className="bg-white text-gray-400 w-full select-none  justify-center xl:justify-normal

@@ -9,6 +9,7 @@ export default function NewsPopup() {
   const dispatch = useDispatch();
   const { itemId, news } = useSelector(({ user }) => user);
   const { title, text, date, image } = news.find(({ id }) => id === itemId);
+  const listText = text.split("/");
   document.body.style.overflow = "hidden";
   const handleClose = () => {
     dispatch(changeShowNewsPopup(false));
@@ -39,7 +40,11 @@ export default function NewsPopup() {
             {date}
           </p>
           <div className="space-y-4 xs:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 mt-4 xs:mt-5 sm:mt-6 md:mt-7 lg:mt-8">
-            <p className="text-gray-900 text-sm xs:text-base">{text}</p>
+            {listText.map((p, i) => (
+              <p key={i} className="text-gray-900 text-sm xs:text-base">
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </div>

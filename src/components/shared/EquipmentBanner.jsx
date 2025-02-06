@@ -51,7 +51,7 @@ export default function EquipmentBanner({
   const [imageSrc, setImageSrc] = useState(
     product ? product?.image_banner : placeholderSrc
   );
-  console.log(imageSrc);
+
   useEffect(() => {
     if (product) return;
     const img = new Image();

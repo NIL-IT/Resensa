@@ -39,7 +39,6 @@ export const createNews = createAsyncThunk(
       formData.append("text", payload.text);
       formData.append("news_photo", payload.news_photo);
 
-      console.log(payload);
       const res = await api.post("/news/", formData);
 
       return res.data;
@@ -63,7 +62,6 @@ export const updateNews = createAsyncThunk(
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("text", data.text);
-      console.log("Отправляемые данные в запросе:", data, "ID:", id);
       if (data.news_photo !== undefined) {
         formData.append("news_photo", data.news_photo);
       }
@@ -124,7 +122,7 @@ export const createEquipment = createAsyncThunk(
       if (isNaN(minParamNum) || isNaN(maxParamNum)) {
         throw new Error("Параметры должны быть числами");
       }
-      console.log("DATA", data);
+
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
@@ -175,7 +173,7 @@ export const updateEquipment = createAsyncThunk(
     formData.append("sub_header", data.sub_header);
     formData.append("min_param", data.min_param);
     formData.append("max_param", data.max_param);
-    console.log("Отправляемые данные в запросе:", data, id);
+
     try {
       const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
@@ -234,7 +232,7 @@ export const createSolutions = createAsyncThunk(
       formData.append("image_card", data.image_card);
       formData.append("sub_header", data.sub_header);
       formData.append("header", data.header);
-      console.log("Отправляемые данные в запросе:", data);
+
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -265,7 +263,7 @@ export const updateSolutions = createAsyncThunk(
     }
     formData.append("header", data.header);
     formData.append("sub_header", data.sub_header);
-    console.log("Отправляемые данные в запросе:", data, id);
+
     try {
       const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
@@ -305,14 +303,6 @@ export const getAllOrders = createAsyncThunk(
 export const createOrders = createAsyncThunk(
   "Orders/createOrders",
   async (data, thunkApi) => {
-    // const formData = new FormData();
-    // console.log("прокидываемая дата", data);
-    // formData.append("name", data.name);
-    // formData.append("number", Number(data.number));
-    // formData.append("date", data.date);
-    // formData.append("client_name", data.client_name);
-    // formData.append("state", data.state);
-    // formData.append("order_amount", Number(data.order_amount));
     try {
       const res = await api.post("/orders/", data);
       return res.data;
@@ -327,8 +317,6 @@ export const updateOrders = createAsyncThunk(
   "Orders/updateOrders",
   async ({ id, data }, thunkApi) => {
     try {
-      console.log(data);
-      // const formData = createFormDataRequest(data, "order");
       const res = await api.patch(`/orders/${id}/`, data);
       return res.data;
     } catch (err) {
@@ -341,7 +329,6 @@ export const patchOrders = createAsyncThunk(
   "patchOrders/patchOrders",
   async ({ id, state }, thunkApi) => {
     try {
-      console.log(`/orders/${id}/state?new_state=${state.toString()}`, ":путь");
       const res = await api.patch(
         `/orders/${id}/state?new_state=${state.toString()}`
       );

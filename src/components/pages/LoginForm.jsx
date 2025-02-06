@@ -29,14 +29,11 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form, "forma");
+
     try {
       const resultAction = await dispatch(authPost(form));
-      console.log("resultAction", resultAction);
-      console.log(authPost.fulfilled.match(resultAction), "resultAction");
       if (authPost.fulfilled.match(resultAction)) {
         const token = resultAction.payload;
-        console.log("Token", token);
         // Store token in cookies for 1 day
         Cookies.set("access_token", token, { expires: 1 });
         dispatch(changeIsAdmin(true));

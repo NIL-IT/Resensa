@@ -42,7 +42,9 @@ export default function News({ news }) {
             {newsData.map((item) => (
               <article
                 onClick={() => showNewsPopup(item.id)}
-                className="group flex flex-col  w-[300px] xs:w-[320px] sm:w-[340px] md:w-[350px] lg:w-[360px] xl:w-[365px] 2xl:w-[368px] 3xl:w-[370px] h-[400px] xs:h-[420px] sm:h-[440px] md:h-[450px] lg:h-[465px] xl:h-[470px] 2xl:h-[475px] 3xl:h-[484px] gradient 
+                className="group flex flex-col  w-[300px] xs:w-[320px] sm:w-[340px] md:w-[350px] lg:w-[360px] xl:w-[365px] 2xl:w-[368px] 3xl:w-[370px] 
+                h-[430px] xs:h-[455px] sm:h-[460px] md:h-[470px] lg:h-[490px] xl:h-[505px] 2xl:h-[510px] 3xl:h-[520px] 
+                gradient 
                 mb-[25px] xs:mb-[28px] sm:mb-[30px] md:mb-[32px] lg:mb-[34px] xl:mb-[35px] 2xl:mb-[36px] 3xl:mb-[37px] 
                 px-[20px] xs:px-[22px] sm:px-[24px] md:px-[26px] lg:px-[27px] xl:px-[28px] 2xl:px-[28px] 3xl:px-[29px] 
                 py-[15px] xs:py-[16px] sm:py-[17px] md:py-[18px] lg:py-[19px] xl:py-[19px] 2xl:py-[19px] 3xl:py-[20px] 

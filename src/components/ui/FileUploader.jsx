@@ -37,7 +37,7 @@ const FileUploader = ({ setActiveUploaderFile }) => {
     setDragActive(false);
 
     const files = Array.from(e.dataTransfer.files);
-    console.log(files);
+
     handleFiles(files);
   };
 

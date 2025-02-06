@@ -92,7 +92,6 @@ export default function AdminOrders({ title }) {
     );
   };
   const changeOrders = (data) => {
-    console.log(data);
     setOrdersList(data);
   };
   const getColor = (state) => {

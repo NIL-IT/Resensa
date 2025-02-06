@@ -6,70 +6,106 @@ const locations = [
   // Административные
   [
     {
-      position: [0.4, 2.5, -1.6],
+      position: [0.12, 1.9, -1],
       spherePosition: [0.5, 1.55, -0.9],
       title: "Уральский экономический колледж",
       description: "Административное здание",
     },
     {
-      position: [0.1, 2.5, -1.9],
+      position: [0.05, 1.9, -1.1],
       spherePosition: [0.1, 1.5, -1.2],
       title: "МФЦ Республика Бурятия",
       description:
         "Верхняя Березовка, Иволгинск, Нижняя Иволга, Нижний Саянтуй",
     },
     {
-      position: [0.05, 2, -2.2],
+      position: [-0.1, 1.8, -1.9],
       spherePosition: [0, 1.35, -1.4],
       title: "ТРЦ Пионер",
       description: "г. Улан-Удэ",
     },
     {
-      position: [1.8, 1.3, -1.6],
+      position: [1.4, 1.3, -1],
       spherePosition: [0.9, 1.5, -0.7],
       title: "Административное здание Министерства обороны",
       description: "г. Москва",
     },
     {
-      position: [1.2, 1.3, -2.6],
+      position: [0.55, 1.5, -2.3],
       spherePosition: [0.41, 1.45, -1],
       title: "Жилые комплексы",
       description: "ЖК Прайм, ЖК Современник, ЖК Сокол - г.Барнаул",
+    },
+    {
+      position: [0.45, 1.6, -2.5],
+      spherePosition: [0.25, 1.45, -1.2],
+      title: "Офис Recensa Новосибирск",
+      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
+    },
+    {
+      position: [0.82, 1.2, -1.8],
+      spherePosition: [0.7, 1.55, -1],
+      title: "Офис Recensa Екатеринбург",
+      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
     },
   ],
   [
     // производства
     {
-      position: [0.1, 2.5, -1.9],
+      position: [0.05, 2.1, -1.5],
       spherePosition: [0.1, 1.5, -1.2],
       title: "Мирнинский Горно-обогатительный комбинат Алроса",
       description: "г.Мирный",
     },
     {
-      position: [1.8, 1.3, -1.6],
+      position: [1.4, 1.3, -1],
       spherePosition: [0.9, 1.5, -0.7],
       title: "НИЦ «Курчатовский институт»",
       description: "г. Москва",
     },
     {
-      position: [-0.3, 2.35, -1.9],
+      position: [-0.3, 2.15, -1.9],
       spherePosition: [-0.35, 1.6, -0.9],
       title: "Пищевое производство",
       description: "г. Якутск",
     },
     {
-      position: [0.55, 1.1, -2.5],
+      position: [-0.14, 2.1, -1.9],
       spherePosition: [0, 1.35, -1.4],
       title: "Производство Абсолют Кэш Энд Кэрри",
       description: "г. Улан-Удэ",
     },
+    {
+      position: [0.91, 1.4, -2],
+      spherePosition: [0.7, 1.55, -1],
+      title: "Офис Recensa Екатеринбург",
+      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
+    },
+    {
+      position: [0.45, 1.6, -2.5],
+      spherePosition: [0.25, 1.45, -1.2],
+      title: "Офис Recensa Новосибирск",
+      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
+    },
   ],
   [
     {
-      position: [1.1, 1, -2.2],
+      position: [0.3, 2, -1.3],
       spherePosition: [0.5, 1.3, -1.2],
       title: "Центральная городская больница",
       description: "Таджикистан, Хатлонская область, Нурек",
+    },
+    {
+      position: [0.45, 1.6, -2.5],
+      spherePosition: [0.25, 1.45, -1.2],
+      title: "Офис Recensa Новосибирск",
+      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
+    },
+    {
+      position: [0.82, 1.2, -1.8],
+      spherePosition: [0.7, 1.55, -1],
+      title: "Офис Recensa Екатеринбург",
+      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
     },
   ],
 ];
@@ -89,11 +125,13 @@ function LocationCard({ position, title, description }) {
       >
         <div className="bg-white rounded-lg shadow-lg relative">
           {title === "Административное здание Министерства обороны" ||
-          title === "Жилые комплексы" ||
-          title === "НИЦ «Курчатовский институт»" ||
-          title === "Производство Абсолют Кэш Энд Кэрри" ||
-          title === "Центральная городская больница" ? (
-            <div id="triangleTop" />
+          title === "НИЦ «Курчатовский институт»" ? (
+            <div id="triangleTopRight" />
+          ) : title === "Жилые комплексы" ||
+            title === "Офис Recensa Новосибирск" ? (
+            <div id="triangleTopLeft" />
+          ) : title === "Офис Recensa Екатеринбург" ? (
+            <div id="triangleTopMiddle" />
           ) : (
             <div id="triangle" />
           )}

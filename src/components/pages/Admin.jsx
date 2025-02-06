@@ -81,7 +81,7 @@ export default function Admin() {
   }, [pathname]);
   const exportFile = async () => {
     const exportFile = await exportOrdersExcel(true);
-    console.log(exportFile);
+
   };
 
   return (

@@ -36,52 +36,9 @@ async function parseExcelToCSVArray(excelBuffer) {
         return obj;
       });
 
-    console.log("Parsed data array:");
-    console.log(JSON.stringify(result, null, 2));
-
     return result;
   } catch (error) {
     console.error("Error parsing Excel to CSV:", error);
     return [];
   }
 }
-
-// Example usage:
-const sampleData = Buffer.from("sample excel data");
-
-// Test the function
-parseExcelToCSVArray(sampleData).then((data) => {
-  // Example of how the data might look
-  const sampleOutput = [
-    {
-      ID: "1",
-      Name: "Product A",
-      Price: "100",
-      Category: "Electronics",
-    },
-    {
-      ID: "2",
-      Name: "Product B",
-      Price: "200",
-      Category: "Furniture",
-    },
-  ];
-
-  console.log("Sample output structure:");
-  console.log(JSON.stringify(sampleOutput, null, 2));
-});
-
-// Example of how to use with server response:
-/*
-async function getAndParseExcel() {
-  try {
-    const response = await fetch('your-api-endpoint');
-    const excelBuffer = await response.arrayBuffer();
-    const data = await parseExcelToCSVArray(Buffer.from(excelBuffer));
-    return data;
-  } catch (error) {
-    console.error('Error fetching and parsing Excel:', error);
-    return [];
-  }
-}
-*/

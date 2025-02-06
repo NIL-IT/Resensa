@@ -61,12 +61,12 @@ export default function AdminNews() {
       {loading ? (
         <div>Загрузка...</div>
       ) : (
-        <div className="flex justify-center lg:justif">
+        <div className="flex justify-center lg:justify-center">
           <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
             {news.map(({ id, name, image, date, title }) => (
               <article
                 key={id}
-                className="flex flex-col justify-between w-full sm:w-[200px] h-[360px] border border-gray-100 p-4 mb-5"
+                className="flex flex-col justify-between w-full sm:w-[200px] h-[380px] border border-gray-100 p-4 mb-5"
               >
                 <div>
                   <img

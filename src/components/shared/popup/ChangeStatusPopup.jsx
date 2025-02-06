@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "../../ui/Select";
 import {
   changeItemId,
   changeStatusOrderPopup,
   patchOrders,
-  updateOrders,
 } from "../../../utils/slice/userSlice";
 
 const options = [
@@ -25,16 +24,12 @@ export default function ChangeStatusPopup() {
   const handleSelectChange = (value) => {
     setFormData(value);
   };
-  console.log(formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Submit`, formData);
+
     try {
       if (selectedOrder) {
-        console.log("Прокидываемая дата ", {
-          id: itemId,
-          state: formData,
-        });
         await dispatch(
           patchOrders({
             id: itemId,

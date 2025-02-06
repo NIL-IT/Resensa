@@ -217,11 +217,40 @@ button::-moz-focus-inner {
   pointer-events: none;
   z-index: 10;
 }
-#triangleTop {
+#triangleTopMiddle {
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 12px solid white;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 10;
+}
+#triangleTopLeft {
+  position: absolute;
+  top: -12px;
+  left: 18%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 12px solid white;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 10;
+}
+#triangleTopRight {
+  position: absolute;
+  top: 10px;
+  left: 90%;
+  transform: translateX(-50%);
+  transform: rotate(90deg);
   width: 0;
   height: 0;
   border-left: 15px solid transparent;

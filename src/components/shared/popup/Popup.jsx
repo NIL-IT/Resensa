@@ -41,7 +41,6 @@ const Popup = () => {
     try {
       const newData = formData;
       delete newData.privacy;
-      console.log("отправляеммые данные:", newData);
       await dispatch(submitOrder(newData));
       setIsOpen(false);
       setFormData({
