@@ -51,7 +51,7 @@ export default function AboutCompany() {
         <Objects about={true} />
         <SliderPage
           title={"о компании"}
-          subTitle={"ВИРТУОЗЫ ВЕНТИЛЯЦИИ"}
+          subTitle={"ПРОФЕССИОНАЛЫ ВЕНТИЛЯЦИИ"}
           text={sliderTextMain}
           slides={slidesMain}
         />
