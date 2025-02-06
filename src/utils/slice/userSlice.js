@@ -3,7 +3,7 @@ import axios from "axios";
 import apiLogin from "../api";
 import Cookies from "js-cookie";
 // Create axios instance with default config
-const url = `https://nilit1.ru/api`;
+const url = `http://new.recensa.ru`;
 const api = axios.create({
   baseURL: url,
   headers: {
