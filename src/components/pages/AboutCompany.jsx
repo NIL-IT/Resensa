@@ -64,7 +64,7 @@ export default function AboutCompany() {
         />
         <Points />
         <Advantages />
-        <Partners />
+        {/* <Partners /> */}
       </main>
       <Footer />
     </>

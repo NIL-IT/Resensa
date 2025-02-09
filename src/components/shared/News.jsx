@@ -28,9 +28,14 @@ export default function News({ news }) {
   };
   return newsData.length ? (
     <section
-      className={`container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px] ${
-        newsData.length > 6 ? "pb-16" : "pb-16"
-      }`}
+      // className={`
+      //    container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px]
+      //   ${
+      //   newsData.length > 6 ? "pb-16" : "pb-16"
+      // }`}
+      className={`
+        container pt-[35px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px] 3xl:pt-[80px] 
+       ${newsData.length > 6 ? "pb-16" : "pb-16"}`}
     >
       <Title
         text={"новости"}

@@ -49,7 +49,7 @@ export default function Equipment({
           placeholderSrc={placeholderSrc}
         />
         <ItemsList equipment={isEquipment} list={data} limited={false} />
-        <Calculator />
+        {/* <Calculator /> */}
         <Objects className={"mt-[20px]"} />
       </main>
       <Footer />

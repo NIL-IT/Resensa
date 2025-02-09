@@ -50,7 +50,7 @@ export default function Home({ equipment, solutions, banner, news }) {
           href={ROUTES.EQUIPMENT}
         />
         <ItemsList equipment={false} list={solutions} href={ROUTES.SOLUTIONS} />
-        <Calculator />
+        {/* <Calculator /> */}
         <SliderPage
           title={"о компании"}
           subTitle={"ВИРТУОЗЫ ВЕНТИЛЯЦИИ"}
@@ -58,7 +58,7 @@ export default function Home({ equipment, solutions, banner, news }) {
           slides={slidesMain}
         />
         <News news={news} />
-        <Partners />
+        {/* <Partners /> */}
         <Objects />
       </main>
       <Footer scrollTop={scrollTop} />
