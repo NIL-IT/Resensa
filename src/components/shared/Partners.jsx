@@ -2,38 +2,6 @@ import React from "react";
 import Title from "../ui/Title";
 const list = [
   {
-    img: "/img/part_1.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_2.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_3.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_4.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_5.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_6.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_7.svg",
-    alt: "part_1",
-  },
-  {
-    img: "/img/part_8.svg",
-    alt: "part_1",
-  },
-  {
     img: "/img/part_9.svg",
     alt: "part_1",
   },
