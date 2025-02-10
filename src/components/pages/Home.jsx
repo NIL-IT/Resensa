@@ -53,12 +53,12 @@ export default function Home({ equipment, solutions, banner, news }) {
         {/* <Calculator /> */}
         <SliderPage
           title={"о компании"}
-          subTitle={"ВИРТУОЗЫ ВЕНТИЛЯЦИИ"}
+          subTitle={"ПРОФЕССИОНАЛЫ ВЕНТИЛЯЦИИ"}
           text={sliderTextMain}
           slides={slidesMain}
         />
         <News news={news} />
-        {/* <Partners /> */}
+        <Partners />
         <Objects />
       </main>
       <Footer scrollTop={scrollTop} />

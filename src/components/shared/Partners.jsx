@@ -33,6 +33,14 @@ const list = [
     img: "/img/part_8.svg",
     alt: "part_1",
   },
+  {
+    img: "/img/part_9.svg",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_10.svg",
+    alt: "part_1",
+  },
 ];
 export default function Partners() {
   return (
@@ -53,7 +61,7 @@ export default function Partners() {
             {list.map((item, i) => (
               <article
                 key={i}
-                className="w-[120px] xs:w-[60px] sm:w-[70px] md:w-[80px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
+                className="flex-center w-[120px] xs:w-[60px] sm:w-[70px] md:w-[80px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
               >
                 <img
                   src={item.img}
