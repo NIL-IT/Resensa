@@ -562,7 +562,39 @@ const userSlice = createSlice({
       })
 
       .addCase(getAllEquipment.fulfilled, (state, action) => {
-        state.equipment = action.payload;
+        const seriesOrder = [
+          "СЕРИЯ RCN",
+          "СЕРИЯ RCLEAN",
+          "СЕРИЯ RPOOL",
+          "СЕРИЯ RCNICE",
+          "СЕРИЯ RCROOF",
+          "СЕРИЯ RECO",
+          "СЕРИЯ RCDUCT",
+          "СИСТЕМЫ RCONTROL",
+          "СЕРИЯ RCOMP",
+          "ХОЛОДИЛЬНОЕ ОБОРУДОВАНИЕ",
+          "СМЕСИТЕЛЬНЫЕ УЗЛЫ",
+        ];
+        function sortByCustomOrder(arr, orderArray) {
+          return arr.sort((a, b) => {
+            const indexA = orderArray.indexOf(a.name);
+            const indexB = orderArray.indexOf(b.name);
+
+            // If both items are in the order array, sort by their position
+            if (indexA !== -1 && indexB !== -1) {
+              return indexA - indexB;
+            }
+
+            // If only one item is in the order array, prioritize it
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+
+            // If neither item is in the order array, maintain their relative position
+            return 0;
+          });
+        }
+        const sortedData = sortByCustomOrder([...action.payload], seriesOrder);
+        state.equipment = sortedData;
       })
       .addCase(authPost.pending, (state) => {
         state.error = null;
