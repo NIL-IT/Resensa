@@ -26,7 +26,7 @@ const ChangeEquipmentPopup = () => {
   const findProduct = itemId
     ? itemsList?.find((item) => +item.id === +itemId)
     : null;
-
+  console.log(findProduct);
   const [formData, setFormData] = useState(() => {
     const baseData = isNews
       ? {
@@ -223,34 +223,54 @@ const ChangeEquipmentPopup = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="space-y-2">
-                <p className="w-full text-sm text-gray-900">
-                  Заголовок баннера
-                </p>
-                <Input
-                  type="text"
-                  name="header"
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.header}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-900"
-                >
-                  Текст баннера
-                </label>
-                <textarea
-                  id="message"
-                  name="sub_header"
-                  rows="4"
-                  onChange={handleInputChange}
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.sub_header}
-                ></textarea>
-              </div>
+              {!isNews && (
+                <>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm text-gray-900"
+                    >
+                      Описание
+                    </label>
+                    <textarea
+                      id="message"
+                      name="description"
+                      rows="4"
+                      onChange={handleInputChange}
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.description}
+                    ></textarea>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="w-full text-sm text-gray-900">
+                      Заголовок баннера
+                    </p>
+                    <Input
+                      type="text"
+                      name="sub_header"
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.sub_header}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm text-gray-900"
+                    >
+                      Текст баннера
+                    </label>
+                    <textarea
+                      id="message"
+                      name="header"
+                      rows="4"
+                      onChange={handleInputChange}
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.header}
+                    ></textarea>
+                  </div>
+                </>
+              )}
               {!isSolutions && (
                 <>
                   <div className="space-y-2">
@@ -279,22 +299,6 @@ const ChangeEquipmentPopup = () => {
                   </div>
                 </>
               )}
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-900"
-                >
-                  Описание
-                </label>
-                <textarea
-                  id="message"
-                  name="description"
-                  rows="4"
-                  onChange={handleInputChange}
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.description}
-                ></textarea>
-              </div>
             </>
           )}
 
