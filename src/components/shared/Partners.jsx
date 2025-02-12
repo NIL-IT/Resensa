@@ -2,11 +2,35 @@ import React from "react";
 import Title from "../ui/Title";
 const list = [
   {
-    img: "/img/part_9.svg",
+    img: "/img/part_1.png",
     alt: "part_1",
   },
   {
-    img: "/img/part_10.svg",
+    img: "/img/part_2.png",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_3.png",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_4.png",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_5.png",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_6.png",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_7.svg",
+    alt: "part_1",
+  },
+  {
+    img: "/img/part_8.svg",
     alt: "part_1",
   },
 ];
@@ -35,7 +59,7 @@ export default function Partners() {
                   src={item.img}
                   alt={item.alt}
                   title="Наш партнер"
-                  className="w-full h-auto"
+                  className="w-full h-auto grayscale"
                 />
               </article>
             ))}
