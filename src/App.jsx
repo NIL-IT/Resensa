@@ -11,6 +11,8 @@ import Widget from "./components/ui/Widget";
 // import NewsPopup from "./components/shared/popup/NewsPopup";
 // import SearchPopup from "./components/shared/popup/SearchPopup";
 
+// import router from "./routes/AppRoutes";
+// import { Sitemap } from "react-router-sitemap";
 import {
   getAllEquipment,
   getAllNews,
@@ -91,7 +93,7 @@ function App() {
 
     fetchData();
   }, [dispatch]);
-
+  // new Sitemap(router).build("http://my-site.ru").save("./sitemap.xml");
   return !loading ? (
     <HelmetProvider>
       <div className="relative">

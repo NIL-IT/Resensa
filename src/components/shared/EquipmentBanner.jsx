@@ -3,7 +3,7 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 export default function EquipmentBanner({
   subtitle,
   title,
@@ -19,11 +19,11 @@ export default function EquipmentBanner({
 }) {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const { pathname } = useLocation();
   const [loading, isLoading] = useState(!currentProduct ? false : true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const [product, setProduct] = useState();
   const [paddingClass, setPaddingClass] = useState("");
-
   const h1Ref = useRef(null);
 
   useEffect(() => {
@@ -60,6 +60,17 @@ export default function EquipmentBanner({
       setImageSrc(bannerImg);
     };
   }, [bannerImg]);
+  const generatePathName = () => {
+    const isEquipment = pathname.split("/")[1] === "equipment";
+    const path = pathname.split("/").pop();
+    if (path === "equipment") return "Главная—Оборудование";
+    if (path === "solutions") return "Главная—Решения";
+    if (path === "about") return "Главная—О компании";
+    if (!isNaN(path))
+      return isEquipment
+        ? `Главная—Оборудование—${subtitle}`
+        : `Главная—Решения—${subtitle}`;
+  };
 
   return loading && !height ? (
     <div
@@ -80,6 +91,62 @@ export default function EquipmentBanner({
           : ""
       }`}
     >
+      <nav className="container relative">
+        <ul
+          itemscope
+          itemtype="http://schema.org/BreadcrumbList"
+          className="absolute flex gap-2 top-[40px] xl:top-[60px]  text-gray-50"
+        >
+          {generatePathName()
+            .split("—")
+            .map((el, i) => (
+              <li
+                itemprop="itemListElement"
+                itemscope
+                itemtype="http://schema.org/ListItem"
+                key={i}
+                className="flex gap-2   text-xs xl:text-sm"
+              >
+                {i === generatePathName().split("—").length - 1 ? (
+                  <>
+                    <span itemprop="name">{el}</span>
+                    <meta itemprop="position" content={i} />
+                  </>
+                ) : (
+                  <a
+                    title={
+                      i == 0
+                        ? "Основной раздел"
+                        : i == 1
+                        ? "Подраздел уровня 1"
+                        : "Подраздел уровня 2"
+                    }
+                    itemprop="item"
+                    className="pointer"
+                    href={
+                      el === "Главная"
+                        ? "/"
+                        : el === "Решения"
+                        ? "/solutions"
+                        : el === "Оборудование"
+                        ? "/equipment"
+                        : el === "О компании"
+                        ? "/about"
+                        : ""
+                    }
+                  >
+                    <span itemprop="name"> {el}</span>
+                    <meta itemprop="position" content={i} />
+                  </a>
+                )}
+                {i + 1 < generatePathName().split("—").length && (
+                  <span>{">"}</span>
+                )}
+              </li>
+            ))}
+        </ul>
+      </nav>
+
       <img
         className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    

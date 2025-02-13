@@ -3,35 +3,35 @@ import Title from "../ui/Title";
 const list = [
   {
     img: "/img/part_1.png",
-    alt: "part_1",
+    alt: "Партнер МССП",
   },
   {
     img: "/img/part_2.png",
-    alt: "part_1",
+    alt: "Партнер Абсолют банк",
   },
   {
     img: "/img/part_3.png",
-    alt: "part_1",
+    alt: "Партнер Мои документы",
   },
   {
     img: "/img/part_4.png",
-    alt: "part_1",
+    alt: "Партнер РКРСЕРВИС",
   },
   {
     img: "/img/part_5.png",
-    alt: "part_1",
+    alt: "Партнер Министерство здравоохранения республики Татарстан",
   },
   {
     img: "/img/part_6.png",
-    alt: "part_1",
+    alt: "Партнер Ростелеком",
   },
   {
     img: "/img/part_7.svg",
-    alt: "part_1",
+    alt: "Партнер РОСАТОМ",
   },
   {
     img: "/img/part_8.svg",
-    alt: "part_1",
+    alt: "Партнер Министерство науки и высшего образования Российской федерации",
   },
 ];
 export default function Partners() {
@@ -58,7 +58,7 @@ export default function Partners() {
                 <img
                   src={item.img}
                   alt={item.alt}
-                  title="Наш партнер"
+                  title={item.alt}
                   className="w-full h-auto grayscale"
                 />
               </article>

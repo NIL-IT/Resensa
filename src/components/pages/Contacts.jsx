@@ -62,31 +62,54 @@ const Contacts = () => {
         </div>
       </div>
       <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
-        {/* Breadcrumb - responsive text size */}
-        <div className="mb-4 xs:mb-5 sm:mb-6">
-          <div className="flex items-center gap-1 xs:gap-2 text-xs xs:text-sm text-gray-400">
-            <Link to="/" className="hover:text-gray-600 transition-colors">
-              Главная
-            </Link>
+        <nav className="mb-4 xs:mb-5 sm:mb-6">
+          <ul
+            itemscope
+            itemtype="http://schema.org/BreadcrumbList"
+            className="flex items-center gap-1 xs:gap-2 text-xs xs:text-sm text-gray-400"
+          >
+            <li
+              itemprop="itemListElement"
+              itemscope
+              itemtype="http://schema.org/ListItem"
+              className="hover:text-gray-600 transition-colors"
+            >
+              <a title="Основной раздел" href="/">
+                <span itemprop="name">Главная</span>
+                <meta itemprop="position" content="0" />
+              </a>
+            </li>
             <span>{">"}</span>
-            <p>Контакты</p>
-          </div>
-        </div>
+            <li
+              itemprop="itemListElement"
+              itemscope
+              itemtype="http://schema.org/ListItem"
+            >
+              <a className="pointer-events: none" title="Подраздел уровня 1">
+                <span itemprop="name">Контакты</span>
+                <meta itemprop="position" content="1" />
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-        {/* Main heading - responsive size and spacing */}
         <h1 className="text-2xl xs:text-3xl sm:text-4xl font-medium text-gray-400 mb-6 xs:mb-7 sm:mb-8">
           Контакты
         </h1>
 
-        {/* Main content grid - responsive layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-7 sm:gap-8">
-          {/* Contact Information */}
           <div className="space-y-4 xs:space-y-5 sm:space-y-6">
-            <h2 className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4">
+            <h2
+              itemProp="address"
+              itemScope
+              itemType="http://schema.org/PostalAddress"
+              className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4"
+            >
               Адрес
             </h2>
             <div className="space-y-3 xs:space-y-4">
               <a
+                itemProp="email"
                 target="_blank"
                 href="mailto:office@recensa.ru"
                 className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
@@ -94,6 +117,7 @@ const Contacts = () => {
                 office@recensa.ru
               </a>
               <a
+                itemProp="telephone"
                 target="_blank"
                 href="tel:+79999999999"
                 className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
@@ -101,7 +125,6 @@ const Contacts = () => {
                 +7 999 999 99 99
               </a>
 
-              {/* Social icons - responsive spacing */}
               <div className="flex gap-3 xs:gap-4 py-4 xs:py-5 sm:py-6">
                 <a
                   target="_blank"
@@ -129,7 +152,6 @@ const Contacts = () => {
                 </a>
               </div>
 
-              {/* Call to action button - responsive width */}
               <div className="pt-2">
                 <Button
                   noLink={true}
@@ -141,7 +163,6 @@ const Contacts = () => {
             </div>
           </div>
 
-          {/* Company Details */}
           <div className="mt-6 lg:mt-0">
             <h2 className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4">
               Реквизиты компании:
