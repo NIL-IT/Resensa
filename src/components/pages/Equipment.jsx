@@ -48,6 +48,7 @@ export default function Equipment({
           isButton={true}
           placeholderSrc={placeholderSrc}
         />
+
         <ItemsList equipment={isEquipment} list={data} limited={false} />
         {/* <Calculator /> */}
         <Objects className={"mt-[20px]"} />
