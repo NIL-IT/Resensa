@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import Title from "../ui/Title";
+import { useEffect, useState } from "react";
 
 export default function Slider({ slides, second }) {
   const [currentSlide, setCurrentSlide] = useState(0);

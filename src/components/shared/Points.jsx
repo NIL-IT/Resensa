@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "../ui/Title";
-import { div } from "three/tsl";
 const list = [
   {
     title: `ПРЕДПРОДАЖНАЯ 

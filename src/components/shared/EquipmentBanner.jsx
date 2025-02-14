@@ -3,8 +3,7 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import useCyrillicFormat from "../../utils/hooks/useCyrillicFormat";
+import { useLocation } from "react-router-dom";
 export default function EquipmentBanner({
   subtitle,
   title,

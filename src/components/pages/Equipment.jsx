@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
 import ItemsList from "../shared/ItemsList";
-import Calculator from "../shared/Сalculator";
+// import Calculator from "../shared/Сalculator";
 import Objects from "../shared/Objects";
 import Footer from "../shared/Footer";
 import { useEffect } from "react";

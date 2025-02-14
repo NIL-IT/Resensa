@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
 
 export default function News({ news }) {

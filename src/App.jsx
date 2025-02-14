@@ -3,16 +3,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/shared/Header";
 import AppRoutes from "./routes/AppRoutes";
 import Widget from "./components/ui/Widget";
-// import Popup from "./components/shared/popup/Popup";
-// import StatusPopup from "./components/shared/popup/StatusPopup";
-// import AddOrderPopup from "./components/shared/popup/AddOrderPopup";
-// import ChangeEquipmentPopup from "./components/shared/popup/ChangeEquipmentPopup";
-// import AddNewItem from "./components/shared/popup/AddNewItem";
-// import NewsPopup from "./components/shared/popup/NewsPopup";
-// import SearchPopup from "./components/shared/popup/SearchPopup";
-
-// import router from "./routes/AppRoutes";
-// import { Sitemap } from "react-router-sitemap";
 import {
   getAllEquipment,
   getAllNews,

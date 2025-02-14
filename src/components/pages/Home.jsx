@@ -4,7 +4,7 @@ import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
 import { sliderTextMain, slidesMain } from "../../utils/data";
-import Calculator from "../shared/Сalculator";
+// import Calculator from "../shared/Сalculator";
 import News from "../shared/News";
 import Partners from "../shared/Partners";
 import Objects from "../shared/Objects";

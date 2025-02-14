@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import Footer from "../shared/Footer";
