@@ -93,7 +93,7 @@ function App() {
 
     fetchData();
   }, [dispatch]);
-  // new Sitemap(router).build("http://my-site.ru").save("./sitemap.xml");
+
   return !loading ? (
     <HelmetProvider>
       <div className="relative">

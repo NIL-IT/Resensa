@@ -2,6 +2,8 @@ import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "./routes";
 import { useSelector } from "react-redux";
+import SitemapGenerator from "../sitemap.xml";
+
 const Home = lazy(() => import("../components/pages/Home"));
 const NotFound = lazy(() => import("../components/pages/NotFound"));
 const Equipment = lazy(() => import("../components/pages/Equipment"));
@@ -12,6 +14,9 @@ const LoginForm = lazy(() => import("../components/pages/LoginForm"));
 const Contacts = lazy(() => import("../components/pages/Contacts"));
 export default function AppRoutes({ equipment, solutions, banner, news }) {
   const { isAdmin } = useSelector(({ user }) => user);
+  if (equipment && solutions) {
+    SitemapGenerator(equipment, solutions);
+  }
 
   return (
     <Routes>

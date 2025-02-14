@@ -2,8 +2,9 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import useCyrillicFormat from "../../utils/hooks/useCyrillicFormat";
 export default function EquipmentBanner({
   subtitle,
   title,
@@ -18,8 +19,9 @@ export default function EquipmentBanner({
   placeholderSrc,
 }) {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const { pathname } = useLocation();
+  const { equipmentById, solutionsById } = useSelector(({ user }) => user);
+
   const [loading, isLoading] = useState(!currentProduct ? false : true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const [product, setProduct] = useState();
@@ -27,11 +29,13 @@ export default function EquipmentBanner({
   const h1Ref = useRef(null);
 
   useEffect(() => {
-    if (!list || !id) return;
-    const filterData = list.filter((item) => item.id === id);
+    if (!list) return;
+    const filterData = list.filter(
+      (item) => item.id === equipmentById || solutionsById
+    );
     setProduct(filterData);
     isLoading(false);
-  }, [id]);
+  }, []);
   let height;
 
   useLayoutEffect(() => {
@@ -66,10 +70,9 @@ export default function EquipmentBanner({
     if (path === "equipment") return "Главная—Оборудование";
     if (path === "solutions") return "Главная—Решения";
     if (path === "about") return "Главная—О компании";
-    if (!isNaN(path))
-      return isEquipment
-        ? `Главная—Оборудование—${subtitle}`
-        : `Главная—Решения—${subtitle}`;
+    return isEquipment
+      ? `Главная—Оборудование—${subtitle}`
+      : `Главная—Решения—${subtitle}`;
   };
 
   return loading && !height ? (
@@ -93,24 +96,24 @@ export default function EquipmentBanner({
     >
       <nav className="container relative">
         <ul
-          itemscope
-          itemtype="http://schema.org/BreadcrumbList"
+          itemScope
+          itemType="http://schema.org/BreadcrumbList"
           className="absolute flex gap-2 top-[40px] xl:top-[60px]  text-gray-50"
         >
           {generatePathName()
             .split("—")
             .map((el, i) => (
               <li
-                itemprop="itemListElement"
-                itemscope
-                itemtype="http://schema.org/ListItem"
+                itemProp="itemListElement"
+                itemScope
+                itemType="http://schema.org/ListItem"
                 key={i}
                 className="flex gap-2   text-xs xl:text-sm"
               >
                 {i === generatePathName().split("—").length - 1 ? (
                   <>
-                    <span itemprop="name">{el}</span>
-                    <meta itemprop="position" content={i} />
+                    <span itemProp="name">{el}</span>
+                    <meta itemProp="position" content={i} />
                   </>
                 ) : (
                   <a
@@ -121,7 +124,7 @@ export default function EquipmentBanner({
                         ? "Подраздел уровня 1"
                         : "Подраздел уровня 2"
                     }
-                    itemprop="item"
+                    itemProp="item"
                     className="pointer"
                     href={
                       el === "Главная"
@@ -135,8 +138,8 @@ export default function EquipmentBanner({
                         : ""
                     }
                   >
-                    <span itemprop="name"> {el}</span>
-                    <meta itemprop="position" content={i} />
+                    <span itemProp="name"> {el}</span>
+                    <meta itemProp="position" content={i} />
                   </a>
                 )}
                 {i + 1 < generatePathName().split("—").length && (

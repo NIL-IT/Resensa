@@ -14,7 +14,6 @@ import {
 } from "../../utils/slice/userSlice";
 
 export default function ProductItem({ list }) {
-  const { id } = useParams();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -78,11 +77,10 @@ export default function ProductItem({ list }) {
 
   // Handle product changes
   useEffect(() => {
-    if (!id) return;
     setCurrentProduct(
       equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
     );
-  }, [id, equipmentById, solutionsById]);
+  }, [pathname, equipmentById, solutionsById]);
 
   // Handle pathname changes and scroll behavior
   useEffect(() => {

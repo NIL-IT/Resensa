@@ -64,30 +64,30 @@ const Contacts = () => {
       <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
         <nav className="mb-4 xs:mb-5 sm:mb-6">
           <ul
-            itemscope
-            itemtype="http://schema.org/BreadcrumbList"
+            itemScope
+            itemType="http://schema.org/BreadcrumbList"
             className="flex items-center gap-1 xs:gap-2 text-xs xs:text-sm text-gray-400"
           >
             <li
-              itemprop="itemListElement"
-              itemscope
-              itemtype="http://schema.org/ListItem"
+              itemProp="itemListElement"
+              itemScope
+              itemType="http://schema.org/ListItem"
               className="hover:text-gray-600 transition-colors"
             >
               <a title="Основной раздел" href="/">
-                <span itemprop="name">Главная</span>
-                <meta itemprop="position" content="0" />
+                <span itemProp="name">Главная</span>
+                <meta itemProp="position" content="0" />
               </a>
             </li>
             <span>{">"}</span>
             <li
-              itemprop="itemListElement"
-              itemscope
-              itemtype="http://schema.org/ListItem"
+              itemProp="itemListElement"
+              itemScope
+              itemType="http://schema.org/ListItem"
             >
               <a className="pointer-events: none" title="Подраздел уровня 1">
-                <span itemprop="name">Контакты</span>
-                <meta itemprop="position" content="1" />
+                <span itemProp="name">Контакты</span>
+                <meta itemProp="position" content="1" />
               </a>
             </li>
           </ul>

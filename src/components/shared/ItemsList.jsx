@@ -11,6 +11,7 @@ import {
   getSolutionsById,
 } from "../../utils/slice/userSlice";
 import { Link, useLocation } from "react-router-dom";
+import useLatinFormat from "../../utils/hooks/useLatinFormat";
 
 export default function ItemsList({
   limited = true,
@@ -71,7 +72,11 @@ export default function ItemsList({
             <Link
               itemScope
               itemType="http://schema.org/Product"
-              to={equipment ? `/equipment/${id}` : `/solutions/${id}`}
+              to={
+                equipment
+                  ? `/equipment/${useLatinFormat(name)}`
+                  : `/solutions/${useLatinFormat(name)}`
+              }
               onClick={() => handleClickItem(id)}
               key={id}
               className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
