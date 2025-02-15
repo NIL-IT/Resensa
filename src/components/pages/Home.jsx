@@ -37,8 +37,14 @@ export default function Home({ equipment, solutions, banner, news }) {
         <title>Recensa - Вентиляционное оборудование и решения</title>
         <meta
           name="description"
-          content="Бренд RECENSA - создание новой производственной базы и поставка вентиляционного оборудования. Профессиональные решения для вентиляции и кондиционирования."
+          content="Бренд RECENSA ориентирован на создание новой производственной базы, а также на поставку вентиляционного оборудования под собственной торговой маркой."
         />
+        {/* <!-- Open Graph --> */}
+        <meta
+          property="og:title"
+          content="Recensa - Вентиляционное оборудование и решения"
+        />
+        <meta property="og:url" content="https://new.recensa.ru" />
       </Helmet>
       <main>
         <Banner banner={banner} />

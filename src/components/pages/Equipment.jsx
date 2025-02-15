@@ -38,6 +38,19 @@ export default function Equipment({
             text.split(".")[0]
           }. Профессиональные решения для вентиляции и кондиционирования.`}
         />
+        {/* <!-- Open Graph --> */}
+        <meta
+          property="og:title"
+          content={`Recensa - Вентиляционное ${
+            isEquipment ? "оборудование" : "решения"
+          }`}
+        />
+        <meta
+          property="og:url"
+          content={`https://new.recensa.ru/${
+            isEquipment ? "equipment" : "solutions"
+          }`}
+        />
       </Helmet>
       <main>
         <EquipmentBanner

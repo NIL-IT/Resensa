@@ -28,6 +28,9 @@ const Contacts = () => {
           name="description"
           content="Контактная информация RECENSA. Адрес, телефон, email и реквизиты компании. Свяжитесь с нами для получения профессиональной консультации по вентиляционному оборудованию."
         />
+        {/* <!-- Open Graph --> */}
+        <meta property="og:title" content="Контакты - Recensa" />
+        <meta property="og:url" content="https://new.recensa.ru/contact" />
       </Helmet>
       <div
         itemScope
