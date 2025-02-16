@@ -54,6 +54,7 @@ export default function Header() {
       }
     } else {
       // Non-admin users just navigate normally
+      // Добавление тестирования
       navigate(path);
       if (i === 4) {
         dispatch(changeRoutingToOrders(true));
