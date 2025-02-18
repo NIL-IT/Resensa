@@ -2,15 +2,15 @@ import React from "react";
 import Title from "../ui/Title";
 const list = [
   {
-    img: "/img/part_1.png",
+    img: "/img/part_1.svg",
     alt: "Партнер МССП",
   },
   {
-    img: "/img/part_2.png",
+    img: "/img/part_2.svg",
     alt: "Партнер Абсолют банк",
   },
   {
-    img: "/img/part_3.png",
+    img: "/img/part_3.svg",
     alt: "Партнер Мои документы",
   },
   {
@@ -18,11 +18,11 @@ const list = [
     alt: "Партнер РКРСЕРВИС",
   },
   {
-    img: "/img/part_5.png",
+    img: "/img/part_5.svg",
     alt: "Партнер Министерство здравоохранения республики Татарстан",
   },
   {
-    img: "/img/part_6.png",
+    img: "/img/part_6.svg",
     alt: "Партнер Ростелеком",
   },
   {
@@ -53,13 +53,17 @@ export default function Partners() {
             {list.map((item, i) => (
               <article
                 key={i}
-                className="flex-center w-[120px] xs:w-[60px] sm:w-[70px] md:w-[80px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
+                className=" flex-center w-[100px]  xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
               >
                 <img
                   src={item.img}
                   alt={item.alt}
                   title={item.alt}
-                  className="w-full h-auto grayscale"
+                  className={`w-full  ${
+                    i + 1 === list.length
+                      ? "h-[100px] xl:h-[130px] 2xl:h-[140px] 3xl:h-[150px]"
+                      : "h-auto"
+                  } ${i === 3 ? "white" : ""}`}
                 />
               </article>
             ))}

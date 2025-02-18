@@ -381,3 +381,6 @@ button::-moz-focus-inner {
   backdrop-filter: blur(0px);
   transition: backdrop-filter 0.3s linear;
 }
+.white {
+  filter: grayscale(1) brightness(1000%);
+}
