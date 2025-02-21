@@ -45,7 +45,6 @@ export default function ProductItem({ list }) {
     else if (widthPage > 375) scrollPosition = 1300;
     else scrollPosition = 1200;
     scrollPosition = document.body.scrollHeight - scrollPosition;
-    console.log(scrollPosition);
     setTimeout(() => {
       window.scrollTo({
         top: scrollPosition,
