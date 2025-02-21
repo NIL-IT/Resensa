@@ -37,19 +37,22 @@ export default function ProductItem({ list }) {
     if (itemId) return;
     const widthPage = document.querySelector("body").offsetWidth;
     let scrollPosition;
-    if (widthPage > 1600) scrollPosition = 3650;
-    else if (widthPage > 1200) scrollPosition = 3000;
-    else if (widthPage > 768) scrollPosition = 3500;
-    else if (widthPage > 640) scrollPosition = 2400;
-    else if (widthPage > 420) scrollPosition = 3600;
-    else if (widthPage > 375) scrollPosition = 3350;
-    else scrollPosition = 3150;
-
-    window.scrollTo({
-      top: scrollPosition,
-      left: 0,
-      behavior: "smooth",
-    });
+    if (widthPage > 1600) scrollPosition = 0;
+    else if (widthPage > 1200) scrollPosition = 0;
+    else if (widthPage > 768) scrollPosition = 800;
+    else if (widthPage > 640) scrollPosition = 1200;
+    else if (widthPage > 420) scrollPosition = 1300;
+    else if (widthPage > 375) scrollPosition = 1300;
+    else scrollPosition = 1200;
+    scrollPosition = document.body.scrollHeight - scrollPosition;
+    console.log(scrollPosition);
+    setTimeout(() => {
+      window.scrollTo({
+        top: scrollPosition,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 10);
   };
 
   // Handle orders routing scroll
