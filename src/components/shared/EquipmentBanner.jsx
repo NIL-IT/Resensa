@@ -41,8 +41,8 @@ export default function EquipmentBanner({
     if (h1Ref.current) {
       height = h1Ref.current.offsetHeight;
       if (height <= 55) {
-        setPaddingClass(`pb-[50px] xs:pb-[60px] sm:pb-[60px] 
-           md:pb-[100px] lg:pb-[136px]  
+        setPaddingClass(`pb-[50px] xs:pb-[60px] sm:pb-[20px] 
+           md:pb-[80px] lg:pb-[130px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`);
       } else {
         setPaddingClass(`pb-[30px] xs:pb-[40px] sm:pb-[30px] 
