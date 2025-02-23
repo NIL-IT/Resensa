@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
@@ -7,8 +7,12 @@ import {
   changeShowSearchPopup,
 } from "../../utils/slice/userSlice";
 
-const BurgerButton = ({ list, handleClickLink }) => {
+const BurgerButton = ({ list, handleClickLink, isAdmin }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [pageWidth, setPageWidth] = useState(0);
+  useEffect(() => {
+    setPageWidth(document.body.scrollWidth);
+  }, []);
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const handleClickLinkBurger = (i, path) => {
@@ -17,10 +21,12 @@ const BurgerButton = ({ list, handleClickLink }) => {
     handleChangeShowPopup(false);
   };
   return (
-    <section className="md:hidden relative">
+    <section className="md:hidden ">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex absolute right-10 top-[-20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80]"
+        className={`flex absolute  top-[20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80] ${
+          isAdmin ? `right-5` : "right-10"
+        }`}
       >
         <span
           className={`block w-6 h-0.5 bg-gray-400 transform transition-transform ${

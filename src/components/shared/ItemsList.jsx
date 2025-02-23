@@ -102,9 +102,9 @@ export default function ItemsList({
                   itemType="http://schema.org/Offer"
                 >
                   <div>Стоимость 5000 руб.</div>
-                  <meta itemprop="price" content="5000" />
-                  <meta itemprop="priceCurrency" content="RUB" />
-                  <meta content="5000" itemprop="lowPrice" />
+                  <meta itemProp="price" content="5000" />
+                  <meta itemProp="priceCurrency" content="RUB" />
+                  <meta content="5000" itemProp="lowPrice" />
                 </div>
                 <div
                   itemProp="description"

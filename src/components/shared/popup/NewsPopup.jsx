@@ -20,25 +20,30 @@ export default function NewsPopup() {
     <article
       itemScope
       itemType="http://schema.org/Article"
-      className="w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[400px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[922px] min-h-[80vh] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll"
+      className="w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px]
+       xs:max-w-[400px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[922px] fixed 
+       top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
-      <div className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-full relative">
+      <div
+        className="bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px]
+         xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-full overflow-y-scroll max-h-[80vh] "
+      >
         <button
           onClick={() => handleClose()}
-          className="fixed top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700"
+          className="fixed top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-5 text-lg text-gray-500 hover:text-gray-700"
         >
           ✕
         </button>
         <div>
           <meta itemProp="headline" content="title" />
           <h2
-            itemprop="name"
+            itemProp="name"
             className="text-lg xs:text-xl sm:text-2xl leading-[24px] xs:leading-[26px] sm:leading-[28px] md:leading-[30.6px] text-gray-400 mb-4 xs:mb-5 sm:mb-6 md:mb-7 lg:mb-8"
           >
             {title}
           </h2>
-          <meta itemprop="url" content="https://new.recensa.ru/" />
-          <meta itemprop="description" content={listText.map((p) => p)} />
+          <meta itemProp="url" content="https://new.recensa.ru/" />
+          <meta itemProp="description" content={listText.map((p) => p)} />
           <div
             itemProp="image"
             itemScope
@@ -75,7 +80,7 @@ export default function NewsPopup() {
             itemScope
             itemType="http://schema.org/Person"
           />
-          <meta itemprop="name" content={"Recensa"} />
+          <meta itemProp="name" content={"Recensa"} />
           {/* Контактная информация о сайте/организации */}
           <div
             className="hidden"
@@ -89,16 +94,16 @@ export default function NewsPopup() {
               itemType="https://schema.org/ImageObject"
             >
               <img itemProp="url" src="/logo.svg" alt="Recensa" />
-              <meta itemprop="width" content="200" />
-              <meta itemprop="height" content="200" />
+              <meta itemProp="width" content="200" />
+              <meta itemProp="height" content="200" />
             </div>
-            <meta itemprop="name" content="Recensa" />
-            <meta itemprop="url" content="https://new.recensa.ru/" />
+            <meta itemProp="name" content="Recensa" />
+            <meta itemProp="url" content="https://new.recensa.ru/" />
           </div>
         </div>
       </div>
       {/* рецензия материала */}
-      <div itemScope="" itemtype="http://schema.org/Organization">
+      <div itemScope="" itemType="http://schema.org/Organization">
         <meta itemProp="name" content={title} />
         <meta itemProp="description" content="description" />
         <link itemProp="url" href="https://new.recensa.ru/" />
@@ -112,7 +117,7 @@ export default function NewsPopup() {
           <meta itemProp="ratingValue" content="4.6" />
           <meta itemProp="ratingCount" content="8864" />
         </div>
-        <div itemProp="review" itemtype="http://schema.org/Review" itemscope="">
+        <div itemProp="review" itemType="http://schema.org/Review" itemScope="">
           <div
             itemProp="author"
             itemType="http://schema.org/Person"

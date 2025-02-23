@@ -24,15 +24,7 @@ export default function Footer({ scrollTop = null }) {
   const { isAdmin, equipment } = useSelector(({ user }) => user);
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const handleClickImg = async () => {
-    if (isAdmin) {
-      Cookies.remove("access_token");
-      await dispatch(changeIsAdmin(false));
-      navigate("/auth");
-    } else {
-      navigate("/");
-    }
-  };
+
   const handleClickLink = async (i, path) => {
     if (!isAdmin && +i == 4) {
       await dispatch(changeRoutingToOrders(true));
@@ -40,27 +32,15 @@ export default function Footer({ scrollTop = null }) {
       dispatch(changeSolutionsId(null));
       return navigate(`/equipment/${equipment[0].id}`);
     }
-    if (isAdmin) {
-      if (i === 4) {
-        // If admin clicks on "Заказы", navigate to admin panel
-        navigate("/admin/1");
-      } else {
-        // For any other link click by admin, log them out
-        Cookies.remove("access_token");
-        await dispatch(changeIsAdmin(false));
-        navigate("/auth");
-      }
-    } else {
-      // Non-admin users just navigate normally
+    if (!isAdmin) {
       navigate(path);
+      if (scrollTop) scrollTop();
       if (i === 4) {
         dispatch(changeRoutingToOrders(true));
       } else {
         dispatch(changeRoutingToOrders(false));
       }
     }
-
-    if (scrollTop) scrollTop();
   };
 
   return (
@@ -73,19 +53,20 @@ export default function Footer({ scrollTop = null }) {
         <div>
           <div
             onClick={() => {
-              if (isAdmin) {
-                Cookies.remove("access_token");
-                dispatch(changeIsAdmin(false));
-                navigate("/auth");
-              } else {
-                if (scrollTop) scrollTop();
-                navigate("/");
-              }
+              // if (isAdmin) {
+              //   Cookies.remove("access_token");
+              //   dispatch(changeIsAdmin(false));
+              //   navigate("/auth");
+              // } else {
+              if (scrollTop) scrollTop();
+              // navigate("/");
+              // }
             }}
             className="cursor-pointer"
           >
-            <div
-              onClick={() => handleClickImg()}
+            <Link
+              to={isAdmin ? "https://new.recensa.ru/" : "/"}
+              target={isAdmin ? "_blank" : "_self"}
               className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5"
             >
               <img
@@ -93,7 +74,7 @@ export default function Footer({ scrollTop = null }) {
                 alt="Логотип"
                 title="Нажмите, чтобы вернуться на главную страницу"
               />
-            </div>
+            </Link>
           </div>
           <h5 className="text-gray-900 text-sm xs:text-sm sm:text-base">
             copyright
@@ -109,10 +90,22 @@ export default function Footer({ scrollTop = null }) {
               {navList.map(({ name, path }, i) => (
                 <li
                   key={i}
-                  className="text-gray-400 hover:text-gray-300 cursor-pointer"
+                  className={`text-gray-400 hover:text-gray-300 cursor-pointer ${
+                    isAdmin && i === 4 && "hidden"
+                  }`}
                   onClick={() => handleClickLink(i, path)}
                 >
-                  <Link itemProp="url">{name}</Link>
+                  {isAdmin ? (
+                    <Link
+                      target="_blank"
+                      to={`https://new.recensa.ru${path}`}
+                      itemProp="url"
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    <Link itemProp="url">{name}</Link>
+                  )}
                 </li>
               ))}
             </menu>

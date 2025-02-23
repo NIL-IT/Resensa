@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authPost, changeIsAdmin } from "../../utils/slice/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 export default function LoginForm() {
@@ -52,12 +52,14 @@ export default function LoginForm() {
     <article className="w-screen h-screen">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="/icon/logo.svg"
-            alt="Recensa"
-            title="Recensa"
-          />
+          <Link to={"/"}>
+            <img
+              className="mx-auto h-10 w-auto"
+              src="/icon/logo.svg"
+              alt="Recensa"
+              title="Recensa"
+            />
+          </Link>
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Войти в аккаунт
           </h2>

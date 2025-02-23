@@ -26,7 +26,7 @@ export default function News({ news }) {
     setLimited(false);
     setNewsData(news);
   };
-  console.log(newsData[0].text.split("/")[0]);
+
   return newsData.length ? (
     <section
       itemScope
@@ -105,7 +105,7 @@ export default function News({ news }) {
                       itemScope
                       itemProp="mainEntityOfPage"
                       itemType="https://schema.org/WebPage"
-                      itemId="https://new.recensa.ru/"
+                      itemID="https://new.recensa.ru/"
                     />
                   </div>
                   <div>

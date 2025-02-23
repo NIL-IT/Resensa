@@ -28,13 +28,13 @@ export default function Header() {
   ];
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const handleClickImg = async (path) => {
-    if (isAdmin) {
-      Cookies.remove("access_token");
-      await dispatch(changeIsAdmin(false));
-      navigate("/auth");
-    }
-  };
+  // const handleClickImg = async (path) => {
+  //   if (isAdmin) {
+  //     Cookies.remove("access_token");
+  //     await dispatch(changeIsAdmin(false));
+  //     navigate("/auth");
+  //   }
+  // };
   const handleClickLink = (i, path) => {
     if (!isAdmin && +i === 4) {
       dispatch(changeRoutingToOrders(true));
@@ -42,19 +42,7 @@ export default function Header() {
       dispatch(changeSolutionsId(null));
       return navigate(`/equipment/${equipment[0].id}`);
     }
-    if (isAdmin) {
-      if (i === 4) {
-        // If admin clicks on "Заказы", navigate to admin panel
-        navigate("/admin/1");
-      } else {
-        // For any other link click by admin, log them out
-        Cookies.remove("access_token");
-        dispatch(changeIsAdmin(false));
-        navigate("/auth");
-      }
-    } else {
-      // Non-admin users just navigate normally
-      // Добавление тестирования
+    if (!isAdmin) {
       navigate(path);
       if (i === 4) {
         dispatch(changeRoutingToOrders(true));
@@ -65,11 +53,20 @@ export default function Header() {
   };
 
   return (
-    <header className="container sticky md:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8">
-      <div className="pl-8 sm:pl-10 md:pl-14 lg:pl-0 flex justify-between items-center border-b border-gray-400 pb-6">
+    <header
+      className={`container sticky md:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8 ${
+        isAdmin && "flex justify-between"
+      }`}
+    >
+      <div
+        className={`pl-8 sm:pl-10 md:pl-14 lg:pl-0 flex justify-between items-center border-b border-gray-400 pb-6 ${
+          isAdmin && "border-none"
+        }`}
+      >
         <Link
-          to={!isAdmin && "/"}
-          onClick={() => handleClickImg("/")}
+          to={isAdmin ? "https://new.recensa.ru/" : "/"}
+          target={isAdmin ? "_blank" : "_self"}
+          // onClick={() => handleClickImg("/")}
           className="mb-0"
         >
           <img
@@ -79,62 +76,68 @@ export default function Header() {
             title="Перейти на главную страницу"
           />
         </Link>
-        <BurgerButton list={navList} handleClickLink={handleClickLink} />
-        <div className="hidden pr-10 lg:pr-0 md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
-            <a
-              target="_blank"
-              href="mailto:office@recensa.ru"
-              className="hover:text-gray-600 "
-            >
-              office@recensa.ru
-            </a>
-            <a
-              target="_blank"
-              href="tel:89999999999"
-              className="hover:text-gray-600"
-            >
-              +7 999 999 99 99
-            </a>
-          </div>
-          <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
-            <div className="flex items-center gap-4">
-              <a target="_blank" href="#" className="hover:opacity-80">
-                <img
-                  src="/icon/telegram.svg"
-                  alt="telegram"
-                  title="Телеграмм"
-                  className="w-8 "
-                />
-              </a>
-              <a target="_blank" href="#" className="hover:opacity-80">
-                <img
-                  src="/icon/wa.svg"
-                  alt="whatsapp"
-                  title="Ватсап"
-                  className="w-8 "
-                />
-              </a>
-              <button
-                onClick={() => dispatch(changeShowSearchPopup(true))}
-                className="hover:opacity-80"
+        <BurgerButton
+          isAdmin={isAdmin}
+          list={navList}
+          handleClickLink={handleClickLink}
+        />
+        {!isAdmin && (
+          <div className="hidden pr-10 lg:pr-0 md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base">
+              <a
+                target="_blank"
+                href="mailto:office@recensa.ru"
+                className="hover:text-gray-600 "
               >
-                <img
-                  src="/icon/search_btn.svg"
-                  alt="search"
-                  title="Поиск"
-                  className="w-8 "
-                />
-              </button>
+                office@recensa.ru
+              </a>
+              <a
+                target="_blank"
+                href="tel:89999999999"
+                className="hover:text-gray-600"
+              >
+                +7 999 999 99 99
+              </a>
             </div>
-            <Button
-              onClick={() => handleChangeShowPopup(true)}
-              text={"заказать звонок"}
-              className="w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm"
-              noLink={true}
-            />
+            <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
+              <div className="flex items-center gap-4">
+                <a target="_blank" href="#" className="hover:opacity-80">
+                  <img
+                    src="/icon/telegram.svg"
+                    alt="telegram"
+                    title="Телеграмм"
+                    className="w-8 "
+                  />
+                </a>
+                <a target="_blank" href="#" className="hover:opacity-80">
+                  <img
+                    src="/icon/wa.svg"
+                    alt="whatsapp"
+                    title="Ватсап"
+                    className="w-8 "
+                  />
+                </a>
+                <button
+                  onClick={() => dispatch(changeShowSearchPopup(true))}
+                  className="hover:opacity-80"
+                >
+                  <img
+                    src="/icon/search_btn.svg"
+                    alt="search"
+                    title="Поиск"
+                    className="w-8 "
+                  />
+                </button>
+              </div>
+              <Button
+                onClick={() => handleChangeShowPopup(true)}
+                text={"заказать звонок"}
+                className="w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm"
+                noLink={true}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <aside>
         <nav
@@ -155,9 +158,21 @@ export default function Header() {
                 itemType="http://schema.org/ItemList"
                 onClick={() => handleClickLink(i, path)}
                 key={i}
-                className="text-gray-400 hover:text-gray-300 cursor-pointer"
+                className={`text-gray-400 hover:text-gray-300 cursor-pointer ${
+                  isAdmin && i === 4 && "hidden"
+                }`}
               >
-                <Link itemProp="url">{name}</Link>
+                {isAdmin ? (
+                  <Link
+                    target="_blank"
+                    to={`https://new.recensa.ru${path}`}
+                    itemProp="url"
+                  >
+                    {name}
+                  </Link>
+                ) : (
+                  <Link itemProp="url">{name}</Link>
+                )}
                 <meta itemProp="name" content={name} />
               </li>
             ))}

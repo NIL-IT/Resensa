@@ -38,14 +38,20 @@ export default function SearchPopup() {
   };
 
   return (
-    <section className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll scrollbar-hide">
-      <div className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg min-w-[100%] relative min-h-full pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10">
+    <section className="h-[80%] min-w-[80%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+      <div
+        className="bg-white pt-2 xs:pt-3 sm:pt-4 px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8
+       rounded-lg min-w-[100%]
+        overflow-y-scroll relative max-h-[100%] min-h-[100%]
+         pb-6 xs:pb-7 sm:pb-8 md:pb-9 lg:pb-10"
+      >
         <div
           itemScope
           itemType="https://schema.org/WebSite"
-          className="sticky z-50 flex-center top-0 left-0 bg-white h-[60px] xs:h-[65px] sm:h-[70px] md:h-[75px] lg:h-[80px]"
+          className="sticky z-50 flex-center top-[-20px] left-0 bg-white h-[60px]
+           xs:h-[65px] sm:h-[70px] md:h-[75px] lg:h-[80px]"
         >
-          <meta itemProp="url" content="nilit1.ru" />
+          <meta itemProp="url" content="https://new.recensa.ru/" />
           <SearchInput
             handleSearch={handleSearch}
             handleClose={handleClose}
@@ -55,9 +61,9 @@ export default function SearchPopup() {
             className={"border-0 border-b border-b-gray-200 gap-4"}
           />
         </div>
-        <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-center">
+        <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-center ">
           {searchData.length > 0 ? (
-            <div className="overflow-y-scroll grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-5">
+            <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-5">
               {searchData.map(
                 ({ image_card, name, description, id, max_param }, i) => (
                   <Link
