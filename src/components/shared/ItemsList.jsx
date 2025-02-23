@@ -94,12 +94,18 @@ export default function ItemsList({
               >
                 {name}
               </h3>
-              <div
-                itemProp="offers"
-                itemScope
-                itemType="http://schema.org/Offer"
-                className="flex-center justify-between gap-2"
-              >
+              <div className="flex-center justify-between gap-2">
+                <div
+                  className="hidden"
+                  itemProp="offers"
+                  itemScope
+                  itemType="http://schema.org/Offer"
+                >
+                  <div>Стоимость 5000 руб.</div>
+                  <meta itemprop="price" content="5000" />
+                  <meta itemprop="priceCurrency" content="RUB" />
+                  <meta content="5000" itemprop="lowPrice" />
+                </div>
                 <div
                   itemProp="description"
                   className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"

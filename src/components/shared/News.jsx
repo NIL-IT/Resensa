@@ -26,8 +26,11 @@ export default function News({ news }) {
     setLimited(false);
     setNewsData(news);
   };
+  console.log(newsData[0].text.split("/")[0]);
   return newsData.length ? (
     <section
+      itemScope
+      itemType="http://schema.org/Blog"
       // className={`
       //    container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px]
       //   ${
@@ -38,6 +41,7 @@ export default function News({ news }) {
        ${newsData.length > 6 ? "pb-16" : "pb-16"}`}
     >
       <Title
+        itemProp="description"
         text={"новости"}
         className="ml-5  xs:ml-0 inline-block text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10"
       />
@@ -46,6 +50,9 @@ export default function News({ news }) {
           <div className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
             {newsData.map((item) => (
               <article
+                itemProp="blogPosts"
+                itemScope
+                itemType="http://schema.org/BlogPosting"
                 onClick={() => showNewsPopup(item.id)}
                 className="group flex flex-col  w-[300px] xs:w-[320px] sm:w-[340px] md:w-[350px] lg:w-[360px] xl:w-[365px] 2xl:w-[368px] 3xl:w-[370px] 
                 h-[430px] xs:h-[455px] sm:h-[460px] md:h-[470px] lg:h-[490px] xl:h-[505px] 2xl:h-[510px] 3xl:h-[520px] 
@@ -57,6 +64,7 @@ export default function News({ news }) {
                 key={item.id}
               >
                 <img
+                  itemProp="image"
                   className="object-cover min-h-[250px] w-[260px] xs:min-h-[265px] xs:w-[275px] sm:min-h-[260px] sm:w-[290px] md:min-h-[260px] md:w-[300px] lg:min-h-[270px] lg:w-[310px] xl:h-[280px] xl:w-[315px] 2xl:min-h-[290px] 2xl:w-[318px]  3xl:min-w-[320px] "
                   src={item.image}
                   alt={item.title}
@@ -64,25 +72,59 @@ export default function News({ news }) {
                 />
                 <div className=" flex flex-col justify-between h-full pt-2">
                   <div>
-                    <p className="text-white  text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]">
+                    <h3
+                      itemProp="headline"
+                      className="text-white  text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl leading-[22px] xs:leading-[23px] sm:leading-[24px] md:leading-[25px] lg:leading-[25.5px]"
+                    >
                       {item.title}
-                    </p>
+                    </h3>
+                    {/* SEO */}
+                    <meta itemProp="datePublished" content={`${item.date}`} />
+                    <meta
+                      itemProp="description"
+                      content={`${item.text.split("/")[0]}`}
+                    />
+                    <meta itemProp="author" content="Resenca" />
+                    <div
+                      itemProp="publisher"
+                      itemScope
+                      itemType="https://schema.org/Organization"
+                      className="hidden"
+                    >
+                      <div
+                        itemProp="logo"
+                        itemScope
+                        itemType="https://schema.org/ImageObject"
+                      >
+                        <img itemProp="url image" src="/logo.svg" />
+                      </div>
+                      <meta itemProp="name" content="Recensa" />
+                    </div>
+                    <meta itemProp="dateModified" content={`${item.date}`} />
+                    <meta
+                      itemScope
+                      itemProp="mainEntityOfPage"
+                      itemType="https://schema.org/WebPage"
+                      itemId="https://new.recensa.ru/"
+                    />
+                  </div>
+                  <div>
                     <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
                       <a className="text-gray-800 text-sm xs:text-sm sm:text-base">
                         {item.date}
                       </a>
                     </div>
+                    <button className="flex-center gap-3 group-hover:gap-4 transition-all">
+                      <a className="text-white text-base xs:text-base sm:text-lg font-normal">
+                        Читать
+                      </a>
+                      <img
+                        src="/icon/sm_arrow.svg"
+                        alt="arrow"
+                        title="Нажмите чтобы посмотреть новость"
+                      />
+                    </button>
                   </div>
-                  <button className="flex-center gap-3 group-hover:gap-4 transition-all">
-                    <a className="text-white text-base xs:text-base sm:text-lg font-normal">
-                      Читать
-                    </a>
-                    <img
-                      src="/icon/sm_arrow.svg"
-                      alt="arrow"
-                      title="Нажмите чтобы посмотреть новость"
-                    />
-                  </button>
                 </div>
               </article>
             ))}
