@@ -44,7 +44,8 @@ export default function Home({ equipment, solutions, banner, news }) {
           property="og:title"
           content="Recensa - Вентиляционное оборудование и решения"
         />
-        <meta property="og:url" content="https://new.recensa.ru" />
+        <meta property="og:url" content="https://new.recensa.ru/" />
+        <link rel="canonical" href="https://new.recensa.ru/" />
       </Helmet>
       <main>
         <Banner banner={banner} />

@@ -127,6 +127,24 @@ export default function ProductItem({ list }) {
           name="description"
           content={`${currentProduct.name}. ${currentProduct.header}. Профессиональные решения для вентиляции от RECENSA.`}
         />
+        {/* <!-- Open Graph --> */}
+        <meta
+          property="og:title"
+          content={`Recensa - ${
+            isEquipment
+              ? `Вентиляционное оборудование ${currentProduct.name}`
+              : `Вентиляционное решение ${currentProduct.name}`
+          }`}
+        />
+        <meta property="og:url" content="https://new.recensa.ru/" />
+        <link
+          rel="canonical"
+          href={`https://new.recensa.ru/${
+            isEquipment
+              ? `equipment/${pathname.split("/")[2]}`
+              : `solutions/${pathname.split("/")[2]}`
+          }`}
+        />
       </Helmet>
       <main>
         <EquipmentBanner

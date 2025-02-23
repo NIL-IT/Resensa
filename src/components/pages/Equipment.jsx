@@ -51,6 +51,12 @@ export default function Equipment({
             isEquipment ? "equipment" : "solutions"
           }`}
         />
+        <link
+          rel="canonical"
+          href={`https://new.recensa.ru/${
+            isEquipment ? "equipment" : "solutions"
+          }`}
+        />
       </Helmet>
       <main>
         <EquipmentBanner

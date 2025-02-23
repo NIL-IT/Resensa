@@ -139,13 +139,13 @@ export default function Advantages() {
               className="min-h-[44px] sm:min-h-[48px] 
                md:min-h-[56px] max-w-[180px] md:max-w-[200px] lg:max-w-[220px]"
             >
-              <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+              <h3 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
                 {title}
-              </h2>
+              </h3>
               {subtitle && (
-                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                <h3 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
                   {subtitle}
-                </h2>
+                </h3>
               )}
             </div>
             <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
@@ -173,13 +173,13 @@ export default function Advantages() {
               className="min-h-[44px] sm:min-h-[48px] 
                md:min-h-[56px] max-w-[180px] md:max-w-[200px] lg:max-w-[220px]"
             >
-              <h2 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+              <h3 className=" text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
                 {title}
-              </h2>
+              </h3>
               {subtitle && (
-                <h2 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
+                <h3 className="text-base uppercase xs:text-base sm:text-lg md:text-xl   text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
                   {subtitle}
-                </h2>
+                </h3>
               )}
             </div>
             <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">

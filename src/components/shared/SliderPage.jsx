@@ -25,12 +25,12 @@ export default function SliderPage({
         />
         <div className="flex justify-center">
           <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px]">
-            <h2
+            <h3
               className="w-full text-gray-400 text-3xl leading-[41px] md:text-[48px] md:leading-[61px] xs:w-full 
             sm:w-full md:w-[350px] lg:w-[370px] xl:w-[390px] 2xl:w-[400px] 3xl:w-[410px]"
             >
               {subTitle}
-            </h2>
+            </h3>
             <div className="space-y-20 ">
               <div
                 className="w-full xs:w-full sm:w-full md:w-[600px] 
@@ -55,9 +55,9 @@ export default function SliderPage({
               space-y-3 lg:space-y-3
                text-gray-400 "
                   >
-                    <h3 className="text-gray-400 text-base  xl:text-xl font-normal">
+                    <h4 className="text-gray-400 text-base  xl:text-xl font-normal">
                       Recensa – это:
-                    </h3>
+                    </h4>
                     <div className="pt-5 space-y-3 lg:space-y-3">
                       {recensaAbout.map((text, i) => (
                         <p key={i}>{text}</p>
@@ -65,10 +65,10 @@ export default function SliderPage({
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-gray-400 text-base  xl:text-xl font-normal">
+                    <h4 className="text-gray-400 text-base  xl:text-xl font-normal">
                       Recensa — это результат многолетнего опыта, уникальных
                       инженерных решений и постоянного развития. Мы объединили:
-                    </h3>
+                    </h4>
                     <ul
                       className="pt-5 xs:text-base sm:text-lg md:text-lg 
             lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg  

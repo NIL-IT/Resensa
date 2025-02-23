@@ -40,6 +40,7 @@ export default function AboutCompany() {
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content="О компании - Recensa" />
         <meta property="og:url" content="https://new.recensa.ru/about" />
+        <link rel="canonical" href="https://new.recensa.ru/about" />
       </Helmet>
       <main>
         <EquipmentBanner

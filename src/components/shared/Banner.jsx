@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import imgPlaceholder from "/img/banner_main_placeholder.png";
 import imgMain from "/img/banner_main.png";
+import MainTitle from "../ui/MainTitle";
 export default function Banner({ banner }) {
   const dispatch = useDispatch();
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
@@ -23,7 +24,7 @@ export default function Banner({ banner }) {
     pb-[35px] xs:pb-[40px] sm:pb-[45px] md:pb-[75px] lg:pb-[102px] xl:pb-[105px] 2xl:pb-[108px] 3xl:pb-[110px]
     "
     >
-      <Title
+      <MainTitle
         className="border-b border-gray-400 pb-[20px] xs:pb-[23px] sm:pb-[25px] md:pb-[28px] 
         lg:pb-[30px] xl:pb-[31px] 2xl:pb-[32px] 3xl:pb-[33px]
         text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-[48px] sm:leading-[40px] md:leading-[50px] lg:leading-[72px]"

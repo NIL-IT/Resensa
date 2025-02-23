@@ -31,6 +31,7 @@ const Contacts = () => {
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content="Контакты - Recensa" />
         <meta property="og:url" content="https://new.recensa.ru/contact" />
+        <link rel="canonical" href="https://new.recensa.ru/contact" />
       </Helmet>
       <div
         itemScope

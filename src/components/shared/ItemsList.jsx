@@ -88,19 +88,24 @@ export default function ItemsList({
                 alt={name}
                 title={name}
               />
-              <h2
+              <h3
                 itemProp="name"
                 className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal my-1.5 xs:my-1.5 sm:my-2"
               >
                 {name}
-              </h2>
-              <div className="flex-center justify-between gap-2">
-                <p
+              </h3>
+              <div
+                itemProp="offers"
+                itemScope
+                itemType="http://schema.org/Offer"
+                className="flex-center justify-between gap-2"
+              >
+                <div
                   itemProp="description"
                   className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"
                 >
                   {description}
-                </p>
+                </div>
                 <Button
                   noLink={true}
                   onClick={() => handleChangeShowPopup(true, id)}
