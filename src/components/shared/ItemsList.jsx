@@ -67,6 +67,9 @@ export default function ItemsList({
         className="w-full flex-center flex-col mx-auto justify-center    2xl:w-[1178px]"
       >
         <meta content={data.length || 0} itemProp="offerCount" />
+        <div className="hidden">Цена от 5000 руб.</div>
+        <meta content="5000" itemprop="lowPrice" />
+        <meta content="RUB" itemprop="priceCurrency" />
         <article className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
           {data.map(({ id, name, description, image_card }) => (
             <Link

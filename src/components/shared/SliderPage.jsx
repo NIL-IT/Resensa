@@ -64,42 +64,6 @@ export default function SliderPage({
                       ))}
                     </div>
                   </div>
-                  <div>
-                    <h4 className="text-gray-400 text-base  xl:text-xl font-normal">
-                      Recensa — это результат многолетнего опыта, уникальных
-                      инженерных решений и постоянного развития. Мы объединили:
-                    </h4>
-                    <ul
-                      className="pt-5 xs:text-base sm:text-lg md:text-lg 
-            lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg  
-            leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[23px]
-
-              space-y-3 lg:space-y-3
-               text-gray-400 "
-                    >
-                      <li>
-                        • Уникальные компетенции и инженерные решения — каждое
-                        оборудование разрабатывается с учётом последних
-                        достижений в области вентиляции.
-                      </li>
-                      <li>
-                        • Современные алгоритмы управления производством,
-                        которые позволяют выпускать продукцию, превосходящую
-                        ожидания клиентов.
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="pb-[60px] xs:pb-[70px] sm:pb-[80px] md:pb-[85px] lg:pb-[90px] xl:pb-[95px] 2xl:pb-[97px] 3xl:pb-[100px]">
-                    <p
-                      className="xs:text-base sm:text-lg md:text-lg 
-            lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[23px]
-              text-gray-400 "
-                    >
-                      Recensa — уверенность в каждом решении. Мы знаем всё о
-                      вентиляционном оборудовании, чтобы ваши задачи решались с
-                      максимальной эффективностью. Обратитесь к профессионалам.
-                    </p>
-                  </div>
                 </>
               )}
             </div>

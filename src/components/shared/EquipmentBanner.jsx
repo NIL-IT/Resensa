@@ -169,7 +169,7 @@ export default function EquipmentBanner({
       <div
         className={`container pl-[20px] xs:pl-[0] ${
           about
-            ? `pt-[80px] xs:pt-[100px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[394px]`
+            ? `pt-[80px] xs:pt-[100px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[300px] 3xl:pb-[94px]`
             : ` ${
                 height <= 76
                   ? `pt-[120px] 
@@ -181,11 +181,11 @@ export default function EquipmentBanner({
       >
         <Title
           text={subtitle || product().name}
-          className="font-norma text-md sm:text-[22px] leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
+          className="font-norma text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
         <h1
           ref={h1Ref}
-          className="font-normal  text-lg leading-[28px]  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
+          className="font-normal  text-lg leading-[28px] sm:text-xl  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
           xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white   uppercase"
         >
           {title || product().sub_header}
