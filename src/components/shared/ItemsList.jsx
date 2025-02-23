@@ -66,6 +66,7 @@ export default function ItemsList({
         itemProp="offers"
         className="w-full flex-center flex-col mx-auto justify-center    2xl:w-[1178px]"
       >
+        <div className="hidden">{data.length || 0}</div>
         <meta content={data.length || 0} itemProp="offerCount" />
         <div className="hidden">Цена от 5000 руб.</div>
         <meta content="5000" itemprop="lowPrice" />
@@ -104,7 +105,7 @@ export default function ItemsList({
                   itemScope
                   itemType="http://schema.org/Offer"
                 >
-                  <div>Стоимость 5000 руб.</div>
+                  <div>Стоимость от 5000 руб.</div>
                   <meta itemProp="price" content="5000" />
                   <meta itemProp="priceCurrency" content="RUB" />
                   <meta content="5000" itemProp="lowPrice" />

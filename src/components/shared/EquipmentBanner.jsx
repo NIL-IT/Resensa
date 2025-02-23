@@ -148,8 +148,8 @@ export default function EquipmentBanner({
             ))}
         </ul>
       </nav>
-
       <img
+        itemprop="image"
         className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
@@ -166,6 +166,8 @@ export default function EquipmentBanner({
         alt="banner"
         title="Banner"
       />
+      <meta itemprop="price" content="5000" />{" "}
+      <meta itemprop="priceCurrency" content="RUB" />
       <div
         className={`container pl-[20px] xs:pl-[0] ${
           about
@@ -184,6 +186,7 @@ export default function EquipmentBanner({
           className="font-norma text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
         />
         <h1
+          itemProp="name"
           ref={h1Ref}
           className="font-normal  text-lg leading-[28px] sm:text-xl  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
           xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white   uppercase"
@@ -192,6 +195,7 @@ export default function EquipmentBanner({
         </h1>
 
         <p
+          itemProp="description"
           className={` text-white mt-3 mb-3 xs:mb-[20px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
             lg:mb-[33px] lg:mt-[20px] xl:mt-[30px] 2xl:mt-[65px] 
             ${about ? "text-sm xl:text-lg" : ""} ${
