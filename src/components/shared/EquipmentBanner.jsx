@@ -177,7 +177,7 @@ export default function EquipmentBanner({
           {product && (
             <>
               <div className="hidden">Стоимость 5000 руб.</div>
-              <meta itemprop="price" content="5000" />
+              <meta itemprop="Price" content="5000" />
               <meta itemprop="priceCurrency" content="RUB" />
               <div className="hidden">
                 Производитель: <span itemprop="brand">Recensa</span>
