@@ -169,8 +169,8 @@ export default function EquipmentBanner({
               max-h-[900px]`
             }`}
             src={imageSrc}
-            alt={product()?.name || "banner"}
-            title={product()?.name || "banner"}
+            alt={product().name ? product().name : "banner"}
+            title={product().name ? product().name : "banner"}
           />
         </div>
         <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
