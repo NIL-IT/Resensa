@@ -149,24 +149,30 @@ export default function EquipmentBanner({
         </ul>
       </nav>
       <div itemScope itemType="http://schema.org/Product">
-        <img
-          itemProp="image"
-          className={`absolute  brightness-50 object-cover object-center top-[30px] 
+        <div itemScope itemType="http://schema.org/ImageObject">
+          <h2 className="hidden" itemProp="name">
+            {product()?.name || "Banner"}
+          </h2>
+          <span itemProp="description">{product()?.name || "Banner"}</span>
+          <img
+            itemProp="image"
+            className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
-            product
-              ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
+              product
+                ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
-              : `
+                : `
               min-w-[100%] max-w-[1920px] 
               h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
-          }`}
-          src={imageSrc}
-          alt="banner"
-          title="Banner"
-        />
+            }`}
+            src={imageSrc}
+            alt={product()?.name || "banner"}
+            title={product()?.name || "banner"}
+          />
+        </div>
         <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
           {product && (
             <>
