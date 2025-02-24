@@ -33,10 +33,10 @@ export default function EquipmentBanner({
       (item) => item.id === equipmentById || solutionsById
     );
     setProduct(filterData);
+    console.log(product);
     isLoading(false);
   }, []);
   let height;
-
   useLayoutEffect(() => {
     if (h1Ref.current) {
       height = h1Ref.current.offsetHeight;
@@ -151,9 +151,11 @@ export default function EquipmentBanner({
       <div itemScope itemType="http://schema.org/Product">
         <div itemScope itemType="http://schema.org/ImageObject">
           <h2 className="hidden" itemProp="name">
-            {product()?.name || "Banner"}
+            {subtitle}
           </h2>
-          <span itemProp="description">{product()?.name || "Banner"}</span>
+          <span className="hidden" itemProp="description">
+            {text}
+          </span>
           <img
             itemProp="image"
             className={`absolute  brightness-50 object-cover object-center top-[30px] 
@@ -169,8 +171,8 @@ export default function EquipmentBanner({
               max-h-[900px]`
             }`}
             src={imageSrc}
-            alt={product().name ? product().name : "banner"}
-            title={product().name ? product().name : "banner"}
+            alt={subtitle}
+            title={subtitle}
           />
         </div>
         <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
@@ -183,7 +185,8 @@ export default function EquipmentBanner({
                 Производитель: <span itemProp="brand">Recensa</span>
               </div>
               <div className="hidden">
-                Модель: <span itemProp="model">{product().name}</span>
+                Модель:{" "}
+                <span itemProp="model">{"recensa" || product().name}</span>
               </div>
             </>
           )}
