@@ -69,7 +69,7 @@ export default function ItemsList({
         <div className="hidden">{data.length || 0}</div>
         <meta content={data.length || 0} itemProp="offerCount" />
         <div className="hidden">Цена от 5000 руб.</div>
-        <meta itemProp="price" content="5000" />
+        <meta itemProp="Price" content="5000" />
         <meta content="5000" itemProp="lowPrice" />
         <meta content="RUB" itemProp="priceCurrency" />
         <article className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
@@ -107,7 +107,7 @@ export default function ItemsList({
                   itemType="http://schema.org/Offer"
                 >
                   <div>Стоимость от 5000 руб.</div>
-                  <meta itemProp="price" content="5000" />
+                  <meta itemProp="Price" content="5000" />
                   <meta itemProp="priceCurrency" content="RUB" />
                   <meta content="5000" itemProp="lowPrice" />
                 </div>
