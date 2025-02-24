@@ -119,8 +119,8 @@ export default function Footer({ scrollTop = null }) {
           <a target="_blank" href="mailto:office@recensa.ru">
             office@recensa.ru
           </a>
-          <a target="_blank" href="tel:89999999999">
-            +7 999 999 99 99
+          <a target="_blank" href="tel:+73832092088">
+            +7 383 209 20 88
           </a>
         </div>
         <div className="flex gap-[10px] lg:justify-end">

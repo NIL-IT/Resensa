@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Slider({ slides, second }) {
+export default function Slider({ slides, second, recensaAbout }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   let currentWidth = document.body.offsetWidth;
   const [width, setWidth] = useState(currentWidth);
@@ -63,11 +63,11 @@ export default function Slider({ slides, second }) {
                     <div
                       className={` w-full xs:w-full sm:w-full 
                         md:w-[600px] lg:w-[650px] xl:w-[700px] 
-                        2xl:w-[750px] 3xl:w-[816px] h-[560px] 
-                        xs:h-[600px] sm:h-[620px] 
-                        md:h-[520px] 
-                        lg:h-[550px] xl:h-[590px] 2xl:h-[560px] 
-                        3xl:h-[558px] ${second ? "" : "bg-gray-100"}`}
+                        2xl:w-[750px] 3xl:w-[816px] h-[360px] 
+                        xs:h-[400px] sm:h-[420px] 
+                        md:h-[420px] 
+                        lg:h-[450px] xl:h-[490px] 2xl:h-[460px] 
+                        3xl:h-[458px] ${second ? "" : "bg-gray-100"}`}
                     >
                       <div
                         className={` h-[150px] xs:h-[170px] sm:h-[190px] md:h-[210px] lg:h-[230px] xl:h-[250px] 2xl:h-[260px] 3xl:h-[272px]
@@ -98,7 +98,10 @@ export default function Slider({ slides, second }) {
                         />
                       </div>
                       <div className="px-[20px] xs:px-[25px] sm:px-[30px] md:px-[35px] lg:px-[40px] xl:px-[45px] pb-[30px] xs:pb-[35px] sm:pb-[40px] md:pb-[45px] lg:pb-[50px] xl:pb-[52px]">
-                        <h3
+                        <p className="text-gray-400 uppercase text-md xs:lg sm:text-xl ">
+                          {description}
+                        </p>
+                        {/* <h3
                           className="text-gray-400 uppercase text-lg xs:text-xl sm:text-2xl leading-[30px] 
                           xs:leading-[35px] sm:leading-[40px] md:leading-[45px] 
                           lg:leading-[50px] xl:leading-[56px]"
@@ -107,7 +110,7 @@ export default function Slider({ slides, second }) {
                         </h3>
                         <p className="xl:max-w-[90%] 2xl:max-w-[100%] text-base xs:text-base sm:text-lg text-gray-400 leading-[18px] xs:leading-[19px] sm:leading-[20px] md:leading-[21px] lg:leading-[22px] xl:leading-[23px]">
                           {description}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                   )}

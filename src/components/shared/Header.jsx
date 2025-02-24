@@ -93,10 +93,10 @@ export default function Header() {
               </a>
               <a
                 target="_blank"
-                href="tel:89999999999"
+                href="tel:+73832092088"
                 className="hover:text-gray-600"
               >
-                +7 999 999 99 99
+                +7 383 209 20 88
               </a>
             </div>
             <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">

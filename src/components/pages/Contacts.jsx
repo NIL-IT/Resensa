@@ -123,10 +123,10 @@ const Contacts = () => {
               <a
                 itemProp="telephone"
                 target="_blank"
-                href="tel:+79999999999"
+                href="tel:+73832092088"
                 className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
               >
-                +7 999 999 99 99
+                +7 383 209 20 88
               </a>
 
               <div className="flex gap-3 xs:gap-4 py-4 xs:py-5 sm:py-6">

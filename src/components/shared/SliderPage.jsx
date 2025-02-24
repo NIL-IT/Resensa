@@ -31,7 +31,7 @@ export default function SliderPage({
             >
               {subTitle}
             </h3>
-            <div className="space-y-20 ">
+            <div className="space-y-10 ">
               <div
                 className="w-full xs:w-full sm:w-full md:w-[600px] 
             lg:w-[700px] xl:w-[750px] 2xl:w-[780px] 3xl:w-[813px] 
@@ -48,29 +48,15 @@ export default function SliderPage({
                 ))}
               </div>
               {!second && (
-                <>
-                  <div
-                    className=" xs:text-base sm:text-lg md:text-lg 
-            lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg  leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[23px]
-              space-y-3 lg:space-y-3
-               text-gray-400 "
-                  >
-                    <h4 className="text-gray-400 text-base  xl:text-xl font-normal">
-                      Recensa – это:
-                    </h4>
-                    <div className="pt-5 space-y-3 lg:space-y-3">
-                      {recensaAbout.map((text, i) => (
-                        <p key={i}>{text}</p>
-                      ))}
-                    </div>
-                  </div>
-                </>
+                <h3 className="text-gray-400 text-xl  xl:text-2xl  pb-10">
+                  Recensa – это:
+                </h3>
               )}
             </div>
           </div>
         </div>
       </div>
-      <Slider slides={slides} second={second} />
+      <Slider recensaAbout={recensaAbout} slides={slides} second={second} />
     </section>
   );
 }

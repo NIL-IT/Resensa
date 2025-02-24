@@ -70,10 +70,10 @@ const BurgerButton = ({ list, handleClickLink, isAdmin }) => {
                 </a>
                 <a
                   target="_blank"
-                  href="tel:89999999999"
+                  href="tel:+73832092088"
                   className="hover:text-gray-600"
                 >
-                  +7 999 999 99 99
+                  +7 383 209 20 88
                 </a>
               </div>
 
