@@ -87,7 +87,7 @@ export default function ItemsList({
             lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
             >
               <img
-                itemProp="image"
+                itemProp="Image"
                 className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px]"
                 src={image_card || "/img/placeholder.svg"}
                 alt={name}
@@ -106,7 +106,7 @@ export default function ItemsList({
                 itemType="http://schema.org/Offer"
               >
                 <div>Стоимость: 5000 руб.</div>
-                <meta itemProp="price" content="5000" />
+                <meta itemProp="Price" content="5000" />
 
                 <meta itemProp="priceCurrency" content="RUB" />
               </div>
