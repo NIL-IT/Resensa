@@ -193,6 +193,8 @@ export default function EquipmentBanner({
 
           <div
             className={`container pl-[20px] xs:pl-[0] ${
+              isProduct && "min-h-[400px]"
+            } ${
               about
                 ? `pt-[80px] xs:pt-[100px] sm:pt-[120px] md:pt-[150px] lg:pt-[200px] xl:pt-[250px] 2xl:pt-[300px] 3xl:pt-[300px] 3xl:pb-[94px]`
                 : ` ${
@@ -200,7 +202,7 @@ export default function EquipmentBanner({
                       ? `pt-[120px] 
           md:pt-[140px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
                       : `pt-[80px] xs:pt-[60px] 
-          md:pt-[130px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px] min-h-[400px]`
+          md:pt-[130px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px] `
                   }`
             }`}
           >
