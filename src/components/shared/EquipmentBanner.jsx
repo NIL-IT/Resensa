@@ -28,7 +28,7 @@ export default function EquipmentBanner({
   const [isProduct, setIsProduct] = useState(pathname.split("/").length === 3);
   useEffect(() => {
     if (!Array.isArray(list)) return;
-    console.log(list);
+
     const filterData = list.filter(
       (item) => item.id === equipmentById?.id || solutionsById?.id
     );
