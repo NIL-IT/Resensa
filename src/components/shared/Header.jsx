@@ -1,9 +1,8 @@
 import React from "react";
 import Button from "../ui/Button";
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import BurgerButton from "../ui/BurgerButton";
-
+import useLatinFormat from "../../utils/hooks/useLatinFormat";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeEquipmentId,
@@ -28,19 +27,12 @@ export default function Header() {
   ];
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  // const handleClickImg = async (path) => {
-  //   if (isAdmin) {
-  //     Cookies.remove("access_token");
-  //     await dispatch(changeIsAdmin(false));
-  //     navigate("/auth");
-  //   }
-  // };
   const handleClickLink = (i, path) => {
     if (!isAdmin && +i === 4) {
       dispatch(changeRoutingToOrders(true));
-      dispatch(changeEquipmentId(null));
+      dispatch(changeEquipmentId(equipment[0]));
       dispatch(changeSolutionsId(null));
-      return navigate(`/equipment/${equipment[0].id}`);
+      return navigate(`/equipment/${useLatinFormat(equipment[0].name)}`);
     }
     if (!isAdmin) {
       navigate(path);
@@ -66,7 +58,6 @@ export default function Header() {
         <Link
           to={isAdmin ? "https://new.recensa.ru/" : "/"}
           target={isAdmin ? "_blank" : "_self"}
-          // onClick={() => handleClickImg("/")}
           className="mb-0"
         >
           <img

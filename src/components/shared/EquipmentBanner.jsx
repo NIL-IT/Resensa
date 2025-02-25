@@ -20,22 +20,21 @@ export default function EquipmentBanner({
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { equipmentById, solutionsById } = useSelector(({ user }) => user);
-
   const [loading, isLoading] = useState(!currentProduct ? false : true);
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState(null);
   const [paddingClass, setPaddingClass] = useState("");
   const h1Ref = useRef(null);
-
+  const [isProduct, setIsProduct] = useState(pathname.split("/").length === 3);
   useEffect(() => {
-    if (!list) return;
+    if (!Array.isArray(list)) return;
+    console.log(list);
     const filterData = list.filter(
-      (item) => item.id === equipmentById || solutionsById
+      (item) => item.id === equipmentById?.id || solutionsById?.id
     );
-    setProduct(filterData);
-    console.log(product);
+    setProduct(filterData[0]);
     isLoading(false);
-  }, []);
+  }, [list, pathname]);
   let height;
   useLayoutEffect(() => {
     if (h1Ref.current) {
@@ -54,7 +53,6 @@ export default function EquipmentBanner({
   const [imageSrc, setImageSrc] = useState(
     product ? product?.image_banner : placeholderSrc
   );
-
   useEffect(() => {
     if (product) return;
     const img = new Image();
@@ -73,7 +71,6 @@ export default function EquipmentBanner({
       ? `Главная—Оборудование—${subtitle}`
       : `Главная—Решения—${subtitle}`;
   };
-
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -148,45 +145,52 @@ export default function EquipmentBanner({
             ))}
         </ul>
       </nav>
-      <div itemScope itemType="http://schema.org/Product">
-        <div itemScope itemType="http://schema.org/ImageObject">
-          <h2 className="hidden" itemProp="name">
-            {subtitle}
-          </h2>
-          <span className="hidden" itemProp="description">
-            {text}
-          </span>
-          <img
-            itemProp="image"
-            className={`absolute  brightness-50 object-cover object-center top-[30px] 
+      <div
+        {...(isProduct
+          ? { itemScope: true, itemType: "http://schema.org/Product" }
+          : {})}
+      >
+        <img
+          itemProp="image"
+          className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
-              product
-                ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
+            product
+              ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
-                : `
+              : `
               min-w-[100%] max-w-[1920px] 
               h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
-            }`}
-            src={imageSrc}
-            alt={subtitle}
-            title={subtitle}
-          />
-        </div>
-        <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
-          {product && (
+          }`}
+          src={imageSrc}
+          alt={subtitle}
+          title={subtitle}
+        />
+
+        <div
+          {...(isProduct
+            ? {
+                itemProp: "offers",
+                itemScope: true,
+                itemType: "http://schema.org/Offer",
+              }
+            : {})}
+        >
+          {isProduct && (
             <>
-              <div className="hidden">Стоимость 5000 руб.</div>
-              <meta itemProp="Price" content="5000" />
+              <meta itemProp="price" content="5000" />
               <meta itemProp="priceCurrency" content="RUB" />
-              <div className="hidden">
-                Производитель: <span itemProp="brand">Recensa</span>
+              <meta
+                itemProp="availability"
+                content="https://schema.org/InStock"
+              />
+              <div itemProp="price" className="hidden">
+                5000
               </div>
-              <div className="hidden">
-                Модель:{" "}
-                <span itemProp="model">{"recensa" || product().name}</span>
+              <div itemProp="priceCurrency" className="hidden">
+                RUB
               </div>
             </>
           )}
@@ -205,7 +209,7 @@ export default function EquipmentBanner({
             }`}
           >
             <Title
-              text={subtitle || product().name}
+              text={subtitle || product.name}
               className="font-norma text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
             />
             <h1
@@ -214,7 +218,7 @@ export default function EquipmentBanner({
               className="font-normal  text-lg leading-[28px] sm:text-xl  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
           xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white   uppercase"
             >
-              {title || product().sub_header}
+              {title || product.sub_header}
             </h1>
 
             <p
@@ -231,7 +235,7 @@ export default function EquipmentBanner({
                   : " text-xs sm:text-sm lg:text-lg xl:text-xl"
               }`}
             >
-              {text || product().header}
+              {text || product.header}
             </p>
             {isButton && (
               <Button

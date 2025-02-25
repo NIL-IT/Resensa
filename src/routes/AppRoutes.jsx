@@ -56,7 +56,6 @@ export default function AppRoutes({ equipment, solutions, banner, news }) {
               dolore magna aliqua. Ut enim ad minim 
               veniam, quis nostrud exercitation ullamco 
               laboris nisi ut aliquip ex ea commodo consequat. 
-
 `}
             data={solutions}
             bannerImg={"/img/newsol_banner.png"}

@@ -4,10 +4,13 @@ import Cookies from "js-cookie";
 import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeEquipmentId,
   changeIsAdmin,
   changeRoutingToOrders,
   changeShowPopup,
+  changeSolutionsId,
 } from "../../utils/slice/userSlice";
+import useLatinFormat from "../../utils/hooks/useLatinFormat";
 
 const navList = [
   { name: "Главная", path: "/" },
@@ -28,9 +31,9 @@ export default function Footer({ scrollTop = null }) {
   const handleClickLink = async (i, path) => {
     if (!isAdmin && +i == 4) {
       await dispatch(changeRoutingToOrders(true));
-      dispatch(changeEquipmentId(null));
+      dispatch(changeEquipmentId(equipment[0]));
       dispatch(changeSolutionsId(null));
-      return navigate(`/equipment/${equipment[0].id}`);
+      return navigate(`/equipment/${useLatinFormat(equipment[0].name)}`);
     }
     if (!isAdmin) {
       navigate(path);
