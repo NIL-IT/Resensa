@@ -35,7 +35,7 @@ export default function Banner({ banner }) {
           <div className="xs:flex xs:gap-5 xl:block md:w-[290px] xl:w-[312px]">
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
-            3xl:text-[48px] text-gray-400"
+            3xl:text-[48px] text-gray-400 min-w-[50px]"
             >
               {banner.first_value || "22"}
             </span>
@@ -52,7 +52,7 @@ export default function Banner({ banner }) {
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] 
             md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
-            3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto]"
+            3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto] min-w-[50px]"
             >
               {banner.second_value || `3`}
             </span>

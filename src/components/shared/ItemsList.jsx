@@ -61,12 +61,11 @@ export default function ItemsList({
           itemType="http://schema.org/AggregateOffer"
           itemScope=""
           itemProp="offers"
-          className="w-full flex-center flex-col mx-auto justify-center    2xl:w-[1178px]"
+          className="w-full flex-center flex-col mx-auto justify-center 2xl:w-[1178px]"
         >
-          <div className="hidden">{data.length || 0}</div>
+          <div className="invisible w-0 h-0">{data.length || 0}</div>
           <meta content={data.length || 0} itemProp="offerCount" />
-          <div className="hidden">Цена от 5000 руб.</div>
-          <meta itemProp="Price" content="5000" />
+          <div className="invisible w-0 h-0">Цена от 5000 руб.</div>
           <meta content="5000" itemProp="lowPrice" />
           <meta content="RUB" itemProp="priceCurrency" />
         </div>
@@ -83,7 +82,8 @@ export default function ItemsList({
             }
             onClick={() => handleClickItem(id)}
             key={id}
-            className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
+            className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] 
+            lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
           >
             <img
               itemProp="image"
@@ -98,22 +98,23 @@ export default function ItemsList({
             >
               {name}
             </h3>
+            <div
+              className="invisible  w-0 h-0"
+              itemProp="offers"
+              itemScope
+              itemType="http://schema.org/Offer"
+            >
+              <div>5000</div>
+              <meta itemProp="price" content="5000" />
+              <meta itemProp="priceCurrency" content="RUB" />
+            </div>
+            <div className="invisible w-0 h-0">
+              Производитель: <span itemProp="brand">Recensa</span>
+            </div>
+            <div className="invisible w-0 h-0">
+              Модель: <span itemProp="model">{name}</span>
+            </div>
             <div className="flex-center justify-between gap-2">
-              <div
-                itemProp="offers"
-                itemScope
-                itemType="http://schema.org/Offer"
-              >
-                <div className="hidden">5000</div>
-                <meta itemProp="price" content="5000" />
-                <meta itemProp="priceCurrency" content="RUB" />
-              </div>
-              <div className="hidden">
-                Производитель: <span itemProp="brand">Recensa</span>
-              </div>
-              <div className="hidden">
-                Модель: <span itemProp="model">{name}</span>
-              </div>
               <div
                 itemProp="description"
                 className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"

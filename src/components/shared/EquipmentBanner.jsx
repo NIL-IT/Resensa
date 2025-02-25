@@ -44,7 +44,7 @@ export default function EquipmentBanner({
            md:pb-[80px] lg:pb-[130px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`);
       } else {
-        setPaddingClass(`pb-[30px] xs:pb-[40px] sm:pb-[30px] 
+        setPaddingClass(`pb-[15px] xs:pb-[0px] sm:pb-[20px] 
            md:pb-[65px] lg:pb-[95px]  
           xl:pb-[110px] 2xl:pb-[180px] 3xl:pb-[230px]`);
       }
@@ -81,11 +81,11 @@ export default function EquipmentBanner({
   ) : (
     <section
       className={`relative ${
-        !about && !product
-          ? `pb-[50px] xs:pb-[30px] sm:pb-[60px] 
+        !about && !isProduct
+          ? `pb-[50px] xs:pb-[30px] sm:pb-[auto] 
       md:pb-[105px] lg:pb-[160px]  
      xl:pb-[205px] 2xl:pb-[240px] 3xl:pb-[286px]`
-          : product
+          : isProduct
           ? paddingClass
           : ""
       }`}
@@ -155,7 +155,7 @@ export default function EquipmentBanner({
           className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
-            product
+            isProduct
               ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
               : `
@@ -179,20 +179,16 @@ export default function EquipmentBanner({
             : {})}
         >
           {isProduct && (
-            <>
+            <div className="invisible w-0 h-0">
               <meta itemProp="price" content="5000" />
               <meta itemProp="priceCurrency" content="RUB" />
               <meta
                 itemProp="availability"
                 content="https://schema.org/InStock"
               />
-              <div itemProp="price" className="hidden">
-                5000
-              </div>
-              <div itemProp="priceCurrency" className="hidden">
-                RUB
-              </div>
-            </>
+              <div itemProp="price">5000</div>
+              <div itemProp="priceCurrency">RUB</div>
+            </div>
           )}
 
           <div
@@ -203,14 +199,14 @@ export default function EquipmentBanner({
                     height <= 76
                       ? `pt-[120px] 
           md:pt-[140px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
-                      : `pt-[80px] xs:pt-[90px] 
-          md:pt-[130px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
+                      : `pt-[80px] xs:pt-[60px] 
+          md:pt-[130px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px] min-h-[400px]`
                   }`
             }`}
           >
             <Title
               text={subtitle || product.name}
-              className="font-norma text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px]"
+              className="font-norma text-sm sm:text-md leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
             />
             <h1
               itemProp="name"
@@ -223,7 +219,7 @@ export default function EquipmentBanner({
 
             <p
               itemProp="description"
-              className={` text-white mt-3 mb-3 xs:mb-[20px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
+              className={` text-white mt-3 mb-8 xs:mb-[40px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
             lg:mb-[33px] lg:mt-[20px] xl:mt-[30px] 2xl:mt-[65px] 
             ${about ? "text-sm xl:text-lg" : ""} ${
                 width
