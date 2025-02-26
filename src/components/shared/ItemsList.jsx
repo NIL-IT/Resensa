@@ -74,19 +74,15 @@ export default function ItemsList({
             src="/img/banner_main.png"
             alt={title ? title : getTitle ? "Оборудование" : "решения"}
           />
+          <div itemProp="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemProp="name" content="Recensa" />
+          </div>
           <meta itemProp="reviewBody" content="Высокое качество продукции" />
           <div
             itemProp="reviewRating"
             itemScope
             itemType="http://schema.org/Rating"
           >
-            <div
-              itemprop="author"
-              itemscope
-              itemtype="http://schema.org/Person"
-            >
-              <meta itemprop="name" content="Recensa" />
-            </div>
             <meta itemProp="ratingValue" content="5" />
             <meta itemProp="bestRating" content="5" />
           </div>
