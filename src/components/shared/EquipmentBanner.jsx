@@ -16,6 +16,7 @@ export default function EquipmentBanner({
   currentProduct,
   list,
   placeholderSrc,
+  cardImg,
 }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -27,14 +28,13 @@ export default function EquipmentBanner({
   const h1Ref = useRef(null);
   const [isProduct, setIsProduct] = useState(pathname.split("/").length === 3);
   useEffect(() => {
-    if (!Array.isArray(list)) return;
-
+    if (!list) return;
     const filterData = list.filter(
       (item) => item.id === equipmentById?.id || solutionsById?.id
     );
     setProduct(filterData[0]);
     isLoading(false);
-  }, [list, pathname]);
+  }, [equipmentById, solutionsById]);
   let height;
   useLayoutEffect(() => {
     if (h1Ref.current) {
@@ -151,7 +151,13 @@ export default function EquipmentBanner({
           : {})}
       >
         <img
+          className="hidden"
+          src={cardImg ? cardImg : ""}
+          alt={subtitle ? subtitle : ""}
           itemProp="image"
+          title={subtitle ? subtitle : ""}
+        />
+        <img
           className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${

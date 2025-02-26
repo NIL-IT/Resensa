@@ -151,6 +151,7 @@ export default function ProductItem({ list }) {
           list={list}
           currentProduct={true}
           bannerImg={currentProduct.image_banner}
+          cardImg={currentProduct.image_card}
           title={currentProduct.sub_header}
           subtitle={currentProduct.name}
           text={currentProduct.header}
