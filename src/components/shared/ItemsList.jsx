@@ -80,6 +80,13 @@ export default function ItemsList({
             itemScope
             itemType="http://schema.org/Rating"
           >
+            <div
+              itemprop="author"
+              itemscope
+              itemtype="http://schema.org/Person"
+            >
+              <meta itemprop="name" content="Recensa" />
+            </div>
             <meta itemProp="ratingValue" content="5" />
             <meta itemProp="bestRating" content="5" />
           </div>
