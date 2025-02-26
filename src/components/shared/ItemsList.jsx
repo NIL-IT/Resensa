@@ -140,7 +140,7 @@ export default function ItemsList({
               >
                 {name}
               </h3>
-              <meta itemProp="brand" content="Recensa" />
+
               <meta itemProp="sku" content={id} />
               <div
                 className="invisible w-0 h-0"
