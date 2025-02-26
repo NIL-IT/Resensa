@@ -68,7 +68,11 @@ export default function ItemsList({
           itemScope
           itemType="http://schema.org/Review"
         >
-          <meta itemProp="author" content="Пользователь Recensa" />
+          <img
+            itemProp="image"
+            src="/img/banner_main.png"
+            alt={title ? title : getTitle ? "Оборудование" : "решения"}
+          />
           <meta itemProp="reviewBody" content="Высокое качество продукции" />
           <div
             itemProp="reviewRating"
@@ -99,6 +103,7 @@ export default function ItemsList({
           <div className="invisible w-0 h-0">{data.length || 0}</div>
           <meta content={data.length || 0} itemProp="offerCount" />
           <div className="invisible w-0 h-0">Цена от 5000 руб.</div>
+          <meta itemProp="price" content="5000" />
           <meta content="5000" itemProp="lowPrice" />
           <meta content="RUB" itemProp="priceCurrency" />
           <meta itemProp="availability" content="https://schema.org/InStock" />
@@ -135,13 +140,13 @@ export default function ItemsList({
                 {name}
               </h3>
               <div
-                className="invisible  w-0 h-0"
+                className="invisible w-0 h-0"
                 itemProp="offers"
                 itemScope
                 itemType="http://schema.org/Offer"
               >
                 <div>Стоимость: 5000 руб.</div>
-                <meta itemProp="Price" content="5000" />
+                <meta itemProp="price" content="5000" />
                 <meta itemProp="priceCurrency" content="RUB" />
                 <meta
                   itemProp="availability"

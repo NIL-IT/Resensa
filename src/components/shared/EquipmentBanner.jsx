@@ -150,13 +150,16 @@ export default function EquipmentBanner({
           ? { itemScope: true, itemType: "http://schema.org/Product" }
           : {})}
       >
-        <img
-          className="hidden"
-          src={cardImg ? cardImg : ""}
-          alt={subtitle ? subtitle : ""}
-          itemProp="image"
-          title={subtitle ? subtitle : ""}
-        />
+        {isProduct && (
+          <img
+            className="hidden"
+            src={cardImg ? cardImg : ""}
+            alt={subtitle ? subtitle : ""}
+            itemProp="image"
+            title={subtitle ? subtitle : ""}
+          />
+        )}
+
         <img
           className={`absolute  brightness-50 object-cover object-center top-[30px] 
           left-0 w-full    
