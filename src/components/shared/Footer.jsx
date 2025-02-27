@@ -47,7 +47,7 @@ export default function Footer({ scrollTop = null }) {
   };
 
   return (
-    <footer className="pl-5 xs:pl-0 container py-[50px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
+    <footer className="pl-5 xs:pl-0 container py-[51px] xs:py-[55px] sm:py-[60px] md:py-[70px] lg:py-[75px] xl:py-[80px] 2xl:py-[82px] 3xl:py-[85px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 relative">
       <span itemScope itemType="https://schema.org/WPFooter" className="hidden">
         <meta itemProp="copyrightYear" content="2025" />
         <meta itemProp="copyrightHolder" content="Recensa" />
