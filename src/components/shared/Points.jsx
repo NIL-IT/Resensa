@@ -25,7 +25,7 @@ const list = [
 ];
 export default function Points() {
   return (
-    <section className="container pb-12 md:pb-20 lg:pb-[124px] pt-0 mt-0">
+    <section className="container pb-12 md:pb-20 lg:pb-[125px] pt-0 mt-0">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-6 xl:gap-4">
         {list.map((item, i) => (
           <article key={i} className="relative xl:w-[300px] 2xl:w-[380px]">

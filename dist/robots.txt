@@ -1,0 +1,19 @@
+User-agent: Yandex
+Disallow: /admin
+Disallow: /auth
+Disallow: *?s=
+Disallow: *?p=
+
+User-agent: Googlebot
+Disallow: /admin
+Disallow: /auth
+Disallow: *?s=
+Disallow: *?p=
+
+User-agent: *
+Disallow: /admin
+Disallow: /auth
+Disallow: *?s=
+Disallow: *?p=
+
+Sitemap: https://new.recensa.ru/sitemap.xml
