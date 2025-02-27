@@ -1,5 +1,4 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { changeShowPopup } from "../../utils/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,7 +39,7 @@ export default function EquipmentBanner({
     if (h1Ref.current) {
       height = h1Ref.current.offsetHeight;
       if (height <= 55) {
-        setPaddingClass(`pb-[50px] xs:pb-[60px] sm:pb-[20px] 
+        setPaddingClass(`pb-[50px] xs:pb-[40px] sm:pb-[20px] 
            md:pb-[80px] lg:pb-[130px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`);
       } else {
@@ -53,6 +52,7 @@ export default function EquipmentBanner({
   const [imageSrc, setImageSrc] = useState(
     product ? product?.image_banner : placeholderSrc
   );
+
   useEffect(() => {
     if (product) return;
     const img = new Image();
@@ -71,6 +71,7 @@ export default function EquipmentBanner({
       ? `Главная—Оборудование—${subtitle}`
       : `Главная—Решения—${subtitle}`;
   };
+
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -215,19 +216,19 @@ export default function EquipmentBanner({
                   }`
             }`}
           >
-            <Title
-              text={subtitle || product.name}
-              className="font-norma text-sm sm:text-md leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
-            />
             <h1
               itemProp="name"
+              className="font-norma text-sm sm:text-md leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
+            >
+              {subtitle || product.name}
+            </h1>
+            <h2
               ref={h1Ref}
               className="font-normal  text-lg leading-[28px] sm:text-xl  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
-          xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white   uppercase"
+          xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white uppercase"
             >
               {title || product.sub_header}
-            </h1>
-
+            </h2>
             <p
               itemProp="description"
               className={` text-white mt-3 mb-8 xs:mb-[40px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
