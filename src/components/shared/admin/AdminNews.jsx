@@ -62,7 +62,7 @@ export default function AdminNews() {
         <div>Загрузка...</div>
       ) : (
         <div className="flex justify-center lg:justify-center">
-          <div className="max-h-[440px] overflow-y-scroll grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+          <div className="max-h-[440px] overflow-y-auto grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
             {news.map(({ id, name, image, date, title }) => (
               <article
                 key={id}

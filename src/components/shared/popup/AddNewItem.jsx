@@ -281,7 +281,9 @@ const AddNewItem = () => {
             htmlFor="message"
             className="block w-full text-xs xs:text-sm text-gray-900"
           >
-            {!isNews ? "Описание" : "Текст новости"}
+            {!isNews
+              ? "Описание"
+              : "Текст новости. Вставьте знак / чтобы сделать абзац"}
           </label>
           <textarea
             id="message"
