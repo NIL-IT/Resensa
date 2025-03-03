@@ -13,6 +13,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
 import EquipmentType from "./components/shared/popup/EquipmentType";
+import SitemapGenerator from "./sitemap.xml";
 
 const Popup = lazy(() => import("./components/shared/popup/Popup"));
 
@@ -75,6 +76,7 @@ function App() {
         await dispatch(getAllEquipment());
         await dispatch(getAllSolutions());
         await dispatch(getBanner());
+        SitemapGenerator(equipment, solutions);
       } catch (error) {
         console.error(error);
       }
