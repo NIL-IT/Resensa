@@ -52,7 +52,7 @@ export default function EquipmentBanner({
   const [imageSrc, setImageSrc] = useState(
     product ? "/img/product_placeholder.png" : placeholderSrc
   );
-  console.log(currentProduct);
+
   useEffect(() => {
     const img = new Image();
     if (product) {
@@ -77,7 +77,7 @@ export default function EquipmentBanner({
       ? `Главная—Оборудование—${subtitle}`
       : `Главная—Решения—${subtitle}`;
   };
-  console.log(product);
+
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
