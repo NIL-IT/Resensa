@@ -50,19 +50,25 @@ export default function EquipmentBanner({
     }
   }, [product]);
   const [imageSrc, setImageSrc] = useState(
-    product ? product?.image_banner : placeholderSrc
+    product ? "/img/product_placeholder.png" : placeholderSrc
   );
-
+  console.log(currentProduct);
   useEffect(() => {
-    if (product) return;
     const img = new Image();
-    img.src = bannerImg;
-    img.onload = () => {
-      setImageSrc(bannerImg);
-    };
+    if (product) {
+      img.src = product.image_banner;
+      img.onload = () => {
+        setImageSrc(product.image_banner);
+      };
+    } else {
+      img.src = bannerImg;
+      img.onload = () => {
+        setImageSrc(bannerImg);
+      };
+    }
   }, [bannerImg]);
+  const isEquipment = pathname.split("/")[1] === "equipment";
   const generatePathName = () => {
-    const isEquipment = pathname.split("/")[1] === "equipment";
     const path = pathname.split("/").pop();
     if (path === "equipment") return "Главная—Оборудование";
     if (path === "solutions") return "Главная—Решения";
@@ -223,7 +229,7 @@ export default function EquipmentBanner({
                     height <= 76
                       ? `pt-[120px] 
           md:pt-[140px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px]`
-                      : `pt-[80px] xs:pt-[60px] 
+                      : `pt-[100px] xs:pt-[100px] 
           md:pt-[130px] lg:pt-[160px] xl:pt-[180px] 2xl:pt-[200px] 3xl:pt-[250px] `
                   }`
             }`}

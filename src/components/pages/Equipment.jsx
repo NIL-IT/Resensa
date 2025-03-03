@@ -19,7 +19,6 @@ export default function Equipment({
 }) {
   const { pathname } = useLocation();
   const { equipment, solutions } = useSelector(({ user }) => user);
-  console.log(equipment, solutions);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeItemId(null));
@@ -33,31 +32,19 @@ export default function Equipment({
   return (
     <>
       <Helmet>
-        <title>
-          {isEquipment ? equipment[0].page_title : solutions[0].page_title}
-        </title>
+        <title>{`Recensa - ${title}`}</title>
         <meta
           name="description"
-          content={
-            isEquipment
-              ? equipment[0].page_description
-              : solutions[0].page_description
-          }
-        />
-        <meta
-          name="keywords"
-          content={
-            isEquipment
-              ? equipment[0].page_keywords
-              : solutions[0].page_keywords
-          }
+          content={`${title} от RECENSA. ${
+            text.split(".")[0]
+          }. Профессиональные решения для вентиляции и кондиционирования.`}
         />
         {/* <!-- Open Graph --> */}
         <meta
           property="og:title"
-          content={
-            isEquipment ? equipment[0].page_title : solutions[0].page_title
-          }
+          content={`Recensa - Вентиляционное ${
+            isEquipment ? "оборудование" : "решения"
+          }`}
         />
         <meta
           property="og:url"

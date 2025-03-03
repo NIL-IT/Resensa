@@ -122,21 +122,19 @@ export default function ProductItem({ list }) {
   return list.length > 0 ? (
     <>
       <Helmet>
-        <title>{`${currentProduct.name} - Recensa`}</title>
-        <meta
-          name="description"
-          content={`${currentProduct.name}. ${currentProduct.header}. Профессиональные решения для вентиляции от RECENSA.`}
-        />
+        <title>{currentProduct.page_title}</title>
+        <meta name="description" content={currentProduct.page_description} />
+        <meta name="keywords" content={currentProduct.page_keywords} />
         {/* <!-- Open Graph --> */}
+        <meta property="og:title" content={currentProduct.page_title} />
         <meta
-          property="og:title"
-          content={`Recensa - ${
+          property="og:url"
+          content={`https://new.recensa.ru/${
             isEquipment
-              ? `Вентиляционное оборудование ${currentProduct.name}`
-              : `Вентиляционное решение ${currentProduct.name}`
+              ? `equipment/${pathname.split("/")[2]}`
+              : `solutions/${pathname.split("/")[2]}`
           }`}
         />
-        <meta property="og:url" content="https://new.recensa.ru/" />
         <link
           rel="canonical"
           href={`https://new.recensa.ru/${
