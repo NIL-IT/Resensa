@@ -135,6 +135,13 @@ export const createEquipment = createAsyncThunk(
       formData.append("min_param", minParamNum);
       formData.append("max_param", maxParamNum);
 
+      formData.append("image_banner_alt", data.image_banner_alt);
+
+      formData.append("image_card_alt", data.image_card_alt);
+      formData.append("page_description", data.page_description);
+
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
       const res = await api.post("/equipments/", formData);
       return res.data;
     } catch (err) {
@@ -174,6 +181,13 @@ export const updateEquipment = createAsyncThunk(
     formData.append("min_param", data.min_param);
     formData.append("max_param", data.max_param);
 
+    formData.append("image_banner_alt", data.image_banner_alt);
+
+    formData.append("image_card_alt", data.image_card_alt);
+    formData.append("page_description", data.page_description);
+
+    formData.append("page_title", data.page_title);
+    formData.append("page_keywords", data.page_keywords);
     try {
       const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
@@ -232,7 +246,13 @@ export const createSolutions = createAsyncThunk(
       formData.append("image_card", data.image_card);
       formData.append("sub_header", data.sub_header);
       formData.append("header", data.header);
+      formData.append("image_banner_alt", data.image_banner_alt);
 
+      formData.append("image_card_alt", data.image_card_alt);
+      formData.append("page_description", data.page_description);
+
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -264,6 +284,13 @@ export const updateSolutions = createAsyncThunk(
     formData.append("header", data.header);
     formData.append("sub_header", data.sub_header);
 
+    formData.append("image_banner_alt", data.image_banner_alt);
+
+    formData.append("image_card_alt", data.image_card_alt);
+    formData.append("page_description", data.page_description);
+
+    formData.append("page_title", data.page_title);
+    formData.append("page_keywords", data.page_keywords);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
       return res.data;

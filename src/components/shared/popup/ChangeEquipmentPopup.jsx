@@ -39,6 +39,11 @@ const ChangeEquipmentPopup = () => {
           description: findProduct?.description || "",
           sub_header: findProduct?.sub_header || "",
           header: findProduct?.header || "",
+          image_banner_alt: findProduct?.image_banner_alt || "",
+          image_card_alt: findProduct?.image_card_alt || "",
+          page_description: findProduct?.page_description || "",
+          page_title: findProduct?.page_title || "",
+          page_keywords: findProduct?.page_keywords || "",
         }
       : {
           name: findProduct?.name || "",
@@ -47,6 +52,11 @@ const ChangeEquipmentPopup = () => {
           max_param: findProduct?.max_param || "",
           sub_header: findProduct?.sub_header || "",
           header: findProduct?.header || "",
+          image_banner_alt: findProduct?.image_banner_alt || "",
+          image_card_alt: findProduct?.image_card_alt || "",
+          page_description: findProduct?.page_description || "",
+          page_title: findProduct?.page_title || "",
+          page_keywords: findProduct?.page_keywords || "",
         };
 
     if (findProduct?.image) {
@@ -88,6 +98,11 @@ const ChangeEquipmentPopup = () => {
             max_param: parseInt(formData.max_param),
             sub_header: formData?.sub_header,
             header: formData?.header,
+            image_banner_alt: formData?.image_banner_alt,
+            image_card_alt: formData?.image_card_alt,
+            page_description: formData?.page_description,
+            page_title: formData?.page_title,
+            page_keywords: formData?.page_keywords,
           };
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: equipmentData })
@@ -100,6 +115,11 @@ const ChangeEquipmentPopup = () => {
             image_banner: selectedFileBanner,
             sub_header: formData?.sub_header,
             header: formData?.header,
+            image_banner_alt: formData?.image_banner_alt,
+            image_card_alt: formData?.image_card_alt,
+            page_description: formData?.page_description,
+            page_title: formData?.page_title,
+            page_keywords: formData?.page_keywords,
           };
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: solutionData })
@@ -170,6 +190,19 @@ const ChangeEquipmentPopup = () => {
                 findProduct={findProduct}
                 onFileSelect={setSelectedFileBanner}
               />
+              <div className="space-y-2 mt-2">
+                <p className="w-full text-sm text-gray-900">
+                  Alt-тег для баннера
+                </p>
+                <Input
+                  type="text"
+                  name="image_banner_alt"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.image_banner_alt}
+                  onChange={handleInputChange}
+                  placeholder="Описание изображения баннера"
+                />
+              </div>
             </div>
           )}
 
@@ -181,7 +214,23 @@ const ChangeEquipmentPopup = () => {
               findProduct={findProduct}
               onFileSelect={setSelectedFile}
             />
+            {!isNews && (
+              <div className="space-y-2 mt-2">
+                <p className="w-full text-sm text-gray-900">
+                  Alt-тег для карточки
+                </p>
+                <Input
+                  type="text"
+                  name="image_card_alt"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.image_card_alt}
+                  onChange={handleInputChange}
+                  placeholder="Описание изображения карточки"
+                />
+              </div>
+            )}
           </div>
+
           {isNews ? (
             <>
               <div className="space-y-2">
@@ -299,6 +348,55 @@ const ChangeEquipmentPopup = () => {
                   </div>
                 </>
               )}
+
+              {/* SEO Information Section */}
+              <div className="border-t border-gray-200 pt-4 space-y-[18px]">
+                <h3 className="text-lg font-medium text-gray-900">
+                  SEO информация
+                </h3>
+
+                <div className="space-y-2">
+                  <p className="w-full text-sm text-gray-900">
+                    Заголовок страницы (Title)
+                  </p>
+                  <Input
+                    type="text"
+                    name="page_title"
+                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    value={formData.page_title}
+                    onChange={handleInputChange}
+                    placeholder="Заголовок для SEO"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <p className="w-full text-sm text-gray-900">
+                    Описание страницы (Description)
+                  </p>
+                  <textarea
+                    name="page_description"
+                    rows="3"
+                    onChange={handleInputChange}
+                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    value={formData.page_description}
+                    placeholder="Краткое описание для поисковых систем"
+                  ></textarea>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="w-full text-sm text-gray-900">
+                    Ключевые слова (Keywords)
+                  </p>
+                  <Input
+                    type="text"
+                    name="page_keywords"
+                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    value={formData.page_keywords}
+                    onChange={handleInputChange}
+                    placeholder="Ключевые слова через запятую"
+                  />
+                </div>
+              </div>
             </>
           )}
 

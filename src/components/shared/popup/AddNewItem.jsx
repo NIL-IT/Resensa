@@ -34,6 +34,11 @@ const AddNewItem = () => {
         description: "",
         sub_header: "",
         header: "",
+        image_banner_alt: "",
+        image_card_alt: "",
+        page_description: "",
+        page_title: "",
+        page_keywords: "",
       };
     } else {
       return {
@@ -43,6 +48,11 @@ const AddNewItem = () => {
         max_param: "",
         sub_header: "",
         header: "",
+        image_banner_alt: "",
+        image_card_alt: "",
+        page_description: "",
+        page_title: "",
+        page_keywords: "",
       };
     }
   });
@@ -102,6 +112,11 @@ const AddNewItem = () => {
           max_param: parseInt(formData.max_param),
           sub_header: formData.sub_header,
           header: formData.header,
+          image_banner_alt: formData.image_banner_alt,
+          image_card_alt: formData.image_card_alt,
+          page_description: formData.page_description,
+          page_title: formData.page_title,
+          page_keywords: formData.page_keywords,
         };
         await dispatch(createEquipment(equipmentData)).unwrap();
         await dispatch(getAllEquipment());
@@ -112,6 +127,11 @@ const AddNewItem = () => {
           max_param: "",
           sub_header: "",
           header: "",
+          image_banner_alt: "",
+          image_card_alt: "",
+          page_description: "",
+          page_title: "",
+          page_keywords: "",
         });
       } else if (+pathnameId === 3) {
         if (
@@ -134,6 +154,11 @@ const AddNewItem = () => {
           image_banner: selectedFileBanner,
           sub_header: formData.sub_header,
           header: formData.header,
+          image_banner_alt: formData.image_banner_alt,
+          image_card_alt: formData.image_card_alt,
+          page_description: formData.page_description,
+          page_title: formData.page_title,
+          page_keywords: formData.page_keywords,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
@@ -142,6 +167,11 @@ const AddNewItem = () => {
           description: "",
           sub_header: "",
           header: "",
+          image_banner_alt: "",
+          image_card_alt: "",
+          page_description: "",
+          page_title: "",
+          page_keywords: "",
         });
       }
 
@@ -200,6 +230,19 @@ const AddNewItem = () => {
                 banner={true}
                 onFileSelect={setSelectedFileBanner}
               />
+              <div className="space-y-2 mt-2">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
+                  Alt-тег для баннера
+                </p>
+                <Input
+                  type="text"
+                  name="image_banner_alt"
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.image_banner_alt}
+                  onChange={handleInputChange}
+                  placeholder="Описание изображения баннера"
+                />
+              </div>
             </div>
           )}
           <div>
@@ -207,6 +250,21 @@ const AddNewItem = () => {
               Изображение для карточки
             </p>
             <ImageUploader onFileSelect={setSelectedFile} />
+            {!isNews && (
+              <div className="space-y-2 mt-2">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
+                  Alt-тег для карточки
+                </p>
+                <Input
+                  type="text"
+                  name="image_card_alt"
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.image_card_alt}
+                  onChange={handleInputChange}
+                  placeholder="Описание изображения карточки"
+                />
+              </div>
+            )}
           </div>
           <div className="space-y-2">
             <p className="w-full text-xs xs:text-sm text-gray-900">Название</p>
@@ -296,6 +354,56 @@ const AddNewItem = () => {
                   font-normal bg-gray-50 rounded-lg border
                    border-gray-300"
                   onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          )}
+
+          {!isNews && (
+            <div className="border-t border-gray-200 pt-4 space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]">
+              <h3 className="text-lg font-medium text-gray-900">
+                SEO информация
+              </h3>
+
+              <div className="space-y-2">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
+                  Заголовок страницы (Title)
+                </p>
+                <Input
+                  type="text"
+                  name="page_title"
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.page_title}
+                  onChange={handleInputChange}
+                  placeholder="Заголовок для SEO"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
+                  Описание страницы (Description)
+                </p>
+                <textarea
+                  name="page_description"
+                  rows="3"
+                  onChange={handleInputChange}
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.page_description}
+                  placeholder="Краткое описание для поисковых систем"
+                ></textarea>
+              </div>
+
+              <div className="space-y-2">
+                <p className="w-full text-xs xs:text-sm text-gray-900">
+                  Ключевые слова (Keywords)
+                </p>
+                <Input
+                  type="text"
+                  name="page_keywords"
+                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.page_keywords}
+                  onChange={handleInputChange}
+                  placeholder="Ключевые слова через запятую"
                 />
               </div>
             </div>
