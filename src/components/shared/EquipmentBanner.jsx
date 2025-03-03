@@ -71,7 +71,7 @@ export default function EquipmentBanner({
       ? `Главная—Оборудование—${subtitle}`
       : `Главная—Решения—${subtitle}`;
   };
-
+  console.log(product);
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -155,9 +155,9 @@ export default function EquipmentBanner({
           <img
             className="hidden"
             src={cardImg ? cardImg : ""}
-            alt={subtitle ? subtitle : ""}
+            alt={product ? product.image_card_alt : "Карточка товара"}
             itemProp="image"
-            title={subtitle ? subtitle : ""}
+            title={product ? product.image_card_alt : "Карточка товара"}
           />
         )}
 
@@ -175,8 +175,20 @@ export default function EquipmentBanner({
               max-h-[900px]`
           }`}
           src={imageSrc}
-          alt={subtitle}
-          title={subtitle}
+          alt={
+            product
+              ? product?.image_banner_alt
+              : isEquipment
+              ? "Баннер оборудования"
+              : "Баннер решений"
+          }
+          title={
+            product
+              ? product?.image_banner_alt
+              : isEquipment
+              ? "Баннер оборудования"
+              : "Баннер решений"
+          }
         />
 
         <div

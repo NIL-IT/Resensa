@@ -7,7 +7,7 @@ import Objects from "../shared/Objects";
 import Footer from "../shared/Footer";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 
 export default function Equipment({
@@ -18,6 +18,8 @@ export default function Equipment({
   placeholderSrc,
 }) {
   const { pathname } = useLocation();
+  const { equipment, solutions } = useSelector(({ user }) => user);
+  console.log(equipment, solutions);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeItemId(null));
@@ -31,19 +33,31 @@ export default function Equipment({
   return (
     <>
       <Helmet>
-        <title>{`Recensa - ${title}`}</title>
+        <title>
+          {isEquipment ? equipment[0].page_title : solutions[0].page_title}
+        </title>
         <meta
           name="description"
-          content={`${title} от RECENSA. ${
-            text.split(".")[0]
-          }. Профессиональные решения для вентиляции и кондиционирования.`}
+          content={
+            isEquipment
+              ? equipment[0].page_description
+              : solutions[0].page_description
+          }
+        />
+        <meta
+          name="keywords"
+          content={
+            isEquipment
+              ? equipment[0].page_keywords
+              : solutions[0].page_keywords
+          }
         />
         {/* <!-- Open Graph --> */}
         <meta
           property="og:title"
-          content={`Recensa - Вентиляционное ${
-            isEquipment ? "оборудование" : "решения"
-          }`}
+          content={
+            isEquipment ? equipment[0].page_title : solutions[0].page_title
+          }
         />
         <meta
           property="og:url"

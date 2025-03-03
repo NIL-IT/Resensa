@@ -65,76 +65,78 @@ export default function ItemsList({
 
         <div className="flex justify-center w-full">
           <article className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
-            {data.map(({ id, name, description, image_card }) => (
-              <Link
-                itemScope
-                itemType="http://schema.org/Product"
-                to={
-                  equipment
-                    ? `/equipment/${useLatinFormat(name)}`
-                    : `/solutions/${useLatinFormat(name)}`
-                }
-                onClick={() => handleClickItem(id)}
-                key={id}
-                className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] 
-            lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
-              >
-                <img
-                  itemProp="image"
-                  className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px]"
-                  src={image_card || "/img/placeholder.svg"}
-                  alt={name}
-                  title={name}
-                />
-                <h3
-                  itemProp="name"
-                  className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal my-1.5 xs:my-1.5 sm:my-2"
-                >
-                  {name}
-                </h3>
-                <meta itemProp="brand" content="Recensa" />
-                <meta itemProp="sku" content={id} />
-                <div
-                  className="invisible w-0 h-0"
-                  itemProp="offers"
+            {data.map(
+              ({ id, name, description, image_card, image_card_alt }) => (
+                <Link
                   itemScope
-                  itemType="http://schema.org/Offer"
+                  itemType="http://schema.org/Product"
+                  to={
+                    equipment
+                      ? `/equipment/${useLatinFormat(name)}`
+                      : `/solutions/${useLatinFormat(name)}`
+                  }
+                  onClick={() => handleClickItem(id)}
+                  key={id}
+                  className="max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] 
+            lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4"
                 >
-                  <meta itemProp="price" content="5000" />
-                  <meta itemProp="priceCurrency" content="RUB" />
-                  <meta
-                    itemProp="availability"
-                    content="https://schema.org/InStock"
+                  <img
+                    itemProp="image"
+                    className="object-cover h-[260px] w-[260px] xs:h-[275px] xs:w-[275px] sm:h-[290px] sm:w-[290px] md:h-[300px] md:w-[300px] lg:h-[310px] lg:w-[310px] xl:h-[315px] xl:w-[315px] 2xl:h-[318px] 2xl:w-[318px] 3xl:h-[320px] 3xl:w-[320px]"
+                    src={image_card || "/img/placeholder.svg"}
+                    alt={image_card_alt}
+                    title={image_card_alt}
                   />
-                  <meta
-                    itemProp="priceValidUntil"
-                    content={formattedPriceValidUntil}
-                  />
-                  <link
-                    itemProp="url"
-                    href={
-                      equipment
-                        ? `/equipment/${useLatinFormat(name)}`
-                        : `/solutions/${useLatinFormat(name)}`
-                    }
-                  />
-                </div>
-                <div className="flex-center justify-between gap-2">
-                  <div
-                    itemProp="description"
-                    className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"
+                  <h3
+                    itemProp="name"
+                    className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal my-1.5 xs:my-1.5 sm:my-2"
                   >
-                    {description}
+                    {name}
+                  </h3>
+                  <meta itemProp="brand" content="Recensa" />
+                  <meta itemProp="sku" content={id} />
+                  <div
+                    className="invisible w-0 h-0"
+                    itemProp="offers"
+                    itemScope
+                    itemType="http://schema.org/Offer"
+                  >
+                    <meta itemProp="price" content="5000" />
+                    <meta itemProp="priceCurrency" content="RUB" />
+                    <meta
+                      itemProp="availability"
+                      content="https://schema.org/InStock"
+                    />
+                    <meta
+                      itemProp="priceValidUntil"
+                      content={formattedPriceValidUntil}
+                    />
+                    <link
+                      itemProp="url"
+                      href={
+                        equipment
+                          ? `/equipment/${useLatinFormat(name)}`
+                          : `/solutions/${useLatinFormat(name)}`
+                      }
+                    />
                   </div>
-                  <Button
-                    noLink={true}
-                    onClick={() => handleChangeShowPopup(true, id)}
-                    text={"Оставить заявку"}
-                    className="w-[50%] py-[16px] px-[12px] hover:bg-gray-450"
-                  />
-                </div>
-              </Link>
-            ))}
+                  <div className="flex-center justify-between gap-2">
+                    <div
+                      itemProp="description"
+                      className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"
+                    >
+                      {description}
+                    </div>
+                    <Button
+                      noLink={true}
+                      onClick={() => handleChangeShowPopup(true, id)}
+                      text={"Оставить заявку"}
+                      className="w-[50%] py-[16px] px-[12px] hover:bg-gray-450"
+                    />
+                  </div>
+                </Link>
+              )
+            )}
           </article>
         </div>
       </div>
