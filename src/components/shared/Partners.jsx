@@ -73,6 +73,9 @@ export default function Partners() {
                   } ${
                     i === 0 &&
                     "translate-y-[-12px] lg:translate-y-[-14px] xl:translate-y-[-16px] 3xl:translate-y-[-18px]"
+                  } ${
+                    i === 5 &&
+                    "translate-y-[-4px] sm:translate-y-[-4px] md:translate-y-[-6px] lg:translate-y-[-6px] xl:translate-y-[-8px] "
                   }`}
                 />
               </article>
