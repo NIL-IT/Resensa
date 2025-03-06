@@ -76,7 +76,6 @@ function App() {
         await dispatch(getAllEquipment());
         await dispatch(getAllSolutions());
         await dispatch(getBanner());
-        SitemapGenerator(equipment, solutions);
       } catch (error) {
         console.error(error);
       }
@@ -85,7 +84,6 @@ function App() {
 
     fetchData();
   }, [dispatch]);
-
   return !loading ? (
     <HelmetProvider>
       <div className="relative">

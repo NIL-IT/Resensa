@@ -75,8 +75,8 @@ const SitemapGenerator = (equipment, solutions) => {
     )
     .join("")}
 </urlset>`;
+      console.log(sitemap);
     };
-
     generateSitemap();
   }, []);
 
