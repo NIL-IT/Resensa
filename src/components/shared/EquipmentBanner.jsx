@@ -176,7 +176,7 @@ export default function EquipmentBanner({
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
               : `
               min-w-[100%] max-w-[1920px] 
-              h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
+              h-[400px] sm:h-[500px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]
               max-h-[900px]`
           }`}
@@ -236,7 +236,7 @@ export default function EquipmentBanner({
           >
             <h1
               itemProp="name"
-              className="font-norma text-sm sm:text-md leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
+              className="font-normal text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
             >
               {subtitle || product.name}
             </h1>
