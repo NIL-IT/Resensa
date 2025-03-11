@@ -75,10 +75,10 @@ export default function Banner({ banner }) {
           />
         </div>
       </div>
-      <div className="mr-5 xs:mr-0">
+      <div className="mr-5 xs:mr-0 flex justify-center">
         <img
           className={`${imageSrc === imgPlaceholder ? "loading" : "loaded"}
-          w-full mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
+          w-[80%] mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
           xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]
           `}
           src={imageSrc}

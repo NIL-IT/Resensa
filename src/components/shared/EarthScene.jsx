@@ -177,7 +177,7 @@ function LocationMarker({
         <div className="flex flex-col items-start pt-1 relative">
           {/* Location name - always visible */}
           <div
-            className={`text-white text-opacity-80 text-[8px] xl:text-xs hover:text-blue-300 cursor-pointer whitespace-nowrap hover:opacity-100 absolute top-1 left-0 z-30 ${
+            className={`text-white text-opacity-90 text-[8px] xl:text-xs hover:text-[#4a90e2] transition-colors duration-300 cursor-pointer whitespace-nowrap  absolute top-1 left-0 z-30 ${
               title === "Офис Recensa Екатеринбург"
                 ? "top-[-32px] left-[-105px] xl:top-[-34px] xl:left-[-160px]"
                 : title === "Жилые комплексы"
@@ -271,7 +271,7 @@ function Earth({ index }) {
       onClick={(e) => e.stopPropagation()}
     >
       {/* Lighting */}
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.8} />
       <directionalLight position={[200, 200, 200]} intensity={0.7} castShadow />
       <directionalLight
         position={[-200, -200, -200]}
@@ -294,7 +294,7 @@ function Earth({ index }) {
           // Only show all locations when nothing is selected
           // OR show only the selected location when one is selected
           const shouldShow = selectedIdx === null || selectedIdx === idx;
-          console.log(selectedIdx);
+
           if (shouldShow) {
             return (
               <LocationMarker

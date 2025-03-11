@@ -29,6 +29,7 @@ export default function Equipment({
   }, [pathname]);
   document.body.style.overflowY = "auto";
   const isEquipment = pathname.split("/")[1] === "equipment";
+  console.log(isEquipment);
   return (
     <>
       <Helmet>
@@ -69,7 +70,12 @@ export default function Equipment({
           placeholderSrc={placeholderSrc}
         />
 
-        <ItemsList equipment={isEquipment} list={data} limited={false} />
+        <ItemsList
+          equipment={isEquipment}
+          list={data}
+          limited={false}
+          title={title}
+        />
         {/* <Calculator /> */}
         <Objects className={"mt-[20px]"} />
       </main>

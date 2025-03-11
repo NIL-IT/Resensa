@@ -21,13 +21,17 @@ export default function SliderPage({
       >
         <Title
           text={title}
-          className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10 inline-block"
+          className={`text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl border-b mb-6 xs:mb-7 sm:mb-8 md:mb-9 lg:mb-10 inline-block`}
         />
         <div className="flex justify-center">
           <div className="w-full xs:w-full sm:w-full md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1100px] 3xl:w-[1160px]">
             <h3
-              className="w-full text-gray-400 text-3xl leading-[41px] md:text-[48px] md:leading-[61px] xs:w-full 
-            sm:w-full md:w-[350px] lg:w-[370px] xl:w-[390px] 2xl:w-[400px] 3xl:w-[410px]"
+              className={`w-full text-gray-400 text-3xl leading-[41px] md:text-[48px] md:leading-[61px]
+                  ${
+                    !second
+                      ? ""
+                      : "md:w-[350px] lg:w-[370px] xl:w-[390px] 2xl:w-[400px] 3xl:w-[410px]"
+                  }`}
             >
               {subTitle}
             </h3>
@@ -47,11 +51,6 @@ export default function SliderPage({
                   <p key={i}>{p}</p>
                 ))}
               </div>
-              {!second && (
-                <h3 className="text-gray-400 text-xl  xl:text-2xl  pb-10">
-                  Recensa – это:
-                </h3>
-              )}
             </div>
           </div>
         </div>

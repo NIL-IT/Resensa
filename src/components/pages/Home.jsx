@@ -60,7 +60,9 @@ export default function Home({ equipment, solutions, banner, news }) {
         {/* <Calculator /> */}
         <SliderPage
           title={"о компании"}
-          subTitle={"ПРОФЕССИОНАЛЫ ВЕНТИЛЯЦИИ"}
+          subTitle={
+            "Recensa: ваш стратегический партнер в реализации масштабных проектов."
+          }
           text={sliderTextMain}
           slides={slidesMain}
         />

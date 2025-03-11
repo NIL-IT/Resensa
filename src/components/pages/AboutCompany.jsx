@@ -55,7 +55,9 @@ export default function AboutCompany() {
         <Objects about={true} />
         <SliderPage
           title={"о компании"}
-          subTitle={"ПРОФЕССИОНАЛЫ ВЕНТИЛЯЦИИ"}
+          subTitle={
+            "Recensa: ваш стратегический партнер в реализации масштабных проектов."
+          }
           text={sliderTextMain}
           slides={slidesMain}
         />

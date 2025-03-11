@@ -60,17 +60,24 @@ export default function Slider({ slides, second, recensaAbout }) {
                       />
                     </div>
                   ) : (
+                    // <div
+                    //   className={` w-full xs:w-full sm:w-full
+                    //     md:w-[600px] lg:w-[650px] xl:w-[700px]
+                    //     2xl:w-[750px] 3xl:w-[816px] h-[360px]
+                    //     xs:h-[400px] sm:h-[420px]
+                    //     md:h-[420px]
+                    //     lg:h-[450px] xl:h-[490px] 2xl:h-[460px]
+                    //     3xl:h-[458px] ${second ? "" : "bg-gray-100"}`}
+                    // >
                     <div
-                      className={` w-full xs:w-full sm:w-full 
-                        md:w-[600px] lg:w-[650px] xl:w-[700px] 
-                        2xl:w-[750px] 3xl:w-[816px] h-[360px] 
-                        xs:h-[400px] sm:h-[420px] 
-                        md:h-[420px] 
-                        lg:h-[450px] xl:h-[490px] 2xl:h-[460px] 
-                        3xl:h-[458px] ${second ? "" : "bg-gray-100"}`}
+                      className={` w-[300px] sm:w-[380px] md:w-[400px] lg:w-[450px] xl:w-[490px] 2xl:w-[500px] h-[360px] 
+                      xs:h-[400px] sm:h-[420px] 
+                      md:h-[420px] 
+                      lg:h-[450px] xl:h-[490px] 2xl:h-[460px] 
+                      3xl:h-[458px] ${second ? "" : "bg-gray-100"}`}
                     >
-                      <div
-                        className={` h-[150px] xs:h-[170px] sm:h-[190px] md:h-[210px] lg:h-[230px] xl:h-[250px] 2xl:h-[260px] 3xl:h-[272px]
+                      {/* <div
+                        className={` h-[150px] xs:h-[170px] sm:h-[190px] md:h-[210px] lg:h-[230px] xl:h-[250px] 2xl:h-[260px] 3xl:h-[272px] overflow-hidden
                            w-full mb-[15px] xs:mb-[18px] sm:mb-[20px] md:mb-[25px] 
                            lg:mb-[28px] xl:mb-[30px] border-b border-b-gray-400 ${
                              index === 1
@@ -79,8 +86,13 @@ export default function Slider({ slides, second, recensaAbout }) {
                                ? "pt-[15px] xs:pt-[17px] sm:pt-[20px] md:pt-[22px] lg:pt-[25px] pl-[25px] xs:pl-[30px] sm:pl-[35px] md:pl-[40px] lg:pl-[45px]"
                                : ""
                            } `}
+                      > */}
+                      <div
+                        className={` h-[150px] xs:h-[170px] sm:h-[190px] md:h-[210px] lg:h-[230px] xl:h-[250px] 2xl:h-[260px] 3xl:h-[272px] overflow-hidden
+                           w-full mb-[15px] xs:mb-[18px] sm:mb-[20px] md:mb-[25px] 
+                           lg:mb-[28px] xl:mb-[30px] border-b border-b-gray-400  `}
                       >
-                        <img
+                        {/* <img
                           src={image}
                           alt={title}
                           title={title}
@@ -95,6 +107,16 @@ export default function Slider({ slides, second, recensaAbout }) {
                               ? "max-w-[170px] sm:max-w-[210px] md:max-w-[230px] lg:max-w-[250px] xl:max-w-[280px] 2xl:max-w-[290px]"
                               : ""
                           }`}
+                        /> */}
+                        <img
+                          style={{
+                            backgroundPosition: "center center",
+                            backgroundSize: "cover",
+                          }}
+                          src={image}
+                          alt={title}
+                          title={title}
+                          className={` w-full h-full  max-w-[300px] sm:max-w-[380px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[490px] 2xl:max-w-[500px]`}
                         />
                       </div>
                       <div className="px-[20px] xs:px-[25px] sm:px-[30px] md:px-[35px] lg:px-[40px] xl:px-[45px] pb-[30px] xs:pb-[35px] sm:pb-[40px] md:pb-[45px] lg:pb-[50px] xl:pb-[52px]">
