@@ -48,6 +48,9 @@ export default function ChangeBanner({ title }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
+    // Check for NaN in numeric values
+
     dispatch(updateBanner(formData));
     setFormData({
       first_value: formData.first_value,
@@ -76,7 +79,7 @@ export default function ChangeBanner({ title }) {
               </p>
               <Input
                 required={false}
-                type={"number"}
+                type={"text"}
                 name="first_value"
                 placeholder={formData.first_value || 0}
                 value={formData.first_value}
@@ -104,7 +107,7 @@ export default function ChangeBanner({ title }) {
               </p>
               <Input
                 required={false}
-                type={"number"}
+                type={"text"}
                 name="second_value"
                 placeholder={"Введите цифру..."}
                 value={formData.second_value}

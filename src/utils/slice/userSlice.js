@@ -396,9 +396,9 @@ export const updateBanner = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append("first_value_string", payload.first_value_string);
-      formData.append("first_value", Number(payload.first_value));
+      formData.append("first_value", payload.first_value);
       formData.append("second_value_string", payload.second_value_string);
-      formData.append("second_value", Number(payload.second_value));
+      formData.append("second_value", payload.second_value);
       const res = await api.put(`/banner/`, formData);
       return res.data;
     } catch (err) {

@@ -122,9 +122,14 @@ export default function Slider({ slides, second, recensaAbout }) {
 
         {/* Navigation dots */}
         <div
-          className="container pl-5 xs:pl-0 flex-center gap-[15px] xs:gap-[17px] sm:gap-[20px]
-         md:gap-[22px] lg:gap-[25px] mt-[25px] xs:mt-[30px] sm:mt-[35px] md:mt-[38px] lg:mt-[40px] xl:mt-[43px] pb-4 pt-5 xs:pt-0 mb-[60px]
-         xs:mb-[70px] sm:mb-[80px] md:mb-[90px] lg:mb-[100px] xl:mb-20 border-b border-b-gray-400"
+          className={`container pl-5 xs:pl-0 flex-center gap-[15px] xs:gap-[17px] sm:gap-[20px]
+         md:gap-[22px] lg:gap-[25px] mt-[25px] xs:mt-[30px] sm:mt-[35px] md:mt-[38px] lg:mt-[40px] xl:mt-[43px] pb-4 pt-5 xs:pt-0 
+          border-b border-b-gray-400 ${
+            !second
+              ? `mb-[60px]
+         xs:mb-[70px] sm:mb-[80px] md:mb-[90px] lg:mb-[100px] xl:mb-20`
+              : ``
+          }`}
         >
           <button
             onClick={() => goToSlide(currentSlide - 1)}

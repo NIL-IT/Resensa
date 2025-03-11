@@ -31,12 +31,11 @@ export default function AppRoutes({ equipment, solutions, banner, news }) {
         element={
           <Equipment
             title={"Оборудование"}
-            text={`Lorem ipsum dolor sit amet, 
-              consectetur adipiscing elit, sed do 
-              eiusmod tempor incididunt ut labore et 
-              dolore magna aliqua. Ut enim ad minim 
-              veniam, quis nostrud exercitation ullamco 
-              laboris nisi ut aliquip ex ea commodo consequat. 
+            text={`Recensa предлагает широкий ассортимент вентиляционного оборудования 
+              для коммерческих, промышленных и жилых объектов. В линейке представлены 
+              установки общего и специализированного назначения, системы вентиляции, 
+              осушения, кондиционирования и автоматизации. Каждая серия разработана с 
+              учетом энергоэффективности, надежности и удобства эксплуатации. 
 
 `}
             data={equipment}
@@ -50,12 +49,12 @@ export default function AppRoutes({ equipment, solutions, banner, news }) {
         element={
           <Equipment
             title={"Решения"}
-            text={`Lorem ipsum dolor sit amet, 
-              consectetur adipiscing elit, sed do 
-              eiusmod tempor incididunt ut labore et 
-              dolore magna aliqua. Ut enim ad minim 
-              veniam, quis nostrud exercitation ullamco 
-              laboris nisi ut aliquip ex ea commodo consequat. 
+            text={`Recensa разрабатывает и поставляет климатические системы для объектов
+               с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 
+               климат в любых условиях. Мы предлагаем комплексные системы для
+               вентиляции, осушения, охлаждения и 
+               автоматизации, адаптированное под 
+               конкретные задачи бизнеса и инфраструктуры.
 `}
             data={solutions}
             bannerImg={"/img/newsol_banner.png"}

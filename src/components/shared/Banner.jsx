@@ -31,11 +31,11 @@ export default function Banner({ banner }) {
         text="производство и поставка вентиляционного оборудования высокого класса"
       />
       <div className="flex-center flex-col lg:flex-row justify-between mt-3 xs:mt-3.5 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 2xl:mt-4 3xl:mt-4 gap-6 xs:gap-7 sm:gap-8 lg:gap-4">
-        <div className="flex-center flex-wrap gap-6 xs:gap-7 sm:gap-8 md:gap-[60px] lg:gap-[70px] xl:gap-[75px] 2xl:gap-[80px] 3xl:gap-[88px]">
-          <div className="xs:flex xs:gap-5 xl:block md:w-[290px] xl:w-[312px]">
+        <div className="flex flex-wrap gap-6 xs:gap-7 sm:gap-8 md:gap-[60px] lg:gap-[70px] xl:gap-[75px] 2xl:gap-[80px] 3xl:gap-[88px]">
+          <div className=" xs:gap-5 block md:w-[290px] xl:w-[312px]">
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
-            3xl:text-[48px] text-gray-400 min-w-[50px]"
+            3xl:text-[48px] text-gray-400 min-w-[auto] sm:min-w-[300px]"
             >
               {banner.first_value || "22"}
             </span>
@@ -48,11 +48,11 @@ export default function Banner({ banner }) {
 вентиляционного оборудования`}
             </p>
           </div>
-          <div className="xs:flex xs:gap-5 xl:block md:w-[280px] xl:w-[312px]">
+          <div className="block xs:gap-5  md:w-[280px] xl:w-[312px]">
             <span
               className="text-[28px] xs:text-[30px] sm:text-[32px] 
             md:text-[42px] lg:text-[44px] xl:text-[45px] 2xl:text-[46px] 
-            3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto] min-w-[50px]"
+            3xl:text-[48px] text-gray-400 xs:w-[34px] sm:w-[36px] md:w-[48px] lg:w-[50px] xl:w-[auto] min-w-[auto] sm:min-w-[300px]"
             >
               {banner.second_value || `3`}
             </span>
