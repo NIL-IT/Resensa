@@ -15,8 +15,12 @@ export default function Slider({ slides, second, recensaAbout }) {
     if (second && width > 1669 && index > 1) return;
     if (second && index > 2 && width > 1220) return;
     if (second && index > 3) return;
-    if (index > 2 && width > 1536) return;
-    if (index > 3) return;
+    if (index > 1 && width > 1800) return;
+    if (index > 2 && width > 1220) {
+      return;
+    }
+    if (index > 3 && width > 1023) return;
+    if (index > 4 && width > 300) return;
     setCurrentSlide(index);
   };
   const setTranslate = () => {
