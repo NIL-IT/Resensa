@@ -196,11 +196,11 @@ function LocationMarker({
                 text-xs cursor-pointer hover:bg-[#4a90e2] transition-colors 
                 duration-200 ${
                   title === "Офис Recensa Екатеринбург"
-                    ? "top-[-10px] left-[-160px]"
+                    ? "top-[-16px] left-[-160px]"
                     : title === "Жилые комплексы"
-                    ? "top-[-10px] left-[-103px]"
+                    ? "top-[0px] left-[-103px]"
                     : title === "Пищевое производство"
-                    ? "top-[-10px] "
+                    ? "top-[0px] "
                     : ""
                 }`}
               onClick={handleClickCart}
