@@ -192,7 +192,7 @@ function LocationMarker({
           {/* Description - visible after first click */}
           {clickState === 1 && (
             <div
-              className={`bg-[#000] absolute top-[20px] left-0 z-50  text-white rounded px-2 py-1 mt-1 w-40 shadow-lg 
+              className={`bg-[#000] absolute  z-50  text-white rounded px-2 py-1 mt-1 w-40 shadow-lg 
                 text-xs cursor-pointer hover:bg-[#4a90e2] transition-colors 
                 duration-200 ${
                   title === "Офис Recensa Екатеринбург"
@@ -201,7 +201,7 @@ function LocationMarker({
                     ? "top-[0px] left-[-103px]"
                     : title === "Пищевое производство"
                     ? "top-[0px] "
-                    : ""
+                    : "top-[20px] left-0"
                 }`}
               onClick={handleClickCart}
             >
