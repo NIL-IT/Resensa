@@ -11,45 +11,45 @@ const locations = [
       position: [0.6, 1.5, -0.9],
       title: "Уральский экономический колледж",
       description: "Административное здание",
-      mapUrl: "https://maps.google.com/?q=Уральский+экономический+колледж",
+      mapUrl: "https://yandex.ru/maps/?text=Уральский+экономический+колледж",
     },
     {
       position: [0.05, 1.52, -1.05],
       title: "МФЦ Республика Бурятия",
       description:
         "Верхняя Березовка, Иволгинск, Нижняя Иволга, Нижний Саянтуй",
-      mapUrl: "https://maps.google.com/?q=МФЦ+Республика+Бурятия",
+      mapUrl: "https://yandex.ru/maps/?text=МФЦ+Республика+Бурятия",
     },
     {
       position: [0.1, 1.28, -1.4],
       title: "ТРЦ Пионер",
       description: "г. Улан-Удэ",
-      mapUrl: "https://maps.google.com/?q=ТРЦ+Пионер+Улан-Удэ",
+      mapUrl: "https://yandex.ru/maps/?text=ТРЦ+Пионер+Улан-Удэ",
     },
     {
       position: [1, 1.4, -0.7],
       title: "Административное здание Министерства обороны",
       description: "г. Москва",
-      mapUrl: "https://maps.google.com/?q=Министерство+обороны+Москва",
+      mapUrl: "https://yandex.ru/maps/?text=Министерство+обороны+Москва",
     },
     {
       position: [0.45, 1.55, -1.1],
       title: "Жилые комплексы",
       description: "ЖК Прайм, ЖК Современник, ЖК Сокол - г.Барнаул",
       mapUrl:
-        "https://2gis.ru/barnaul/search/%D0%96%D0%9A%20%D0%9F%D1%80%D0%B0%D0%B9%D0%BC%2C%20%D0%96%D0%9A%20%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B8%D0%BA%2C%20%D0%96%D0%9A%20%D0%A1%D0%BE%D0%BA%D0%BE%D0%BB%20-%20%D0%B3.%D0%91%D0%B0%D1%80%D0%BD%D0%B0%D1%83%D0%BB?m=84.387886%2C53.198179%2F9.96",
+        "https://yandex.ru/maps/?text=ЖК+Прайм+ЖК+Современник+ЖК+Сокол+Барнаул",
     },
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
       description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://maps.google.com/?q=Новосибирск+улица+Шевченко+4",
+      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
       description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
-      mapUrl: "https://maps.google.com/?q=Екатеринбург+улица+Свердлова+11А",
+      mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],
   // Производства
@@ -59,39 +59,37 @@ const locations = [
       title: "Мирнинский Горно-обогатительный комбинат Алроса",
       description: "г.Мирный",
       mapUrl:
-        "https://2gis.ru/mirnyj-yakutia-region/firm/70000001046376138?m=113.968956%2C62.52585%2F16",
+        "https://yandex.ru/maps/?text=Мирнинский+Горно-обогатительный+комбинат+Алроса",
     },
     {
       position: [1, 1.4, -0.7],
       title: "НИЦ «Курчатовский институт»",
       description: "г. Москва",
-      mapUrl:
-        "https://2gis.ru/moscow/branches/4504136498521605?m=37.614234%2C55.794272%2F12.24",
+      mapUrl: "https://yandex.ru/maps/?text=НИЦ+Курчатовский+институт+Москва",
     },
     {
       position: [-0.3, 1.6, -1],
       title: "Пищевое производство",
       description: "г. Якутск",
-      mapUrl:
-        "https://2gis.ru/yakutsk/search/%D0%BF%D0%B8%D1%89%D0%B5%D0%B2%D0%BE%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE%20%D1%8F%D0%BA%D1%83%D1%82%D1%81%D0%BA?m=130.127847%2C61.87272%2F9.61",
+      mapUrl: "https://yandex.ru/maps/?text=пищевое+производство+Якутск",
     },
     {
       position: [0.1, 1.28, -1.4],
       title: "Производство Абсолют Кэш Энд Кэрри",
       description: "г. Улан-Удэ",
-      mapUrl: "https://maps.google.com/?q=Абсолют+Кэш+Энд+Кэрри+Улан-Удэ",
+      mapUrl: "https://yandex.ru/maps/?text=Абсолют+Кэш+Энд+Кэрри+Улан-Удэ",
     },
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
       description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://maps.google.com/?q=Новосибирск+улица+Шевченко+4",
+      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
       description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
-      mapUrl: "https://maps.google.com/?q=Екатеринбург+улица+Свердлова+11А",
+      mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],
   // Медицинские
@@ -101,19 +99,19 @@ const locations = [
       title: "Центральная городская больница",
       description: "Таджикистан, Хатлонская область, Нурек",
       mapUrl:
-        "https://maps.google.com/?q=Центральная+городская+больница+Нурек+Таджикистан",
+        "https://yandex.ru/maps/?text=Центральная+городская+больница+Нурек+Таджикистан",
     },
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
       description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://maps.google.com/?q=Новосибирск+улица+Шевченко+4",
+      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
       description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
-      mapUrl: "https://maps.google.com/?q=Екатеринбург+улица+Свердлова+11А",
+      mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],
 ];
