@@ -81,6 +81,7 @@ const Contacts = () => {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
+                <meta itemProp="item" content="https://example.com/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -92,6 +93,7 @@ const Contacts = () => {
               <a className="pointer-events: none" title="Подраздел уровня 1">
                 <span itemProp="name">Контакты</span>
                 <meta itemProp="position" content="1" />
+                <meta itemProp="item" content="https://example.com/contacts" />
               </a>
             </li>
           </ul>
