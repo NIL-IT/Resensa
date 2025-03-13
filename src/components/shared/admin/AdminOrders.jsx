@@ -79,11 +79,17 @@ export default function AdminOrders({ title }) {
   };
 
   const deleteAll = async () => {
+    if (!window.confirm("Вы уверены, что хотите удалить все заказы ?")) {
+      return;
+    }
+    setLoading(true);
     for (const order of ordersList) {
       await dispatch(deleteOrders(order.id));
     }
 
     setSelectedOrders([]);
+    setOrdersList([]);
+    setLoading(false);
   };
 
   const handleSearch = (value) => {

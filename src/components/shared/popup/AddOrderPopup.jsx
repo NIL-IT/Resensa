@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createOrders,
   changeAddOrderPopup,
@@ -13,12 +13,13 @@ const options = [
   { label: "Доставлен", value: "Доставлен" },
   { label: "Отменен", value: "Отменен" },
   { label: "Оплачен", value: "Оплачен" },
-  { label: "В пути", value: "В пути" },
 ];
 
 export default function AddOrderPopup() {
   const dispatch = useDispatch();
+  const orders = useSelector((state) => state.user.orders || []);
   const [isOpen, setIsOpen] = useState(true);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -37,19 +38,36 @@ export default function AddOrderPopup() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // Clear error when user changes the number field
+    if (name === "number") {
+      setError("");
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
+  const checkDuplicateOrder = (orderNumber) => {
+    return orders.some((order) => order.number === orderNumber);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Convert numeric fields before sending
+      // Convert numeric fields before checking
+      const orderNumber = Number(formData.number);
+
+      // Check if order with the same number exists
+      if (checkDuplicateOrder(orderNumber)) {
+        setError("Заказ с таким номером уже существует.");
+        return;
+      }
+
+      // Prepare data for submission
       const submitData = {
         ...formData,
-        number: Number(formData.number),
+        number: orderNumber,
         order_amount: Number(formData.order_amount),
       };
 
@@ -63,10 +81,11 @@ export default function AddOrderPopup() {
         state: "",
         order_amount: "",
       });
+      setError("");
       setIsOpen(false);
     } catch (error) {
       console.error("Failed to create order:", error);
-      alert(
+      setError(
         "Не удалось создать заказ. Пожалуйста, проверьте введенные данные."
       );
     }
@@ -75,6 +94,11 @@ export default function AddOrderPopup() {
   useEffect(() => {
     dispatch(changeAddOrderPopup(isOpen));
   }, [isOpen]);
+
+  // Fetch orders when component mounts
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, []);
 
   return (
     <section className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8">
@@ -104,19 +128,25 @@ export default function AddOrderPopup() {
               placeholder="Наименование заказа"
               value={formData.name}
               onChange={handleInputChange}
+              required
             />
-            <Input
-              type="number"
-              name="number"
-              placeholder="Номер заказа"
-              value={formData.number}
-              onChange={handleInputChange}
-            />
+            <div>
+              <Input
+                type="number"
+                name="number"
+                placeholder="Номер заказа"
+                value={formData.number}
+                onChange={handleInputChange}
+                required
+              />
+              {error && <p className="text-red text-sm mt-1">{error}</p>}
+            </div>
             <Input
               type="date"
               name="date"
               value={formData.date}
               onChange={handleInputChange}
+              required
             />
             <Input
               type="text"
@@ -124,6 +154,7 @@ export default function AddOrderPopup() {
               placeholder="Данные клиента"
               value={formData.client_name}
               onChange={handleInputChange}
+              required
             />
             <Select
               handleSelectChange={handleSelectChange}
@@ -140,6 +171,7 @@ export default function AddOrderPopup() {
               placeholder="Сумма заказа"
               value={formData.order_amount}
               onChange={handleInputChange}
+              required
             />
           </div>
 
