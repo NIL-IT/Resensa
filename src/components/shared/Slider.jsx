@@ -116,11 +116,14 @@ export default function Slider({ slides, second, recensaAbout }) {
                           style={{
                             backgroundPosition: "center center",
                             backgroundSize: "cover",
+                            objectFit: "cover",
+                            width: "100%",
+                            height: "100%",
                           }}
                           src={image}
                           alt={title}
                           title={title}
-                          className={` w-full h-full  max-w-[300px] sm:max-w-[380px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[490px] 2xl:max-w-[500px]`}
+                          className="w-full h-full max-w-[300px] sm:max-w-[380px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[490px] 2xl:max-w-[500px] overflow-hidden"
                         />
                       </div>
                       <div className="px-[20px] xs:px-[25px] sm:px-[30px] md:px-[35px] lg:px-[40px] xl:px-[45px] pb-[30px] xs:pb-[35px] sm:pb-[40px] md:pb-[45px] lg:pb-[50px] xl:pb-[52px]">
