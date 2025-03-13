@@ -218,8 +218,6 @@ export default function EquipmentBanner({
                 itemProp="availability"
                 content="https://schema.org/InStock"
               />
-              <div itemProp="price">5000</div>
-              <div itemProp="priceCurrency">RUB</div>
             </div>
           )}
 
