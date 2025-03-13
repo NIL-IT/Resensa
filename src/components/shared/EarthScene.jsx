@@ -33,7 +33,7 @@ const locations = [
       mapUrl: "https://yandex.ru/maps/?text=Министерство+обороны+Москва",
     },
     {
-      position: [0.45, 1.55, -1.1],
+      position: [0.43, 1.48, -1.04],
       title: "Жилые комплексы",
       description: "ЖК Прайм, ЖК Современник, ЖК Сокол - г.Барнаул",
       mapUrl:
@@ -162,7 +162,7 @@ function LocationMarker({
   return (
     <mesh position={position}>
       {/* Small dot marker */}
-      <sphereGeometry args={[0.02, 16, 16]} />
+      <sphereGeometry args={[0.014, 16, 16]} />
       <meshBasicMaterial color="#4a90e2" />
 
       {/* Label with click functionality */}
