@@ -3,9 +3,6 @@ import { useSelector } from "react-redux";
 import Title from "../ui/Title";
 
 export default function ProductDescription({ currentProduct }) {
-  //   const { equipmentById, solutionsById } = useSelector(({ user }) => user);
-  //   const productID = equipmentById ? equipmentById : solutionsById;
-  console.log(currentProduct);
   return (
     <section className="container  pt-10 pb-5 lg:pt-20 lg:pb-10">
       <Title

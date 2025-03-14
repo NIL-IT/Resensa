@@ -157,7 +157,7 @@ export default function EquipmentBanner({
           ? { itemScope: true, itemType: "http://schema.org/Product" }
           : {})}
       >
-        <h4 className="hidden" itemprop="name">
+        <h4 className="hidden" itemProp="name">
           {" "}
           {subtitle || product.name}
         </h4>

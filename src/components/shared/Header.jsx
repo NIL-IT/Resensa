@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../ui/Button";
 import { Link, useNavigate } from "react-router-dom";
 import BurgerButton from "../ui/BurgerButton";
@@ -7,20 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeEquipmentId,
   changeIsAdmin,
+  changeItemId,
   changeRoutingToOrders,
   changeShowPopup,
   changeShowSearchPopup,
   changeSolutionsId,
+  getEquipmentById,
+  getSolutionsById,
 } from "../../utils/slice/userSlice";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAdmin, equipment } = useSelector(({ user }) => user);
+  const { isAdmin, equipment, solutions } = useSelector(({ user }) => user);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const navList = [
     { name: "Главная", path: "/" },
-    { name: "Оборудование", path: "/equipment" },
-    { name: "Решения", path: "/solutions" },
+    { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
+    { name: "Решения", path: "/solutions", dropdownItems: solutions },
     { name: "О компании", path: "/about" },
     { name: "Заказы", path: `/admin/1` },
     { name: "Контакты", path: "/contact" },
@@ -42,6 +48,16 @@ export default function Header() {
         dispatch(changeRoutingToOrders(false));
       }
     }
+  };
+  const handleClickItem = async (id, name) => {
+    if (name === "Оборудование") {
+      await dispatch(getEquipmentById(id));
+      dispatch(changeSolutionsId(null));
+    } else {
+      await dispatch(getSolutionsById(id));
+      dispatch(changeEquipmentId(null));
+    }
+    dispatch(changeItemId(id));
   };
 
   return (
@@ -142,28 +158,66 @@ export default function Header() {
             itemType="http://schema.org/ItemList"
             className="flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base"
           >
-            {navList.map(({ name, path }, i) => (
+            {navList.map(({ name, path, dropdownItems }, i) => (
               <li
                 itemProp="itemListElement"
                 itemScope=""
                 itemType="http://schema.org/ItemList"
-                onClick={() => handleClickLink(i, path)}
                 key={i}
-                className={`text-gray-400 hover:text-gray-300 cursor-pointer ${
+                className={`relative text-gray-400 hover:text-gray-300 cursor-pointer pb-4 ${
                   isAdmin && i === 4 && "hidden"
                 }`}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {isAdmin ? (
-                  <Link
-                    target="_blank"
-                    to={`https://new.recensa.ru${path}`}
-                    itemProp="url"
+                <div className="flex items-center">
+                  {isAdmin ? (
+                    <Link
+                      target="_blank"
+                      to={`https://new.recensa.ru${path}`}
+                      itemProp="url"
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    <Link
+                      onClick={() => handleClickLink(i, path)}
+                      itemProp="url"
+                    >
+                      {name}
+                    </Link>
+                  )}
+                  {dropdownItems && dropdownItems.length > 0 && (
+                    <>
+                      {hoveredIndex === i ? (
+                        <ChevronUp width={20} />
+                      ) : (
+                        <ChevronDown width={20} />
+                      )}
+                    </>
+                  )}
+                </div>
+
+                {/* Dropdown menu */}
+                {dropdownItems && dropdownItems.length > 0 && (
+                  <div
+                    className={`absolute left-0 top-[30px] w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-20  ${
+                      hoveredIndex === i ? "block" : "hidden"
+                    }`}
                   >
-                    {name}
-                  </Link>
-                ) : (
-                  <Link itemProp="url">{name}</Link>
+                    {dropdownItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        to={`${path}/${useLatinFormat(item.name)}`}
+                        className="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                        onClick={() => handleClickItem(item.id, name)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
                 )}
+
                 <meta itemProp="name" content={name} />
               </li>
             ))}
