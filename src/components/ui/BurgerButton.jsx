@@ -54,7 +54,7 @@ const BurgerButton = ({ list, handleClickLink, isAdmin }) => {
                     key={i}
                     className="text-gray-400 hover:text-gray-300 cursor-pointer text-xl"
                   >
-                    {name}
+                    <Link to={path}>{name}</Link>
                   </li>
                 ))}
               </ul>

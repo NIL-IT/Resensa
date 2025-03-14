@@ -23,7 +23,7 @@ export default function Objects({ className = null, about = false }) {
           : ""
       } ${className}`}
     >
-      <div className="earth_container px-4 sm:px-6 lg:px-8 relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
+      <div className="earth_container  relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
         <div
           className="flex-center flex-col 
         lg:flex-row lg:items-center lg:justify-between g
@@ -35,7 +35,7 @@ export default function Objects({ className = null, about = false }) {
             
           sm:h-[850px] 
             xs:h-[800px] 
-         h-[800px]"
+         h-[800px] px-4 sm:px-6 lg:px-8"
           >
             <Title
               text={"наши объекты"}
@@ -77,10 +77,10 @@ export default function Objects({ className = null, about = false }) {
             2xl:top-[60px] 2xl:right-[-200px]
             xl:top-[100px] xl:right-[-50px]
             lg:top-[460px] lg:right-[-140px]
-            md:top-[360px] md:right-[-140px]
-            sm:top-[400px] sm:right-[-110px]
-            xs:top-[360px] xs:right-[0]
-            top-[360px] right-[0] 
+            md:top-[360px] md:right-[-90px]
+            sm:top-[400px] sm:right-[-90px]
+            xs:top-[360px] xs:right-[-20px]
+            top-[360px] right-[-20px] 
        "
           >
             <EarthScene index={index} />

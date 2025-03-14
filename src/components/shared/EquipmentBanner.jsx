@@ -101,7 +101,7 @@ export default function EquipmentBanner({
         <ul
           itemScope
           itemType="http://schema.org/BreadcrumbList"
-          className="absolute flex gap-2 top-[40px] xl:top-[60px]  text-gray-50"
+          className="absolute flex gap-2 top-[40px] xl:top-[60px]  text-gray-50 px-5 xs:px-0"
         >
           {generatePathName()
             .split("—")
@@ -111,7 +111,7 @@ export default function EquipmentBanner({
                 itemScope
                 itemType="http://schema.org/ListItem"
                 key={i}
-                className="flex gap-2   text-xs xl:text-sm"
+                className="flex gap-2   text-sm "
               >
                 {i === generatePathName().split("—").length - 1 ? (
                   <>
