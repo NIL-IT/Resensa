@@ -39,6 +39,7 @@ const AddNewItem = () => {
         page_description: "",
         page_title: "",
         page_keywords: "",
+        extra_description: "",
       };
     } else {
       return {
@@ -53,6 +54,7 @@ const AddNewItem = () => {
         page_description: "",
         page_title: "",
         page_keywords: "",
+        extra_description: "",
       };
     }
   });
@@ -96,7 +98,8 @@ const AddNewItem = () => {
           !formData.min_param ||
           !formData.max_param ||
           !formData.header ||
-          !formData.sub_header
+          !formData.sub_header ||
+          !formData.extra_description
         ) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -117,6 +120,7 @@ const AddNewItem = () => {
           page_description: formData.page_description,
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
+          extra_description: formData.extra_description,
         };
         await dispatch(createEquipment(equipmentData)).unwrap();
         await dispatch(getAllEquipment());
@@ -132,6 +136,7 @@ const AddNewItem = () => {
           page_description: "",
           page_title: "",
           page_keywords: "",
+          extra_description: "",
         });
       } else if (+pathnameId === 3) {
         if (
@@ -140,7 +145,8 @@ const AddNewItem = () => {
           !selectedFile ||
           !selectedFileBanner ||
           !formData.header ||
-          !formData.sub_header
+          !formData.sub_header ||
+          !formData.extra_description
         ) {
           setError(
             "Пожалуйста, заполните все обязательные поля и загрузите изображение"
@@ -159,6 +165,7 @@ const AddNewItem = () => {
           page_description: formData.page_description,
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
+          extra_description: formData.extra_description,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
@@ -172,6 +179,7 @@ const AddNewItem = () => {
           page_description: "",
           page_title: "",
           page_keywords: "",
+          extra_description: "",
         });
       }
 
@@ -293,8 +301,26 @@ const AddNewItem = () => {
             className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
             value={!isNews ? formData.description : formData.text}
           ></textarea>
+
           {!isNews && (
             <>
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm text-gray-900"
+                >
+                  Полное описание товара
+                </label>
+                <textarea
+                  id="message"
+                  name="extra_description"
+                  rows="4"
+                  onChange={handleInputChange}
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.extra_description}
+                ></textarea>
+              </div>
+
               <div className="space-y-2">
                 <p className="w-full text-xs xs:text-sm text-gray-900">
                   Заголовок баннера

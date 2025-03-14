@@ -12,6 +12,7 @@ import {
   changeRoutingToOrders,
   getAllOrders,
 } from "../../utils/slice/userSlice";
+import ProductDescription from "../shared/ProductDescription";
 
 export default function ProductItem({ list }) {
   const dispatch = useDispatch();
@@ -157,6 +158,7 @@ export default function ProductItem({ list }) {
           width={"w-[300px] xs:w-[360px] md:w-[500px] lg:w-[656px]"}
         />
         <Advantages />
+        <ProductDescription currentProduct={currentProduct} />
         <ItemsList
           equipment={isEquipment}
           title={"каталог"}

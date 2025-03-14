@@ -26,7 +26,6 @@ const ChangeEquipmentPopup = () => {
   const findProduct = itemId
     ? itemsList?.find((item) => +item.id === +itemId)
     : null;
-  console.log(findProduct);
   const [formData, setFormData] = useState(() => {
     const baseData = isNews
       ? {
@@ -44,6 +43,7 @@ const ChangeEquipmentPopup = () => {
           page_description: findProduct?.page_description || "",
           page_title: findProduct?.page_title || "",
           page_keywords: findProduct?.page_keywords || "",
+          extra_description: findProduct?.extra_description || "",
         }
       : {
           name: findProduct?.name || "",
@@ -57,6 +57,7 @@ const ChangeEquipmentPopup = () => {
           page_description: findProduct?.page_description || "",
           page_title: findProduct?.page_title || "",
           page_keywords: findProduct?.page_keywords || "",
+          extra_description: findProduct?.extra_description || "",
         };
 
     if (findProduct?.image) {
@@ -103,6 +104,7 @@ const ChangeEquipmentPopup = () => {
             page_description: formData?.page_description,
             page_title: formData?.page_title,
             page_keywords: formData?.page_keywords,
+            extra_description: formData?.extra_description,
           };
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: equipmentData })
@@ -120,6 +122,7 @@ const ChangeEquipmentPopup = () => {
             page_description: formData?.page_description,
             page_title: formData?.page_title,
             page_keywords: formData?.page_keywords,
+            extra_description: formData?.extra_description,
           };
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: solutionData })
@@ -288,6 +291,20 @@ const ChangeEquipmentPopup = () => {
                       onChange={handleInputChange}
                       className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
                       value={formData.description}
+                    ></textarea>
+                    <label
+                      htmlFor="extra_description"
+                      className="block text-sm text-gray-900"
+                    >
+                      Полное описание товара
+                    </label>
+                    <textarea
+                      id="extra_description"
+                      name="extra_description"
+                      rows="4"
+                      onChange={handleInputChange}
+                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                      value={formData.extra_description}
                     ></textarea>
                   </div>
                   <div className="space-y-2">

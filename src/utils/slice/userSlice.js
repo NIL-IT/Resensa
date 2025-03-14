@@ -142,6 +142,7 @@ export const createEquipment = createAsyncThunk(
 
       formData.append("page_title", data.page_title);
       formData.append("page_keywords", data.page_keywords);
+      formData.append("extra_description", data.extra_description);
       const res = await api.post("/equipments/", formData);
       return res.data;
     } catch (err) {
@@ -188,6 +189,7 @@ export const updateEquipment = createAsyncThunk(
 
     formData.append("page_title", data.page_title);
     formData.append("page_keywords", data.page_keywords);
+    formData.append("extra_description", data.extra_description);
     try {
       const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
@@ -253,6 +255,7 @@ export const createSolutions = createAsyncThunk(
 
       formData.append("page_title", data.page_title);
       formData.append("page_keywords", data.page_keywords);
+      formData.append("extra_description", data.extra_description);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -291,6 +294,7 @@ export const updateSolutions = createAsyncThunk(
 
     formData.append("page_title", data.page_title);
     formData.append("page_keywords", data.page_keywords);
+    formData.append("extra_description", data.extra_description);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
       return res.data;
