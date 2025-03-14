@@ -28,7 +28,12 @@ export default function Header() {
     { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
     { name: "Решения", path: "/solutions", dropdownItems: solutions },
     { name: "О компании", path: "/about" },
-    { name: "Заказы", path: `/admin/1` },
+    {
+      name: "Заказы",
+      path: `${
+        isAdmin ? `/admin/1` : `/equipment/${useLatinFormat(equipment[0].name)}`
+      }`,
+    },
     { name: "Контакты", path: "/contact" },
   ];
 
@@ -38,10 +43,10 @@ export default function Header() {
       dispatch(changeRoutingToOrders(true));
       dispatch(changeEquipmentId(equipment[0]));
       dispatch(changeSolutionsId(null));
-      return navigate(`/equipment/${useLatinFormat(equipment[0].name)}`);
+      // return navigate(`/equipment/${useLatinFormat(equipment[0].name)}`);
     }
     if (!isAdmin) {
-      navigate(path);
+      // navigate(path);
       if (i === 4) {
         dispatch(changeRoutingToOrders(true));
       } else {
@@ -173,8 +178,9 @@ export default function Header() {
                 <div className="flex items-center">
                   {isAdmin ? (
                     <Link
+                      onClick={() => handleClickLink(i, path)}
                       target="_blank"
-                      to={`https://new.recensa.ru${path}`}
+                      to={path}
                       itemProp="url"
                     >
                       {name}
@@ -183,6 +189,7 @@ export default function Header() {
                     <Link
                       onClick={() => handleClickLink(i, path)}
                       itemProp="url"
+                      to={path}
                     >
                       {name}
                     </Link>
