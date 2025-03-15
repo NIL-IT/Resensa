@@ -18,7 +18,8 @@ import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import { useParams } from "react-router-dom";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
-export default function AboutCompany() {
+export default function AboutCompany({ company }) {
+  console.log(company);
   const dispatch = useDispatch();
   const { pathname } = useParams();
   const scrollTop = () => {

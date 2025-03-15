@@ -411,6 +411,33 @@ export const updateBanner = createAsyncThunk(
     }
   }
 );
+export const getCompany = createAsyncThunk(
+  "Company/getCompany",
+  async (_, thunkApi) => {
+    try {
+      const res = await api.get(`/company/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const updateCompany = createAsyncThunk(
+  "Company/updateCompany",
+  async (payload, thunkApi) => {
+    try {
+      const formData = new FormData();
+      formData.append("about_main_screen", payload.about_main_screen);
+      formData.append("about_unique_screen", payload.about_unique_screen);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 export const authPost = createAsyncThunk(
   "user/authPost",
   async (credentials, { rejectWithValue }) => {
@@ -502,6 +529,7 @@ const userSlice = createSlice({
     banner: null,
     equipment: [],
     solutions: [],
+    company: [],
     equipmentById: null,
     solutionsById: null,
     routingToOrders: false,
@@ -653,6 +681,9 @@ const userSlice = createSlice({
       })
       .addCase(getSolutionsById.fulfilled, (state, action) => {
         state.solutionsById = action.payload;
+      })
+      .addCase(getCompany.fulfilled, (state, action) => {
+        state.company = action.payload;
       });
   },
 });

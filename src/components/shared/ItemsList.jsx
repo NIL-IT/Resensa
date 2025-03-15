@@ -154,10 +154,10 @@ export default function ItemsList({
         <div className="flex-center justify-between gap-2">
           <div
             itemProp="description"
+            dangerouslySetInnerHTML={{ __html: description }}
             className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"
-          >
-            {description}
-          </div>
+          />
+
           <Button
             noLink={true}
             onClick={(e) => {

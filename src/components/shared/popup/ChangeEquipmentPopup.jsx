@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,10 +10,12 @@ import {
 } from "../../../utils/slice/userSlice";
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
-
+import JoditEditor from "jodit-react";
+import { config } from "../../../utils/data";
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+
   const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === 4;
   const isSolutions = +pathnameId === 3;
@@ -73,6 +75,12 @@ const ChangeEquipmentPopup = () => {
     return baseData;
   });
 
+  const handleEditorChange = (content, editor, name) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: content,
+    }));
+  };
   const [selectedFile, setSelectedFile] = useState();
   const [selectedFileBanner, setSelectedFileBanner] = useState();
   const handleInputChange = (e) => {
@@ -82,7 +90,10 @@ const ChangeEquipmentPopup = () => {
       [name]: value,
     }));
   };
-
+  const textEditorRef = useRef(null);
+  const descriptionEditorRef = useRef(null);
+  const extraDescriptionEditorRef = useRef(null);
+  const headerEditorRef = useRef(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -248,19 +259,19 @@ const ChangeEquipmentPopup = () => {
               </div>
               <div className="space-y-2">
                 <label
-                  htmlFor="message"
+                  htmlFor="text"
                   className="block text-sm font-medium text-gray-900"
                 >
                   Текст новости
                 </label>
-                <textarea
-                  id="message"
-                  name="text"
-                  rows="4"
-                  onChange={handleInputChange}
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+
+                <JoditEditor
+                  ref={textEditorRef}
                   value={formData.text}
-                ></textarea>
+                  config={config}
+                  onBlur={(content) => handleEditorChange(content, "text")}
+                  onChange={(content) => {}}
+                />
               </div>
             </>
           ) : (
@@ -284,31 +295,34 @@ const ChangeEquipmentPopup = () => {
                     >
                       Описание
                     </label>
-                    <textarea
-                      id="message"
-                      name="description"
-                      rows="4"
-                      onChange={handleInputChange}
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    <JoditEditor
+                      ref={descriptionEditorRef}
                       value={formData.description}
-                    ></textarea>
+                      config={config}
+                      onBlur={(content) =>
+                        handleEditorChange(content, "description")
+                      }
+                      onChange={(content) => {}}
+                    />
+
                     <label
                       htmlFor="extra_description"
-                      className="block text-sm text-gray-900"
+                      className="block text-sm text-gray-900 pt-4"
                     >
                       Полное описание товара
                     </label>
-                    <textarea
-                      id="extra_description"
-                      name="extra_description"
-                      rows="4"
-                      onChange={handleInputChange}
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    <JoditEditor
+                      ref={extraDescriptionEditorRef}
                       value={formData.extra_description}
-                    ></textarea>
+                      config={config}
+                      onBlur={(content) =>
+                        handleEditorChange(content, "extra_description")
+                      }
+                      onChange={(content) => {}}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <p className="w-full text-sm text-gray-900">
+                    <p className="w-full text-sm text-gray-900 pt-4">
                       Заголовок баннера
                     </p>
                     <Input
@@ -326,21 +340,22 @@ const ChangeEquipmentPopup = () => {
                     >
                       Текст баннера
                     </label>
-                    <textarea
-                      id="message"
-                      name="header"
-                      rows="4"
-                      onChange={handleInputChange}
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                    <JoditEditor
+                      ref={headerEditorRef}
                       value={formData.header}
-                    ></textarea>
+                      config={config}
+                      onBlur={(content) =>
+                        handleEditorChange(content, "header")
+                      }
+                      onChange={(content) => {}}
+                    />
                   </div>
                 </>
               )}
               {!isSolutions && (
                 <>
                   <div className="space-y-2">
-                    <p className="w-full text-sm text-gray-900">
+                    <p className="w-full text-sm text-gray-900 pt-4">
                       Минимальный параметр
                     </p>
                     <Input

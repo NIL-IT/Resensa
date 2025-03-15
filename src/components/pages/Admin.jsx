@@ -9,6 +9,7 @@ import ChangeBanner from "../shared/admin/ChangeBanner";
 import AdminNews from "../shared/admin/AdminNews";
 import { Menu, X } from "lucide-react";
 import { exportOrdersExcel } from "../../utils/slice/userSlice";
+import ChangeAbout from "../shared/admin/ChangeAbout";
 
 const navList = [
   {
@@ -47,6 +48,12 @@ const navList = [
   },
   {
     id: "6",
+    name: "О компании",
+    component: (title) => <ChangeAbout title={title} />,
+    title: "Изменить страницу о компании",
+  },
+  {
+    id: "7",
     name: "выйти",
     component: (title) => <AdminExit title={title} />,
     title: "выйти",
@@ -81,7 +88,6 @@ export default function Admin() {
   }, [pathname]);
   const exportFile = async () => {
     const exportFile = await exportOrdersExcel(true);
-
   };
 
   return (

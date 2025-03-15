@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,9 +10,12 @@ import {
   getAllEquipment,
   getAllSolutions,
 } from "../../../utils/slice/userSlice";
+import JoditEditor from "jodit-react";
+// Import the config from data
 
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
+import { config } from "../../../utils/data";
 
 const AddNewItem = () => {
   const dispatch = useDispatch();
@@ -61,11 +64,20 @@ const AddNewItem = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileBanner, setSelectedFileBanner] = useState(null);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  // Обработчик изменения текста в редакторе
+  const handleEditorChange = (content, editor, name) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: content,
     }));
   };
 
@@ -203,7 +215,11 @@ const AddNewItem = () => {
     if (id == 3) return "Добавление нового решения";
     if (id == 4) return "Добавление новой новости";
   };
-
+  const editor = useRef(null);
+  // Add additional refs if you have multiple editors
+  const textEditor = useRef(null);
+  const extraDescriptionEditor = useRef(null);
+  const headerEditor = useRef(null);
   return (
     <section
       className="fixed inset-0 flex items-center justify-center px-4 xs:px-5 
@@ -289,39 +305,47 @@ const AddNewItem = () => {
             htmlFor="message"
             className="block w-full text-xs xs:text-sm text-gray-900"
           >
-            {!isNews
-              ? "Описание"
-              : "Текст новости. Вставьте знак / чтобы сделать абзац"}
+            {!isNews ? "Описание" : "Текст новости"}
           </label>
-          <textarea
-            id="message"
-            name={!isNews ? "description" : "text"}
-            rows="4"
-            onChange={handleInputChange}
-            className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-            value={!isNews ? formData.description : formData.text}
-          ></textarea>
+          {isNews ? (
+            // Используем ReactQuill для поля text в новостях
 
+            <JoditEditor
+              ref={textEditor}
+              value={formData.text}
+              config={config}
+              onBlur={(newContent) => handleEditorChange(newContent, "text")}
+            />
+          ) : (
+            <JoditEditor
+              ref={editor}
+              value={formData.description}
+              config={config}
+              onBlur={(newContent) =>
+                handleEditorChange(newContent, "description")
+              }
+            />
+          )}
           {!isNews && (
             <>
-              <div className="space-y-2">
+              <div className="space-y-2 pt-4">
                 <label
                   htmlFor="message"
                   className="block text-sm text-gray-900"
                 >
                   Полное описание товара
                 </label>
-                <textarea
-                  id="message"
-                  name="extra_description"
-                  rows="4"
-                  onChange={handleInputChange}
-                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                <JoditEditor
+                  ref={extraDescriptionEditor}
                   value={formData.extra_description}
-                ></textarea>
+                  config={config}
+                  onBlur={(newContent) =>
+                    handleEditorChange(newContent, "extra_description")
+                  }
+                />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 pt-4">
                 <p className="w-full text-xs xs:text-sm text-gray-900">
                   Заголовок баннера
                 </p>
@@ -339,18 +363,18 @@ const AddNewItem = () => {
               >
                 Текст баннера
               </label>
-              <textarea
-                id="message"
-                name="header"
-                rows="4"
-                onChange={handleInputChange}
-                className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+              <JoditEditor
+                ref={headerEditor}
                 value={formData.header}
-              ></textarea>
+                config={config}
+                onBlur={(newContent) =>
+                  handleEditorChange(newContent, "header")
+                }
+              />
             </>
           )}
           {+pathnameId === 2 && (
-            <div className="flex w-full justify-between gap-4 pb-5">
+            <div className="flex w-full justify-between gap-4 pb-5 pt-4">
               <div className="w-[48%] space-y-2">
                 <p className="block w-full text-xs xs:text-sm text-gray-900">
                   От

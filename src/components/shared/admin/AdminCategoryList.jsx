@@ -98,13 +98,13 @@ export default function AdminCategoryList({ title, category }) {
                           src={image_card || "/img/placeholder.svg"}
                           alt={name}
                         />
-
                         <h2 className="text-gray-400 text-sm uppercase font-normal my-2">
                           {name}
                         </h2>
-                        <p className="text-[13px] max-h-[80px] overflow-hidden text-gray-300">
-                          {description}
-                        </p>
+                        <div
+                          className="text-[13px] max-h-[80px] overflow-hidden text-gray-300"
+                          dangerouslySetInnerHTML={{ __html: description }}
+                        />
                       </div>
                       <div className="flex flex-col justify-center gap-2">
                         <Button

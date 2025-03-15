@@ -8,6 +8,7 @@ import {
   getAllNews,
   getAllSolutions,
   getBanner,
+  getCompany,
 } from "./utils/slice/userSlice";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -47,6 +48,7 @@ function App() {
     news,
     orders,
     calcPopup,
+    company,
   } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   const isActivePopup =
@@ -71,6 +73,7 @@ function App() {
         await dispatch(getAllEquipment());
         await dispatch(getAllSolutions());
         await dispatch(getBanner());
+        await dispatch(getCompany());
       } catch (error) {
         console.error(error);
       }
@@ -95,6 +98,7 @@ function App() {
             <AppRoutes
               equipment={equipment}
               solutions={solutions}
+              company={company}
               banner={banner}
               news={news}
               orders={orders}

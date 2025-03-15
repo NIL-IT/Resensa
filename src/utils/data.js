@@ -1,5 +1,41 @@
 const password = 1234554321;
-
+export const config = {
+  readonly: false,
+  height: 200,
+  toolbar: ["bold", "underline", "ol", "italic"],
+  buttons: ["bold", "underline", "ol", "italic"],
+  removeButtons: [
+    "ul",
+    "outdent",
+    "indent",
+    "fontsize",
+    "brush",
+    "paragraph",
+    "file",
+    "image",
+    "video",
+    "table",
+    "link",
+    "hr",
+    "copyformat",
+    "fullsize",
+    "source",
+    "cut",
+    "selectall",
+    "undo",
+    "redo",
+  ],
+  showXPathInStatusbar: false,
+  showCharsCounter: false,
+  showWordsCounter: false,
+  toolbarAdaptive: false,
+  statusbar: false,
+  language: "ru",
+  // Отключение резервных кнопок в адаптивном режиме
+  buttonsMD: ["bold", "underline", "ol", "italic"],
+  buttonsSM: ["bold", "underline", "ol", "italic"],
+  buttonsXS: ["bold", "underline", "ol", "italic"],
+};
 export const slidesMain = [
   {
     image: "/img/slider_1.jpg",

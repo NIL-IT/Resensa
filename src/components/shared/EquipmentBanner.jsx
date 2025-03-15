@@ -249,7 +249,8 @@ export default function EquipmentBanner({
             >
               {title || product.sub_header}
             </h2>
-            <p
+            <div
+              dangerouslySetInnerHTML={{ __html: text }}
               itemProp="description"
               className={` text-white mt-3 mb-8 xs:mb-[40px] xs:mt-[20px] sm:mb-[30px] sm:mt-[30px]  md:mb-[40px] md:mt-[40px] 
             lg:mb-[33px] lg:mt-[20px] xl:mt-[30px] 2xl:mt-[65px] 
@@ -262,9 +263,7 @@ export default function EquipmentBanner({
                   ? textSize
                   : " text-xs sm:text-sm lg:text-lg xl:text-xl"
               }`}
-            >
-              {text || product.header}
-            </p>
+            />
             {isButton && (
               <Button
                 onClick={() => handleChangeShowPopup(true)}

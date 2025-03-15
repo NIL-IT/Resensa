@@ -17,13 +17,21 @@ export default function NewsPage({ news }) {
 
     setFindNews(findNews[0]);
   }, []);
-  let listText;
-  if (findNews) {
-    listText = findNews.text.split("/");
-  }
+
   const handleNavigateNews = () => {
     Cookies.set("news_nav", "1", { expires: 1 });
   };
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  };
+
+  useEffect(() => {
+    scrollTop();
+  }, [pathname]);
+  document.body.style.overflowY = "auto";
   return findNews ? (
     <>
       <article
@@ -99,7 +107,12 @@ export default function NewsPage({ news }) {
                     findNews.title
                   )}`}
                 />
-                <meta itemProp="description" content={listText.map((p) => p)} />
+                <meta
+                  itemProp="description"
+                  content={
+                    <div dangerouslySetInnerHTML={{ __html: findNews.text }} />
+                  }
+                />
                 <div
                   itemProp="image"
                   itemScope
@@ -130,11 +143,10 @@ export default function NewsPage({ news }) {
                   itemProp="articleBody"
                   className="space-y-4 xs:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 mt-4 xs:mt-5 sm:mt-6 md:mt-7 lg:mt-8"
                 >
-                  {listText.map((p, i) => (
-                    <p key={i} className="text-gray-900 text-sm xs:text-base">
-                      {p}
-                    </p>
-                  ))}
+                  <div
+                    className="text-gray-900 text-sm xs:text-base"
+                    dangerouslySetInnerHTML={{ __html: findNews.text }}
+                  />
                 </div>
                 <div
                   itemProp="author"
