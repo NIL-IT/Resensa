@@ -39,6 +39,11 @@ export const createNews = createAsyncThunk(
       formData.append("text", payload.text);
       formData.append("news_photo", payload.news_photo);
 
+      formData.append("page_description", payload.page_description);
+      formData.append("page_title", payload.page_title);
+      formData.append("page_keywords", payload.page_keywords);
+      formData.append("hidden_seo_text", payload.hidden_seo_text);
+      formData.append("date", payload.date);
       const res = await api.post("/news/", formData);
 
       return res.data;
@@ -65,6 +70,10 @@ export const updateNews = createAsyncThunk(
       if (data.news_photo !== undefined) {
         formData.append("news_photo", data.news_photo);
       }
+      formData.append("page_description", payload.page_description);
+      formData.append("page_title", payload.page_title);
+      formData.append("page_keywords", payload.page_keywords);
+      formData.append("hidden_seo_text", payload.hidden_seo_text);
       const res = await api.post(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
@@ -143,6 +152,8 @@ export const createEquipment = createAsyncThunk(
       formData.append("page_title", data.page_title);
       formData.append("page_keywords", data.page_keywords);
       formData.append("extra_description", data.extra_description);
+
+      formData.append("hidden_seo_text ", data.hidden_seo_text);
       const res = await api.post("/equipments/", formData);
       return res.data;
     } catch (err) {
@@ -190,6 +201,8 @@ export const updateEquipment = createAsyncThunk(
     formData.append("page_title", data.page_title);
     formData.append("page_keywords", data.page_keywords);
     formData.append("extra_description", data.extra_description);
+
+    formData.append("hidden_seo_text ", data.hidden_seo_text);
     try {
       const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
@@ -256,6 +269,8 @@ export const createSolutions = createAsyncThunk(
       formData.append("page_title", data.page_title);
       formData.append("page_keywords", data.page_keywords);
       formData.append("extra_description", data.extra_description);
+
+      formData.append("hidden_seo_text ", data.hidden_seo_text);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -295,6 +310,8 @@ export const updateSolutions = createAsyncThunk(
     formData.append("page_title", data.page_title);
     formData.append("page_keywords", data.page_keywords);
     formData.append("extra_description", data.extra_description);
+
+    formData.append("hidden_seo_text ", data.hidden_seo_text);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
       return res.data;

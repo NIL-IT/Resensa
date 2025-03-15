@@ -30,6 +30,10 @@ const AddNewItem = () => {
       return {
         title: "",
         text: "",
+        page_description: "",
+        page_title: "",
+        page_keywords: "",
+        hidden_seo_text: "",
       };
     } else if (isSolutions) {
       return {
@@ -43,6 +47,7 @@ const AddNewItem = () => {
         page_title: "",
         page_keywords: "",
         extra_description: "",
+        hidden_seo_text: "",
       };
     } else {
       return {
@@ -58,6 +63,7 @@ const AddNewItem = () => {
         page_title: "",
         page_keywords: "",
         extra_description: "",
+        hidden_seo_text: "",
       };
     }
   });
@@ -97,6 +103,10 @@ const AddNewItem = () => {
           title: formData.title,
           text: formData.text,
           news_photo: selectedFile,
+          page_description: formData.page_description,
+          page_title: formData.page_title,
+          page_keywords: formData.page_keywords,
+          hidden_seo_text: formData.hidden_seo_text,
         };
         await dispatch(createNews(newsData)).unwrap();
         await dispatch(getAllNews());
@@ -134,6 +144,7 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           extra_description: formData.extra_description,
+          hidden_seo_text: formData.hidden_seo_text,
         };
 
         await dispatch(createEquipment(equipmentData)).unwrap();
@@ -151,6 +162,7 @@ const AddNewItem = () => {
           page_title: "",
           page_keywords: "",
           extra_description: "",
+          hidden_seo_text: "",
         });
       } else if (+pathnameId === 3) {
         if (
@@ -180,6 +192,7 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           extra_description: formData.extra_description,
+          hidden_seo_text: formData.hidden_seo_text,
         };
         await dispatch(createSolutions(solutionData)).unwrap();
         await dispatch(getAllSolutions());
@@ -194,6 +207,7 @@ const AddNewItem = () => {
           page_title: "",
           page_keywords: "",
           extra_description: "",
+          hidden_seo_text: "",
         });
       }
 
@@ -411,55 +425,65 @@ const AddNewItem = () => {
             </div>
           )}
 
-          {!isNews && (
-            <div className="border-t border-gray-200 pt-4 space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]">
-              <h3 className="text-lg font-medium text-gray-900">
-                SEO информация
-              </h3>
+          <div className="border-t border-gray-200 pt-4 space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]">
+            <h3 className="text-lg font-medium text-gray-900">
+              SEO информация
+            </h3>
 
-              <div className="space-y-2">
-                <p className="w-full text-xs xs:text-sm text-gray-900">
-                  Заголовок страницы (Title)
-                </p>
-                <Input
-                  type="text"
-                  name="page_title"
-                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.page_title}
-                  onChange={handleInputChange}
-                  placeholder="Заголовок для SEO"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <p className="w-full text-xs xs:text-sm text-gray-900">
-                  Описание страницы (Description)
-                </p>
-                <textarea
-                  name="page_description"
-                  rows="3"
-                  onChange={handleInputChange}
-                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.page_description}
-                  placeholder="Краткое описание для поисковых систем"
-                ></textarea>
-              </div>
-
-              <div className="space-y-2">
-                <p className="w-full text-xs xs:text-sm text-gray-900">
-                  Ключевые слова (Keywords)
-                </p>
-                <Input
-                  type="text"
-                  name="page_keywords"
-                  className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                  value={formData.page_keywords}
-                  onChange={handleInputChange}
-                  placeholder="Ключевые слова через запятую"
-                />
-              </div>
+            <div className="space-y-2">
+              <p className="w-full text-xs xs:text-sm text-gray-900">
+                Заголовок страницы (Title)
+              </p>
+              <Input
+                type="text"
+                name="page_title"
+                className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_title}
+                onChange={handleInputChange}
+                placeholder="Заголовок для SEO"
+              />
             </div>
-          )}
+
+            <div className="space-y-2">
+              <p className="w-full text-xs xs:text-sm text-gray-900">
+                Описание страницы (Description)
+              </p>
+              <textarea
+                name="page_description"
+                rows="3"
+                onChange={handleInputChange}
+                className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_description}
+                placeholder="Краткое описание для поисковых систем"
+              ></textarea>
+            </div>
+            <div className="space-y-2">
+              <p className="w-full text-sm text-gray-900">
+                Текст для поисковых систем
+              </p>
+              <textarea
+                name="hidden_seo_text"
+                rows="3"
+                onChange={handleInputChange}
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.hidden_seo_text}
+                placeholder="Этот текст предназначен для поисковых систем и не виден пользователям. "
+              ></textarea>
+            </div>
+            <div className="space-y-2">
+              <p className="w-full text-xs xs:text-sm text-gray-900">
+                Ключевые слова (Keywords)
+              </p>
+              <Input
+                type="text"
+                name="page_keywords"
+                className="block p-2 xs:p-2.5 w-full text-sm xs:text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_keywords}
+                onChange={handleInputChange}
+                placeholder="Ключевые слова через запятую"
+              />
+            </div>
+          </div>
 
           <button
             type="submit"

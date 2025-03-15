@@ -33,6 +33,10 @@ const ChangeEquipmentPopup = () => {
       ? {
           title: findProduct?.title || "",
           text: findProduct?.text || "",
+          page_description: findProduct?.page_description || "",
+          page_title: findProduct?.page_title || "",
+          page_keywords: findProduct?.page_keywords || "",
+          hidden_seo_text: findProduct?.hidden_seo_text || "",
         }
       : isSolutions
       ? {
@@ -46,6 +50,7 @@ const ChangeEquipmentPopup = () => {
           page_title: findProduct?.page_title || "",
           page_keywords: findProduct?.page_keywords || "",
           extra_description: findProduct?.extra_description || "",
+          hidden_seo_text: findProduct?.hidden_seo_text || "",
         }
       : {
           name: findProduct?.name || "",
@@ -60,6 +65,7 @@ const ChangeEquipmentPopup = () => {
           page_title: findProduct?.page_title || "",
           page_keywords: findProduct?.page_keywords || "",
           extra_description: findProduct?.extra_description || "",
+          hidden_seo_text: findProduct?.hidden_seo_text || "",
         };
 
     if (findProduct?.image) {
@@ -112,10 +118,11 @@ const ChangeEquipmentPopup = () => {
             header: formData?.header,
             image_banner_alt: formData?.image_banner_alt,
             image_card_alt: formData?.image_card_alt,
+            extra_description: formData?.extra_description,
             page_description: formData?.page_description,
             page_title: formData?.page_title,
             page_keywords: formData?.page_keywords,
-            extra_description: formData?.extra_description,
+            hidden_seo_text: formData?.hidden_seo_text,
           };
           await dispatch(
             updateEquipment({ id: findProduct?.id, data: equipmentData })
@@ -134,29 +141,38 @@ const ChangeEquipmentPopup = () => {
             page_title: formData?.page_title,
             page_keywords: formData?.page_keywords,
             extra_description: formData?.extra_description,
+            hidden_seo_text: formData?.hidden_seo_text,
           };
           await dispatch(
             updateSolutions({ id: findProduct?.id, data: solutionData })
           ).unwrap();
         }
       } else {
+        const today = new Date();
+        const formattedDate = today.toISOString().split("T")[0];
         const newsData = selectedFile
           ? {
               title: formData.title,
               text: formData.text,
               news_photo: selectedFile,
+              page_description: formData.page_description,
+              page_title: formData.page_title,
+              page_keywords: formData.page_keywords,
+              hidden_seo_text: formData.hidden_seo_text,
+              date: formattedDate,
             }
           : {
               title: formData.title,
               text: formData.text,
+              page_description: formData.page_description,
+              page_title: formData.page_title,
+              page_keywords: formData.page_keywords,
+              hidden_seo_text: formData.hidden_seo_text,
+              date: formattedDate,
             };
         await dispatch(
           updateNews({ id: findProduct?.id, data: newsData })
         ).unwrap();
-        setFormData({
-          title: formData?.title || "",
-          text: formData?.text || "",
-        });
       }
 
       dispatch(changeEquipmentPopup(false));
@@ -245,7 +261,7 @@ const ChangeEquipmentPopup = () => {
             )}
           </div>
 
-          {isNews ? (
+          {isNews && (
             <>
               <div className="space-y-2">
                 <p className="w-full text-sm text-gray-900">Название</p>
@@ -273,7 +289,9 @@ const ChangeEquipmentPopup = () => {
                 />
               </div>
             </>
-          ) : (
+          )}
+
+          {!isNews && (
             <>
               <div className="space-y-2">
                 <p className="w-full text-sm text-gray-900">Название</p>
@@ -285,148 +303,155 @@ const ChangeEquipmentPopup = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              {!isNews && (
-                <>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="block text-sm text-gray-900"
-                    >
-                      Описание
-                    </label>
-                    <JoditEditor
-                      ref={descriptionEditorRef}
-                      value={formData.description}
-                      config={config}
-                      onBlur={(content) =>
-                        handleEditorChange(content, "description")
-                      }
-                    />
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm text-gray-900"
+                >
+                  Описание
+                </label>
+                <JoditEditor
+                  ref={descriptionEditorRef}
+                  value={formData.description}
+                  config={config}
+                  onBlur={(content) =>
+                    handleEditorChange(content, "description")
+                  }
+                />
 
-                    <label
-                      htmlFor="extra_description"
-                      className="block text-sm text-gray-900 pt-4"
-                    >
-                      Полное описание товара
-                    </label>
-                    <JoditEditor
-                      ref={extraDescriptionEditorRef}
-                      value={formData.extra_description}
-                      config={config}
-                      onBlur={(content) =>
-                        handleEditorChange(content, "extra_description")
-                      }
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <p className="w-full text-sm text-gray-900 pt-4">
-                      Заголовок баннера
-                    </p>
-                    <Input
-                      type="text"
-                      name="sub_header"
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                      value={formData.sub_header}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="block text-sm text-gray-900"
-                    >
-                      Текст баннера
-                    </label>
-                    <JoditEditor
-                      ref={headerEditorRef}
-                      value={formData.header}
-                      config={config}
-                      onBlur={(content) =>
-                        handleEditorChange(content, "header")
-                      }
-                    />
-                  </div>
-                </>
-              )}
-              {!isSolutions && (
-                <>
-                  <div className="space-y-2">
-                    <p className="w-full text-sm text-gray-900 pt-4">
-                      Минимальный параметр
-                    </p>
-                    <Input
-                      type="text"
-                      name="min_param"
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                      value={formData.min_param}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <p className="w-full text-sm text-gray-900">
-                      Максимальный параметр
-                    </p>
-                    <Input
-                      type="text"
-                      name="max_param"
-                      className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                      value={formData.max_param}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* SEO Information Section */}
-              <div className="border-t border-gray-200 pt-4 space-y-[18px]">
-                <h3 className="text-lg font-medium text-gray-900">
-                  SEO информация
-                </h3>
-
-                <div className="space-y-2">
-                  <p className="w-full text-sm text-gray-900">
-                    Заголовок страницы (Title)
-                  </p>
-                  <Input
-                    type="text"
-                    name="page_title"
-                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                    value={formData.page_title}
-                    onChange={handleInputChange}
-                    placeholder="Заголовок для SEO"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <p className="w-full text-sm text-gray-900">
-                    Описание страницы (Description)
-                  </p>
-                  <textarea
-                    name="page_description"
-                    rows="3"
-                    onChange={handleInputChange}
-                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                    value={formData.page_description}
-                    placeholder="Краткое описание для поисковых систем"
-                  ></textarea>
-                </div>
-
-                <div className="space-y-2">
-                  <p className="w-full text-sm text-gray-900">
-                    Ключевые слова (Keywords)
-                  </p>
-                  <Input
-                    type="text"
-                    name="page_keywords"
-                    className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
-                    value={formData.page_keywords}
-                    onChange={handleInputChange}
-                    placeholder="Ключевые слова через запятую"
-                  />
-                </div>
+                <label
+                  htmlFor="extra_description"
+                  className="block text-sm text-gray-900 pt-4"
+                >
+                  Полное описание товара
+                </label>
+                <JoditEditor
+                  ref={extraDescriptionEditorRef}
+                  value={formData.extra_description}
+                  config={config}
+                  onBlur={(content) =>
+                    handleEditorChange(content, "extra_description")
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <p className="w-full text-sm text-gray-900 pt-4">
+                  Заголовок баннера
+                </p>
+                <Input
+                  type="text"
+                  name="sub_header"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.sub_header}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm text-gray-900"
+                >
+                  Текст баннера
+                </label>
+                <JoditEditor
+                  ref={headerEditorRef}
+                  value={formData.header}
+                  config={config}
+                  onBlur={(content) => handleEditorChange(content, "header")}
+                />
               </div>
             </>
           )}
+          {!isSolutions && !isNews && (
+            <>
+              <div className="space-y-2">
+                <p className="w-full text-sm text-gray-900 pt-4">
+                  Минимальный параметр
+                </p>
+                <Input
+                  type="text"
+                  name="min_param"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.min_param}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="space-y-2">
+                <p className="w-full text-sm text-gray-900">
+                  Максимальный параметр
+                </p>
+                <Input
+                  type="text"
+                  name="max_param"
+                  className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                  value={formData.max_param}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </>
+          )}
+
+          {/* SEO Information Section */}
+          <div className="border-t border-gray-200 pt-4 space-y-[18px]">
+            <h3 className="text-lg font-medium text-gray-900">
+              SEO информация
+            </h3>
+
+            <div className="space-y-2">
+              <p className="w-full text-sm text-gray-900">
+                Заголовок страницы (Title)
+              </p>
+              <Input
+                type="text"
+                name="page_title"
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_title}
+                onChange={handleInputChange}
+                placeholder="Заголовок для SEO"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <p className="w-full text-sm text-gray-900">
+                Описание страницы (Description)
+              </p>
+              <textarea
+                name="page_description"
+                rows="3"
+                onChange={handleInputChange}
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_description}
+                placeholder="Краткое описание для поисковых систем"
+              ></textarea>
+            </div>
+            <div className="space-y-2">
+              <p className="w-full text-sm text-gray-900">
+                Текст для поисковых систем
+              </p>
+              <textarea
+                name="hidden_seo_text"
+                rows="3"
+                onChange={handleInputChange}
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.hidden_seo_text}
+                placeholder="Этот текст предназначен для поисковых систем и не виден пользователям. "
+              ></textarea>
+            </div>
+
+            <div className="space-y-2">
+              <p className="w-full text-sm text-gray-900">
+                Ключевые слова (Keywords)
+              </p>
+              <Input
+                type="text"
+                name="page_keywords"
+                className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+                value={formData.page_keywords}
+                onChange={handleInputChange}
+                placeholder="Ключевые слова через запятую"
+              />
+            </div>
+          </div>
 
           <button
             type="submit"
