@@ -75,7 +75,7 @@ const ChangeEquipmentPopup = () => {
     return baseData;
   });
 
-  const handleEditorChange = (content, editor, name) => {
+  const handleEditorChange = (content, name) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: content,
@@ -270,7 +270,6 @@ const ChangeEquipmentPopup = () => {
                   value={formData.text}
                   config={config}
                   onBlur={(content) => handleEditorChange(content, "text")}
-                  onChange={(content) => {}}
                 />
               </div>
             </>
@@ -302,7 +301,6 @@ const ChangeEquipmentPopup = () => {
                       onBlur={(content) =>
                         handleEditorChange(content, "description")
                       }
-                      onChange={(content) => {}}
                     />
 
                     <label
@@ -318,7 +316,6 @@ const ChangeEquipmentPopup = () => {
                       onBlur={(content) =>
                         handleEditorChange(content, "extra_description")
                       }
-                      onChange={(content) => {}}
                     />
                   </div>
                   <div className="space-y-2">
@@ -347,7 +344,6 @@ const ChangeEquipmentPopup = () => {
                       onBlur={(content) =>
                         handleEditorChange(content, "header")
                       }
-                      onChange={(content) => {}}
                     />
                   </div>
                 </>

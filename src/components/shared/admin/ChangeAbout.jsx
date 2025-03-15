@@ -38,10 +38,10 @@ export default function ChangeAbout({ title }) {
   // Настройки для редактора Jodit
 
   // Обработчик изменения текста в редакторе
-  const handleEditorChange = (content, editor) => {
+  const handleEditorChange = (content, name) => {
     setFormData((prevData) => ({
       ...prevData,
-      [editor]: content,
+      [name]: content,
     }));
   };
 

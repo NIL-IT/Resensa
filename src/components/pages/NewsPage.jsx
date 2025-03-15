@@ -144,7 +144,7 @@ export default function NewsPage({ news }) {
                   className="space-y-4 xs:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 mt-4 xs:mt-5 sm:mt-6 md:mt-7 lg:mt-8"
                 >
                   <div
-                    className="text-gray-900 text-sm xs:text-base"
+                    className="text-gray-900 text-sm xs:text-base space-y-4"
                     dangerouslySetInnerHTML={{ __html: findNews.text }}
                   />
                 </div>

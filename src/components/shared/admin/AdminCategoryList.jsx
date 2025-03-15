@@ -83,7 +83,7 @@ export default function AdminCategoryList({ title, category }) {
         <div className="text-center text-gray-400 py-4">Загрузка...</div>
       ) : dataCategory.length > 0 ? (
         <div className="flex justify-center w-full">
-          <div className="max-h-[440px] overflow-y-auto grid  grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
+          <div className="max-h-[440px] overflow-y-auto grid  grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 pr-5">
             {dataCategory.map(
               ({ id, name, description, image_card, date, title }) => (
                 <article

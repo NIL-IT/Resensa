@@ -13,30 +13,35 @@ import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
 import { useDispatch } from "react-redux";
-import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
+import { changeItemId } from "../../utils/slice/userSlice";
 import Cookies from "js-cookie";
 export default function Home({ equipment, solutions, banner, news }) {
   const { pathname } = useLocation();
   const isNavigateNews = Cookies.get("news_nav") === "1";
+
   const dispatch = useDispatch();
   const scrollToOrders = () => {
-    const widthPage = document.querySelector("body").offsetWidth;
-    let scrollPosition;
-    if (widthPage > 1600) scrollPosition = 5200;
-    else if (widthPage > 1200) scrollPosition = 5200;
-    else if (widthPage > 768) scrollPosition = 5800;
-    else if (widthPage > 640) scrollPosition = 5900;
-    else if (widthPage > 420) scrollPosition = 5600;
-    else if (widthPage > 375) scrollPosition = 5300;
-    else scrollPosition = 5200;
     setTimeout(() => {
+      const widthPage = document.querySelector("body").offsetWidth;
+      const heightPage = document.querySelector("body").offsetHeight;
+      let scrollPosition;
+      if (widthPage > 1600) scrollPosition = 2500;
+      else if (widthPage > 1280) scrollPosition = 2545;
+      else if (widthPage > 768) scrollPosition = 2927;
+      else if (widthPage > 640) scrollPosition = 3870;
+      else if (widthPage > 420) scrollPosition = 3897;
+      else if (widthPage > 375) scrollPosition = 3973;
+      else scrollPosition = 3900;
+      let scroll = heightPage - scrollPosition;
+
       window.scrollTo({
-        top: scrollPosition,
+        top: scroll,
         left: 0,
         behavior: "smooth",
       });
-    }, 10);
-    Cookies.set("news_nav", "0", { expires: 1 });
+
+      Cookies.set("news_nav", "0", { expires: 1 });
+    }, 30);
   };
 
   const scrollTop = () => {

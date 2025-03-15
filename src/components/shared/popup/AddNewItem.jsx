@@ -74,7 +74,7 @@ const AddNewItem = () => {
   };
 
   // Обработчик изменения текста в редакторе
-  const handleEditorChange = (content, editor, name) => {
+  const handleEditorChange = (name, content) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: content,
@@ -84,7 +84,7 @@ const AddNewItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+    console.log(formData);
     try {
       if (isNews) {
         if (!formData.title || !formData.text || !selectedFile) {
@@ -102,6 +102,7 @@ const AddNewItem = () => {
         await dispatch(getAllNews());
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {
+        console.log(formData);
         if (
           !formData.name ||
           !formData.description ||
@@ -134,6 +135,7 @@ const AddNewItem = () => {
           page_keywords: formData.page_keywords,
           extra_description: formData.extra_description,
         };
+
         await dispatch(createEquipment(equipmentData)).unwrap();
         await dispatch(getAllEquipment());
         setFormData({
@@ -308,21 +310,19 @@ const AddNewItem = () => {
             {!isNews ? "Описание" : "Текст новости"}
           </label>
           {isNews ? (
-            // Используем ReactQuill для поля text в новостях
-
             <JoditEditor
               ref={textEditor}
-              value={formData.text}
+              value={formData.text || ""}
               config={config}
-              onBlur={(newContent) => handleEditorChange(newContent, "text")}
+              onBlur={(newContent) => handleEditorChange("text", newContent)}
             />
           ) : (
             <JoditEditor
               ref={editor}
-              value={formData.description}
+              value={formData.description || ""}
               config={config}
               onBlur={(newContent) =>
-                handleEditorChange(newContent, "description")
+                handleEditorChange("description", newContent)
               }
             />
           )}
@@ -337,10 +337,10 @@ const AddNewItem = () => {
                 </label>
                 <JoditEditor
                   ref={extraDescriptionEditor}
-                  value={formData.extra_description}
+                  value={formData.extra_description || ""}
                   config={config}
                   onBlur={(newContent) =>
-                    handleEditorChange(newContent, "extra_description")
+                    handleEditorChange("extra_description", newContent)
                   }
                 />
               </div>
@@ -365,10 +365,10 @@ const AddNewItem = () => {
               </label>
               <JoditEditor
                 ref={headerEditor}
-                value={formData.header}
+                value={formData.header || ""}
                 config={config}
                 onBlur={(newContent) =>
-                  handleEditorChange(newContent, "header")
+                  handleEditorChange("header", newContent)
                 }
               />
             </>
