@@ -13,7 +13,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
 import EquipmentType from "./components/shared/popup/EquipmentType";
-import SitemapGenerator from "./sitemap.xml";
 
 const Popup = lazy(() => import("./components/shared/popup/Popup"));
 
@@ -28,9 +27,6 @@ const ChangeEquipmentPopup = lazy(() =>
 );
 
 const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
-
-const NewsPopup = lazy(() => import("./components/shared/popup/NewsPopup"));
-
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
@@ -59,7 +55,6 @@ function App() {
     addOrderPopup ||
     equipmentPopup ||
     addNewItemPopup ||
-    newsPopup ||
     searchPopup ||
     statusOrderPopup ||
     calcPopup;
@@ -129,11 +124,6 @@ function App() {
         {addNewItemPopup && (
           <Suspense fallback={"...Загрузка"}>
             <AddNewItem />
-          </Suspense>
-        )}
-        {newsPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <NewsPopup />
           </Suspense>
         )}
         {searchPopup && (

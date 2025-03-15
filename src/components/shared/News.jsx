@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
-import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
 
+import { Link } from "react-router-dom";
+import useLatinFormat from "../../utils/hooks/useLatinFormat";
+import Cookies from "js-cookie";
 export default function News({ news }) {
   const dispatch = useDispatch();
   const [isLimited, setLimited] = useState(true);
@@ -18,10 +20,7 @@ export default function News({ news }) {
       setNewsData(newsData.slice(0, 6));
     }
   }, [isLimited]);
-  const showNewsPopup = (id) => {
-    dispatch(changeItemId(id));
-    dispatch(changeShowNewsPopup(true));
-  };
+  const showNewsPopup = (id) => {};
   const handleClick = () => {
     setLimited(false);
     setNewsData(news);
@@ -49,7 +48,8 @@ export default function News({ news }) {
         <div className="w-full flex-center flex-col mx-auto justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
           <div className="grid  grid-cols-1  lg:grid-cols-2  2xl:grid-cols-3 gap-8">
             {newsData.map((item) => (
-              <article
+              <Link
+                to={`/news/${useLatinFormat(item.title)}`}
                 itemProp="blogPosts"
                 itemScope
                 itemType="http://schema.org/BlogPosting"
@@ -110,14 +110,14 @@ export default function News({ news }) {
                   </div>
                   <div>
                     <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
-                      <a className="text-gray-800 text-sm xs:text-sm sm:text-base">
+                      <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
                         {item.date}
-                      </a>
+                      </span>
                     </div>
                     <button className="flex-center gap-3 group-hover:gap-4 transition-all">
-                      <a className="text-white text-base xs:text-base sm:text-lg font-normal">
+                      <span className="text-white text-base xs:text-base sm:text-lg font-normal">
                         Читать
-                      </a>
+                      </span>
                       <img
                         src="/icon/sm_arrow.svg"
                         alt="arrow"
@@ -126,7 +126,7 @@ export default function News({ news }) {
                     </button>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
           {isLimited && news.length > 6 && (

@@ -7,5 +7,6 @@ export const ROUTES = {
   ADMIN: "/admin/:id",
   EQUIPMENT_PRODUCT: "/equipment/:id",
   SOLUTIONS_PRODUCT: "/solutions/:id",
+  NEWS: "/news/:name",
   AUTH: "/auth",
 };

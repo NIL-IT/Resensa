@@ -10,6 +10,7 @@ const Admin = lazy(() => import("../components/pages/Admin"));
 const ProductItem = lazy(() => import("../components/pages/ProductItem"));
 const LoginForm = lazy(() => import("../components/pages/LoginForm"));
 const Contacts = lazy(() => import("../components/pages/Contacts"));
+const NewsPage = lazy(() => import("../components/pages/NewsPage"));
 export default function AppRoutes({ equipment, solutions, banner, news }) {
   const { isAdmin } = useSelector(({ user }) => user);
   return (
@@ -73,6 +74,7 @@ export default function AppRoutes({ equipment, solutions, banner, news }) {
       <Route path={ROUTES.ABOUT} element={<AboutCompany />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
       <Route path={ROUTES.CONTACT} element={<Contacts />} />
+      <Route path={ROUTES.NEWS} element={<NewsPage news={news} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

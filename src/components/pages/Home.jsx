@@ -13,16 +13,41 @@ import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
 import { useDispatch } from "react-redux";
-import { changeItemId } from "../../utils/slice/userSlice";
-
+import { changeItemId, changeShowNewsPopup } from "../../utils/slice/userSlice";
+import Cookies from "js-cookie";
 export default function Home({ equipment, solutions, banner, news }) {
   const { pathname } = useLocation();
+  const isNavigateNews = Cookies.get("news_nav") === "1";
   const dispatch = useDispatch();
+  const scrollToOrders = () => {
+    const widthPage = document.querySelector("body").offsetWidth;
+    let scrollPosition;
+    if (widthPage > 1600) scrollPosition = 5200;
+    else if (widthPage > 1200) scrollPosition = 5200;
+    else if (widthPage > 768) scrollPosition = 5800;
+    else if (widthPage > 640) scrollPosition = 5900;
+    else if (widthPage > 420) scrollPosition = 5600;
+    else if (widthPage > 375) scrollPosition = 5300;
+    else scrollPosition = 5200;
+    setTimeout(() => {
+      window.scrollTo({
+        top: scrollPosition,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 10);
+    Cookies.set("news_nav", "0", { expires: 1 });
+  };
+
   const scrollTop = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
+    if (isNavigateNews) {
+      scrollToOrders();
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+      });
+    }
   };
 
   useEffect(() => {
