@@ -1,4 +1,4 @@
-import{j as t,r as n}from"./three-vendor-D76XtHXd.js";import{T as a,u as x,z as o,b as i,H as m}from"./index-CBi2OLhA.js";import{E as c}from"./EquipmentBanner-By1A6Zz7.js";import{O as p}from"./Objects-Canqi_7E.js";import{A as d}from"./Advantages-QHwMLdP4.js";import{S as l,P as u}from"./SliderPage-D4dBUEkb.js";import{F as b}from"./Footer-DcTy4ii4.js";import{a as g,b as j,d as h}from"./data-DNsZWopF.js";import"./react-vendor-C6O4aKhz.js";const f=[{title:`ПРЕДПРОДАЖНАЯ 
+import{j as t,r as n}from"./three-vendor-D76XtHXd.js";import{T as a,u as x,z as o,b as i,H as m}from"./index-OHHebK11.js";import{E as c}from"./EquipmentBanner-CwqpS63f.js";import{O as p}from"./Objects-ByKZcZeW.js";import{A as d}from"./Advantages-DqitW5Io.js";import{S as l,P as u}from"./SliderPage-BR6qpQIt.js";import{F as b}from"./Footer-D_ad7kXN.js";import{a as g,b as j,d as h}from"./data-DNsZWopF.js";import"./react-vendor-C6O4aKhz.js";const f=[{title:`ПРЕДПРОДАЖНАЯ 
 ПОДГОТОВКА`,text:`Подтверждаем максимальное соответствие
 параметров вентагрегатов проектным значениям.`},{title:"ОКРАСКА В ЛЮБОЙ ЦВЕТ",text:`По желанию клиента мы окрашиваем
 вентиляционный агрегат в любой цвет

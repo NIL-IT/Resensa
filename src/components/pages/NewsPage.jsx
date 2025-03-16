@@ -4,12 +4,13 @@ import { useLocation } from "react-router-dom";
 import useLatinFormat from "../../utils/hooks/useLatinFormat";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import { Helmet } from "react-helmet-async";
+import SeoBlock from "../shared/SeoBlock";
 export default function NewsPage({ news }) {
   const [findNews, setFindNews] = useState();
-  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const newsName = pathname.split("/")[2];
   useEffect(() => {
-    const newsName = pathname.split("/")[2];
     if (!newsName || !news) return;
     const findNews = news.filter(({ title }) =>
       useLatinFormat(title.toLowerCase()).includes(newsName.toLowerCase())
@@ -34,6 +35,22 @@ export default function NewsPage({ news }) {
   document.body.style.overflowY = "auto";
   return findNews ? (
     <>
+      <SeoBlock
+        url={`https://new.recensa.ru/${newsName}`}
+        title={findNews.page_title}
+        description={findNews.hidden_seo_text}
+      />
+      <Helmet>
+        <title>{findNews.page_title}</title>
+        <meta name="description" content={findNews.page_description} />
+        <meta property="og:title" content={findNews.page_title} />
+        <meta
+          property="og:url"
+          content={`https://new.recensa.ru/${newsName}`}
+        />
+        <meta name="keywords" content={findNews.page_keywords} />
+        <link rel="canonical" href={`https://new.recensa.ru/${newsName}`} />
+      </Helmet>
       <article
         itemScope
         itemType="http://schema.org/Article"

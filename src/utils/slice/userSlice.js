@@ -153,7 +153,7 @@ export const createEquipment = createAsyncThunk(
       formData.append("page_keywords", data.page_keywords);
       formData.append("extra_description", data.extra_description);
 
-      formData.append("hidden_seo_text ", data.hidden_seo_text);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
       const res = await api.post("/equipments/", formData);
       return res.data;
     } catch (err) {
@@ -202,7 +202,7 @@ export const updateEquipment = createAsyncThunk(
     formData.append("page_keywords", data.page_keywords);
     formData.append("extra_description", data.extra_description);
 
-    formData.append("hidden_seo_text ", data.hidden_seo_text);
+    formData.append("hidden_seo_text", data.hidden_seo_text);
     try {
       const res = await api.put(`/equipments/${id}`, formData);
       return res.data;
@@ -271,7 +271,7 @@ export const createSolutions = createAsyncThunk(
       formData.append("page_keywords", data.page_keywords);
       formData.append("extra_description", data.extra_description);
 
-      formData.append("hidden_seo_text ", data.hidden_seo_text);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
       const res = await api.post("/solutions/", formData);
       return res.data;
     } catch (err) {
@@ -312,7 +312,7 @@ export const updateSolutions = createAsyncThunk(
     formData.append("page_keywords", data.page_keywords);
     formData.append("extra_description", data.extra_description);
 
-    formData.append("hidden_seo_text ", data.hidden_seo_text);
+    formData.append("hidden_seo_text", data.hidden_seo_text);
     console.log(data);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
@@ -449,6 +449,53 @@ export const updateCompany = createAsyncThunk(
       const formData = new FormData();
       formData.append("about_main_screen", payload.about_main_screen);
       formData.append("about_unique_screen", payload.about_unique_screen);
+
+      formData.append("about_page_title", payload.about_page_title);
+      formData.append("about_page_description", payload.about_page_description);
+      formData.append("about_hidden_seo_text", payload.about_hidden_seo_text);
+      formData.append("about_page_keywords", payload.about_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const updateHomeSeo = createAsyncThunk(
+  "HomeSeo/updateHomeSeo",
+  async (payload, thunkApi) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("main_page_title", payload.main_page_title);
+      formData.append("main_page_description", payload.main_page_description);
+      formData.append("main_hidden_seo_text", payload.main_hidden_seo_text);
+      formData.append("main_page_keywords", payload.main_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const updateContactsSeo = createAsyncThunk(
+  "contacts/updateContactsSeo",
+  async (payload, thunkApi) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("contacts_page_title", payload.contacts_page_title);
+      formData.append(
+        "contacts_page_description",
+        payload.contacts_page_description
+      );
+      formData.append(
+        "contacts_hidden_seo_text",
+        payload.contacts_hidden_seo_text
+      );
+      formData.append("contacts_page_keywords", payload.contacts_page_keywords);
       const res = await api.put(`/company/`, formData);
       return res.data;
     } catch (err) {
@@ -540,6 +587,7 @@ export const submitOrder = createAsyncThunk(
     }
   }
 );
+
 const token = Cookies.get("access_token");
 const userSlice = createSlice({
   name: "user",

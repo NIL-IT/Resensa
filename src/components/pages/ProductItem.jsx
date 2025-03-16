@@ -13,6 +13,7 @@ import {
   getAllOrders,
 } from "../../utils/slice/userSlice";
 import ProductDescription from "../shared/ProductDescription";
+import SeoBlock from "../shared/SeoBlock";
 
 export default function ProductItem({ list }) {
   const dispatch = useDispatch();
@@ -119,14 +120,22 @@ export default function ProductItem({ list }) {
     dataFetchedRef.current = true;
     dispatch(getAllOrders());
   }, []);
-
+  console.log(currentProduct);
   return list.length > 0 ? (
     <>
+      <SeoBlock
+        url={`https://new.recensa.ru/${
+          isEquipment
+            ? `equipment/${pathname.split("/")[2]}`
+            : `solutions/${pathname.split("/")[2]}`
+        }`}
+        title={currentProduct.page_title}
+        description={currentProduct.hidden_seo_text}
+      />
       <Helmet>
         <title>{currentProduct.page_title}</title>
         <meta name="description" content={currentProduct.page_description} />
         <meta name="keywords" content={currentProduct.page_keywords} />
-        {/* <!-- Open Graph --> */}
         <meta property="og:title" content={currentProduct.page_title} />
         <meta
           property="og:url"

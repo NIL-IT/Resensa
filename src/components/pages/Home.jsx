@@ -15,7 +15,8 @@ import SliderPage from "../shared/SliderPage";
 import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import Cookies from "js-cookie";
-export default function Home({ equipment, solutions, banner, news }) {
+import SeoBlock from "../shared/SeoBlock";
+export default function Home({ equipment, solutions, banner, news, company }) {
   const { pathname } = useLocation();
   const isNavigateNews = Cookies.get("news_nav") === "1";
 
@@ -64,20 +65,19 @@ export default function Home({ equipment, solutions, banner, news }) {
   return (
     <>
       <Helmet>
-        <title>Recensa - Вентиляционное оборудование и решения</title>
-        <meta
-          name="description"
-          content="Бренд RECENSA ориентирован на создание новой производственной базы, а также на поставку вентиляционного оборудования под собственной торговой маркой."
-        />
-        {/* <!-- Open Graph --> */}
-        <meta
-          property="og:title"
-          content="Recensa - Вентиляционное оборудование и решения"
-        />
+        <title>{company.main_page_title}</title>
+        <meta name="description" content={company.main_page_description} />
+        <meta property="og:title" content={company.main_page_title} />
         <meta property="og:url" content="https://new.recensa.ru/" />
+        <meta name="keywords" content={company.main_page_keywords} />
         <link rel="canonical" href="https://new.recensa.ru/" />
       </Helmet>
       <main>
+        <SeoBlock
+          description={company.main_hidden_seo_text}
+          title={company.main_page_title}
+          url={"https://new.recensa.ru/"}
+        />
         <Banner banner={banner} />
         <Advantages />
         <ItemsList

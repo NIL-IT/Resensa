@@ -5,8 +5,9 @@ import Button from "../ui/Button";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import Footer from "../shared/Footer";
 import { useDispatch } from "react-redux";
+import SeoBlock from "../shared/SeoBlock";
 
-const Contacts = () => {
+const Contacts = ({ company }) => {
   const dispatch = useDispatch();
   document.body.style.overflowY = "auto";
   const scrollTop = () => {
@@ -22,14 +23,17 @@ const Contacts = () => {
   }, [pathname]);
   return (
     <section className="min-h-screen flex flex-col">
+      <SeoBlock
+        url={"https://new.recensa.ru/contact"}
+        description={company.contacts_hidden_seo_text}
+        title={company.contacts_page_title}
+      />
       <Helmet>
-        <title>Контакты - Recensa</title>
-        <meta
-          name="description"
-          content="Контактная информация RECENSA. Адрес, телефон, email и реквизиты компании. Свяжитесь с нами для получения профессиональной консультации по вентиляционному оборудованию."
-        />
+        <title>{company.contacts_page_title}</title>
+        <meta name="description" content={company.contacts_page_description} />
+        <meta name="keywords" content={company.contacts_page_keywords} />
         {/* <!-- Open Graph --> */}
-        <meta property="og:title" content="Контакты - Recensa" />
+        <meta property="og:title" content={company.contacts_page_title} />
         <meta property="og:url" content="https://new.recensa.ru/contact" />
         <link rel="canonical" href="https://new.recensa.ru/contact" />
       </Helmet>

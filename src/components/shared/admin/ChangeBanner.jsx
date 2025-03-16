@@ -67,72 +67,69 @@ export default function ChangeBanner({ title }) {
       <div className="flex items-center justify-between mb-4">
         <Title className="text-xl font-normal text-gray-400" text={title} />
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="pt-6 sm:pt-10 w-full sm:w-[300px] md:w-[400px] lg:w-[500px]"
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col gap-5 items-center">
-            <div>
-              <p className="block mb-1 text-sm font-medium text-gray-900">
-                Цифра для первого значения
-              </p>
-              <Input
-                required={false}
-                type={"text"}
-                name="first_value"
-                placeholder={formData.first_value || 0}
-                value={formData.first_value}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <p className="block mb-1 text-sm font-medium text-gray-900">
-                Текст для первого значения
-              </p>
-              <Input
-                required={false}
-                type={"text"}
-                name="first_value_string"
-                placeholder={"Введите текст..."}
-                value={formData.first_value_string}
-                onChange={handleInputChange}
-              />
-            </div>
+      <form onSubmit={handleSubmit} className="pt-6 sm:pt-10 w-full space-y-10">
+        <div className="space-y-3">
+          <div>
+            <p className="block mb-1 text-sm font-medium text-gray-900">
+              Цифра для первого значения
+            </p>
+            <Input
+              required={false}
+              type={"text"}
+              name="first_value"
+              placeholder={formData.first_value || 0}
+              value={formData.first_value}
+              onChange={handleInputChange}
+            />
           </div>
-          <div className="flex flex-col gap-5 items-center">
-            <div>
-              <p className="block mb-1 text-sm font-medium text-gray-900">
-                Цифра для второго значения
-              </p>
-              <Input
-                required={false}
-                type={"text"}
-                name="second_value"
-                placeholder={"Введите цифру..."}
-                value={formData.second_value}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <p className="block mb-1 text-sm font-medium text-gray-900">
-                Текст для второго значения
-              </p>
-              <Input
-                required={false}
-                type={"text"}
-                name="second_value_string"
-                placeholder={"Введите текст..."}
-                value={formData.second_value_string}
-                onChange={handleInputChange}
-              />
-            </div>
+          <div>
+            <p className="block mb-1 text-sm font-medium text-gray-900">
+              Текст для первого значения
+            </p>
+            <Input
+              required={false}
+              type={"text"}
+              name="first_value_string"
+              placeholder={"Введите текст..."}
+              value={formData.first_value_string}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
-        <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+
+        <div className="space-y-3">
+          <div>
+            <p className="block mb-1 text-sm font-medium text-gray-900">
+              Цифра для второго значения
+            </p>
+            <Input
+              required={false}
+              type={"text"}
+              name="second_value"
+              placeholder={"Введите цифру..."}
+              value={formData.second_value}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <p className="block mb-1 text-sm font-medium text-gray-900">
+              Текст для второго значения
+            </p>
+            <Input
+              required={false}
+              type={"text"}
+              name="second_value_string"
+              placeholder={"Введите текст..."}
+              value={formData.second_value_string}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-col  items-start sm:items-center gap-2 sm:gap-4">
           <button
             type="submit"
-            className="flex w-full sm:w-[120px] justify-center rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors mb-5 lg:mb-0"
+            className="flex w-full  justify-center rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors mb-5 lg:mb-0"
           >
             Сохранить
           </button>

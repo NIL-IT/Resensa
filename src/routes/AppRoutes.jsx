@@ -30,6 +30,7 @@ export default function AppRoutes({
             solutions={solutions}
             banner={banner}
             news={news}
+            company={company}
           />
         }
       />
@@ -37,6 +38,7 @@ export default function AppRoutes({
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
+            company={company}
             title={"Оборудование"}
             text={`Recensa предлагает широкий ассортимент вентиляционного оборудования 
               для коммерческих, промышленных и жилых объектов. В линейке представлены 
@@ -55,6 +57,7 @@ export default function AppRoutes({
         path={ROUTES.SOLUTIONS}
         element={
           <Equipment
+            company={company}
             title={"Решения"}
             text={`Recensa разрабатывает и поставляет климатические системы для объектов
                с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 
@@ -79,7 +82,7 @@ export default function AppRoutes({
       />
       <Route path={ROUTES.ABOUT} element={<AboutCompany company={company} />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
-      <Route path={ROUTES.CONTACT} element={<Contacts />} />
+      <Route path={ROUTES.CONTACT} element={<Contacts company={company} />} />
       <Route path={ROUTES.NEWS} element={<NewsPage news={news} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

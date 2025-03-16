@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Title from "../../ui/Title";
+import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany, updateCompany } from "../../../utils/slice/userSlice";
 import JoditEditor from "jodit-react";
@@ -12,6 +13,10 @@ export default function ChangeAbout({ title }) {
   const [formData, setFormData] = useState({
     about_main_screen: company?.about_main_screen || "",
     about_unique_screen: company?.about_unique_screen || "",
+    about_page_title: company?.about_page_title || "",
+    about_page_description: company?.about_page_description || "",
+    about_hidden_seo_text: company?.about_hidden_seo_text || "",
+    about_page_keywords: company?.about_page_keywords || "",
   });
 
   const bannerEditorRef = useRef(null);
@@ -29,6 +34,10 @@ export default function ChangeAbout({ title }) {
       setFormData({
         about_main_screen: company?.about_main_screen || "",
         about_unique_screen: company?.about_unique_screen || "",
+        about_page_title: company?.about_page_title || "",
+        about_page_description: company?.about_page_description || "",
+        about_hidden_seo_text: company?.about_hidden_seo_text || "",
+        about_page_keywords: company?.about_page_keywords || "",
       });
     }
   }, [company]);
@@ -50,6 +59,15 @@ export default function ChangeAbout({ title }) {
       [name]: content,
     }));
   }, []);
+
+  // Обработчик изменений для обычных полей ввода
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,10 +127,69 @@ export default function ChangeAbout({ title }) {
             </div>
           </div>
         </div>
-        <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div className="border-t border-gray-200 pt-4 space-y-[18px]">
+          <h3 className="text-lg font-medium text-gray-900">SEO информация</h3>
+
+          <div className="space-y-2">
+            <p className="w-full text-sm text-gray-900">
+              Заголовок страницы (Title)
+            </p>
+            <Input
+              type="text"
+              name="about_page_title"
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+              value={formData.about_page_title}
+              onChange={handleInputChange}
+              placeholder="Заголовок для SEO"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <p className="w-full text-sm text-gray-900">
+              Описание страницы (Description)
+            </p>
+            <textarea
+              name="about_page_description"
+              rows="3"
+              onChange={handleInputChange}
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+              value={formData.about_page_description}
+              placeholder="Краткое описание для поисковых систем"
+            ></textarea>
+          </div>
+          <div className="space-y-2">
+            <p className="w-full text-sm text-gray-900">
+              Текст для поисковых систем
+            </p>
+            <textarea
+              name="about_hidden_seo_text"
+              rows="3"
+              onChange={handleInputChange}
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+              value={formData.about_hidden_seo_text}
+              placeholder="Этот текст предназначен для поисковых систем и не виден пользователям. "
+            ></textarea>
+          </div>
+
+          <div className="space-y-2">
+            <p className="w-full text-sm text-gray-900">
+              Ключевые слова (Keywords)
+            </p>
+            <Input
+              type="text"
+              name="about_page_keywords"
+              className="block p-2.5 w-full text-base text-gray-400 font-normal bg-gray-50 rounded-lg border border-gray-300"
+              value={formData.about_page_keywords}
+              onChange={handleInputChange}
+              placeholder="Ключевые слова через запятую"
+            />
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col  items-start sm:items-center gap-2 sm:gap-4">
           <button
             type="submit"
-            className="flex w-full sm:w-[120px] justify-center rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors mb-5 lg:mb-0"
+            className="flex w-full  justify-center rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 transition-colors mb-5 lg:mb-0"
           >
             Сохранить
           </button>
