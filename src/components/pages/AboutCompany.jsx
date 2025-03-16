@@ -19,7 +19,6 @@ import { changeItemId } from "../../utils/slice/userSlice";
 import { useParams } from "react-router-dom";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
 export default function AboutCompany({ company }) {
-  console.log(company);
   const dispatch = useDispatch();
   const { pathname } = useParams();
   const scrollTop = () => {
@@ -49,7 +48,7 @@ export default function AboutCompany({ company }) {
           placeholderSrc={"/img/newbanner_about_compress.png"}
           title={"о компании"}
           subtitle={"recensa"}
-          text={text}
+          text={company.about_main_screen}
           textSize={"text-lg"}
           about={true}
         />
@@ -59,7 +58,7 @@ export default function AboutCompany({ company }) {
           subTitle={
             "Recensa: ваш стратегический партнер в реализации масштабных проектов."
           }
-          text={sliderTextMain}
+          text={company.about_unique_screen}
           slides={slidesMain}
         />
         <SliderPage

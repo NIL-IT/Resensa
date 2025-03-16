@@ -99,6 +99,9 @@ const AddNewItem = () => {
           );
           return;
         }
+        const today = new Date();
+        const formattedDate = today.toISOString().split("T")[0];
+        console.log(formattedDate);
         const newsData = {
           title: formData.title,
           text: formData.text,
@@ -107,6 +110,7 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           hidden_seo_text: formData.hidden_seo_text,
+          date: formattedDate,
         };
         await dispatch(createNews(newsData)).unwrap();
         await dispatch(getAllNews());
@@ -179,6 +183,7 @@ const AddNewItem = () => {
           );
           return;
         }
+
         const solutionData = {
           name: formData.name,
           description: formData.description,
@@ -194,7 +199,7 @@ const AddNewItem = () => {
           extra_description: formData.extra_description,
           hidden_seo_text: formData.hidden_seo_text,
         };
-        await dispatch(createSolutions(solutionData)).unwrap();
+        await dispatch(createSolutions(solutionData));
         await dispatch(getAllSolutions());
         setFormData({
           name: "",

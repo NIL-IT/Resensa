@@ -254,6 +254,7 @@ export const createSolutions = createAsyncThunk(
   "Solutions/createSolutions",
   async (data, thunkApi) => {
     try {
+      console.log(data);
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("description", data.description);
@@ -312,6 +313,7 @@ export const updateSolutions = createAsyncThunk(
     formData.append("extra_description", data.extra_description);
 
     formData.append("hidden_seo_text ", data.hidden_seo_text);
+    console.log(data);
     try {
       const res = await api.put(`/solutions/${id}`, formData);
       return res.data;

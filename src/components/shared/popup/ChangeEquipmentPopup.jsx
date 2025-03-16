@@ -148,8 +148,8 @@ const ChangeEquipmentPopup = () => {
           ).unwrap();
         }
       } else {
-        const today = new Date();
-        const formattedDate = today.toISOString().split("T")[0];
+        // const today = new Date();
+        // const formattedDate = today.toISOString().split("T")[0];
         const newsData = selectedFile
           ? {
               title: formData.title,
@@ -159,7 +159,6 @@ const ChangeEquipmentPopup = () => {
               page_title: formData.page_title,
               page_keywords: formData.page_keywords,
               hidden_seo_text: formData.hidden_seo_text,
-              date: formattedDate,
             }
           : {
               title: formData.title,
@@ -168,7 +167,6 @@ const ChangeEquipmentPopup = () => {
               page_title: formData.page_title,
               page_keywords: formData.page_keywords,
               hidden_seo_text: formData.hidden_seo_text,
-              date: formattedDate,
             };
         await dispatch(
           updateNews({ id: findProduct?.id, data: newsData })

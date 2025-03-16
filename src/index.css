@@ -386,3 +386,50 @@ button::-moz-focus-inner {
 .white {
   filter: grayscale(1) brightness(1000%);
 }
+.editor-container .jodit-workplace {
+  min-height: 150px;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.editor-container .jodit-wysiwyg {
+  padding: 8px 10px;
+  overflow: auto;
+  outline: none;
+  min-height: 150px;
+}
+
+.editor-container .jodit-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.editor-container .jodit-toolbar__box {
+  z-index: 3;
+  position: relative;
+}
+
+/* Исправление проблемы с z-index для выпадающих меню */
+.jodit-popup,
+.jodit-dialog {
+  z-index: 100 !important;
+}
+
+/* Улучшение взаимодействия с редактором */
+.jodit-container:not(.jodit_inline) {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* Обеспечение видимости контекстного меню */
+.jodit-context-menu {
+  z-index: 200 !important;
+}
+
+/* Исправление проблем с вставкой */
+.jodit-wysiwyg[contenteditable="true"] {
+  user-select: text;
+  -webkit-user-select: text;
+}

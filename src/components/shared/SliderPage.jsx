@@ -37,6 +37,7 @@ export default function SliderPage({
             </h3>
             <div className="space-y-10 ">
               <div
+                dangerouslySetInnerHTML={{ __html: text }}
                 className="w-full xs:w-full sm:w-full md:w-[600px] 
             lg:w-[700px] xl:w-[750px] 2xl:w-[780px] 3xl:w-[813px] 
             text-base xs:text-base sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg 
@@ -46,11 +47,7 @@ export default function SliderPage({
               text-gray-400 mb-[35px] xs:mb-[40px] sm:mb-[45px]
                md:mb-[50px] lg:mb-[55px] xl:mb-[60px] 2xl:mb-[65px] 
                3xl:mb-[70px]"
-              >
-                {text.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
+              />
             </div>
           </div>
         </div>
