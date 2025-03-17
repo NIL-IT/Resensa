@@ -28,7 +28,7 @@ if (!isProduction) {
   app.use(vite.middlewares);
 } else {
   app.use(compression());
-  app.use(base, sirv("./dist/client", { extensions: [] }));
+  app.use(sirv(path.resolve("dist/client"), { extensions: [] }));
 }
 
 // Serve HTML
