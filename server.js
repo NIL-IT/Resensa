@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import express from "express";
 import compression from "compression";
 import sirv from "sirv";
-import path from "path";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -34,6 +33,7 @@ if (!isProduction) {
 
 // Serve HTML
 app.use("*", async (req, res) => {
+  console.log(`Request: ${req.method} ${req.originalUrl}`);
   try {
     const url = req.originalUrl.replace(base, "");
 
