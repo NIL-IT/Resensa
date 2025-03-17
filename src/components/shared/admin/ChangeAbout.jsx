@@ -100,7 +100,7 @@ export default function ChangeAbout({ title }) {
                 ref={bannerEditorRef}
                 value={formData.about_main_screen}
                 config={{ ...config, height: 150 }}
-                onChange={(content) =>
+                onBlur={(content) =>
                   handleEditorChange(content, "about_main_screen")
                 }
                 tabIndex={1}
@@ -119,7 +119,7 @@ export default function ChangeAbout({ title }) {
                 ref={aboutEditorRef}
                 value={formData.about_unique_screen}
                 config={{ ...config, height: 150 }}
-                onChange={(content) =>
+                onBlur={(content) =>
                   handleEditorChange(content, "about_unique_screen")
                 }
                 tabIndex={2}

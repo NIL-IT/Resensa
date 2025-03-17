@@ -504,6 +504,57 @@ export const updateContactsSeo = createAsyncThunk(
     }
   }
 );
+export const updateEquipmentSeo = createAsyncThunk(
+  "Equipment/updateEquipmentSeo",
+  async (payload, thunkApi) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("equipment_page_title", payload.equipment_page_title);
+      formData.append(
+        "equipment_page_description",
+        payload.equipment_page_description
+      );
+      formData.append(
+        "equipment_hidden_seo_text",
+        payload.equipment_hidden_seo_text
+      );
+      formData.append(
+        "equipment_page_keywords",
+        payload.equipment_page_keywords
+      );
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+export const updateSolutionSeo = createAsyncThunk(
+  "Solution/updateSolutionSeo",
+  async (payload, thunkApi) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("solution_page_title", payload.solution_page_title);
+      formData.append(
+        "solution_page_description",
+        payload.solution_page_description
+      );
+      formData.append(
+        "solution_hidden_seo_text",
+        payload.solution_hidden_seo_text
+      );
+      formData.append("solution_page_keywords", payload.solution_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 export const authPost = createAsyncThunk(
   "user/authPost",
   async (credentials, { rejectWithValue }) => {
