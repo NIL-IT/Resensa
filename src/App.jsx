@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/shared/Header";
 import AppRoutes from "./routes/AppRoutes";
 import Widget from "./components/ui/Widget";
@@ -83,72 +82,70 @@ function App() {
     fetchData();
   }, [dispatch]);
   return !loading ? (
-    <HelmetProvider>
-      <div className="relative">
-        {!isLoginForm && <Widget />}
-        <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
-          {!isLoginForm && <Header />}
-          <Suspense
-            fallback={
-              <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ">
-                <div className="loader" />
-              </div>
-            }
-          >
-            <AppRoutes
-              equipment={equipment}
-              solutions={solutions}
-              company={company}
-              banner={banner}
-              news={news}
-              orders={orders}
-            />
-          </Suspense>
-        </div>
-        {isPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <Popup />
-          </Suspense>
-        )}
-        {status && (
-          <Suspense fallback={"...Загрузка"}>
-            <StatusPopup orders={orders} />
-          </Suspense>
-        )}
-        {addOrderPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <AddOrderPopup />
-          </Suspense>
-        )}
-        {equipmentPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <ChangeEquipmentPopup />
-          </Suspense>
-        )}
-        {addNewItemPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <AddNewItem />
-          </Suspense>
-        )}
-        {searchPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <SearchPopup />
-          </Suspense>
-        )}
-        {statusOrderPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <ChangeStatusPopup />
-          </Suspense>
-        )}
-        {calcPopup && (
-          <Suspense fallback={"...Загрузка"}>
-            <EquipmentType />
-          </Suspense>
-        )}
+    <div className="relative">
+      {!isLoginForm && <Widget />}
+      <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
+        {!isLoginForm && <Header />}
+        <Suspense
+          fallback={
+            <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ">
+              <div className="loader" />
+            </div>
+          }
+        >
+          <AppRoutes
+            equipment={equipment}
+            solutions={solutions}
+            company={company}
+            banner={banner}
+            news={news}
+            orders={orders}
+          />
+        </Suspense>
       </div>
-    </HelmetProvider>
+      {isPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <Popup />
+        </Suspense>
+      )}
+      {status && (
+        <Suspense fallback={"...Загрузка"}>
+          <StatusPopup orders={orders} />
+        </Suspense>
+      )}
+      {addOrderPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <AddOrderPopup />
+        </Suspense>
+      )}
+      {equipmentPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <ChangeEquipmentPopup />
+        </Suspense>
+      )}
+      {addNewItemPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <AddNewItem />
+        </Suspense>
+      )}
+      {searchPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <SearchPopup />
+        </Suspense>
+      )}
+      {statusOrderPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <ChangeStatusPopup />
+        </Suspense>
+      )}
+      {calcPopup && (
+        <Suspense fallback={"...Загрузка"}>
+          <EquipmentType />
+        </Suspense>
+      )}
+    </div>
   ) : (
-    <div className="fixed top-0left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center">
+    <div className="fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center">
       <div className="loader" />
     </div>
   );

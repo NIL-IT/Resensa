@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "generate-sitemap": "node scripts/generateSitemap.js"
+    "dev": "node server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "preview": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
+    "@loadable/component": "^5.16.4",
+    "@loadable/server": "^5.16.5",
     "@react-three/drei": "^9.120.6",
     "@react-three/fiber": "^8.17.12",
     "@reduxjs/toolkit": "^2.5.0",
@@ -18,6 +20,8 @@
     "axios": "^1.7.9",
     "browserify": "^17.0.1",
     "clsx": "^2.1.1",
+    "compression": "^1.8.0",
+    "cross-env": "^7.0.3",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
     "jodit-react": "^5.2.15",
@@ -30,8 +34,9 @@
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.1.1",
+    "react-router-dom": "^6.4.0",
     "react-router-sitemap": "^1.2.0",
+    "sirv": "^3.0.1",
     "sitemap": "^8.0.0",
     "tailwind-merge": "^2.6.0",
     "three": "^0.172.0",
@@ -52,6 +57,7 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "terser": "^5.27.0",
-    "vite": "^6.0.5"
+    "vite": "^6.2.2",
+    "vite-plugin-cjs-interop": "^2.2.0"
   }
 }

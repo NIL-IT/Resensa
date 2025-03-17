@@ -251,7 +251,7 @@ const AddNewItem = () => {
       lg:py-[35px] xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 
       rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-full 
       max-w-[300px] xs:max-w-[350px] sm:max-w-[450px] md:max-w-[550px] 
-      lg:max-w-[600px] xl:max-w-[663px] relative overflow-y-scroll max-h-[85%]"
+      lg:max-w-[600px] xl:max-w-[663px] relative overflow-y-scroll  overflow-x-hidden max-h-[85%]"
       >
         <button
           onClick={() => dispatch(changeShowAddNewItemPopup(false))}

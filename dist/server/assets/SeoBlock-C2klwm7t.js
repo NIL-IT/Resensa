@@ -1,0 +1,1 @@
+import{jsxs as l,jsx as e}from"react/jsx-runtime";import"react";const t=({title:r,description:o,url:i})=>l("div",{style:{display:"none"},children:[e("h1",{children:r}),e("p",{children:o}),e("a",{href:"https://example.com",children:i})]});export{t as S};

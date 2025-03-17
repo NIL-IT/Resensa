@@ -15,7 +15,7 @@ export default function AdminNews() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { news, itemId } = useSelector(({ user }) => user);
-  console.log(news);
+
   const changeNews = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));

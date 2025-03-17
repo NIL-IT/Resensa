@@ -1,32 +1,32 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    // Оптимизация сборки
-    target: "es2015",
-    minify: "esbuild",
-    minifyOptions: {
-      target: "es2015",
-      treeShaking: true,
-      drop: ["console", "debugger"],
+export default defineConfig(({ mode }) => {
+  process.env.NODE_ENV = mode;
+  return {
+    plugins: [react()],
+    ssr: {
+      // Явно указываем, что react-helmet-async должен обрабатываться как ESM
+      noExternal: ["react-helmet-async"],
     },
-    // Разделение кода
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
-          "three-vendor": ["three", "@react-three/fiber", "@react-three/drei"],
+    build: {
+      target: "es2015",
+      minify: "esbuild",
+      minifyOptions: {
+        target: "es2015",
+        treeShaking: true,
+        drop: ["console", "debugger"],
+      },
+      rollupOptions: {
+        output: {
+          // Полностью комментируем manualChunks на время отладки
+          // manualChunks: {
+          //   "three-vendor": ["three", "@react-three/fiber", "@react-three/drei"],
+          // },
         },
       },
+      chunkSizeWarningLimit: 1000,
+      emptyOutDir: true,
+      assetsInlineLimit: 4096,
     },
-    // Уменьшение размера чанков
-    chunkSizeWarningLimit: 1000,
-    // Очистка выходной директории
-    emptyOutDir: true,
-    // Оптимизация ассетов
-    assetsInlineLimit: 4096,
-  },
+  };
 });

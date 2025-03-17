@@ -187,7 +187,7 @@ const ChangeEquipmentPopup = () => {
     <section className="fixed inset-0 flex items-center justify-center">
       <div
         className="bg-white  h-[80%] py-[38px] px-8 
-      rounded-lg w-full max-w-[663px]  overflow-scroll  relative"
+      rounded-lg w-full max-w-[663px]  overflow-y-scroll overflow-x-hidden  relative"
       >
         <button
           onClick={() => {
