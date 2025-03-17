@@ -6,7 +6,7 @@ import sirv from "sirv";
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
-const base = process.env.BASE || "/";
+const base = process.env.BASE || "https://new.recensa.ru/";
 
 // Cached production assets
 const templateHtml = isProduction
