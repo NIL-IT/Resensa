@@ -93,7 +93,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
           subTitle={
             "Recensa: ваш стратегический партнер в реализации масштабных проектов."
           }
-          text={sliderTextMain}
+          text={company.about_unique_screen}
           slides={slidesMain}
         />
         <News news={news} />

@@ -29,6 +29,9 @@ export const config = {
   toolbarAdaptive: false,
   statusbar: false,
   language: "ru",
+  enableDragAndDropFileToEditor: true,
+  pastePlain: false,
+  pasteAsHTML: true,
   // Отключение резервных кнопок в адаптивном режиме
   buttonsMD: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
   buttonsSM: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],

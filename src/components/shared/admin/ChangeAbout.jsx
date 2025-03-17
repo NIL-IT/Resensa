@@ -99,7 +99,7 @@ export default function ChangeAbout({ title }) {
               <JoditEditor
                 ref={bannerEditorRef}
                 value={formData.about_main_screen}
-                config={{ ...config, height: 150 }}
+                config={config}
                 onBlur={(content) =>
                   handleEditorChange(content, "about_main_screen")
                 }
@@ -118,7 +118,7 @@ export default function ChangeAbout({ title }) {
               <JoditEditor
                 ref={aboutEditorRef}
                 value={formData.about_unique_screen}
-                config={{ ...config, height: 150 }}
+                config={config}
                 onBlur={(content) =>
                   handleEditorChange(content, "about_unique_screen")
                 }
