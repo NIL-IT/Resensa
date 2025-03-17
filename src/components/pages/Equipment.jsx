@@ -9,8 +9,10 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
+import SeoBlock from "../shared/SeoBlock";
 
 export default function Equipment({
+  company,
   data,
   bannerImg,
   title,
@@ -32,33 +34,19 @@ export default function Equipment({
 
   return (
     <>
+      <SeoBlock
+        url={company.url}
+        title={company.page_title}
+        description={company.hidden_seo_text}
+      />
       <Helmet>
-        <title>{`Recensa - ${title}`}</title>
-        <meta
-          name="description"
-          content={`${title} от RECENSA. ${
-            text.split(".")[0]
-          }. Профессиональные решения для вентиляции и кондиционирования.`}
-        />
+        <title>{company.page_title}</title>
+        <meta name="description" content={company.page_description} />
+        <meta name="keywords" content={company.page_keywords} />
         {/* <!-- Open Graph --> */}
-        <meta
-          property="og:title"
-          content={`Recensa - Вентиляционное ${
-            isEquipment ? "оборудование" : "решения"
-          }`}
-        />
-        <meta
-          property="og:url"
-          content={`https://new.recensa.ru/${
-            isEquipment ? "equipment" : "solutions"
-          }`}
-        />
-        <link
-          rel="canonical"
-          href={`https://new.recensa.ru/${
-            isEquipment ? "equipment" : "solutions"
-          }`}
-        />
+        <meta property="og:title" content={company.page_title} />
+        <meta property="og:url" content={company.url} />
+        <link rel="canonical" href={company.url} />
       </Helmet>
       <main>
         <EquipmentBanner

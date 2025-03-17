@@ -38,7 +38,13 @@ export default function AppRoutes({
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
-            company={company}
+            company={{
+              hidden_seo_text: company.equipment_hidden_seo_text,
+              page_title: company.equipment_page_title,
+              page_description: company.equipment_page_description,
+              page_keywords: company.equipment_page_keywords,
+              url: "https://new.recensa.ru/equipment",
+            }}
             title={"Оборудование"}
             text={`Recensa предлагает широкий ассортимент вентиляционного оборудования 
               для коммерческих, промышленных и жилых объектов. В линейке представлены 
@@ -57,7 +63,13 @@ export default function AppRoutes({
         path={ROUTES.SOLUTIONS}
         element={
           <Equipment
-            company={company}
+            company={{
+              hidden_seo_text: company.solution_hidden_seo_text,
+              page_title: company.solution_page_title,
+              page_description: company.solution_page_description,
+              page_keywords: company.solution_page_keywords,
+              url: "https://new.recensa.ru/solutions",
+            }}
             title={"Решения"}
             text={`Recensa разрабатывает и поставляет климатические системы для объектов
                с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 

@@ -18,7 +18,6 @@ export const config = {
     "link",
     "hr",
     "copyformat",
-
     "source",
     "cut",
     "selectall",

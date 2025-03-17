@@ -13,7 +13,12 @@ import {
 export default function SeoPage({ title }) {
   const dispatch = useDispatch();
   const { company } = useSelector(({ user }) => user);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState({
+    main: false,
+    contacts: false,
+    equipment: false,
+    solution: false,
+  });
   const [formDataMain, setFormDataMain] = useState({
     main_page_title: company.main_page_title || "",
     main_page_description: company.main_page_description || "",
@@ -78,9 +83,14 @@ export default function SeoPage({ title }) {
 
   useEffect(() => {
     let timer;
-    if (showSuccess) {
+    if (Object.values(showSuccess).some((value) => value === true)) {
       timer = setTimeout(() => {
-        setShowSuccess(false);
+        setShowSuccess({
+          main: false,
+          contacts: false,
+          equipment: false,
+          solution: false,
+        });
       }, 3000); // Hide message after 3 seconds
     }
     return () => clearTimeout(timer);
@@ -121,26 +131,26 @@ export default function SeoPage({ title }) {
   const handleSubmitMain = (e) => {
     e.preventDefault();
     dispatch(updateHomeSeo(formDataMain));
-    setShowSuccess(true);
+    setShowSuccess({ main: true });
   };
 
   const handleSubmitContacts = (e) => {
     e.preventDefault();
     dispatch(updateContactsSeo(formDataContacts));
-    setShowSuccess(true);
+    setShowSuccess({ contacts: true });
   };
 
   const handleSubmitEquipment = (e) => {
     e.preventDefault();
     console.log(formDataEquipment);
     dispatch(updateEquipmentSeo(formDataEquipment));
-    setShowSuccess(true);
+    setShowSuccess({ equipment: true });
   };
 
   const handleSubmitSolution = (e) => {
     e.preventDefault();
     dispatch(updateSolutionSeo(formDataSolution));
-    setShowSuccess(true);
+    setShowSuccess({ solution: true });
   };
 
   return (
@@ -219,7 +229,7 @@ export default function SeoPage({ title }) {
           >
             Сохранить
           </button>
-          {showSuccess && (
+          {showSuccess.main && (
             <p className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
             </p>
@@ -301,7 +311,7 @@ export default function SeoPage({ title }) {
           >
             Сохранить
           </button>
-          {showSuccess && (
+          {showSuccess.contacts && (
             <p className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
             </p>
@@ -382,7 +392,7 @@ export default function SeoPage({ title }) {
           >
             Сохранить
           </button>
-          {showSuccess && (
+          {showSuccess.equipment && (
             <p className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
             </p>
@@ -463,7 +473,7 @@ export default function SeoPage({ title }) {
           >
             Сохранить
           </button>
-          {showSuccess && (
+          {showSuccess.solution && (
             <p className="text-green text-sm animate-fade-in mt-2 sm:mt-0">
               Данные успешно изменены
             </p>
