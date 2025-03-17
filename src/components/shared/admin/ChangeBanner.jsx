@@ -74,6 +74,7 @@ export default function ChangeBanner({ title }) {
               Цифра для первого значения
             </p>
             <Input
+              className={"border border-gray-200"}
               required={false}
               type={"text"}
               name="first_value"
@@ -87,6 +88,7 @@ export default function ChangeBanner({ title }) {
               Текст для первого значения
             </p>
             <Input
+              className={"border border-gray-200"}
               required={false}
               type={"text"}
               name="first_value_string"
@@ -103,6 +105,7 @@ export default function ChangeBanner({ title }) {
               Цифра для второго значения
             </p>
             <Input
+              className={"border border-gray-200"}
               required={false}
               type={"text"}
               name="second_value"
@@ -116,6 +119,7 @@ export default function ChangeBanner({ title }) {
               Текст для второго значения
             </p>
             <Input
+              className={"border border-gray-200"}
               required={false}
               type={"text"}
               name="second_value_string"

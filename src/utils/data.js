@@ -2,15 +2,14 @@ const password = 1234554321;
 export const config = {
   readonly: false,
   height: 200,
-  toolbar: ["bold", "underline", "ol", "italic", "fullsize"],
-  buttons: ["bold", "underline", "ol", "italic", "fullsize"],
+  toolbar: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  buttons: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
   removeButtons: [
     "ul",
     "outdent",
     "indent",
     "fontsize",
     "brush",
-    "paragraph",
     "file",
     "image",
     "video",
@@ -31,9 +30,19 @@ export const config = {
   statusbar: false,
   language: "ru",
   // Отключение резервных кнопок в адаптивном режиме
-  buttonsMD: ["bold", "underline", "ol", "italic", "fullsize"],
-  buttonsSM: ["bold", "underline", "ol", "italic", "fullsize"],
-  buttonsXS: ["bold", "underline", "ol", "italic", "fullsize"],
+  buttonsMD: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  buttonsSM: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  buttonsXS: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  controls: {
+    paragraph: {
+      list: {
+        h3: "Заголовок 3",
+        h4: "Заголовок 4",
+        h5: "Заголовок 5",
+        h6: "Заголовок 6",
+      },
+    },
+  },
 };
 export const slidesMain = [
   {
