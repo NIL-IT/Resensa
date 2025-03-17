@@ -79,10 +79,14 @@ export default function News({ news }) {
                       {item.title}
                     </h3>
                     {/* SEO */}
-                    <meta itemProp="datePublished" content={`${item.date}`} />
+                    <meta
+                      itemProp="datePublished"
+                      content={item.date.split("T")[0]}
+                    />
+
                     <meta
                       itemProp="description"
-                      content={`${item.text.split("/")[0]}`}
+                      content={`${item.text.replace(/<[^>]*>/g, "")}`}
                     />
                     <meta itemProp="author" content="Resenca" />
                     <div
@@ -111,7 +115,7 @@ export default function News({ news }) {
                   <div>
                     <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
                       <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
-                        {item.date}
+                        {item.date.split("T")[0]}
                       </span>
                     </div>
                     <button className="flex-center gap-3 group-hover:gap-4 transition-all">

@@ -55,7 +55,7 @@ export default function NewsPage({ news }) {
         itemScope
         itemType="http://schema.org/Article"
         className={`
-              container pt-[35px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px] 3xl:pt-[80px] 
+              container py-[35px] md:py-[40px] lg:py-[50px] xl:py-[60px] 2xl:py-[70px] 3xl:py-[80px] 
            `}
       >
         <nav className="mb-4 xs:mb-5 sm:mb-6">
@@ -149,12 +149,18 @@ export default function NewsPage({ news }) {
                     alt={findNews.title}
                   />
                 </div>
-                <meta itemProp="datePublished" content={findNews.date} />
-                <meta itemProp="dateModified" content={findNews.date} />
+                <meta
+                  itemProp="datePublished"
+                  content={findNews.date.split("T")[0]}
+                />
+                <meta
+                  itemProp="dateModified"
+                  content={findNews.date.split("T")[0]}
+                />
                 <meta itemProp="inLanguage" content="ru-RU" />
 
                 <p className="text-gray-900 text-sm xs:text-base block mt-4">
-                  {findNews.date}
+                  {findNews.date.split("T")[0]}
                 </p>
                 <div
                   itemProp="articleBody"
@@ -218,14 +224,18 @@ export default function NewsPage({ news }) {
                   itemScope=""
                 >
                   <meta itemProp="name" content="Recensa" />
-                  <link itemProp="url" href="https://new.recensa.ru/" />
+                  <link
+                    itemProp="url"
+                    href={`https://new.recensa.ru/${useLatinFormat(
+                      findNews.title
+                    )}`}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </article>
-
       <Footer />
     </>
   ) : (

@@ -110,9 +110,9 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           hidden_seo_text: formData.hidden_seo_text,
-          date: formattedDate,
+          // date: formattedDate,
         };
-        await dispatch(createNews(newsData)).unwrap();
+        await dispatch(createNews(newsData));
         await dispatch(getAllNews());
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {

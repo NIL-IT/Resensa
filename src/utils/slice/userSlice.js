@@ -43,7 +43,8 @@ export const createNews = createAsyncThunk(
       formData.append("page_title", payload.page_title);
       formData.append("page_keywords", payload.page_keywords);
       formData.append("hidden_seo_text", payload.hidden_seo_text);
-      formData.append("date", payload.date);
+      // formData.append("date", payload.date);
+      // console.log(payload.date);
       const res = await api.post("/news/", formData);
 
       return res.data;

@@ -31,7 +31,9 @@ export default function Header() {
     {
       name: "Заказы",
       path: `${
-        isAdmin ? `/admin/1` : `/equipment/${useLatinFormat(equipment[0].name)}`
+        isAdmin
+          ? `/admin/1`
+          : `/equipment/${useLatinFormat(equipment[0]?.name)}`
       }`,
     },
     { name: "Контакты", path: "/contact" },

@@ -15,7 +15,7 @@ export default function AdminNews() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { news, itemId } = useSelector(({ user }) => user);
-
+  console.log(news);
   const changeNews = (id) => {
     dispatch(changeItemId(id));
     dispatch(changeEquipmentPopup(true));
@@ -77,7 +77,9 @@ export default function AdminNews() {
                   <h2 className="text-gray-400 text-sm uppercase font-normal my-2 overflow-hidden">
                     {title}
                   </h2>
-                  <p className="text-[13px] text-gray-300">{date}</p>
+                  <p className="text-[13px] text-gray-300">
+                    {date.split("T")[0]}
+                  </p>
                 </div>
                 <div className="flex flex-col justify-center gap-2">
                   <Button
