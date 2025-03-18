@@ -31,7 +31,6 @@ export default function Equipment({
   }, [pathname]);
   document.body.style.overflowY = "auto";
   const isEquipment = pathname.split("/")[1] === "equipment";
-
   return (
     <>
       <SeoBlock

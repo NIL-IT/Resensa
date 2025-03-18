@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { Helmet } from "react-helmet-async";
 import SeoBlock from "../shared/SeoBlock";
+
 export default function NewsPage({ news }) {
   const [findNews, setFindNews] = useState();
   const { pathname } = useLocation();
   const newsName = pathname.split("/")[2];
+
   useEffect(() => {
     if (!newsName || !news) return;
     const findNews = news.filter(({ title }) =>
@@ -22,6 +24,7 @@ export default function NewsPage({ news }) {
   const handleNavigateNews = () => {
     Cookies.set("news_nav", "1", { expires: 1 });
   };
+
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -32,11 +35,21 @@ export default function NewsPage({ news }) {
   useEffect(() => {
     scrollTop();
   }, [pathname]);
+
   document.body.style.overflowY = "auto";
+
+  // Generate the canonical URL properly - ensure it doesn't create a chain
+  const getCanonicalUrl = () => {
+    if (!findNews) return null;
+
+    // Use the direct URL format consistently
+    return `https://new.recensa.ru/news/${newsName}`;
+  };
+
   return findNews ? (
     <>
       <SeoBlock
-        url={`https://new.recensa.ru/${newsName}`}
+        url={getCanonicalUrl()}
         title={findNews.page_title}
         description={findNews.hidden_seo_text}
       />
@@ -44,12 +57,10 @@ export default function NewsPage({ news }) {
         <title>{findNews.page_title}</title>
         <meta name="description" content={findNews.page_description} />
         <meta property="og:title" content={findNews.page_title} />
-        <meta
-          property="og:url"
-          content={`https://new.recensa.ru/${newsName}`}
-        />
+        <meta property="og:url" content={getCanonicalUrl()} />
         <meta name="keywords" content={findNews.page_keywords} />
-        <link rel="canonical" href={`https://new.recensa.ru/${newsName}`} />
+        {/* Fix canonical URL to prevent chains */}
+        <link rel="canonical" href={getCanonicalUrl()} />
       </Helmet>
       <article
         itemScope

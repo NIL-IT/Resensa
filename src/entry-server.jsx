@@ -5,6 +5,13 @@ import { StaticRouter } from "react-router-dom/server"; // Corrected import
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import { store } from "./utils/store";
+import {
+  getAllEquipment,
+  getAllNews,
+  getAllSolutions,
+  getBanner,
+  getCompany,
+} from "./utils/slice/userSlice";
 export async function fetchInitialData(url, store) {
   // Dispatch your initial data actions here
   try {

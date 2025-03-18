@@ -34,7 +34,9 @@
     <meta name="referrer" content="origin-when-crossorigin" />
   </head>
   <body>
-    <script></script>
+    <script>
+      window.__INITIAL_STATE__ = <%= JSON.stringify(initialState) %>;
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/entry-client.jsx"></script>
   </body>
