@@ -119,42 +119,48 @@ app.use("*", async (req, res) => {
     // Pass the status code to the render function
     const rendered = await render(url, statusCode);
 
-    // Safely serialize the initial state to prevent XSS attacks
-    const safeInitialState = JSON.stringify(rendered.initialState || {})
+    // Create the script tag with initial state
+    const initialStateScript = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(
+      rendered.initialState || {}
+    )
       .replace(/</g, "\\u003c")
-      .replace(/>/g, "\\u003e")
-      .replace(/&/g, "\\u0026")
-      .replace(/'/g, "\\u0027")
-      .replace(/"/g, '\\"');
-
-    // Create the script tag with properly escaped initial state
-    const initialStateScript = `<script>window.__INITIAL_STATE__ = JSON.parse("${safeInitialState}");</script>`;
+      .replace(/>/g, "\\u003e")}</script>`;
 
     // Replace placeholders in the template
     let html = template;
 
-    // Check if the template has specific placeholders
+    // Replace the head content if placeholder exists
     if (html.includes("<!--app-head-->")) {
       html = html.replace("<!--app-head-->", rendered.head || "");
     }
 
+    // Replace the HTML content
     if (html.includes("<!--app-html-->")) {
       html = html.replace("<!--app-html-->", rendered.html || "");
+    } else {
+      html = html.replace(
+        '<div id="root">',
+        `<div id="root">${rendered.html || ""}`
+      );
     }
 
-    // Replace the initial state placeholder or inject before closing body tag
+    // Replace the initial state placeholder
     if (html.includes("<!--initial-state-->")) {
       html = html.replace("<!--initial-state-->", initialStateScript);
+    } else if (html.includes("window.__INITIAL_STATE__ = __INITIAL_STATE__;")) {
+      // Replace the placeholder in the original template
+      html = html.replace(
+        "window.__INITIAL_STATE__ = __INITIAL_STATE__;",
+        `window.__INITIAL_STATE__ = ${JSON.stringify(
+          rendered.initialState || {}
+        )
+          .replace(/</g, "\\u003c")
+          .replace(/>/g, "\\u003e")};`
+      );
     } else {
-      // If there's no placeholder, inject before the closing body tag
+      // If no placeholder exists, inject before the closing body tag
       html = html.replace("</body>", `${initialStateScript}</body>`);
     }
-
-    // Fix for the specific issue with <%= JSON.stringify(initialState) %>
-    html = html.replace(
-      /window\.__INITIAL_STATE__\s*=\s*JSON\.parse\(["`']<%=\s*JSON\.stringify\(initialState\)\s*%>["`']\)/g,
-      `window.__INITIAL_STATE__ = JSON.parse("${safeInitialState}")`
-    );
 
     // IMPORTANT: Set the status code explicitly before sending the response
     res.status(statusCode);
