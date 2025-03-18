@@ -78,11 +78,7 @@ export default function Header() {
           isAdmin && "border-none"
         }`}
       >
-        <Link
-          to={isAdmin ? "https://new.recensa.ru/" : "/"}
-          target={isAdmin ? "_blank" : "_self"}
-          className="mb-0"
-        >
+        <Link to={"/"} target={isAdmin ? "_blank" : "_self"} className="mb-0">
           <img
             className="w-[200px] sm:w-[230px] lg:w-[313px]"
             src="/icon/logo.svg"

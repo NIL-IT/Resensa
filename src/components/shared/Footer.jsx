@@ -68,7 +68,7 @@ export default function Footer({ scrollTop = null }) {
             className="cursor-pointer"
           >
             <Link
-              to={isAdmin ? "https://new.recensa.ru/" : "/"}
+              to={"/"}
               target={isAdmin ? "_blank" : "_self"}
               className="max-w-[200px] xs:max-w-[210px] sm:max-w-[220px] md:max-w-[230px] lg:max-w-[240px] xl:max-w-[245px] 2xl:max-w-[247px] 3xl:max-w-[249px] max-h-[35px] xs:max-h-[36px] sm:max-h-[38px] md:max-h-[39px] lg:max-h-[40px] xl:max-h-[41px] 2xl:max-h-[41px] 3xl:max-h-[42px] mb-3 xs:mb-3.5 sm:mb-4 md:mb-4.5 lg:mb-5"
             >
