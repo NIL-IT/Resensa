@@ -71,10 +71,10 @@ export const updateNews = createAsyncThunk(
       if (data.news_photo !== undefined) {
         formData.append("news_photo", data.news_photo);
       }
-      formData.append("page_description", payload.page_description);
-      formData.append("page_title", payload.page_title);
-      formData.append("page_keywords", payload.page_keywords);
-      formData.append("hidden_seo_text", payload.hidden_seo_text);
+      formData.append("page_description", data.page_description);
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
       const res = await api.post(`/news/${id}`, formData);
       return res.data;
     } catch (err) {
