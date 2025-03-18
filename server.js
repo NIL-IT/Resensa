@@ -7,7 +7,7 @@ import path from "path";
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
-const base = process.env.BASE || "https://new.recensa.ru/";
+const base = process.env.BASE || "/"; // Изменено с "https://new.recensa.ru/"
 
 // Cached production assets
 const templateHtml = isProduction
@@ -32,7 +32,6 @@ if (!isProduction) {
   app.use(sirv(path.resolve("dist/client"), { extensions: [] }));
 }
 
-// Define valid routes for 404 detection
 const validRoutes = [
   "/",
   "/equipment",
@@ -45,14 +44,22 @@ const validRoutes = [
   "/equipment/:id",
   "/solutions/:id",
 ];
-
 // Helper function to check if a URL is valid
 function isValidRoute(url) {
   // Remove query parameters and hash
   const cleanUrl = url.split("?")[0].split("#")[0];
 
+  // Remove trailing slash if present (except for root)
+  if (cleanUrl !== "/" && cleanUrl.endsWith("/")) {
+    const cleanUrlTemp = cleanUrl.slice(0, -1);
+    cleanUrl = cleanUrlTemp;
+  }
+
+  console.log(`Checking route: ${cleanUrl}`);
+
   // Check if it's a direct match with our valid routes
   if (validRoutes.includes(cleanUrl)) {
+    console.log(`Valid route match: ${cleanUrl}`);
     return true;
   }
 
@@ -61,6 +68,8 @@ function isValidRoute(url) {
     cleanUrl.startsWith("/equipment/") ||
     cleanUrl.startsWith("/solutions/")
   ) {
+    // Here you might want to check if the specific product exists
+    console.log(`Valid product route: ${cleanUrl}`);
     return true;
   }
 
@@ -68,23 +77,33 @@ function isValidRoute(url) {
   if (
     cleanUrl.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)
   ) {
+    console.log(`Valid asset: ${cleanUrl}`);
     return true;
   }
 
+  console.log(`Invalid route: ${cleanUrl}`);
   return false;
 }
 
 // Serve HTML
 app.use("*", async (req, res) => {
-  console.log(`Request: ${req.method} ${req.originalUrl}`);
   try {
-    const url = req.originalUrl.replace(base, "");
+    // Get the URL without the base
+    const fullUrl = req.originalUrl;
+    console.log(`Request: ${req.method} ${fullUrl}`);
+
+    // Remove the base from the URL if it's present
+    let url = fullUrl;
+    if (base !== "/" && url.startsWith(base)) {
+      url = url.substring(base.length);
+    }
 
     // Determine if this is a valid route
     const isValid = isValidRoute(url);
 
     // Set status code based on route validity
     const statusCode = isValid ? 200 : 404;
+    console.log(`Setting status code: ${statusCode} for ${url}`);
 
     let template, render;
     if (!isProduction) {
@@ -97,8 +116,8 @@ app.use("*", async (req, res) => {
       render = (await import("./dist/server/entry-server.js")).render;
     }
 
-    // Here's the key change - await the render function
-    const rendered = await render(url);
+    // Pass the status code to the render function
+    const rendered = await render(url, statusCode);
 
     // Add initial state to the template
     const initialState = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(
@@ -108,10 +127,16 @@ app.use("*", async (req, res) => {
     const html = template
       .replace("<!--app-head-->", rendered.head || "")
       .replace("<!--app-html-->", rendered.html || "")
-      .replace("<!--initial-state-->", initialState); // Add this line to your index.html
+      .replace("<!--initial-state-->", initialState);
 
-    // Set the appropriate status code and send the HTML
-    res.status(statusCode).set({ "Content-Type": "text/html" }).end(html);
+    // IMPORTANT: Set the status code explicitly before sending the response
+    res.status(statusCode);
+
+    // Add debug header to see if our status code is being set
+    res.set("X-Debug-Status-Code", statusCode.toString());
+
+    // Set content type and send the HTML
+    res.set({ "Content-Type": "text/html" }).end(html);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
     console.log(e.stack);
