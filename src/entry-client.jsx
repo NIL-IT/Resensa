@@ -18,7 +18,7 @@ const store = configureStore({
   },
   preloadedState,
 });
-
+console.log("Client state:", store);
 // Hydrate with matching server structure
 hydrateRoot(
   document.getElementById("root"),

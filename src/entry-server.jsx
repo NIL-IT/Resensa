@@ -14,6 +14,7 @@ import {
 } from "./utils/slice/userSlice";
 export async function fetchInitialData(url, store) {
   // Dispatch your initial data actions here
+  console.log("Server state:", store.getState());
   try {
     await Promise.all([
       store.dispatch(getAllNews()),

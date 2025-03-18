@@ -35,7 +35,9 @@
   </head>
   <body>
     <script>
-      window.__INITIAL_STATE__ = <%= JSON.stringify(initialState) %>;
+      window.__INITIAL_STATE__ = JSON.parse(
+        "<%= JSON.stringify(initialState) %>"
+      );
     </script>
     <div id="root"></div>
     <script type="module" src="/src/entry-client.jsx"></script>
