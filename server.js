@@ -44,15 +44,15 @@ const validRoutes = [
   "/equipment/:id",
   "/solutions/:id",
 ];
+
 // Helper function to check if a URL is valid
 function isValidRoute(url) {
   // Remove query parameters and hash
-  const cleanUrl = url.split("?")[0].split("#")[0];
+  let cleanUrl = url.split("?")[0].split("#")[0];
 
   // Remove trailing slash if present (except for root)
   if (cleanUrl !== "/" && cleanUrl.endsWith("/")) {
-    const cleanUrlTemp = cleanUrl.slice(0, -1);
-    cleanUrl = cleanUrlTemp;
+    cleanUrl = cleanUrl.slice(0, -1);
   }
 
   console.log(`Checking route: ${cleanUrl}`);
@@ -119,15 +119,42 @@ app.use("*", async (req, res) => {
     // Pass the status code to the render function
     const rendered = await render(url, statusCode);
 
-    // Add initial state to the template
-    const initialState = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(
-      rendered.initialState || {}
-    ).replace(/</g, "\\u003c")}</script>`;
+    // Safely serialize the initial state to prevent XSS attacks
+    const safeInitialState = JSON.stringify(rendered.initialState || {})
+      .replace(/</g, "\\u003c")
+      .replace(/>/g, "\\u003e")
+      .replace(/&/g, "\\u0026")
+      .replace(/'/g, "\\u0027")
+      .replace(/"/g, '\\"');
 
-    const html = template
-      .replace("<!--app-head-->", rendered.head || "")
-      .replace("<!--app-html-->", rendered.html || "")
-      .replace("<!--initial-state-->", initialState);
+    // Create the script tag with properly escaped initial state
+    const initialStateScript = `<script>window.__INITIAL_STATE__ = JSON.parse("${safeInitialState}");</script>`;
+
+    // Replace placeholders in the template
+    let html = template;
+
+    // Check if the template has specific placeholders
+    if (html.includes("<!--app-head-->")) {
+      html = html.replace("<!--app-head-->", rendered.head || "");
+    }
+
+    if (html.includes("<!--app-html-->")) {
+      html = html.replace("<!--app-html-->", rendered.html || "");
+    }
+
+    // Replace the initial state placeholder or inject before closing body tag
+    if (html.includes("<!--initial-state-->")) {
+      html = html.replace("<!--initial-state-->", initialStateScript);
+    } else {
+      // If there's no placeholder, inject before the closing body tag
+      html = html.replace("</body>", `${initialStateScript}</body>`);
+    }
+
+    // Fix for the specific issue with <%= JSON.stringify(initialState) %>
+    html = html.replace(
+      /window\.__INITIAL_STATE__\s*=\s*JSON\.parse\(["`']<%=\s*JSON\.stringify\(initialState\)\s*%>["`']\)/g,
+      `window.__INITIAL_STATE__ = JSON.parse("${safeInitialState}")`
+    );
 
     // IMPORTANT: Set the status code explicitly before sending the response
     res.status(statusCode);
