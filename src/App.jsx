@@ -63,43 +63,28 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dataFetchedRef = useRef(false);
   useEffect(() => {
-    // Загружаем данные только если их еще нет в store
-    if (
-      equipment.length &&
-      news.length &&
-      solutions.length &&
-      banner &&
-      company
-    ) {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+
+    if (!equipment.length || !news.length || !solutions.length) {
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          await dispatch(getAllNews());
+          await dispatch(getAllEquipment());
+          await dispatch(getAllSolutions());
+          await dispatch(getBanner());
+          await dispatch(getCompany());
+        } catch (error) {
+          console.error(error);
+        }
+        setLoading(false);
+      };
+      fetchData();
+    } else {
       setLoading(false);
-      return;
     }
-
-    const fetchData = async () => {
-      try {
-        let promises = [];
-        if (!news.length) promises.push(dispatch(getAllNews()));
-        if (!equipment.length) promises.push(dispatch(getAllEquipment()));
-        if (!solutions.length) promises.push(dispatch(getAllSolutions()));
-        if (!banner) promises.push(dispatch(getBanner()));
-        if (!company) promises.push(dispatch(getCompany()));
-
-        await Promise.all(promises);
-      } catch (error) {
-        console.error(error);
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [
-    dispatch,
-    equipment.length,
-    news.length,
-    solutions.length,
-    banner,
-    company,
-  ]);
+  }, [dispatch, equipment.length, news.length, solutions.length]);
   return !loading ? (
     <div className="relative">
       {!isLoginForm && <Widget />}

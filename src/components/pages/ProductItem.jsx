@@ -120,7 +120,6 @@ export default function ProductItem({ list }) {
     dataFetchedRef.current = true;
     dispatch(getAllOrders());
   }, []);
-  console.log(currentProduct);
   return list.length > 0 ? (
     <>
       <SeoBlock
