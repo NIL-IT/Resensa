@@ -236,19 +236,19 @@ export default function EquipmentBanner({
                   }`
             }`}
           >
-            <h1
+            <h2
               itemProp="name"
               className="font-normal text-sm sm:text-lg leading-[22px] sm:leading-[24px] xl:text-[28px] 2xl:text-[32px] text-white md:leading-[41px] pt-[10px] md:pt-[0px]"
             >
               {subtitle || product.name}
-            </h1>
-            <h2
+            </h2>
+            <h3
               ref={h1Ref}
               className="font-normal  text-lg leading-[28px] sm:text-xl  md:text-[28px]  mt-3 md:mt-0 sm:leading-[32px]  md:leading-[36px]  
           xl:text-[38px] 2xl:text-[48px] xl:leading-[51px] 2xl:leading-[61px] text-white uppercase"
             >
               {title || product.sub_header}
-            </h2>
+            </h3>
             <div
               dangerouslySetInnerHTML={{ __html: text }}
               itemProp="description"

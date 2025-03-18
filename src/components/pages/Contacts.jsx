@@ -103,20 +103,20 @@ const Contacts = ({ company }) => {
           </ul>
         </nav>
 
-        <h1 className="text-2xl xs:text-3xl sm:text-4xl font-medium text-gray-400 mb-6 xs:mb-7 sm:mb-8">
+        <h2 className="text-2xl xs:text-3xl sm:text-4xl font-medium text-gray-400 mb-6 xs:mb-7 sm:mb-8">
           Контакты
-        </h1>
+        </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-7 sm:gap-8">
           <div className="space-y-4 xs:space-y-5 sm:space-y-6">
-            <h2
+            <h3
               itemProp="address"
               itemScope
               itemType="http://schema.org/PostalAddress"
               className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4"
             >
               Адрес
-            </h2>
+            </h3>
             <div className="space-y-3 xs:space-y-4">
               <a
                 itemProp="email"
@@ -174,9 +174,9 @@ const Contacts = ({ company }) => {
           </div>
 
           <div className="mt-6 lg:mt-0">
-            <h2 className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4">
+            <h3 className="text-lg xs:text-xl font-medium text-gray-400 mb-3 xs:mb-4">
               Реквизиты компании:
-            </h2>
+            </h3>
             <div className="space-y-2 xs:space-y-3 text-sm xs:text-base text-gray-400">
               <p>ООО "РЕСЕНСА"</p>
               <p>ИНН: 1234567890</p>

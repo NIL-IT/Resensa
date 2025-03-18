@@ -108,12 +108,12 @@ export default function NewsPage({ news }) {
           </ul>
         </nav>
         <meta itemProp="headline" content="title" />
-        <h1
+        <h2
           itemProp="name"
           className="text-lg xs:text-xl sm:text-2xl leading-[24px] xs:leading-[26px] sm:leading-[28px] md:leading-[30.6px] text-gray-400 mb-4 xs:mb-5 sm:mb-6 md:mb-7 lg:mb-8"
         >
           {findNews.title}
-        </h1>
+        </h2>
         <div className="flex justify-center w-full">
           <div className="w-full flex justify-center   md:w-[800px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1178px]">
             <div className="w-full">
