@@ -17,6 +17,7 @@ import Points from "../shared/Points";
 import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import { useParams } from "react-router-dom";
+import SeoBlock from "../shared/SeoBlock";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
 export default function AboutCompany({ company }) {
   const dispatch = useDispatch();
@@ -34,11 +35,17 @@ export default function AboutCompany({ company }) {
   document.body.style.overflowY = "auto";
   return (
     <>
+      <SeoBlock
+        title={company.about_page_title}
+        description={company.about_hidden_seo_text}
+        url={"https://new.recensa.ru/about"}
+      />
       <Helmet>
-        <title>О компании - Recensa</title>
-        <meta name="description" content={text} />
+        <title>{company.about_page_title}</title>
+        <meta name="description" content={company.about_page_description} />
+        <meta name="keywords" content={company.about_page_keywords} />
         {/* <!-- Open Graph --> */}
-        <meta property="og:title" content="О компании - Recensa" />
+        <meta property="og:title" content={company.about_page_title} />
         <meta property="og:url" content="https://new.recensa.ru/about" />
         <link rel="canonical" href="https://new.recensa.ru/about" />
       </Helmet>

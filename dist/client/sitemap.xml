@@ -121,4 +121,22 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+    <url>
+    <loc>https://new.recensa.ru/news/ustanovka-i-obsluzhivanie-vytyazhnykh-sistem-ventilyatsii-sovety-i-rekomendatsii</loc>
+    <lastmod>2025-02-14T11:51:16.524Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://new.recensa.ru/news/novye-tekhnologii-v-modelyakh-kanalnykh-ventilyatorov</loc>
+    <lastmod>2025-02-14T11:51:16.524Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://new.recensa.ru/news/primenenie-promyshlennykh-ventilyatorov-effektivnost-i-raznoobrazie</loc>
+    <lastmod>2025-02-14T11:51:16.524Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
