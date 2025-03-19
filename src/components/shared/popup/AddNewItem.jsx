@@ -325,7 +325,11 @@ const AddNewItem = () => {
             {!isNews ? "Описание" : "Текст новости"}
           </label>
           {isNews ? (
-            <Suspense fallback={<p>Loading editor...</p>}>
+            <Suspense
+              fallback={
+                <div className="border border-gray-300 h-[150px] w-full"></div>
+              }
+            >
               <JoditEditor
                 ref={textEditor}
                 value={formData.text || ""}
@@ -334,7 +338,11 @@ const AddNewItem = () => {
               />
             </Suspense>
           ) : (
-            <Suspense fallback={<p>Loading editor...</p>}>
+            <Suspense
+              fallback={
+                <div className="border border-gray-300 h-[150px] w-full"></div>
+              }
+            >
               <JoditEditor
                 ref={editor}
                 value={formData.description || ""}
@@ -354,7 +362,11 @@ const AddNewItem = () => {
                 >
                   Полное описание товара
                 </label>
-                <Suspense fallback={<p>Loading editor...</p>}>
+                <Suspense
+                  fallback={
+                    <div className="border border-gray-300 h-[150px] w-full"></div>
+                  }
+                >
                   <JoditEditor
                     ref={extraDescriptionEditor}
                     value={formData.extra_description || ""}
@@ -384,7 +396,11 @@ const AddNewItem = () => {
               >
                 Текст баннера
               </label>
-              <Suspense fallback={<p>Loading editor...</p>}>
+              <Suspense
+                fallback={
+                  <div className="border border-gray-300 h-[150px] w-full"></div>
+                }
+              >
                 <JoditEditor
                   ref={headerEditor}
                   value={formData.header || ""}

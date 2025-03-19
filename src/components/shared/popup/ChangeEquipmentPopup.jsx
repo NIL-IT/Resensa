@@ -276,7 +276,11 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст новости
                 </label>
-                <Suspense fallback={<p>Loading editor...</p>}>
+                <Suspense
+                  fallback={
+                    <div className="border border-gray-300 h-[150px] w-full"></div>
+                  }
+                >
                   <JoditEditor
                     ref={textEditorRef}
                     value={formData.text}
@@ -307,7 +311,11 @@ const ChangeEquipmentPopup = () => {
                 >
                   Описание
                 </label>
-                <Suspense fallback={<p>Loading editor...</p>}>
+                <Suspense
+                  fallback={
+                    <div className="border border-gray-300 h-[150px] w-full"></div>
+                  }
+                >
                   <JoditEditor
                     ref={descriptionEditorRef}
                     value={formData.description}
@@ -324,7 +332,11 @@ const ChangeEquipmentPopup = () => {
                 >
                   Полное описание товара
                 </label>
-                <Suspense fallback={<p>Loading editor...</p>}>
+                <Suspense
+                  fallback={
+                    <div className="border border-gray-300 h-[150px] w-full"></div>
+                  }
+                >
                   <JoditEditor
                     ref={extraDescriptionEditorRef}
                     value={formData.extra_description}
@@ -354,7 +366,11 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст баннера
                 </label>
-                <Suspense fallback={<p>Loading editor...</p>}>
+                <Suspense
+                  fallback={
+                    <div className="border border-gray-300 h-[150px] w-full"></div>
+                  }
+                >
                   <JoditEditor
                     ref={headerEditorRef}
                     value={formData.header}

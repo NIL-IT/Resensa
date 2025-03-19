@@ -103,7 +103,11 @@ export default function ChangeAbout({ title }) {
               Текст баннера
             </label>
             <div className="editor-container">
-              <Suspense fallback={<p>Loading editor...</p>}>
+              <Suspense
+                fallback={
+                  <div className="border border-gray-300 h-[150px] w-full"></div>
+                }
+              >
                 <JoditEditor
                   ref={bannerEditorRef}
                   value={formData.about_main_screen}
@@ -124,7 +128,11 @@ export default function ChangeAbout({ title }) {
               Текст страницы о компании
             </label>
             <div className="editor-container">
-              <Suspense fallback={<p>Loading editor...</p>}>
+              <Suspense
+                fallback={
+                  <div className="border border-gray-300 h-[150px] w-full"></div>
+                }
+              >
                 <JoditEditor
                   ref={aboutEditorRef}
                   value={formData.about_unique_screen}
