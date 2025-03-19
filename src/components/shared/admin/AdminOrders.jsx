@@ -4,7 +4,7 @@ import { PencilLine, Plus, Trash2 } from "lucide-react";
 import VerticalDote from "../../ui/VerticalDote";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders, deleteOrders } from "../../../utils/slice/userSlice";
-import { useFormatDate } from "../../../utils/hooks/formatDate";
+import { formatDate } from "../../../utils/hooks/formatDate";
 import SearchInput from "../../ui/SearchInput";
 
 export const list = [
@@ -32,7 +32,6 @@ export default function AdminOrders({ title }) {
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
     setLoading(true);
     const fetchOrders = async () => {
@@ -167,44 +166,49 @@ export default function AdminOrders({ title }) {
             </tbody>
           ) : ordersList.length > 0 ? (
             <tbody>
-              {ordersList.map((order) => (
-                <tr
-                  key={order.id}
-                  className="border-b *:text-center *:text-[8px]  lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
-                >
-                  <td className="text-center py-2 xl:py-3 w-[15px] px-1 xl:px-2">
-                    <input
-                      checked={isChecked(order.id)}
-                      onChange={() => handleCheckedOrder(order.id)}
-                      type="checkbox"
-                      className="rounded border-gray-300 cursor-pointer"
-                    />
-                  </td>
-                  <td className=" py-2 xl:py-3 px-1 xl:px-4">{order.name}</td>
-                  <td className=" py-2 xl:py-3 px-1 xl:px-4">{order.number}</td>
-                  <td className=" py-2 xl:py-3 px-1 xl:px-4">
-                    {useFormatDate(order.date)}
-                  </td>
-                  <td className="py-2 lg:py-3 px-1 lg:px-4 ">
-                    {order.client_name}
-                  </td>
-                  <td className="py-2 lg:py-3 px-1 lg:pr-4 ">
-                    <p
-                      className={`inline-flex items-center text-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
-                    >
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full ${getColor(
-                          order.state
-                        )}`}
+              {ordersList.map((order) => {
+                let formattedDate = formatDate(order.date);
+                return (
+                  <tr
+                    key={order.id}
+                    className="border-b *:text-center *:text-[8px]  lg:*:text-[11px] xl:*:text-sm *:font-normal *:text-gray-400"
+                  >
+                    <td className="text-center py-2 xl:py-3 w-[15px] px-1 xl:px-2">
+                      <input
+                        checked={isChecked(order.id)}
+                        onChange={() => handleCheckedOrder(order.id)}
+                        type="checkbox"
+                        className="rounded border-gray-300 cursor-pointer"
                       />
-                      {order.state}
-                    </p>
-                  </td>
-                  <td className=" py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
-                    {order.order_amount} ₽
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className=" py-2 xl:py-3 px-1 xl:px-4">{order.name}</td>
+                    <td className=" py-2 xl:py-3 px-1 xl:px-4">
+                      {order.number}
+                    </td>
+                    <td className=" py-2 xl:py-3 px-1 xl:px-4">
+                      {formattedDate}
+                    </td>
+                    <td className="py-2 lg:py-3 px-1 lg:px-4 ">
+                      {order.client_name}
+                    </td>
+                    <td className="py-2 lg:py-3 px-1 lg:pr-4 ">
+                      <p
+                        className={`inline-flex items-center text-center gap-1 lg:gap-2 px-1 lg:px-2 py-0.5 lg:py-1 rounded-full text-gray-400 text-[11px] lg:text-sm`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${getColor(
+                            order.state
+                          )}`}
+                        />
+                        {order.state}
+                      </p>
+                    </td>
+                    <td className=" py-2 lg:py-3 px-1 lg:px-4 text-[8px] lg:text-sm">
+                      {order.order_amount} ₽
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           ) : (
             <tbody>

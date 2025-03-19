@@ -148,8 +148,6 @@ const ChangeEquipmentPopup = () => {
           ).unwrap();
         }
       } else {
-        // const today = new Date();
-        // const formattedDate = today.toISOString().split("T")[0];
         const newsData = selectedFile
           ? {
               title: formData.title,

@@ -99,9 +99,6 @@ const AddNewItem = () => {
           );
           return;
         }
-        const today = new Date();
-        const formattedDate = today.toISOString().split("T")[0];
-        console.log(formattedDate);
         const newsData = {
           title: formData.title,
           text: formData.text,
@@ -110,7 +107,7 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           hidden_seo_text: formData.hidden_seo_text,
-          // date: formattedDate,
+   
         };
         await dispatch(createNews(newsData));
         await dispatch(getAllNews());
