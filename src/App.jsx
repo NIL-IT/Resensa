@@ -10,7 +10,7 @@ import {
   getCompany,
 } from "./utils/slice/userSlice";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+
 import ChangeStatusPopup from "./components/shared/popup/ChangeStatusPopup";
 import EquipmentType from "./components/shared/popup/EquipmentType";
 
@@ -30,8 +30,14 @@ const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
-  const { pathname } = useLocation();
-  const isLoginForm = pathname === "/auth" || pathname === "/auth/";
+  const [path, setPathname] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
+  const isLoginForm = path === "/auth" || path === "/auth/";
   const {
     isPopup,
     status,

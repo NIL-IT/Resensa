@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useRef, lazy } from "react";
+import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import { I as Input } from "./Input-Fzfexiw9.js";
 import { useDispatch, useSelector } from "react-redux";
 import { f as changeEquipmentPopup, a as changeItemId, u as updateEquipment, h as updateSolutions, i as updateNews } from "../entry-server.js";
@@ -18,8 +18,12 @@ import "lucide-react";
 const JoditEditor = lazy(() => import("jodit-react"));
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const pathnameId = pathname.split("/").at(-1);
+  const { path, setPathname } = useState("");
+  useEffect(() => {
+    const { pathname } = useLocation();
+    setPathname(pathname);
+  }, []);
+  const pathnameId = path.split("/").at(-1);
   const isNews = +pathnameId === 4;
   const isSolutions = +pathnameId === 3;
   document.body.style.overflowY = "hidden";
@@ -259,15 +263,21 @@ const ChangeEquipmentPopup = () => {
                   children: "Текст новости"
                 }
               ),
-              /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("p", { children: "Loading editor..." }), children: /* @__PURE__ */ jsx(
-                JoditEditor,
+              /* @__PURE__ */ jsx(
+                Suspense,
                 {
-                  ref: textEditorRef,
-                  value: formData.text,
-                  config,
-                  onBlur: (content) => handleEditorChange(content, "text")
+                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
+                  children: /* @__PURE__ */ jsx(
+                    JoditEditor,
+                    {
+                      ref: textEditorRef,
+                      value: formData.text,
+                      config,
+                      onBlur: (content) => handleEditorChange(content, "text")
+                    }
+                  )
                 }
-              ) })
+              )
             ] })
           ] }),
           !isNews && /* @__PURE__ */ jsxs(Fragment, { children: [
@@ -293,15 +303,21 @@ const ChangeEquipmentPopup = () => {
                   children: "Описание"
                 }
               ),
-              /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("p", { children: "Loading editor..." }), children: /* @__PURE__ */ jsx(
-                JoditEditor,
+              /* @__PURE__ */ jsx(
+                Suspense,
                 {
-                  ref: descriptionEditorRef,
-                  value: formData.description,
-                  config,
-                  onBlur: (content) => handleEditorChange(content, "description")
+                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
+                  children: /* @__PURE__ */ jsx(
+                    JoditEditor,
+                    {
+                      ref: descriptionEditorRef,
+                      value: formData.description,
+                      config,
+                      onBlur: (content) => handleEditorChange(content, "description")
+                    }
+                  )
                 }
-              ) }),
+              ),
               /* @__PURE__ */ jsx(
                 "label",
                 {
@@ -310,15 +326,21 @@ const ChangeEquipmentPopup = () => {
                   children: "Полное описание товара"
                 }
               ),
-              /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("p", { children: "Loading editor..." }), children: /* @__PURE__ */ jsx(
-                JoditEditor,
+              /* @__PURE__ */ jsx(
+                Suspense,
                 {
-                  ref: extraDescriptionEditorRef,
-                  value: formData.extra_description,
-                  config,
-                  onBlur: (content) => handleEditorChange(content, "extra_description")
+                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
+                  children: /* @__PURE__ */ jsx(
+                    JoditEditor,
+                    {
+                      ref: extraDescriptionEditorRef,
+                      value: formData.extra_description,
+                      config,
+                      onBlur: (content) => handleEditorChange(content, "extra_description")
+                    }
+                  )
                 }
-              ) })
+              )
             ] }),
             /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
               /* @__PURE__ */ jsx("p", { className: "w-full text-sm text-gray-900 pt-4", children: "Заголовок баннера" }),
@@ -342,15 +364,21 @@ const ChangeEquipmentPopup = () => {
                   children: "Текст баннера"
                 }
               ),
-              /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("p", { children: "Loading editor..." }), children: /* @__PURE__ */ jsx(
-                JoditEditor,
+              /* @__PURE__ */ jsx(
+                Suspense,
                 {
-                  ref: headerEditorRef,
-                  value: formData.header,
-                  config,
-                  onBlur: (content) => handleEditorChange(content, "header")
+                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
+                  children: /* @__PURE__ */ jsx(
+                    JoditEditor,
+                    {
+                      ref: headerEditorRef,
+                      value: formData.header,
+                      config,
+                      onBlur: (content) => handleEditorChange(content, "header")
+                    }
+                  )
                 }
-              ) })
+              )
             ] })
           ] }),
           !isSolutions && !isNews && /* @__PURE__ */ jsxs(Fragment, { children: [

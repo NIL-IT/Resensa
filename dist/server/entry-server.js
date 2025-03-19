@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import pkg from "react-helmet-async";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Link, useNavigate, Routes, Route, useLocation } from "react-router-dom";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
@@ -1793,13 +1793,18 @@ const AddOrderPopup = lazy(
   () => import("./assets/AddOrderPopup-Caq0LXRT.js")
 );
 const ChangeEquipmentPopup = lazy(
-  () => import("./assets/ChangeEquipmentPopup-LGBY2I6o.js")
+  () => import("./assets/ChangeEquipmentPopup-CXdKs-mE.js")
 );
 const AddNewItem = lazy(() => import("./assets/AddNewItem-VNXoEPTs.js"));
 const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
 function App() {
-  const { pathname } = useLocation();
-  const isLoginForm = pathname === "/auth" || pathname === "/auth/";
+  const [path, setPathname] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
+  const isLoginForm = path === "/auth" || path === "/auth/";
   const {
     isPopup,
     status,
