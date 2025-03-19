@@ -1,10 +1,14 @@
 export function formatDate(dateString) {
-  console.log(dateString);
-  const date = new Date(dateString);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    throw new Error("Input must be in YYYY-MM-DD format");
+  }
 
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear();
+  // Split the input string
+  const parts = dateString.split("-");
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
 
+  // Return the formatted date
   return `${day}.${month}.${year}`;
 }
