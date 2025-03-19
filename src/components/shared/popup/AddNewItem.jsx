@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, Suspense } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +10,7 @@ import {
   getAllEquipment,
   getAllSolutions,
 } from "../../../utils/slice/userSlice";
-import JoditEditor from "jodit-react";
+const JoditEditor = lazy(() => import("jodit-react"));
 // Import the config from data
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -107,7 +107,6 @@ const AddNewItem = () => {
           page_title: formData.page_title,
           page_keywords: formData.page_keywords,
           hidden_seo_text: formData.hidden_seo_text,
-   
         };
         await dispatch(createNews(newsData));
         await dispatch(getAllNews());
@@ -326,21 +325,25 @@ const AddNewItem = () => {
             {!isNews ? "Описание" : "Текст новости"}
           </label>
           {isNews ? (
-            <JoditEditor
-              ref={textEditor}
-              value={formData.text || ""}
-              config={config}
-              onBlur={(newContent) => handleEditorChange("text", newContent)}
-            />
+            <Suspense fallback={<p>Loading editor...</p>}>
+              <JoditEditor
+                ref={textEditor}
+                value={formData.text || ""}
+                config={config}
+                onBlur={(newContent) => handleEditorChange("text", newContent)}
+              />
+            </Suspense>
           ) : (
-            <JoditEditor
-              ref={editor}
-              value={formData.description || ""}
-              config={config}
-              onBlur={(newContent) =>
-                handleEditorChange("description", newContent)
-              }
-            />
+            <Suspense fallback={<p>Loading editor...</p>}>
+              <JoditEditor
+                ref={editor}
+                value={formData.description || ""}
+                config={config}
+                onBlur={(newContent) =>
+                  handleEditorChange("description", newContent)
+                }
+              />
+            </Suspense>
           )}
           {!isNews && (
             <>
@@ -351,14 +354,16 @@ const AddNewItem = () => {
                 >
                   Полное описание товара
                 </label>
-                <JoditEditor
-                  ref={extraDescriptionEditor}
-                  value={formData.extra_description || ""}
-                  config={config}
-                  onBlur={(newContent) =>
-                    handleEditorChange("extra_description", newContent)
-                  }
-                />
+                <Suspense fallback={<p>Loading editor...</p>}>
+                  <JoditEditor
+                    ref={extraDescriptionEditor}
+                    value={formData.extra_description || ""}
+                    config={config}
+                    onBlur={(newContent) =>
+                      handleEditorChange("extra_description", newContent)
+                    }
+                  />
+                </Suspense>
               </div>
 
               <div className="space-y-2 pt-4">
@@ -379,14 +384,16 @@ const AddNewItem = () => {
               >
                 Текст баннера
               </label>
-              <JoditEditor
-                ref={headerEditor}
-                value={formData.header || ""}
-                config={config}
-                onBlur={(newContent) =>
-                  handleEditorChange("header", newContent)
-                }
-              />
+              <Suspense fallback={<p>Loading editor...</p>}>
+                <JoditEditor
+                  ref={headerEditor}
+                  value={formData.header || ""}
+                  config={config}
+                  onBlur={(newContent) =>
+                    handleEditorChange("header", newContent)
+                  }
+                />
+              </Suspense>
             </>
           )}
           {+pathnameId === 2 && (

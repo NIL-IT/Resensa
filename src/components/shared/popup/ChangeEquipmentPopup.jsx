@@ -10,7 +10,7 @@ import {
 } from "../../../utils/slice/userSlice";
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
-import JoditEditor from "jodit-react";
+const JoditEditor = lazy(() => import("jodit-react"));
 import { config } from "../../../utils/data";
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
@@ -276,13 +276,14 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст новости
                 </label>
-
-                <JoditEditor
-                  ref={textEditorRef}
-                  value={formData.text}
-                  config={config}
-                  onBlur={(content) => handleEditorChange(content, "text")}
-                />
+                <Suspense fallback={<p>Loading editor...</p>}>
+                  <JoditEditor
+                    ref={textEditorRef}
+                    value={formData.text}
+                    config={config}
+                    onBlur={(content) => handleEditorChange(content, "text")}
+                  />
+                </Suspense>
               </div>
             </>
           )}
@@ -306,14 +307,16 @@ const ChangeEquipmentPopup = () => {
                 >
                   Описание
                 </label>
-                <JoditEditor
-                  ref={descriptionEditorRef}
-                  value={formData.description}
-                  config={config}
-                  onBlur={(content) =>
-                    handleEditorChange(content, "description")
-                  }
-                />
+                <Suspense fallback={<p>Loading editor...</p>}>
+                  <JoditEditor
+                    ref={descriptionEditorRef}
+                    value={formData.description}
+                    config={config}
+                    onBlur={(content) =>
+                      handleEditorChange(content, "description")
+                    }
+                  />
+                </Suspense>
 
                 <label
                   htmlFor="extra_description"
@@ -321,14 +324,16 @@ const ChangeEquipmentPopup = () => {
                 >
                   Полное описание товара
                 </label>
-                <JoditEditor
-                  ref={extraDescriptionEditorRef}
-                  value={formData.extra_description}
-                  config={config}
-                  onBlur={(content) =>
-                    handleEditorChange(content, "extra_description")
-                  }
-                />
+                <Suspense fallback={<p>Loading editor...</p>}>
+                  <JoditEditor
+                    ref={extraDescriptionEditorRef}
+                    value={formData.extra_description}
+                    config={config}
+                    onBlur={(content) =>
+                      handleEditorChange(content, "extra_description")
+                    }
+                  />
+                </Suspense>
               </div>
               <div className="space-y-2">
                 <p className="w-full text-sm text-gray-900 pt-4">
@@ -349,12 +354,14 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст баннера
                 </label>
-                <JoditEditor
-                  ref={headerEditorRef}
-                  value={formData.header}
-                  config={config}
-                  onBlur={(content) => handleEditorChange(content, "header")}
-                />
+                <Suspense fallback={<p>Loading editor...</p>}>
+                  <JoditEditor
+                    ref={headerEditorRef}
+                    value={formData.header}
+                    config={config}
+                    onBlur={(content) => handleEditorChange(content, "header")}
+                  />
+                </Suspense>
               </div>
             </>
           )}

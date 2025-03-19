@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  Suspense,
+} from "react";
 import Title from "../../ui/Title";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany, updateCompany } from "../../../utils/slice/userSlice";
-import JoditEditor from "jodit-react";
+const JoditEditor = lazy(() => import("jodit-react"));
 import { config } from "../../../utils/data";
 
 export default function ChangeAbout({ title }) {
@@ -96,15 +102,17 @@ export default function ChangeAbout({ title }) {
               Текст баннера
             </label>
             <div className="editor-container">
-              <JoditEditor
-                ref={bannerEditorRef}
-                value={formData.about_main_screen}
-                config={config}
-                onBlur={(content) =>
-                  handleEditorChange(content, "about_main_screen")
-                }
-                tabIndex={1}
-              />
+              <Suspense fallback={<p>Loading editor...</p>}>
+                <JoditEditor
+                  ref={bannerEditorRef}
+                  value={formData.about_main_screen}
+                  config={config}
+                  onBlur={(content) =>
+                    handleEditorChange(content, "about_main_screen")
+                  }
+                  tabIndex={1}
+                />
+              </Suspense>
             </div>
           </div>
           <div className="space-y-2 w-full mt-10">
@@ -115,15 +123,17 @@ export default function ChangeAbout({ title }) {
               Текст страницы о компании
             </label>
             <div className="editor-container">
-              <JoditEditor
-                ref={aboutEditorRef}
-                value={formData.about_unique_screen}
-                config={config}
-                onBlur={(content) =>
-                  handleEditorChange(content, "about_unique_screen")
-                }
-                tabIndex={2}
-              />
+              <Suspense fallback={<p>Loading editor...</p>}>
+                <JoditEditor
+                  ref={aboutEditorRef}
+                  value={formData.about_unique_screen}
+                  config={config}
+                  onBlur={(content) =>
+                    handleEditorChange(content, "about_unique_screen")
+                  }
+                  tabIndex={2}
+                />
+              </Suspense>
             </div>
           </div>
         </div>

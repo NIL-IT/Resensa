@@ -1293,7 +1293,7 @@ const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
 const NotFound = lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
 const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
 const AboutCompany = lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
-const Admin = lazy(() => import("./assets/Admin-BaCdjujk.js"));
+const Admin = lazy(() => import("./assets/Admin-Bt20zZz_.js"));
 const ProductItem = lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
 const Contacts = lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
@@ -1793,9 +1793,9 @@ const AddOrderPopup = lazy(
   () => import("./assets/AddOrderPopup-Caq0LXRT.js")
 );
 const ChangeEquipmentPopup = lazy(
-  () => import("./assets/ChangeEquipmentPopup-BRjdxTey.js")
+  () => import("./assets/ChangeEquipmentPopup-7Vxhqbm0.js")
 );
-const AddNewItem = lazy(() => import("./assets/AddNewItem-DHE72_5v.js"));
+const AddNewItem = lazy(() => import("./assets/AddNewItem-wBGajrW3.js"));
 const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
 function App() {
   const { pathname } = useLocation();
