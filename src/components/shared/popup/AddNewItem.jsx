@@ -1,4 +1,4 @@
-import React, { useState, useRef, Suspense } from "react";
+import React, { useState, useRef, Suspense, lazy } from "react";
 import Input from "../../ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {

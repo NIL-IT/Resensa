@@ -4,6 +4,7 @@ import React, {
   useRef,
   useCallback,
   Suspense,
+  lazy,
 } from "react";
 import Title from "../../ui/Title";
 import Input from "../../ui/Input";
