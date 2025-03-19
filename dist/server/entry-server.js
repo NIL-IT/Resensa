@@ -1288,7 +1288,7 @@ const ROUTES = {
   NEWS: "/news/:name",
   AUTH: "/auth"
 };
-const Home = lazy(() => import("./assets/Home-BI54osGy.js"));
+const Home = lazy(() => import("./assets/Home-BJozqgGb.js"));
 const NotFound = lazy(() => import("./assets/NotFound-DahZjD4d.js"));
 const Equipment = lazy(() => import("./assets/Equipment-BiwnbbwE.js"));
 const AboutCompany = lazy(() => import("./assets/AboutCompany-C3unMTZL.js"));

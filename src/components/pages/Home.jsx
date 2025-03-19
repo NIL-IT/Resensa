@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
-import { sliderTextMain, slidesMain } from "../../utils/data";
+import { slidesMain } from "../../utils/data";
 // import Calculator from "../shared/Сalculator";
 import News from "../shared/News";
 import Partners from "../shared/Partners";
@@ -64,6 +64,11 @@ export default function Home({ equipment, solutions, banner, news, company }) {
 
   return (
     <>
+      <SeoBlock
+        description={company.main_hidden_seo_text}
+        title={company.main_page_title}
+        url={"https://new.recensa.ru/"}
+      />
       <Helmet>
         <title>{company.main_page_title}</title>
         <meta name="description" content={company.main_page_description} />
@@ -73,11 +78,6 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         <link rel="canonical" href="https://new.recensa.ru/" />
       </Helmet>
       <main>
-        <SeoBlock
-          description={company.main_hidden_seo_text}
-          title={company.main_page_title}
-          url={"https://new.recensa.ru/"}
-        />
         <Banner banner={banner} />
         <Advantages />
         <ItemsList

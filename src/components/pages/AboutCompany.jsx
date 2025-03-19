@@ -6,12 +6,7 @@ import Advantages from "../shared/Advantages";
 import Partners from "../shared/Partners";
 import Footer from "../shared/Footer";
 import SliderPage from "../shared/SliderPage";
-import {
-  sliderTextMain,
-  sliderTextSub,
-  slidesMain,
-  slidesSub,
-} from "../../utils/data";
+import { sliderTextSub, slidesMain, slidesSub } from "../../utils/data";
 
 import Points from "../shared/Points";
 import { useDispatch } from "react-redux";
