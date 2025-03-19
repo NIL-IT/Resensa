@@ -24,7 +24,7 @@ export default function ItemsList({
   const [visibleItems, setVisibleItems] = useState([]);
   const [hiddenItems, setHiddenItems] = useState([]);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [formattedPriceValidUntil, setFormattedPriceValidUntil] = useState("");
+  // const [formattedPriceValidUntil, setFormattedPriceValidUntil] = useState("");
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isOrders = pathname.split("/")[2] === "orders";
@@ -86,12 +86,12 @@ export default function ItemsList({
     });
   };
 
-  useEffect(() => {
-    // Calculate the date only on client-side to avoid hydration mismatch
-    const priceValidUntil = new Date();
-    priceValidUntil.setFullYear(priceValidUntil.getFullYear() + 1);
-    setFormattedPriceValidUntil(priceValidUntil.toISOString().split("T")[0]);
-  }, []);
+  // useEffect(() => {
+  //   // Calculate the date only on client-side to avoid hydration mismatch
+  //   const priceValidUntil = new Date();
+  //   priceValidUntil.setFullYear(priceValidUntil.getFullYear() + 1);
+  //   setFormattedPriceValidUntil(priceValidUntil.toISOString().split("T")[0]);
+  // }, []);
 
   const renderItem = (item, index) => {
     const { id, name, description, image_card, image_card_alt } = item;
@@ -144,7 +144,7 @@ export default function ItemsList({
           <meta itemProp="price" content="5000" />
           <meta itemProp="priceCurrency" content="RUB" />
           <meta itemProp="availability" content="https://schema.org/InStock" />
-          <meta itemProp="priceValidUntil" content={formattedPriceValidUntil} />
+          {/* <meta itemProp="priceValidUntil" content={formattedPriceValidUntil} /> */}
           <link
             itemProp="url"
             href={

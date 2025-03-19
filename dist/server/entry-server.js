@@ -1,14 +1,15 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, lazy, useRef, Suspense, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { Link, useNavigate, Routes, Route, useLocation, StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router";
 import { useDispatch, useSelector, Provider } from "react-redux";
 import { createAsyncThunk, createSlice, configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { HelmetProvider } from "react-helmet-async";
+import pkg from "react-helmet-async";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Link, useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
@@ -1288,15 +1289,15 @@ const ROUTES = {
   NEWS: "/news/:name",
   AUTH: "/auth"
 };
-const Home = lazy(() => import("./assets/Home-DXzJjzon.js"));
-const NotFound = lazy(() => import("./assets/NotFound-DahZjD4d.js"));
-const Equipment = lazy(() => import("./assets/Equipment-F53NvUlW.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-C3unMTZL.js"));
-const Admin = lazy(() => import("./assets/Admin-DrcqZ_sV.js"));
-const ProductItem = lazy(() => import("./assets/ProductItem-DXylnaAg.js"));
-const LoginForm = lazy(() => import("./assets/LoginForm-DF3dtOl3.js"));
-const Contacts = lazy(() => import("./assets/Contacts-Cchsw1SM.js"));
-const NewsPage = lazy(() => import("./assets/NewsPage-DIxc3LqF.js"));
+const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
+const NotFound = lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
+const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
+const AboutCompany = lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
+const Admin = lazy(() => import("./assets/Admin-DYgPt8kH.js"));
+const ProductItem = lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
+const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
+const Contacts = lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
+const NewsPage = lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
 function AppRoutes({
   company,
   equipment,
@@ -1786,16 +1787,16 @@ function EquipmentType() {
     )
   ] }) });
 }
-const Popup = lazy(() => import("./assets/Popup-LWFz3Hfi.js"));
-const StatusPopup = lazy(() => import("./assets/StatusPopup-BmrLP5jB.js"));
+const Popup = lazy(() => import("./assets/Popup-DcmDSHpX.js"));
+const StatusPopup = lazy(() => import("./assets/StatusPopup-CDe1lx6d.js"));
 const AddOrderPopup = lazy(
-  () => import("./assets/AddOrderPopup-BYMm0Gsy.js")
+  () => import("./assets/AddOrderPopup-Caq0LXRT.js")
 );
 const ChangeEquipmentPopup = lazy(
-  () => import("./assets/ChangeEquipmentPopup-obffJcYT.js")
+  () => import("./assets/ChangeEquipmentPopup-BRjdxTey.js")
 );
-const AddNewItem = lazy(() => import("./assets/AddNewItem-CSlSn37t.js"));
-const SearchPopup = lazy(() => import("./assets/SearchPopup-CQvd1BkW.js"));
+const AddNewItem = lazy(() => import("./assets/AddNewItem-DHE72_5v.js"));
+const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
 function App() {
   const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
@@ -1805,7 +1806,6 @@ function App() {
     addOrderPopup,
     equipmentPopup,
     addNewItemPopup,
-    newsPopup,
     searchPopup,
     statusOrderPopup,
     equipment,
@@ -1874,6 +1874,7 @@ function App() {
     calcPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(EquipmentType, {}) })
   ] }) : /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center", children: /* @__PURE__ */ jsx("div", { className: "loader" }) });
 }
+const { HelmetProvider } = pkg;
 function render(url2) {
   const helmetContext = {};
   const html = renderToString(

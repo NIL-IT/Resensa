@@ -38,7 +38,6 @@ function App() {
     addOrderPopup,
     equipmentPopup,
     addNewItemPopup,
-    newsPopup,
     searchPopup,
     statusOrderPopup,
     equipment,

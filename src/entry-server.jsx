@@ -1,9 +1,11 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router";
 import { Provider } from "react-redux";
 import { store } from "./utils/store.js";
-import { HelmetProvider } from "react-helmet-async";
+import pkg from "react-helmet-async";
+const { HelmetProvider } = pkg;
+
 import App from "./App";
 
 /**
