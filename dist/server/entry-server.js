@@ -1,29 +1,1941 @@
-var et=Object.defineProperty,tt=Object.defineProperties;var rt=Object.getOwnPropertyDescriptors;var B=Object.getOwnPropertySymbols;var Ne=Object.prototype.hasOwnProperty,Se=Object.prototype.propertyIsEnumerable;var X=(e,t,a)=>t in e?et(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a,y=(e,t)=>{for(var a in t||(t={}))Ne.call(t,a)&&X(e,a,t[a]);if(B)for(var a of B(t))Se.call(t,a)&&X(e,a,t[a]);return e},C=(e,t)=>tt(e,rt(t));var ee=(e,t)=>{var a={};for(var r in e)Ne.call(e,r)&&t.indexOf(r)<0&&(a[r]=e[r]);if(e!=null&&B)for(var r of B(e))t.indexOf(r)<0&&Se.call(e,r)&&(a[r]=e[r]);return a};var P=(e,t,a)=>X(e,typeof t!="symbol"?t+"":t,a);var h=(e,t,a)=>new Promise((r,o)=>{var n=c=>{try{l(a.next(c))}catch(d){o(d)}},i=c=>{try{l(a.throw(c))}catch(d){o(d)}},l=c=>c.done?r(c.value):Promise.resolve(c.value).then(n,i);l((a=a.apply(e,t)).next())});import{jsx as s,jsxs as g,Fragment as at}from"react/jsx-runtime";import k,{Component as de,useState as $,useEffect as G,lazy as T,useRef as Fe,Suspense as I}from"react";import{renderToString as nt}from"react-dom/server";import{useDispatch as F,useSelector as W,Provider as st}from"react-redux";import{StaticRouter as ot}from"react-router-dom/server.mjs";import it from"react-fast-compare";import Ce from"invariant";import lt from"shallowequal";import{clsx as ct}from"clsx";import{twMerge as pt}from"tailwind-merge";import{Link as D,useNavigate as dt,Routes as mt,Route as O,useLocation as ut}from"react-router-dom";import{createAsyncThunk as f,createSlice as ht,configureStore as gt}from"@reduxjs/toolkit";import Me from"axios";import me from"js-cookie";import{ChevronUp as xt,ChevronDown as Ue}from"lucide-react";var He=(e=>(e.BASE="base",e.BODY="body",e.HEAD="head",e.HTML="html",e.LINK="link",e.META="meta",e.NOSCRIPT="noscript",e.SCRIPT="script",e.STYLE="style",e.TITLE="title",e.FRAGMENT="Symbol(react.fragment)",e))(He||{}),te={link:{rel:["amphtml","canonical","alternate"]},script:{type:["application/ld+json"]},meta:{charset:"",name:["generator","robots","description"],property:["og:type","og:title","og:url","og:image","og:image:alt","og:description","twitter:url","twitter:title","twitter:description","twitter:image","twitter:image:alt","twitter:card","twitter:site"]}},Oe=Object.values(He),ue={accesskey:"accessKey",charset:"charSet",class:"className",contenteditable:"contentEditable",contextmenu:"contextMenu","http-equiv":"httpEquiv",itemprop:"itemProp",tabindex:"tabIndex"},ft=Object.entries(ue).reduce((e,[t,a])=>(e[a]=t,e),{}),E="data-rh",R={DEFAULT_TITLE:"defaultTitle",DEFER:"defer",ENCODE_SPECIAL_CHARACTERS:"encodeSpecialCharacters",ON_CHANGE_CLIENT_STATE:"onChangeClientState",TITLE_TEMPLATE:"titleTemplate",PRIORITIZE_SEO_TAGS:"prioritizeSeoTags"},L=(e,t)=>{for(let a=e.length-1;a>=0;a-=1){const r=e[a];if(Object.prototype.hasOwnProperty.call(r,t))return r[t]}return null},_t=e=>{let t=L(e,"title");const a=L(e,R.TITLE_TEMPLATE);if(Array.isArray(t)&&(t=t.join("")),a&&t)return a.replace(/%s/g,()=>t);const r=L(e,R.DEFAULT_TITLE);return t||r||void 0},yt=e=>L(e,R.ON_CHANGE_CLIENT_STATE)||(()=>{}),re=(e,t)=>t.filter(a=>typeof a[e]!="undefined").map(a=>a[e]).reduce((a,r)=>y(y({},a),r),{}),wt=(e,t)=>t.filter(a=>typeof a.base!="undefined").map(a=>a.base).reverse().reduce((a,r)=>{if(!a.length){const o=Object.keys(r);for(let n=0;n<o.length;n+=1){const l=o[n].toLowerCase();if(e.indexOf(l)!==-1&&r[l])return a.concat(r)}}return a},[]),bt=e=>console&&typeof console.warn=="function"&&console.warn(e),U=(e,t,a)=>{const r={};return a.filter(o=>Array.isArray(o[e])?!0:(typeof o[e]!="undefined"&&bt(`Helmet: ${e} should be of type "Array". Instead found type "${typeof o[e]}"`),!1)).map(o=>o[e]).reverse().reduce((o,n)=>{const i={};n.filter(c=>{let d;const m=Object.keys(c);for(let u=0;u<m.length;u+=1){const x=m[u],w=x.toLowerCase();t.indexOf(w)!==-1&&!(d==="rel"&&c[d].toLowerCase()==="canonical")&&!(w==="rel"&&c[w].toLowerCase()==="stylesheet")&&(d=w),t.indexOf(x)!==-1&&(x==="innerHTML"||x==="cssText"||x==="itemprop")&&(d=x)}if(!d||!c[d])return!1;const p=c[d].toLowerCase();return r[d]||(r[d]={}),i[d]||(i[d]={}),r[d][p]?!1:(i[d][p]=!0,!0)}).reverse().forEach(c=>o.push(c));const l=Object.keys(i);for(let c=0;c<l.length;c+=1){const d=l[c],m=y(y({},r[d]),i[d]);r[d]=m}return o},[]).reverse()},vt=(e,t)=>{if(Array.isArray(e)&&e.length){for(let a=0;a<e.length;a+=1)if(e[a][t])return!0}return!1},Tt=e=>({baseTag:wt(["href"],e),bodyAttributes:re("bodyAttributes",e),defer:L(e,R.DEFER),encode:L(e,R.ENCODE_SPECIAL_CHARACTERS),htmlAttributes:re("htmlAttributes",e),linkTags:U("link",["rel","href"],e),metaTags:U("meta",["name","charset","http-equiv","property","itemprop"],e),noscriptTags:U("noscript",["innerHTML"],e),onChangeClientState:yt(e),scriptTags:U("script",["src","innerHTML"],e),styleTags:U("style",["cssText"],e),title:_t(e),titleAttributes:re("titleAttributes",e),prioritizeSeoTags:vt(e,R.PRIORITIZE_SEO_TAGS)}),We=e=>Array.isArray(e)?e.join(""):e,Nt=(e,t)=>{const a=Object.keys(e);for(let r=0;r<a.length;r+=1)if(t[a[r]]&&t[a[r]].includes(e[a[r]]))return!0;return!1},ae=(e,t)=>Array.isArray(e)?e.reduce((a,r)=>(Nt(r,t)?a.priority.push(r):a.default.push(r),a),{priority:[],default:[]}):{default:e,priority:[]},ke=(e,t)=>C(y({},e),{[t]:void 0}),St=["noscript","script","style"],ie=(e,t=!0)=>t===!1?String(e):String(e).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;"),Be=e=>Object.keys(e).reduce((t,a)=>{const r=typeof e[a]!="undefined"?`${a}="${e[a]}"`:`${a}`;return t?`${t} ${r}`:r},""),Ct=(e,t,a,r)=>{const o=Be(a),n=We(t);return o?`<${e} ${E}="true" ${o}>${ie(n,r)}</${e}>`:`<${e} ${E}="true">${ie(n,r)}</${e}>`},Ot=(e,t,a=!0)=>t.reduce((r,o)=>{const n=o,i=Object.keys(n).filter(d=>!(d==="innerHTML"||d==="cssText")).reduce((d,m)=>{const p=typeof n[m]=="undefined"?m:`${m}="${ie(n[m],a)}"`;return d?`${d} ${p}`:p},""),l=n.innerHTML||n.cssText||"",c=St.indexOf(e)===-1;return`${r}<${e} ${E}="true" ${i}${c?"/>":`>${l}</${e}>`}`},""),Ve=(e,t={})=>Object.keys(e).reduce((a,r)=>{const o=ue[r];return a[o||r]=e[r],a},t),kt=(e,t,a)=>{const r={key:t,[E]:!0},o=Ve(a,r);return[k.createElement("title",o,t)]},z=(e,t)=>t.map((a,r)=>{const o={key:r,[E]:!0};return Object.keys(a).forEach(n=>{const l=ue[n]||n;if(l==="innerHTML"||l==="cssText"){const c=a.innerHTML||a.cssText;o.dangerouslySetInnerHTML={__html:c}}else o[l]=a[n]}),k.createElement(e,o)}),S=(e,t,a=!0)=>{switch(e){case"title":return{toComponent:()=>kt(e,t.title,t.titleAttributes),toString:()=>Ct(e,t.title,t.titleAttributes,a)};case"bodyAttributes":case"htmlAttributes":return{toComponent:()=>Ve(t),toString:()=>Be(t)};default:return{toComponent:()=>z(e,t),toString:()=>Ot(e,t,a)}}},Et=({metaTags:e,linkTags:t,scriptTags:a,encode:r})=>{const o=ae(e,te.meta),n=ae(t,te.link),i=ae(a,te.script);return{priorityMethods:{toComponent:()=>[...z("meta",o.priority),...z("link",n.priority),...z("script",i.priority)],toString:()=>`${S("meta",o.priority,r)} ${S("link",n.priority,r)} ${S("script",i.priority,r)}`},metaTags:o.default,linkTags:n.default,scriptTags:i.default}},At=e=>{const{baseTag:t,bodyAttributes:a,encode:r=!0,htmlAttributes:o,noscriptTags:n,styleTags:i,title:l="",titleAttributes:c,prioritizeSeoTags:d}=e;let{linkTags:m,metaTags:p,scriptTags:u}=e,x={toComponent:()=>{},toString:()=>""};return d&&({priorityMethods:x,linkTags:m,metaTags:p,scriptTags:u}=Et(e)),{priority:x,base:S("base",t,r),bodyAttributes:S("bodyAttributes",a,r),htmlAttributes:S("htmlAttributes",o,r),link:S("link",m,r),meta:S("meta",p,r),noscript:S("noscript",n,r),script:S("script",u,r),style:S("style",i,r),title:S("title",{title:l,titleAttributes:c},r)}},le=At,V=[],ze=!!(typeof window!="undefined"&&window.document&&window.document.createElement),ce=class{constructor(e,t){P(this,"instances",[]);P(this,"canUseDOM",ze);P(this,"context");P(this,"value",{setHelmet:e=>{this.context.helmet=e},helmetInstances:{get:()=>this.canUseDOM?V:this.instances,add:e=>{(this.canUseDOM?V:this.instances).push(e)},remove:e=>{const t=(this.canUseDOM?V:this.instances).indexOf(e);(this.canUseDOM?V:this.instances).splice(t,1)}}});this.context=e,this.canUseDOM=t||!1,t||(e.helmet=le({baseTag:[],bodyAttributes:{},htmlAttributes:{},linkTags:[],metaTags:[],noscriptTags:[],scriptTags:[],styleTags:[],title:"",titleAttributes:{}}))}},Pt={},Ke=k.createContext(Pt),j,Ye=(j=class extends de{constructor(a){super(a);P(this,"helmetData");this.helmetData=new ce(this.props.context||{},j.canUseDOM)}render(){return k.createElement(Ke.Provider,{value:this.helmetData.value},this.props.children)}},P(j,"canUseDOM",ze),j),q=(e,t)=>{const a=document.head||document.querySelector("head"),r=a.querySelectorAll(`${e}[${E}]`),o=[].slice.call(r),n=[];let i;return t&&t.length&&t.forEach(l=>{const c=document.createElement(e);for(const d in l)if(Object.prototype.hasOwnProperty.call(l,d))if(d==="innerHTML")c.innerHTML=l.innerHTML;else if(d==="cssText")c.styleSheet?c.styleSheet.cssText=l.cssText:c.appendChild(document.createTextNode(l.cssText));else{const m=d,p=typeof l[m]=="undefined"?"":l[m];c.setAttribute(d,p)}c.setAttribute(E,"true"),o.some((d,m)=>(i=m,c.isEqualNode(d)))?o.splice(i,1):n.push(c)}),o.forEach(l=>{var c;return(c=l.parentNode)==null?void 0:c.removeChild(l)}),n.forEach(l=>a.appendChild(l)),{oldTags:o,newTags:n}},pe=(e,t)=>{const a=document.getElementsByTagName(e)[0];if(!a)return;const r=a.getAttribute(E),o=r?r.split(","):[],n=[...o],i=Object.keys(t);for(const l of i){const c=t[l]||"";a.getAttribute(l)!==c&&a.setAttribute(l,c),o.indexOf(l)===-1&&o.push(l);const d=n.indexOf(l);d!==-1&&n.splice(d,1)}for(let l=n.length-1;l>=0;l-=1)a.removeAttribute(n[l]);o.length===n.length?a.removeAttribute(E):a.getAttribute(E)!==i.join(",")&&a.setAttribute(E,i.join(","))},It=(e,t)=>{typeof e!="undefined"&&document.title!==e&&(document.title=We(e)),pe("title",t)},Ee=(e,t)=>{const{baseTag:a,bodyAttributes:r,htmlAttributes:o,linkTags:n,metaTags:i,noscriptTags:l,onChangeClientState:c,scriptTags:d,styleTags:m,title:p,titleAttributes:u}=e;pe("body",r),pe("html",o),It(p,u);const x={baseTag:q("base",a),linkTags:q("link",n),metaTags:q("meta",i),noscriptTags:q("noscript",l),scriptTags:q("script",d),styleTags:q("style",m)},w={},b={};Object.keys(x).forEach(N=>{const{newTags:v,oldTags:M}=x[N];v.length&&(w[N]=v),M.length&&(b[N]=x[N].oldTags)}),t&&t(),c(e,w,b)},H=null,Dt=e=>{H&&cancelAnimationFrame(H),e.defer?H=requestAnimationFrame(()=>{Ee(e,()=>{H=null})}):(Ee(e),H=null)},jt=Dt,Ae=class extends de{constructor(){super(...arguments);P(this,"rendered",!1)}shouldComponentUpdate(t){return!lt(t,this.props)}componentDidUpdate(){this.emitChange()}componentWillUnmount(){const{helmetInstances:t}=this.props.context;t.remove(this),this.emitChange()}emitChange(){const{helmetInstances:t,setHelmet:a}=this.props.context;let r=null;const o=Tt(t.get().map(n=>{const i=y({},n.props);return delete i.context,i}));Ye.canUseDOM?jt(o):le&&(r=le(o)),a(r)}init(){if(this.rendered)return;this.rendered=!0;const{helmetInstances:t}=this.props.context;t.add(this),this.emitChange()}render(){return this.init(),null}},oe,Or=(oe=class extends de{shouldComponentUpdate(e){return!it(ke(this.props,"helmetData"),ke(e,"helmetData"))}mapNestedChildrenToProps(e,t){if(!t)return null;switch(e.type){case"script":case"noscript":return{innerHTML:t};case"style":return{cssText:t};default:throw new Error(`<${e.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`)}}flattenArrayTypeChildren(e,t,a,r){return C(y({},t),{[e.type]:[...t[e.type]||[],y(y({},a),this.mapNestedChildrenToProps(e,r))]})}mapObjectTypeChildren(e,t,a,r){switch(e.type){case"title":return C(y({},t),{[e.type]:r,titleAttributes:y({},a)});case"body":return C(y({},t),{bodyAttributes:y({},a)});case"html":return C(y({},t),{htmlAttributes:y({},a)});default:return C(y({},t),{[e.type]:y({},a)})}}mapArrayTypeChildrenToProps(e,t){let a=y({},t);return Object.keys(e).forEach(r=>{a=C(y({},a),{[r]:e[r]})}),a}warnOnInvalidChildren(e,t){return Ce(Oe.some(a=>e.type===a),typeof e.type=="function"?"You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.":`Only elements types ${Oe.join(", ")} are allowed. Helmet does not support rendering <${e.type}> elements. Refer to our API for more information.`),Ce(!t||typeof t=="string"||Array.isArray(t)&&!t.some(a=>typeof a!="string"),`Helmet expects a string as a child of <${e.type}>. Did you forget to wrap your children in braces? ( <${e.type}>{\`\`}</${e.type}> ) Refer to our API for more information.`),!0}mapChildrenToProps(e,t){let a={};return k.Children.forEach(e,r=>{if(!r||!r.props)return;const c=r.props,{children:o}=c,n=ee(c,["children"]),i=Object.keys(n).reduce((d,m)=>(d[ft[m]||m]=n[m],d),{});let{type:l}=r;switch(typeof l=="symbol"?l=l.toString():this.warnOnInvalidChildren(r,o),l){case"Symbol(react.fragment)":t=this.mapChildrenToProps(o,t);break;case"link":case"meta":case"noscript":case"script":case"style":a=this.flattenArrayTypeChildren(r,a,i,o);break;default:t=this.mapObjectTypeChildren(r,t,i,o);break}}),this.mapArrayTypeChildrenToProps(a,t)}render(){const o=this.props,{children:e}=o,t=ee(o,["children"]);let a=y({},t),{helmetData:r}=t;if(e&&(a=this.mapChildrenToProps(e,a)),r&&!(r instanceof ce)){const n=r;r=new ce(n.context,!0),delete a.helmetData}return r?k.createElement(Ae,C(y({},a),{context:r.value})):k.createElement(Ke.Consumer,null,n=>k.createElement(Ae,C(y({},a),{context:n})))}},P(oe,"defaultProps",{defer:!0,encodeSpecialCharacters:!0,prioritizeSeoTags:!1}),oe);function K(...e){return pt(ct(e))}function he({text:e,className:t="",icon:a=!1,onClick:r=null,white:o=!1,href:n="",iconWidth:i,type:l="button",noLink:c=!1,target:d=null}){return c?s("button",{to:n,className:K("bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",t),onClick:r,children:e}):a?s(D,{to:n,target:d,children:g("button",{type:l,className:K("group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5",t),onClick:r,children:[o?s("img",{className:`group-hover:translate-x-1 transition-all ${i||""}`,src:"/icon/arrow_right.svg",alt:"arrow"}):s("img",{className:`group-hover:translate-x-1 transition-all ${i||""}`,src:"/icon/arrow.svg",alt:"arrow"}),s("p",{children:e})]})}):s(D,{to:n,className:K("bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",t),onClick:r,children:e})}const ge=Me.create({baseURL:"https://new.recensa.ru/api"});ge.interceptors.request.use(e=>{const t=me.get("access_token");return t&&(e.headers.Authorization=`Bearer ${t}`),e});ge.interceptors.response.use(e=>e,e=>{var t;return((t=e.response)==null?void 0:t.status)===401&&(me.remove("access_token"),window.location.href="/auth"),Promise.reject(e)});const $t="https://new.recensa.ru/api",_=Me.create({baseURL:$t,headers:{Accept:"application/json"}}),xe=f("news/getNews",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/news/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),kr=f("news/createNews",(e,t)=>h(void 0,null,function*(){var a,r,o;try{if(!e.title||!e.text||!e.news_photo)throw new Error("Отсутствуют обязательные поля: заголовок, текст и изображение");const n=new FormData;return n.append("title",e.title),n.append("text",e.text),n.append("news_photo",e.news_photo),n.append("page_description",e.page_description),n.append("page_title",e.page_title),n.append("page_keywords",e.page_keywords),n.append("hidden_seo_text",e.hidden_seo_text),(yield _.post("/news/",n)).data}catch(n){return console.error("Upload error:",n),t.rejectWithValue({message:((r=(a=n.response)==null?void 0:a.data)==null?void 0:r.message)||n.message||"Ошибка при создании новости",status:(o=n.response)==null?void 0:o.status})}})),Er=f("news/updateNews",(r,o)=>h(void 0,[r,o],function*({id:e,data:t},a){var n;try{const i=new FormData;return i.append("title",t.title),i.append("text",t.text),t.news_photo!==void 0&&i.append("news_photo",t.news_photo),i.append("page_description",t.page_description),i.append("page_title",t.page_title),i.append("page_keywords",t.page_keywords),i.append("hidden_seo_text",t.hidden_seo_text),(yield _.post(`/news/${e}`,i)).data}catch(i){return console.log(i),a.rejectWithValue(((n=i.response)==null?void 0:n.data)||i.message)}})),Ar=f("news/deleteNews",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.delete(`/news/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),fe=f("Equipment/getAllEquipment",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/equipments/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),_e=f("getEquipmentById/getEquipmentById",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get(`/equipments/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Pr=f("Equipment/createEquipment",(e,t)=>h(void 0,null,function*(){var a,r,o,n,i,l,c,d;try{const m=Number(e.min_param),p=Number(e.max_param);if(isNaN(m)||isNaN(p))throw new Error("Параметры должны быть числами");const u=new FormData;return u.append("name",e.name),u.append("description",e.description),u.append("sub_header",e.sub_header),u.append("header",e.header),u.append("image_banner",e.image_banner),u.append("image_card",e.image_card),u.append("min_param",m),u.append("max_param",p),u.append("image_banner_alt",e.image_banner_alt),u.append("image_card_alt",e.image_card_alt),u.append("page_description",e.page_description),u.append("page_title",e.page_title),u.append("page_keywords",e.page_keywords),u.append("extra_description",e.extra_description),u.append("hidden_seo_text",e.hidden_seo_text),(yield _.post("/equipments/",u)).data}catch(m){return console.error("Equipment creation error:",{error:m,response:(a=m.response)==null?void 0:a.data,status:(r=m.response)==null?void 0:r.status,statusText:(o=m.response)==null?void 0:o.statusText,headers:(n=m.response)==null?void 0:n.headers}),t.rejectWithValue({message:((l=(i=m.response)==null?void 0:i.data)==null?void 0:l.message)||m.message||"Ошибка при создании оборудования",status:(c=m.response)==null?void 0:c.status,details:(d=m.response)==null?void 0:d.data})}})),Ir=f("Equipment/updateEquipment",(r,o)=>h(void 0,[r,o],function*({id:e,data:t},a){var i;const n=new FormData;n.append("name",t.name),n.append("description",t.description),t.image_banner&&n.append("image_banner",t.image_banner),t.image_card&&n.append("image_card",t.image_card),n.append("header",t.header),n.append("sub_header",t.sub_header),n.append("min_param",t.min_param),n.append("max_param",t.max_param),n.append("image_banner_alt",t.image_banner_alt),n.append("image_card_alt",t.image_card_alt),n.append("page_description",t.page_description),n.append("page_title",t.page_title),n.append("page_keywords",t.page_keywords),n.append("extra_description",t.extra_description),n.append("hidden_seo_text",t.hidden_seo_text);try{return(yield _.put(`/equipments/${e}`,n)).data}catch(l){return console.log(l),a.rejectWithValue(((i=l.response)==null?void 0:i.data)||l.message)}})),Dr=f("Equipment/deleteEquipment",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.delete(`/equipments/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),ye=f("Solutions/getAllSolutions",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/solutions/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Qe=f("getSolutionsById/getSolutionsById",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get(`/solutions/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),jr=f("Solutions/createSolutions",(e,t)=>h(void 0,null,function*(){var a,r,o;try{console.log(e);const n=new FormData;return n.append("name",e.name),n.append("description",e.description),n.append("image_banner",e.image_banner),n.append("image_card",e.image_card),n.append("sub_header",e.sub_header),n.append("header",e.header),n.append("image_banner_alt",e.image_banner_alt),n.append("image_card_alt",e.image_card_alt),n.append("page_description",e.page_description),n.append("page_title",e.page_title),n.append("page_keywords",e.page_keywords),n.append("extra_description",e.extra_description),n.append("hidden_seo_text",e.hidden_seo_text),(yield _.post("/solutions/",n)).data}catch(n){return console.error("Solution creation error:",n),t.rejectWithValue({message:((r=(a=n.response)==null?void 0:a.data)==null?void 0:r.message)||n.message||"Ошибка при создании решения",status:(o=n.response)==null?void 0:o.status})}})),$r=f("Solutions/updateSolutions",(r,o)=>h(void 0,[r,o],function*({id:e,data:t},a){var i;const n=new FormData;n.append("name",t.name),n.append("description",t.description),t.image_banner&&n.append("image_banner",t.image_banner),t.image_card&&n.append("image_card",t.image_card),n.append("header",t.header),n.append("sub_header",t.sub_header),n.append("image_banner_alt",t.image_banner_alt),n.append("image_card_alt",t.image_card_alt),n.append("page_description",t.page_description),n.append("page_title",t.page_title),n.append("page_keywords",t.page_keywords),n.append("extra_description",t.extra_description),n.append("hidden_seo_text",t.hidden_seo_text),console.log(t);try{return(yield _.put(`/solutions/${e}`,n)).data}catch(l){return console.log(l),a.rejectWithValue(((i=l.response)==null?void 0:i.data)||l.message)}})),qr=f("Solutions/deleteSolutions",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.delete(`/solutions/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),qt=f("Orders/getAllOrders",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/orders/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Rr=f("Orders/createOrders",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.post("/orders/",e)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}}));f("Orders/updateOrders",(r,o)=>h(void 0,[r,o],function*({id:e,data:t},a){var n;try{return(yield _.patch(`/orders/${e}/`,t)).data}catch(i){return console.log(i),a.rejectWithValue(((n=i.response)==null?void 0:n.data)||i.message)}}));const Rt=f("patchOrders/patchOrders",(r,o)=>h(void 0,[r,o],function*({id:e,state:t},a){var n;try{return(yield _.patch(`/orders/${e}/state?new_state=${t.toString()}`)).data}catch(i){return console.log(i),a.rejectWithValue(((n=i.response)==null?void 0:n.data)||i.message)}})),Lr=f("orders/deleteOrders",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.delete(`/orders/${e}`)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),we=f("banner/getBanner",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/banner/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Fr=f("banner/updateBanner",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("first_value_string",e.first_value_string),r.append("first_value",e.first_value),r.append("second_value_string",e.second_value_string),r.append("second_value",e.second_value),(yield _.put("/banner/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),be=f("Company/getCompany",(e,t)=>h(void 0,null,function*(){var a;try{return(yield _.get("/company/")).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Mr=f("Company/updateCompany",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("about_main_screen",e.about_main_screen),r.append("about_unique_screen",e.about_unique_screen),r.append("about_page_title",e.about_page_title),r.append("about_page_description",e.about_page_description),r.append("about_hidden_seo_text",e.about_hidden_seo_text),r.append("about_page_keywords",e.about_page_keywords),(yield _.put("/company/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Ur=f("HomeSeo/updateHomeSeo",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("main_page_title",e.main_page_title),r.append("main_page_description",e.main_page_description),r.append("main_hidden_seo_text",e.main_hidden_seo_text),r.append("main_page_keywords",e.main_page_keywords),(yield _.put("/company/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Hr=f("contacts/updateContactsSeo",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("contacts_page_title",e.contacts_page_title),r.append("contacts_page_description",e.contacts_page_description),r.append("contacts_hidden_seo_text",e.contacts_hidden_seo_text),r.append("contacts_page_keywords",e.contacts_page_keywords),(yield _.put("/company/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Wr=f("Equipment/updateEquipmentSeo",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("equipment_page_title",e.equipment_page_title),r.append("equipment_page_description",e.equipment_page_description),r.append("equipment_hidden_seo_text",e.equipment_hidden_seo_text),r.append("equipment_page_keywords",e.equipment_page_keywords),(yield _.put("/company/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Br=f("Solution/updateSolutionSeo",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("solution_page_title",e.solution_page_title),r.append("solution_page_description",e.solution_page_description),r.append("solution_hidden_seo_text",e.solution_hidden_seo_text),r.append("solution_page_keywords",e.solution_page_keywords),(yield _.put("/company/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),ne=f("user/authPost",(a,r)=>h(void 0,[a,r],function*(e,{rejectWithValue:t}){var o;try{const n=new FormData;return n.append("username",e.username),n.append("password",e.password),(yield ge.post("/auth/token",n)).data}catch(n){return((o=n.response)==null?void 0:o.status)===422?t({message:"Неверное имя пользователя или пароль"}):t({message:"Ошибка сервера. Попробуйте позже."})}})),Lt=f("importOrdersExcel/importOrdersExcel",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("file",e),(yield _.post("/orders/import/excel",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Vr=(e=!1)=>h(void 0,null,function*(){fetch("https://new.recensa.ru/api/orders/export/excel",{method:"GET"}).then(t=>{if(e){if(!t.ok)throw new Error("Ошибка при получении файла");return t.blob()}else{const a=t.arrayBuffer();return parseExcelToCSVArray(Buffer.from(a))}}).then(t=>{if(e){const a=window.URL.createObjectURL(t),r=document.createElement("a");r.href=a,r.download="example.xlsx",r.click(),window.URL.revokeObjectURL(a)}})}),zr=f("submitOrder/submitOrder",(e,t)=>h(void 0,null,function*(){var a;try{const r=new FormData;return r.append("company_name",e.company_name),r.append("name",e.name),r.append("phone",e.phone),r.append("email",e.email),r.append("product_name",e.product_name),(yield _.post("/orders/submit-order/",r)).data}catch(r){return console.log(r),t.rejectWithValue(((a=r.response)==null?void 0:a.data)||r.message)}})),Ft=me.get("access_token"),Ge=ht({name:"user",initialState:{news:[],banner:null,equipment:[],solutions:[],company:[],equipmentById:null,solutionsById:null,routingToOrders:!1,orders:[],isAdmin:!!Ft,isPopup:!1,status:!1,orderNum:null,addOrderPopup:!1,ordersData:[],equipmentPopup:!1,itemId:null,addNewItemPopup:!1,newsPopup:!1,searchPopup:!1,statusOrderPopup:!1,token:null,isAuthenticated:!1,error:null,excel:null,exportExcel:null,result:null,calcPopup:!1},reducers:{changeCalcPopup:(e,{payload:t})=>{e.calcPopup=t},changeResult:(e,{payload:t})=>{e.result=t},changeEquipmentId:(e,{payload:t})=>{e.equipmentById=t},changeSolutionsId:(e,{payload:t})=>{e.solutionsById=t},changeRoutingToOrders:(e,{payload:t})=>{e.routingToOrders=t},changeShowAddNewItemPopup:(e,{payload:t})=>{e.addNewItemPopup=t},changeShowPopup:(e,{payload:t})=>{e.isPopup=t},changeStatusOrderPopup:(e,{payload:t})=>{e.statusOrderPopup=t},changeShowStatus:(e,{payload:t})=>{e.status=t},changeOrderNumber:(e,{payload:t})=>{e.orderNum=t},changeAddOrderPopup:(e,{payload:t})=>{e.addOrderPopup=t},changeOrdersList:(e,{payload:t})=>{e.ordersData=t},changeEquipmentPopup:(e,{payload:t})=>{e.equipmentPopup=t},changeShowNewsPopup:(e,{payload:t})=>{e.newsPopup=t},changeShowSearchPopup:(e,{payload:t})=>{e.searchPopup=t},changeItemId:(e,{payload:t})=>{e.itemId=t},addItemOrder:(e,{payload:t})=>{!e.ordersData.some(({id:r})=>r===t.id)&&t.id&&e.ordersData.push(t)},changeIsAdmin:(e,{payload:t})=>{e.isAdmin=t}},extraReducers:e=>{e.addCase(xe.fulfilled,(t,a)=>{t.news=a.payload}).addCase(fe.fulfilled,(t,a)=>{const r=["СЕРИЯ RCN","СЕРИЯ RCLEAN","СЕРИЯ RPOOL","СЕРИЯ RCNICE","СЕРИЯ RCROOF","СЕРИЯ RECO","СЕРИЯ RCDUCT","СИСТЕМЫ RCONTROL","СЕРИЯ RCOMP","ХОЛОДИЛЬНОЕ ОБОРУДОВАНИЕ","СМЕСИТЕЛЬНЫЕ УЗЛЫ"];function o(i,l){return i.sort((c,d)=>{const m=l.indexOf(c.name),p=l.indexOf(d.name);return m!==-1&&p!==-1?m-p:m!==-1?-1:p!==-1?1:0})}const n=o([...a.payload],r);t.equipment=n}).addCase(ne.pending,t=>{t.error=null}).addCase(ne.fulfilled,t=>{t.error=null}).addCase(ne.rejected,(t,a)=>{var r;t.error=((r=a.payload)==null?void 0:r.message)||"Ошибка авторизации"}).addCase(Lt.fulfilled,(t,a)=>{t.excel=a.payload}).addCase(ye.fulfilled,(t,a)=>{t.solutions=a.payload}).addCase(qt.fulfilled,(t,a)=>{t.orders=a.payload}).addCase(we.fulfilled,(t,a)=>{t.banner=a.payload}).addCase(_e.fulfilled,(t,a)=>{t.equipmentById=a.payload}).addCase(Qe.fulfilled,(t,a)=>{t.solutionsById=a.payload}).addCase(be.fulfilled,(t,a)=>{t.company=a.payload})}}),{changeCalcPopup:Pe,changeEquipmentId:Ie,changeSolutionsId:De,changeStatusOrderPopup:je,changeRoutingToOrders:Y,changeIsAdmin:Kr,changeNumberForMainBanner:Yr,changeShowSearchPopup:Ze,changeShowNewsPopup:Qr,changeItemId:Q,changeResult:Gr,changeEquipmentPopup:Zr,addItemOrder:Jr,changeOrdersList:Xr,changeAddOrderPopup:ea,changeShowPopup:Z,changeShowStatus:ta,changeOrderNumber:ra,changeShowAddNewItemPopup:aa}=Ge.actions,Mt=Ge.reducer,Ut=({list:e,handleClickLink:t,isAdmin:a})=>{const[r,o]=$(!1),[n,i]=$(0);G(()=>{i(document.body.scrollWidth)},[]);const l=F(),c=m=>l(Z(m)),d=(m,p)=>{o(!1),t(m,p),c(!1)};return g("section",{className:"md:hidden ",children:[g("button",{onClick:()=>o(!r),className:`flex absolute  top-[20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80] ${a?"right-5":"right-10"}`,children:[s("span",{className:`block w-6 h-0.5 bg-gray-400 transform transition-transform ${r?"rotate-45 translate-y-2":""}`}),s("span",{className:`block w-6 h-0.5 bg-gray-400 ${r?"opacity-0":""}`}),s("span",{className:`block w-6 h-0.5 bg-gray-400 transform transition-transform ${r?"-rotate-45 -translate-y-2":""}`})]}),r&&s("aside",{className:"pt-10 fixed top-0 left-0 w-[100vw] bg-white shadow-lg p-4 z-50",children:g("div",{className:"flex flex-col  gap-4",children:[s("nav",{className:"mt-2",children:s("ul",{className:"flex flex-col gap-2 text-sm",children:e.map(({name:m,path:p},u)=>s("li",{onClick:()=>d(u,p),className:"text-gray-400 hover:text-gray-300 cursor-pointer text-xl",children:s(D,{to:p,children:m})},u))})}),g("div",{className:"flex flex-col gap-2 text-gray-400 text-sm",children:[g("div",{className:"flex flex-col gap-2 text-gray-400 text-sm",children:[s("a",{target:"_blank",href:"mailto:office@recensa.ru",className:"hover:text-gray-600",children:"office@recensa.ru"}),s("a",{target:"_blank",href:"tel:+73832092088",className:"hover:text-gray-600",children:"+7 383 209 20 88"})]}),g("div",{className:"flex items-center gap-4 mt-3 mb-3",children:[s("a",{target:"_blank",href:"#",className:"hover:opacity-80",children:s("img",{src:"/icon/telegram.svg",alt:"telegram",className:"w-8"})}),s("a",{target:"_blank",href:"#",className:"hover:opacity-80",children:s("img",{src:"/icon/wa.svg",alt:"whatsapp",className:"w-8"})}),s("button",{onClick:()=>l(Ze(!0)),className:"hover:opacity-80",children:s("img",{src:"/icon/search_btn.svg",alt:"search",className:"w-8"})})]}),s(he,{onClick:()=>c(!0),text:"заказать звонок",className:"w-full hover:bg-gray-450 text-sm"})]})]})})]})},Ht={а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"y",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"kh",ц:"ts",ч:"ch",ш:"sh",щ:"shch",ъ:"",ы:"y",ь:"",э:"e",ю:"yu",я:"ya",А:"A",Б:"B",В:"V",Г:"G",Д:"D",Е:"E",Ё:"E",Ж:"Zh",З:"Z",И:"I",Й:"Y",К:"K",Л:"L",М:"M",Н:"N",О:"O",П:"P",Р:"R",С:"S",Т:"T",У:"U",Ф:"F",Х:"Kh",Ц:"Ts",Ч:"Ch",Ш:"Sh",Щ:"Shch",Ъ:"",Ы:"Y",Ь:"",Э:"E",Ю:"Yu",Я:"Ya"};function $e(e){return e.split("").map(t=>Ht[t]||t).join("").toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"")}function Wt(){var m;const e=F();dt();const{isAdmin:t,equipment:a,solutions:r}=W(({user:p})=>p),[o,n]=$(null),i=[{name:"Главная",path:"/"},{name:"Оборудование",path:"/equipment",dropdownItems:a},{name:"Решения",path:"/solutions",dropdownItems:r},{name:"О компании",path:"/about"},{name:"Заказы",path:`${t?"/admin/1":`/equipment/${$e((m=a[0])==null?void 0:m.name)}`}`},{name:"Контакты",path:"/contact"}],l=p=>e(Z(p)),c=(p,u)=>{!t&&+p==4&&(e(Y(!0)),e(Ie(a[0])),e(De(null))),t||e(Y(p===4))},d=(p,u)=>h(this,null,function*(){u==="Оборудование"?(yield e(_e(p)),e(De(null))):(yield e(Qe(p)),e(Ie(null))),e(Q(p))});return g("header",{className:`container sticky md:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8 ${t&&"flex justify-between"}`,children:[g("div",{className:`pl-8 sm:pl-10 md:pl-14 lg:pl-0 flex justify-between items-center border-b border-gray-400 pb-6 ${t&&"border-none"}`,children:[s(D,{to:"/",target:t?"_blank":"_self",className:"mb-0",children:s("img",{className:"w-[200px] sm:w-[230px] lg:w-[313px]",src:"/icon/logo.svg",alt:"logo",title:"Перейти на главную страницу"})}),s(Ut,{isAdmin:t,list:i,handleClickLink:c}),!t&&g("div",{className:"hidden pr-10 lg:pr-0 md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center",children:[g("div",{className:"flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base",children:[s("a",{target:"_blank",href:"mailto:office@recensa.ru",className:"hover:text-gray-600 ",children:"office@recensa.ru"}),s("a",{target:"_blank",href:"tel:+73832092088",className:"hover:text-gray-600",children:"+7 383 209 20 88"})]}),g("div",{className:"flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4",children:[g("div",{className:"flex items-center gap-4",children:[s("a",{target:"_blank",href:"#",className:"hover:opacity-80",children:s("img",{src:"/icon/telegram.svg",alt:"telegram",title:"Телеграмм",className:"w-8 "})}),s("a",{target:"_blank",href:"#",className:"hover:opacity-80",children:s("img",{src:"/icon/wa.svg",alt:"whatsapp",title:"Ватсап",className:"w-8 "})}),s("button",{onClick:()=>e(Ze(!0)),className:"hover:opacity-80",children:s("img",{src:"/icon/search_btn.svg",alt:"search",title:"Поиск",className:"w-8 "})})]}),s(he,{onClick:()=>l(!0),text:"заказать звонок",className:"w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm",noLink:!0})]})]})]}),s("aside",{children:s("nav",{itemScope:!0,itemType:"http://schema.org/SiteNavigationElement",className:"mt-6 hidden md:block",children:s("menu",{itemProp:"about",itemScope:!0,itemType:"http://schema.org/ItemList",className:"flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base",children:i.map(({name:p,path:u,dropdownItems:x},w)=>g("li",{itemProp:"itemListElement",itemScope:"",itemType:"http://schema.org/ItemList",className:`relative text-gray-400 hover:text-gray-300 cursor-pointer pb-4 ${t&&w===4&&"hidden"}`,onMouseEnter:()=>n(w),onMouseLeave:()=>n(null),children:[g("div",{className:"flex items-center",children:[t?s(D,{onClick:()=>c(w),target:"_blank",to:u,itemProp:"url",children:p}):s(D,{onClick:()=>c(w),itemProp:"url",to:u,children:p}),x&&x.length>0&&s(at,{children:o===w?s(xt,{width:20}):s(Ue,{width:20})})]}),x&&x.length>0&&s("div",{className:`absolute left-0 top-[30px] w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-20  ${o===w?"block":"hidden"}`,children:x.map((b,N)=>s(D,{to:`${u}/${$e(b.name)}`,className:"block px-4 py-2 text-sm text-gray-400 hover:bg-gray-100 hover:text-gray-600",onClick:()=>d(b.id,p),children:b.name},N))}),s("meta",{itemProp:"name",content:p})]},w))})})})]})}const A={HOME:"/",EQUIPMENT:"/equipment",SOLUTIONS:"/solutions",ABOUT:"/about",CONTACT:"/contact",ADMIN:"/admin/:id",EQUIPMENT_PRODUCT:"/equipment/:id",SOLUTIONS_PRODUCT:"/solutions/:id",NEWS:"/news/:name",AUTH:"/auth"},Bt=T(()=>import("./assets/Home-CYTd09OA.js")),Vt=T(()=>import("./assets/NotFound-DmxlKFIW.js")),qe=T(()=>import("./assets/Equipment-B4PNxaf7.js")),zt=T(()=>import("./assets/AboutCompany-C8mZ-QHt.js")),Kt=T(()=>import("./assets/Admin-qn8obIgj.js")),Re=T(()=>import("./assets/ProductItem-BULPshQ9.js")),Yt=T(()=>import("./assets/LoginForm-WrRA8hl9.js")),Qt=T(()=>import("./assets/Contacts-XG8Rrh-_.js")),Gt=T(()=>import("./assets/NewsPage-NerLpSlU.js"));function Zt({company:e,equipment:t,solutions:a,banner:r,news:o}){const{isAdmin:n}=W(({user:i})=>i);return g(mt,{children:[s(O,{path:A.AUTH,element:s(Yt,{})}),s(O,{path:A.HOME,element:s(Bt,{equipment:t,solutions:a,banner:r,news:o,company:e})}),s(O,{path:A.EQUIPMENT,element:s(qe,{company:{hidden_seo_text:e.equipment_hidden_seo_text,page_title:e.equipment_page_title,page_description:e.equipment_page_description,page_keywords:e.equipment_page_keywords,url:"https://new.recensa.ru/equipment"},title:"Оборудование",text:`Recensa предлагает широкий ассортимент вентиляционного оборудования 
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import React, { useState, useEffect, lazy, useRef, Suspense, StrictMode } from "react";
+import { renderToString } from "react-dom/server";
+import { Link, useNavigate, Routes, Route, useLocation, StaticRouter } from "react-router-dom";
+import { useDispatch, useSelector, Provider } from "react-redux";
+import { createAsyncThunk, createSlice, configureStore } from "@reduxjs/toolkit";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { HelmetProvider } from "react-helmet-async";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { ChevronUp, ChevronDown } from "lucide-react";
+const apiLogin = axios.create({
+  baseURL: "https://new.recensa.ru/api"
+  // Adjust this based on your API URL
+});
+apiLogin.interceptors.request.use((config) => {
+  const token2 = Cookies.get("access_token");
+  if (token2) {
+    config.headers.Authorization = `Bearer ${token2}`;
+  }
+  return config;
+});
+apiLogin.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    var _a;
+    if (((_a = error.response) == null ? void 0 : _a.status) === 401) {
+      Cookies.remove("access_token");
+      window.location.href = "/auth";
+    }
+    return Promise.reject(error);
+  }
+);
+const url = `https://new.recensa.ru/api`;
+const api = axios.create({
+  baseURL: url,
+  headers: {
+    Accept: "application/json"
+  }
+});
+const getAllNews = createAsyncThunk(
+  "news/getNews",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get("/news/");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const createNews = createAsyncThunk(
+  "news/createNews",
+  async (payload, thunkApi) => {
+    var _a, _b, _c;
+    try {
+      if (!payload.title || !payload.text || !payload.news_photo) {
+        throw new Error(
+          "Отсутствуют обязательные поля: заголовок, текст и изображение"
+        );
+      }
+      const formData = new FormData();
+      formData.append("title", payload.title);
+      formData.append("text", payload.text);
+      formData.append("news_photo", payload.news_photo);
+      formData.append("page_description", payload.page_description);
+      formData.append("page_title", payload.page_title);
+      formData.append("page_keywords", payload.page_keywords);
+      formData.append("hidden_seo_text", payload.hidden_seo_text);
+      const res = await api.post("/news/", formData);
+      return res.data;
+    } catch (err) {
+      console.error("Upload error:", err);
+      return thunkApi.rejectWithValue({
+        message: ((_b = (_a = err.response) == null ? void 0 : _a.data) == null ? void 0 : _b.message) || err.message || "Ошибка при создании новости",
+        status: (_c = err.response) == null ? void 0 : _c.status
+      });
+    }
+  }
+);
+const updateNews = createAsyncThunk(
+  "news/updateNews",
+  async ({ id, data }, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("text", data.text);
+      if (data.news_photo !== void 0) {
+        formData.append("news_photo", data.news_photo);
+      }
+      formData.append("page_description", data.page_description);
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
+      const res = await api.post(`/news/${id}`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const deleteNews = createAsyncThunk(
+  "news/deleteNews",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.delete(`/news/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getAllEquipment = createAsyncThunk(
+  "Equipment/getAllEquipment",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get("/equipments/");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getEquipmentById = createAsyncThunk(
+  "getEquipmentById/getEquipmentById",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get(`/equipments/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const createEquipment = createAsyncThunk(
+  "Equipment/createEquipment",
+  async (data, thunkApi) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    try {
+      const minParamNum = Number(data.min_param);
+      const maxParamNum = Number(data.max_param);
+      if (isNaN(minParamNum) || isNaN(maxParamNum)) {
+        throw new Error("Параметры должны быть числами");
+      }
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("sub_header", data.sub_header);
+      formData.append("header", data.header);
+      formData.append("image_banner", data.image_banner);
+      formData.append("image_card", data.image_card);
+      formData.append("min_param", minParamNum);
+      formData.append("max_param", maxParamNum);
+      formData.append("image_banner_alt", data.image_banner_alt);
+      formData.append("image_card_alt", data.image_card_alt);
+      formData.append("page_description", data.page_description);
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
+      formData.append("extra_description", data.extra_description);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
+      const res = await api.post("/equipments/", formData);
+      return res.data;
+    } catch (err) {
+      console.error("Equipment creation error:", {
+        error: err,
+        response: (_a = err.response) == null ? void 0 : _a.data,
+        status: (_b = err.response) == null ? void 0 : _b.status,
+        statusText: (_c = err.response) == null ? void 0 : _c.statusText,
+        headers: (_d = err.response) == null ? void 0 : _d.headers
+      });
+      return thunkApi.rejectWithValue({
+        message: ((_f = (_e = err.response) == null ? void 0 : _e.data) == null ? void 0 : _f.message) || err.message || "Ошибка при создании оборудования",
+        status: (_g = err.response) == null ? void 0 : _g.status,
+        details: (_h = err.response) == null ? void 0 : _h.data
+      });
+    }
+  }
+);
+const updateEquipment = createAsyncThunk(
+  "Equipment/updateEquipment",
+  async ({ id, data }, thunkApi) => {
+    var _a;
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    if (data.image_banner) {
+      formData.append("image_banner", data.image_banner);
+    }
+    if (data.image_card) {
+      formData.append("image_card", data.image_card);
+    }
+    formData.append("header", data.header);
+    formData.append("sub_header", data.sub_header);
+    formData.append("min_param", data.min_param);
+    formData.append("max_param", data.max_param);
+    formData.append("image_banner_alt", data.image_banner_alt);
+    formData.append("image_card_alt", data.image_card_alt);
+    formData.append("page_description", data.page_description);
+    formData.append("page_title", data.page_title);
+    formData.append("page_keywords", data.page_keywords);
+    formData.append("extra_description", data.extra_description);
+    formData.append("hidden_seo_text", data.hidden_seo_text);
+    try {
+      const res = await api.put(`/equipments/${id}`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const deleteEquipment = createAsyncThunk(
+  "Equipment/deleteEquipment",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.delete(`/equipments/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getAllSolutions = createAsyncThunk(
+  "Solutions/getAllSolutions",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get("/solutions/");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getSolutionsById = createAsyncThunk(
+  "getSolutionsById/getSolutionsById",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get(`/solutions/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const createSolutions = createAsyncThunk(
+  "Solutions/createSolutions",
+  async (data, thunkApi) => {
+    var _a, _b, _c;
+    try {
+      console.log(data);
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("image_banner", data.image_banner);
+      formData.append("image_card", data.image_card);
+      formData.append("sub_header", data.sub_header);
+      formData.append("header", data.header);
+      formData.append("image_banner_alt", data.image_banner_alt);
+      formData.append("image_card_alt", data.image_card_alt);
+      formData.append("page_description", data.page_description);
+      formData.append("page_title", data.page_title);
+      formData.append("page_keywords", data.page_keywords);
+      formData.append("extra_description", data.extra_description);
+      formData.append("hidden_seo_text", data.hidden_seo_text);
+      const res = await api.post("/solutions/", formData);
+      return res.data;
+    } catch (err) {
+      console.error("Solution creation error:", err);
+      return thunkApi.rejectWithValue({
+        message: ((_b = (_a = err.response) == null ? void 0 : _a.data) == null ? void 0 : _b.message) || err.message || "Ошибка при создании решения",
+        status: (_c = err.response) == null ? void 0 : _c.status
+      });
+    }
+  }
+);
+const updateSolutions = createAsyncThunk(
+  "Solutions/updateSolutions",
+  async ({ id, data }, thunkApi) => {
+    var _a;
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    if (data.image_banner) {
+      formData.append("image_banner", data.image_banner);
+    }
+    if (data.image_card) {
+      formData.append("image_card", data.image_card);
+    }
+    formData.append("header", data.header);
+    formData.append("sub_header", data.sub_header);
+    formData.append("image_banner_alt", data.image_banner_alt);
+    formData.append("image_card_alt", data.image_card_alt);
+    formData.append("page_description", data.page_description);
+    formData.append("page_title", data.page_title);
+    formData.append("page_keywords", data.page_keywords);
+    formData.append("extra_description", data.extra_description);
+    formData.append("hidden_seo_text", data.hidden_seo_text);
+    console.log(data);
+    try {
+      const res = await api.put(`/solutions/${id}`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const deleteSolutions = createAsyncThunk(
+  "Solutions/deleteSolutions",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.delete(`/solutions/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getAllOrders = createAsyncThunk(
+  "Orders/getAllOrders",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get("/orders/");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const createOrders = createAsyncThunk(
+  "Orders/createOrders",
+  async (data, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.post("/orders/", data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+createAsyncThunk(
+  "Orders/updateOrders",
+  async ({ id, data }, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.patch(`/orders/${id}/`, data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const patchOrders = createAsyncThunk(
+  "patchOrders/patchOrders",
+  async ({ id, state }, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.patch(
+        `/orders/${id}/state?new_state=${state.toString()}`
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const deleteOrders = createAsyncThunk(
+  "orders/deleteOrders",
+  async (id, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.delete(`/orders/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getBanner = createAsyncThunk(
+  "banner/getBanner",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get(`/banner/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateBanner = createAsyncThunk(
+  "banner/updateBanner",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("first_value_string", payload.first_value_string);
+      formData.append("first_value", payload.first_value);
+      formData.append("second_value_string", payload.second_value_string);
+      formData.append("second_value", payload.second_value);
+      const res = await api.put(`/banner/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const getCompany = createAsyncThunk(
+  "Company/getCompany",
+  async (_, thunkApi) => {
+    var _a;
+    try {
+      const res = await api.get(`/company/`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateCompany = createAsyncThunk(
+  "Company/updateCompany",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("about_main_screen", payload.about_main_screen);
+      formData.append("about_unique_screen", payload.about_unique_screen);
+      formData.append("about_page_title", payload.about_page_title);
+      formData.append("about_page_description", payload.about_page_description);
+      formData.append("about_hidden_seo_text", payload.about_hidden_seo_text);
+      formData.append("about_page_keywords", payload.about_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateHomeSeo = createAsyncThunk(
+  "HomeSeo/updateHomeSeo",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("main_page_title", payload.main_page_title);
+      formData.append("main_page_description", payload.main_page_description);
+      formData.append("main_hidden_seo_text", payload.main_hidden_seo_text);
+      formData.append("main_page_keywords", payload.main_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateContactsSeo = createAsyncThunk(
+  "contacts/updateContactsSeo",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("contacts_page_title", payload.contacts_page_title);
+      formData.append(
+        "contacts_page_description",
+        payload.contacts_page_description
+      );
+      formData.append(
+        "contacts_hidden_seo_text",
+        payload.contacts_hidden_seo_text
+      );
+      formData.append("contacts_page_keywords", payload.contacts_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateEquipmentSeo = createAsyncThunk(
+  "Equipment/updateEquipmentSeo",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("equipment_page_title", payload.equipment_page_title);
+      formData.append(
+        "equipment_page_description",
+        payload.equipment_page_description
+      );
+      formData.append(
+        "equipment_hidden_seo_text",
+        payload.equipment_hidden_seo_text
+      );
+      formData.append(
+        "equipment_page_keywords",
+        payload.equipment_page_keywords
+      );
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const updateSolutionSeo = createAsyncThunk(
+  "Solution/updateSolutionSeo",
+  async (payload, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("solution_page_title", payload.solution_page_title);
+      formData.append(
+        "solution_page_description",
+        payload.solution_page_description
+      );
+      formData.append(
+        "solution_hidden_seo_text",
+        payload.solution_hidden_seo_text
+      );
+      formData.append("solution_page_keywords", payload.solution_page_keywords);
+      const res = await api.put(`/company/`, formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const authPost = createAsyncThunk(
+  "user/authPost",
+  async (credentials, { rejectWithValue }) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("username", credentials.username);
+      formData.append("password", credentials.password);
+      const response = await apiLogin.post("/auth/token", formData);
+      return response.data;
+    } catch (error) {
+      if (((_a = error.response) == null ? void 0 : _a.status) === 422) {
+        return rejectWithValue({
+          message: "Неверное имя пользователя или пароль"
+        });
+      }
+      return rejectWithValue({
+        message: "Ошибка сервера. Попробуйте позже."
+      });
+    }
+  }
+);
+const importOrdersExcel = createAsyncThunk(
+  "importOrdersExcel/importOrdersExcel",
+  async (file, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await api.post("/orders/import/excel", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const exportOrdersExcel = async (exportFile = false) => {
+  fetch("https://new.recensa.ru/api/orders/export/excel", {
+    method: "GET"
+  }).then((response) => {
+    if (exportFile) {
+      if (!response.ok) {
+        throw new Error("Ошибка при получении файла");
+      }
+      return response.blob();
+    } else {
+      const excelBuffer = response.arrayBuffer();
+      const data = parseExcelToCSVArray(Buffer.from(excelBuffer));
+      return data;
+    }
+  }).then((blob) => {
+    if (exportFile) {
+      const url2 = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url2;
+      link.download = "example.xlsx";
+      link.click();
+      window.URL.revokeObjectURL(url2);
+    }
+  });
+};
+const submitOrder = createAsyncThunk(
+  "submitOrder/submitOrder",
+  async (data, thunkApi) => {
+    var _a;
+    try {
+      const formData = new FormData();
+      formData.append("company_name", data.company_name);
+      formData.append("name", data.name);
+      formData.append("phone", data.phone);
+      formData.append("email", data.email);
+      formData.append("product_name", data.product_name);
+      const res = await api.post("/orders/submit-order/", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(((_a = err.response) == null ? void 0 : _a.data) || err.message);
+    }
+  }
+);
+const token = Cookies.get("access_token");
+const userSlice = createSlice({
+  name: "user",
+  initialState: {
+    news: [],
+    banner: null,
+    equipment: [],
+    solutions: [],
+    company: [],
+    equipmentById: null,
+    solutionsById: null,
+    routingToOrders: false,
+    orders: [],
+    isAdmin: token ? true : false,
+    isPopup: false,
+    status: false,
+    orderNum: null,
+    addOrderPopup: false,
+    ordersData: [],
+    equipmentPopup: false,
+    itemId: null,
+    addNewItemPopup: false,
+    newsPopup: false,
+    searchPopup: false,
+    statusOrderPopup: false,
+    token: null,
+    isAuthenticated: false,
+    error: null,
+    excel: null,
+    exportExcel: null,
+    result: null,
+    calcPopup: false
+  },
+  reducers: {
+    changeCalcPopup: (state, { payload }) => {
+      state.calcPopup = payload;
+    },
+    changeResult: (state, { payload }) => {
+      state.result = payload;
+    },
+    changeEquipmentId: (state, { payload }) => {
+      state.equipmentById = payload;
+    },
+    changeSolutionsId: (state, { payload }) => {
+      state.solutionsById = payload;
+    },
+    changeRoutingToOrders: (state, { payload }) => {
+      state.routingToOrders = payload;
+    },
+    changeShowAddNewItemPopup: (state, { payload }) => {
+      state.addNewItemPopup = payload;
+    },
+    changeShowPopup: (state, { payload }) => {
+      state.isPopup = payload;
+    },
+    changeStatusOrderPopup: (state, { payload }) => {
+      state.statusOrderPopup = payload;
+    },
+    changeShowStatus: (state, { payload }) => {
+      state.status = payload;
+    },
+    changeOrderNumber: (state, { payload }) => {
+      state.orderNum = payload;
+    },
+    changeAddOrderPopup: (state, { payload }) => {
+      state.addOrderPopup = payload;
+    },
+    changeOrdersList: (state, { payload }) => {
+      state.ordersData = payload;
+    },
+    changeEquipmentPopup: (state, { payload }) => {
+      state.equipmentPopup = payload;
+    },
+    changeShowNewsPopup: (state, { payload }) => {
+      state.newsPopup = payload;
+    },
+    changeShowSearchPopup: (state, { payload }) => {
+      state.searchPopup = payload;
+    },
+    changeItemId: (state, { payload }) => {
+      state.itemId = payload;
+    },
+    addItemOrder: (state, { payload }) => {
+      let isFind = state.ordersData.some(({ id }) => id === payload.id);
+      if (!isFind && payload.id) {
+        state.ordersData.push(payload);
+      }
+    },
+    changeIsAdmin: (state, { payload }) => {
+      state.isAdmin = payload;
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getAllNews.fulfilled, (state, action) => {
+      state.news = action.payload;
+    }).addCase(getAllEquipment.fulfilled, (state, action) => {
+      const seriesOrder = [
+        "СЕРИЯ RCN",
+        "СЕРИЯ RCLEAN",
+        "СЕРИЯ RPOOL",
+        "СЕРИЯ RCNICE",
+        "СЕРИЯ RCROOF",
+        "СЕРИЯ RECO",
+        "СЕРИЯ RCDUCT",
+        "СИСТЕМЫ RCONTROL",
+        "СЕРИЯ RCOMP",
+        "ХОЛОДИЛЬНОЕ ОБОРУДОВАНИЕ",
+        "СМЕСИТЕЛЬНЫЕ УЗЛЫ"
+      ];
+      function sortByCustomOrder(arr, orderArray) {
+        return arr.sort((a, b) => {
+          const indexA = orderArray.indexOf(a.name);
+          const indexB = orderArray.indexOf(b.name);
+          if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+          }
+          if (indexA !== -1) return -1;
+          if (indexB !== -1) return 1;
+          return 0;
+        });
+      }
+      const sortedData = sortByCustomOrder([...action.payload], seriesOrder);
+      state.equipment = sortedData;
+    }).addCase(authPost.pending, (state) => {
+      state.error = null;
+    }).addCase(authPost.fulfilled, (state) => {
+      state.error = null;
+    }).addCase(authPost.rejected, (state, action) => {
+      var _a;
+      state.error = ((_a = action.payload) == null ? void 0 : _a.message) || "Ошибка авторизации";
+    }).addCase(importOrdersExcel.fulfilled, (state, action) => {
+      state.excel = action.payload;
+    }).addCase(getAllSolutions.fulfilled, (state, action) => {
+      state.solutions = action.payload;
+    }).addCase(getAllOrders.fulfilled, (state, action) => {
+      state.orders = action.payload;
+    }).addCase(getBanner.fulfilled, (state, action) => {
+      state.banner = action.payload;
+    }).addCase(getEquipmentById.fulfilled, (state, action) => {
+      state.equipmentById = action.payload;
+    }).addCase(getSolutionsById.fulfilled, (state, action) => {
+      state.solutionsById = action.payload;
+    }).addCase(getCompany.fulfilled, (state, action) => {
+      state.company = action.payload;
+    });
+  }
+});
+const {
+  changeCalcPopup,
+  changeEquipmentId,
+  changeSolutionsId,
+  changeStatusOrderPopup,
+  changeRoutingToOrders,
+  changeIsAdmin,
+  changeNumberForMainBanner,
+  changeShowSearchPopup,
+  changeShowNewsPopup,
+  changeItemId,
+  changeResult,
+  changeEquipmentPopup,
+  addItemOrder,
+  changeOrdersList,
+  changeAddOrderPopup,
+  changeShowPopup,
+  changeShowStatus,
+  changeOrderNumber,
+  changeShowAddNewItemPopup
+} = userSlice.actions;
+const userSlice$1 = userSlice.reducer;
+const store = configureStore({
+  reducer: {
+    user: userSlice$1
+  }
+});
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+function Button({
+  text,
+  className = "",
+  icon = false,
+  onClick = null,
+  white = false,
+  href = "",
+  iconWidth,
+  type = "button",
+  noLink = false,
+  target = null
+}) {
+  return noLink ? /* @__PURE__ */ jsx(
+    "button",
+    {
+      to: href,
+      className: cn(
+        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",
+        className
+      ),
+      onClick,
+      children: text
+    }
+  ) : !icon ? /* @__PURE__ */ jsx(
+    Link,
+    {
+      to: href,
+      className: cn(
+        "bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase transition-all text-center",
+        className
+      ),
+      onClick,
+      children: text
+    }
+  ) : /* @__PURE__ */ jsx(Link, { to: href, target, children: /* @__PURE__ */ jsxs(
+    "button",
+    {
+      type,
+      className: cn(
+        "group bg-gray-400 text-white font-normal py-[9px] px-[30px] text-xs uppercase flex-center gap-5",
+        className
+      ),
+      onClick,
+      children: [
+        white ? /* @__PURE__ */ jsx(
+          "img",
+          {
+            className: `group-hover:translate-x-1 transition-all ${iconWidth ? iconWidth : ""}`,
+            src: "/icon/arrow_right.svg",
+            alt: "arrow"
+          }
+        ) : /* @__PURE__ */ jsx(
+          "img",
+          {
+            className: `group-hover:translate-x-1 transition-all ${iconWidth ? iconWidth : ""}`,
+            src: "/icon/arrow.svg",
+            alt: "arrow"
+          }
+        ),
+        /* @__PURE__ */ jsx("p", { children: text })
+      ]
+    }
+  ) });
+}
+const BurgerButton = ({ list, handleClickLink, isAdmin }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [pageWidth, setPageWidth] = useState(0);
+  useEffect(() => {
+    setPageWidth(document.body.scrollWidth);
+  }, []);
+  const dispatch = useDispatch();
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
+  const handleClickLinkBurger = (i, path) => {
+    setIsOpen(false);
+    handleClickLink(i, path);
+    handleChangeShowPopup(false);
+  };
+  return /* @__PURE__ */ jsxs("section", { className: "md:hidden ", children: [
+    /* @__PURE__ */ jsxs(
+      "button",
+      {
+        onClick: () => setIsOpen(!isOpen),
+        className: `flex absolute  top-[20px] flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[80] ${isAdmin ? `right-5` : "right-10"}`,
+        children: [
+          /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: `block w-6 h-0.5 bg-gray-400 transform transition-transform ${isOpen ? "rotate-45 translate-y-2" : ""}`
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: `block w-6 h-0.5 bg-gray-400 ${isOpen ? "opacity-0" : ""}`
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: `block w-6 h-0.5 bg-gray-400 transform transition-transform ${isOpen ? "-rotate-45 -translate-y-2" : ""}`
+            }
+          )
+        ]
+      }
+    ),
+    isOpen && /* @__PURE__ */ jsx("aside", { className: "pt-10 fixed top-0 left-0 w-[100vw] bg-white shadow-lg p-4 z-50", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col  gap-4", children: [
+      /* @__PURE__ */ jsx("nav", { className: "mt-2", children: /* @__PURE__ */ jsx("ul", { className: "flex flex-col gap-2 text-sm", children: list.map(({ name, path }, i) => /* @__PURE__ */ jsx(
+        "li",
+        {
+          onClick: () => handleClickLinkBurger(i, path),
+          className: "text-gray-400 hover:text-gray-300 cursor-pointer text-xl",
+          children: /* @__PURE__ */ jsx(Link, { to: path, children: name })
+        },
+        i
+      )) }) }),
+      /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2 text-gray-400 text-sm", children: [
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2 text-gray-400 text-sm", children: [
+          /* @__PURE__ */ jsx(
+            "a",
+            {
+              target: "_blank",
+              href: "mailto:office@recensa.ru",
+              className: "hover:text-gray-600",
+              children: "office@recensa.ru"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "a",
+            {
+              target: "_blank",
+              href: "tel:+73832092088",
+              className: "hover:text-gray-600",
+              children: "+7 383 209 20 88"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-4 mt-3 mb-3", children: [
+          /* @__PURE__ */ jsx("a", { target: "_blank", href: "#", className: "hover:opacity-80", children: /* @__PURE__ */ jsx(
+            "img",
+            {
+              src: "/icon/telegram.svg",
+              alt: "telegram",
+              className: "w-8"
+            }
+          ) }),
+          /* @__PURE__ */ jsx("a", { target: "_blank", href: "#", className: "hover:opacity-80", children: /* @__PURE__ */ jsx("img", { src: "/icon/wa.svg", alt: "whatsapp", className: "w-8" }) }),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              onClick: () => dispatch(changeShowSearchPopup(true)),
+              className: "hover:opacity-80",
+              children: /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: "/icon/search_btn.svg",
+                  alt: "search",
+                  className: "w-8"
+                }
+              )
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx(
+          Button,
+          {
+            onClick: () => handleChangeShowPopup(true),
+            text: "заказать звонок",
+            className: "w-full hover:bg-gray-450 text-sm"
+          }
+        )
+      ] })
+    ] }) })
+  ] });
+};
+const cyrillicToLatin = {
+  а: "a",
+  б: "b",
+  в: "v",
+  г: "g",
+  д: "d",
+  е: "e",
+  ё: "e",
+  ж: "zh",
+  з: "z",
+  и: "i",
+  й: "y",
+  к: "k",
+  л: "l",
+  м: "m",
+  н: "n",
+  о: "o",
+  п: "p",
+  р: "r",
+  с: "s",
+  т: "t",
+  у: "u",
+  ф: "f",
+  х: "kh",
+  ц: "ts",
+  ч: "ch",
+  ш: "sh",
+  щ: "shch",
+  ъ: "",
+  ы: "y",
+  ь: "",
+  э: "e",
+  ю: "yu",
+  я: "ya",
+  А: "A",
+  Б: "B",
+  В: "V",
+  Г: "G",
+  Д: "D",
+  Е: "E",
+  Ё: "E",
+  Ж: "Zh",
+  З: "Z",
+  И: "I",
+  Й: "Y",
+  К: "K",
+  Л: "L",
+  М: "M",
+  Н: "N",
+  О: "O",
+  П: "P",
+  Р: "R",
+  С: "S",
+  Т: "T",
+  У: "U",
+  Ф: "F",
+  Х: "Kh",
+  Ц: "Ts",
+  Ч: "Ch",
+  Ш: "Sh",
+  Щ: "Shch",
+  Ъ: "",
+  Ы: "Y",
+  Ь: "",
+  Э: "E",
+  Ю: "Yu",
+  Я: "Ya"
+};
+function useLatinFormat(text) {
+  return text.split("").map((char) => cyrillicToLatin[char] || char).join("").toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+function Header() {
+  var _a;
+  const dispatch = useDispatch();
+  useNavigate();
+  const { isAdmin, equipment, solutions } = useSelector(({ user }) => user);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const navList = [
+    { name: "Главная", path: "/" },
+    { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
+    { name: "Решения", path: "/solutions", dropdownItems: solutions },
+    { name: "О компании", path: "/about" },
+    {
+      name: "Заказы",
+      path: `${isAdmin ? `/admin/1` : `/equipment/${useLatinFormat((_a = equipment[0]) == null ? void 0 : _a.name)}`}`
+    },
+    { name: "Контакты", path: "/contact" }
+  ];
+  const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
+  const handleClickLink = (i, path) => {
+    if (!isAdmin && +i === 4) {
+      dispatch(changeRoutingToOrders(true));
+      dispatch(changeEquipmentId(equipment[0]));
+      dispatch(changeSolutionsId(null));
+    }
+    if (!isAdmin) {
+      if (i === 4) {
+        dispatch(changeRoutingToOrders(true));
+      } else {
+        dispatch(changeRoutingToOrders(false));
+      }
+    }
+  };
+  const handleClickItem = async (id, name) => {
+    if (name === "Оборудование") {
+      await dispatch(getEquipmentById(id));
+      dispatch(changeSolutionsId(null));
+    } else {
+      await dispatch(getSolutionsById(id));
+      dispatch(changeEquipmentId(null));
+    }
+    dispatch(changeItemId(id));
+  };
+  return /* @__PURE__ */ jsxs(
+    "header",
+    {
+      className: `container sticky md:static top-0 left-0 bg-white z-[60]  min-w-[100vw] lg:min-w-[auto] pt-6 lg:pt-8 ${isAdmin && "flex justify-between"}`,
+      children: [
+        /* @__PURE__ */ jsxs(
+          "div",
+          {
+            className: `pl-8 sm:pl-10 md:pl-14 lg:pl-0 flex justify-between items-center border-b border-gray-400 pb-6 ${isAdmin && "border-none"}`,
+            children: [
+              /* @__PURE__ */ jsx(Link, { to: "/", target: isAdmin ? "_blank" : "_self", className: "mb-0", children: /* @__PURE__ */ jsx(
+                "img",
+                {
+                  className: "w-[200px] sm:w-[230px] lg:w-[313px]",
+                  src: "/icon/logo.svg",
+                  alt: "logo",
+                  title: "Перейти на главную страницу"
+                }
+              ) }),
+              /* @__PURE__ */ jsx(
+                BurgerButton,
+                {
+                  isAdmin,
+                  list: navList,
+                  handleClickLink
+                }
+              ),
+              !isAdmin && /* @__PURE__ */ jsxs("div", { className: "hidden pr-10 lg:pr-0 md:flex flex-col items-center lg:items-center gap-4 lg:gap-6 2xl:flex-row 2xl:items-center", children: [
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-400 text-sm sm:text-base", children: [
+                  /* @__PURE__ */ jsx(
+                    "a",
+                    {
+                      target: "_blank",
+                      href: "mailto:office@recensa.ru",
+                      className: "hover:text-gray-600 ",
+                      children: "office@recensa.ru"
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "a",
+                    {
+                      target: "_blank",
+                      href: "tel:+73832092088",
+                      className: "hover:text-gray-600",
+                      children: "+7 383 209 20 88"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: "flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4", children: [
+                  /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsx("a", { target: "_blank", href: "#", className: "hover:opacity-80", children: /* @__PURE__ */ jsx(
+                      "img",
+                      {
+                        src: "/icon/telegram.svg",
+                        alt: "telegram",
+                        title: "Телеграмм",
+                        className: "w-8 "
+                      }
+                    ) }),
+                    /* @__PURE__ */ jsx("a", { target: "_blank", href: "#", className: "hover:opacity-80", children: /* @__PURE__ */ jsx(
+                      "img",
+                      {
+                        src: "/icon/wa.svg",
+                        alt: "whatsapp",
+                        title: "Ватсап",
+                        className: "w-8 "
+                      }
+                    ) }),
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onClick: () => dispatch(changeShowSearchPopup(true)),
+                        className: "hover:opacity-80",
+                        children: /* @__PURE__ */ jsx(
+                          "img",
+                          {
+                            src: "/icon/search_btn.svg",
+                            alt: "search",
+                            title: "Поиск",
+                            className: "w-8 "
+                          }
+                        )
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsx(
+                    Button,
+                    {
+                      onClick: () => handleChangeShowPopup(true),
+                      text: "заказать звонок",
+                      className: "w-full sm:w-auto md:px-2 md:text-xs lg:py-[9px] lg:px-[20px] xl:px-[30px] hover:bg-gray-450 lg:text-sm",
+                      noLink: true
+                    }
+                  )
+                ] })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx("aside", { children: /* @__PURE__ */ jsx(
+          "nav",
+          {
+            itemScope: true,
+            itemType: "http://schema.org/SiteNavigationElement",
+            className: "mt-6 hidden md:block",
+            children: /* @__PURE__ */ jsx(
+              "menu",
+              {
+                itemProp: "about",
+                itemScope: true,
+                itemType: "http://schema.org/ItemList",
+                className: "flex flex-wrap justify-center xs:gap-x-4 lg:gap-x-8 gap-y-2 text-sm sm:text-base",
+                children: navList.map(({ name, path, dropdownItems }, i) => /* @__PURE__ */ jsxs(
+                  "li",
+                  {
+                    itemProp: "itemListElement",
+                    itemScope: "",
+                    itemType: "http://schema.org/ItemList",
+                    className: `relative text-gray-400 hover:text-gray-300 cursor-pointer pb-4 ${isAdmin && i === 4 && "hidden"}`,
+                    onMouseEnter: () => setHoveredIndex(i),
+                    onMouseLeave: () => setHoveredIndex(null),
+                    children: [
+                      /* @__PURE__ */ jsxs("div", { className: "flex items-center", children: [
+                        isAdmin ? /* @__PURE__ */ jsx(
+                          Link,
+                          {
+                            onClick: () => handleClickLink(i),
+                            target: "_blank",
+                            to: path,
+                            itemProp: "url",
+                            children: name
+                          }
+                        ) : /* @__PURE__ */ jsx(
+                          Link,
+                          {
+                            onClick: () => handleClickLink(i),
+                            itemProp: "url",
+                            to: path,
+                            children: name
+                          }
+                        ),
+                        dropdownItems && dropdownItems.length > 0 && /* @__PURE__ */ jsx(Fragment, { children: hoveredIndex === i ? /* @__PURE__ */ jsx(ChevronUp, { width: 20 }) : /* @__PURE__ */ jsx(ChevronDown, { width: 20 }) })
+                      ] }),
+                      dropdownItems && dropdownItems.length > 0 && /* @__PURE__ */ jsx(
+                        "div",
+                        {
+                          className: `absolute left-0 top-[30px] w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-20  ${hoveredIndex === i ? "block" : "hidden"}`,
+                          children: dropdownItems.map((item, index) => /* @__PURE__ */ jsx(
+                            Link,
+                            {
+                              to: `${path}/${useLatinFormat(item.name)}`,
+                              className: "block px-4 py-2 text-sm text-gray-400 hover:bg-gray-100 hover:text-gray-600",
+                              onClick: () => handleClickItem(item.id, name),
+                              children: item.name
+                            },
+                            index
+                          ))
+                        }
+                      ),
+                      /* @__PURE__ */ jsx("meta", { itemProp: "name", content: name })
+                    ]
+                  },
+                  i
+                ))
+              }
+            )
+          }
+        ) })
+      ]
+    }
+  );
+}
+const ROUTES = {
+  HOME: "/",
+  EQUIPMENT: "/equipment",
+  SOLUTIONS: "/solutions",
+  ABOUT: "/about",
+  CONTACT: "/contact",
+  ADMIN: "/admin/:id",
+  EQUIPMENT_PRODUCT: "/equipment/:id",
+  SOLUTIONS_PRODUCT: "/solutions/:id",
+  NEWS: "/news/:name",
+  AUTH: "/auth"
+};
+const Home = lazy(() => import("./assets/Home-BI54osGy.js"));
+const NotFound = lazy(() => import("./assets/NotFound-DahZjD4d.js"));
+const Equipment = lazy(() => import("./assets/Equipment-BiwnbbwE.js"));
+const AboutCompany = lazy(() => import("./assets/AboutCompany-C3unMTZL.js"));
+const Admin = lazy(() => import("./assets/Admin-CmltQtux.js"));
+const ProductItem = lazy(() => import("./assets/ProductItem-ZEauA3KL.js"));
+const LoginForm = lazy(() => import("./assets/LoginForm-DF3dtOl3.js"));
+const Contacts = lazy(() => import("./assets/Contacts-Cchsw1SM.js"));
+const NewsPage = lazy(() => import("./assets/NewsPage-DIxc3LqF.js"));
+function AppRoutes({
+  company,
+  equipment,
+  solutions,
+  banner,
+  news
+}) {
+  const { isAdmin } = useSelector(({ user }) => user);
+  return /* @__PURE__ */ jsxs(Routes, { children: [
+    /* @__PURE__ */ jsx(Route, { path: ROUTES.AUTH, element: /* @__PURE__ */ jsx(LoginForm, {}) }),
+    /* @__PURE__ */ jsx(
+      Route,
+      {
+        path: ROUTES.HOME,
+        element: /* @__PURE__ */ jsx(
+          Home,
+          {
+            equipment,
+            solutions,
+            banner,
+            news,
+            company
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      Route,
+      {
+        path: ROUTES.EQUIPMENT,
+        element: /* @__PURE__ */ jsx(
+          Equipment,
+          {
+            company: {
+              hidden_seo_text: company.equipment_hidden_seo_text,
+              page_title: company.equipment_page_title,
+              page_description: company.equipment_page_description,
+              page_keywords: company.equipment_page_keywords,
+              url: "https://new.recensa.ru/equipment"
+            },
+            title: "Оборудование",
+            text: `Recensa предлагает широкий ассортимент вентиляционного оборудования 
               для коммерческих, промышленных и жилых объектов. В линейке представлены 
               установки общего и специализированного назначения, системы вентиляции, 
               осушения, кондиционирования и автоматизации. Каждая серия разработана с 
               учетом энергоэффективности, надежности и удобства эксплуатации. 
 
-`,data:t,bannerImg:"/img/newbanner.png",placeholderSrc:"/img/newbanner_compress.png"})}),s(O,{path:A.SOLUTIONS,element:s(qe,{company:{hidden_seo_text:e.solution_hidden_seo_text,page_title:e.solution_page_title,page_description:e.solution_page_description,page_keywords:e.solution_page_keywords,url:"https://new.recensa.ru/solutions"},title:"Решения",text:`Recensa разрабатывает и поставляет климатические системы для объектов
+`,
+            data: equipment,
+            bannerImg: "/img/newbanner.png",
+            placeholderSrc: "/img/newbanner_compress.png"
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      Route,
+      {
+        path: ROUTES.SOLUTIONS,
+        element: /* @__PURE__ */ jsx(
+          Equipment,
+          {
+            company: {
+              hidden_seo_text: company.solution_hidden_seo_text,
+              page_title: company.solution_page_title,
+              page_description: company.solution_page_description,
+              page_keywords: company.solution_page_keywords,
+              url: "https://new.recensa.ru/solutions"
+            },
+            title: "Решения",
+            text: `Recensa разрабатывает и поставляет климатические системы для объектов
                с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 
                климат в любых условиях. Мы предлагаем комплексные системы для
                вентиляции, осушения, охлаждения и 
                автоматизации, адаптированное под 
                конкретные задачи бизнеса и инфраструктуры.
-`,data:a,bannerImg:"/img/newsol_banner.png",placeholderSrc:"/img/newsol_banner_compress.png"})}),s(O,{path:A.EQUIPMENT_PRODUCT,element:s(Re,{list:t})}),s(O,{path:A.SOLUTIONS_PRODUCT,element:s(Re,{list:a})}),s(O,{path:A.ABOUT,element:s(zt,{company:e})}),n&&s(O,{path:A.ADMIN,element:s(Kt,{})}),s(O,{path:A.CONTACT,element:s(Qt,{company:e})}),s(O,{path:A.NEWS,element:s(Gt,{news:o})}),s(O,{path:"*",element:s(Vt,{})})]})}function Jt(){const e=F();return s("button",{type:"button",onClick:()=>e(Z(!0)),className:"fixed bottom-8 right-8 cursor-pointer z-50",children:s("img",{className:"max-w-[50px] max-h-[50px] animateWidget",src:"/icon/widget.svg",alt:"Позвони нам",title:"Нажмите, чтобы заказать звонок"})})}function Xt({handleSelectChange:e,options:t,className:a,border:r,placeholder:o}){const[n,i]=k.useState(!1),[l,c]=k.useState(o);return G(()=>{e(l)},[l]),g("div",{className:`relative w-[115px] text-gray-400 mt-[13px] ${a}`,children:[g("button",{onClick:()=>i(!n),className:`w-full flex items-center justify-between px-3 py-2 border border-gray-400 ${r?"border-none":""}`,children:[s("p",{className:`${r?"text-gray-400 font-normal text-sm md:text-base":""}`,children:l}),s(Ue,{className:`w-4 h-4 transition-transform ${n?"rotate-180":""}`})]}),n&&s("div",{className:"absolute w-full mt-1 border border-gray-200  bg-white shadow-lg ",children:s("ul",{className:"py-1",children:t.map(d=>s("li",{className:"px-3 py-1.5 hover:bg-gray-100 cursor-pointer",onClick:()=>{c(d.value),i(!1)},children:d.label},d.value))})})]})}const er=[{label:"Доставлен",value:"Доставлен"},{label:"Отменен",value:"Отменен"},{label:"Оплачен",value:"Оплачен"}];function tr(){const e=F(),{itemId:t,orders:a}=W(({user:p})=>p),[r,o]=$(a.filter(p=>p.id===t)),n=r[0].number,[i,l]=$(r[0].state),c=p=>{l(p)},d=p=>h(this,null,function*(){p.preventDefault();try{r?(yield e(Rt({id:t,state:i})),l(""),e(Q(null)),e(je(!1))):alert("Заказ с указанным номером не найден среди выбранных.")}catch(u){console.error("Failed to update order status:",u),alert("Не удалось изменить статус заказа. Пожалуйста, попробуйте еще раз.")}}),m=()=>{e(Q(null)),e(je(!1))};return s("section",{className:"fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 bg-black bg-opacity-50",children:g("div",{className:`bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] \r
-      xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] \r
-      md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] \r
-      lg:max-w-[500px] xl:max-w-[663px] relative`,children:[s("button",{onClick:()=>m(),className:"absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700",children:"✕"}),g("h2",{className:"text-center text-base xs:text-base sm:text-2xl md:text-3xl lg:text-[32px] font-medium leading-[30px] xs:leading-[32px] sm:leading-[35px] md:leading-[38px] lg:leading-[40.8px] text-gray-400 mb-4 xs:mb-4.5 sm:mb-5 md:mb-5.5 lg:mb-10",children:["Изменить статус заказа № ",n||"Номер не найден"]}),g("div",{className:"space-y-[12px] xs:space-y-[14px] sm:space-y-[20px] md:space-y-[24px] lg:space-y-[40px]",children:[s("div",{className:"space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]",children:s(Xt,{handleSelectChange:c,options:er,placeholder:"Выберите новый статус",border:!0,className:"w-full p-2 bg-gray-75 rounded focus:outline-none focus:ring-2 font-normal text-base text-gray-400 placeholder:text-gray-150"})}),s("button",{onClick:d,className:"w-full p-2 xs:p-2.5 sm:p-2.5 md:p-3 bg-gray-400 text-white uppercase rounded hover:bg-[#2F2F2F] transition-colors text-base xs:text-base sm:text-lg font-medium",children:"Сохранить"})]})]})})}function Le({text:e,className:t="",itemProp:a,ref:r}){return s("h2",C(y(y({},a?{itemProp:a}:{}),r?{ref:r}:{}),{itemProp:a,className:K("text-[48px] text-gray-400 uppercase",t),children:e}))}function rr(){const e=Fe(null),{result:t,equipment:a}=W(({user:p})=>p),r=F();document.body.style.overflow="hidden";function o(p,u){if(!(p!=null&&p.length)||typeof u!="number"||isNaN(u))return null;try{const x=p.filter(b=>{const N=Number(b.min_param),v=Number(b.max_param);return isNaN(N)||isNaN(v)||N===void 0||v===void 0?!1:u>=N&&u<=v});return x.length?x.length===1?x[0].id:[...x].sort((b,N)=>{const v=Number(b.min_param),M=Number(N.min_param);return v-M})[0].id:null}catch(x){return console.error("Error in findItemWithLowestMinParam:",x),null}}const[n,i]=$(o(a,t));G(()=>{o(a,t)?i(o(a,t)):i(a[0].id)},[t,a]);const l=p=>i(n===p?null:p),c=()=>{if(!n)return"/img/placeholder.svg";const p=a.find(({id:u})=>u===n);return p||null},d=p=>h(this,null,function*(){yield r(_e(p)),r(Y(!1)),r(Q(p)),r(Pe(!1)),r(Z(!0))}),m=()=>{r(Pe(!1))};return s("section",{className:"min-h-[90%] min-w-[90%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll scrollbar-hide",children:g("div",{className:" bg-white pt-2 xs:pt-3 sm:pt-4  rounded-lg min-w-[100%] min-h-[90vh]  relative  ",children:[s("div",{className:"sticky z-50 flex-center top-0 left-0 bg-white ",children:s("div",{className:"w-full  ",children:s("button",{onClick:()=>m(),className:" text-xl absolute top-2 right-4 text-gray-500  hover:text-gray-700",children:"✕"})})}),s("div",{className:` h-full mt-14 md:mt-0 flex-center justify-center w-full \r
-   px-4 mb-10 lg:mb-20`,children:g("div",{className:`w-full max-w-[300px] xs:max-w-[400px] \r
-        sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] \r
-        xl:max-w-[1200px] 2xl:max-w-[1300px]  pt-0 \r
-         md:pt-16 lg:pt-18 xl:pt-10 xl:pb-10`,children:[s(Le,{text:"оборудование",className:" pt-0 xs:pt-5 inline-block border-b border-gray-400 text-lg xs:text-xl sm:text-2xl font-normal"}),s(Le,{text:"ВЫБЕРИТЕ ТИП ОБОРУДОВАНИЯ",className:"pt-6 xs:pt-7 sm:pt-8 md:pt-9 lg:pt-10 text-4xl leading-[40px] lg:text-[48px] lg:leading-[61px]"}),s("p",{className:"w-full md:w-[500px] lg:w-[600px] xl:w-[735px] text-gray-900 text-base xs:text-lg sm:text-xl pb-[20px] xs:pb-[25px] sm:pb-[30px] md:pb-[35px] lg:pb-[40px] pt-4 xs:pt-5 sm:pt-6",children:"Предварительные выводы неутешительны: сплочённость команды профессионалов обеспечивает широкому кругу (специалистов) участие в формировании поставленных обществом задач. Безусловно."}),g("div",{className:"flex flex-col  xl:items-start xl:flex-row xl:justify-between w-full gap-8 lg:gap-10",children:[s("div",{className:" transition-all duration-500 relative ",children:s("div",{className:"space-y-1 pb-10 xs:pb-12 sm:pb-14 md:pb-16 lg:pb-0 xl:pb-20 h-[500px]  xl:h-[600px]",children:a.map(({name:p,description:u,min_param:x,max_param:w,id:b})=>g("div",{ref:e,onClick:()=>l(b),className:`flex flex-col w-full xs:w-[320px] sm:w-[350px] md:w-[375px] lg:w-[500px] xl:w-[320px] 2xl:w-[400px]\r
-                       hover:bg-gray-50 cursor-pointer `,children:[g("div",{className:`flex justify-between items-center px-1 py-2 ${n===b?"bg-gray-50":""}`,children:[s("p",{className:"text-gray-900 text-base xs:text-lg sm:text-xl md:text-2xl xl:text-xl 2xl:text-2xl uppercase",children:p}),s("img",{className:`w-[14px] transition-all duration-300 ${n!==b?"-rotate-90":"rotate-0"}`,src:"/icon/small_arrow.svg",alt:""})]}),g("div",{className:`transition-all overflow-hidden duration-300 ease-in-out bg-gray-50 rounded px-4
-                        ${n===b?"max-h-[500px] opacity-100 py-4 mb-2 translate-y-0":"max-h-0 opacity-0 py-0 -translate-y-2"}`,children:[s("p",{className:"text-gray-700 mb-2 ",children:u}),g("p",{className:"text-gray-700 mb-2 ",children:["Минимальный параметр: ",x," М³/ч"]}),g("p",{className:"text-gray-700 mb-2 ",children:["Максимальный параметр: ",w," М³/ч"]})]})]},b))})}),g("div",{className:"flex flex-col items-center",children:[s("div",{className:" h-[300px] lg:h-[400px] flex-center justify-center ",children:s("img",{src:c().image_card||a[0].image_card||"/img/placeholder.svg",alt:"оборудование",className:`w-full \r
-                max-w-[300px] lg:max-w-[400px] xl:max-w-[550px] \r
-                2xl:max-w-[570px] max-h-[337px] object-contain`})}),g("div",{className:`w-[742px] border-t border-gray-400 pt-2 xs:pt-3 \r
-              sm:pt-4 mt-[30px] xs:mt-[40px] sm:mt-[50px] md:mt-[60px] lg:mt-[25px] \r
-              flex-col 2xl:flex-row  items-center 2xl:flex-center  xl:gap-4 gap-4  lg:justify-between  \r
-              max-w-[320px] sm:max-w-[350px] lg:max-w-[600px] xl:max-w-[530px] 2xl:max-w-[680px] 3xl:max-w-[742px] mb-10 xl:mb-0 `,children:[g("div",{className:"flex flex-row xl:w-[100%]  2xl:w-[55%] justify-between mb-5 2xl:mb-0",children:[g("div",{className:"text-center lg:text-left",children:[s("p",{className:"text-left text-base xs:text-lg sm:text-xl uppercase",children:c().name||a[0].name}),s("p",{className:"text-left text-sm xs:text-base xl:max-w-[400px] 2xl:max-w-[200px] 3xl:max-w-auto uppercase",children:c().sub_header||a[0].sub_header})]}),g("div",{className:"text-left",children:[g("p",{className:"text-base xs:text-lg sm:text-xl lg:text-base 2xl:text-xl",children:["от ",c().min_param||a[0].min_param," ","м3/ч"]}),g("p",{className:"text-sm xs:text-base",children:["до ",c().max_param||a[0].max_param," ","м3/ч"]})]})]}),s(he,{onClick:()=>d(c().id),icon:!0,text:"оформить заказ",iconWidth:"w-[20px] xs:w-[25px] sm:w-[30px]",className:"text-sm py-4   lg:pr-6 lg:pl-4 2xl:pr-8 2xl:pl-5 lg:text-sm  2xl:text-base"})]})]})]})]})})]})})}const ar=T(()=>import("./assets/Popup-CcjrhIbk.js")),nr=T(()=>import("./assets/StatusPopup-oYrgHWsI.js")),sr=T(()=>import("./assets/AddOrderPopup-DtuNEIvz.js")),or=T(()=>import("./assets/ChangeEquipmentPopup-BZ5EHnDD.js")),ir=T(()=>import("./assets/AddNewItem-Iq8MfgVM.js")),lr=T(()=>import("./assets/SearchPopup-vJ8FJ1vo.js"));function cr(){const{pathname:e}=ut(),t=e==="/auth"||e==="/auth/",{isPopup:a,status:r,addOrderPopup:o,equipmentPopup:n,addNewItemPopup:i,newsPopup:l,searchPopup:c,statusOrderPopup:d,equipment:m,solutions:p,banner:u,news:x,orders:w,calcPopup:b,company:N}=W(({user:Te})=>Te),v=F(),M=a||r||o||n||i||c||d||b,[Je,J]=$(!0),ve=Fe(!1);return G(()=>{ve.current||(ve.current=!0,!m.length||!x.length||!p.length?h(this,null,function*(){J(!0);try{yield v(xe()),yield v(fe()),yield v(ye()),yield v(we()),yield v(be())}catch(Xe){console.error(Xe)}J(!1)}):J(!1))},[v,m.length,x.length,p.length]),Je?s("div",{className:"fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center",children:s("div",{className:"loader"})}):g("div",{className:"relative",children:[!t&&s(Jt,{}),g("div",{className:`${M&&"blur-md bg-gray-200"}`,children:[!t&&s(Wt,{}),s(I,{fallback:s("div",{className:"fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ",children:s("div",{className:"loader"})}),children:s(Zt,{equipment:m,solutions:p,company:N,banner:u,news:x,orders:w})})]}),a&&s(I,{fallback:"...Загрузка",children:s(ar,{})}),r&&s(I,{fallback:"...Загрузка",children:s(nr,{orders:w})}),o&&s(I,{fallback:"...Загрузка",children:s(sr,{})}),n&&s(I,{fallback:"...Загрузка",children:s(or,{})}),i&&s(I,{fallback:"...Загрузка",children:s(ir,{})}),c&&s(I,{fallback:"...Загрузка",children:s(lr,{})}),d&&s(I,{fallback:"...Загрузка",children:s(tr,{})}),b&&s(I,{fallback:"...Загрузка",children:s(rr,{})})]})}const se=gt({reducer:{user:Mt}});function pr(e,t){return h(this,null,function*(){try{yield Promise.all([t.dispatch(xe()),t.dispatch(fe()),t.dispatch(ye()),t.dispatch(we()),t.dispatch(be())])}catch(a){console.error("Error fetching initial data:",a)}return t.getState()})}function na(e){return h(this,null,function*(){yield pr(e,se);const t={},a=nt(s(k.StrictMode,{children:s(st,{store:se,children:s(ot,{location:e,children:s(Ye,{context:t,children:s(cr,{})})})})})),{helmet:r}=t;return{html:a,head:r?`${r.title.toString()}
-       ${r.meta.toString()}
-       ${r.link.toString()}`:"",initialState:se.getState()}})}export{Lt as A,he as B,we as C,Fr as D,Ar as E,be as F,Mr as G,Or as H,Ur as I,Hr as J,Wr as K,Br as L,Vr as M,ra as N,Y as O,_e as P,De as Q,A as R,Xt as S,Le as T,Qe as U,Ie as V,ne as W,Q as a,ta as b,Z as c,ea as d,Rr as e,Zr as f,pr as fetchInitialData,qt as g,$r as h,Er as i,aa as j,kr as k,xe as l,Pr as m,fe as n,jr as o,ye as p,Ze as q,K as r,na as render,zr as s,$e as t,Ir as u,je as v,Lr as w,Kr as x,Dr as y,qr as z};
+`,
+            data: solutions,
+            bannerImg: "/img/newsol_banner.png",
+            placeholderSrc: "/img/newsol_banner_compress.png"
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      Route,
+      {
+        path: ROUTES.EQUIPMENT_PRODUCT,
+        element: /* @__PURE__ */ jsx(ProductItem, { list: equipment })
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      Route,
+      {
+        path: ROUTES.SOLUTIONS_PRODUCT,
+        element: /* @__PURE__ */ jsx(ProductItem, { list: solutions })
+      }
+    ),
+    /* @__PURE__ */ jsx(Route, { path: ROUTES.ABOUT, element: /* @__PURE__ */ jsx(AboutCompany, { company }) }),
+    isAdmin && /* @__PURE__ */ jsx(Route, { path: ROUTES.ADMIN, element: /* @__PURE__ */ jsx(Admin, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: ROUTES.CONTACT, element: /* @__PURE__ */ jsx(Contacts, { company }) }),
+    /* @__PURE__ */ jsx(Route, { path: ROUTES.NEWS, element: /* @__PURE__ */ jsx(NewsPage, { news }) }),
+    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
+  ] });
+}
+function Widget() {
+  const dispatch = useDispatch();
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      type: "button",
+      onClick: () => dispatch(changeShowPopup(true)),
+      className: "fixed bottom-8 right-8 cursor-pointer z-50",
+      children: /* @__PURE__ */ jsx(
+        "img",
+        {
+          className: "max-w-[50px] max-h-[50px] animateWidget",
+          src: "/icon/widget.svg",
+          alt: "Позвони нам",
+          title: "Нажмите, чтобы заказать звонок"
+        }
+      )
+    }
+  );
+}
+function Select({
+  handleSelectChange,
+  options: options2,
+  className,
+  border,
+  placeholder
+}) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState(placeholder);
+  useEffect(() => {
+    handleSelectChange(selected);
+  }, [selected]);
+  return /* @__PURE__ */ jsxs("div", { className: `relative w-[115px] text-gray-400 mt-[13px] ${className}`, children: [
+    /* @__PURE__ */ jsxs(
+      "button",
+      {
+        onClick: () => setIsOpen(!isOpen),
+        className: `w-full flex items-center justify-between px-3 py-2 border border-gray-400 ${border ? "border-none" : ""}`,
+        children: [
+          /* @__PURE__ */ jsx(
+            "p",
+            {
+              className: `${border ? "text-gray-400 font-normal text-sm md:text-base" : ""}`,
+              children: selected
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            ChevronDown,
+            {
+              className: `w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`
+            }
+          )
+        ]
+      }
+    ),
+    isOpen && /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `absolute w-full mt-1 border border-gray-200  bg-white shadow-lg `,
+        children: /* @__PURE__ */ jsx("ul", { className: "py-1", children: options2.map((option) => /* @__PURE__ */ jsx(
+          "li",
+          {
+            className: "px-3 py-1.5 hover:bg-gray-100 cursor-pointer",
+            onClick: () => {
+              setSelected(option.value);
+              setIsOpen(false);
+            },
+            children: option.label
+          },
+          option.value
+        )) })
+      }
+    )
+  ] });
+}
+const options = [
+  { label: "Доставлен", value: "Доставлен" },
+  { label: "Отменен", value: "Отменен" },
+  { label: "Оплачен", value: "Оплачен" }
+];
+function ChangeStatusPopup() {
+  const dispatch = useDispatch();
+  const { itemId, orders } = useSelector(({ user }) => user);
+  const [selectedOrder, setSelectedOrder] = useState(
+    orders.filter((item) => item.id === itemId)
+  );
+  const numberOfOrders = selectedOrder[0].number;
+  const [formData, setFormData] = useState(selectedOrder[0].state);
+  const handleSelectChange = (value) => {
+    setFormData(value);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (selectedOrder) {
+        await dispatch(
+          patchOrders({
+            id: itemId,
+            state: formData
+          })
+        );
+        setFormData("");
+        dispatch(changeItemId(null));
+        dispatch(changeStatusOrderPopup(false));
+      } else {
+        alert("Заказ с указанным номером не найден среди выбранных.");
+      }
+    } catch (error) {
+      console.error("Failed to update order status:", error);
+      alert(
+        "Не удалось изменить статус заказа. Пожалуйста, попробуйте еще раз."
+      );
+    }
+  };
+  const handleClose = () => {
+    dispatch(changeItemId(null));
+    dispatch(changeStatusOrderPopup(false));
+  };
+  return /* @__PURE__ */ jsx("section", { className: "fixed inset-0 flex items-center justify-center px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 bg-black bg-opacity-50", children: /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: "bg-white py-[25px] xs:py-[28px] sm:py-[30px] md:py-[33px] lg:py-[35px] \r\n      xl:py-[38px] px-4 xs:px-5 sm:px-6 md:px-7 lg:px-8 rounded-lg w-[90%] xs:w-[85%] sm:w-[80%] \r\n      md:w-[70%] lg:w-[60%] xl:w-full max-w-[300px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] \r\n      lg:max-w-[500px] xl:max-w-[663px] relative",
+      children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            onClick: () => handleClose(),
+            className: "absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4 right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 text-gray-500 hover:text-gray-700",
+            children: "✕"
+          }
+        ),
+        /* @__PURE__ */ jsxs("h2", { className: "text-center text-base xs:text-base sm:text-2xl md:text-3xl lg:text-[32px] font-medium leading-[30px] xs:leading-[32px] sm:leading-[35px] md:leading-[38px] lg:leading-[40.8px] text-gray-400 mb-4 xs:mb-4.5 sm:mb-5 md:mb-5.5 lg:mb-10", children: [
+          "Изменить статус заказа № ",
+          numberOfOrders || "Номер не найден"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "space-y-[12px] xs:space-y-[14px] sm:space-y-[20px] md:space-y-[24px] lg:space-y-[40px]", children: [
+          /* @__PURE__ */ jsx("div", { className: "space-y-[12px] xs:space-y-[14px] sm:space-y-[15px] md:space-y-[16px] lg:space-y-[18px]", children: /* @__PURE__ */ jsx(
+            Select,
+            {
+              handleSelectChange,
+              options,
+              placeholder: "Выберите новый статус",
+              border: true,
+              className: "w-full p-2 bg-gray-75 rounded focus:outline-none focus:ring-2 font-normal text-base text-gray-400 placeholder:text-gray-150"
+            }
+          ) }),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              onClick: handleSubmit,
+              className: "w-full p-2 xs:p-2.5 sm:p-2.5 md:p-3 bg-gray-400 text-white uppercase rounded hover:bg-[#2F2F2F] transition-colors text-base xs:text-base sm:text-lg font-medium",
+              children: "Сохранить"
+            }
+          )
+        ] })
+      ]
+    }
+  ) });
+}
+function Title({ text, className = "", itemProp, ref }) {
+  return /* @__PURE__ */ jsx(
+    "h2",
+    {
+      ...itemProp ? { itemProp } : {},
+      ...ref ? { ref } : {},
+      itemProp,
+      className: cn("text-[48px] text-gray-400 uppercase", className),
+      children: text
+    }
+  );
+}
+function EquipmentType() {
+  const ref = useRef(null);
+  const { result, equipment } = useSelector(({ user }) => user);
+  const dispatch = useDispatch();
+  document.body.style.overflow = "hidden";
+  function findItemWithLowestMinParam(array, targetNumber) {
+    if (!(array == null ? void 0 : array.length) || typeof targetNumber !== "number" || isNaN(targetNumber)) {
+      return null;
+    }
+    try {
+      const filteredItems = array.filter((item) => {
+        const min = Number(item.min_param);
+        const max = Number(item.max_param);
+        if (isNaN(min) || isNaN(max) || min === void 0 || max === void 0) {
+          return false;
+        }
+        return targetNumber >= min && targetNumber <= max;
+      });
+      if (!filteredItems.length) {
+        return null;
+      }
+      if (filteredItems.length === 1) {
+        return filteredItems[0].id;
+      }
+      const sortedItems = [...filteredItems].sort((a, b) => {
+        const minA = Number(a.min_param);
+        const minB = Number(b.min_param);
+        return minA - minB;
+      });
+      return sortedItems[0].id;
+    } catch (error) {
+      console.error("Error in findItemWithLowestMinParam:", error);
+      return null;
+    }
+  }
+  const [activeIndex, setIndex] = useState(
+    findItemWithLowestMinParam(equipment, result)
+  );
+  useEffect(() => {
+    if (findItemWithLowestMinParam(equipment, result)) {
+      setIndex(findItemWithLowestMinParam(equipment, result));
+    } else {
+      setIndex(equipment[0].id);
+    }
+  }, [result, equipment]);
+  const handleClick = (id) => setIndex(activeIndex === id ? null : id);
+  const findImage = () => {
+    if (!activeIndex) return "/img/placeholder.svg";
+    const img = equipment.find(({ id }) => id === activeIndex);
+    return img ? img : null;
+  };
+  const handleClickButton = async (id) => {
+    await dispatch(getEquipmentById(id));
+    dispatch(changeRoutingToOrders(false));
+    dispatch(changeItemId(id));
+    dispatch(changeCalcPopup(false));
+    dispatch(changeShowPopup(true));
+  };
+  const handleClose = () => {
+    dispatch(changeCalcPopup(false));
+  };
+  return /* @__PURE__ */ jsx("section", { className: "min-h-[90%] min-w-[90%] fixed inset-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] overflow-y-scroll scrollbar-hide", children: /* @__PURE__ */ jsxs("div", { className: " bg-white pt-2 xs:pt-3 sm:pt-4  rounded-lg min-w-[100%] min-h-[90vh]  relative  ", children: [
+    /* @__PURE__ */ jsx("div", { className: "sticky z-50 flex-center top-0 left-0 bg-white ", children: /* @__PURE__ */ jsx("div", { className: "w-full  ", children: /* @__PURE__ */ jsx(
+      "button",
+      {
+        onClick: () => handleClose(),
+        className: " text-xl absolute top-2 right-4 text-gray-500  hover:text-gray-700",
+        children: "✕"
+      }
+    ) }) }),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: " h-full mt-14 md:mt-0 flex-center justify-center w-full \r\n   px-4 mb-10 lg:mb-20",
+        children: /* @__PURE__ */ jsxs(
+          "div",
+          {
+            className: "w-full max-w-[300px] xs:max-w-[400px] \r\n        sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] \r\n        xl:max-w-[1200px] 2xl:max-w-[1300px]  pt-0 \r\n         md:pt-16 lg:pt-18 xl:pt-10 xl:pb-10",
+            children: [
+              /* @__PURE__ */ jsx(
+                Title,
+                {
+                  text: "оборудование",
+                  className: " pt-0 xs:pt-5 inline-block border-b border-gray-400 text-lg xs:text-xl sm:text-2xl font-normal"
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                Title,
+                {
+                  text: "ВЫБЕРИТЕ ТИП ОБОРУДОВАНИЯ",
+                  className: "pt-6 xs:pt-7 sm:pt-8 md:pt-9 lg:pt-10 text-4xl leading-[40px] lg:text-[48px] lg:leading-[61px]"
+                }
+              ),
+              /* @__PURE__ */ jsx("p", { className: "w-full md:w-[500px] lg:w-[600px] xl:w-[735px] text-gray-900 text-base xs:text-lg sm:text-xl pb-[20px] xs:pb-[25px] sm:pb-[30px] md:pb-[35px] lg:pb-[40px] pt-4 xs:pt-5 sm:pt-6", children: "Предварительные выводы неутешительны: сплочённость команды профессионалов обеспечивает широкому кругу (специалистов) участие в формировании поставленных обществом задач. Безусловно." }),
+              /* @__PURE__ */ jsxs("div", { className: "flex flex-col  xl:items-start xl:flex-row xl:justify-between w-full gap-8 lg:gap-10", children: [
+                /* @__PURE__ */ jsx("div", { className: ` transition-all duration-500 relative `, children: /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `space-y-1 pb-10 xs:pb-12 sm:pb-14 md:pb-16 lg:pb-0 xl:pb-20 h-[500px]  xl:h-[600px]`,
+                    children: equipment.map(
+                      ({ name, description, min_param, max_param, id }) => /* @__PURE__ */ jsxs(
+                        "div",
+                        {
+                          ref,
+                          onClick: () => handleClick(id),
+                          className: "flex flex-col w-full xs:w-[320px] sm:w-[350px] md:w-[375px] lg:w-[500px] xl:w-[320px] 2xl:w-[400px]\r\n                       hover:bg-gray-50 cursor-pointer ",
+                          children: [
+                            /* @__PURE__ */ jsxs(
+                              "div",
+                              {
+                                className: `flex justify-between items-center px-1 py-2 ${activeIndex === id ? "bg-gray-50" : ""}`,
+                                children: [
+                                  /* @__PURE__ */ jsx(
+                                    "p",
+                                    {
+                                      className: `text-gray-900 text-base xs:text-lg sm:text-xl md:text-2xl xl:text-xl 2xl:text-2xl uppercase`,
+                                      children: name
+                                    }
+                                  ),
+                                  /* @__PURE__ */ jsx(
+                                    "img",
+                                    {
+                                      className: `w-[14px] transition-all duration-300 ${activeIndex !== id ? "-rotate-90" : "rotate-0"}`,
+                                      src: "/icon/small_arrow.svg",
+                                      alt: ""
+                                    }
+                                  )
+                                ]
+                              }
+                            ),
+                            /* @__PURE__ */ jsxs(
+                              "div",
+                              {
+                                className: `transition-all overflow-hidden duration-300 ease-in-out bg-gray-50 rounded px-4
+                        ${activeIndex === id ? "max-h-[500px] opacity-100 py-4 mb-2 translate-y-0" : "max-h-0 opacity-0 py-0 -translate-y-2"}`,
+                                children: [
+                                  /* @__PURE__ */ jsx("p", { className: `text-gray-700 mb-2 `, children: description }),
+                                  /* @__PURE__ */ jsxs("p", { className: `text-gray-700 mb-2 `, children: [
+                                    "Минимальный параметр: ",
+                                    min_param,
+                                    " М³/ч"
+                                  ] }),
+                                  /* @__PURE__ */ jsxs("p", { className: `text-gray-700 mb-2 `, children: [
+                                    "Максимальный параметр: ",
+                                    max_param,
+                                    " М³/ч"
+                                  ] })
+                                ]
+                              }
+                            )
+                          ]
+                        },
+                        id
+                      )
+                    )
+                  }
+                ) }),
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
+                  /* @__PURE__ */ jsx("div", { className: " h-[300px] lg:h-[400px] flex-center justify-center ", children: /* @__PURE__ */ jsx(
+                    "img",
+                    {
+                      src: findImage().image_card || equipment[0].image_card || "/img/placeholder.svg",
+                      alt: "оборудование",
+                      className: "w-full \r\n                max-w-[300px] lg:max-w-[400px] xl:max-w-[550px] \r\n                2xl:max-w-[570px] max-h-[337px] object-contain"
+                    }
+                  ) }),
+                  /* @__PURE__ */ jsxs(
+                    "div",
+                    {
+                      className: "w-[742px] border-t border-gray-400 pt-2 xs:pt-3 \r\n              sm:pt-4 mt-[30px] xs:mt-[40px] sm:mt-[50px] md:mt-[60px] lg:mt-[25px] \r\n              flex-col 2xl:flex-row  items-center 2xl:flex-center  xl:gap-4 gap-4  lg:justify-between  \r\n              max-w-[320px] sm:max-w-[350px] lg:max-w-[600px] xl:max-w-[530px] 2xl:max-w-[680px] 3xl:max-w-[742px] mb-10 xl:mb-0 ",
+                      children: [
+                        /* @__PURE__ */ jsxs("div", { className: "flex flex-row xl:w-[100%]  2xl:w-[55%] justify-between mb-5 2xl:mb-0", children: [
+                          /* @__PURE__ */ jsxs("div", { className: "text-center lg:text-left", children: [
+                            /* @__PURE__ */ jsx("p", { className: "text-left text-base xs:text-lg sm:text-xl uppercase", children: findImage().name || equipment[0].name }),
+                            /* @__PURE__ */ jsx("p", { className: "text-left text-sm xs:text-base xl:max-w-[400px] 2xl:max-w-[200px] 3xl:max-w-auto uppercase", children: findImage().sub_header || equipment[0].sub_header })
+                          ] }),
+                          /* @__PURE__ */ jsxs("div", { className: "text-left", children: [
+                            /* @__PURE__ */ jsxs("p", { className: "text-base xs:text-lg sm:text-xl lg:text-base 2xl:text-xl", children: [
+                              "от ",
+                              findImage().min_param || equipment[0].min_param,
+                              " ",
+                              "м3/ч"
+                            ] }),
+                            /* @__PURE__ */ jsxs("p", { className: "text-sm xs:text-base", children: [
+                              "до ",
+                              findImage().max_param || equipment[0].max_param,
+                              " ",
+                              "м3/ч"
+                            ] })
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsx(
+                          Button,
+                          {
+                            onClick: () => handleClickButton(findImage().id),
+                            icon: true,
+                            text: "оформить заказ",
+                            iconWidth: "w-[20px] xs:w-[25px] sm:w-[30px]",
+                            className: "text-sm py-4   lg:pr-6 lg:pl-4 2xl:pr-8 2xl:pl-5 lg:text-sm  2xl:text-base"
+                          }
+                        )
+                      ]
+                    }
+                  )
+                ] })
+              ] })
+            ]
+          }
+        )
+      }
+    )
+  ] }) });
+}
+const Popup = lazy(() => import("./assets/Popup-LWFz3Hfi.js"));
+const StatusPopup = lazy(() => import("./assets/StatusPopup-BmrLP5jB.js"));
+const AddOrderPopup = lazy(
+  () => import("./assets/AddOrderPopup-BYMm0Gsy.js")
+);
+const ChangeEquipmentPopup = lazy(
+  () => import("./assets/ChangeEquipmentPopup-obffJcYT.js")
+);
+const AddNewItem = lazy(() => import("./assets/AddNewItem-Dv88M54w.js"));
+const SearchPopup = lazy(() => import("./assets/SearchPopup-CQvd1BkW.js"));
+function App() {
+  const { pathname } = useLocation();
+  const isLoginForm = pathname === "/auth" || pathname === "/auth/";
+  const {
+    isPopup,
+    status,
+    addOrderPopup,
+    equipmentPopup,
+    addNewItemPopup,
+    newsPopup,
+    searchPopup,
+    statusOrderPopup,
+    equipment,
+    solutions,
+    banner,
+    news,
+    orders,
+    calcPopup,
+    company
+  } = useSelector(({ user }) => user);
+  const dispatch = useDispatch();
+  const isActivePopup = isPopup || status || addOrderPopup || equipmentPopup || addNewItemPopup || searchPopup || statusOrderPopup || calcPopup;
+  const [loading, setLoading] = useState(true);
+  const dataFetchedRef = useRef(false);
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    if (!equipment.length || !news.length || !solutions.length) {
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          await dispatch(getAllNews());
+          await dispatch(getAllEquipment());
+          await dispatch(getAllSolutions());
+          await dispatch(getBanner());
+          await dispatch(getCompany());
+        } catch (error) {
+          console.error(error);
+        }
+        setLoading(false);
+      };
+      fetchData();
+    } else {
+      setLoading(false);
+    }
+  }, [dispatch, equipment.length, news.length, solutions.length]);
+  return !loading ? /* @__PURE__ */ jsxs("div", { className: "relative", children: [
+    !isLoginForm && /* @__PURE__ */ jsx(Widget, {}),
+    /* @__PURE__ */ jsxs("div", { className: `${isActivePopup && "blur-md bg-gray-200"}`, children: [
+      !isLoginForm && /* @__PURE__ */ jsx(Header, {}),
+      /* @__PURE__ */ jsx(
+        Suspense,
+        {
+          fallback: /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ", children: /* @__PURE__ */ jsx("div", { className: "loader" }) }),
+          children: /* @__PURE__ */ jsx(
+            AppRoutes,
+            {
+              equipment,
+              solutions,
+              company,
+              banner,
+              news,
+              orders
+            }
+          )
+        }
+      )
+    ] }),
+    isPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(Popup, {}) }),
+    status && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(StatusPopup, { orders }) }),
+    addOrderPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(AddOrderPopup, {}) }),
+    equipmentPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(ChangeEquipmentPopup, {}) }),
+    addNewItemPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(AddNewItem, {}) }),
+    searchPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(SearchPopup, {}) }),
+    statusOrderPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(ChangeStatusPopup, {}) }),
+    calcPopup && /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(EquipmentType, {}) })
+  ] }) : /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center", children: /* @__PURE__ */ jsx("div", { className: "loader" }) });
+}
+function render(url2) {
+  const helmetContext = {};
+  const html = renderToString(
+    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(Provider, { store, children: /* @__PURE__ */ jsx(StaticRouter, { location: url2, children: /* @__PURE__ */ jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsx(App, {}) }) }) }) })
+  );
+  return {
+    html,
+    head: helmetContext.helmet ? `
+      ${helmetContext.helmet.title.toString()}
+      ${helmetContext.helmet.meta.toString()}
+      ${helmetContext.helmet.link.toString()}
+    ` : ""
+  };
+}
+export {
+  importOrdersExcel as A,
+  Button as B,
+  getBanner as C,
+  updateBanner as D,
+  deleteNews as E,
+  getCompany as F,
+  updateCompany as G,
+  updateHomeSeo as H,
+  updateContactsSeo as I,
+  updateEquipmentSeo as J,
+  updateSolutionSeo as K,
+  exportOrdersExcel as L,
+  changeOrderNumber as M,
+  changeRoutingToOrders as N,
+  getEquipmentById as O,
+  changeSolutionsId as P,
+  getSolutionsById as Q,
+  ROUTES as R,
+  Select as S,
+  Title as T,
+  changeEquipmentId as U,
+  authPost as V,
+  changeItemId as a,
+  changeShowStatus as b,
+  changeShowPopup as c,
+  changeAddOrderPopup as d,
+  createOrders as e,
+  changeEquipmentPopup as f,
+  getAllOrders as g,
+  updateSolutions as h,
+  updateNews as i,
+  changeShowAddNewItemPopup as j,
+  createNews as k,
+  getAllNews as l,
+  createEquipment as m,
+  getAllEquipment as n,
+  createSolutions as o,
+  getAllSolutions as p,
+  changeShowSearchPopup as q,
+  cn as r,
+  render,
+  submitOrder as s,
+  useLatinFormat as t,
+  updateEquipment as u,
+  changeStatusOrderPopup as v,
+  deleteOrders as w,
+  changeIsAdmin as x,
+  deleteEquipment as y,
+  deleteSolutions as z
+};

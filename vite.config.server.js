@@ -4,23 +4,17 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
-    ssr: true,
+    ssr: "src/entry-server.jsx",
     outDir: "dist/server",
     emptyOutDir: false,
     rollupOptions: {
-      input: "src/entry-server.jsx",
-      // Добавляем react-router-dom в external
       external: [
         "react",
         "react-dom",
-        "react-redux",
-        "react-router-dom",
-        "react-helmet-async",
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei",
       ],
     },
-  },
-  ssr: {
-    // Указываем, что react-helmet-async должен обрабатываться как ESM
-    noExternal: ["react-helmet-async"],
   },
 });
