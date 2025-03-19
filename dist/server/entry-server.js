@@ -1793,7 +1793,7 @@ const AddOrderPopup = lazy(
   () => import("./assets/AddOrderPopup-Caq0LXRT.js")
 );
 const ChangeEquipmentPopup = lazy(
-  () => import("./assets/ChangeEquipmentPopup-BJuwLhZl.js")
+  () => import("./assets/ChangeEquipmentPopup-LGBY2I6o.js")
 );
 const AddNewItem = lazy(() => import("./assets/AddNewItem-VNXoEPTs.js"));
 const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
