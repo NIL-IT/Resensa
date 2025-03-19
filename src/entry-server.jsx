@@ -5,9 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./utils/store.js";
 import pkg from "react-helmet-async";
 const { HelmetProvider } = pkg;
-
 import App from "./App";
-
 /**
  * @param {string} url
  */
