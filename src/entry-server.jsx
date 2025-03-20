@@ -17,8 +17,8 @@ export function render(url) {
       {/* <Provider store={store}> */}
       {/* <StaticRouter location={url}> */}
       {/* <HelmetProvider context={helmetContext}> */}
-      <div>HI</div>
       {/* <App /> */}
+      <div>HI</div>
       {/* </HelmetProvider> */}
       {/* </StaticRouter> */}
       {/* </Provider> */}

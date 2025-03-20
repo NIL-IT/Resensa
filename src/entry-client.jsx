@@ -14,9 +14,7 @@ hydrateRoot(
     {/* <BrowserRouter> */}
     {/* <HelmetProvider> */}
     {/* <App /> */}
-
     <div>HI</div>
-
     {/* </HelmetProvider> */}
     {/* </BrowserRouter> */}
     {/* </Provider> */}
