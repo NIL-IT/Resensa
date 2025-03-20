@@ -14,11 +14,13 @@ export function render(url) {
 
   const html = renderToString(
     <StrictMode>
-      <Provider store={store}>
-        <StaticRouter location={url}>
-          <App />
-        </StaticRouter>
-      </Provider>
+      {/* <Provider store={store}> */}
+      <StaticRouter location={url}>
+        {/* <HelmetProvider context={helmetContext}> */}
+        <App />
+        {/* </HelmetProvider> */}
+      </StaticRouter>
+      {/* </Provider> */}
     </StrictMode>
   );
 

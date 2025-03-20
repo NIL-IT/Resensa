@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "./routes";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 const Home = lazy(() => import("../components/pages/Home"));
 const NotFound = lazy(() => import("../components/pages/NotFound"));
 const Equipment = lazy(() => import("../components/pages/Equipment"));
@@ -18,20 +18,21 @@ export default function AppRoutes({
   banner,
   news,
 }) {
-  const { isAdmin } = useSelector(({ user }) => user);
+  // const { isAdmin } = useSelector(({ user }) => user);
   return (
     <Routes>
-      <Route path={ROUTES.AUTH} element={<LoginForm />} />
+      {/* <Route path={ROUTES.AUTH} element={<LoginForm />} /> */}
       <Route
         path={ROUTES.HOME}
         element={
-          <Home
-            equipment={equipment}
-            solutions={solutions}
-            banner={banner}
-            news={news}
-            company={company}
-          />
+          <>HI</>
+          // <Home
+          //   equipment={equipment}
+          //   solutions={solutions}
+          //   banner={banner}
+          //   news={news}
+          //   company={company}
+          // />
         }
       />
       {/* <Route
