@@ -1,11 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useRef, Suspense, lazy } from "react";
+import { useState, useRef } from "react";
 import { I as Input } from "./Input-Fzfexiw9.js";
 import { useDispatch } from "react-redux";
 import { j as changeShowAddNewItemPopup, k as createNews, l as getAllNews, m as createEquipment, n as getAllEquipment, o as createSolutions, p as getAllSolutions } from "../entry-server.js";
 import { I as ImageUploader } from "./ImageUploader-eWXrU1kH.js";
 import { useLocation } from "react-router-dom";
-import { c as config } from "./data-C21Hc6VP.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
@@ -15,7 +14,6 @@ import "react-helmet-async";
 import "clsx";
 import "tailwind-merge";
 import "lucide-react";
-const JoditEditor = lazy(() => import("jodit-react"));
 const AddNewItem = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -72,12 +70,6 @@ const AddNewItem = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value
-    }));
-  };
-  const handleEditorChange = (name, content) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: content
     }));
   };
   const handleSubmit = async (e) => {
@@ -199,10 +191,10 @@ const AddNewItem = () => {
     if (id == 3) return "Добавление нового решения";
     if (id == 4) return "Добавление новой новости";
   };
-  const editor = useRef(null);
-  const textEditor = useRef(null);
-  const extraDescriptionEditor = useRef(null);
-  const headerEditor = useRef(null);
+  useRef(null);
+  useRef(null);
+  useRef(null);
+  useRef(null);
   return /* @__PURE__ */ jsx(
     "section",
     {
@@ -290,61 +282,15 @@ const AddNewItem = () => {
                       children: !isNews ? "Описание" : "Текст новости"
                     }
                   ),
-                  isNews ? /* @__PURE__ */ jsx(
-                    Suspense,
-                    {
-                      fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                      children: /* @__PURE__ */ jsx(
-                        JoditEditor,
-                        {
-                          ref: textEditor,
-                          value: formData.text || "",
-                          config,
-                          onBlur: (newContent) => handleEditorChange("text", newContent)
-                        }
-                      )
-                    }
-                  ) : /* @__PURE__ */ jsx(
-                    Suspense,
-                    {
-                      fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                      children: /* @__PURE__ */ jsx(
-                        JoditEditor,
-                        {
-                          ref: editor,
-                          value: formData.description || "",
-                          config,
-                          onBlur: (newContent) => handleEditorChange("description", newContent)
-                        }
-                      )
-                    }
-                  ),
                   !isNews && /* @__PURE__ */ jsxs(Fragment, { children: [
-                    /* @__PURE__ */ jsxs("div", { className: "space-y-2 pt-4", children: [
-                      /* @__PURE__ */ jsx(
-                        "label",
-                        {
-                          htmlFor: "message",
-                          className: "block text-sm text-gray-900",
-                          children: "Полное описание товара"
-                        }
-                      ),
-                      /* @__PURE__ */ jsx(
-                        Suspense,
-                        {
-                          fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                          children: /* @__PURE__ */ jsx(
-                            JoditEditor,
-                            {
-                              ref: extraDescriptionEditor,
-                              value: formData.extra_description || "",
-                              config,
-                              onBlur: (newContent) => handleEditorChange("extra_description", newContent)
-                            }
-                          )
-                        }
-                      )
-                    ] }),
+                    /* @__PURE__ */ jsx("div", { className: "space-y-2 pt-4", children: /* @__PURE__ */ jsx(
+                      "label",
+                      {
+                        htmlFor: "message",
+                        className: "block text-sm text-gray-900",
+                        children: "Полное описание товара"
+                      }
+                    ) }),
                     /* @__PURE__ */ jsxs("div", { className: "space-y-2 pt-4", children: [
                       /* @__PURE__ */ jsx("p", { className: "w-full text-xs xs:text-sm text-gray-900", children: "Заголовок баннера" }),
                       /* @__PURE__ */ jsx(
@@ -364,21 +310,6 @@ const AddNewItem = () => {
                         htmlFor: "message",
                         className: "block w-full text-xs xs:text-sm text-gray-900",
                         children: "Текст баннера"
-                      }
-                    ),
-                    /* @__PURE__ */ jsx(
-                      Suspense,
-                      {
-                        fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                        children: /* @__PURE__ */ jsx(
-                          JoditEditor,
-                          {
-                            ref: headerEditor,
-                            value: formData.header || "",
-                            config,
-                            onBlur: (newContent) => handleEditorChange("header", newContent)
-                          }
-                        )
                       }
                     )
                   ] }),

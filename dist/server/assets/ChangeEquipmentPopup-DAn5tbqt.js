@@ -1,11 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useEffect, useRef, Suspense, lazy } from "react";
+import { useState, useEffect, useRef } from "react";
 import { I as Input } from "./Input-Fzfexiw9.js";
 import { useDispatch, useSelector } from "react-redux";
 import { f as changeEquipmentPopup, a as changeItemId, u as updateEquipment, h as updateSolutions, i as updateNews } from "../entry-server.js";
 import { I as ImageUploader } from "./ImageUploader-eWXrU1kH.js";
 import { useLocation } from "react-router-dom";
-import { c as config } from "./data-C21Hc6VP.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
@@ -15,7 +14,6 @@ import "react-helmet-async";
 import "clsx";
 import "tailwind-merge";
 import "lucide-react";
-const JoditEditor = lazy(() => import("jodit-react"));
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
   const { path, setPathname } = useState("");
@@ -78,12 +76,6 @@ const ChangeEquipmentPopup = () => {
     }
     return baseData;
   });
-  const handleEditorChange = (content, name) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: content
-    }));
-  };
   const [selectedFile, setSelectedFile] = useState();
   const [selectedFileBanner, setSelectedFileBanner] = useState();
   const handleInputChange = (e) => {
@@ -93,10 +85,10 @@ const ChangeEquipmentPopup = () => {
       [name]: value
     }));
   };
-  const textEditorRef = useRef(null);
-  const descriptionEditorRef = useRef(null);
-  const extraDescriptionEditorRef = useRef(null);
-  const headerEditorRef = useRef(null);
+  useRef(null);
+  useRef(null);
+  useRef(null);
+  useRef(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -254,31 +246,14 @@ const ChangeEquipmentPopup = () => {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
-              /* @__PURE__ */ jsx(
-                "label",
-                {
-                  htmlFor: "text",
-                  className: "block text-sm font-medium text-gray-900",
-                  children: "Текст новости"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: textEditorRef,
-                      value: formData.text,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "text")
-                    }
-                  )
-                }
-              )
-            ] })
+            /* @__PURE__ */ jsx("div", { className: "space-y-2", children: /* @__PURE__ */ jsx(
+              "label",
+              {
+                htmlFor: "text",
+                className: "block text-sm font-medium text-gray-900",
+                children: "Текст новости"
+              }
+            ) })
           ] }),
           !isNews && /* @__PURE__ */ jsxs(Fragment, { children: [
             /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
@@ -304,41 +279,11 @@ const ChangeEquipmentPopup = () => {
                 }
               ),
               /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: descriptionEditorRef,
-                      value: formData.description,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "description")
-                    }
-                  )
-                }
-              ),
-              /* @__PURE__ */ jsx(
                 "label",
                 {
                   htmlFor: "extra_description",
                   className: "block text-sm text-gray-900 pt-4",
                   children: "Полное описание товара"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: extraDescriptionEditorRef,
-                      value: formData.extra_description,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "extra_description")
-                    }
-                  )
                 }
               )
             ] }),
@@ -355,31 +300,14 @@ const ChangeEquipmentPopup = () => {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
-              /* @__PURE__ */ jsx(
-                "label",
-                {
-                  htmlFor: "message",
-                  className: "block text-sm text-gray-900",
-                  children: "Текст баннера"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: headerEditorRef,
-                      value: formData.header,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "header")
-                    }
-                  )
-                }
-              )
-            ] })
+            /* @__PURE__ */ jsx("div", { className: "space-y-2", children: /* @__PURE__ */ jsx(
+              "label",
+              {
+                htmlFor: "message",
+                className: "block text-sm text-gray-900",
+                children: "Текст баннера"
+              }
+            ) })
           ] }),
           !isSolutions && !isNews && /* @__PURE__ */ jsxs(Fragment, { children: [
             /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [

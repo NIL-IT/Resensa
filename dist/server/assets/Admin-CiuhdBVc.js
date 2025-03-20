@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useState, useRef, useEffect, useCallback, Suspense, lazy } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { F as Footer } from "./Footer-COUjKbhr.js";
 import { v as changeStatusOrderPopup, a as changeItemId, d as changeAddOrderPopup, T as Title, g as getAllOrders, w as deleteOrders, x as changeIsAdmin, B as Button, f as changeEquipmentPopup, y as deleteEquipment, n as getAllEquipment, z as deleteSolutions, p as getAllSolutions, j as changeShowAddNewItemPopup, A as importOrdersExcel, C as getBanner, D as updateBanner, E as deleteNews, l as getAllNews, F as getCompany, G as updateCompany, H as updateHomeSeo, I as updateContactsSeo, J as updateEquipmentSeo, K as updateSolutionSeo, L as exportOrdersExcel } from "../entry-server.js";
@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { S as SearchInput } from "./SearchInput-D_mXnIgV.js";
 import Cookies from "js-cookie";
 import { I as Input } from "./Input-Fzfexiw9.js";
-import { c as config } from "./data-C21Hc6VP.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
@@ -824,7 +823,6 @@ function AdminNews() {
     )) }) })
   ] });
 }
-const JoditEditor = lazy(() => import("jodit-react"));
 function ChangeAbout({ title }) {
   const dispatch = useDispatch();
   const { company } = useSelector(({ user }) => user);
@@ -837,8 +835,8 @@ function ChangeAbout({ title }) {
     about_hidden_seo_text: (company == null ? void 0 : company.about_hidden_seo_text) || "",
     about_page_keywords: (company == null ? void 0 : company.about_page_keywords) || ""
   });
-  const bannerEditorRef = useRef(null);
-  const aboutEditorRef = useRef(null);
+  useRef(null);
+  useRef(null);
   const formRef = useRef(null);
   useEffect(() => {
     dispatch(getCompany());
@@ -864,7 +862,7 @@ function ChangeAbout({ title }) {
     }
     return () => clearTimeout(timer);
   }, [showSuccess]);
-  const handleEditorChange = useCallback((content, name) => {
+  useCallback((content, name) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: content
@@ -902,22 +900,7 @@ function ChangeAbout({ title }) {
                   children: "Текст баннера"
                 }
               ),
-              /* @__PURE__ */ jsx("div", { className: "editor-container", children: /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: bannerEditorRef,
-                      value: formData.about_main_screen,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "about_main_screen"),
-                      tabIndex: 1
-                    }
-                  )
-                }
-              ) })
+              /* @__PURE__ */ jsx("div", { className: "editor-container" })
             ] }),
             /* @__PURE__ */ jsxs("div", { className: "space-y-2 w-full mt-10", children: [
               /* @__PURE__ */ jsx(
@@ -928,22 +911,7 @@ function ChangeAbout({ title }) {
                   children: "Текст страницы о компании"
                 }
               ),
-              /* @__PURE__ */ jsx("div", { className: "editor-container", children: /* @__PURE__ */ jsx(
-                Suspense,
-                {
-                  fallback: /* @__PURE__ */ jsx("div", { className: "border border-gray-300 h-[150px] w-full" }),
-                  children: /* @__PURE__ */ jsx(
-                    JoditEditor,
-                    {
-                      ref: aboutEditorRef,
-                      value: formData.about_unique_screen,
-                      config,
-                      onBlur: (content) => handleEditorChange(content, "about_unique_screen"),
-                      tabIndex: 2
-                    }
-                  )
-                }
-              ) })
+              /* @__PURE__ */ jsx("div", { className: "editor-container" })
             ] })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "border-t border-gray-200 pt-4 space-y-[18px]", children: [

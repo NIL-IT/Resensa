@@ -5,10 +5,9 @@ import { r as cn, B as Button, c as changeShowPopup, T as Title, t as useLatinFo
 import { useDispatch } from "react-redux";
 import { A as Advantages } from "./Advantages-CW1EK6O8.js";
 import { I as ItemsList } from "./ItemsList-B8wJ9N9J.js";
-import { s as slidesMain } from "./data-C21Hc6VP.js";
+import { S as SliderPage, s as slidesMain, P as Partners } from "./SliderPage-Bpkeb_E1.js";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
-import { S as SliderPage, P as Partners } from "./SliderPage-DdLIMf5t.js";
 import { O as Objects } from "./Objects-J6-LRsMW.js";
 import { F as Footer } from "./Footer-COUjKbhr.js";
 import { S as SeoBlock } from "./SeoBlock-CuK8FUQ-.js";
