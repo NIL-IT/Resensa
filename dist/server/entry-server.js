@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import pkg from "react-helmet-async";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Link, useNavigate, Routes, Route } from "react-router-dom";
+import { Link, useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
@@ -1281,23 +1281,19 @@ const ROUTES = {
   HOME: "/",
   EQUIPMENT: "/equipment",
   SOLUTIONS: "/solutions",
-  ABOUT: "/about",
-  CONTACT: "/contact",
-  ADMIN: "/admin/:id",
   EQUIPMENT_PRODUCT: "/equipment/:id",
   SOLUTIONS_PRODUCT: "/solutions/:id",
-  NEWS: "/news/:name",
   AUTH: "/auth"
 };
 const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
 const NotFound = lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
 const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
-const Admin = lazy(() => import("./assets/Admin-iJi7KGb3.js"));
+lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
+lazy(() => import("./assets/Admin-iJi7KGb3.js"));
 const ProductItem = lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
-const Contacts = lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
-const NewsPage = lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
+lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
+lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
 function AppRoutes({
   company,
   equipment,
@@ -1396,10 +1392,6 @@ function AppRoutes({
         element: /* @__PURE__ */ jsx(ProductItem, { list: solutions })
       }
     ),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.ABOUT, element: /* @__PURE__ */ jsx(AboutCompany, { company }) }),
-    isAdmin && /* @__PURE__ */ jsx(Route, { path: ROUTES.ADMIN, element: /* @__PURE__ */ jsx(Admin, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.CONTACT, element: /* @__PURE__ */ jsx(Contacts, { company }) }),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.NEWS, element: /* @__PURE__ */ jsx(NewsPage, { news }) }),
     /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
   ] });
 }
@@ -1798,13 +1790,8 @@ const ChangeEquipmentPopup = lazy(
 const AddNewItem = lazy(() => import("./assets/AddNewItem-VNXoEPTs.js"));
 const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
 function App() {
-  const [path, setPathname] = useState("");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
-  }, []);
-  const isLoginForm = path === "/auth" || path === "/auth/";
+  const { pathname } = useLocation();
+  const isLoginForm = pathname === "/auth" || pathname === "/auth/";
   const {
     isPopup,
     status,
