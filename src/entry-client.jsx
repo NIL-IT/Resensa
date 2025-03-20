@@ -12,9 +12,7 @@ hydrateRoot(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
+        <App />
       </BrowserRouter>
     </Provider>
   </StrictMode>

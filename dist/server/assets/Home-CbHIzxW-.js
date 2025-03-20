@@ -1,6 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import "clsx";
 import { r as cn, B as Button, c as changeShowPopup, T as Title, t as useLatinFormat, a as changeItemId, R as ROUTES } from "../entry-server.js";
 import { useDispatch } from "react-redux";
@@ -17,6 +16,7 @@ import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
 import "axios";
+import "react-helmet-async";
 import "tailwind-merge";
 import "lucide-react";
 import "@react-three/fiber";
@@ -315,14 +315,6 @@ function Home({ equipment, solutions, banner, news, company }) {
         url: "https://new.recensa.ru/"
       }
     ),
-    /* @__PURE__ */ jsxs(Helmet, { children: [
-      /* @__PURE__ */ jsx("title", { children: company.main_page_title }),
-      /* @__PURE__ */ jsx("meta", { name: "description", content: company.main_page_description }),
-      /* @__PURE__ */ jsx("meta", { property: "og:title", content: company.main_page_title }),
-      /* @__PURE__ */ jsx("meta", { property: "og:url", content: "https://new.recensa.ru/" }),
-      /* @__PURE__ */ jsx("meta", { name: "keywords", content: company.main_page_keywords }),
-      /* @__PURE__ */ jsx("link", { rel: "canonical", href: "https://new.recensa.ru/" })
-    ] }),
     /* @__PURE__ */ jsxs("main", { children: [
       /* @__PURE__ */ jsx(Banner, { banner }),
       /* @__PURE__ */ jsx(Advantages, {}),

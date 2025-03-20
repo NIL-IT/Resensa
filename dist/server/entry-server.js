@@ -1281,23 +1281,17 @@ const ROUTES = {
   HOME: "/",
   EQUIPMENT: "/equipment",
   SOLUTIONS: "/solutions",
-  ABOUT: "/about",
-  CONTACT: "/contact",
-  ADMIN: "/admin/:id",
-  EQUIPMENT_PRODUCT: "/equipment/:id",
-  SOLUTIONS_PRODUCT: "/solutions/:id",
-  NEWS: "/news/:name",
   AUTH: "/auth"
 };
-const Home = lazy(() => import("./assets/Home-DlfAxSuz.js"));
-const NotFound = lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
-const Equipment = lazy(() => import("./assets/Equipment-DOZTefee.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-BJXrudqB.js"));
-const Admin = lazy(() => import("./assets/Admin-bymlltxo.js"));
-const ProductItem = lazy(() => import("./assets/ProductItem-DR7vFTW0.js"));
+const Home = lazy(() => import("./assets/Home-CbHIzxW-.js"));
+lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
+lazy(() => import("./assets/Equipment-DOZTefee.js"));
+lazy(() => import("./assets/AboutCompany-BJXrudqB.js"));
+lazy(() => import("./assets/Admin-bymlltxo.js"));
+lazy(() => import("./assets/ProductItem-DR7vFTW0.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-Hic2uBcY.js"));
-const Contacts = lazy(() => import("./assets/Contacts-Btq5to1b.js"));
-const NewsPage = lazy(() => import("./assets/NewsPage-DDCnI1co.js"));
+lazy(() => import("./assets/Contacts-Btq5to1b.js"));
+lazy(() => import("./assets/NewsPage-DDCnI1co.js"));
 function AppRoutes({
   company,
   equipment,
@@ -1323,84 +1317,7 @@ function AppRoutes({
           }
         )
       }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.EQUIPMENT,
-        element: /* @__PURE__ */ jsx(
-          Equipment,
-          {
-            company: {
-              hidden_seo_text: company.equipment_hidden_seo_text,
-              page_title: company.equipment_page_title,
-              page_description: company.equipment_page_description,
-              page_keywords: company.equipment_page_keywords,
-              url: "https://new.recensa.ru/equipment"
-            },
-            title: "Оборудование",
-            text: `Recensa предлагает широкий ассортимент вентиляционного оборудования 
-              для коммерческих, промышленных и жилых объектов. В линейке представлены 
-              установки общего и специализированного назначения, системы вентиляции, 
-              осушения, кондиционирования и автоматизации. Каждая серия разработана с 
-              учетом энергоэффективности, надежности и удобства эксплуатации. 
-
-`,
-            data: equipment,
-            bannerImg: "/img/newbanner.png",
-            placeholderSrc: "/img/newbanner_compress.png"
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.SOLUTIONS,
-        element: /* @__PURE__ */ jsx(
-          Equipment,
-          {
-            company: {
-              hidden_seo_text: company.solution_hidden_seo_text,
-              page_title: company.solution_page_title,
-              page_description: company.solution_page_description,
-              page_keywords: company.solution_page_keywords,
-              url: "https://new.recensa.ru/solutions"
-            },
-            title: "Решения",
-            text: `Recensa разрабатывает и поставляет климатические системы для объектов
-               с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 
-               климат в любых условиях. Мы предлагаем комплексные системы для
-               вентиляции, осушения, охлаждения и 
-               автоматизации, адаптированное под 
-               конкретные задачи бизнеса и инфраструктуры.
-`,
-            data: solutions,
-            bannerImg: "/img/newsol_banner.png",
-            placeholderSrc: "/img/newsol_banner_compress.png"
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.EQUIPMENT_PRODUCT,
-        element: /* @__PURE__ */ jsx(ProductItem, { list: equipment })
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.SOLUTIONS_PRODUCT,
-        element: /* @__PURE__ */ jsx(ProductItem, { list: solutions })
-      }
-    ),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.ABOUT, element: /* @__PURE__ */ jsx(AboutCompany, { company }) }),
-    isAdmin && /* @__PURE__ */ jsx(Route, { path: ROUTES.ADMIN, element: /* @__PURE__ */ jsx(Admin, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.CONTACT, element: /* @__PURE__ */ jsx(Contacts, { company }) }),
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.NEWS, element: /* @__PURE__ */ jsx(NewsPage, { news }) }),
-    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
+    )
   ] });
 }
 function Widget() {
@@ -1883,7 +1800,7 @@ const { HelmetProvider } = pkg;
 function render(url2) {
   const helmetContext = {};
   const html = renderToString(
-    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(Provider, { store, children: /* @__PURE__ */ jsx(StaticRouter, { location: url2, children: /* @__PURE__ */ jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsx(App, {}) }) }) }) })
+    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(Provider, { store, children: /* @__PURE__ */ jsx(StaticRouter, { location: url2, children: /* @__PURE__ */ jsx(App, {}) }) }) })
   );
   return {
     html,

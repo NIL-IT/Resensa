@@ -16,9 +16,7 @@ export function render(url) {
     <StrictMode>
       <Provider store={store}>
         <StaticRouter location={url}>
-          <HelmetProvider context={helmetContext}>
-            <App />
-          </HelmetProvider>
+          <App />
         </StaticRouter>
       </Provider>
     </StrictMode>
