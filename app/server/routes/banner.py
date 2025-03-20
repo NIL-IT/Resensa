@@ -19,9 +19,9 @@ async def get_banner(banner_repo: BannerRepository = Depends(get_banner_reposito
 @router.put("/", status_code=status.HTTP_200_OK)
 async def update_banner(
     first_value_string: Optional[str] = Form(None),
-    first_value: Optional[int] = Form(None),
+    first_value: Optional[str] = Form(None),
     second_value_string: Optional[str] = Form(None),
-    second_value: Optional[int] = Form(None),
+    second_value: Optional[str] = Form(None),
     sub_header: Optional[str] = Form(None),
     banner_repo: BannerRepository = Depends(get_banner_repository),
 ):

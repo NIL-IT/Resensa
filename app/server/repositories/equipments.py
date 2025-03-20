@@ -41,11 +41,14 @@ class EquipmentsRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error fetching equipments by id")
 
-    async def update_equipment(self, equipment_id: int, name: str, description: str, min_param: int, max_param: int, image_banner: str, image_card: str, sub_header: str, header: str):
+    async def update_equipment(self, equipment_id: int, name: str, description: str, extra_description: str, min_param: int, max_param: int, image_banner: str, image_card: str, sub_header: str,
+                               header: str, image_banner_alt: str, image_card_alt: str, page_description: str, page_title: str, page_keywords: str, hidden_seo_text: str):
         stmt = (
             update(Equipment)
             .where(Equipment.id == equipment_id)
-            .values(name=name, description=description, min_param=min_param, max_param=max_param, image_banner= image_banner, image_card=image_card, sub_header=sub_header, header=header)
+            .values(name=name, description=description, extra_description=extra_description, min_param=min_param, max_param=max_param, image_banner= image_banner,
+                    image_card=image_card, sub_header=sub_header, header=header, image_banner_alt=image_banner_alt, image_card_alt=image_card_alt,
+                    page_description=page_description, page_title=page_title, page_keywords=page_keywords, hidden_seo_text=hidden_seo_text)
             .execution_options(synchronize_session="fetch")
         )
         result = await self.db.execute(stmt)

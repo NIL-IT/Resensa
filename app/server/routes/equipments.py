@@ -1,23 +1,32 @@
+import logging
 import os
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Form, UploadFile, File, HTTPException
 from fastapi.params import Query
 from starlette import status
+from transliterate import translit
+from unidecode import unidecode
 
 from ..database.models import Equipment
 from ..repositories.equipments import EquipmentsRepository, get_equipment_repository
 from ..utils.save_image import save_upload_file, read_image
 
 router = APIRouter()
-BASE_URL = "https://nilit1.ru"  # Замените на ваш реальный адрес
-
+BASE_URL = "https://new.recensa.ru"  # Замените на ваш реальный адрес
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 async def create_equipments(name: str = Form(...),
     description: str = Form(...),
+    extra_description: str = Form(...),
     min_param: int = Form(...),
     max_param: int = Form(...),
+    image_banner_alt: str = Form(...),
+    image_card_alt: str = Form(...),
+    page_description: str = Form(...),
+    page_title: str = Form(...),
+    page_keywords: str = Form(...),
+    hidden_seo_text: str = Form(...),
     image_banner: UploadFile = File(...),  image_card: UploadFile = File(...), sub_header: str = Form(...), header: str = Form(...),
     equipment_repo: EquipmentsRepository = Depends(get_equipment_repository)):
 
@@ -26,12 +35,12 @@ async def create_equipments(name: str = Form(...),
     os.makedirs(save_dir, exist_ok=True)  # Создать папку, если её нет
 
     # Сохраняем файл
-    image_banner_path = os.path.join(save_dir, image_banner.filename)
-    image_banner_relative_path = f"files/{image_banner.filename}"  # Относительный путь для базы данных
+    image_banner_path = os.path.join(save_dir, image_banner.filename.replace(" ", "_"))
+    image_banner_relative_path = f"files/{image_banner.filename.replace(" ", "_")}"  # Относительный путь для базы данных
     await save_upload_file(image_banner, image_banner_path)
 
-    image_card_path = os.path.join(save_dir, image_card.filename)
-    image_card_relative_path = f"files/{image_card.filename}"  # Относительный путь для базы данных
+    image_card_path = os.path.join(save_dir, image_card.filename.replace(" ", "_"))
+    image_card_relative_path = f"files/{image_card.filename.replace(" ", "_")}"  # Относительный путь для базы данных
     await save_upload_file(image_card, image_card_path)
 
     equipment_model = Equipment(
@@ -41,8 +50,15 @@ async def create_equipments(name: str = Form(...),
         min_param=min_param,
         max_param=max_param,
         description=description,
+        extra_description=extra_description,
         sub_header=sub_header,
-        header=header
+        header=header,
+        image_banner_alt=image_banner_alt,
+        image_card_alt=image_card_alt,
+        page_description=page_description,
+        page_title=page_title,
+        page_keywords=page_keywords,
+        hidden_seo_text=hidden_seo_text
     )
 
     try:
@@ -63,10 +79,17 @@ async def get_required_equipment(param: int = Query(..., description="Parameter 
             "min_param": equipment.min_param,
             "max_param": equipment.max_param,
             "description": equipment.description,
+            "extra_description": equipment.extra_description,
             "image_banner": f"{BASE_URL}/{equipment.image_banner}",
             "image_card": f"{BASE_URL}/{equipment.image_card}",
             "sub_header": equipment.sub_header,
-            "header": equipment.header
+            "header": equipment.header,
+            "image_banner_alt": equipment.image_banner_alt,
+            "image_card_alt": equipment.image_card_alt,
+            "page_description": equipment.page_description,
+            "page_title": equipment.page_title,
+            "page_keywords": equipment.page_keywords,
+            "hidden_seo_text": equipment.hidden_seo_text,
             }
         ]
 
@@ -85,10 +108,18 @@ async def get_all_equipments(equipment_repo: EquipmentsRepository = Depends(get_
             "min_param": equipment.min_param,
             "max_param": equipment.max_param,
             "description": equipment.description,
+            "extra_description": equipment.extra_description,
             "image_banner": f"{BASE_URL}/{equipment.image_banner}",
             "image_card": f"{BASE_URL}/{equipment.image_card}",
             "sub_header": equipment.sub_header,
-            "header": equipment.header
+            "header": equipment.header,
+            "image_banner_alt": equipment.image_banner_alt,
+            "image_card_alt": equipment.image_card_alt,
+            "page_description": equipment.page_description,
+            "page_title": equipment.page_title,
+            "page_keywords": equipment.page_keywords,
+            "hidden_seo_text": equipment.hidden_seo_text,
+
             }
             for equipment in equipments
         ]
@@ -109,22 +140,35 @@ async def get_equipment_by_id(
             "min_param": equipment.min_param,
             "max_param": equipment.max_param,
             "description": equipment.description,
+            "extra_description": equipment.extra_description,
             "image_banner": f"{BASE_URL}/{equipment.image_banner}",
             "image_card": f"{BASE_URL}/{equipment.image_card}",
             "sub_header": equipment.sub_header,
-            "header": equipment.header
+            "header": equipment.header,
+            "image_banner_alt": equipment.image_banner_alt,
+            "image_card_alt": equipment.image_card_alt,
+            "page_description": equipment.page_description,
+            "page_title": equipment.page_title,
+            "page_keywords": equipment.page_keywords,
+            "hidden_seo_text": equipment.hidden_seo_text,
         }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
-
 
 @router.put("/{equipment_id}", status_code=status.HTTP_200_OK)
 async def update_equipment(
     equipment_id: int,
     name: Optional[str] = Form(None),
     description: Optional[str] = Form(None),
+    extra_description: Optional[str] = Form(None),
     min_param: Optional[int] = Form(None),
     max_param: Optional[int] = Form(None),
+    image_banner_alt: Optional[str] = Form(None),
+    image_card_alt: Optional[str] = Form(None),
+    page_description: Optional[str] = Form(None),
+    page_title: Optional[str] = Form(None),
+    page_keywords: Optional[str] = Form(None),
+    hidden_seo_text: Optional[str] = Form(None),
     image_banner: UploadFile = File(None),  image_card: UploadFile = File(None), sub_header: Optional[str] = Form(None), header: str = Form(None),
     equipment_repo: EquipmentsRepository = Depends(get_equipment_repository),
 ):
@@ -140,23 +184,30 @@ async def update_equipment(
             save_dir = os.path.join(dirname, "../files")  # Папка `files` в проекте
             os.makedirs(save_dir, exist_ok=True)  # Создать папку, если её нет
             if image_banner:
-                file_path = os.path.join(save_dir, image_banner.filename)
-                updated_image_banner = f"files/{image_banner.filename}"
+                file_path = os.path.join(save_dir, image_banner.filename.replace(" ", "_"))
+                updated_image_banner = f"files/{image_banner.filename.replace(" ", "_")}"
                 await save_upload_file(image_banner, file_path)
             if image_card:
-                file_path = os.path.join(save_dir, image_card.filename)
-                updated_image_card = f"files/{image_card.filename}"
+                file_path = os.path.join(save_dir, image_card.filename.replace(" ", "_"))
+                updated_image_card = f"files/{image_card.filename.replace(" ", "_")}"
                 await save_upload_file(image_card, file_path)
 
         updated_equipment = await equipment_repo.update_equipment(
             equipment_id,
             name or equipment.name,
             description or equipment.description,
+            extra_description or equipment.extra_description,
             min_param or equipment.min_param,
             max_param or equipment.max_param,
             updated_image_banner, updated_image_card,
             sub_header or equipment.sub_header,
             header or equipment.header,
+            image_banner_alt or equipment.image_banner_alt,
+            image_card_alt or equipment.image_card_alt,
+            page_description or equipment.page_description,
+            page_title or equipment.page_title,
+            page_keywords or equipment.page_keywords,
+            hidden_seo_text or equipment.hidden_seo_text,
         )
         return {
             "id": equipment.id,
@@ -164,10 +215,17 @@ async def update_equipment(
             "min_param": updated_equipment.min_param,
             "max_param": updated_equipment.max_param,
             "description": updated_equipment.description,
+            "extra_description": updated_equipment.extra_description,
             "image_banner": f"{BASE_URL}/{updated_equipment.image_banner}",
             "image_card": f"{BASE_URL}/{updated_equipment.image_card}",
             "sub_header": updated_equipment.sub_header,
-            "header": updated_equipment.header
+            "header": updated_equipment.header,
+            "image_banner_alt": updated_equipment.image_banner_alt,
+            "image_card_alt": updated_equipment.image_card_alt,
+            "page_description": updated_equipment.page_description,
+            "page_title": updated_equipment.page_title,
+            "page_keywords": updated_equipment.page_keywords,
+            "hidden_seo_text": updated_equipment.hidden_seo_text,
         }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

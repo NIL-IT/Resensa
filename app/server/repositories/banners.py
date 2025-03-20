@@ -33,7 +33,7 @@ class BannerRepository:
         except Exception as e:
             raise HTTPException(status_code=500, detail="Error fetching banner")
 
-    async def update_banner(self,  first_value_string: str, first_value: int, second_value_string: str, second_value: int, sub_header: str):
+    async def update_banner(self,  first_value_string: str, first_value: str, second_value_string: str, second_value: str, sub_header: str):
         stmt = (
             update(Banner)
             .where(Banner.id == 1)

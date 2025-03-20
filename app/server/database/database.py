@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
 
-from .models import News, Equipment, Solutions, Order, Admin, Banner
+from .models import News, Equipment, Solutions, Order, Admin, Banner, Company
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -40,3 +40,5 @@ def create_tables(conn):
         Admin.__table__.create(conn)
     if not inspector.has_table('banner'):
         Banner.__table__.create(conn)
+    if not inspector.has_table('company'):
+        Company.__table__.create(conn)
