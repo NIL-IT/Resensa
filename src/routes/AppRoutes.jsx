@@ -21,7 +21,7 @@ export default function AppRoutes({
   const { isAdmin } = useSelector(({ user }) => user);
   return (
     <Routes>
-      {/* <Route path={ROUTES.AUTH} element={<LoginForm />} />
+      <Route path={ROUTES.AUTH} element={<LoginForm />} />
       <Route
         path={ROUTES.HOME}
         element={
@@ -33,8 +33,8 @@ export default function AppRoutes({
             company={company}
           />
         }
-      /> */}
-      {/* <Route
+      />
+      <Route
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
@@ -83,20 +83,20 @@ export default function AppRoutes({
             placeholderSrc={"/img/newsol_banner_compress.png"}
           />
         }
-      /> */}
-      {/* <Route
+      />
+      <Route
         path={ROUTES.EQUIPMENT_PRODUCT}
         element={<ProductItem list={equipment} />}
       />
       <Route
         path={ROUTES.SOLUTIONS_PRODUCT}
         element={<ProductItem list={solutions} />}
-      /> */}
-      {/* <Route path={ROUTES.ABOUT} element={<AboutCompany company={company} />} />
+      />
+      <Route path={ROUTES.ABOUT} element={<AboutCompany company={company} />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
       <Route path={ROUTES.CONTACT} element={<Contacts company={company} />} />
-      <Route path={ROUTES.NEWS} element={<NewsPage news={news} />} /> */}
-      {/* <Route path="*" element={<NotFound />} /> */}
+      <Route path={ROUTES.NEWS} element={<NewsPage news={news} />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

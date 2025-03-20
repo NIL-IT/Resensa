@@ -94,7 +94,7 @@ function App() {
   }, [dispatch, equipment.length, news.length, solutions.length]);
   return !loading ? (
     <div className="relative">
-      {!isLoginForm && <Widget />}
+      {/* {!isLoginForm && <Widget />}
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
         {!isLoginForm && <Header />}
         <Suspense
@@ -153,7 +153,7 @@ function App() {
         <Suspense fallback={"...Загрузка"}>
           <EquipmentType />
         </Suspense>
-      )}
+      )} */}
     </div>
   ) : (
     <div className="fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center">
