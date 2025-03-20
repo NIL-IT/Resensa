@@ -31,14 +31,12 @@ const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
-  // const [path, setPathname] = useState("");
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     setPathname(window.location.pathname);
-  //   }
-  // }, []);
-  const { pathname } = useLocation();
+  const [pathname, setPathname] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
   const {
     isPopup,

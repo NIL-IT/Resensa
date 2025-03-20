@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, lazy, useRef, Suspense, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router";
+import { StaticRouter } from "react-router-dom/server.mjs";
 import { useDispatch, useSelector, Provider } from "react-redux";
 import { createAsyncThunk, createSlice, configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import pkg from "react-helmet-async";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Link, useNavigate, Routes, Route, useLocation } from "react-router-dom";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
@@ -1289,15 +1289,15 @@ const ROUTES = {
   NEWS: "/news/:name",
   AUTH: "/auth"
 };
-const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
-const NotFound = lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
-const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
-const Admin = lazy(() => import("./assets/Admin-iJi7KGb3.js"));
-const ProductItem = lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
-const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
-const Contacts = lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
-const NewsPage = lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
+const Home = lazy(() => import("./assets/Home-DlfAxSuz.js"));
+const NotFound = lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
+const Equipment = lazy(() => import("./assets/Equipment-DOZTefee.js"));
+const AboutCompany = lazy(() => import("./assets/AboutCompany-BJXrudqB.js"));
+const Admin = lazy(() => import("./assets/Admin-bymlltxo.js"));
+const ProductItem = lazy(() => import("./assets/ProductItem-DR7vFTW0.js"));
+const LoginForm = lazy(() => import("./assets/LoginForm-Hic2uBcY.js"));
+const Contacts = lazy(() => import("./assets/Contacts-Btq5to1b.js"));
+const NewsPage = lazy(() => import("./assets/NewsPage-DDCnI1co.js"));
 function AppRoutes({
   company,
   equipment,
@@ -1787,18 +1787,23 @@ function EquipmentType() {
     )
   ] }) });
 }
-const Popup = lazy(() => import("./assets/Popup-DcmDSHpX.js"));
-const StatusPopup = lazy(() => import("./assets/StatusPopup-CDe1lx6d.js"));
+const Popup = lazy(() => import("./assets/Popup-x_DfzfTT.js"));
+const StatusPopup = lazy(() => import("./assets/StatusPopup-DvrIQe62.js"));
 const AddOrderPopup = lazy(
-  () => import("./assets/AddOrderPopup-Caq0LXRT.js")
+  () => import("./assets/AddOrderPopup-BlGZA30i.js")
 );
 const ChangeEquipmentPopup = lazy(
-  () => import("./assets/ChangeEquipmentPopup-CXdKs-mE.js")
+  () => import("./assets/ChangeEquipmentPopup-Bw54RW1B.js")
 );
-const AddNewItem = lazy(() => import("./assets/AddNewItem-VNXoEPTs.js"));
-const SearchPopup = lazy(() => import("./assets/SearchPopup-hDOkOiAW.js"));
+const AddNewItem = lazy(() => import("./assets/AddNewItem--WElxn-u.js"));
+const SearchPopup = lazy(() => import("./assets/SearchPopup-OEXq5UjI.js"));
 function App() {
-  const { pathname } = useLocation();
+  const [pathname, setPathname] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
   const {
     isPopup,
