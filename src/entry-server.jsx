@@ -27,12 +27,5 @@ export function render(url) {
 
   return {
     html,
-    head: helmetContext.helmet
-      ? `
-      ${helmetContext.helmet.title.toString()}
-      ${helmetContext.helmet.meta.toString()}
-      ${helmetContext.helmet.link.toString()}
-    `
-      : "",
   };
 }

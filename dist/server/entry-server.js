@@ -831,17 +831,11 @@ lazy(() => import("./assets/AddNewItem-bUF4f5S4.js"));
 lazy(() => import("./assets/SearchPopup-WvAiRzyL.js"));
 const { HelmetProvider } = pkg;
 function render(url2) {
-  const helmetContext = {};
   const html = renderToString(
     /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx("div", { children: "HI" }) })
   );
   return {
-    html,
-    head: helmetContext.helmet ? `
-      ${helmetContext.helmet.title.toString()}
-      ${helmetContext.helmet.meta.toString()}
-      ${helmetContext.helmet.link.toString()}
-    ` : ""
+    html
   };
 }
 export {
