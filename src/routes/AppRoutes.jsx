@@ -84,19 +84,19 @@ export default function AppRoutes({
           />
         }
       />
-      <Route
+      {/* <Route
         path={ROUTES.EQUIPMENT_PRODUCT}
         element={<ProductItem list={equipment} />}
       />
       <Route
         path={ROUTES.SOLUTIONS_PRODUCT}
         element={<ProductItem list={solutions} />}
-      />
+      /> */}
       {/* <Route path={ROUTES.ABOUT} element={<AboutCompany company={company} />} />
       {isAdmin && <Route path={ROUTES.ADMIN} element={<Admin />} />}
       <Route path={ROUTES.CONTACT} element={<Contacts company={company} />} />
       <Route path={ROUTES.NEWS} element={<NewsPage news={news} />} /> */}
-      <Route path="*" element={<NotFound />} />
+      {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   );
 }

@@ -1281,16 +1281,14 @@ const ROUTES = {
   HOME: "/",
   EQUIPMENT: "/equipment",
   SOLUTIONS: "/solutions",
-  EQUIPMENT_PRODUCT: "/equipment/:id",
-  SOLUTIONS_PRODUCT: "/solutions/:id",
   AUTH: "/auth"
 };
 const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
-const NotFound = lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
+lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
 const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
 lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
 lazy(() => import("./assets/Admin-iJi7KGb3.js"));
-const ProductItem = lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
+lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
 lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
 lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
@@ -1377,22 +1375,7 @@ function AppRoutes({
           }
         )
       }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.EQUIPMENT_PRODUCT,
-        element: /* @__PURE__ */ jsx(ProductItem, { list: equipment })
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.SOLUTIONS_PRODUCT,
-        element: /* @__PURE__ */ jsx(ProductItem, { list: solutions })
-      }
-    ),
-    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
+    )
   ] });
 }
 function Widget() {
