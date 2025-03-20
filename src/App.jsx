@@ -1,4 +1,4 @@
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/shared/Header";
 import AppRoutes from "./routes/AppRoutes";
 import Widget from "./components/ui/Widget";
@@ -31,48 +31,42 @@ const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
-  const [pathname, setPathname] = useState("");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
-  }, []);
+  // const [path, setPathname] = useState("");
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setPathname(window.location.pathname);
+  //   }
+  // }, []);
+  const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
-  // const {
-  //   isPopup,
-  //   status,
-  //   addOrderPopup,
-  //   equipmentPopup,
-  //   addNewItemPopup,
-  //   searchPopup,
-  //   statusOrderPopup,
-  //   equipment,
-  //   solutions,
-  //   banner,
-  //   news,
-  //   orders,
-  //   calcPopup,
-  //   company,
-  // } = useSelector(({ user }) => user);
-  // const dispatch = useDispatch();
-  const isActivePopup = false;
-  // isPopup ||
-  // status ||
-  // addOrderPopup ||
-  // equipmentPopup ||
-  // addNewItemPopup ||
-  // searchPopup ||
-  // statusOrderPopup ||
-  // calcPopup;
-  const [equipment, setEquipment] = useState([]);
-  const [solutions, setSolutions] = useState([]);
-  const [banner, setBanner] = useState(null);
-  const [news, setNews] = useState([]);
-  const [company, setCompany] = useState(null);
-  const [orders, setOrders] = useState(null);
-  // Флаги для попапов тоже переместите в локальное состояние
-  const [isPopup, setIsPopup] = useState(false);
-  const [status, setStatus] = useState(false);
+  const {
+    isPopup,
+    status,
+    addOrderPopup,
+    equipmentPopup,
+    addNewItemPopup,
+    searchPopup,
+    statusOrderPopup,
+    equipment,
+    solutions,
+    banner,
+    news,
+    orders,
+    calcPopup,
+    company,
+  } = useSelector(({ user }) => user);
+  const dispatch = useDispatch();
+  const isActivePopup =
+    isPopup ||
+    status ||
+    addOrderPopup ||
+    equipmentPopup ||
+    addNewItemPopup ||
+    searchPopup ||
+    statusOrderPopup ||
+    calcPopup;
+
   const [loading, setLoading] = useState(true);
   const dataFetchedRef = useRef(false);
   useEffect(() => {
@@ -83,11 +77,11 @@ function App() {
       const fetchData = async () => {
         setLoading(true);
         try {
-          // await dispatch(getAllNews());
-          // await dispatch(getAllEquipment());
-          // await dispatch(getAllSolutions());
-          // await dispatch(getBanner());
-          // await dispatch(getCompany());
+          await dispatch(getAllNews());
+          await dispatch(getAllEquipment());
+          await dispatch(getAllSolutions());
+          await dispatch(getBanner());
+          await dispatch(getCompany());
         } catch (error) {
           console.error(error);
         }
@@ -97,12 +91,12 @@ function App() {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [dispatch, equipment.length, news.length, solutions.length]);
   return !loading ? (
     <div className="relative">
-      {/* {!isLoginForm && <Widget />} */}
+      {!isLoginForm && <Widget />}
       <div className={`${isActivePopup && "blur-md bg-gray-200"}`}>
-        {/* {!isLoginForm && <Header />} */}
+        {!isLoginForm && <Header />}
         <Suspense
           fallback={
             <div className="fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ">
@@ -120,7 +114,7 @@ function App() {
           />
         </Suspense>
       </div>
-      {/* {isPopup && (
+      {isPopup && (
         <Suspense fallback={"...Загрузка"}>
           <Popup />
         </Suspense>
@@ -159,7 +153,7 @@ function App() {
         <Suspense fallback={"...Загрузка"}>
           <EquipmentType />
         </Suspense>
-      )} */}
+      )}
     </div>
   ) : (
     <div className="fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center">
