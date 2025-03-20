@@ -1285,7 +1285,7 @@ const ROUTES = {
 };
 const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
 lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
-const Equipment = lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
+lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
 lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
 lazy(() => import("./assets/Admin-iJi7KGb3.js"));
 lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
@@ -1314,64 +1314,6 @@ function AppRoutes({
             banner,
             news,
             company
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.EQUIPMENT,
-        element: /* @__PURE__ */ jsx(
-          Equipment,
-          {
-            company: {
-              hidden_seo_text: company.equipment_hidden_seo_text,
-              page_title: company.equipment_page_title,
-              page_description: company.equipment_page_description,
-              page_keywords: company.equipment_page_keywords,
-              url: "https://new.recensa.ru/equipment"
-            },
-            title: "Оборудование",
-            text: `Recensa предлагает широкий ассортимент вентиляционного оборудования 
-              для коммерческих, промышленных и жилых объектов. В линейке представлены 
-              установки общего и специализированного назначения, системы вентиляции, 
-              осушения, кондиционирования и автоматизации. Каждая серия разработана с 
-              учетом энергоэффективности, надежности и удобства эксплуатации. 
-
-`,
-            data: equipment,
-            bannerImg: "/img/newbanner.png",
-            placeholderSrc: "/img/newbanner_compress.png"
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.SOLUTIONS,
-        element: /* @__PURE__ */ jsx(
-          Equipment,
-          {
-            company: {
-              hidden_seo_text: company.solution_hidden_seo_text,
-              page_title: company.solution_page_title,
-              page_description: company.solution_page_description,
-              page_keywords: company.solution_page_keywords,
-              url: "https://new.recensa.ru/solutions"
-            },
-            title: "Решения",
-            text: `Recensa разрабатывает и поставляет климатические системы для объектов
-               с особыми требованиями. Наши технологии помогают создать комфортный и безопасный 
-               климат в любых условиях. Мы предлагаем комплексные системы для
-               вентиляции, осушения, охлаждения и 
-               автоматизации, адаптированное под 
-               конкретные задачи бизнеса и инфраструктуры.
-`,
-            data: solutions,
-            bannerImg: "/img/newsol_banner.png",
-            placeholderSrc: "/img/newsol_banner_compress.png"
           }
         )
       }

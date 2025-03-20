@@ -34,7 +34,7 @@ export default function AppRoutes({
           />
         }
       />
-      <Route
+      {/* <Route
         path={ROUTES.EQUIPMENT}
         element={
           <Equipment
@@ -83,7 +83,7 @@ export default function AppRoutes({
             placeholderSrc={"/img/newsol_banner_compress.png"}
           />
         }
-      />
+      /> */}
       {/* <Route
         path={ROUTES.EQUIPMENT_PRODUCT}
         element={<ProductItem list={equipment} />}
