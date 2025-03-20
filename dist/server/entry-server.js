@@ -1,13 +1,11 @@
-import { jsx, Fragment } from "react/jsx-runtime";
-import { lazy, useState, useEffect, useRef, Suspense, StrictMode } from "react";
+import { jsx } from "react/jsx-runtime";
+import { lazy, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server.mjs";
 import { createAsyncThunk, createSlice, configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
 import pkg from "react-helmet-async";
 import "clsx";
-import { Routes, Route } from "react-router-dom";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
   // Adjust this based on your API URL
@@ -812,99 +810,30 @@ configureStore({
     user: userSlice$1
   }
 });
-const ROUTES = {
-  HOME: "/",
-  EQUIPMENT: "/equipment",
-  SOLUTIONS: "/solutions"
-};
-lazy(() => import("./assets/Home-CzZ4LI3Z.js"));
-lazy(() => import("./assets/NotFound-M4zAa2HT.js"));
-lazy(() => import("./assets/Equipment-w85VKmAi.js"));
-lazy(() => import("./assets/AboutCompany-BxHReaPU.js"));
-lazy(() => import("./assets/Admin-DR4FIi6E.js"));
-lazy(() => import("./assets/ProductItem-Cz06LTXG.js"));
-lazy(() => import("./assets/LoginForm-DMmxRQT9.js"));
-lazy(() => import("./assets/Contacts-CZAe99pj.js"));
-lazy(() => import("./assets/NewsPage-BPHGhl0p.js"));
-function AppRoutes({
-  company,
-  equipment,
-  solutions,
-  banner,
-  news
-}) {
-  return /* @__PURE__ */ jsx(Routes, { children: /* @__PURE__ */ jsx(
-    Route,
-    {
-      path: ROUTES.HOME,
-      element: /* @__PURE__ */ jsx(Fragment, { children: "HI" })
-    }
-  ) });
-}
-lazy(() => import("./assets/Popup-BHMFzape.js"));
-lazy(() => import("./assets/StatusPopup-BuPsCEIq.js"));
+lazy(() => import("./assets/Home-CxuWUBtp.js"));
+lazy(() => import("./assets/NotFound-BgsE9Uif.js"));
+lazy(() => import("./assets/Equipment-DrRQbmea.js"));
+lazy(() => import("./assets/AboutCompany-sld29VYG.js"));
+lazy(() => import("./assets/Admin-Fmqr9mzv.js"));
+lazy(() => import("./assets/ProductItem-fGmYd_AH.js"));
+lazy(() => import("./assets/LoginForm-BfRsUc_P.js"));
+lazy(() => import("./assets/Contacts-CK7wTRoC.js"));
+lazy(() => import("./assets/NewsPage-CVbCASVv.js"));
+lazy(() => import("./assets/Popup-Cw_pOdq6.js"));
+lazy(() => import("./assets/StatusPopup-DSa_711T.js"));
 lazy(
-  () => import("./assets/AddOrderPopup-Dy3zfIAK.js")
+  () => import("./assets/AddOrderPopup-WRofZoia.js")
 );
 lazy(
-  () => import("./assets/ChangeEquipmentPopup-CaWxyb6S.js")
+  () => import("./assets/ChangeEquipmentPopup-0eD3cVcy.js")
 );
-lazy(() => import("./assets/AddNewItem-Dm7NdE42.js"));
-lazy(() => import("./assets/SearchPopup-ktLZc0gX.js"));
-function App() {
-  const [pathname, setPathname] = useState("");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
-  }, []);
-  const isActivePopup = false;
-  const [equipment, setEquipment] = useState([]);
-  const [solutions, setSolutions] = useState([]);
-  const [banner, setBanner] = useState(null);
-  const [news, setNews] = useState([]);
-  const [company, setCompany] = useState(null);
-  const [orders, setOrders] = useState(null);
-  const [isPopup, setIsPopup] = useState(false);
-  const [status, setStatus] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const dataFetchedRef = useRef(false);
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    if (!equipment.length || !news.length || !solutions.length) {
-      const fetchData = async () => {
-        setLoading(true);
-        setLoading(false);
-      };
-      fetchData();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-  return !loading ? /* @__PURE__ */ jsx("div", { className: "relative", children: /* @__PURE__ */ jsx("div", { className: `${isActivePopup}`, children: /* @__PURE__ */ jsx(
-    Suspense,
-    {
-      fallback: /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0 z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center  ", children: /* @__PURE__ */ jsx("div", { className: "loader" }) }),
-      children: /* @__PURE__ */ jsx(
-        AppRoutes,
-        {
-          equipment,
-          solutions,
-          company,
-          banner,
-          news,
-          orders
-        }
-      )
-    }
-  ) }) }) : /* @__PURE__ */ jsx("div", { className: "fixed top-0 left-0  z-50 bg-white min-w-[100vw] min-h-[100vh] flex-center justify-center", children: /* @__PURE__ */ jsx("div", { className: "loader" }) });
-}
+lazy(() => import("./assets/AddNewItem-bUF4f5S4.js"));
+lazy(() => import("./assets/SearchPopup-WvAiRzyL.js"));
 const { HelmetProvider } = pkg;
 function render(url2) {
   const helmetContext = {};
   const html = renderToString(
-    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(StaticRouter, { location: url2, children: /* @__PURE__ */ jsx(App, {}) }) })
+    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx("div", { children: "HI" }) })
   );
   return {
     html,
@@ -932,7 +861,6 @@ export {
   getSolutionsById as N,
   changeEquipmentId as O,
   authPost as P,
-  ROUTES as R,
   changeItemId as a,
   changeShowStatus as b,
   changeShowPopup as c,

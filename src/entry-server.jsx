@@ -15,11 +15,12 @@ export function render(url) {
   const html = renderToString(
     <StrictMode>
       {/* <Provider store={store}> */}
-      <StaticRouter location={url}>
-        {/* <HelmetProvider context={helmetContext}> */}
-        <App />
-        {/* </HelmetProvider> */}
-      </StaticRouter>
+      {/* <StaticRouter location={url}> */}
+      {/* <HelmetProvider context={helmetContext}> */}
+      <div>HI</div>
+      {/* <App /> */}
+      {/* </HelmetProvider> */}
+      {/* </StaticRouter> */}
       {/* </Provider> */}
     </StrictMode>
   );

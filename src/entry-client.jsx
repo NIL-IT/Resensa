@@ -11,11 +11,14 @@ hydrateRoot(
   document.getElementById("root"),
   <StrictMode>
     {/* <Provider store={store}> */}
-    <BrowserRouter>
-      {/* <HelmetProvider> */}
-      <App />
-      {/* </HelmetProvider> */}
-    </BrowserRouter>
+    {/* <BrowserRouter> */}
+    {/* <HelmetProvider> */}
+    {/* <App /> */}
+
+    <div>HI</div>
+
+    {/* </HelmetProvider> */}
+    {/* </BrowserRouter> */}
     {/* </Provider> */}
   </StrictMode>
 );
