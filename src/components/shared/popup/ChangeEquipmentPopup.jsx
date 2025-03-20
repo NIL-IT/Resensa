@@ -10,7 +10,7 @@ import {
 } from "../../../utils/slice/userSlice";
 import ImageUploader from "../../ui/ImageUploader";
 import { useLocation } from "react-router-dom";
-// const JoditEditor = lazy(() => import("jodit-react"));
+const JoditEditor = lazy(() => import("jodit-react"));
 import { config } from "../../../utils/data";
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
@@ -280,7 +280,7 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст новости
                 </label>
-                {/* <Suspense
+                <Suspense
                   fallback={
                     <div className="border border-gray-300 h-[150px] w-full"></div>
                   }
@@ -291,7 +291,7 @@ const ChangeEquipmentPopup = () => {
                     config={config}
                     onBlur={(content) => handleEditorChange(content, "text")}
                   />
-                </Suspense> */}
+                </Suspense>
               </div>
             </>
           )}
@@ -315,7 +315,7 @@ const ChangeEquipmentPopup = () => {
                 >
                   Описание
                 </label>
-                {/* <Suspense
+                <Suspense
                   fallback={
                     <div className="border border-gray-300 h-[150px] w-full"></div>
                   }
@@ -328,7 +328,7 @@ const ChangeEquipmentPopup = () => {
                       handleEditorChange(content, "description")
                     }
                   />
-                </Suspense> */}
+                </Suspense>
 
                 <label
                   htmlFor="extra_description"
@@ -336,7 +336,7 @@ const ChangeEquipmentPopup = () => {
                 >
                   Полное описание товара
                 </label>
-                {/* <Suspense
+                <Suspense
                   fallback={
                     <div className="border border-gray-300 h-[150px] w-full"></div>
                   }
@@ -349,7 +349,7 @@ const ChangeEquipmentPopup = () => {
                       handleEditorChange(content, "extra_description")
                     }
                   />
-                </Suspense> */}
+                </Suspense>
               </div>
               <div className="space-y-2">
                 <p className="w-full text-sm text-gray-900 pt-4">
@@ -370,7 +370,7 @@ const ChangeEquipmentPopup = () => {
                 >
                   Текст баннера
                 </label>
-                {/* <Suspense
+                <Suspense
                   fallback={
                     <div className="border border-gray-300 h-[150px] w-full"></div>
                   }
@@ -381,7 +381,7 @@ const ChangeEquipmentPopup = () => {
                     config={config}
                     onBlur={(content) => handleEditorChange(content, "header")}
                   />
-                </Suspense> */}
+                </Suspense>
               </div>
             </>
           )}

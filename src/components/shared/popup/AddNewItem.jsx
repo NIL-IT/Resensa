@@ -10,7 +10,7 @@ import {
   getAllEquipment,
   getAllSolutions,
 } from "../../../utils/slice/userSlice";
-// const JoditEditor = lazy(() => import("jodit-react"));
+const JoditEditor = lazy(() => import("jodit-react"));
 // Import the config from data
 
 import ImageUploader from "../../ui/ImageUploader";
@@ -324,7 +324,7 @@ const AddNewItem = () => {
           >
             {!isNews ? "Описание" : "Текст новости"}
           </label>
-          {/* {isNews ? (
+          {isNews ? (
             <Suspense
               fallback={
                 <div className="border border-gray-300 h-[150px] w-full"></div>
@@ -352,7 +352,7 @@ const AddNewItem = () => {
                 }
               />
             </Suspense>
-          )} */}
+          )}
           {!isNews && (
             <>
               <div className="space-y-2 pt-4">
@@ -362,7 +362,7 @@ const AddNewItem = () => {
                 >
                   Полное описание товара
                 </label>
-                {/* <Suspense
+                <Suspense
                   fallback={
                     <div className="border border-gray-300 h-[150px] w-full"></div>
                   }
@@ -375,7 +375,7 @@ const AddNewItem = () => {
                       handleEditorChange("extra_description", newContent)
                     }
                   />
-                </Suspense> */}
+                </Suspense>
               </div>
 
               <div className="space-y-2 pt-4">
@@ -396,7 +396,7 @@ const AddNewItem = () => {
               >
                 Текст баннера
               </label>
-              {/* <Suspense
+              <Suspense
                 fallback={
                   <div className="border border-gray-300 h-[150px] w-full"></div>
                 }
@@ -409,7 +409,7 @@ const AddNewItem = () => {
                     handleEditorChange("header", newContent)
                   }
                 />
-              </Suspense> */}
+              </Suspense>
             </>
           )}
           {+pathnameId === 2 && (

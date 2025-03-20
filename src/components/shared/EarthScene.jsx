@@ -141,7 +141,7 @@ function LocationMarker({
     handleLocationClick(e, null);
     if (clickState === 1) {
       // Second click - open map in new tab
-      window.open(mapUrl, "_blank");
+
       setClickState(0);
     }
   };
@@ -191,7 +191,9 @@ function LocationMarker({
 
           {/* Description - visible after first click */}
           {clickState === 1 && (
-            <div
+            <a
+              target="_blank"
+              href={mapUrl}
               className={`bg-[#000] absolute  z-50  text-white rounded px-2 py-1 mt-1 w-40 shadow-lg 
                 text-xs cursor-pointer hover:bg-[#4a90e2] transition-colors 
                 duration-200 ${
@@ -209,7 +211,7 @@ function LocationMarker({
               <p className="text-blue-300 text-[6px] mt-1">
                 Нажмите еще раз для открытия карты
               </p>
-            </div>
+            </a>
           )}
         </div>
       </Html>
