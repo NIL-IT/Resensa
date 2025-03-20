@@ -21,7 +21,7 @@ export default function AppRoutes({
   const { isAdmin } = useSelector(({ user }) => user);
   return (
     <Routes>
-      <Route path={ROUTES.AUTH} element={<LoginForm />} />
+      {/* <Route path={ROUTES.AUTH} element={<LoginForm />} />
       <Route
         path={ROUTES.HOME}
         element={
@@ -33,7 +33,7 @@ export default function AppRoutes({
             company={company}
           />
         }
-      />
+      /> */}
       {/* <Route
         path={ROUTES.EQUIPMENT}
         element={

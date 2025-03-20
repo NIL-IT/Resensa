@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import pkg from "react-helmet-async";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Link, useNavigate, Routes, Route, useLocation } from "react-router-dom";
+import { Link, useNavigate, Routes, useLocation } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 const apiLogin = axios.create({
   baseURL: "https://new.recensa.ru/api"
@@ -1277,21 +1277,15 @@ function Header() {
     }
   );
 }
-const ROUTES = {
-  HOME: "/",
-  EQUIPMENT: "/equipment",
-  SOLUTIONS: "/solutions",
-  AUTH: "/auth"
-};
-const Home = lazy(() => import("./assets/Home-BJ56gPs6.js"));
-lazy(() => import("./assets/NotFound-DBGLx2fc.js"));
-lazy(() => import("./assets/Equipment-EJYeBRGW.js"));
-lazy(() => import("./assets/AboutCompany-ClvvmXeh.js"));
-lazy(() => import("./assets/Admin-iJi7KGb3.js"));
-lazy(() => import("./assets/ProductItem-D2hmFMWv.js"));
-const LoginForm = lazy(() => import("./assets/LoginForm-DDSaruI9.js"));
-lazy(() => import("./assets/Contacts-B-VsE_cS.js"));
-lazy(() => import("./assets/NewsPage-DlGJv50X.js"));
+lazy(() => import("./assets/Home-DcX_R7fh.js"));
+lazy(() => import("./assets/NotFound-BgsE9Uif.js"));
+lazy(() => import("./assets/Equipment-gnbMmL_6.js"));
+lazy(() => import("./assets/AboutCompany-BUqYBvP-.js"));
+lazy(() => import("./assets/Admin-DMvdlz5z.js"));
+lazy(() => import("./assets/ProductItem-C6b3aCDP.js"));
+lazy(() => import("./assets/LoginForm-OIWK30R8.js"));
+lazy(() => import("./assets/Contacts-B2V3ImnE.js"));
+lazy(() => import("./assets/NewsPage-DJeT4-Cs.js"));
 function AppRoutes({
   company,
   equipment,
@@ -1300,25 +1294,7 @@ function AppRoutes({
   news
 }) {
   const { isAdmin } = useSelector(({ user }) => user);
-  return /* @__PURE__ */ jsxs(Routes, { children: [
-    /* @__PURE__ */ jsx(Route, { path: ROUTES.AUTH, element: /* @__PURE__ */ jsx(LoginForm, {}) }),
-    /* @__PURE__ */ jsx(
-      Route,
-      {
-        path: ROUTES.HOME,
-        element: /* @__PURE__ */ jsx(
-          Home,
-          {
-            equipment,
-            solutions,
-            banner,
-            news,
-            company
-          }
-        )
-      }
-    )
-  ] });
+  return /* @__PURE__ */ jsx(Routes, {});
 }
 function Widget() {
   const dispatch = useDispatch();
@@ -1824,11 +1800,10 @@ export {
   getEquipmentById as O,
   changeSolutionsId as P,
   getSolutionsById as Q,
-  ROUTES as R,
+  changeEquipmentId as R,
   Select as S,
   Title as T,
-  changeEquipmentId as U,
-  authPost as V,
+  authPost as U,
   changeItemId as a,
   changeShowStatus as b,
   changeShowPopup as c,
