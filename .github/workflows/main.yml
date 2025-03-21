@@ -40,17 +40,17 @@ jobs:
             rm -rf /var/www/resensa/frontend_temp
           fi
 
-          cd /var/www/resensa/frontend
-          npm install
-          npm run build
+          # cd /var/www/resensa/frontend
+          # npm install
+          # npm run build
 
-          if [ -d /var/www/resensa/frontend/current ]; then
-            mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
-          fi
+          # if [ -d /var/www/resensa/frontend/current ]; then
+          #   mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
+          # fi
 
-          mkdir -p /var/www/resensa/frontend/current
-          cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
-          rm -rf /var/www/resensa/frontend/previous
+          # mkdir -p /var/www/resensa/frontend/current
+          # cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
+          # rm -rf /var/www/resensa/frontend/previous
           SCRIPT
           chmod +x deploy.sh
 
@@ -62,4 +62,4 @@ jobs:
           PAT: ${{ secrets.PAT }}
         run: |
           sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no deploy.sh $USERNAME@$HOST:/tmp/
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "bash /tmp/deploy.sh $PAT && rm /tmp/deploy.sh"
+          # sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "bash /tmp/deploy.sh $PAT && rm /tmp/deploy.sh"
