@@ -74,7 +74,7 @@ export default function Footer({ scrollTop = null }) {
           </div>
           <h5
             onClick={() => navigate("/privicy")}
-            className="text-gray-900 text-sm xs:text-sm sm:text-base border-b cursor-pointer"
+            className="text-gray-900 text-sm xs:text-sm sm:text-base border-b cursor-pointer inline"
           >
             Политика конфиденциальности
           </h5>

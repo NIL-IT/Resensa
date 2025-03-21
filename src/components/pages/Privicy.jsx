@@ -284,7 +284,7 @@ export default function PrivicyPage() {
   const renderPolicySection = (section) => {
     return (
       <div key={section.id} className="mb-10">
-        <h3 className="text-md xs:text-lg sm:text-xl mb-6 font-medium">
+        <h3 className="text-md xs:text-lg sm:text-xl mb-6 font-medium text-gray-400">
           {section.title}
         </h3>
 
@@ -359,13 +359,10 @@ export default function PrivicyPage() {
         </nav>
 
         <article className="py-8 md:py-10 lg:py-12">
-          <h1 className="text-xl xs:text-2xl sm:text-3xl leading-tight font-medium mb-8 md:mb-10">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl leading-tight font-medium mb-8 md:mb-10 text-gray-400">
             Политика в отношении обработки персональных данных
-          </h1>
-
-          <div className="max-w-4xl mx-auto">
-            {privacyPolicyData.map(renderPolicySection)}
-          </div>
+          </h2>
+          <div>{privacyPolicyData.map(renderPolicySection)}</div>
         </article>
       </div>
 
