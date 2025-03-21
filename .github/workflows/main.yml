@@ -42,15 +42,15 @@ jobs:
 
           cd /var/www/resensa/frontend
           npm install
-          npm run build
+          # npm run build
 
-          if [ -d /var/www/resensa/frontend/current ]; then
-            mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
-          fi
+          # if [ -d /var/www/resensa/frontend/current ]; then
+          #   mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
+          # fi
 
-          mkdir -p /var/www/resensa/frontend/current
-          cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
-          rm -rf /var/www/resensa/frontend/previous
+          # mkdir -p /var/www/resensa/frontend/current
+          # cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
+          # rm -rf /var/www/resensa/frontend/previous
           SCRIPT
           chmod +x deploy.sh
 
