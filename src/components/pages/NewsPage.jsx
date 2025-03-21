@@ -109,6 +109,7 @@ export default function NewsPage({ news }) {
               itemProp="itemListElement"
               itemScope
               itemType="http://schema.org/ListItem"
+              className="hidden lg:inline "
             >
               <a className="pointer-events: none" title="Подраздел уровня 2">
                 <span itemProp="name">{findNews.title}</span>
