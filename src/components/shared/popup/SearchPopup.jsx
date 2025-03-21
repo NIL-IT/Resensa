@@ -103,7 +103,7 @@ export default function SearchPopup() {
             </div>
           ) : (
             <div className="w-full h-[60vh] flex-center justify-center ">
-              <p className="text-gray-400">
+              <p className="text-gray-400 text-center">
                 По вашему запросу ничего не найдено
               </p>
             </div>
