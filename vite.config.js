@@ -5,8 +5,14 @@ export default defineConfig({
   plugins: [react()],
   build: {
     target: "es2015",
-    // Отключаем минификацию
-    minify: false,
+    minify: "esbuild",
+    // Включаем source maps если установлена переменная окружения
+    sourcemap: process.env.VITE_GENERATE_SOURCEMAP === "true",
+    minifyOptions: {
+      target: "es2015",
+      treeShaking: true,
+      drop: ["console", "debugger"],
+    },
     rollupOptions: {
       output: {
         manualChunks: {
