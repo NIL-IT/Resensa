@@ -10,9 +10,9 @@ import App from "./App";
  * @param {string} url
  */
 export function render(url) {
-  const helmetContext = {};
   console.warn = () => {};
   console.error = () => {};
+  const helmetContext = {};
   const html = renderToString(
     <StrictMode>
       <Provider store={store}>
