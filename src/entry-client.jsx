@@ -8,6 +8,9 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 console.warn = () => {};
 console.error = () => {};
+console.log = () => {};
+console.info = () => {};
+console.debug = () => {};
 hydrateRoot(
   document.getElementById("root"),
   <StrictMode>

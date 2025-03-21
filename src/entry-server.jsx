@@ -12,6 +12,9 @@ import App from "./App";
 export function render(url) {
   console.warn = () => {};
   console.error = () => {};
+  console.log = () => {};
+  console.info = () => {};
+  console.debug = () => {};
   const helmetContext = {};
   const html = renderToString(
     <StrictMode>
