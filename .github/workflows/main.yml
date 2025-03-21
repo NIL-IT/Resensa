@@ -36,6 +36,7 @@ jobs:
           fi
 
           cd /var/www/resensa/frontend
+          npm cache clean --force
           npm install -g npm@latest
           npm install
           SCRIPT
