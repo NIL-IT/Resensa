@@ -14,24 +14,25 @@ export function render(url) {
 
   const html = renderToString(
     <StrictMode>
-      <Provider store={store}>
+      <div>Hi</div>
+      {/* <Provider store={store}>
         <StaticRouter location={url}>
           <HelmetProvider context={helmetContext}>
-            <App />
-          </HelmetProvider>
+            <App /> */}
+      {/* </HelmetProvider>
         </StaticRouter>
-      </Provider>
+      </Provider> */}
     </StrictMode>
   );
 
   return {
     html,
-    head: helmetContext.helmet
-      ? `
-      ${helmetContext.helmet.title.toString()}
-      ${helmetContext.helmet.meta.toString()}
-      ${helmetContext.helmet.link.toString()}
-    `
-      : "",
+    //   head: helmetContext.helmet
+    //     ? `
+    //     ${helmetContext.helmet.title.toString()}
+    //     ${helmetContext.helmet.meta.toString()}
+    //     ${helmetContext.helmet.link.toString()}
+    //   `
+    //     : "",
   };
 }

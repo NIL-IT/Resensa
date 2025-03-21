@@ -1,0 +1,1 @@
+import{j as e}from"./index-DZeHIetG.js";import"react";import{c as x}from"./Button-bkEJrYUn.js";function p({text:s,className:a="",itemProp:t,ref:r}){return e.jsx("h2",{...t?{itemProp:t}:{},...r?{ref:r}:{},itemProp:t,className:x("text-[48px] text-gray-400 uppercase",a),children:s})}export{p as T};

@@ -1,0 +1,1 @@
+import{j as e}from"./index-DZeHIetG.js";import"react";const n=({title:s,description:r,url:o})=>e.jsxs("div",{style:{display:"none"},children:[e.jsx("h1",{children:s}),e.jsx("p",{children:r}),e.jsx("a",{href:"https://example.com",children:o})]});export{n as S};
