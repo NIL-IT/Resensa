@@ -12,6 +12,7 @@ export default defineConfig({
     ],
   },
   build: {
+    minify: process.env.VITE_DISABLE_MINIFY ? false : "terser",
     outDir: "dist/server",
     target: "node18", // Указываем целевую версию Node.js
     emptyOutDir: true, // Очищаем старые билды
