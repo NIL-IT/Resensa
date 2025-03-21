@@ -100,6 +100,9 @@ export default function Admin() {
 
   return (
     <>
+      <Helmet>
+        <title>Личный кабинет</title>
+      </Helmet>
       <main className="min-h-screen flex flex-col">
         <div className="w-full md:container mx-auto px-4 pt-[30px] flex-grow">
           <p className="text-gray-900 text-sm">
