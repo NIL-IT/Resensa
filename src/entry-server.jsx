@@ -13,13 +13,15 @@ export function render(url) {
   const helmetContext = {};
 
   const html = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={url}>
-        <HelmetProvider context={helmetContext}>
-          <App />
-        </HelmetProvider>
-      </StaticRouter>
-    </Provider>
+    <StrictMode>
+      <Provider store={store}>
+        <StaticRouter location={url}>
+          <HelmetProvider context={helmetContext}>
+            <App />
+          </HelmetProvider>
+        </StaticRouter>
+      </Provider>
+    </StrictMode>
   );
 
   return {
