@@ -160,18 +160,12 @@ export default function NewsPage({ news }) {
                     alt={findNews.title}
                   />
                 </div>
-                <meta
-                  itemProp="datePublished"
-                  content={findNews.date.split("T")[0]}
-                />
-                <meta
-                  itemProp="dateModified"
-                  content={findNews.date.split("T")[0]}
-                />
+                <meta itemProp="datePublished" content={findNews.date} />
+                <meta itemProp="dateModified" content={findNews.date} />
                 <meta itemProp="inLanguage" content="ru-RU" />
 
                 <p className="text-gray-900 text-sm xs:text-base block mt-4">
-                  {findNews.date.split("T")[0]}
+                  {findNews.date}
                 </p>
                 <div
                   itemProp="articleBody"
