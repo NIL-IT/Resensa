@@ -23,22 +23,38 @@ export default function Header() {
   const { isAdmin, equipment, solutions } = useSelector(({ user }) => user);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const navList = [
-    { name: "Главная", path: "/" },
-    { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
-    { name: "Решения", path: "/solutions", dropdownItems: solutions },
-    { name: "О компании", path: "/about" },
-    {
-      name: "Заказы",
-      path: `${
-        isAdmin
-          ? `/admin/1`
-          : `/equipment/${useLatinFormat(equipment[0]?.name)}`
-      }`,
-    },
-    { name: "Контакты", path: "/contact" },
-    isAdmin && { name: "Личный кабинет", path: "/admin/1" },
-  ];
+  const navList = !isAdmin
+    ? [
+        { name: "Главная", path: "/" },
+        { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
+        { name: "Решения", path: "/solutions", dropdownItems: solutions },
+        { name: "О компании", path: "/about" },
+        {
+          name: "Заказы",
+          path: `${
+            isAdmin
+              ? `/admin/1`
+              : `/equipment/${useLatinFormat(equipment[0]?.name)}`
+          }`,
+        },
+        { name: "Контакты", path: "/contact" },
+      ]
+    : [
+        { name: "Главная", path: "/" },
+        { name: "Оборудование", path: "/equipment", dropdownItems: equipment },
+        { name: "Решения", path: "/solutions", dropdownItems: solutions },
+        { name: "О компании", path: "/about" },
+        {
+          name: "Заказы",
+          path: `${
+            isAdmin
+              ? `/admin/1`
+              : `/equipment/${useLatinFormat(equipment[0]?.name)}`
+          }`,
+        },
+        { name: "Контакты", path: "/contact" },
+        { name: "Личный кабинет", path: "/admin/1" },
+      ];
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
   const handleClickLink = (i, path) => {
@@ -174,6 +190,7 @@ export default function Header() {
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
+                {console.log(name)}
                 <div className="flex items-center">
                   {isAdmin ? (
                     <Link

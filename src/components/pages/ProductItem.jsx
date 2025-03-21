@@ -30,6 +30,7 @@ export default function ProductItem({ list }) {
   const [currentProduct, setCurrentProduct] = useState(
     equipmentById || solutionsById || (list && list.length > 0 ? list[0] : null)
   );
+  console.log(currentProduct);
   document.body.style.overflowY = "auto";
   useEffect(() => {
     if (!currentProduct) navigate("/");
