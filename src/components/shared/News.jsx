@@ -30,11 +30,6 @@ export default function News({ news }) {
     <section
       itemScope
       itemType="http://schema.org/Blog"
-      // className={`
-      //    container pt-[50px] md:pt-[190px] lg:pt-[200px] xl:pt-[210px] 2xl:pt-[215px] 3xl:pt-[218px]
-      //   ${
-      //   newsData.length > 6 ? "pb-16" : "pb-16"
-      // }`}
       className={`
         container pt-[35px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px] 3xl:pt-[80px] 
        ${newsData.length > 6 ? "pb-16" : "pb-16"}`}
@@ -81,7 +76,7 @@ export default function News({ news }) {
                     {/* SEO */}
                     <meta
                       itemProp="datePublished"
-                      content={item.date.split("T")[0]}
+                      content={item.date.replaceAll("/", ".")}
                     />
 
                     <meta
@@ -104,7 +99,10 @@ export default function News({ news }) {
                       </div>
                       <meta itemProp="name" content="Recensa" />
                     </div>
-                    <meta itemProp="dateModified" content={`${item.date}`} />
+                    <meta
+                      itemProp="dateModified"
+                      content={`${item.date.replaceAll("/", ".")}`}
+                    />
                     <meta
                       itemScope
                       itemProp="mainEntityOfPage"
@@ -115,7 +113,7 @@ export default function News({ news }) {
                   <div>
                     <div className="pt-[10px] xs:pt-[11px] sm:pt-[12px] md:pt-[13px] lg:pt-[14px] pb-3 xs:pb-3.5 sm:pb-4 md:pb-4.5 lg:pb-5">
                       <span className="text-gray-800 text-sm xs:text-sm sm:text-base">
-                        {item.date.split("T")[0]}
+                        {item.date.replaceAll("/", ".")}
                       </span>
                     </div>
                     <button className="flex-center gap-3 group-hover:gap-4 transition-all">

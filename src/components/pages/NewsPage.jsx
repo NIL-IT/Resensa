@@ -84,7 +84,7 @@ export default function NewsPage({ news }) {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://example.com/" />
+                <meta itemProp="item" content="https://new.recensa.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -101,7 +101,7 @@ export default function NewsPage({ news }) {
               >
                 <span itemProp="name">Новости</span>
                 <meta itemProp="position" content="1" />
-                <meta itemProp="item" content="https://example.com/contacts" />
+                <meta itemProp="item" content="https://new.recensa.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -113,7 +113,12 @@ export default function NewsPage({ news }) {
               <a className="pointer-events: none" title="Подраздел уровня 2">
                 <span itemProp="name">{findNews.title}</span>
                 <meta itemProp="position" content="1" />
-                <meta itemProp="item" content="https://example.com/contacts" />
+                <meta
+                  itemProp="item"
+                  content={`https://new.recensa.ru/news/${useLatinFormat(
+                    findNews.title
+                  )}`}
+                />
               </a>
             </li>
           </ul>
@@ -160,12 +165,18 @@ export default function NewsPage({ news }) {
                     alt={findNews.title}
                   />
                 </div>
-                <meta itemProp="datePublished" content={findNews.date} />
-                <meta itemProp="dateModified" content={findNews.date} />
+                <meta
+                  itemProp="datePublished"
+                  content={findNews.date.replaceAll("/", ".")}
+                />
+                <meta
+                  itemProp="dateModified"
+                  content={findNews.date.replaceAll("/", ".")}
+                />
                 <meta itemProp="inLanguage" content="ru-RU" />
 
                 <p className="text-gray-900 text-sm xs:text-base block mt-4">
-                  {findNews.date}
+                  {findNews.date.replaceAll("/", ".")}
                 </p>
                 <div
                   itemProp="articleBody"

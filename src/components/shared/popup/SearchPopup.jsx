@@ -4,6 +4,7 @@ import { changeShowSearchPopup } from "../../../utils/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
+import useLatinFormat from "../../../utils/hooks/useLatinFormat";
 
 export default function SearchPopup() {
   const { equipment, solutions } = useSelector(({ user }) => user);
@@ -68,7 +69,11 @@ export default function SearchPopup() {
                 ({ image_card, name, description, id, max_param }, i) => (
                   <Link
                     onClick={() => handleClose()}
-                    to={max_param ? `/equipment/${id}` : `/solutions/${id}`}
+                    to={
+                      max_param
+                        ? `/equipment/${useLatinFormat(name)}`
+                        : `/solutions/${useLatinFormat(name)}`
+                    }
                     key={i}
                     className="flex flex-col justify-between w-full xs:w-[180px] sm:w-[190px] md:w-[195px] lg:w-[200px] border border-gray-100 p-2 xs:p-3 sm:p-4"
                   >
@@ -82,9 +87,10 @@ export default function SearchPopup() {
                       <h2 className="text-gray-400 text-xs xs:text-sm uppercase font-normal my-1 xs:my-1.5 sm:my-2">
                         {name}
                       </h2>
-                      <p className="text-[11px] xs:text-[12px] sm:text-[13px] text-gray-300 line-clamp-3">
-                        {description}
-                      </p>
+                      <div
+                        className="text-[11px] xs:text-[12px] sm:text-[13px] text-gray-300 line-clamp-3"
+                        dangerouslySetInnerHTML={{ __html: description }}
+                      />
                     </div>
                     <Button
                       noLink={true}

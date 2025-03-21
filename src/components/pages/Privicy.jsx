@@ -249,7 +249,7 @@ export default function PrivicyPage() {
               {tableData.headers.map((header, index) => (
                 <th
                   key={index}
-                  className="border border-gray-300 p-1 lg:p-3 text-left text-[10px] lg:text-sm xl:text-lg"
+                  className="border border-gray-300 p-1 lg:p-3 text-left text-[10px] md:text-sm xl:text-lg"
                 >
                   {header}
                 </th>
@@ -262,7 +262,7 @@ export default function PrivicyPage() {
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className="border border-gray-300 p-1 lg:p-3 text-[8px] lg:text-sm xl:text-lg"
+                    className="border border-gray-300 p-1 lg:p-3 text-[9px] md:text-sm xl:text-lg"
                   >
                     {cell.split("\n").map((line, lineIndex) => (
                       <React.Fragment key={lineIndex}>
@@ -320,7 +320,7 @@ export default function PrivicyPage() {
         <link rel="canonical" href={"https://new.recensa.ru/privicy"} />
       </Helmet>
 
-      <div className="container px-4 py-4">
+      <div className="container px-3 sm:px-0 ">
         <nav className="mb-4 xs:mb-5 sm:mb-6">
           <ul
             itemScope

@@ -85,7 +85,7 @@ const Contacts = ({ company }) => {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://example.com/" />
+                <meta itemProp="item" content="https://new.recensa.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -97,7 +97,10 @@ const Contacts = ({ company }) => {
               <a className="pointer-events: none" title="Подраздел уровня 1">
                 <span itemProp="name">Контакты</span>
                 <meta itemProp="position" content="1" />
-                <meta itemProp="item" content="https://example.com/contacts" />
+                <meta
+                  itemProp="item"
+                  content="https://new.recensa.ru/contact"
+                />
               </a>
             </li>
           </ul>
