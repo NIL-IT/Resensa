@@ -31,6 +31,8 @@ const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
+  console.warn = () => {};
+  console.error = () => {};
   // const [path, setPathname] = useState("");
 
   // useEffect(() => {

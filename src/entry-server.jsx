@@ -11,7 +11,8 @@ import App from "./App";
  */
 export function render(url) {
   const helmetContext = {};
-
+  console.warn = () => {};
+  console.error = () => {};
   const html = renderToString(
     <StrictMode>
       <Provider store={store}>
