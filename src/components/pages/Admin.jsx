@@ -11,6 +11,7 @@ import { Menu, X } from "lucide-react";
 import { exportOrdersExcel } from "../../utils/slice/userSlice";
 import ChangeAbout from "../shared/admin/ChangeAbout";
 import SeoPage from "../shared/admin/Seo";
+import { Helmet } from "react-helmet-async";
 
 const navList = [
   {
