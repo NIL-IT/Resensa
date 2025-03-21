@@ -1,0 +1,1 @@
+import{j as e}from"./index-BUmeV-AY.js";import"react";const s=({title:s,description:i,url:r})=>e.jsxs("div",{style:{display:"none"},children:[e.jsx("h1",{children:s}),e.jsx("p",{children:i}),e.jsx("a",{href:"https://example.com",children:r})]});export{s as S};
