@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouter } from "react-router";
 import { Provider } from "react-redux";
 import { store } from "./utils/store.js";
 import pkg from "react-helmet-async";

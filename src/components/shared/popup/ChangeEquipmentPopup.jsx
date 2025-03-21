@@ -14,13 +14,9 @@ const JoditEditor = lazy(() => import("jodit-react"));
 import { config } from "../../../utils/data";
 const ChangeEquipmentPopup = () => {
   const dispatch = useDispatch();
-  const { path, setPathname } = useState("");
-  useEffect(() => {
-    const { pathname } = useLocation();
-    setPathname(pathname);
-  }, []);
+  const { pathname } = useLocation();
 
-  const pathnameId = path.split("/").at(-1);
+  const pathnameId = pathname.split("/").at(-1);
   const isNews = +pathnameId === 4;
   const isSolutions = +pathnameId === 3;
   document.body.style.overflowY = "hidden";
