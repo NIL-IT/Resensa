@@ -17,11 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
       - name: Create deploy script
         run: |
           cat > deploy.sh << 'SCRIPT'
@@ -42,19 +37,10 @@ jobs:
 
           cd /var/www/resensa/frontend
           npm install
-          npm run build
-
-          if [ -d /var/www/resensa/frontend/current ]; then
-            mv /var/www/resensa/frontend/current /var/www/resensa/frontend/previous
-          fi
-
-          mkdir -p /var/www/resensa/frontend/current
-          cp -r /var/www/resensa/frontend/dist/* /var/www/resensa/frontend/current/
-          rm -rf /var/www/resensa/frontend/previous
           SCRIPT
           chmod +x deploy.sh
 
-      - name: Deploy and build project
+      - name: Deploy project
         env:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
