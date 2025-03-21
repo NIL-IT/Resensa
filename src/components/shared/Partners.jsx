@@ -50,12 +50,12 @@ export default function Partners() {
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-[30px] sm:gap-x-[30px] sm:gap-y-[20px] md:gap-x-[40px] md:gap-y-[10px]  2xl:gap-x-[200px] 3xl:gap-x-[300px] max-w-[400px] 
           xs:max-w-[500px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[750px] 
-          xl:max-w-[780px] 2xl:max-w-[800px] 3xl:max-w-[1110px] mx-auto justify-items-center"
+          xl:max-w-[780px] 2xl:max-w-[800px] 3xl:max-w-[1110px] mx-auto justify-items-center lg:justify-items-start"
           >
             {list.map((item, i) => (
               <article
                 key={i}
-                className={`flex-center justify-center mt-2 xl:mt-3  ${
+                className={`flex-center justify-center lg:justify-start mt-2 xl:mt-3  ${
                   i === 4
                     ? "w-[150px]  xl:w-[200px] 2xl:w-[250px] 3xl:w-[300px]"
                     : "w-[100px]  xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
