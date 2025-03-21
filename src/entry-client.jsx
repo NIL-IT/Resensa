@@ -10,13 +10,12 @@ import App from "./App";
 hydrateRoot(
   document.getElementById("root"),
   <StrictMode>
-    <div>Hi</div>
-    {/* <Provider store={store}>
+    <Provider store={store}>
       <BrowserRouter>
         <HelmetProvider>
           <App />
         </HelmetProvider>
       </BrowserRouter>
-    </Provider> */}
+    </Provider>
   </StrictMode>
 );
