@@ -37,6 +37,7 @@ export default function Header() {
       }`,
     },
     { name: "Контакты", path: "/contact" },
+    isAdmin && { name: "Личный кабинет", path: "/admin/1" },
   ];
 
   const handleChangeShowPopup = (boolean) => dispatch(changeShowPopup(boolean));
