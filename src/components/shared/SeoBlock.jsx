@@ -5,7 +5,7 @@ const SeoBlock = ({ title, description, url }) => {
     <div style={{ display: "none" }}>
       <h1>{title}</h1>
       <p>{description}</p>
-      <a href="https://example.com">{url}</a>
+      <a href={url}>{url}</a>
     </div>
   );
 };

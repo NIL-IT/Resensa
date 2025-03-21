@@ -65,7 +65,7 @@ export default function Footer({ scrollTop = null }) {
               // navigate("/");
               // }
             }}
-            className="cursor-pointer"
+            className="cursor-pointer pb-2"
           >
             <Link
               to={"/"}
@@ -79,9 +79,12 @@ export default function Footer({ scrollTop = null }) {
               />
             </Link>
           </div>
-          <h5 className="text-gray-900 text-sm xs:text-sm sm:text-base">
-            copyright
-          </h5>
+          <a
+            to="/privicy"
+            className="text-gray-900 text-sm xs:text-sm sm:text-base border-b cursor-pointer"
+          >
+            Политика конфиденциальности
+          </a>
         </div>
         <div className="order-3 lg:order-2">
           <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
