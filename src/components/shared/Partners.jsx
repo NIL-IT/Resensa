@@ -55,7 +55,7 @@ export default function Partners() {
             {list.map((item, i) => (
               <article
                 key={i}
-                className={`flex-center mt-2 xl:mt-3  ${
+                className={`flex-center justify-center mt-2 xl:mt-3  ${
                   i === 4
                     ? "w-[150px]  xl:w-[200px] 2xl:w-[250px] 3xl:w-[300px]"
                     : "w-[100px]  xl:w-[130px] 2xl:w-[140px] 3xl:w-[150px]"
