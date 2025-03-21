@@ -28,7 +28,7 @@ export default function ProductItem({ list }) {
     !equipmentById && !solutionsById ? true : equipmentById ? true : false;
 
   const [currentProduct, setCurrentProduct] = useState(
-    equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+    equipmentById || solutionsById || (list && list.length > 0 ? list[0] : null)
   );
   document.body.style.overflowY = "auto";
   useEffect(() => {
@@ -120,7 +120,7 @@ export default function ProductItem({ list }) {
     dataFetchedRef.current = true;
     dispatch(getAllOrders());
   }, []);
-  return list.length > 0 ? (
+  return currentProduct ? (
     <>
       <SeoBlock
         url={`https://new.recensa.ru/${
