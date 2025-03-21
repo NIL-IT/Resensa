@@ -56,14 +56,7 @@ export default function Footer({ scrollTop = null }) {
         <div>
           <div
             onClick={() => {
-              // if (isAdmin) {
-              //   Cookies.remove("access_token");
-              //   dispatch(changeIsAdmin(false));
-              //   navigate("/auth");
-              // } else {
               if (scrollTop) scrollTop();
-              // navigate("/");
-              // }
             }}
             className="cursor-pointer pb-2"
           >
@@ -79,12 +72,12 @@ export default function Footer({ scrollTop = null }) {
               />
             </Link>
           </div>
-          <a
-            to="/privicy"
+          <h5
+            onClick={() => navigate("/privicy")}
             className="text-gray-900 text-sm xs:text-sm sm:text-base border-b cursor-pointer"
           >
             Политика конфиденциальности
-          </a>
+          </h5>
         </div>
         <div className="order-3 lg:order-2">
           <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">

@@ -249,7 +249,7 @@ export default function PrivicyPage() {
               {tableData.headers.map((header, index) => (
                 <th
                   key={index}
-                  className="border border-gray-300 p-3 text-left text-xs lg:text-sm xl:text-lg"
+                  className="border border-gray-300 p-1 lg:p-3 text-left text-[10px] lg:text-sm xl:text-lg"
                 >
                   {header}
                 </th>
@@ -262,7 +262,7 @@ export default function PrivicyPage() {
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className="border border-gray-300 p-3 text-xs lg:text-sm xl:text-lg"
+                    className="border border-gray-300 p-1 lg:p-3 text-[8px] lg:text-sm xl:text-lg"
                   >
                     {cell.split("\n").map((line, lineIndex) => (
                       <React.Fragment key={lineIndex}>
