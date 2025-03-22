@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import EarthScene from "./EarthScene";
@@ -12,34 +12,47 @@ const list = [
 ];
 
 export default function Objects({ className = null, about = false }) {
-  const [index, setIndex] = React.useState(0);
-  const [loading, setLoading] = React.useState(false);
+  const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (value) => setIndex(value);
+
+  // Первый useEffect для установки loading
   useEffect(() => {
     setLoading(true);
-    useEffect(() => {
-      const handleResize = () => {
-        // Вызовите здесь перерисовку или обновление компонента
-      };
-
-      window.addEventListener("resize", handleResize);
-      // Вызовите handleResize один раз при монтировании
-      handleResize();
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
   }, []);
+
+  // Отдельный useEffect для обработки изменения размера окна
+  useEffect(() => {
+    const handleResize = () => {
+      // Перерисовка или обновление компонента
+      // Если нужно, можно добавить здесь логику для пересоздания 3D сцены
+
+      // Убедитесь, что loading уже true перед любой перерисовкой
+      if (!loading) {
+        setLoading(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    // Вызов handleResize один раз при монтировании
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [loading]);
+
   return (
     <section
-      className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${
+      className={`w-full bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${
         about
-          ? "mt-[0px] xs:mt-[28px]  md:mt-[160px] lg:mt-[225px] xl:mt-[205px] 2xl:mt-[220px] 3xl:mt-[225px]"
+          ? "mt-[0px] xs:mt-[28px] md:mt-[160px] lg:mt-[225px] xl:mt-[205px] 2xl:mt-[220px] 3xl:mt-[225px]"
           : ""
       } ${className}`}
     >
-      <div className="earth_container  relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
+      {/* Остальной код остается прежним */}
+      <div className="earth_container relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
         <div
           className="flex-center flex-col 
         lg:flex-row lg:items-center lg:justify-between g
@@ -58,7 +71,7 @@ export default function Objects({ className = null, about = false }) {
               className="inline-block text-white text-xl sm:text-2xl lg:text-3xl border-b border-b-white mb-6"
             />
             <article className=" max-w-[411px]">
-              <div className="text-white border border-white divide-y divide-white w-full  ">
+              <div className="text-white border border-white divide-y divide-white w-full">
                 {list.map(({ name, id }, i) => (
                   <button
                     type="button"
@@ -77,7 +90,7 @@ export default function Objects({ className = null, about = false }) {
                 href="https://yandex.ru/maps/65/novosibirsk/house/ulitsa_shevchenko_4/bEsYfwRjT0YCQFtvfXxwdXRnZA==/inside/?ll=82.932743%2C55.014572&tab=inside&z=19.71"
                 icon={true}
                 text={"построить маршрут до офиса"}
-                className="bg-white text-gray-400 w-full select-none  justify-center xl:justify-normal
+                className="bg-white text-gray-400 w-full select-none justify-center xl:justify-normal
               mt-6 sm:mt-8 text-sm lg:text-md xl:text-base 
                font-normal 
               py-3 xl:py-5  px-4 sm:px-3 xl:px-5
