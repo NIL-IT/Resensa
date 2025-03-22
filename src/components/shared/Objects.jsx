@@ -11,7 +11,7 @@ const list = [
   // { name: "Муниципальные объекты", id: 5 },
 ];
 
-export default function Objects({ className = null, about = false }) {
+export default function Objects({ className = "", about = false }) {
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
