@@ -16,7 +16,7 @@ import Objects from "../shared/Objects";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
 export default function AboutCompany({ company }) {
   const dispatch = useDispatch();
-  const { pathname } = useParams();
+  const { pathname } = useLocation();
   const scrollTop = () => {
     window.scrollTo({
       top: 0,

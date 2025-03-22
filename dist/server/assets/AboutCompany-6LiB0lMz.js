@@ -7,8 +7,8 @@ import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
 import { T as Title, a as changeItemId, v as SeoBlock, F as Footer } from "../entry-server.js";
 import { s as slidesMain, a as slidesSub, b as sliderTextSub } from "./data-C21Hc6VP.js";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { O as Objects } from "./Objects-Ceb3JV4o.js";
+import "react-router-dom";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
@@ -64,7 +64,7 @@ function Points() {
 }
 function AboutCompany({ company }) {
   const dispatch = useDispatch();
-  const { pathname } = useParams();
+  const { pathname } = useLocation();
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
