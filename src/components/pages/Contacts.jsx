@@ -6,6 +6,7 @@ import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
 import Footer from "../shared/Footer";
 import { useDispatch } from "react-redux";
 import SeoBlock from "../shared/SeoBlock";
+import Objects from "../shared/Objects";
 
 const Contacts = ({ company }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Contacts = ({ company }) => {
         <meta property="og:url" content="https://new.recensa.ru/contact" />
         <link rel="canonical" href="https://new.recensa.ru/contact" />
       </Helmet>
+      <Objects />
       <div
         itemScope
         itemType="http://schema.org/Organization"
