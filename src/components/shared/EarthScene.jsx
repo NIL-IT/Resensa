@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
@@ -353,6 +353,7 @@ export default function EarthScene({ index }) {
     xl:w-[500px] xl:h-[500px] 
     2xl:w-[1000px] 2xl:h-[660px] select-none"
     >
+      <div>dsadsadsadasd</div>
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         style={{ background: "transparent", width: "100%", height: "100%" }}
