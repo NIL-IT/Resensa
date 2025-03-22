@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 const EarthScene = lazy(() => import("./EarthScene"));
@@ -7,39 +7,12 @@ const list = [
   { name: "Административные объекты", id: 1 },
   { name: "Производства", id: 2 },
   { name: "Медицина и фармацевтика", id: 3 },
-  // { name: "Спортивные объекты", id: 2 },
-  // { name: "Муниципальные объекты", id: 5 },
 ];
 
 export default function Objects({ className = "", about = false }) {
   const [index, setIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
   const handleChange = (value) => setIndex(value);
-
-  // Определяем, что мы на клиенте
-  useEffect(() => {
-    setIsClient(true);
-    setLoading(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const handleResize = () => {
-      if (!loading) {
-        setLoading(true);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [loading, isClient]);
 
   return (
     <section
@@ -49,7 +22,6 @@ export default function Objects({ className = "", about = false }) {
           : ""
       } ${className}`}
     >
-      {/* Остальной код остается прежним */}
       <div className="earth_container relative max-w-[full] min-h-[500px] sm:min-h-[550px] md:min-h-[550px] lg:min-h-[602px] xl:min-h-[650px] 2xl:min-h-[702px] flex flex-col justify-center">
         <div
           className="flex-center flex-col 

@@ -433,7 +433,3 @@ button::-moz-focus-inner {
   user-select: text;
   -webkit-user-select: text;
 }
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}

@@ -220,6 +220,9 @@ function LocationMarker({
 }
 
 function Earth({ index }) {
+  if (typeof window === "undefined") {
+    return null;
+  }
   const earthRef = useRef();
   const earthTexture = useTexture(img);
 
