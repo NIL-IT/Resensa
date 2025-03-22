@@ -1,8 +1,9 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useTexture, Html } from "@react-three/drei";
-import img from "../../assets/3d/texture_earth.jpg";
+import { OrbitControls, Html } from "@react-three/drei";
+import { useLoader, useTexture } from "@react-three/fiber";
+import { TextureLoader } from "three";
 
 const locations = [
   // Административные
@@ -224,8 +225,10 @@ function Earth({ index }) {
     return null;
   }
   const earthRef = useRef();
-  const earthTexture = useTexture(img);
-
+  const earthTexture = useLoader(
+    TextureLoader,
+    "../../assets/3d/texture_earth.jpg"
+  );
   // State for tracking which location is selected
   const [selectedIdx, setSelectedIdx] = useState(null);
   // State for tracking if description should be shown
