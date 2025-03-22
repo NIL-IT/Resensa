@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-import EarthScene from "./EarthScene";
+const EarthScene = dynamic(() => import("./EarthScene"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-500 h-500 bg-gray-500 animate-pulse rounded-full" />
+  ),
+});
 
 const list = [
   { name: "Административные объекты", id: 1 },

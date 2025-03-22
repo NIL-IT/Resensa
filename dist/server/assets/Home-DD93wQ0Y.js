@@ -10,15 +10,13 @@ import { s as slidesMain } from "./data-C21Hc6VP.js";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
-import { O as Objects } from "./Objects-DBTRkU-q.js";
+import { O as Objects } from "./Objects-CUd4gFfZ.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
 import "axios";
 import "tailwind-merge";
 import "lucide-react";
-import "@react-three/fiber";
-import "@react-three/drei";
 const imgPlaceholder = "/img/banner_main_placeholder.png";
 const imgMain = "/img/banner_main.png";
 function MainTitle({ text, className = "", itemProp = "" }) {

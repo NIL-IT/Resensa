@@ -23,4 +23,9 @@ export default defineConfig({
     emptyOutDir: true,
     assetsInlineLimit: 4096,
   },
+  // Add the following to help with SSR
+  ssr: {
+    // Avoid transpiling dependencies in SSR
+    noExternal: ["three", "@react-three/fiber", "@react-three/drei"],
+  },
 });
