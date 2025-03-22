@@ -7,7 +7,6 @@ import { slidesMain } from "../../utils/data";
 // import Calculator from "../shared/Сalculator";
 import News from "../shared/News";
 import Partners from "../shared/Partners";
-const Objects = lazy(() => import("../shared/Objects"));
 import Footer from "../shared/Footer";
 import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";
@@ -16,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import Cookies from "js-cookie";
 import SeoBlock from "../shared/SeoBlock";
+import Objects from "../shared/Objects";
 export default function Home({ equipment, solutions, banner, news, company }) {
   const { pathname } = useLocation();
   const isNavigateNews = Cookies.get("news_nav") === "1";
@@ -98,9 +98,8 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
-        <Suspense fallback={"...Загрузка"}>
-          <Objects />
-        </Suspense>
+
+        <Objects />
       </main>
       <Footer scrollTop={scrollTop} />
     </>

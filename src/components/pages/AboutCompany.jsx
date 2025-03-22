@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
-const Objects = lazy(() => import("../shared/Objects"));
 import Advantages from "../shared/Advantages";
 import Partners from "../shared/Partners";
 import Footer from "../shared/Footer";
@@ -13,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import { useParams } from "react-router-dom";
 import SeoBlock from "../shared/SeoBlock";
+import Objects from "../shared/Objects";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
 export default function AboutCompany({ company }) {
   const dispatch = useDispatch();
@@ -54,9 +54,7 @@ export default function AboutCompany({ company }) {
           textSize={"text-lg"}
           about={true}
         />
-        <Suspense fallback={"...Загрузка"}>
-          <Objects about={true} />
-        </Suspense>
+        <Objects about={true} />
         <SliderPage
           title={"о компании"}
           subTitle={

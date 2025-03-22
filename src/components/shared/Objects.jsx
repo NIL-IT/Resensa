@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 const EarthScene = lazy(() => import("./EarthScene"));
@@ -118,7 +118,9 @@ export default function Objects({ className = null, about = false }) {
             top-[360px] right-[-20px] 
        "
             >
-              {isClient && loading && <EarthScene index={index} />}
+              <Suspense fallback={"...Загрузка"}>
+                <EarthScene index={index} />
+              </Suspense>
             </div>
           </div>
         </div>
