@@ -4,10 +4,10 @@ import { useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import LocationMarker from "./LocationMarker";
-console.log("Earth");
+import { locations } from "./EarthScene";
 export default function Earth({ index, locations }) {
+  console.log("Earth");
   const earthRef = useRef();
-
   const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [showDescription, setShowDescription] = useState(false);
@@ -123,3 +123,5 @@ export default function Earth({ index, locations }) {
     </group>
   );
 }
+
+console.log(Earth(1, locations));

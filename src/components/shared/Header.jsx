@@ -190,7 +190,6 @@ export default function Header() {
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {console.log(name)}
                 <div className="flex items-center">
                   {isAdmin ? (
                     <Link

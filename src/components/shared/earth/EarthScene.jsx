@@ -6,7 +6,7 @@ import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import Earth from "./Earth";
 
-const locations = [
+export const locations = [
   // Административные
   [
     {
