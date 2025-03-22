@@ -14,34 +14,32 @@ const list = [
 export default function Objects({ className = null, about = false }) {
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const handleChange = (value) => setIndex(value);
 
-  // Первый useEffect для установки loading
+  // Определяем, что мы на клиенте
   useEffect(() => {
+    setIsClient(true);
     setLoading(true);
   }, []);
 
-  // Отдельный useEffect для обработки изменения размера окна
   useEffect(() => {
-    const handleResize = () => {
-      // Перерисовка или обновление компонента
-      // Если нужно, можно добавить здесь логику для пересоздания 3D сцены
+    if (!isClient) return;
 
-      // Убедитесь, что loading уже true перед любой перерисовкой
+    const handleResize = () => {
       if (!loading) {
         setLoading(true);
       }
     };
 
     window.addEventListener("resize", handleResize);
-    // Вызов handleResize один раз при монтировании
     handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [loading]);
+  }, [loading, isClient]);
 
   return (
     <section
@@ -112,7 +110,7 @@ export default function Objects({ className = null, about = false }) {
             top-[360px] right-[-20px] 
        "
           >
-            {loading && <EarthScene index={index} />}
+            {isClient && loading && <EarthScene index={index} />}
           </div>
         </div>
       </div>

@@ -98,7 +98,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
-        <Objects />
+        <Objects className={"mt-[2px]"} />
       </main>
       <Footer scrollTop={scrollTop} />
     </>
