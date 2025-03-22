@@ -1131,8 +1131,8 @@ function Header() {
                 {
                   className: "w-[200px] sm:w-[230px] lg:w-[313px]",
                   src: "/icon/logo.svg",
-                  alt: "logo",
-                  title: "Перейти на главную страницу"
+                  alt: "Recensa - вентиляционное оборудование",
+                  title: "Recensa - вентиляционное оборудование"
                 }
               ) }),
               /* @__PURE__ */ jsx(
@@ -1355,8 +1355,8 @@ function Footer({ scrollTop = null }) {
                   "img",
                   {
                     src: "/icon/logo.svg",
-                    alt: "Логотип",
-                    title: "Нажмите, чтобы вернуться на главную страницу"
+                    alt: "Recensa - вентиляционное оборудование",
+                    title: "Recensa - вентиляционное оборудование"
                   }
                 )
               }

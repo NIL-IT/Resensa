@@ -67,8 +67,8 @@ export default function Footer({ scrollTop = null }) {
             >
               <img
                 src="/icon/logo.svg"
-                alt="Логотип"
-                title="Нажмите, чтобы вернуться на главную страницу"
+                alt="Recensa - вентиляционное оборудование"
+                title="Recensa - вентиляционное оборудование"
               />
             </Link>
           </div>

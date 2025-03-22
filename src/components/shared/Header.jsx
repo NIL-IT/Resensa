@@ -99,8 +99,8 @@ export default function Header() {
           <img
             className="w-[200px] sm:w-[230px] lg:w-[313px]"
             src="/icon/logo.svg"
-            alt="logo"
-            title="Перейти на главную страницу"
+            alt="Recensa - вентиляционное оборудование"
+            title="Recensa - вентиляционное оборудование"
           />
         </Link>
         <BurgerButton
