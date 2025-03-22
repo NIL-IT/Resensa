@@ -225,7 +225,27 @@ function Earth({ index }) {
     return null;
   }
   const earthRef = useRef();
-  const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
+  const [texture, setTexture] = useState(null);
+
+  useEffect(() => {
+    const textureLoader = new TextureLoader();
+    try {
+      textureLoader.load(
+        "/texture_earth.jpg", // Try absolute path
+        (loadedTexture) => {
+          setTexture(loadedTexture);
+        },
+        undefined,
+        (error) => {
+          console.error("Error loading texture:", error);
+          // Could set a fallback texture here
+        }
+      );
+    } catch (error) {
+      console.error("Texture loading error:", error);
+    }
+  }, []);
+
   // State for tracking which location is selected
   const [selectedIdx, setSelectedIdx] = useState(null);
   // State for tracking if description should be shown
@@ -286,7 +306,7 @@ function Earth({ index }) {
       <mesh ref={earthRef}>
         <sphereGeometry args={[1.8, 64, 64]} />
         <meshStandardMaterial
-          map={earthTexture}
+          map={texture}
           metalness={0.05}
           roughness={0.9}
           color="#cccccc"
