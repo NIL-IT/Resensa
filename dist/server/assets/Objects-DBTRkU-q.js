@@ -273,9 +273,12 @@ function EarthScene({ index }) {
   return /* @__PURE__ */ jsx(
     "article",
     {
+      className: "xs:w-[400px] xs:h-[450px] \r\n    sm:w-[600px] sm:h-[500px] \r\n    md:w-[800px] md:h-[500px] \r\n    lg:w-[1000px] lg:h-[600px] \r\n    xl:w-[500px] xl:h-[500px] \r\n    2xl:w-[1000px] 2xl:h-[660px] select-none",
       children: /* @__PURE__ */ jsxs(
         Canvas,
         {
+          camera: { position: [0, 0, 6], fov: 45 },
+          style: { background: "transparent", width: "100%", height: "100%" },
           children: [
             /* @__PURE__ */ jsx(Earth, { index }),
             /* @__PURE__ */ jsx(

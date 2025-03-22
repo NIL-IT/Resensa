@@ -10,7 +10,7 @@ import { s as slidesMain } from "./data-C21Hc6VP.js";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
-import { O as Objects } from "./Objects-5km_zCLh.js";
+import { O as Objects } from "./Objects-DBTRkU-q.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
