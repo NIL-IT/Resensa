@@ -10,6 +10,8 @@ import App from "./App";
  * @param {string} url
  */
 export function render(url) {
+  console.warn = () => {};
+  console.error = () => {};
   const helmetContext = {};
 
   const html = renderToString(

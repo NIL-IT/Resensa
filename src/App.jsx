@@ -31,6 +31,18 @@ const AddNewItem = lazy(() => import("./components/shared/popup/AddNewItem"));
 const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
+  console.warn = () => {};
+  console.error = () => {};
+  window.addEventListener("error", (event) => {
+    event.preventDefault(); // Блокирует стандартный вывод ошибки в консоль
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    event.preventDefault(); // Блокирует вывод ошибок промисов
+  });
+  console.error = (...args) => {
+    console.trace("Suppressed Error:", ...args);
+  };
   // const [path, setPathname] = useState("");
 
   // useEffect(() => {
