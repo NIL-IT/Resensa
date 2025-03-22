@@ -6,17 +6,12 @@ import { store } from "./utils/store.js";
 import pkg from "react-helmet-async";
 const { HelmetProvider } = pkg;
 import App from "./App";
-
 /**
  * @param {string} url
  */
 export function render(url) {
-  console.warn = () => {};
-  console.error = () => {};
-  console.log = () => {};
-  console.info = () => {};
-  console.debug = () => {};
-  const helmetContext = { helmet: {} };
+  const helmetContext = {};
+
   const html = renderToString(
     <StrictMode>
       <Provider store={store}>
@@ -33,10 +28,10 @@ export function render(url) {
     html,
     head: helmetContext.helmet
       ? `
-    ${helmetContext.helmet.title?.toString() || ""}
-    ${helmetContext.helmet.meta?.toString() || ""}
-    ${helmetContext.helmet.link?.toString() || ""}
-  `
+      ${helmetContext.helmet.title.toString()}
+      ${helmetContext.helmet.meta.toString()}
+      ${helmetContext.helmet.link.toString()}
+    `
       : "",
   };
 }

@@ -11,6 +11,7 @@ console.error = () => {};
 console.log = () => {};
 console.info = () => {};
 console.debug = () => {};
+
 hydrateRoot(
   document.getElementById("root"),
   <StrictMode>

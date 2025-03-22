@@ -6,8 +6,6 @@ export default defineConfig({
   build: {
     target: "es2015",
     minify: "esbuild",
-    // Включаем source maps если установлена переменная окружения
-    sourcemap: process.env.VITE_GENERATE_SOURCEMAP === "true",
     minifyOptions: {
       target: "es2015",
       treeShaking: true,
