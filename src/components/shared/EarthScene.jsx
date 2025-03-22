@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
-import { useLoader, useTexture } from "@react-three/fiber";
+import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 
 const locations = [
@@ -225,27 +225,8 @@ function Earth({ index }) {
     return null;
   }
   const earthRef = useRef();
-  const [texture, setTexture] = useState(null);
 
-  useEffect(() => {
-    const textureLoader = new TextureLoader();
-    try {
-      textureLoader.load(
-        "/texture_earth.jpg", // Try absolute path
-        (loadedTexture) => {
-          setTexture(loadedTexture);
-        },
-        undefined,
-        (error) => {
-          console.error("Error loading texture:", error);
-          // Could set a fallback texture here
-        }
-      );
-    } catch (error) {
-      console.error("Texture loading error:", error);
-    }
-  }, []);
-
+  const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
   // State for tracking which location is selected
   const [selectedIdx, setSelectedIdx] = useState(null);
   // State for tracking if description should be shown
@@ -306,7 +287,7 @@ function Earth({ index }) {
       <mesh ref={earthRef}>
         <sphereGeometry args={[1.8, 64, 64]} />
         <meshStandardMaterial
-          map={texture}
+          map={earthTexture}
           metalness={0.05}
           roughness={0.9}
           color="#cccccc"
@@ -353,14 +334,13 @@ export default function EarthScene({ index }) {
     xl:w-[500px] xl:h-[500px] 
     2xl:w-[1000px] 2xl:h-[660px] select-none"
     >
-      <div>dsadsadsadasd</div>
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         style={{ background: "transparent", width: "100%", height: "100%" }}
       >
         <Earth index={index} />
         <OrbitControls
-          enableZoom={false}
+          enableZoom={true}
           enablePan={true}
           enableRotate={true}
           zoomSpeed={0.6}
