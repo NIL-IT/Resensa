@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import EarthScene from "./EarthScene";
@@ -13,8 +13,11 @@ const list = [
 
 export default function Objects({ className = null, about = false }) {
   const [index, setIndex] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
   const handleChange = (value) => setIndex(value);
-
+  useEffect(() => {
+    setLoading(true);
+  }, []);
   return (
     <section
       className={`w-full  bg-gray-400 py-12 sm:py-16 md:py-20 lg:py-24 ${
@@ -83,7 +86,7 @@ export default function Objects({ className = null, about = false }) {
             top-[360px] right-[-20px] 
        "
           >
-            <EarthScene index={index} />
+            {loading && <EarthScene index={index} />}
           </div>
         </div>
       </div>
