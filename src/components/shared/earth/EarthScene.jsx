@@ -141,7 +141,6 @@ export default function EarthScene({ index }) {
           camera={{ position: [0, 0, 6], fov: 45 }}
           style={{ background: "transparent", width: "100%", height: "100%" }}
         >
-          {console.log(isClient)}
           <Earth index={index} locations={locations} />
           <OrbitControls
             enableZoom={false}

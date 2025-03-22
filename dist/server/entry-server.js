@@ -1753,14 +1753,14 @@ function PrivicyPage() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const Home = lazy(() => import("./assets/Home-BU0HRrtJ.js"));
+const Home = lazy(() => import("./assets/Home-Lo92CIe1.js"));
 const NotFound = lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
-const Equipment = lazy(() => import("./assets/Equipment-CfvpFxFq.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-CSlaDXe4.js"));
+const Equipment = lazy(() => import("./assets/Equipment-C1iobJnH.js"));
+const AboutCompany = lazy(() => import("./assets/AboutCompany-HmKxCOOi.js"));
 const Admin = lazy(() => import("./assets/Admin-BFsaBDxF.js"));
 const ProductItem = lazy(() => import("./assets/ProductItem-90mZ-whC.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-Dt-nCNaM.js"));
-const Contacts = lazy(() => import("./assets/Contacts-DGhBJ_hQ.js"));
+const Contacts = lazy(() => import("./assets/Contacts-BGKGSvkL.js"));
 const NewsPage = lazy(() => import("./assets/NewsPage-D2CZt0Tj.js"));
 function AppRoutes({
   company,

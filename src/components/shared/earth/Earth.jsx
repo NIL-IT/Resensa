@@ -4,16 +4,11 @@ import { useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import LocationMarker from "./LocationMarker";
+console.log("Earth");
 export default function Earth({ index, locations }) {
-  console.log("Earth");
-
-  // Используем ref для доступа к 3D объекту
   const earthRef = useRef();
 
-  // Загружаем текстуру земли
   const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
-
-  // Состояния для отслеживания выбранной локации и отображения описания
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [showDescription, setShowDescription] = useState(false);
 
