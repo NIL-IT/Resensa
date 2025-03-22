@@ -1753,7 +1753,7 @@ function PrivicyPage() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const Home = lazy(() => import("./assets/Home-DzYbfES_.js"));
+const Home = lazy(() => import("./assets/Home-B3FxfqHK.js"));
 const NotFound = lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
 const Equipment = lazy(() => import("./assets/Equipment-vmHPKdju.js"));
 const AboutCompany = lazy(() => import("./assets/AboutCompany-DuX7MPTU.js"));

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import Objects from "../shared/Objects";
 import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
@@ -78,7 +78,6 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         <link rel="canonical" href="https://new.recensa.ru/" />
       </Helmet>
       <main>
-        <Objects />
         <Banner banner={banner} />
         <Advantages />
         <ItemsList
@@ -99,6 +98,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
+        <Objects className={"mt-[0px]"} />
       </main>
       <Footer scrollTop={scrollTop} />
     </>
