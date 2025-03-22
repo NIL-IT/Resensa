@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
 const Objects = lazy(() => import("../shared/Objects"));
@@ -54,7 +54,9 @@ export default function AboutCompany({ company }) {
           textSize={"text-lg"}
           about={true}
         />
-        <Objects about={true} />
+        <Suspense fallback={"...Загрузка"}>
+          <Objects about={true} />
+        </Suspense>
         <SliderPage
           title={"о компании"}
           subTitle={

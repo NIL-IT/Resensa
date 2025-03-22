@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
@@ -98,7 +98,9 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
-        <Objects />
+        <Suspense fallback={"...Загрузка"}>
+          <Objects />
+        </Suspense>
       </main>
       <Footer scrollTop={scrollTop} />
     </>
