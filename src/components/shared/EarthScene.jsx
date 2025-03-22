@@ -220,62 +220,121 @@ function LocationMarker({
   );
 }
 
+export default function EarthScene({ index }) {
+  // Состояние, которое гарантирует, что компонент загружен на клиенте
+  const [isClient, setIsClient] = useState(false);
+
+  // Устанавливаем флаг isClient при монтировании компонента
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return (
+    <article
+      className="xs:w-[400px] xs:h-[450px]
+      sm:w-[600px] sm:h-[500px]
+      md:w-[800px] md:h-[500px]
+      lg:w-[1000px] lg:h-[600px]
+      xl:w-[500px] xl:h-[500px]
+      2xl:w-[1000px] 2xl:h-[660px] select-none"
+    >
+      {isClient && (
+        <Canvas
+          camera={{ position: [0, 0, 6], fov: 45 }}
+          style={{ background: "transparent", width: "100%", height: "100%" }}
+        >
+          <Earth index={index} />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={true}
+            enableRotate={true}
+            zoomSpeed={0.6}
+            panSpeed={0.5}
+            rotateSpeed={0.4}
+            minPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+      )}
+    </article>
+  );
+}
 function Earth({ index }) {
   console.log("Earth");
-  if (typeof window === "undefined") {
-    return null;
-  }
+
+  // Используем ref для доступа к 3D объекту
   const earthRef = useRef();
 
+  // Загружаем текстуру земли
   const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
-  // State for tracking which location is selected
+
+  // Состояния для отслеживания выбранной локации и отображения описания
   const [selectedIdx, setSelectedIdx] = useState(null);
-  // State for tracking if description should be shown
   const [showDescription, setShowDescription] = useState(false);
 
+  // Принудительный рендеринг для обработки изменений
+  const [forceRender, setForceRender] = useState(0);
+
+  // Вращение земли (в данном случае скорость 0)
   useFrame(({ clock }) => {
     earthRef.current.rotation.y = clock.getElapsedTime() * 0;
   });
 
-  // Handle location marker click
+  // Обработка клика по локации
   const handleLocationClick = (e, idx) => {
     e?.stopPropagation?.();
     if (selectedIdx === idx) {
-      // If clicking the same location again
+      // Если нажимаем ту же локацию снова
       if (showDescription) {
-        // If description is already showing, reset everything (show all locations)
+        // Если описание уже показано, сбрасываем всё
         setSelectedIdx(null);
         setShowDescription(false);
       } else {
-        // If description is not showing, show it
+        // Если описание не показано, показываем его
         setShowDescription(true);
       }
     } else {
-      // Clicking a different location - select it and show description
+      // Нажимаем другую локацию - выбираем её и показываем описание
       setSelectedIdx(idx);
       setShowDescription(true);
     }
   };
 
-  // Handle click outside to reset
+  // Обработка клика вне локаций для сброса
   const handleOutsideClick = () => {
     setSelectedIdx(null);
     setShowDescription(false);
   };
 
-  React.useEffect(() => {
-    // Add global click handler
+  // Добавляем обработчик клика при монтировании компонента
+  useEffect(() => {
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, []);
 
+  // Добавляем слушатель изменения размера окна для принудительного обновления
+  useEffect(() => {
+    const handleResize = () => {
+      setForceRender((prev) => prev + 1);
+    };
+
+    // Вызываем принудительное обновление при монтировании компонента
+    // Это обеспечит рендеринг при первой загрузке
+    setForceRender((prev) => prev + 1);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Предполагаем, что locations существует в вашем коде
   return (
     <group
       scale={1.2}
       rotation={[0.8, -2.6, 0]}
       onClick={(e) => e.stopPropagation()}
+      key={forceRender} // Добавляем key для принудительного обновления
     >
-      {/* Lighting */}
+      {/* Освещение */}
       <ambientLight intensity={0.8} />
       <directionalLight position={[200, 200, 200]} intensity={0.7} castShadow />
       <directionalLight
@@ -284,7 +343,7 @@ function Earth({ index }) {
         castShadow
       />
 
-      {/* Earth */}
+      {/* Земля */}
       <mesh ref={earthRef}>
         <sphereGeometry args={[1.8, 64, 64]} />
         <meshStandardMaterial
@@ -294,10 +353,10 @@ function Earth({ index }) {
           color="#cccccc"
         />
 
-        {/* Render locations based on selection state */}
+        {/* Отображение локаций в зависимости от состояния выбора */}
         {locations[index].map((location, idx) => {
-          // Only show all locations when nothing is selected
-          // OR show only the selected location when one is selected
+          // Показываем все локации, когда ничего не выбрано
+          // ИЛИ показываем только выбранную локацию
           const shouldShow = selectedIdx === null || selectedIdx === idx;
 
           if (shouldShow) {
@@ -316,41 +375,11 @@ function Earth({ index }) {
         })}
       </mesh>
 
-      {/* Atmosphere */}
+      {/* Атмосфера */}
       <mesh>
         <sphereGeometry args={[1.85, 64, 64]} />
         <meshBasicMaterial color="#3a85ff" transparent opacity={0.03} />
       </mesh>
     </group>
-  );
-}
-
-export default function EarthScene({ index }) {
-  return (
-    <article
-      className="xs:w-[400px] xs:h-[450px] 
-    sm:w-[600px] sm:h-[500px] 
-    md:w-[800px] md:h-[500px] 
-    lg:w-[1000px] lg:h-[600px] 
-    xl:w-[500px] xl:h-[500px] 
-    2xl:w-[1000px] 2xl:h-[660px] select-none"
-    >
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
-        style={{ background: "transparent", width: "100%", height: "100%" }}
-      >
-        <Earth index={index} />
-        <OrbitControls
-          enableZoom={false}
-          enablePan={true}
-          enableRotate={true}
-          zoomSpeed={0.6}
-          panSpeed={0.5}
-          rotateSpeed={0.4}
-          minPolarAngle={Math.PI / 2}
-          maxPolarAngle={Math.PI / 2}
-        />
-      </Canvas>
-    </article>
   );
 }
