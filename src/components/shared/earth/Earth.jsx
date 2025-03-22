@@ -4,7 +4,6 @@ import { useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import LocationMarker from "./LocationMarker";
-import { locations } from "./EarthScene";
 export default function Earth({ index, locations }) {
   console.log("Earth");
   const earthRef = useRef();
@@ -123,5 +122,3 @@ export default function Earth({ index, locations }) {
     </group>
   );
 }
-
-console.log(Earth(1, locations));
