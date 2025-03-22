@@ -1,6 +1,17 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, lazy } from "react";
 import { T as Title, B as Button } from "../entry-server.js";
+import "react-dom/server";
+import "react-router-dom/server.mjs";
+import "react-redux";
+import "@reduxjs/toolkit";
+import "axios";
+import "js-cookie";
+import "react-helmet-async";
+import "clsx";
+import "tailwind-merge";
+import "react-router-dom";
+import "lucide-react";
 const EarthScene = lazy(() => import("./EarthScene-CPvi4Dtj.js"));
 const list = [
   { name: "Административные объекты", id: 1 },
@@ -92,5 +103,5 @@ function Objects({ className = null, about = false }) {
   );
 }
 export {
-  Objects as O
+  Objects as default
 };

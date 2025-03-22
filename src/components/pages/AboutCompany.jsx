@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import EquipmentBanner from "../shared/EquipmentBanner";
-import Objects from "../shared/Objects";
+const Objects = lazy(() => import("../shared/Objects"));
 import Advantages from "../shared/Advantages";
 import Partners from "../shared/Partners";
 import Footer from "../shared/Footer";

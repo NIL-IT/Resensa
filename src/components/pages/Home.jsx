@@ -7,7 +7,7 @@ import { slidesMain } from "../../utils/data";
 // import Calculator from "../shared/Сalculator";
 import News from "../shared/News";
 import Partners from "../shared/Partners";
-import Objects from "../shared/Objects";
+const Objects = lazy(() => import("../shared/Objects"));
 import Footer from "../shared/Footer";
 import { ROUTES } from "../../routes/routes";
 import { useLocation } from "react-router-dom";

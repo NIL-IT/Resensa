@@ -2,7 +2,6 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { E as EquipmentBanner } from "./EquipmentBanner-BBTahqeQ.js";
-import { O as Objects } from "./Objects-DoajEWIF.js";
 import { A as Advantages } from "./Advantages-CW1EK6O8.js";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
 import { T as Title, a as changeItemId, v as SeoBlock, F as Footer } from "../entry-server.js";
@@ -62,6 +61,7 @@ function Points() {
     item.subtext && /* @__PURE__ */ jsx("p", { className: "text-base md:text-lg text-gray-400 mt-2", children: item.subtext })
   ] }, i)) }) });
 }
+const Objects = lazy(() => import("./Objects-BcvPZAyo.js"));
 function AboutCompany({ company }) {
   const dispatch = useDispatch();
   const { pathname } = useParams();

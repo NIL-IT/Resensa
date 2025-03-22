@@ -10,7 +10,6 @@ import { s as slidesMain } from "./data-C21Hc6VP.js";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
-import { O as Objects } from "./Objects-LY5c4mgY.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";
@@ -268,6 +267,7 @@ function News({ news }) {
     }
   ) : /* @__PURE__ */ jsx(Fragment, {});
 }
+const Objects = lazy(() => import("./Objects-BcvPZAyo.js"));
 function Home({ equipment, solutions, banner, news, company }) {
   const { pathname } = useLocation();
   const isNavigateNews = Cookies.get("news_nav") === "1";
