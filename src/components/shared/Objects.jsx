@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
-const EarthScene = lazy(() => import("./EarthScene"));
+const EarthScene = lazy(() => import("./earth/EarthScene"));
 
 const list = [
   { name: "Административные объекты", id: 1 },
