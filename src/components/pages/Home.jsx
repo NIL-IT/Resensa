@@ -17,49 +17,50 @@ import { changeItemId } from "../../utils/slice/userSlice";
 import Cookies from "js-cookie";
 import SeoBlock from "../shared/SeoBlock";
 export default function Home({ equipment, solutions, banner, news, company }) {
-  // const { pathname } = useLocation();
-  // const isNavigateNews = Cookies.get("news_nav") === "1";
-  // const dispatch = useDispatch();
-  // const scrollToOrders = () => {
-  //   setTimeout(() => {
-  //     const widthPage = document.querySelector("body").offsetWidth;
-  //     const heightPage = document.querySelector("body").offsetHeight;
-  //     let scrollPosition;
-  //     if (widthPage > 1600) scrollPosition = 2500;
-  //     else if (widthPage > 1280) scrollPosition = 2545;
-  //     else if (widthPage > 768) scrollPosition = 2927;
-  //     else if (widthPage > 640) scrollPosition = 3870;
-  //     else if (widthPage > 420) scrollPosition = 3897;
-  //     else if (widthPage > 375) scrollPosition = 3973;
-  //     else scrollPosition = 3900;
-  //     let scroll = heightPage - scrollPosition;
+  const { pathname } = useLocation();
+  const isNavigateNews = Cookies.get("news_nav") === "1";
+  const dispatch = useDispatch();
+  const scrollToOrders = () => {
+    setTimeout(() => {
+      const widthPage = document.querySelector("body").offsetWidth;
+      const heightPage = document.querySelector("body").offsetHeight;
+      let scrollPosition;
+      if (widthPage > 1600) scrollPosition = 2500;
+      else if (widthPage > 1280) scrollPosition = 2545;
+      else if (widthPage > 768) scrollPosition = 2927;
+      else if (widthPage > 640) scrollPosition = 3870;
+      else if (widthPage > 420) scrollPosition = 3897;
+      else if (widthPage > 375) scrollPosition = 3973;
+      else scrollPosition = 3900;
+      let scroll = heightPage - scrollPosition;
 
-  //     window.scrollTo({
-  //       top: scroll,
-  //       left: 0,
-  //       behavior: "smooth",
-  //     });
+      window.scrollTo({
+        top: scroll,
+        left: 0,
+        behavior: "smooth",
+      });
 
-  //     Cookies.set("news_nav", "0", { expires: 1 });
-  //   }, 30);
-  // };
+      Cookies.set("news_nav", "0", { expires: 1 });
+    }, 30);
+  };
 
-  // const scrollTop = () => {
-  //   if (isNavigateNews) {
-  //     scrollToOrders();
-  //   } else {
-  //     window.scrollTo({
-  //       top: 0,
-  //       left: 0,
-  //     });
-  //   }
-  // };
+  const scrollTop = () => {
+    if (isNavigateNews) {
+      scrollToOrders();
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+      });
+    }
+  };
 
-  // useEffect(() => {
-  //   scrollTop();
-  //   dispatch(changeItemId(null));
-  // }, [pathname]);
-  // document.body.style.overflowY = "auto";
+  useEffect(() => {
+    scrollTop();
+    dispatch(changeItemId(null));
+  }, [pathname]);
+  document.body.style.overflowY = "auto";
+
   return (
     <>
       <SeoBlock
@@ -98,7 +99,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         <Partners />
         <Objects className={"mt-[0px]"} />
       </main>
-      <Footer />
+      <Footer scrollTop={scrollTop} />
     </>
   );
 }

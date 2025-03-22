@@ -10,7 +10,7 @@ import { sliderTextSub, slidesMain, slidesSub } from "../../utils/data";
 import Points from "../shared/Points";
 import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SeoBlock from "../shared/SeoBlock";
 import Objects from "../shared/Objects";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;

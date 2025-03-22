@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { O as Objects } from "./Objects-Ceb3JV4o.js";
 import { Helmet } from "react-helmet-async";
 import "clsx";
-import { t as cn, B as Button, c as changeShowPopup, T as Title, q as useLatinFormat, v as SeoBlock, R as ROUTES, F as Footer } from "../entry-server.js";
+import { t as cn, B as Button, c as changeShowPopup, T as Title, q as useLatinFormat, a as changeItemId, v as SeoBlock, R as ROUTES, F as Footer } from "../entry-server.js";
 import { useDispatch } from "react-redux";
 import { A as Advantages } from "./Advantages-CW1EK6O8.js";
 import { I as ItemsList } from "./ItemsList-QUHiM5Dy.js";
 import { s as slidesMain } from "./data-C21Hc6VP.js";
-import { Link } from "react-router-dom";
-import "js-cookie";
+import { Link, useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
@@ -269,6 +269,45 @@ function News({ news }) {
   ) : /* @__PURE__ */ jsx(Fragment, {});
 }
 function Home({ equipment, solutions, banner, news, company }) {
+  const { pathname } = useLocation();
+  const isNavigateNews = Cookies.get("news_nav") === "1";
+  const dispatch = useDispatch();
+  const scrollToOrders = () => {
+    setTimeout(() => {
+      const widthPage = document.querySelector("body").offsetWidth;
+      const heightPage = document.querySelector("body").offsetHeight;
+      let scrollPosition;
+      if (widthPage > 1600) scrollPosition = 2500;
+      else if (widthPage > 1280) scrollPosition = 2545;
+      else if (widthPage > 768) scrollPosition = 2927;
+      else if (widthPage > 640) scrollPosition = 3870;
+      else if (widthPage > 420) scrollPosition = 3897;
+      else if (widthPage > 375) scrollPosition = 3973;
+      else scrollPosition = 3900;
+      let scroll = heightPage - scrollPosition;
+      window.scrollTo({
+        top: scroll,
+        left: 0,
+        behavior: "smooth"
+      });
+      Cookies.set("news_nav", "0", { expires: 1 });
+    }, 30);
+  };
+  const scrollTop = () => {
+    if (isNavigateNews) {
+      scrollToOrders();
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }
+  };
+  useEffect(() => {
+    scrollTop();
+    dispatch(changeItemId(null));
+  }, [pathname]);
+  document.body.style.overflowY = "auto";
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(
       SeoBlock,
@@ -312,7 +351,7 @@ function Home({ equipment, solutions, banner, news, company }) {
       /* @__PURE__ */ jsx(Partners, {}),
       /* @__PURE__ */ jsx(Objects, { className: "mt-[0px]" })
     ] }),
-    /* @__PURE__ */ jsx(Footer, {})
+    /* @__PURE__ */ jsx(Footer, { scrollTop })
   ] });
 }
 export {
