@@ -8,7 +8,7 @@ import { T as Title, a as changeItemId, v as SeoBlock, F as Footer } from "../en
 import { s as slidesMain, a as slidesSub, b as sliderTextSub } from "./data-C21Hc6VP.js";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { O as Objects } from "./Objects-Ceb3JV4o.js";
+import { O as Objects } from "./Objects-8l1fAPDW.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";

@@ -81,7 +81,6 @@ function Objects({ className = "", about = false }) {
             /* @__PURE__ */ jsx(
               "div",
               {
-                className: "absolute   \r\n            3xl:top-[40px] 3xl:right-[-250px]\r\n            2xl:top-[60px] 2xl:right-[-200px]\r\n            xl:top-[100px] xl:right-[-50px]\r\n            lg:top-[460px] lg:right-[-140px]\r\n            md:top-[360px] md:right-[-90px]\r\n            sm:top-[400px] sm:right-[-90px]\r\n            xs:top-[360px] xs:right-[-20px]\r\n            top-[360px] right-[-20px] \r\n       ",
                 children: /* @__PURE__ */ jsx(Suspense, { fallback: "...Загрузка", children: /* @__PURE__ */ jsx(EarthScene, { index }) })
               }
             )

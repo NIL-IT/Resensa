@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { a as changeItemId, v as SeoBlock, B as Button, c as changeShowPopup, F as Footer } from "../entry-server.js";
 import { useDispatch } from "react-redux";
-import "./Objects-Ceb3JV4o.js";
+import "./Objects-8l1fAPDW.js";
 import "react-dom/server";
 import "react-router-dom/server.mjs";
 import "@reduxjs/toolkit";

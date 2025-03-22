@@ -99,16 +99,16 @@ export default function Objects({ className = "", about = false }) {
             </article>
           </div>
           <div
-            className="absolute   
-            3xl:top-[40px] 3xl:right-[-250px]
-            2xl:top-[60px] 2xl:right-[-200px]
-            xl:top-[100px] xl:right-[-50px]
-            lg:top-[460px] lg:right-[-140px]
-            md:top-[360px] md:right-[-90px]
-            sm:top-[400px] sm:right-[-90px]
-            xs:top-[360px] xs:right-[-20px]
-            top-[360px] right-[-20px] 
-       "
+          //       className="absolute
+          //       3xl:top-[40px] 3xl:right-[-250px]
+          //       2xl:top-[60px] 2xl:right-[-200px]
+          //       xl:top-[100px] xl:right-[-50px]
+          //       lg:top-[460px] lg:right-[-140px]
+          //       md:top-[360px] md:right-[-90px]
+          //       sm:top-[400px] sm:right-[-90px]
+          //       xs:top-[360px] xs:right-[-20px]
+          //       top-[360px] right-[-20px]
+          //  "
           >
             <Suspense fallback={"...Загрузка"}>
               <EarthScene index={index} />

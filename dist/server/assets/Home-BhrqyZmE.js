@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { O as Objects } from "./Objects-Ceb3JV4o.js";
+import { O as Objects } from "./Objects-8l1fAPDW.js";
 import { Helmet } from "react-helmet-async";
 import "clsx";
 import { t as cn, B as Button, c as changeShowPopup, T as Title, q as useLatinFormat, a as changeItemId, v as SeoBlock, R as ROUTES, F as Footer } from "../entry-server.js";
