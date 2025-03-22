@@ -17,6 +17,19 @@ export default function Objects({ className = null, about = false }) {
   const handleChange = (value) => setIndex(value);
   useEffect(() => {
     setLoading(true);
+    useEffect(() => {
+      const handleResize = () => {
+        // Вызовите здесь перерисовку или обновление компонента
+      };
+
+      window.addEventListener("resize", handleResize);
+      // Вызовите handleResize один раз при монтировании
+      handleResize();
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
   }, []);
   return (
     <section
