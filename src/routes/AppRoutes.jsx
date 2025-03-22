@@ -2,7 +2,7 @@ import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "./routes";
 import { useSelector } from "react-redux";
-import PrivicyPage from "../components/pages/Privicy";
+const PrivicyPage = lazy(() => import("../components/pages/Privicy"));
 const Home = lazy(() => import("../components/pages/Home"));
 const NotFound = lazy(() => import("../components/pages/NotFound"));
 const Equipment = lazy(() => import("../components/pages/Equipment"));
@@ -19,7 +19,7 @@ export default function AppRoutes({
   banner,
   news,
 }) {
-  const { isAdmin } = useSelector(({ user }) => user);
+  const isAdmin = useSelector(({ user }) => user?.isAdmin || false);
   return (
     <Routes>
       <Route path={ROUTES.AUTH} element={<LoginForm />} />

@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+
 import EquipmentBanner from "../shared/EquipmentBanner";
 import Advantages from "../shared/Advantages";
 import Partners from "../shared/Partners";

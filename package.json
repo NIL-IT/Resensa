@@ -8,7 +8,6 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --config vite.config.server.js",
-    "build:with-sourcemap": "cross-env VITE_GENERATE_SOURCEMAP=true npm run build",
     "preview": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
@@ -30,7 +29,7 @@
     "path": "^0.12.7",
     "re": "^0.1.4",
     "react": "18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.4.0",

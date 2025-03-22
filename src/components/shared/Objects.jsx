@@ -2,7 +2,6 @@ import React, { lazy, Suspense, useState } from "react";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 const EarthScene = lazy(() => import("./earth/EarthScene"));
-
 const list = [
   { name: "Административные объекты", id: 1 },
   { name: "Производства", id: 2 },
@@ -82,7 +81,7 @@ export default function Objects({ className = "", about = false }) {
             top-[360px] right-[-20px] z-50
        "
           >
-            <Suspense fallback={"...Загрузка"}>
+            <Suspense fallback={null}>
               <EarthScene index={index} />
             </Suspense>
           </div>

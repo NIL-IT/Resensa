@@ -3,10 +3,18 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  ssr: {
+    noExternal: [
+      "react",
+      "react-dom",
+      "@react-three/fiber",
+      "@react-three/drei",
+    ],
+  },
   build: {
-    ssr: "src/entry-server.jsx",
     outDir: "dist/server",
-    emptyOutDir: false,
+    target: "node18", // Указываем целевую версию Node.js
+    emptyOutDir: true, // Очищаем старые билды
     rollupOptions: {
       external: [
         "react",
@@ -14,7 +22,11 @@ export default defineConfig({
         "three",
         "@react-three/fiber",
         "@react-three/drei",
+        "express", // Исключаем Express, если он используется
       ],
+      output: {
+        format: "esm", // Указываем, что сборка должна быть в ES-модуле
+      },
     },
   },
 });

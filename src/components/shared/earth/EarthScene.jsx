@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
+
 import Earth from "./Earth";
 
 export const locations = [
@@ -124,7 +123,9 @@ export default function EarthScene({ index }) {
 
   // Устанавливаем флаг isClient при монтировании компонента
   useEffect(() => {
-    setIsClient(true);
+    setTimeout(() => {
+      setIsClient(true);
+    }, 200);
   }, []);
 
   return (

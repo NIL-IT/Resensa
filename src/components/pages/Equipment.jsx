@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+
 import EquipmentBanner from "../shared/EquipmentBanner";
 import ItemsList from "../shared/ItemsList";
 // import Calculator from "../shared/Сalculator";

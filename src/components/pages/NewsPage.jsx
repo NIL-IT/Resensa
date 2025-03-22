@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Footer from "../shared/Footer";
 import { useLocation } from "react-router-dom";
 import useLatinFormat from "../../utils/hooks/useLatinFormat";
-import { useDispatch } from "react-redux";
+
 import Cookies from "js-cookie";
 import { Helmet } from "react-helmet-async";
+
 import SeoBlock from "../shared/SeoBlock";
 
 export default function NewsPage({ news }) {
