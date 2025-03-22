@@ -321,13 +321,6 @@ function Earth({ index }) {
 }
 
 export default function EarthScene({ index }) {
-  const canvasRef = useRef();
-  useEffect(() => {
-    if (canvasRef.current) {
-      // Инициализация Three.js
-      console.log(canvasRef.current);
-    }
-  }, [canvasRef]);
   return (
     <article
       className="xs:w-[400px] xs:h-[450px] 
@@ -338,7 +331,6 @@ export default function EarthScene({ index }) {
     2xl:w-[1000px] 2xl:h-[660px] select-none"
     >
       <Canvas
-        ref={canvasRef}
         camera={{ position: [0, 0, 6], fov: 45 }}
         style={{ background: "transparent", width: "100%", height: "100%" }}
       >
