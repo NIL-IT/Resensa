@@ -321,6 +321,10 @@ function Earth({ index }) {
 }
 
 export default function EarthScene({ index }) {
+  const [isClient, setClient] = useState(false);
+  useEffect(() => {
+    setClient(true);
+  }, []);
   return (
     <article
       className="xs:w-[400px] xs:h-[450px] 
@@ -330,22 +334,26 @@ export default function EarthScene({ index }) {
     xl:w-[500px] xl:h-[500px] 
     2xl:w-[1000px] 2xl:h-[660px] select-none"
     >
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
-        style={{ background: "transparent", width: "100%", height: "100%" }}
-      >
-        <Earth index={index} />
-        <OrbitControls
-          enableZoom={false}
-          enablePan={true}
-          enableRotate={true}
-          zoomSpeed={0.6}
-          panSpeed={0.5}
-          rotateSpeed={0.4}
-          minPolarAngle={Math.PI / 2}
-          maxPolarAngle={Math.PI / 2}
-        />
-      </Canvas>
+      {!isClient ? (
+        <div></div>
+      ) : (
+        <Canvas
+          camera={{ position: [0, 0, 6], fov: 45 }}
+          style={{ background: "transparent", width: "100%", height: "100%" }}
+        >
+          <Earth index={index} />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={true}
+            enableRotate={true}
+            zoomSpeed={0.6}
+            panSpeed={0.5}
+            rotateSpeed={0.4}
+            minPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+      )}
     </article>
   );
 }
