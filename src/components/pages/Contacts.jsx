@@ -38,7 +38,7 @@ const Contacts = ({ company }) => {
         <meta property="og:url" content="https://new.recensa.ru/contact" />
         <link rel="canonical" href="https://new.recensa.ru/contact" />
       </Helmet>
-      <Objects />
+
       <div
         itemScope
         itemType="http://schema.org/Organization"

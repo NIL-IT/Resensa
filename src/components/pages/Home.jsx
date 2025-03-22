@@ -78,6 +78,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         <link rel="canonical" href="https://new.recensa.ru/" />
       </Helmet>
       <main>
+        <Objects />
         <Banner banner={banner} />
         <Advantages />
         <ItemsList
@@ -98,7 +99,6 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
-        <Objects />
       </main>
       <Footer scrollTop={scrollTop} />
     </>
