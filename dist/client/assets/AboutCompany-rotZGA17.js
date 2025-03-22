@@ -1,4 +1,4 @@
-import{j as t,r as n}from"./three-vendor-Ci446NTQ.js";import{T as a,u as o,h as i,b as x,z as m,H as c,F as p}from"./index-D7tqNScT.js";import{E as d}from"./EquipmentBanner-BVqt-XY0.js";import{A as u}from"./Advantages-C9MKd0J9.js";import{S as l,P as b}from"./SliderPage-BogQb_8a.js";import{s as g,a as j,b as h}from"./data-B0z0wmyU.js";import{O as _}from"./Objects-B2owcOoT.js";import"./react-vendor-DomL0yj5.js";const f=[{title:`ПРЕДПРОДАЖНАЯ 
+import{j as t,r as n}from"./three-vendor-Ci446NTQ.js";import{T as a,u as o,h as i,b as x,z as m,H as c,F as p}from"./index-Suk9RvPR.js";import{E as d}from"./EquipmentBanner-BSBL_Kkg.js";import{A as u}from"./Advantages-D15F17Dd.js";import{S as l,P as b}from"./SliderPage-C8E0wgFs.js";import{s as g,a as j,b as h}from"./data-B0z0wmyU.js";import{O as _}from"./Objects-DY7NHEzP.js";import"./react-vendor-DomL0yj5.js";const f=[{title:`ПРЕДПРОДАЖНАЯ 
 ПОДГОТОВКА`,text:`Подтверждаем максимальное соответствие
 параметров вентагрегатов проектным значениям.`},{title:"ОКРАСКА В ЛЮБОЙ ЦВЕТ",text:`По желанию клиента мы окрашиваем
 вентиляционный агрегат в любой цвет

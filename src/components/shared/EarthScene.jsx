@@ -221,6 +221,7 @@ function LocationMarker({
 }
 
 function Earth({ index }) {
+  console.log("Earth");
   if (typeof window === "undefined") {
     return null;
   }
@@ -340,7 +341,7 @@ export default function EarthScene({ index }) {
       >
         <Earth index={index} />
         <OrbitControls
-          enableZoom={true}
+          enableZoom={false}
           enablePan={true}
           enableRotate={true}
           zoomSpeed={0.6}
