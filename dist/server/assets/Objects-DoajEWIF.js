@@ -1,10 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 import { T as Title, B as Button } from "../entry-server.js";
-const EarthScene = dynamic(() => import("./EarthScene-Xj-09J1E.js"), {
-  ssr: false,
-  loading: () => /* @__PURE__ */ jsx("div", { className: "w-500 h-500 bg-gray-500 animate-pulse rounded-full" })
-});
+const EarthScene = lazy(() => import("./EarthScene-Xj-09J1E.js"));
 const list = [
   { name: "Административные объекты", id: 1 },
   { name: "Производства", id: 2 },
