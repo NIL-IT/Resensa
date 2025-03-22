@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
+import Objects from "../shared/Objects";
 import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
 import Advantages from "../shared/Advantages";
@@ -15,7 +16,6 @@ import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
 import Cookies from "js-cookie";
 import SeoBlock from "../shared/SeoBlock";
-import Objects from "../shared/Objects";
 export default function Home({ equipment, solutions, banner, news, company }) {
   const { pathname } = useLocation();
   const isNavigateNews = Cookies.get("news_nav") === "1";
@@ -98,6 +98,7 @@ export default function Home({ equipment, solutions, banner, news, company }) {
         />
         <News news={news} />
         <Partners />
+        <Objects className={"mt-[20px]"} />
         <Objects />
       </main>
       <Footer scrollTop={scrollTop} />

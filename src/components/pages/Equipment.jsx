@@ -20,7 +20,6 @@ export default function Equipment({
   placeholderSrc,
 }) {
   const { pathname } = useLocation();
-  const { equipment, solutions } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeItemId(null));

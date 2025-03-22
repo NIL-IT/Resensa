@@ -1628,6 +1628,7 @@ function PrivicyPage() {
     scrollTop();
     document.body.style.overflowY = "auto";
   }, []);
+  document.body.style.overflowY = "auto";
   const renderContent = (content) => {
     return content.map((paragraph, index) => /* @__PURE__ */ jsx("p", { className: "text-gray-400 text-md sm:text-lg mb-5", children: paragraph }, index));
   };
@@ -1752,10 +1753,10 @@ function PrivicyPage() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const Home = lazy(() => import("./assets/Home-CHCdLEv5.js"));
+const Home = lazy(() => import("./assets/Home-CPUuuo4_.js"));
 const NotFound = lazy(() => import("./assets/NotFound-BytFK6Zq.js"));
-const Equipment = lazy(() => import("./assets/Equipment-C-CAzWR_.js"));
-const AboutCompany = lazy(() => import("./assets/AboutCompany-al7DILLt.js"));
+const Equipment = lazy(() => import("./assets/Equipment-vmHPKdju.js"));
+const AboutCompany = lazy(() => import("./assets/AboutCompany-DuX7MPTU.js"));
 const Admin = lazy(() => import("./assets/Admin-BFsaBDxF.js"));
 const ProductItem = lazy(() => import("./assets/ProductItem-90mZ-whC.js"));
 const LoginForm = lazy(() => import("./assets/LoginForm-Dt-nCNaM.js"));

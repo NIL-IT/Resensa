@@ -201,7 +201,7 @@ export default function PrivicyPage() {
     scrollTop();
     document.body.style.overflowY = "auto";
   }, []);
-
+  document.body.style.overflowY = "auto";
   // Helper function to render content paragraphs
   const renderContent = (content) => {
     return content.map((paragraph, index) => (
