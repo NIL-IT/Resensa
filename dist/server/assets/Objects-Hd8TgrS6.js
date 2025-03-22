@@ -313,9 +313,11 @@ function Objects({ className = null, about = false }) {
   const [isClient, setIsClient] = useState(false);
   const handleChange = (value) => setIndex(value);
   useEffect(() => {
+    document.body.style.zoom = "99.9%";
     setIsClient(true);
     setLoading(true);
   }, []);
+  document.body.style.zoom = "100%";
   useEffect(() => {
     if (!isClient) return;
     const handleResize = () => {

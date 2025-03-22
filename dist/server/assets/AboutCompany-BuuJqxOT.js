@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { E as EquipmentBanner } from "./EquipmentBanner-BBTahqeQ.js";
-import { O as Objects } from "./Objects-DBTRkU-q.js";
+import { O as Objects } from "./Objects-Hd8TgrS6.js";
 import { A as Advantages } from "./Advantages-CW1EK6O8.js";
 import { S as SliderPage, P as Partners } from "./SliderPage-CI8vh2HL.js";
 import { T as Title, a as changeItemId, v as SeoBlock, F as Footer } from "../entry-server.js";
