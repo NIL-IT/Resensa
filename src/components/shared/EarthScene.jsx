@@ -225,10 +225,7 @@ function Earth({ index }) {
     return null;
   }
   const earthRef = useRef();
-  const earthTexture = useLoader(
-    TextureLoader,
-    "../../assets/3d/texture_earth.jpg"
-  );
+  const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
   // State for tracking which location is selected
   const [selectedIdx, setSelectedIdx] = useState(null);
   // State for tracking if description should be shown
