@@ -323,16 +323,16 @@ function Earth({ index }) {
 export default function EarthScene({ index }) {
   return (
     <article
-      className="xs:w-[400px] xs:h-[450px] 
-    sm:w-[600px] sm:h-[500px] 
-    md:w-[800px] md:h-[500px] 
-    lg:w-[1000px] lg:h-[600px] 
-    xl:w-[500px] xl:h-[500px] 
-    2xl:w-[1000px] 2xl:h-[660px] select-none"
+    //   className="xs:w-[400px] xs:h-[450px]
+    // sm:w-[600px] sm:h-[500px]
+    // md:w-[800px] md:h-[500px]
+    // lg:w-[1000px] lg:h-[600px]
+    // xl:w-[500px] xl:h-[500px]
+    // 2xl:w-[1000px] 2xl:h-[660px] select-none"
     >
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
-        style={{ background: "transparent", width: "100%", height: "100%" }}
+      // camera={{ position: [0, 0, 6], fov: 45 }}
+      // style={{ background: "transparent", width: "100%", height: "100%" }}
       >
         <Earth index={index} />
         <OrbitControls

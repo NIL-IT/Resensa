@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { E as EquipmentBanner } from "./EquipmentBanner-BBTahqeQ.js";
 import { I as ItemsList } from "./ItemsList-QUHiM5Dy.js";
-import { O as Objects } from "./Objects-Hd8TgrS6.js";
+import { O as Objects } from "./Objects-5km_zCLh.js";
 import { a as changeItemId, v as SeoBlock, F as Footer } from "../entry-server.js";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

@@ -20,11 +20,10 @@ export default function Objects({ className = null, about = false }) {
 
   // Определяем, что мы на клиенте
   useEffect(() => {
-    document.body.style.zoom = "99.9%";
     setIsClient(true);
     setLoading(true);
   }, []);
-  document.body.style.zoom = "100%";
+
   useEffect(() => {
     if (!isClient) return;
 
