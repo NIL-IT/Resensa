@@ -786,7 +786,32 @@ const userSlice = createSlice({
         state.excel = action.payload;
       })
       .addCase(getAllSolutions.fulfilled, (state, action) => {
-        state.solutions = action.payload;
+        const seriesOrder = [
+          "СЕРИЯ RCNICE",
+          "СЕРИЯ RCLEAN",
+          "СЕРИЯ RPOOL",
+          "СЕРИЯ RCROOF",
+        ];
+        function sortByCustomOrder(arr, orderArray) {
+          return arr.sort((a, b) => {
+            const indexA = orderArray.indexOf(a.name);
+            const indexB = orderArray.indexOf(b.name);
+
+            // If both items are in the order array, sort by their position
+            if (indexA !== -1 && indexB !== -1) {
+              return indexA - indexB;
+            }
+
+            // If only one item is in the order array, prioritize it
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+
+            // If neither item is in the order array, maintain their relative position
+            return 0;
+          });
+        }
+        const sortedData = sortByCustomOrder([...action.payload], seriesOrder);
+        state.solutions = sortedData;
       })
       .addCase(getAllOrders.fulfilled, (state, action) => {
         state.orders = action.payload;

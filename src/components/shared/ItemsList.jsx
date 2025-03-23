@@ -86,13 +86,6 @@ export default function ItemsList({
     });
   };
 
-  // useEffect(() => {
-  //   // Calculate the date only on client-side to avoid hydration mismatch
-  //   const priceValidUntil = new Date();
-  //   priceValidUntil.setFullYear(priceValidUntil.getFullYear() + 1);
-  //   setFormattedPriceValidUntil(priceValidUntil.toISOString().split("T")[0]);
-  // }, []);
-
   const renderItem = (item, index) => {
     const { id, name, description, image_card, image_card_alt } = item;
     const isNewlyAdded = index >= 6 && isAnimating;
@@ -108,7 +101,7 @@ export default function ItemsList({
         }
         onClick={() => handleClickItem(id)}
         key={id}
-        className={`max-h-[440px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px] 
+        className={`relative sm:min-h-[420px] w-[280px] xs:w-[300px] sm:w-[320px] md:w-[330px]
         lg:w-[340px] xl:w-[345px] 2xl:w-[348px] 3xl:w-[352px] border border-gray-100 p-3 xs:p-3.5 sm:p-4
         transition-all duration-500 ease-in-out ${
           isNewlyAdded
@@ -127,12 +120,7 @@ export default function ItemsList({
           alt={image_card_alt}
           title={image_card_alt}
         />
-        <h3
-          itemProp="name"
-          className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal my-1.5 xs:my-1.5 sm:my-2"
-        >
-          {name}
-        </h3>
+
         <meta itemProp="brand" content="Recensa" />
         <meta itemProp="sku" content={id} />
         <div
@@ -144,7 +132,6 @@ export default function ItemsList({
           <meta itemProp="price" content="5000" />
           <meta itemProp="priceCurrency" content="RUB" />
           <meta itemProp="availability" content="https://schema.org/InStock" />
-          {/* <meta itemProp="priceValidUntil" content={formattedPriceValidUntil} /> */}
           <link
             itemProp="url"
             href={
@@ -154,11 +141,20 @@ export default function ItemsList({
             }
           />
         </div>
-        <div className="flex-center justify-between gap-2">
+
+        <div className="flex flex-col  mt-2">
+          <h3
+            itemProp="name"
+            className="text-gray-400 text-xs xs:text-xs sm:text-sm uppercase font-normal mb-2"
+          >
+            {name}
+          </h3>
+
           <div
             itemProp="description"
             dangerouslySetInnerHTML={{ __html: description }}
-            className="w-[50%] text-[11px] max-h-[60px] overflow-hidden xs:text-[12px] sm:text-[13px] text-gray-300"
+            className="text-[11px] xs:text-[12px] sm:text-[13px]
+             text-gray-300 pr-[48%] md:pr-[52%] overflow-hidden"
           />
 
           <Button
@@ -168,7 +164,11 @@ export default function ItemsList({
               handleChangeShowPopup(true, id);
             }}
             text={"Оставить заявку"}
-            className="w-[50%] py-[16px] px-[12px] hover:bg-gray-450"
+            className="absolute right-3 xs:right-3.5 sm:right-4
+               bottom-3 xs:bottom-3.5 sm:bottom-4 
+               max-w-[120px] md:max-w-[156px] md:max-h-[48px] 
+               text-[10px] md:text-[12px]
+               py-[16px] px-[12px] hover:bg-gray-450"
           />
         </div>
       </Link>
