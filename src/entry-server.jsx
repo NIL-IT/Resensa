@@ -10,15 +10,16 @@ import App from "./App";
  * @param {string} url
  */
 export function render(url) {
-  console.warn = () => {};
-  console.error = () => {};
-  const helmetContext = {};
+  // console.warn = () => {};
+  // console.error = () => {};
+  const { helmet } = renderToString(<App />);
+  console.log(helmet);
 
   const html = renderToString(
     <StrictMode>
       <Provider store={store}>
         <StaticRouter location={url}>
-          <HelmetProvider context={helmetContext}>
+          <HelmetProvider context={helmet}>
             <App />
           </HelmetProvider>
         </StaticRouter>
@@ -28,11 +29,11 @@ export function render(url) {
 
   return {
     html,
-    head: helmetContext.helmet
+    head: helmet
       ? `
-      ${helmetContext.helmet.title.toString()}
-      ${helmetContext.helmet.meta.toString()}
-      ${helmetContext.helmet.link.toString()}
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${helmet.link.toString()}
     `
       : "",
   };
