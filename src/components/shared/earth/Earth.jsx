@@ -5,7 +5,6 @@ import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import LocationMarker from "./LocationMarker";
 export default function Earth({ index, locations }) {
-  console.log("Earth");
   const earthRef = useRef();
   const earthTexture = useLoader(TextureLoader, "/texture_earth.jpg");
   const [selectedIdx, setSelectedIdx] = useState(null);

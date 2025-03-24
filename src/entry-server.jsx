@@ -6,26 +6,26 @@ import { store } from "./utils/store.js";
 import pkg from "react-helmet-async";
 const { HelmetProvider } = pkg;
 import App from "./App";
+
 /**
  * @param {string} url
  */
 export function render(url) {
-  // console.warn = () => {};
-  // console.error = () => {};
-  const { helmet } = renderToString(<App />);
-  console.log(helmet);
+  const helmetContext = {}; // Create context for Helmet
 
   const html = renderToString(
     <StrictMode>
       <Provider store={store}>
         <StaticRouter location={url}>
-          <HelmetProvider context={helmet}>
+          <HelmetProvider context={helmetContext}>
             <App />
           </HelmetProvider>
         </StaticRouter>
       </Provider>
     </StrictMode>
   );
+
+  const { helmet } = helmetContext; // Get helmet data from context
 
   return {
     html,
