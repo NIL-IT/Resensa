@@ -26,8 +26,6 @@ export function render(url) {
   );
 
   const { helmet } = helmetContext;
-
-  // Важно: возвращайте все типы данных из helmet
   return {
     html,
     head: helmet
