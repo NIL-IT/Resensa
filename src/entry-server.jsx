@@ -11,7 +11,7 @@ import App from "./App";
  * @param {string} url
  */
 export function render(url) {
-  const helmetContext = {}; // Create context for Helmet
+  const helmetContext = {};
 
   const html = renderToString(
     <StrictMode>
@@ -25,8 +25,9 @@ export function render(url) {
     </StrictMode>
   );
 
-  const { helmet } = helmetContext; // Get helmet data from context
+  const { helmet } = helmetContext;
 
+  // Важно: возвращайте все типы данных из helmet
   return {
     html,
     head: helmet
@@ -34,7 +35,8 @@ export function render(url) {
       ${helmet.title.toString()}
       ${helmet.meta.toString()}
       ${helmet.link.toString()}
-    `
+      ${helmet.script.toString()}
+      `
       : "",
   };
 }
