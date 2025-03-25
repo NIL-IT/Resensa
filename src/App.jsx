@@ -45,14 +45,14 @@ function App() {
   console.error = (...args) => {
     console.trace("Suppressed Error:", ...args);
   };
-  const [pathname, setPathname] = useState("");
+  // const [pathname, setPathname] = useState("");
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
-  }, []);
-  // const { pathname } = useLocation();
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setPathname(window.location.pathname);
+  //   }
+  // }, []);
+  const { pathname } = useLocation();
   const isLoginForm = pathname === "/auth" || pathname === "/auth/";
   const {
     isPopup,

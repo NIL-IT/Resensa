@@ -1,1 +1,0 @@
-import{j as s}from"./index-Cfm02Rei.js";import"react";const t=({title:r,description:i,url:e})=>s.jsxs("div",{style:{display:"none"},children:[s.jsx("h1",{children:r}),s.jsx("p",{children:i}),s.jsx("a",{href:e,children:e})]});export{t as S};

@@ -1,1 +1,0 @@
-import{j as s}from"./three-vendor-Ci446NTQ.js";const o=({title:r,description:n,url:e})=>s.jsxs("div",{style:{display:"none"},children:[s.jsx("h1",{children:r}),s.jsx("p",{children:n}),s.jsx("a",{href:e,children:e})]});export{o as S};
