@@ -42,9 +42,9 @@ function App() {
     event.preventDefault(); // Блокирует вывод ошибок промисов
   });
 
-  console.error = (...args) => {
-    console.trace("Suppressed Error:", ...args);
-  };
+  // console.error = (...args) => {
+  //   console.trace("Suppressed Error:", ...args);
+  // };
   // const [pathname, setPathname] = useState("");
 
   // useEffect(() => {
