@@ -2,8 +2,26 @@ const password = 1234554321;
 export const config = {
   readonly: false,
   height: 200,
-  toolbar: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
-  buttons: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  toolbar: [
+    "bold",
+    "underline",
+    "ol",
+    "italic",
+    "fullsize",
+    "paragraph",
+    "uppercase",
+    "lowercase",
+  ],
+  buttons: [
+    "bold",
+    "underline",
+    "ol",
+    "italic",
+    "fullsize",
+    "paragraph",
+    "uppercase",
+    "lowercase",
+  ],
   removeButtons: [
     "ul",
     "outdent",
@@ -32,17 +50,79 @@ export const config = {
   enableDragAndDropFileToEditor: true,
   pastePlain: false,
   pasteAsHTML: true,
-  // Отключение резервных кнопок в адаптивном режиме
-  buttonsMD: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
-  buttonsSM: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
-  buttonsXS: ["bold", "underline", "ol", "italic", "fullsize", "paragraph"],
+  buttonsMD: [
+    "bold",
+    "underline",
+    "ol",
+    "italic",
+    "fullsize",
+    "paragraph",
+    "uppercase",
+    "lowercase",
+  ],
+  buttonsSM: [
+    "bold",
+    "underline",
+    "ol",
+    "italic",
+    "fullsize",
+    "paragraph",
+    "uppercase",
+    "lowercase",
+  ],
+  buttonsXS: [
+    "bold",
+    "underline",
+    "ol",
+    "italic",
+    "fullsize",
+    "paragraph",
+    "uppercase",
+    "lowercase",
+  ],
   controls: {
-    paragraph: {
-      list: {
-        h3: "Заголовок 3",
-        h4: "Заголовок 4",
-        h5: "Заголовок 5",
-        h6: "Заголовок 6",
+    uppercase: {
+      name: "Верхний регистер",
+      tooltip: "Преобразовать в верхний регистр",
+      exec: function (editor) {
+        const selection = editor.selection.current();
+        if (selection) {
+          const range = editor.selection.range;
+          const selectedText = range.toString();
+
+          if (selectedText) {
+            const uppercaseText = selectedText.toUpperCase();
+
+            // Заменяем выделенный текст
+            range.deleteContents();
+            range.insertNode(document.createTextNode(uppercaseText));
+
+            // Обновляем выделение
+            editor.selection.select(range);
+          }
+        }
+      },
+    },
+    lowercase: {
+      name: "Нижний регистер",
+      tooltip: "Преобразовать в нижний регистр",
+      exec: function (editor) {
+        const selection = editor.selection.current();
+        if (selection) {
+          const range = editor.selection.range;
+          const selectedText = range.toString();
+
+          if (selectedText) {
+            const lowercaseText = selectedText.toLowerCase();
+
+            // Заменяем выделенный текст
+            range.deleteContents();
+            range.insertNode(document.createTextNode(lowercaseText));
+
+            // Обновляем выделение
+            editor.selection.select(range);
+          }
+        }
       },
     },
   },

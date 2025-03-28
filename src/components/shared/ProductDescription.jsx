@@ -12,7 +12,7 @@ export default function ProductDescription({ currentProduct }) {
       <div className="flex justify-center px-5 sm:p-0">
         <div
           dangerouslySetInnerHTML={{ __html: currentProduct.extra_description }}
-          className="w-[1160px]"
+          className="w-[1160px] text-base xl:text-lg"
         />
       </div>
     </section>
