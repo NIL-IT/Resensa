@@ -33,9 +33,12 @@ export default function ItemsList({
   useEffect(() => {
     if (!list) return;
 
-    if (lim && list.length > 6) {
+    if (lim && list.length > 6 && equipment) {
       setVisibleItems(list.slice(0, 6));
       setHiddenItems(list.slice(6));
+    } else if (lim && list.length > 3 && !equipment) {
+      setVisibleItems(list.slice(0, 3));
+      setHiddenItems(list.slice(3));
     } else {
       setVisibleItems(list);
       setHiddenItems([]);

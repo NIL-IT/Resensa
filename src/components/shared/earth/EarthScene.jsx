@@ -130,8 +130,8 @@ export default function EarthScene({ index }) {
 
   return (
     <article
-      className="xs:w-[400px] xs:h-[450px]
-      sm:w-[600px] sm:h-[500px]
+      className="xs:w-[360px] xs:h-[360px]
+      sm:w-[400px] sm:h-[400px]
       md:w-[800px] md:h-[500px]
       lg:w-[1000px] lg:h-[600px]
       xl:w-[500px] xl:h-[500px]
