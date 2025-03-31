@@ -128,7 +128,11 @@ export default function Header() {
             </div>
             <div className="flex justify-normal  md:justify-between lg:justify-normal w-full lg:w-[auto] flex-col sm:flex-row items-center gap-4">
               <div className="flex items-center gap-4">
-                <a target="_blank" href="#" className="hover:opacity-80">
+                <a
+                  target="_blank"
+                  href="https://t.me/+79231226699"
+                  className="hover:opacity-80"
+                >
                   <img
                     src="/icon/telegram.svg"
                     alt="telegram"
@@ -136,7 +140,11 @@ export default function Header() {
                     className="w-8 "
                   />
                 </a>
-                <a target="_blank" href="#" className="hover:opacity-80">
+                <a
+                  target="_blank"
+                  href="https://wa.me/+79231226699"
+                  className="hover:opacity-80"
+                >
                   <img
                     src="/icon/wa.svg"
                     alt="whatsapp"

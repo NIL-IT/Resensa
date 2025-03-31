@@ -78,6 +78,16 @@ export default function Footer({ scrollTop = null }) {
           >
             Политика конфиденциальности
           </h5>
+          <div className=" max-w-[313px] pt-3 text-gray-400 text-base sm:text-lg font-normal space-y-2">
+            <p>г.Новосибирск ул. Серебренниковская 14, офис 512</p>
+            <a target="_blank" href="mailto:office@recensa.ru">
+              Office@recensa.ru
+            </a>
+            <p>г.Екатеринбург ул. Свердлова 11А Офис 512</p>
+            <a target="_blank" href="mailto:ufd@recensa.ru">
+              ufd@recensa.ru
+            </a>
+          </div>
         </div>
         <div className="order-3 lg:order-2">
           <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
@@ -123,13 +133,14 @@ export default function Footer({ scrollTop = null }) {
           </a>
         </div>
         <div className="flex gap-[10px] lg:justify-end">
-          <a href="#">
+          <a href="https://t.me/+79231226699" target="_blank">
             <img src="/icon/telegram.svg" alt="telegram" title="Телеграмм" />
           </a>
-          <a href="#">
+          <a href="https://wa.me/+79231226699" target="_blank">
             <img src="/icon/wa.svg" alt="whatsapp" title="Ватсап" />
           </a>
         </div>
+
         <Button
           noLink={true}
           onClick={() => handleChangeShowPopup(true)}
