@@ -113,7 +113,7 @@ const Contacts = ({ company }) => {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-7 sm:gap-8">
-          <div className="space-y-4 xs:space-y-5 sm:space-y-6">
+          <div className="space-y-4  ">
             <h3
               itemProp="address"
               itemScope
@@ -123,14 +123,17 @@ const Contacts = ({ company }) => {
               Адрес
             </h3>
             <div className="space-y-3 xs:space-y-4">
-              <a
-                itemProp="email"
-                target="_blank"
-                href="mailto:office@recensa.ru"
-                className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                office@recensa.ru
-              </a>
+              <div className="   text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors space-y-2">
+                <p>г.Новосибирск ул. Серебренниковская 14, офис 512</p>
+                <a target="_blank" href="mailto:office@recensa.ru">
+                  Office@recensa.ru
+                </a>
+                <p>г.Екатеринбург ул. Свердлова 11А Офис 512</p>
+                <a target="_blank" href="mailto:ufd@recensa.ru">
+                  ufd@recensa.ru
+                </a>
+              </div>
+
               <a
                 itemProp="telephone"
                 target="_blank"
@@ -140,10 +143,10 @@ const Contacts = ({ company }) => {
                 +7 383 209 20 88
               </a>
 
-              <div className="flex gap-3 xs:gap-4 py-4 xs:py-5 sm:py-6">
+              <div className="flex gap-3 xs:gap-4 pt-4 xs:pt-5 sm:pt-6 pb-2">
                 <a
                   target="_blank"
-                  href="#"
+                  href="https://wa.me/+79231226699"
                   className="hover:opacity-80 transition-opacity"
                 >
                   <img
@@ -155,7 +158,7 @@ const Contacts = ({ company }) => {
                 </a>
                 <a
                   target="_blank"
-                  href="#"
+                  href="https://t.me/+79231226699"
                   className="hover:opacity-80 transition-opacity"
                 >
                   <img
@@ -167,7 +170,7 @@ const Contacts = ({ company }) => {
                 </a>
               </div>
 
-              <div className="pt-2">
+              <div className="">
                 <Button
                   noLink={true}
                   onClick={() => dispatch(changeShowPopup(true))}
