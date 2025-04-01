@@ -48,7 +48,6 @@ export default function ChangeBanner({ title }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     // Check for NaN in numeric values
 
     dispatch(updateBanner(formData));

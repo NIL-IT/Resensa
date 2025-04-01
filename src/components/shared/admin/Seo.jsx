@@ -142,7 +142,7 @@ export default function SeoPage({ title }) {
 
   const handleSubmitEquipment = (e) => {
     e.preventDefault();
-    console.log(formDataEquipment);
+
     dispatch(updateEquipmentSeo(formDataEquipment));
     setShowSuccess({ equipment: true });
   };

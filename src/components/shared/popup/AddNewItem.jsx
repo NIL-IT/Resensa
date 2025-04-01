@@ -90,7 +90,7 @@ const AddNewItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    console.log(formData);
+
     try {
       if (isNews) {
         if (!formData.title || !formData.text || !selectedFile) {
@@ -112,7 +112,6 @@ const AddNewItem = () => {
         await dispatch(getAllNews());
         setFormData({ title: "", text: "" });
       } else if (+pathnameId === 2) {
-        console.log(formData);
         if (
           !formData.name ||
           !formData.description ||

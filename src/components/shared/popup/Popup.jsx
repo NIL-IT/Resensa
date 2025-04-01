@@ -6,6 +6,7 @@ import {
   changeShowPopup,
   submitOrder,
 } from "../../../utils/slice/userSlice";
+import { Link } from "react-router-dom";
 
 const Popup = () => {
   const dispatch = useDispatch();
@@ -122,12 +123,13 @@ const Popup = () => {
               className="mt-0.5 xs:mt-1"
               required
             />
-            <label
+            <a
+              href="/privicy"
               htmlFor="privacy"
-              className="text-xs xs:text-sm text-gray-600"
+              className="text-xs xs:text-sm text-gray-600 cursor-pointer underline underline-offset-4 "
             >
               Нажимая на кнопку, вы соглашаетесь с политикой конфиденциальности
-            </label>
+            </a>
           </div>
           <button
             type="submit"

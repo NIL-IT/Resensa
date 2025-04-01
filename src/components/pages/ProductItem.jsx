@@ -32,7 +32,7 @@ export default function ProductItem({ list }) {
   const [currentProduct, setCurrentProduct] = useState(
     list.find(({ name }) => useLatinFormat(name) === pathname.split("/")[2])
   );
-  console.log(currentProduct);
+
   document.body.style.overflowY = "auto";
   useEffect(() => {
     if (!currentProduct) navigate("/");
