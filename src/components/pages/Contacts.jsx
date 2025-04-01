@@ -71,7 +71,7 @@ const Contacts = ({ company }) => {
           <meta itemProp="ratingCount" content="1064" />
         </div>
       </div>
-      <div className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
+      <div className="container mx-auto pl-4 xs:pl-5 sm:pl-6 lg:pl-8 py-4 xs:py-5 sm:py-6 flex-grow border-b border-b-gray-400">
         <nav className="mb-4 xs:mb-5 sm:mb-6">
           <ul
             itemScope
@@ -112,8 +112,8 @@ const Contacts = ({ company }) => {
           Контакты
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-7 sm:gap-8">
-          <div className="space-y-4  ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-7 lg:gap-28">
+          <div className="space-y-4 ">
             <h3
               itemProp="address"
               itemScope
@@ -123,25 +123,47 @@ const Contacts = ({ company }) => {
               Адрес
             </h3>
             <div className="space-y-3 xs:space-y-4">
-              <div className="   text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors space-y-2">
-                <p>г.Новосибирск ул. Серебренниковская 14, офис 512</p>
-                <a target="_blank" href="mailto:office@recensa.ru">
-                  Office@recensa.ru
-                </a>
-                <p>г.Екатеринбург ул. Свердлова 11А Офис 512</p>
-                <a target="_blank" href="mailto:ufd@recensa.ru">
-                  ufd@recensa.ru
-                </a>
-              </div>
+              <div className="   text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors space-y-8 xl:space-y-11">
+                <div className="space-y-2 ">
+                  <p>г. Новосибирск, ул. Серебренниковская, дом 14, офис 512</p>
 
-              <a
-                itemProp="telephone"
-                target="_blank"
-                href="tel:+73832092088"
-                className="block text-sm xs:text-base text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                +7 383 209 20 88
-              </a>
+                  <div>
+                    <a target="_blank" href="mailto:office@recensa.ru">
+                      office@recensa.ru
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      target="_blank"
+                      href="tel:+73832092088"
+                      className="hover:text-gray-600"
+                    >
+                      +7 (383) 209-20-88
+                    </a>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <p>г. Екатеринбург, ул. Свердлова, дом 11А, офис 512</p>
+                  <div>
+                    <a
+                      className=" "
+                      target="_blank"
+                      href="mailto:ufd@recensa.ru"
+                    >
+                      ufd@recensa.ru
+                    </a>
+                  </div>
+                  <div className="">
+                    <a
+                      target="_blank"
+                      href="tel:+79222059435"
+                      className="hover:text-gray-600"
+                    >
+                      +7 (922) 205-94-35
+                    </a>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex gap-3 xs:gap-4 pt-4 xs:pt-5 sm:pt-6 pb-2">
                 <a

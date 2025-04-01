@@ -43,13 +43,15 @@ export const locations = [
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
-      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
+      description:
+        "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
+      mapUrl:
+        "https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/inside/?ll=82.928862%2C55.020812&tab=inside&z=17.23",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
-      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
+      description: "г. Екатеринбург,<br/> ул. Свердлова, дом 11А, офис 512",
       mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],
@@ -58,7 +60,7 @@ export const locations = [
     {
       position: [-0.1, 1.6, -1],
       title: "Мирнинский Горно-обогатительный комбинат Алроса",
-      description: "г.Мирный",
+      description: "г. Мирный",
       mapUrl:
         "https://yandex.ru/maps/?text=Мирнинский+Горно-обогатительный+комбинат+Алроса",
     },
@@ -83,13 +85,15 @@ export const locations = [
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
-      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
+      description:
+        "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
+      mapUrl:
+        "https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/inside/?ll=82.928862%2C55.020812&tab=inside&z=17.23",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
-      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
+      description: "г. Екатеринбург,<br/> ул. Свердлова, дом 11А, офис 512",
       mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],
@@ -105,13 +109,15 @@ export const locations = [
     {
       position: [0.5, 1.25, -1.3],
       title: "Офис Recensa Новосибирск",
-      description: "г.Новосибирск ул.Шевченко д.4 офис 509 ",
-      mapUrl: "https://yandex.ru/maps/?text=Новосибирск+улица+Шевченко+4",
+      description:
+        "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
+      mapUrl:
+        "https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/inside/?ll=82.928862%2C55.020812&tab=inside&z=17.23",
     },
     {
       position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
-      description: "г.Екатеринбург ул. Свердлова д.11 А офис 512",
+      description: "г. Екатеринбург,<br/> ул. Свердлова, дом 11А, офис 512",
       mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",
     },
   ],

@@ -94,7 +94,10 @@ export default function LocationMarker({
                 }`}
               onClick={handleClickCart}
             >
-              <p className="leading-tight">{description}</p>
+              <p
+                dangerouslySetInnerHTML={{ __html: description }}
+                className="leading-tight"
+              />
               <p className="text-blue-300 text-[6px] mt-1">
                 Нажмите еще раз для открытия карты
               </p>

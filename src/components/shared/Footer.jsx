@@ -52,7 +52,7 @@ export default function Footer({ scrollTop = null }) {
         <meta itemProp="copyrightYear" content="2025" />
         <meta itemProp="copyrightHolder" content="Recensa" />
       </span>
-      <div className="flex flex-col lg:flex-row gap-5 lg:gap-20">
+      <div className="flex flex-col 2xl:flex-row gap-5 2xl:gap-20">
         <div>
           <div
             onClick={() => {
@@ -78,16 +78,6 @@ export default function Footer({ scrollTop = null }) {
           >
             Политика конфиденциальности
           </h5>
-          <div className=" max-w-[313px] pt-3 text-gray-400 text-base sm:text-lg font-normal space-y-2">
-            <p>г.Новосибирск ул. Серебренниковская 14, офис 512</p>
-            <a target="_blank" href="mailto:office@recensa.ru">
-              Office@recensa.ru
-            </a>
-            <p>г.Екатеринбург ул. Свердлова 11А Офис 512</p>
-            <a target="_blank" href="mailto:ufd@recensa.ru">
-              ufd@recensa.ru
-            </a>
-          </div>
         </div>
         <div className="order-3 lg:order-2">
           <nav className="flex flex-col sm:flex-row gap-8 xs:gap-10 sm:gap-[40px] md:gap-[45px] lg:gap-[50px] xl:gap-[54px] 2xl:gap-[56px] 3xl:gap-[58px]">
@@ -122,31 +112,68 @@ export default function Footer({ scrollTop = null }) {
         </div>
       </div>
 
-      <article className="flex flex-col gap-[15px] xs:gap-[18px] sm:gap-[20px] md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3">
-        <div className="flex flex-col lg:justify-end *:flex *:lg:justify-end text-gray-400 text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl font-normal">
-          <p>Адрес</p>
-          <a target="_blank" href="mailto:office@recensa.ru">
-            office@recensa.ru
-          </a>
-          <a target="_blank" href="tel:+73832092088">
-            +7 383 209 20 88
-          </a>
+      <article
+        className="flex flex-col
+       gap-[15px] xs:gap-[18px] sm:gap-[20px] 
+       md:gap-[22px] lg:gap-[24px] xl:gap-[25px] 
+       2xl:gap-[25px] 3xl:gap-[26px] order-2 lg:order-3 justify-between"
+      >
+        <div className="flex flex-col 2xl:flex-row gap-6 xl:gap-10">
+          <div className=" text-gray-400 text-base sm:text-lg font-normal space-y-1  xl:space-y-2">
+            <p className=" ">г. Екатеринбург, ул. Свердлова,</p>
+            <p> дом 11А, офис 512</p>
+            <div>
+              <a className=" " target="_blank" href="mailto:ufd@recensa.ru">
+                ufd@recensa.ru
+              </a>
+            </div>
+            <div className="text-gray-400 text-base sm:text-lg font-normal">
+              <a
+                target="_blank"
+                href="tel:+79222059435"
+                className="hover:text-gray-600"
+              >
+                +7 (922) 205-94-35
+              </a>
+            </div>
+          </div>
+          <div className=" text-gray-400 text-base sm:text-lg font-normal space-y-1  xl:space-y-2">
+            <p>г. Новосибирск, ул. Серебренниковская,</p>
+            <p>дом 14, офис 512</p>
+            <div>
+              <a target="_blank" href="mailto:office@recensa.ru">
+                office@recensa.ru
+              </a>
+            </div>
+            <div>
+              <a
+                target="_blank"
+                href="tel:+73832092088"
+                className="hover:text-gray-600"
+              >
+                +7 (383) 209-20-88
+              </a>
+            </div>
+          </div>
         </div>
-        <div className="flex gap-[10px] lg:justify-end">
-          <a href="https://t.me/+79231226699" target="_blank">
-            <img src="/icon/telegram.svg" alt="telegram" title="Телеграмм" />
-          </a>
-          <a href="https://wa.me/+79231226699" target="_blank">
-            <img src="/icon/wa.svg" alt="whatsapp" title="Ватсап" />
-          </a>
-        </div>
+        <div>
+          <div className="flex gap-[10px] lg:justify-end mb-5">
+            <a href="https://t.me/+79231226699" target="_blank">
+              <img src="/icon/telegram.svg" alt="telegram" title="Телеграмм" />
+            </a>
+            <a href="https://wa.me/+79231226699" target="_blank">
+              <img src="/icon/wa.svg" alt="whatsapp" title="Ватсап" />
+            </a>
+          </div>
 
-        <Button
-          noLink={true}
-          onClick={() => handleChangeShowPopup(true)}
-          text={"заказать звонок"}
-          className="bg-white border border-gray-400 text-gray-400 text-xs font-normal py-2.5 xs:py-2.5 sm:py-3 px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[30px] flex lg:justify-end hover:border-gray-200 hover:bg-gray-50 w-fit lg:w-auto lg:ml-auto"
-        />
+          <Button
+            noLink={true}
+            onClick={() => handleChangeShowPopup(true)}
+            text={"заказать звонок"}
+            className="  text-white text-xs font-normal py-2.5 xs:py-2.5 sm:py-3 px-[20px] xs:px-[22px] sm:px-[25px] md:px-[27px] lg:px-[30px] flex lg:justify-end 
+           hover:bg-gray-450 w-fit lg:w-auto lg:ml-auto"
+          />
+        </div>
       </article>
       <a
         target="_blank"
