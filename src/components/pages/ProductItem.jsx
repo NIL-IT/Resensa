@@ -15,6 +15,7 @@ import {
 } from "../../utils/slice/userSlice";
 import ProductDescription from "../shared/ProductDescription";
 import SeoBlock from "../shared/SeoBlock";
+import useLatinFormat from "../../utils/hooks/useLatinFormat";
 
 export default function ProductItem({ list }) {
   const dispatch = useDispatch();
@@ -29,8 +30,9 @@ export default function ProductItem({ list }) {
     !equipmentById && !solutionsById ? true : equipmentById ? true : false;
 
   const [currentProduct, setCurrentProduct] = useState(
-    equipmentById || solutionsById || (list && list.length > 0 ? list[0] : null)
+    list.find(({ name }) => useLatinFormat(name) === pathname.split("/")[2])
   );
+  console.log(currentProduct);
   document.body.style.overflowY = "auto";
   useEffect(() => {
     if (!currentProduct) navigate("/");
@@ -83,7 +85,13 @@ export default function ProductItem({ list }) {
   // Handle product changes
   useEffect(() => {
     setCurrentProduct(
-      equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+      equipmentById
+        ? equipmentById
+        : solutionsById
+        ? solutionsById
+        : list.find(
+            ({ name }) => useLatinFormat(name) === pathname.split("/")[2]
+          )
     );
   }, [pathname, equipmentById, solutionsById]);
 
@@ -110,7 +118,13 @@ export default function ProductItem({ list }) {
       dispatch(changeRoutingToOrders(false));
     }
     setCurrentProduct(
-      equipmentById ? equipmentById : solutionsById ? solutionsById : list[0]
+      equipmentById
+        ? equipmentById
+        : solutionsById
+        ? solutionsById
+        : list.find(
+            ({ name }) => useLatinFormat(name) === pathname.split("/")[2]
+          )
     );
     setPrevPathname(pathname);
   }, [pathname, itemId]);
