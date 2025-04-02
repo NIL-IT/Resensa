@@ -56,7 +56,7 @@ export default function Objects({ className = "", about = false }) {
               </div>
               <Button
                 target={"_blank"}
-                href="https://yandex.ru/maps/65/novosibirsk/house/ulitsa_shevchenko_4/bEsYfwRjT0YCQFtvfXxwdXRnZA==/inside/?ll=82.932743%2C55.014572&tab=inside&z=19.71"
+                href="https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/?ll=82.927382%2C55.020673&z=17"
                 icon={true}
                 text={"построить маршрут до офиса"}
                 className="bg-white text-gray-400 w-full select-none justify-center xl:justify-normal
