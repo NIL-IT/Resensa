@@ -81,7 +81,7 @@ export default function Banner({ banner }) {
       <div className=" flex justify-center">
         <img
           className={`${imageSrc === imgPlaceholder ? "loading" : "loaded"}
-          min-w-[100wh] min-h-[400px]   md:min-h-[500px] xl:min-h-[700px]  mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
+          min-w-[100wh] min-h-[250px] sm:min-h-[300px]   md:min-h-[450px] xl:min-h-[700px]  mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
           xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]
           `}
           style={{
