@@ -3,8 +3,8 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import { useDispatch } from "react-redux";
 import { changeShowPopup } from "../../utils/slice/userSlice";
-import imgPlaceholder from "/img/banner_main_placeholder.png";
-import imgMain from "/img/banner_main.png";
+import imgPlaceholder from "/img/new_banner_placeholder.jpg";
+import imgMain from "/img/new_banner.jpg";
 import MainTitle from "../ui/MainTitle";
 export default function Banner({ banner }) {
   const dispatch = useDispatch();
@@ -19,12 +19,12 @@ export default function Banner({ banner }) {
   }, []);
   return (
     <section
-      className="pl-5 xs:pl-0 
+      className="
       pt-[40px] xs:pt-[45px] sm:pt-[50px] md:pt-[90px] lg:pt-[118px] xl:pt-[120px] 2xl:pt-[122px] 3xl:pt-[125px] 
     
     "
     >
-      <div className="container ">
+      <div className="container pl-5 xs:pl-0 ">
         <MainTitle
           className="border-b border-gray-400 pb-[20px] xs:pb-[23px] sm:pb-[25px] md:pb-[28px] 
         lg:pb-[30px] xl:pb-[31px] 2xl:pb-[32px] 3xl:pb-[33px]
@@ -81,7 +81,7 @@ export default function Banner({ banner }) {
       <div className=" flex justify-center">
         <img
           className={`${imageSrc === imgPlaceholder ? "loading" : "loaded"}
-          min-w-[100wh] max-h-[700px]  mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
+          min-w-[100wh] min-h-[400px]   md:min-h-[500px] xl:min-h-[700px]  mt-[35px] xs:mt-[40px] sm:mt-[45px] md:mt-[75px] lg:mt-[85px] 
           xl:mt-[95px] 2xl:mt-[100px] 3xl:mt-[105px]
           `}
           style={{
@@ -89,11 +89,11 @@ export default function Banner({ banner }) {
             backgroundSize: "center",
             objectFit: "cover",
             width: "100%",
-            height: "50%",
+            height: "100%",
           }}
           src={imageSrc}
           alt="banner"
-          title="Banner"
+          title="Оборудование Recensa"
         />
       </div>
     </section>
