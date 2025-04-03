@@ -135,6 +135,7 @@ export default function ProductItem({ list }) {
     dataFetchedRef.current = true;
     dispatch(getAllOrders());
   }, []);
+
   return currentProduct ? (
     <>
       <SeoBlock

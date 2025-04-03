@@ -28,9 +28,14 @@ export default function EquipmentBanner({
   const [isProduct, setIsProduct] = useState(pathname.split("/").length === 3);
   useEffect(() => {
     if (!list) return;
-    const filterData = list.filter(
-      (item) => item.id === equipmentById?.id || solutionsById?.id
-    );
+    let filterData;
+    if (equipmentById) {
+      filterData = list.filter((item) => item.id === equipmentById.id);
+    } else if (solutionsById) {
+      filterData = list.filter((item) => item.id === solutionsById.id);
+    } else {
+      filterData = list[0];
+    }
     setProduct(filterData[0]);
     isLoading(false);
   }, [equipmentById, solutionsById]);
@@ -77,7 +82,6 @@ export default function EquipmentBanner({
       ? `Главная—Оборудование—${subtitle}`
       : `Главная—Решения—${subtitle}`;
   };
-
   return loading && !height ? (
     <div
       className=" bg-white w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
@@ -164,7 +168,7 @@ export default function EquipmentBanner({
         {isProduct && (
           <img
             className="hidden"
-            src={cardImg ? cardImg : ""}
+            src={cardImg ? cardImg : "/img/product_placeholder.png"}
             alt={product ? product.image_card_alt : "Карточка товара"}
             itemProp="image"
             title={product ? product.image_card_alt : "Карточка товара"}
