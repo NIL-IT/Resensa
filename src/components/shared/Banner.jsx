@@ -41,13 +41,10 @@ export default function Banner({ banner }) {
                 {banner.first_value || "22"}
               </span>
               <p
+                dangerouslySetInnerHTML={{ __html: banner.first_value_string }}
                 className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl 3xl:text-xl
              text-gray-300 xs:text-start text-left "
-              >
-                {banner.first_value_string ||
-                  `года опыта на рынке
-вентиляционного оборудования`}
-              </p>
+              />
             </div>
             <div className="block xs:gap-5  md:w-[280px] xl:w-[312px]">
               <span
@@ -58,13 +55,10 @@ export default function Banner({ banner }) {
                 {banner.second_value || `3`}
               </span>
               <p
+                dangerouslySetInnerHTML={{ __html: banner.second_value_string }}
                 className="text-base xs:text-base sm:text-lg md:text-xl lg:text-xl
              xl:text-xl 2xl:text-xl 3xl:text-xl text-gray-300 xs:text-start text-left"
-              >
-                {banner.second_value_string ||
-                  `года гарантии
-на продукцию компании.`}
-              </p>
+              />
             </div>
           </div>
           <div className="mr-5 xs:mr-0">

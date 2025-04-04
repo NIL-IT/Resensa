@@ -84,7 +84,8 @@ export default function ChangeBanner({ title }) {
           </div>
           <div>
             <p className="block mb-1 text-sm font-medium text-gray-900">
-              Текст для первого значения
+              Текст для первого значения (что-бы сделать отступ введите
+              специальных знак &lt;/br&gt; )
             </p>
             <Input
               className={"border border-gray-200"}
@@ -115,7 +116,8 @@ export default function ChangeBanner({ title }) {
           </div>
           <div>
             <p className="block mb-1 text-sm font-medium text-gray-900">
-              Текст для второго значения
+              Текст для второго значения (что-бы сделать отступ введите
+              специальных знак &lt;/br&gt; )
             </p>
             <Input
               className={"border border-gray-200"}
