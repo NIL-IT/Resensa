@@ -44,11 +44,11 @@ export default function EquipmentBanner({
     if (h1Ref.current) {
       height = h1Ref.current.offsetHeight;
       if (height <= 55) {
-        setPaddingClass(`pb-[50px] xs:pb-[40px] sm:pb-[20px] 
+        setPaddingClass(`pb-[auto] xs:pb-[auto] sm:pb-[20px] 
            md:pb-[80px] lg:pb-[130px]  
           xl:pb-[190px] 2xl:pb-[240px] 3xl:pb-[286px]`);
       } else {
-        setPaddingClass(`pb-[15px] xs:pb-[0px] sm:pb-[20px] 
+        setPaddingClass(`pb-[15px] xs:pb-[0px] sm:pb-[30px] 
            md:pb-[65px] lg:pb-[95px]  
           xl:pb-[110px] 2xl:pb-[180px] 3xl:pb-[230px]`);
       }
@@ -180,7 +180,7 @@ export default function EquipmentBanner({
           left-0 w-full    
           z-[-2] ${imageSrc === placeholderSrc ? "loading" : "loaded"} ${
             isProduct
-              ? `object-contain h-[400px] md:h-[500px] lg:h-[600px] 
+              ? `object-contain h-[420px] md:h-[500px] lg:h-[600px] 
               xl:h-[700px] 2xl:h-[800px] 3xl:h-[900px]`
               : `
               min-w-[100%] max-w-[1920px] 
@@ -226,7 +226,7 @@ export default function EquipmentBanner({
           )}
 
           <div
-            className={`container pl-[20px] xs:pl-[0] ${
+            className={`container pl-[20px]  xs:pl-[0] ${
               isProduct && "min-h-[400px]"
             } ${
               about
