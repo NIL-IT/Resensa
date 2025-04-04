@@ -4,7 +4,7 @@ import Title from "../ui/Title";
 const list = [
   {
     title: "высокачественное оборудование",
-    text: "Производим, учитывая специфику эксплуатационных требований и климатических условий.",
+    text: "Производим, учитывая специфику эксплуатационных требований<br/>и климатических условий.",
     img: "/icon/ad_1.svg",
   },
   {
@@ -30,7 +30,7 @@ const list = [
   },
   {
     title: "адаптация под ваши запросы",
-    text: "Оборудование может быть адаптировано под ваши запросы, включая окрасуц и конфигурацию.",
+    text: "Оборудование может быть адаптировано под ваши запросы, включая окрасуц</br>и конфигурацию.",
     img: "/icon/ad_6.svg",
   },
 ];
@@ -178,9 +178,10 @@ export default function Advantages() {
                 </h3>
               )}
             </div>
-            <p className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]">
-              {text}
-            </p>
+            <p
+              dangerouslySetInnerHTML={{ __html: text }}
+              className="text-gray-100 text-sm xs:text-sm sm:text-base md:text-lg leading-[20px] xs:leading-[21px] sm:leading-[22px] md:leading-[25.5px] lg:leading-[26px] xl:leading-[26.5px] 2xl:leading-[27px] 3xl:leading-[27.5px] max-w-[330px] xs:max-w-[340px] sm:max-w-[350px] md:max-w-[370px]"
+            />
           </article>
         ))}
       </div>
