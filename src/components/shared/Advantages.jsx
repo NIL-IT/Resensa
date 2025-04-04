@@ -13,18 +13,17 @@ const list = [
     img: "/icon/ad_2.svg",
   },
   {
-    title: "инновации и технологии",
+    title: "инновации</br>и технологии",
     text: "Используя передовые технологии, разрабатываем оборудование, которое соответствует мировым стандартам энергоэффективности и надежности.",
     img: "/icon/ad_3.svg",
   },
   {
     title: "широкий выбор комплектующих",
-    text: "Включая различные типы теплообменников, вентиляторов и фильтров, что позволяет создавать решения для любых условий.",
+    text: "Включая различные типы теплообменников, вентиляторов</br>и фильтров, что позволяет создавать решения для любых условий.",
     img: "/icon/ad_4.svg",
   },
   {
-    title: "наши",
-    subtitle: "инженеры",
+    title: "наши<br/>инженеры",
     text: "Помогут вым подобрать идеальное решение, учитывая ваши задачи, требования и условия эксплуатации",
     img: "/icon/ad_5.svg",
   },
@@ -169,14 +168,10 @@ export default function Advantages() {
               className="min-h-[44px] sm:min-h-[48px] 
                md:min-h-[56px] max-w-[180px] md:max-w-[200px] lg:max-w-[220px]"
             >
-              <h3 className="text-base uppercase xs:text-base sm:text-lg md:text-xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                {title}
-              </h3>
-              {subtitle && (
-                <h3 className="text-base uppercase xs:text-base sm:text-lg md:text-xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]">
-                  {subtitle}
-                </h3>
-              )}
+              <h3
+                dangerouslySetInnerHTML={{ __html: title }}
+                className="text-base uppercase xs:text-base sm:text-lg md:text-xl text-white max-w-[260px] xs:max-w-[270px] sm:max-w-[280px] md:max-w-[300px]"
+              />
             </div>
             <p
               dangerouslySetInnerHTML={{ __html: text }}
