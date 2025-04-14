@@ -175,17 +175,6 @@ export default function Footer({ scrollTop = null }) {
           />
         </div>
       </article>
-      <a
-        target="_blank"
-        href="https://nil-it.ru"
-        className="absolute bottom-3 xs:bottom-3.5 sm:bottom-4 md:bottom-4.5 lg:bottom-5 right-0 w-[120px] xs:w-[130px] sm:w-[140px] md:w-[145px] lg:w-[150px] xl:w-[153px] 2xl:w-[154px] 3xl:w-[156px] h-[20px] xs:h-[22px] sm:h-[24px] md:h-[25px] lg:h-[26px] xl:h-[26px] 2xl:h-[26px] 3xl:h-[27px]"
-      >
-        <img
-          src="/img/nil.png"
-          alt="nill"
-          title="Компания разработающая сайт"
-        />
-      </a>
     </footer>
   );
 }
