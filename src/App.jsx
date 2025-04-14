@@ -32,6 +32,7 @@ const SearchPopup = lazy(() => import("./components/shared/popup/SearchPopup"));
 
 function App() {
   console.warn = () => {};
+
   console.error = () => {};
 
   window.addEventListener("error", (event) => {
