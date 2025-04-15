@@ -58,7 +58,7 @@ export const locations = [
   // Производства
   [
     {
-      position: [-0.1, 1.6, -1],
+      position: [-0.05, 1.56, -1.02],
       title: "Мирнинский Горно-обогатительный комбинат Алроса",
       description: "г. Мирный",
       mapUrl:
@@ -71,7 +71,7 @@ export const locations = [
       mapUrl: "https://yandex.ru/maps/?text=НИЦ+Курчатовский+институт+Москва",
     },
     {
-      position: [-0.3, 1.6, -1],
+      position: [-0.2, 1.53, -1.04],
       title: "Пищевое производство",
       description: "г. Якутск",
       mapUrl: "https://yandex.ru/maps/?text=пищевое+производство+Якутск",
@@ -83,7 +83,7 @@ export const locations = [
       mapUrl: "https://yandex.ru/maps/?text=Абсолют+Кэш+Энд+Кэрри+Улан-Удэ",
     },
     {
-      position: [0.35, 1.43, -1.15],
+      position: [0.44, 1.44, -1.07],
       title: "Офис Recensa Новосибирск",
       description:
         "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
@@ -107,7 +107,7 @@ export const locations = [
         "https://yandex.ru/maps/?text=Центральная+городская+больница+Нурек+Таджикистан",
     },
     {
-      position: [0.4, 1.4, -1.13],
+      position: [0.44, 1.44, -1.07],
       title: "Офис Recensa Новосибирск",
       description:
         "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
@@ -115,7 +115,7 @@ export const locations = [
         "https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/inside/?ll=82.928862%2C55.020812&tab=inside&z=17.23",
     },
     {
-      position: [0.75, 1.5, -0.83],
+      position: [0.75, 1.5, -0.85],
       title: "Офис Recensa Екатеринбург",
       description: "г. Екатеринбург,<br/> ул. Свердлова, дом 11А, офис 512",
       mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",

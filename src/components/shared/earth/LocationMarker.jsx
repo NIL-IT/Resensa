@@ -71,7 +71,7 @@ export default function LocationMarker({
                 : title === "Пищевое производство"
                 ? "top-[-22px] "
                 : title === "Офис Recensa Новосибирск" && groupIndex === 1
-                ? "top-[-22px] left-[0px] xl:top-[-23px] xl:left-[0px]"
+                ? "top-[-20px] left-[0px] xl:top-[-20px] xl:left-[0px]"
                 : ""
             }`}
             onClick={(e) => handleClickTitle(e, i)}
@@ -92,6 +92,8 @@ export default function LocationMarker({
                     : title === "Жилые комплексы"
                     ? "top-[0px] left-[-103px]"
                     : title === "Пищевое производство"
+                    ? "top-[0px] "
+                    : title === "Офис Recensa Новосибирск" && groupIndex === 1
                     ? "top-[0px] "
                     : "top-[20px] left-0"
                 }`}
