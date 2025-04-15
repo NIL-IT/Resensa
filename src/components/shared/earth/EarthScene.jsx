@@ -83,7 +83,7 @@ export const locations = [
       mapUrl: "https://yandex.ru/maps/?text=Абсолют+Кэш+Энд+Кэрри+Улан-Удэ",
     },
     {
-      position: [0.5, 1.25, -1.3],
+      position: [0.35, 1.43, -1.15],
       title: "Офис Recensa Новосибирск",
       description:
         "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
@@ -100,14 +100,14 @@ export const locations = [
   // Медицинские
   [
     {
-      position: [0.4, 1.4, -1.2],
+      position: [0.5, 1.25, -1.26],
       title: "Центральная городская больница",
       description: "Таджикистан, Хатлонская область, Нурек",
       mapUrl:
         "https://yandex.ru/maps/?text=Центральная+городская+больница+Нурек+Таджикистан",
     },
     {
-      position: [0.5, 1.25, -1.3],
+      position: [0.4, 1.4, -1.13],
       title: "Офис Recensa Новосибирск",
       description:
         "г. Новосибирск,<br/> ул. Серебренниковская, дом 14, офис 512",
@@ -115,7 +115,7 @@ export const locations = [
         "https://yandex.ru/maps/65/novosibirsk/house/serebrennikovskaya_ulitsa_14/bEsYfwVnSk0EQFtvfXxzcXpkZw==/inside/?ll=82.928862%2C55.020812&tab=inside&z=17.23",
     },
     {
-      position: [0.75, 1.5, -0.85],
+      position: [0.75, 1.5, -0.83],
       title: "Офис Recensa Екатеринбург",
       description: "г. Екатеринбург,<br/> ул. Свердлова, дом 11А, офис 512",
       mapUrl: "https://yandex.ru/maps/?text=Екатеринбург+улица+Свердлова+11А",

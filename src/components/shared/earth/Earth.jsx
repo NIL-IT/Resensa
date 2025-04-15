@@ -102,6 +102,7 @@ export default function Earth({ index, locations }) {
               <LocationMarker
                 key={idx}
                 {...location}
+                groupIndex={index}
                 i={idx}
                 handleLocationClick={handleLocationClick}
                 isSelected={selectedIdx === idx}

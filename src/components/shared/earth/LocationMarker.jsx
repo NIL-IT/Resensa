@@ -10,9 +10,10 @@ export default function LocationMarker({
   mapUrl,
   handleLocationClick,
   i,
+  groupIndex,
 }) {
   const [clickState, setClickState] = useState(0); // 0 = none, 1 = showing description, 2 = go to map
-
+  console.log(groupIndex);
   const handleClickTitle = (e, index) => {
     e.stopPropagation();
     handleLocationClick(e, index);
@@ -69,6 +70,8 @@ export default function LocationMarker({
                 ? "top-[-21px] left-[-103px]"
                 : title === "Пищевое производство"
                 ? "top-[-22px] "
+                : title === "Офис Recensa Новосибирск" && groupIndex === 1
+                ? "top-[-22px] left-[0px] xl:top-[-23px] xl:left-[0px]"
                 : ""
             }`}
             onClick={(e) => handleClickTitle(e, i)}
