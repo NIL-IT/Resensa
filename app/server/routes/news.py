@@ -33,7 +33,7 @@ async def create_news(
 
     news_model = News(
         news_photo=relative_path,
-        titlnews_modele=title,
+        title=title,
         text=text,
         date=datetime.now().strftime("%d/%m/%Y"),
         page_description=page_description,
@@ -42,7 +42,7 @@ async def create_news(
         hidden_seo_text=hidden_seo_text
     )
     try:
-        news = await news_repo.create_news()
+        news = await news_repo.create_news(news_model)
         return news
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

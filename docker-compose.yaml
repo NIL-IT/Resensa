@@ -17,6 +17,9 @@
         retries: 10
     app:
       image: soramiyaz/fastapi-server:latest
+      environment:
+        BOT_ID: 7596705272:AAEMTxUss6MarU3qpSXUyM8DTOiGdmhXtOc
+        CHAT_ID: -1002335074227
       networks:
         - default_network
       volumes:
