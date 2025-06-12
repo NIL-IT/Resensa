@@ -21,8 +21,8 @@
       build: .
       environment:
         BOT_ID: 7596705272:AAEMTxUss6MarU3qpSXUyM8DTOiGdmhXtOc
-        CHAT_ID: -1002335074227s
-        DATABASE_URL: "postgresql://postgres:1423@postgres:5432/resensa"  # Critical!
+        CHAT_ID: -1002335074227
+        DATABASE_URL: "postgresql+asyncpg://postgres:1423@postgres:5432/resensa"  # Critical!
       networks:
         - default_network
       volumes:
