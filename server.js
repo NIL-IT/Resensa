@@ -3,8 +3,8 @@ import express from "express";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
-const port = process.env.PORT || 5173;
-const host = "http://localhost"; // Добавленный хост
+const port = process.env.PORT || 3000;
+const host = "localhost"; // Добавленный хост
 const base = process.env.BASE || "/";
 
 // Cached production assets

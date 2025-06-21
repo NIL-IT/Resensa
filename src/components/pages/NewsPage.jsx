@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { Helmet } from "react-helmet-async";
 
 import SeoBlock from "../shared/SeoBlock";
+import { domen } from "../../utils/config";
 
 export default function NewsPage({ news }) {
   const [findNews, setFindNews] = useState();
@@ -44,7 +45,7 @@ export default function NewsPage({ news }) {
     if (!findNews) return null;
 
     // Use the direct URL format consistently
-    return `https://recensa.nilit1.ru/news/${newsName}`;
+    return `${domen}/news/${newsName}`;
   };
 
   return findNews ? (
@@ -85,7 +86,7 @@ export default function NewsPage({ news }) {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
+                <meta itemProp="item" content={domen} />
               </a>
             </li>
             <span>{">"}</span>
@@ -102,7 +103,7 @@ export default function NewsPage({ news }) {
               >
                 <span itemProp="name">Новости</span>
                 <meta itemProp="position" content="1" />
-                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
+                <meta itemProp="item" content={domen} />
               </a>
             </li>
             <span>{">"}</span>
@@ -117,9 +118,7 @@ export default function NewsPage({ news }) {
                 <meta itemProp="position" content="1" />
                 <meta
                   itemProp="item"
-                  content={`https://recensa.nilit1.ru/news/${useLatinFormat(
-                    findNews.title
-                  )}`}
+                  content={`${domen}/news/${useLatinFormat(findNews.title)}`}
                 />
               </a>
             </li>
@@ -138,9 +137,7 @@ export default function NewsPage({ news }) {
               <div className="w-full">
                 <meta
                   itemProp="url"
-                  content={`https://recensa.nilit1.ru/${useLatinFormat(
-                    findNews.title
-                  )}`}
+                  content={`${domen}/${useLatinFormat(findNews.title)}`}
                 />
                 <meta
                   itemProp="description"
@@ -212,7 +209,7 @@ export default function NewsPage({ news }) {
                     <meta itemProp="height" content="200" />
                   </div>
                   <meta itemProp="name" content="Recensa" />
-                  <meta itemProp="url" content="https://recensa.nilit1.ru/" />
+                  <meta itemProp="url" content={domen} />
                 </div>
               </div>
             </div>
@@ -220,7 +217,7 @@ export default function NewsPage({ news }) {
             <div itemScope="" itemType="http://schema.org/Organization">
               <meta itemProp="name" content={findNews.title} />
               <meta itemProp="description" content="description" />
-              <link itemProp="url" href="https://recensa.nilit1.ru/" />
+              <link itemProp="url" href={domen} />
               <div
                 itemProp="aggregateRating"
                 itemScope
@@ -244,9 +241,7 @@ export default function NewsPage({ news }) {
                   <meta itemProp="name" content="Recensa" />
                   <link
                     itemProp="url"
-                    href={`https://recensa.nilit1.ru/${useLatinFormat(
-                      findNews.title
-                    )}`}
+                    href={`${domen}/${useLatinFormat(findNews.title)}`}
                   />
                 </div>
               </div>

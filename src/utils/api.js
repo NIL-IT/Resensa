@@ -1,8 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { url } from "./config";
 
 const apiLogin = axios.create({
-  baseURL: "https://recensa.nilit1.ru/api", // Adjust this based on your API URL
+  baseURL: url, // Adjust this based on your API URL
 });
 
 // Add request interceptor to add token to protected requests

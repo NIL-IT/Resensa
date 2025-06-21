@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import SliderPage from "../shared/SliderPage";
 import { useDispatch } from "react-redux";
 import { changeItemId } from "../../utils/slice/userSlice";
+import { domen } from "../../utils/config";
 import Cookies from "js-cookie";
 import SeoBlock from "../shared/SeoBlock";
 export default function Home({ equipment, solutions, banner, news, company }) {
@@ -66,15 +67,15 @@ export default function Home({ equipment, solutions, banner, news, company }) {
       <SeoBlock
         description={company.main_hidden_seo_text}
         title={company.main_page_title}
-        url={"https://recensa.nilit1.ru/"}
+        url={`${domen}/`}
       />
       <Helmet>
         <title>{company.main_page_title}</title>
         <meta name="description" content={company.main_page_description} />
         <meta property="og:title" content={company.main_page_title} />
-        <meta property="og:url" content="https://recensa.nilit1.ru/" />
+        <meta property="og:url" content={`${domen}/`} />
         <meta name="keywords" content={company.main_page_keywords} />
-        <link rel="canonical" href="https://recensa.nilit1.ru/" />
+        <link rel="canonical" href={`${domen}/`} />
       </Helmet>
       <main>
         <Banner banner={banner} />

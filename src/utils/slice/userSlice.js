@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import apiLogin from "../api";
 import Cookies from "js-cookie";
+import { url, domen } from "../config";
+
 // Create axios instance with default config
-const url = `https://recensa.nilit1.ru/api`;
 const api = axios.create({
   baseURL: url,
   headers: {

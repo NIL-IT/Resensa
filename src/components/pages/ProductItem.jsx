@@ -8,6 +8,7 @@ import Advantages from "../shared/Advantages";
 import ItemsList from "../shared/ItemsList";
 import Footer from "../shared/Footer";
 import OrderStatus from "../shared/OrderStatus";
+import { domen } from "../../utils/config";
 import {
   changeIsAdmin,
   changeRoutingToOrders,
@@ -139,7 +140,7 @@ export default function ProductItem({ list }) {
   return currentProduct ? (
     <>
       <SeoBlock
-        url={`https://recensa.nilit1.ru/${
+        url={`${domen}/${
           isEquipment
             ? `equipment/${pathname.split("/")[2]}`
             : `solutions/${pathname.split("/")[2]}`
@@ -154,7 +155,7 @@ export default function ProductItem({ list }) {
         <meta property="og:title" content={currentProduct.page_title} />
         <meta
           property="og:url"
-          content={`https://recensa.nilit1.ru/${
+          content={`${domen}/${
             isEquipment
               ? `equipment/${pathname.split("/")[2]}`
               : `solutions/${pathname.split("/")[2]}`
@@ -162,7 +163,7 @@ export default function ProductItem({ list }) {
         />
         <link
           rel="canonical"
-          href={`https://recensa.nilit1.ru/${
+          href={`${domen}/${
             isEquipment
               ? `equipment/${pathname.split("/")[2]}`
               : `solutions/${pathname.split("/")[2]}`

@@ -1,5 +1,11 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeItemId } from "../../utils/slice/userSlice";
+import { domen } from "../../utils/config";
+import { useLocation } from "react-router-dom";
+import SeoBlock from "../shared/SeoBlock";
 
 import EquipmentBanner from "../shared/EquipmentBanner";
 import Advantages from "../shared/Advantages";
@@ -9,10 +15,6 @@ import SliderPage from "../shared/SliderPage";
 import { sliderTextSub, slidesMain, slidesSub } from "../../utils/data";
 
 import Points from "../shared/Points";
-import { useDispatch } from "react-redux";
-import { changeItemId } from "../../utils/slice/userSlice";
-import { useLocation } from "react-router-dom";
-import SeoBlock from "../shared/SeoBlock";
 import Objects from "../shared/Objects";
 const text = `Recensa — уверенность в каждом решении. Мы знаем всё о вентиляционном оборудовании, чтобы ваши задачи решались с максимальной эффективностью. Обратитесь к профессионалам.`;
 export default function AboutCompany({ company }) {
@@ -32,9 +34,9 @@ export default function AboutCompany({ company }) {
   return (
     <>
       <SeoBlock
-        title={company.about_page_title}
+        url={`${domen}/about`}
         description={company.about_hidden_seo_text}
-        url={"https://recensa.nilit1.ru/about"}
+        title={company.about_page_title}
       />
       <Helmet>
         <title>{company.about_page_title}</title>
@@ -42,8 +44,8 @@ export default function AboutCompany({ company }) {
         <meta name="keywords" content={company.about_page_keywords} />
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content={company.about_page_title} />
-        <meta property="og:url" content="https://recensa.nilit1.ru/about" />
-        <link rel="canonical" href="https://recensa.nilit1.ru/about" />
+        <meta property="og:url" content={`${domen}/about`} />
+        <link rel="canonical" href={`${domen}/about`} />
       </Helmet>
       <main>
         <EquipmentBanner

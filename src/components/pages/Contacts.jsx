@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import { changeItemId, changeShowPopup } from "../../utils/slice/userSlice";
+import { domen } from "../../utils/config";
 import Footer from "../shared/Footer";
 import { useDispatch } from "react-redux";
 import SeoBlock from "../shared/SeoBlock";
@@ -25,7 +26,7 @@ const Contacts = ({ company }) => {
   return (
     <section className="min-h-screen flex flex-col">
       <SeoBlock
-        url={"https://recensa.nilit1.ru/contact"}
+        url={`${domen}/contact`}
         description={company.contacts_hidden_seo_text}
         title={company.contacts_page_title}
       />
@@ -35,8 +36,8 @@ const Contacts = ({ company }) => {
         <meta name="keywords" content={company.contacts_page_keywords} />
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content={company.contacts_page_title} />
-        <meta property="og:url" content="https://recensa.nilit1.ru/contact" />
-        <link rel="canonical" href="https://recensa.nilit1.ru/contact" />
+        <meta property="og:url" content={`${domen}/contact`} />
+        <link rel="canonical" href={`${domen}/contact`} />
       </Helmet>
 
       <div
@@ -58,7 +59,7 @@ const Contacts = ({ company }) => {
           itemProp="legalName"
           content="ООО РЕСЕНСА - производство и поставка вентиляционного оборудования"
         />
-        <link itemProp="url" href="https://recensa.nilit1.ru/api/contact" />
+        <link itemProp="url" href={`${domen}/contact`} />
         <meta itemProp="sameAs" content="#" />
         <div
           itemProp="aggregateRating"
@@ -87,7 +88,7 @@ const Contacts = ({ company }) => {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
+                <meta itemProp="item" content={`${domen}/`} />
               </a>
             </li>
             <span>{">"}</span>
@@ -99,10 +100,7 @@ const Contacts = ({ company }) => {
               <a className="pointer-events: none" title="Подраздел уровня 1">
                 <span itemProp="name">Контакты</span>
                 <meta itemProp="position" content="1" />
-                <meta
-                  itemProp="item"
-                  content="https://recensa.nilit1.ru/contact"
-                />
+                <meta itemProp="item" content={`${domen}/contact`} />
               </a>
             </li>
           </ul>
@@ -209,19 +207,21 @@ const Contacts = ({ company }) => {
             </h3>
             <div className="space-y-2 xs:space-y-3 text-sm xs:text-base text-gray-400">
               <p>ООО "РЕСЕНСА"</p>
-              <p>ИНН: 1234567890</p>
-              <p>КПП: 123456789</p>
-              <p>ОГРН: 1234567890123</p>
               <p className="break-words">
-                Юридический адрес: г. Москва, ул. Примерная, д. 1
+                Юр. адрес: 630123, Новосибирская обл, Новосибирск г, Аэропорт
+                ул, д. 2/3, офис 16
               </p>
-              <p className="break-words">
-                Фактический адрес: г. Москва, ул. Примерная, д. 1
-              </p>
-              <p>Р/с: 12345678901234567890</p>
-              <p>К/с: 12345678901234567890</p>
-              <p>БИК: 123456789</p>
-              <p>Банк: ПАО "Примербанк"</p>
+              <p>ОГРН: 1235400003013</p>
+              <p>ИНН: 5402076520</p>
+              <p>КПП: 540201001</p>
+              <p>Номер р/счета: 40702810012510001541</p>
+              <p>Наименование банка: Филиал "Центральный" Банка ВТБ (ПАО)</p>
+              <p>Адрес банка: г. Новосибирск</p>
+              <p>БИК: 044525411</p>
+              <p>Кор. счет: № 30101810145250000411</p>
+              <p>Код по ОКВЭД: 46.69.9</p>
+              <p>e-mail: office@recensa.ru</p>
+              <p>Генеральный директор: Котенков Алексей Александрович</p>
             </div>
           </div>
         </div>
