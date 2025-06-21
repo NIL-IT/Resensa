@@ -592,7 +592,7 @@ export const importOrdersExcel = createAsyncThunk(
 );
 
 export const exportOrdersExcel = async (exportFile = false) => {
-  fetch("https://recensa.nilit1.ru/api/orders/export/excel", {
+  fetch(`${url}/orders/export/excel`, {
     method: "GET",
   })
     .then((response) => {
