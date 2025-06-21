@@ -35,13 +35,13 @@ function App() {
 
   console.error = () => {};
 
-  // window.addEventListener("error", (event) => {
-  //   event.preventDefault(); // Блокирует стандартный вывод ошибки в консоль
-  // });
+  window.addEventListener("error", (event) => {
+    event.preventDefault(); // Блокирует стандартный вывод ошибки в консоль
+  });
 
-  // window.addEventListener("unhandledrejection", (event) => {
-  //   event.preventDefault(); // Блокирует вывод ошибок промисов
-  // });
+  window.addEventListener("unhandledrejection", (event) => {
+    event.preventDefault(); // Блокирует вывод ошибок промисов
+  });
 
   // console.error = (...args) => {
   //   console.trace("Suppressed Error:", ...args);
