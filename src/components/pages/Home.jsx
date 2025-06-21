@@ -66,15 +66,15 @@ export default function Home({ equipment, solutions, banner, news, company }) {
       <SeoBlock
         description={company.main_hidden_seo_text}
         title={company.main_page_title}
-        url={"https://new.recensa.ru/"}
+        url={"https://recensa.nilit1.ru/"}
       />
       <Helmet>
         <title>{company.main_page_title}</title>
         <meta name="description" content={company.main_page_description} />
         <meta property="og:title" content={company.main_page_title} />
-        <meta property="og:url" content="https://new.recensa.ru/" />
+        <meta property="og:url" content="https://recensa.nilit1.ru/" />
         <meta name="keywords" content={company.main_page_keywords} />
-        <link rel="canonical" href="https://new.recensa.ru/" />
+        <link rel="canonical" href="https://recensa.nilit1.ru/" />
       </Helmet>
       <main>
         <Banner banner={banner} />

@@ -97,7 +97,7 @@ export default function Footer({ scrollTop = null }) {
                   {isAdmin ? (
                     <Link
                       target="_blank"
-                      to={`https://new.recensa.ru${path}`}
+                      to={`https://recensa.nilit1.ru${path}`}
                       itemProp="url"
                     >
                       {name}

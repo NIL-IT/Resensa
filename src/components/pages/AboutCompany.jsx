@@ -34,7 +34,7 @@ export default function AboutCompany({ company }) {
       <SeoBlock
         title={company.about_page_title}
         description={company.about_hidden_seo_text}
-        url={"https://new.recensa.ru/about"}
+        url={"https://recensa.nilit1.ru/about"}
       />
       <Helmet>
         <title>{company.about_page_title}</title>
@@ -42,8 +42,8 @@ export default function AboutCompany({ company }) {
         <meta name="keywords" content={company.about_page_keywords} />
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content={company.about_page_title} />
-        <meta property="og:url" content="https://new.recensa.ru/about" />
-        <link rel="canonical" href="https://new.recensa.ru/about" />
+        <meta property="og:url" content="https://recensa.nilit1.ru/about" />
+        <link rel="canonical" href="https://recensa.nilit1.ru/about" />
       </Helmet>
       <main>
         <EquipmentBanner

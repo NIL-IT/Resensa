@@ -44,7 +44,7 @@ export default function AppRoutes({
               page_title: company.equipment_page_title,
               page_description: company.equipment_page_description,
               page_keywords: company.equipment_page_keywords,
-              url: "https://new.recensa.ru/equipment",
+              url: "https://recensa.nilit1.ru/equipment",
             }}
             title={"Оборудование"}
             text={`Recensa предлагает широкий ассортимент вентиляционного оборудования 
@@ -69,7 +69,7 @@ export default function AppRoutes({
               page_title: company.solution_page_title,
               page_description: company.solution_page_description,
               page_keywords: company.solution_page_keywords,
-              url: "https://new.recensa.ru/solutions",
+              url: "https://recensa.nilit1.ru/solutions",
             }}
             title={"Решения"}
             text={`Recensa разрабатывает и поставляет климатические системы для объектов

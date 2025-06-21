@@ -139,7 +139,7 @@ export default function ProductItem({ list }) {
   return currentProduct ? (
     <>
       <SeoBlock
-        url={`https://new.recensa.ru/${
+        url={`https://recensa.nilit1.ru/${
           isEquipment
             ? `equipment/${pathname.split("/")[2]}`
             : `solutions/${pathname.split("/")[2]}`
@@ -154,7 +154,7 @@ export default function ProductItem({ list }) {
         <meta property="og:title" content={currentProduct.page_title} />
         <meta
           property="og:url"
-          content={`https://new.recensa.ru/${
+          content={`https://recensa.nilit1.ru/${
             isEquipment
               ? `equipment/${pathname.split("/")[2]}`
               : `solutions/${pathname.split("/")[2]}`
@@ -162,7 +162,7 @@ export default function ProductItem({ list }) {
         />
         <link
           rel="canonical"
-          href={`https://new.recensa.ru/${
+          href={`https://recensa.nilit1.ru/${
             isEquipment
               ? `equipment/${pathname.split("/")[2]}`
               : `solutions/${pathname.split("/")[2]}`

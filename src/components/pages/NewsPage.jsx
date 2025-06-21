@@ -44,7 +44,7 @@ export default function NewsPage({ news }) {
     if (!findNews) return null;
 
     // Use the direct URL format consistently
-    return `https://new.recensa.ru/news/${newsName}`;
+    return `https://recensa.nilit1.ru/news/${newsName}`;
   };
 
   return findNews ? (
@@ -85,7 +85,7 @@ export default function NewsPage({ news }) {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://new.recensa.ru/" />
+                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -102,7 +102,7 @@ export default function NewsPage({ news }) {
               >
                 <span itemProp="name">Новости</span>
                 <meta itemProp="position" content="1" />
-                <meta itemProp="item" content="https://new.recensa.ru/" />
+                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -117,7 +117,7 @@ export default function NewsPage({ news }) {
                 <meta itemProp="position" content="1" />
                 <meta
                   itemProp="item"
-                  content={`https://new.recensa.ru/news/${useLatinFormat(
+                  content={`https://recensa.nilit1.ru/news/${useLatinFormat(
                     findNews.title
                   )}`}
                 />
@@ -138,7 +138,7 @@ export default function NewsPage({ news }) {
               <div className="w-full">
                 <meta
                   itemProp="url"
-                  content={`https://new.recensa.ru/${useLatinFormat(
+                  content={`https://recensa.nilit1.ru/${useLatinFormat(
                     findNews.title
                   )}`}
                 />
@@ -212,7 +212,7 @@ export default function NewsPage({ news }) {
                     <meta itemProp="height" content="200" />
                   </div>
                   <meta itemProp="name" content="Recensa" />
-                  <meta itemProp="url" content="https://new.recensa.ru/" />
+                  <meta itemProp="url" content="https://recensa.nilit1.ru/" />
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function NewsPage({ news }) {
             <div itemScope="" itemType="http://schema.org/Organization">
               <meta itemProp="name" content={findNews.title} />
               <meta itemProp="description" content="description" />
-              <link itemProp="url" href="https://new.recensa.ru/" />
+              <link itemProp="url" href="https://recensa.nilit1.ru/" />
               <div
                 itemProp="aggregateRating"
                 itemScope
@@ -244,7 +244,7 @@ export default function NewsPage({ news }) {
                   <meta itemProp="name" content="Recensa" />
                   <link
                     itemProp="url"
-                    href={`https://new.recensa.ru/${useLatinFormat(
+                    href={`https://recensa.nilit1.ru/${useLatinFormat(
                       findNews.title
                     )}`}
                   />

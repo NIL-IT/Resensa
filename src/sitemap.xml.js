@@ -4,7 +4,7 @@
 // const SitemapGenerator = (equipment, solutions) => {
 //   useEffect(() => {
 //     const generateSitemap = async () => {
-//       const baseUrl = "https://new.recensa.ru";
+//       const baseUrl = "https://recensa.nilit1.ru";
 //       // Получаем данные из API
 
 //       // Создаем статические URL

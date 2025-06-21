@@ -107,7 +107,7 @@ export default function News({ news }) {
                       itemScope
                       itemProp="mainEntityOfPage"
                       itemType="https://schema.org/WebPage"
-                      itemID="https://new.recensa.ru/"
+                      itemID="https://recensa.nilit1.ru/"
                     />
                   </div>
                   <div>

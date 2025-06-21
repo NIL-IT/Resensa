@@ -25,7 +25,7 @@ const Contacts = ({ company }) => {
   return (
     <section className="min-h-screen flex flex-col">
       <SeoBlock
-        url={"https://new.recensa.ru/contact"}
+        url={"https://recensa.nilit1.ru/contact"}
         description={company.contacts_hidden_seo_text}
         title={company.contacts_page_title}
       />
@@ -35,8 +35,8 @@ const Contacts = ({ company }) => {
         <meta name="keywords" content={company.contacts_page_keywords} />
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content={company.contacts_page_title} />
-        <meta property="og:url" content="https://new.recensa.ru/contact" />
-        <link rel="canonical" href="https://new.recensa.ru/contact" />
+        <meta property="og:url" content="https://recensa.nilit1.ru/contact" />
+        <link rel="canonical" href="https://recensa.nilit1.ru/contact" />
       </Helmet>
 
       <div
@@ -58,7 +58,7 @@ const Contacts = ({ company }) => {
           itemProp="legalName"
           content="ООО РЕСЕНСА - производство и поставка вентиляционного оборудования"
         />
-        <link itemProp="url" href="https://new.recensa.ru/api/contact" />
+        <link itemProp="url" href="https://recensa.nilit1.ru/api/contact" />
         <meta itemProp="sameAs" content="#" />
         <div
           itemProp="aggregateRating"
@@ -87,7 +87,7 @@ const Contacts = ({ company }) => {
               <a title="Основной раздел" href="/">
                 <span itemProp="name">Главная</span>
                 <meta itemProp="position" content="0" />
-                <meta itemProp="item" content="https://new.recensa.ru/" />
+                <meta itemProp="item" content="https://recensa.nilit1.ru/" />
               </a>
             </li>
             <span>{">"}</span>
@@ -101,7 +101,7 @@ const Contacts = ({ company }) => {
                 <meta itemProp="position" content="1" />
                 <meta
                   itemProp="item"
-                  content="https://new.recensa.ru/contact"
+                  content="https://recensa.nilit1.ru/contact"
                 />
               </a>
             </li>

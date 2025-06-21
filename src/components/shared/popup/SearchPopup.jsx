@@ -52,7 +52,7 @@ export default function SearchPopup() {
           className="sticky z-50 flex-center top-[-20px] left-0 bg-white h-[60px]
            xs:h-[65px] sm:h-[70px] md:h-[75px] lg:h-[80px]"
         >
-          <meta itemProp="url" content="https://new.recensa.ru/" />
+          <meta itemProp="url" content="https://recensa.nilit1.ru/" />
           <SearchInput
             handleSearch={handleSearch}
             handleClose={handleClose}
