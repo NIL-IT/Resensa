@@ -36,6 +36,7 @@ jobs:
           fi
 
           cd /var/www/resensa/Resensa-front
+          npm i
           npm run build
           
           SCRIPT
