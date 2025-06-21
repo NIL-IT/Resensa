@@ -36,7 +36,7 @@ jobs:
           fi
 
           cd /var/www/resensa/Resensa-front
-          
+          npm run build
           
           SCRIPT
           chmod +x deploy.sh
